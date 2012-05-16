@@ -7,14 +7,25 @@ set textwidth=78    "Maximum width of text"
 set iminsert=0
 set imsearch=0
 
-"Pathogen setup
-call pathogen#infect()
 syntax on
+
+"setup for neobundle
+filetype plugin indent off
+
+if has('vim_starting')
+    set runtimepath+='set runtimepath+=' . expand('~/.vim/bundle/neobundle.vim')
+    call neobundle#rc(expand('~/.vim/bundle'))
+endif
+
+"Repositories to sync automatically
+NeoBundle 'git://github.com/Shougo/neocomplcache.git'
+NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
+
 filetype plugin indent on
 
 "setup for neocomplcache
 let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_snippets_dir = '~/.snippets'
+let g:neocomplcache_snippets_dir = '~/.vim/snippets'
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
