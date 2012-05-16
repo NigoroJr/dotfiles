@@ -10,10 +10,11 @@ set imsearch=0
 syntax on
 
 "setup for neobundle
+filetype off
 filetype plugin indent off
 
 if has('vim_starting')
-    set runtimepath+='set runtimepath+=' . expand('~/.vim/bundle/neobundle.vim')
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
     call neobundle#rc(expand('~/.vim/bundle'))
 endif
 
