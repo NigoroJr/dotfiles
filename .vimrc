@@ -14,8 +14,8 @@ filetype off
 filetype plugin indent off
 
 if has('vim_starting')
-    set runtimepath+=~\vimfiles\bundle\neobundle.vim\
-    call neobundle#rc(expand('~\vimfiles\bundle\neobundle.vim'))
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+    call neobundle#rc(expand('~/.vim/bundle'))
 endif
 
 "Repositories to sync automatically
@@ -26,7 +26,7 @@ filetype plugin indent on
 
 "setup for neocomplcache
 let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_snippets_dir = '~\vimfiles\snippets'
+let g:neocomplcache_snippets_dir = '~/.vim/snippets'
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
