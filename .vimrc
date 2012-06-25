@@ -19,11 +19,16 @@ if has('vim_starting')
 endif
 
 "Repositories to sync automatically
+<<<<<<< HEAD
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'vim-scripts/sudo.vim'
 NeoBundle 'Lokaltog/vim-easymotion'
+=======
+NeoBundle 'git://github.com/Shougo/neocomplcache.git'
+NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
+>>>>>>> e3ea0e1b75513a0fa9c3f418c71379dbd955ac24
 
 filetype plugin indent on
 
