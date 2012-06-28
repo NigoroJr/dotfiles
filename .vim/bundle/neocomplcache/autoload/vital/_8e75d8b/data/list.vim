@@ -5,7 +5,7 @@ set cpo&vim
 
 " Removes duplicates from a list.
 function! s:uniq(list, ...)
-  let list = a:0 ? map(a:list, printf('[v:val, %s]', a:1)) : a:list
+  let list = a:0 ? map(copy(a:list), printf('[v:val, %s]', a:1)) : copy(a:list)
   let i = 0
   let seen = {}
   while i < len(list)
@@ -68,6 +68,25 @@ function! s:sort_by(list, expr)
   \      'a:a[1] ==# a:b[1] ? 0 : a:a[1] ># a:b[1] ? 1 : -1'), 'v:val[0]')
 endfunction
 
+" Returns a maximum value in {list} through given {expr}.
+" Returns 0 if {list} is empty.
+" v:val is used in {expr}
+function! s:max(list, expr)
+  if empty(a:list)
+    return 0
+  endif
+  let list = map(copy(a:list), a:expr)
+  return a:list[index(list, max(list))]
+endfunction
+
+" Returns a minimum value in {list} through given {expr}.
+" Returns 0 if {list} is empty.
+" v:val is used in {expr}
+" FIXME: -0x80000000 == 0x80000000
+function! s:min(list, expr)
+  return s:max(a:list, '-(' . a:expr . ')')
+endfunction
+
 " Returns List of character sequence between [a:from, a:to]
 " e.g.: s:char_range('a', 'c') returns ['a', 'b', 'c']
 function! s:char_range(from, to)
@@ -95,18 +114,38 @@ endfunction
 " similar to Haskell's Data.List.span
 function! s:span(f, xs)
   let border = len(a:xs)
-  for i in range(0, len(a:xs)-1)
+  for i in range(len(a:xs))
     if !eval(substitute(a:f, 'v:val', a:xs[i], 'g'))
       let border = i
       break
     endif
   endfor
-  return [a:xs[0 : border-1], a:xs[border : -1]]
+  return border == 0 ? [[], copy(a:xs)] : [a:xs[: border - 1], a:xs[border :]]
 endfunction
 
 " similar to Haskell's Data.List.break
 function! s:break(f, xs)
   return s:span(printf('!(%s)', a:f), a:xs)
+endfunction
+
+" similar to Haskell's Prelude.all
+function! s:all(f, xs)
+  return !s:any(printf('!(%s)', a:f), a:xs)
+endfunction
+
+" similar to Haskell's Prelude.any
+function! s:any(f, xs)
+  return !empty(filter(map(copy(a:xs), a:f), 'v:val'))
+endfunction
+
+" similar to Haskell's Prelude.and
+function! s:and(xs)
+  return s:all('v:val', a:xs)
+endfunction
+
+" similar to Haskell's Prelude.or
+function! s:or(xs)
+  return s:any('v:val', a:xs)
 endfunction
 
 " similar to Haskell's Prelude.foldl
@@ -148,6 +187,11 @@ function! s:foldr1(f, xs)
     throw 'foldr1'
   endif
   return s:foldr(a:f, a:xs[-1], a:xs[0:-2])
+endfunction
+
+" similar to python's zip()
+function! s:zip(...)
+    return map(range(min(map(copy(a:000), 'len(v:val)'))), "map(copy(a:000), 'v:val['.v:val.']')")
 endfunction
 
 

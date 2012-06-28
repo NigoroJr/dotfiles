@@ -96,9 +96,11 @@ INTERFACE					*neobundle-interface*
 ------------------------------------------------------------------------------
 FUNCTIONS 					*neobundle-functions*
 
-neobundle#rc({base-path})			*neobundle#rc()*
+neobundle#rc([{base-path}])			*neobundle#rc()*
 		Initialize neobundle.vim. {base-path} is neobundle downloaded
 		file base path.
+		If omit {base-path}, neobundle searches "bundle" directory from
+		default 'runtimepath'.
 >
 	set nocompatible
 	filetype off
@@ -171,6 +173,14 @@ COMMANDS 					*neobundle-commands*
 			others		(String)
 			Specify others environment build script.
 
+		augroup		(String)
+		Specify augroup name in the plugin.
+		Neobundle call |VimEnter| or |GUIEnter| autocmds automatically.
+		Note: Some function define autocmds for |VimEnter| or
+		|GUIEnter|.
+		For example, "fugitive", "NERDTree", "session.vim".
+		This attribute is valid in |:NeoBundleLazy|.
+
 		Examples:
 >
 		NeoBundle 'git_repository_uri'
@@ -208,7 +218,7 @@ COMMANDS 					*neobundle-commands*
 :NeoBundleUpdate [{name}]			*:NeoBundleUpdate*
 		Same to |:NeoBundleInstall!|.
 
-:NeoBundleClean [{bang} [{name}...]] 	*:NeoBundleWithCurrentDir*
+:NeoBundleClean [{bang} [{name}...]] 	*:NeoBundleClean*
 		Removes non configured plugins. If {bang} is added, force
 		remove plugins. If {name} are added, remove
 		{name} plugins.
@@ -225,7 +235,10 @@ COMMANDS 					*neobundle-commands*
 		This command register neobundle, but don't add to
 		'runtimepath'.
 		Note: |:NeoExternalBundle| is deprecated name.
-
+>
+		NeoBundleLazy 'The-NERD-tree', {'augroup' : 'NERDTree'}
+		NeoBundleSource The-NERD-tree
+<
 :NeoBundleSource [{name}...]			*:NeoBundleSource*
 		|:source| {name} plugins.
 		If omit {name}, |:source| all lazy plugins.
@@ -371,6 +384,25 @@ neobundle/lazy					*unite-action-neobundle-lazy*
 
 ==============================================================================
 CHANGELOG					*neobundle-changelog*
+
+2012-06-23
+- Fixed s:neobundle_dir problem.
+
+2012-06-17
+- Added .gitignore.
+- Improved neobundle sources behavior.
+
+2012-06-07
+- Added augroup attribute.
+
+2012-06-06
+- Improved neobundle#rc() behavior.
+
+2012-06-02
+- Added .git suffix.
+
+2012-05-20
+- Fixed reinstall error.
 
 2012-05-16
 - Improved :NeoBundleSource behavior.

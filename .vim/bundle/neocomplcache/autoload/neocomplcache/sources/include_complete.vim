@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: include_complete.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 05 Feb 2012.
+" Last Modified: 19 May 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -41,10 +41,12 @@ function! s:source.initialize()"{{{
   let s:cache_accessed_time = {}
   let s:async_include_cache = {}
   let s:cached_pattern = {}
-  let s:completion_length = neocomplcache#get_auto_completion_length('include_complete')
+  let s:completion_length =
+        \ neocomplcache#get_auto_completion_length('include_complete')
 
   " Set rank.
-  call neocomplcache#set_dictionary_helper(g:neocomplcache_source_rank, 'include_complete', 8)
+  call neocomplcache#set_dictionary_helper(
+        \ g:neocomplcache_source_rank, 'include_complete', 8)
 
   if neocomplcache#has_vimproc()
     augroup neocomplcache
@@ -91,8 +93,8 @@ function! s:source.initialize()"{{{
   endif
 
   " Create cache directory.
-  if !isdirectory(g:neocomplcache_temporary_dir . '/include_cache')
-    call mkdir(g:neocomplcache_temporary_dir . '/include_cache', 'p')
+  if !isdirectory(neocomplcache#get_temporary_directory() . '/include_cache')
+    call mkdir(neocomplcache#get_temporary_directory() . '/include_cache', 'p')
   endif
 
   " Add command.
@@ -347,6 +349,7 @@ function! s:get_include_files(nestlevel, lines, filetype, pattern, path, expr)"{
         let filename = fnamemodify(findfile(
               \ matchstr(line[match_end :], '\f\+'), a:path), ':p')
       endif
+
       if filereadable(filename)
         call add(include_files, filename)
 
@@ -355,6 +358,11 @@ function! s:get_include_files(nestlevel, lines, filetype, pattern, path, expr)"{
                 \ a:nestlevel + 1, readfile(filename)[:100],
                 \ a:filetype, a:pattern, a:path, a:expr)
         endif
+      elseif isdirectory(filename) && a:filetype ==# 'java'
+        " For Java import with *.
+        " Ex: import lejos.nxt.*
+        let include_files +=
+              \ neocomplcache#util#glob(filename . '/*.java')
       endif
     endif
   endfor"}}}

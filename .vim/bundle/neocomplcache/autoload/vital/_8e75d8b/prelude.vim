@@ -24,8 +24,11 @@ let [
 \   type(function('tr')),
 \   type([]),
 \   type({}),
-\   type(3.14159)
+\   has('float') ? type(str2float('0')) : -1
 \]
+" __TYPE_FLOAT = -1 when -float
+" This doesn't match to anything.
+
 " Number or Float
 function! s:is_numeric(Value)
     let _ = type(a:Value)
@@ -101,6 +104,9 @@ function! s:strchars(str)"{{{
 endfunction"}}}
 
 function! s:strwidthpart(str, width)"{{{
+  if a:width <= 0
+    return ''
+  endif
   let ret = a:str
   let width = s:wcswidth(a:str)
   while width > a:width
@@ -112,6 +118,9 @@ function! s:strwidthpart(str, width)"{{{
   return ret
 endfunction"}}}
 function! s:strwidthpart_reverse(str, width)"{{{
+  if a:width <= 0
+    return ''
+  endif
   let ret = a:str
   let width = s:wcswidth(a:str)
   while width > a:width
@@ -173,7 +182,9 @@ endif
 
 let s:is_windows = has('win16') || has('win32') || has('win64')
 let s:is_cygwin = has('win32unix')
-let s:is_mac = !s:is_windows && (has('mac') || has('macunix') || has('gui_macvim') || system('uname') =~? '^darwin')
+let s:is_mac = !s:is_windows
+      \ && (has('mac') || has('macunix') || has('gui_macvim') ||
+      \   (!executable('xdg-open') && system('uname') =~? '^darwin'))
 function! s:is_windows()"{{{
   return s:is_windows
 endfunction"}}}
@@ -197,7 +208,7 @@ function! s:smart_execute_command(action, word)"{{{
 endfunction"}}}
 
 function! s:escape_file_searching(buffer_name)"{{{
-  return escape(a:buffer_name, '*[]?{},')
+  return escape(a:buffer_name, '*[]?{}, ')
 endfunction"}}}
 function! s:escape_pattern(str)"{{{
   return escape(a:str, '~"\.^$[]*')
@@ -259,7 +270,8 @@ endfunction"}}}
 function! s:path2directory(path)"{{{
   return s:substitute_path_separator(isdirectory(a:path) ? a:path : fnamemodify(a:path, ':p:h'))
 endfunction"}}}
-function! s:path2project_directory(path)"{{{
+function! s:path2project_directory(path, ...)"{{{
+  let is_allow_empty = get(a:000, 0, 0)
   let search_directory = s:path2directory(a:path)
   let directory = ''
 
@@ -274,7 +286,8 @@ function! s:path2project_directory(path)"{{{
 
   " Search project file.
   if directory == ''
-    for d in ['build.xml', 'prj.el', '.project', 'pom.xml', 'Makefile', 'configure', 'Rakefile', 'NAnt.build', 'tags', 'gtags']
+    for d in ['build.xml', 'prj.el', '.project', 'pom.xml',
+          \ 'Makefile', 'configure', 'Rakefile', 'NAnt.build', 'tags', 'gtags']
       let d = findfile(d, s:escape_file_searching(search_directory) . ';')
       if d != ''
         let directory = fnamemodify(d, ':p:h')
@@ -291,7 +304,8 @@ function! s:path2project_directory(path)"{{{
     endif
   endif
 
-  if directory == ''
+  if directory == '' && !is_allow_empty
+    " Use original path.
     let directory = search_directory
   endif
 
@@ -306,10 +320,8 @@ endfunction"}}}
 function! s:system(str, ...)"{{{
   let command = a:str
   let input = a:0 >= 1 ? a:1 : ''
-  if &termencoding != '' && &termencoding != &encoding
-    let command = s:iconv(command, &encoding, &termencoding)
-    let input = s:iconv(input, &encoding, &termencoding)
-  endif
+  let command = s:iconv(command, &encoding, 'char')
+  let input = s:iconv(input, &encoding, 'char')
 
   if a:0 == 0
     let output = s:has_vimproc() ?
@@ -323,9 +335,7 @@ function! s:system(str, ...)"{{{
           \ vimproc#system(command, input, a:2) : system(command, input)
   endif
 
-  if &termencoding != '' && &termencoding != &encoding
-    let output = s:iconv(output, &termencoding, &encoding)
-  endif
+  let output = s:iconv(output, 'char', &encoding)
 
   return output
 endfunction"}}}

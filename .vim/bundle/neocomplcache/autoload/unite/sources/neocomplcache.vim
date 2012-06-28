@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: neocomplcache.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 02 Feb 2012.
+" Last Modified: 23 May 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -61,7 +61,7 @@ function! s:neocomplcache_source.hooks.on_init(args, context) "{{{
   let a:context.source__cur_keyword_pos =
         \ neocomplcache#get_cur_keyword_pos(complete_results)
   let a:context.source__complete_words = neocomplcache#get_complete_words(
-        \ complete_results, 1, a:context.source__cur_keyword_pos,
+        \ complete_results, a:context.source__cur_keyword_pos,
         \ cur_text[a:context.source__cur_keyword_pos :])
 
   " Restore options.
@@ -120,12 +120,8 @@ function! s:start_complete(is_quick_match)
     return ''
   endif
 
-  let winheight =
-        \ (&pumheight != 0) ? &pumheight : (winheight(0) - winline())
-
   return unite#start_complete(['neocomplcache'], {
-        \ 'auto_preview' : 1, 'winheight' : winheight,
-        \ 'auto_resize' : 1, 'quick_match' : a:is_quick_match,
+        \ 'auto_preview' : 1, 'quick_match' : a:is_quick_match,
         \ })
 endfunction
 
