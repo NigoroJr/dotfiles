@@ -32,12 +32,19 @@ NeoBundle 'vim-scripts/DrawIt'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'taku-o/vim-toggle'
+NeoBundle 'Shougo/neocomplcache-snippets-complete'
 
 filetype plugin indent on
 
+" Settings for VimShell
+" VimShell with ,is
+nnoremap <silent> ,is :VimShell<CR>
+" Interactive pythong with ,ipy
+nnoremap <silent> ,ipy :VimShellInteractive python<CR>
+
 " Setup for neocomplcache
 let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_snippets_dir = '~/.vim/snippets'
+let g:neocomplcache_snippets_dir = '~/.vim/bundle/neocomplcache-snippets-complete/autoload/neocomplcache/sources/snippets_complete/'
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
@@ -61,9 +68,3 @@ smap <silent> <C-k> <Plug>(neocomplcache_snippets_expand)
 " Toggle Snippet Editor
 nnoremap <silent> <Space>es :<C-u>NeoComplCacheEditSnippets 
 nnoremap <silent> es<Space> :<C-u>NeoComplCacheEditSnippets 
-
-" Settings for VimShell
-" VimShell with ,is
-nnoremap <silent> ,is :VimShell<CR>
-" Interactive pythong with ,ipy
-nnoremap <silent> ,ipy :VimShellInteractive python<CR>
