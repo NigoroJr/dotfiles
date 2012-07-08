@@ -1,0 +1,17 @@
+# This is a file of aliases
+
+# Aliases for ls
+alias ls='ls --color=auto'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+
+alias lsl='ls -l'
+alias ll='ls -l'
+alias lal='ls -Al'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Aliases for grep
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
