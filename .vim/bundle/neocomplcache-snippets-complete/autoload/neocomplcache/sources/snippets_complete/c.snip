@@ -1,15 +1,23 @@
+snippet     array
+abbr        check array
+    // Print each element of an array
+    int check_array;
+    for (check_array = 0; check_array < ${2}; check_array++) {
+        printf("${3}", ${1: array name}[check_array]);
+    }
+
 snippet     if
 abbr        if () {}
     if (${1:/* condition */}) {
         ${0:/* code */}
     }
 
-snippet else
+snippet     else
     else {
         ${0}
     }
 
-snippet elseif
+snippet     elseif
     else if (${1:/* condition */}) {
         ${0}
     }
