@@ -360,6 +360,7 @@ let g:quickrun#default_config = {
 \   'hook/sweep/files': '%S:p:r',
 \ },
 \ 'scala': {
+\   'cmdopt': '-Dfile.encoding=' . &termencoding,
 \   'hook/output_encode/encoding': '&termencoding',
 \ },
 \ 'scheme': {
@@ -683,7 +684,7 @@ endfunction
 function! s:Session.invoke_hook(point, ...)
   let context = a:0 ? a:1 : {}
   let func = 'on_' . a:point
-  let pri = printf('v:val.priority(%s)', string(a:point))
+  let pri = printf('v:val.priority(%s) - 0', string(a:point))
   for hook in s:V.Data.List.sort_by(self.hooks, pri)
     if has_key(hook, func) && s:V.is_funcref(hook[func])
       call call(hook[func], [self, context], hook)
@@ -718,6 +719,10 @@ endfunction
 
 function! quickrun#sweep_sessions()
   call map(keys(s:sessions), 's:dispose_session(v:val)')
+endfunction
+
+function! quickrun#is_running()
+  return !empty(s:sessions)
 endfunction
 
 
@@ -903,6 +908,21 @@ function! quickrun#execute(cmd)
   return result
 endfunction
 
+" Converts a string as argline or a list of config to config object.
+function! quickrun#config(config)
+  if type(a:config) == type('')
+    return s:build_config_from_arglist(s:parse_argline(a:config))
+  elseif type(a:config) == type([])
+    let config = {}
+    for c in a:config
+      call extend(config, quickrun#config(c))
+      unlet c
+    endfor
+    return config
+  endif
+  return a:config
+endfunction
+
 
 " Misc functions.  {{{1
 function! s:parse_argline(argline)
@@ -964,23 +984,8 @@ function! s:build_config_from_arglist(arglist)
   return config
 endfunction
 
-" Converts a string as argline or a list of config to config object.
-function! s:to_config(config)
-  if type(a:config) == type('')
-    return s:build_config_from_arglist(s:parse_argline(a:config))
-  elseif type(a:config) == type([])
-    let config = {}
-    for c in a:config
-      call extend(config, s:to_config(c))
-      unlet c
-    endfor
-    return config
-  endif
-  return a:config
-endfunction
-
 function! s:build_config(config)
-  let config = s:to_config(a:config)
+  let config = quickrun#config(a:config)
   if !has_key(config, 'mode')
     let config.mode = histget(':') =~# "^'<,'>\\s*Q\\%[uickRun]" ? 'v' : 'n'
   endif

@@ -2,7 +2,7 @@
 " FILE: vimproc.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com> (Modified)
 "          Yukihiro Nakadaira <yukihiro.nakadaira at gmail.com> (Original)
-" Last Modified: 22 Jun 2012.
+" Last Modified: 29 Aug 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -45,11 +45,6 @@ endif
 let s:last_status = 0
 let s:last_errmsg = ''
 
-let s:password_regex =
-      \'\%(Enter \|[Oo]ld \|[Nn]ew \|login '  .
-      \'\|Kerberos \|CVS \|UNIX \| SMB \|LDAP \|\[sudo] ' .
-      \'\|^\|\n\|''s \)[Pp]assword'
-
 " Global options definition."{{{
 let g:vimproc_dll_path =
       \ get(g:, 'vimproc_dll_path', expand('<sfile>:p:h') . '/' .
@@ -59,6 +54,11 @@ let g:vimproc_dll_path =
       \      has('win32unix') ? 'vimproc_cygwin.dll' :
       \      vimproc#util#is_mac() ? 'vimproc_mac.so' :
       \                              'vimproc_unix.so'))
+let g:vimproc_password_pattern =
+      \ get(g:, 'vimproc_password_pattern',
+      \'\%(Enter \|[Oo]ld \|[Nn]ew \|login '  .
+      \'\|Kerberos \|CVS \|UNIX \| SMB \|LDAP \|\[sudo] ' .
+      \'\|^\|\n\|''s \)\%([Pp]assword\|[Pp]assphrase\)\>')
 "}}}
 
 " Check 'encoding'"{{{
@@ -70,9 +70,10 @@ if &encoding =~# '^euc-jp'
 endif
 "}}}
 
-let g:vimproc_dll_path = substitute(
-      \ vimproc#util#iconv(g:vimproc_dll_path,
-      \ &encoding, vimproc#util#termencoding()), '\\', '/', 'g')
+let g:vimproc_dll_path =
+      \ vimproc#util#iconv(
+      \   vimproc#util#substitute_path_separator(g:vimproc_dll_path),
+      \   &encoding, vimproc#util#termencoding())
 
 if !filereadable(g:vimproc_dll_path)"{{{
   function! vimproc#get_last_status()
@@ -101,13 +102,8 @@ function! vimproc#dll_version()"{{{
   return str2nr(dll_version)
 endfunction"}}}
 
-" Create vital module for vimproc
-let s:V = vital#of('vimproc')
-let s:Filepath = s:V.import('System.Filepath')
-
 "-----------------------------------------------------------
 " API
-
 
 function! vimproc#open(filename)"{{{
   let filename = vimproc#util#iconv(fnamemodify(a:filename, ':p'),
@@ -148,20 +144,8 @@ function! vimproc#get_command_name(command, ...)"{{{
 
   let cnt = a:0 < 2 ? 1 : a:2
 
-  let command = a:command
-  let pattern = printf('[/~]\?\f\+[%s]\f*$',
-        \ vimproc#util#is_windows() && !s:is_msys ? '/\\' : '/')
-  if command =~ pattern &&
-        \ (!vimproc#util#is_windows() || fnamemodify(command, ':e') != '')
-    if !executable(command)
-      let command = resolve(command)
-    endif
-
-    let files = [ command ]
-  else
-    let files = split(substitute(vimproc#util#substitute_path_separator(
-          \ s:Filepath.which(command, path)), '//', '/', 'g'), '\n')
-  endif
+  let files = split(substitute(vimproc#util#substitute_path_separator(
+        \ vimproc#filepath#which(a:command, path)), '//', '/', 'g'), '\n')
 
   if cnt < 0
     return files
@@ -171,139 +155,7 @@ function! vimproc#get_command_name(command, ...)"{{{
 
   if file == ''
     throw printf(
-          \ 'vimproc#get_command_name: File "%s" is not found.', command)
-  endif
-
-  if !executable(file)
-    let command = vimproc#util#substitute_path_separator(
-          \ resolve(file))
-  endif
-
-  if !vimproc#util#is_windows() && !executable(file)
-    throw printf(
-          \ 'vimproc#get_command_name: File "%s" is not executable.', file)
-  endif
-
-  return file
-endfunction"}}}
-function! vimproc#get_command_name_old(command, ...)"{{{
-  if a:0 > 3
-    throw 'vimproc#get_command_name: Invalid argument.'
-  endif
-
-  if a:0 >= 1
-    let path = a:1
-  else
-    let path = $PATH
-  endif
-
-  " Expand path.
-  let path = substitute(path,
-        \ (vimproc#util#is_windows() ? ';' : ':'), ',', 'g')
-  if vimproc#util#is_windows()
-    let path = substitute(path, '\\', '/', 'g')
-  endif
-
-  " Escape ' ' and ".
-  let path = escape(path, ' "')
-
-  let cnt = a:0 < 2 ? 1 : a:2
-
-  let command = vimproc#util#expand(a:command)
-
-  let pattern = printf('[/~]\?\f\+[%s]\f*$',
-        \ vimproc#util#is_windows() && !s:is_msys ? '/\\' : '/')
-  if command =~ pattern &&
-        \ (!vimproc#util#is_windows() || fnamemodify(command, ':e') != '')
-    if !executable(command)
-      let command = resolve(command)
-    endif
-
-    if !filereadable(command)
-      throw printf('vimproc#get_command_name: File "%s" is not found.', command)
-    elseif !vimproc#util#is_windows() && !executable(command)
-      throw printf('vimproc#get_command_name: File "%s" is not executable.', command)
-    endif
-
-    return cnt < 0 ? [ command ] : command
-  endif
-
-  " Command search.
-  let suffixesadd_save = &l:suffixesadd
-  if vimproc#util#is_windows()"{{{
-    " On Windows, findfile() search a file which don't have file extension
-    " also. When there are 'perldoc', 'perldoc.bat' in your $PATH,
-    " executable('perldoc')  return 1 cause by you have 'perldoc.bat'.
-    " But findfile('perldoc', $PATH, 1) return whether file exist there.
-    if fnamemodify(command, ':e') == ''
-      let &l:suffixesadd = ''
-      " for ext in split($PATHEXT . ';.LNK', ';')
-      "   let file = findfile(command . ext, path, cnt)
-      if command =~ '[/\\]'
-        " Absolute path.
-        let path = fnamemodify(command, ':h')
-        let command = fnamemodify(command, ':t')
-      else
-        " substitute ,, -> ,
-        let path = substitute(path, ',\{2,}', ',', 'g')
-      endif
-
-      let file = cnt < 0 ? [] : ''
-      for head in split(path, ',')
-        for ext in split($PATHEXT . ';.LNK', ';')
-          let findfile = findfile(command . tolower(ext), head, cnt)
-          if cnt >= 0 && findfile != ''
-            let file = findfile
-            break
-          elseif cnt < 0 && !empty(findfile)
-            let file += findfile
-          endif
-        endfor
-
-        if cnt >= 0 && file != ''
-          break
-        endif
-      endfor
-    else
-      let &l:suffixesadd =
-            \ substitute($PATHEXT . ';.LNK', ';', ',', 'g')
-      let file = findfile(command, path, cnt)
-    endif"}}}
-  else
-    let &l:suffixesadd = ''
-    while 1
-      let file = findfile(command, path, cnt)
-      if type(file) == type([]) || file == '' || file !~ '^\a\+:'
-        break
-      endif
-
-      let cnt += 1
-    endwhile
-  endif
-  let &l:suffixesadd = suffixesadd_save
-
-  if type(file) == type([])
-    return map(filter(file, 'executable(v:val)'),
-          \ 'fnamemodify(v:val, ":p")')
-  endif
-
-  if file == ''
-    throw printf(
-          \ 'vimproc#get_command_name: File "%s" is not found.', command)
-  endif
-
-  if file !~ '^\%(/\|\a\+:\)'
-    " Convert to full path.
-    let file = fnamemodify(file, ':p')
-  endif
-
-  if !executable(file)
-    let file = resolve(file)
-  endif
-
-  if !vimproc#util#is_windows() && !executable(file)
-    throw printf(
-          \ 'vimproc#get_command_name: File "%s" is not executable.', file)
+          \ 'vimproc#get_command_name: File "%s" is not found.', a:command)
   endif
 
   return file
@@ -360,7 +212,7 @@ function! s:system(cmdline, is_passwd, input, timeout, is_pty)"{{{
     if !subproc.stdout.eof"{{{
       let out = subproc.stdout.read(1000, 0)
 
-      if a:is_passwd && out =~ s:password_regex
+      if a:is_passwd && out =~# g:vimproc_password_pattern
         redraw
         echo out
 
@@ -378,7 +230,7 @@ function! s:system(cmdline, is_passwd, input, timeout, is_pty)"{{{
     if !subproc.stderr.eof"{{{
       let out = subproc.stderr.read(1000, 0)
 
-      if a:is_passwd && out =~ s:password_regex
+      if a:is_passwd && out =~# g:vimproc_password_pattern
         redraw
         echo out
 
@@ -672,6 +524,13 @@ function! s:plineopen(npipe, commands, is_pty)"{{{
 endfunction"}}}
 
 function! s:is_pseudo_device(filename)"{{{
+  if vimproc#util#is_windows() && (
+    \    a:filename ==# '/dev/stdin'
+    \ || a:filename ==# '/dev/stdout'
+    \ || a:filename ==# '/dev/stderr')
+    return 1
+  endif
+
   return a:filename == ''
         \ || a:filename ==# '/dev/null'
         \ || a:filename ==# '/dev/clip'
@@ -851,12 +710,12 @@ function! vimproc#readdir(dirname)"{{{
     return []
   endif
 
-  let dirname = iconv(dirname, &encoding,
+  let dirname = vimproc#util#iconv(dirname, &encoding,
         \ vimproc#util#termencoding())
 
   let files = s:libcall('vp_readdir', [dirname])
 
-  call map(files, 'iconv(v:val, vimproc#util#termencoding(), &encoding)')
+  call map(files, 'vimproc#util#iconv(v:val, vimproc#util#termencoding(), &encoding)')
 
   return files
 endfunction"}}}
@@ -1043,7 +902,8 @@ endfunction"}}}
 " UTILS
 
 function! s:str2hd(str)
-  return join(map(range(len(a:str)), 'printf("%02X", char2nr(a:str[v:val]))'), '')
+  return join(map(range(len(a:str)),
+        \ 'printf("%02X", char2nr(a:str[v:val]))'), '')
 endfunction
 
 function! s:hd2str(hd)
@@ -1074,19 +934,16 @@ function! s:convert_args(args)"{{{
 
   let command_name = vimproc#get_command_name(a:args[0])
 
-  return s:analyze_shebang(command_name) + a:args[1:]
+  return vimproc#analyze_shebang(command_name) + a:args[1:]
 endfunction"}}}
 
-function! s:analyze_shebang(filename)"{{{
-  if vimproc#util#is_mac()
-    " Mac OS X's shebang support is incomplete. :-(
-    if getfsize(a:filename) > 100000
-
+function! vimproc#analyze_shebang(filename)"{{{
+  if !filereadable(a:filename) ||
+        \ getfsize(a:filename) > 100000 ||
+        \ (vimproc#util#is_windows() &&
+        \ '.'.fnamemodify(a:filename, ':e') !~?
+        \   '^'.substitute($PATHEXT, ';', '$\\|^', 'g').'$')
       " Maybe a binary file.
-      return [a:filename]
-    endif
-  elseif !vimproc#util#is_windows() || '.'.fnamemodify(a:filename, ':e') !~?
-        \ '^' . substitute($PATHEXT, ';', '$\\|^', 'g') . '$'
     return [a:filename]
   endif
 
@@ -1100,8 +957,10 @@ function! s:analyze_shebang(filename)"{{{
   let shebang = split(matchstr(lines[0], '^#!\zs.\+'))
 
   " Convert command name.
-  if vimproc#util#is_windows() && shebang[0] =~ '^/'
-    let shebang[0] = vimproc#get_command_name(fnamemodify(shebang[0], ':t'))
+  if vimproc#util#is_windows()
+        \ && shebang[0] =~ '^/'
+    let shebang[0] = vimproc#get_command_name(
+          \ fnamemodify(shebang[0], ':t'))
   endif
 
   return shebang + [a:filename]
@@ -1189,11 +1048,15 @@ function! s:vp_file_write(hd, timeout) dict
   return nleft
 endfunction
 
+function! s:quote_arg(arg)
+  return a:arg =~ '[ "]' ? '"' . substitute(a:arg, '"', '\\"', 'g') . '"' : a:arg
+endfunction
+
 function! s:vp_pipe_open(npipe, hstdin, hstdout, hstderr, argv)"{{{
   if vimproc#util#is_windows()
-    let cmdline = ''
-    for arg in a:argv
-      let cmdline .= '"' . substitute(arg, '"', '\\"', 'g') . '" '
+    let cmdline = s:quote_arg(substitute(a:argv[0], '/', '\', 'g'))
+    for arg in a:argv[1:]
+      let cmdline .= ' ' . s:quote_arg(arg)
     endfor
     let [pid; fdlist] = s:libcall('vp_pipe_open',
           \ [a:npipe, a:hstdin, a:hstdout, a:hstderr, cmdline])

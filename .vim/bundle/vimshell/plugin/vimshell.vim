@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: vimshell.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 10 Apr 2012.
+" Last Modified: 21 Sep 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -31,6 +31,7 @@ elseif v:version < 702
   finish
 elseif $SUDO_USER != '' && $USER !=# $SUDO_USER
       \ && $HOME !=# expand('~'.$USER)
+      \ && $HOME ==# expand('~'.$SUDO_USER)
   echoerr '"sudo vim" and $HOME is not same to /root are detected.'
         \.'Please use sudo.vim plugin instead of sudo command or set always_set_home in sudoers.'
   finish
@@ -38,6 +39,17 @@ endif
 
 let s:save_cpo = &cpo
 set cpo&vim
+
+if exists(':NeoBundleDepends')"{{{
+  NeoBundleDepends 'Shougo/vimproc', {
+        \ 'build' : {
+        \     'windows' : 'echo "Sorry, cannot update vimproc binary file in Windows."',
+        \     'cygwin' : 'make -f make_cygwin.mak',
+        \     'mac' : 'make -f make_mac.mak',
+        \     'unix' : 'make -f make_unix.mak',
+        \    },
+        \ }
+endif"}}}
 
 " Obsolute options check."{{{
 if exists('g:VimShell_Prompt')
@@ -108,13 +120,13 @@ let g:vimshell_scrollback_limit =
 
 " For interactive commands.
 let g:vimshell_interactive_no_save_history_commands =
-      \ get(g:, 'vimshell_no_save_history_commands', {})
+      \ get(g:, 'vimshell_interactive_no_save_history_commands', {})
 let g:vimshell_interactive_update_time =
-      \ get(g:, 'vimshell_update_time', 500)
+      \ get(g:, 'vimshell_interactive_update_time', 500)
 let g:vimshell_interactive_command_options =
-      \ get(g:, 'vimshell_command_options', {})
+      \ get(g:, 'vimshell_interactive_command_options', {})
 let g:vimshell_interactive_interpreter_commands =
-      \ get(g:, 'vimshell_interpreter_commands', {})
+      \ get(g:, 'vimshell_interactive_interpreter_commands', {})
 let g:vimshell_interactive_encodings =
       \ get(g:, 'vimshell_interactive_encodings', {})
 let g:vimshell_interactive_prompts =
@@ -167,6 +179,11 @@ command! -nargs=* -complete=customlist,vimshell#vimshell_execute_complete VimShe
 command! -nargs=+ -complete=customlist,vimshell#vimshell_execute_complete VimShellTerminal
       \ call s:vimshell_terminal(<q-args>)
 
+command! -range -nargs=? VimShellSendString
+      \ call vimshell#interactive#send_region(<line1>, <line2>, <q-args>)
+command! -complete=buffer -nargs=1 VimShellSendBuffer
+      \ call vimshell#interactive#set_send_buffer(<q-args>)
+
 " Plugin keymappings"{{{
 nnoremap <silent> <Plug>(vimshell_split_switch)
       \ :<C-u>call <SID>call_vimshell({'split' : 1}, '')<CR>
@@ -201,7 +218,7 @@ function! s:vimshell_execute(args)"{{{
 endfunction"}}}
 function! s:vimshell_interactive(args)"{{{
   if a:args == ''
-    call vimshell#commands#iexe#dummy()
+    call vimshell#commands#iexe#define()
 
     " Search interpreter.
     if &filetype == '' ||
@@ -276,7 +293,7 @@ function! s:call_vimshell(default, args)"{{{
     endif
   endfor
 
-  call vimshell#switch_shell(join(args), options)
+  call vimshell#start(join(args), options)
 endfunction"}}}
 
 augroup vimshell

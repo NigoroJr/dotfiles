@@ -33,7 +33,7 @@ NeoBundle 'vim-scripts/DrawIt'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'taku-o/vim-toggle'
-NeoBundle 'Shougo/neocomplcache-snippets-complete'
+" NeoBundle 'Shougo/neocomplcache-snippets-complete'
 
 filetype plugin indent on
 

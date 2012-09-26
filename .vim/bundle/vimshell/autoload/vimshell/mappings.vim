@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: mappings.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 03 Mar 2012.
+" Last Modified: 23 Sep 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -78,7 +78,9 @@ function! vimshell#mappings#define_default_mappings()"{{{
         \ <SID>expand_wildcard() :
         \ exists('*neocomplcache#start_manual_complete') ?
         \    neocomplcache#start_manual_complete() :
-        \ "\<C-o>:echoerr 'neocomplcache is not installed or enabled. Completion feature is disabled.'\<CR>"
+        \    vimshell#complete#start()
+  inoremap <buffer><silent><expr> <Plug>(vimshell_zsh_complete)
+        \ unite#sources#vimshell_zsh_complete#start_complete(!0)
   inoremap <buffer><silent> <Plug>(vimshell_push_current_line)
         \ <ESC>:call <SID>push_current_line()<CR>
   inoremap <buffer><silent> <Plug>(vimshell_insert_last_word)
@@ -92,7 +94,8 @@ function! vimshell#mappings#define_default_mappings()"{{{
   inoremap <buffer><silent><expr> <Plug>(vimshell_delete_backward_word)
         \ vimshell#get_cur_text()  == '' ? '' : "\<C-w>"
   inoremap <buffer><silent> <Plug>(vimshell_enter)
-        \ <C-g>u<ESC>:<C-u>call vimshell#execute_current_line(1)<CR>
+        \ <C-g>u<C-o>:call vimshell#execute_current_line(1)<CR>
+        " \ <C-g>u<ESC>:<C-u>call vimshell#execute_current_line(1)<CR>
   inoremap <buffer><silent> <Plug>(vimshell_interrupt)
         \ <C-o>:call <SID>hangup(1)<CR>
   inoremap <buffer><silent> <Plug>(vimshell_move_previous_window)
@@ -160,11 +163,15 @@ function! vimshell#mappings#define_default_mappings()"{{{
 
   " Insert mode key-mappings.
   " Execute command.
-  inoremap <expr> <SID>(bs-ctrl-])    getline('.')[col('.') - 2] ==# "\<C-]>" ? "\<BS>" : ''
+  inoremap <expr> <SID>(bs-ctrl-])
+        \ getline('.')[col('.') - 2] ==# "\<C-]>" ? "\<BS>" : ''
   imap <buffer> <C-]>               <C-]><SID>(bs-ctrl-])
   imap <buffer> <CR>                <C-]><Plug>(vimshell_enter)
   " History completion.
-  inoremap <buffer> <expr><silent> <C-l>  unite#sources#vimshell_history#start_complete(!0)
+  inoremap <buffer> <expr><silent> <C-l>
+        \ unite#sources#vimshell_history#start_complete(!0)
+  inoremap <buffer> <expr><silent> <C-l>
+        \ unite#sources#vimshell_history#start_complete(!0)
   " Command completion.
   imap <buffer> <TAB>  <Plug>(vimshell_command_complete)
   " Move to Beginning of command.
@@ -253,10 +260,6 @@ function! vimshell#mappings#execute_line(is_insert)"{{{
   if !vimshell#check_prompt() && !vimshell#check_secondary_prompt()
     " Prompt not found
 
-    if a:is_insert
-      return
-    endif
-
     if !vimshell#check_prompt('$')
       " Create prompt line.
       call append('$', vimshell#get_prompt())
@@ -264,7 +267,8 @@ function! vimshell#mappings#execute_line(is_insert)"{{{
 
     if getline('.') =~ '^\s*\d\+:\s[^[:space:]]'
       " History output execution.
-      call setline('$', vimshell#get_prompt() . matchstr(getline('.'), '^\s*\d\+:\s\zs.*'))
+      call setline('$', vimshell#get_prompt() .
+            \ matchstr(getline('.'), '^\s*\d\+:\s\zs.*'))
     else
       " Search cursor file.
       let filename = substitute(
@@ -326,7 +330,7 @@ function! s:execute_command_line(is_insert, oldpos)"{{{
 
   try
     call vimshell#parser#check_script(line)
-  catch /^Exception: Quote/
+  catch /^Exception: Quote\|^Exception: Join to next line/
     call vimshell#print_secondary_prompt()
 
     call vimshell#start_insert(a:is_insert)
@@ -358,7 +362,7 @@ function! s:execute_command_line(is_insert, oldpos)"{{{
     endif
 
     " Error.
-    call vimshell#error_line({}, v:exception . ' ' . v:throwpoint)
+    call vimshell#error_line({}, v:exception)
     call vimshell#next_prompt(context, a:is_insert)
     call vimshell#start_insert(a:is_insert)
     return
@@ -526,11 +530,16 @@ function! s:delete_line()"{{{
   endif
 endfunction"}}}
 function! s:clear(is_insert)"{{{
+  if vimshell#is_interactive()
+    return vimshell#int_mappings#clear()
+  endif
+
+  let lines = split(vimshell#get_prompt_command(), "\<NL>", 1)
+
   " Hangup current process.
   call s:hangup(a:is_insert)
 
   " Clean up the screen.
-  let lines = split(vimshell#get_prompt_command(), "\<NL>", 1)
   % delete _
 
   call vimshell#terminal#clear_highlight()
@@ -538,7 +547,8 @@ function! s:clear(is_insert)"{{{
 
   call vimshell#print_prompt()
   call vimshell#set_prompt_command(lines[0])
-  call append('$', map(lines[1:], string(vimshell#get_secondary_prompt()).'.v:val'))
+  call append('$', map(lines[1:],
+        \ string(vimshell#get_secondary_prompt()).'.v:val'))
   $
 
   if a:is_insert
@@ -565,8 +575,7 @@ function! s:hide()"{{{
   endif
 endfunction"}}}
 function! s:exit()"{{{
-  call vimshell#util#delete_buffer()
-  call s:hide()
+  call vimshell#interactive#quit_buffer()
 endfunction"}}}
 function! s:delete_backward_char()"{{{
   if !pumvisible()
@@ -614,7 +623,8 @@ function! s:open_file(filename)"{{{
   if a:filename !~ '^\a\+:\|^[/~]'
     let prompt_nr = vimshell#get_prompt_linenr()
     let filename = (has_key(b:vimshell.prompt_current_dir, prompt_nr)?
-          \ b:vimshell.prompt_current_dir[prompt_nr] : getcwd()) . '/' . a:filename
+          \ b:vimshell.prompt_current_dir[prompt_nr] :
+          \ getcwd()) . '/' . a:filename
     let filename = substitute(filename, '//', '/', 'g')
     let filename = substitute(filename, ' ', '\\ ', 'g')
   else
@@ -642,14 +652,13 @@ function! s:open_file(filename)"{{{
 endfunction"}}}
 function! s:hangup(is_insert)"{{{
   if empty(b:vimshell.continuation)
+    call vimshell#print_prompt()
+    call vimshell#start_insert(a:is_insert)
     return
   endif
 
   " Kill process.
   call vimshell#interactive#hang_up(bufname('%'))
-
-  " Clear continuation.
-  let b:vimshell.continuation = {}
 
   let context = {
         \ 'has_head_spaces' : 0,

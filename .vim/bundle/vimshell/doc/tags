@@ -71,6 +71,7 @@ g:vimshell_popup_height	vimshell.txt	/*g:vimshell_popup_height*
 g:vimshell_prompt	vimshell.txt	/*g:vimshell_prompt*
 g:vimshell_right_prompt	vimshell.txt	/*g:vimshell_right_prompt*
 g:vimshell_scrollback_limit	vimshell.txt	/*g:vimshell_scrollback_limit*
+g:vimshell_secondary_prompt	vimshell.txt	/*g:vimshell_secondary_prompt*
 g:vimshell_split_command	vimshell.txt	/*g:vimshell_split_command*
 g:vimshell_temporary_directory	vimshell.txt	/*g:vimshell_temporary_directory*
 g:vimshell_terminal_commands	vimshell.txt	/*g:vimshell_terminal_commands*
@@ -105,12 +106,14 @@ i_<Plug>(vimshell_move_head)	vimshell.txt	/*i_<Plug>(vimshell_move_head)*
 i_<Plug>(vimshell_move_previous_window)	vimshell.txt	/*i_<Plug>(vimshell_move_previous_window)*
 i_<Plug>(vimshell_push_current_line)	vimshell.txt	/*i_<Plug>(vimshell_push_current_line)*
 i_<Plug>(vimshell_run_help)	vimshell.txt	/*i_<Plug>(vimshell_run_help)*
+i_<Plug>(vimshell_zsh_complete)	vimshell.txt	/*i_<Plug>(vimshell_zsh_complete)*
 v_<Plug>(vimshell_select_next_prompt)	vimshell.txt	/*v_<Plug>(vimshell_select_next_prompt)*
 v_<Plug>(vimshell_select_previous_prompt)	vimshell.txt	/*v_<Plug>(vimshell_select_previous_prompt)*
 vimshell#hook#add()	vimshell.txt	/*vimshell#hook#add()*
 vimshell#hook#get()	vimshell.txt	/*vimshell#hook#get()*
 vimshell#hook#remove()	vimshell.txt	/*vimshell#hook#remove()*
 vimshell#hook#set()	vimshell.txt	/*vimshell#hook#set()*
+vimshell#interactive#send_string()	vimshell.txt	/*vimshell#interactive#send_string()*
 vimshell-alter-command	vimshell.txt	/*vimshell-alter-command*
 vimshell-buffer-key-mappings	vimshell.txt	/*vimshell-buffer-key-mappings*
 vimshell-changelog	vimshell.txt	/*vimshell-changelog*
@@ -120,6 +123,7 @@ vimshell-create-plugin	vimshell.txt	/*vimshell-create-plugin*
 vimshell-examples	vimshell.txt	/*vimshell-examples*
 vimshell-execute-options	vimshell.txt	/*vimshell-execute-options*
 vimshell-execute-options-encoding	vimshell.txt	/*vimshell-execute-options-encoding*
+vimshell-faq	vimshell.txt	/*vimshell-faq*
 vimshell-functions	vimshell.txt	/*vimshell-functions*
 vimshell-hook	vimshell.txt	/*vimshell-hook*
 vimshell-hook-chpwd	vimshell.txt	/*vimshell-hook-chpwd*
@@ -163,6 +167,7 @@ vimshell-internal-repeat	vimshell.txt	/*vimshell-internal-repeat*
 vimshell-internal-shell	vimshell.txt	/*vimshell-internal-shell*
 vimshell-internal-source	vimshell.txt	/*vimshell-internal-source*
 vimshell-internal-source_shellcmd	vimshell.txt	/*vimshell-internal-source_shellcmd*
+vimshell-internal-sudo	vimshell.txt	/*vimshell-internal-sudo*
 vimshell-internal-texe	vimshell.txt	/*vimshell-internal-texe*
 vimshell-internal-time	vimshell.txt	/*vimshell-internal-time*
 vimshell-internal-vi	vimshell.txt	/*vimshell-internal-vi*
@@ -178,9 +183,13 @@ vimshell-options	vimshell.txt	/*vimshell-options*
 vimshell-options-buffer-name	vimshell.txt	/*vimshell-options-buffer-name*
 vimshell-options-create	vimshell.txt	/*vimshell-options-create*
 vimshell-options-popup	vimshell.txt	/*vimshell-options-popup*
+vimshell-options-prompt	vimshell.txt	/*vimshell-options-prompt*
+vimshell-options-right-prompt	vimshell.txt	/*vimshell-options-right-prompt*
+vimshell-options-secondary-prompt	vimshell.txt	/*vimshell-options-secondary-prompt*
 vimshell-options-split	vimshell.txt	/*vimshell-options-split*
 vimshell-options-split-command	vimshell.txt	/*vimshell-options-split-command*
 vimshell-options-toggle	vimshell.txt	/*vimshell-options-toggle*
+vimshell-options-user-prompt	vimshell.txt	/*vimshell-options-user-prompt*
 vimshell-special-alias	vimshell.txt	/*vimshell-special-alias*
 vimshell-special-commands	vimshell.txt	/*vimshell-special-commands*
 vimshell-special-let	vimshell.txt	/*vimshell-special-let*
@@ -192,6 +201,7 @@ vimshell-tips-backquote	vimshell.txt	/*vimshell-tips-backquote*
 vimshell-tips-block	vimshell.txt	/*vimshell-tips-block*
 vimshell-tips-directory-stack	vimshell.txt	/*vimshell-tips-directory-stack*
 vimshell-tips-encoding	vimshell.txt	/*vimshell-tips-encoding*
+vimshell-tips-environment-variables-execution	vimshell.txt	/*vimshell-tips-environment-variables-execution*
 vimshell-tips-fakecygpty	vimshell.txt	/*vimshell-tips-fakecygpty*
 vimshell-tips-wildcard	vimshell.txt	/*vimshell-tips-wildcard*
 vimshell-unite-action-vimshell-history	vimshell.txt	/*vimshell-unite-action-vimshell-history*

@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: exe.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 28 Mar 2012.
+" Last Modified: 25 Sep 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -45,7 +45,8 @@ function! s:command.execute(commands, context)"{{{
   " Encoding conversion.
   if options['--encoding'] != '' && options['--encoding'] != &encoding
     for command in commands
-      call map(command.args, 'iconv(v:val, &encoding, options["--encoding"])')
+      call map(command.args,
+            \ 'vimproc#util#iconv(v:val, &encoding, options["--encoding"])')
     endfor
   endif
 
@@ -118,7 +119,9 @@ function! s:init_process(commands, context, options)"{{{
         \ '$LINES' : winheight(0),
         \ '$VIMSHELL_TERM' : 'execute',
         \ '$EDITOR' : vimshell#get_editor_name(),
+        \ '$GIT_EDITOR' : vimshell#get_editor_name(),
         \ '$PAGER' : g:vimshell_cat_command,
+        \ '$GIT_PAGER' : g:vimshell_cat_command,
         \})
 
   " Initialize.

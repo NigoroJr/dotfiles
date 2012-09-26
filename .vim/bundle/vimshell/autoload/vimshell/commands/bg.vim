@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: bg.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 31 Mar 2012.
+" Last Modified: 12 Sep 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -23,6 +23,11 @@
 "     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 " }}}
 "=============================================================================
+
+let s:V = vital#of('vimshell')
+let s:BM = s:V.import('Vim.Buffer.Manager')
+let s:manager = s:BM.new()  " creates new manager
+call s:manager.config('opener', 'silent edit')
 
 let s:command = {
       \ 'name' : 'bg',
@@ -53,7 +58,7 @@ function! s:command.execute(commands, context)"{{{
   " Encoding conversion.
   if options['--encoding'] != '' && options['--encoding'] != &encoding
     for command in commands
-      call map(command.args, 'iconv(v:val, &encoding, options["--encoding"])')
+      call map(command.args, 'vimproc#util#iconv(v:val, &encoding, options["--encoding"])')
     endfor
   endif
 
@@ -66,7 +71,9 @@ function! s:command.execute(commands, context)"{{{
         \ '$LINES' : winheight(0),
         \ '$VIMSHELL_TERM' : 'background',
         \ '$EDITOR' : vimshell#get_editor_name(),
+        \ '$GIT_EDITOR' : vimshell#get_editor_name(),
         \ '$PAGER' : g:vimshell_cat_command,
+        \ '$GIT_PAGER' : g:vimshell_cat_command,
         \})
 
   " Initialize.
@@ -116,15 +123,19 @@ function! vimshell#commands#bg#init(commands, context, options, interactive)"{{{
     let args .= join(command.args)
   endfor
 
-  silent edit `='bg-'.substitute(args, '[<>|]', '_', 'g')
-        \ .'@'.(bufnr('$')+1)`
+  let ret = s:manager.open('bg-'.substitute(args,
+        \ '[<>|]', '_', 'g') .'@'.(bufnr('$')+1))
+  if !ret.loaded
+    call vimshell#echo_error(
+          \ '[vimshell] Failed to open Buffer.')
+    return
+  endif
 
   let [new_pos[2], new_pos[3]] = [bufnr('%'), getpos('.')]
 
   call vimshell#cd(cwd)
 
   " Common.
-  setlocal nocompatible
   setlocal nolist
   setlocal buftype=nofile
   setlocal noswapfile
