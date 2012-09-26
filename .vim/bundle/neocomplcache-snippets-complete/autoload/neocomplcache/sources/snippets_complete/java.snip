@@ -1,3 +1,6 @@
+snippet Scanner
+    Scanner ${1:var} = new Scanner(System.in);
+
 snippet pu
     public
 
@@ -174,15 +177,15 @@ snippet main
 	public static void main(String[] args) {
 		${0}
 	}
-    
+
+snippet pf
+    System.out.printf("${1}", ${2});
 
 snippet pl
     System.out.println(${1});${0}
 
-
 snippet p
     System.out.print(${1});${0}
-
 
 #javadoc
 snippet c
@@ -190,11 +193,10 @@ snippet c
 	 * ${0}
 	 */
     
-
-snippet a
-    @author ${0:$TM_FULLNAME}
-
-
+" snippet a
+"    @author ${0:$TM_FULLNAME}
+"
+"
 snippet {code
 abbr {
     {@code ${0}

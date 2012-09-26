@@ -13,13 +13,19 @@ snippet perl5
 	use warnings;
 	${1}
 
-# print array for debuggin
+# print array for debuging
 snippet check_array
     print join("${1:glue}", ${2:array}), "\n";
 
 snippet five
     use 5.010;
     ${0}
+
+snippet p
+    print "${1:}\n";
+
+snippet pf
+    printf "${1}\n", ${2};
 
 snippet sub
 	sub ${1:function_name} {
