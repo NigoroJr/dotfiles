@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: iexe.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 12 Sep 2012.
+" Last Modified: 21 Jun 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -23,11 +23,6 @@
 "     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 " }}}
 "=============================================================================
-
-let s:V = vital#of('vimshell')
-let s:BM = s:V.import('Vim.Buffer.Manager')
-let s:manager = s:BM.new()  " creates new manager
-call s:manager.config('opener', 'silent edit')
 
 let s:command = {
       \ 'name' : 'iexe',
@@ -78,8 +73,7 @@ function! s:command.execute(commands, context)"{{{
   endif
 
   if !use_cygpty && has_key(g:vimshell_interactive_command_options, cmdname)
-    for arg in vimproc#parser#split_args(
-          \ g:vimshell_interactive_command_options[cmdname])
+    for arg in vimproc#parser#split_args(g:vimshell_interactive_command_options[cmdname])
       call add(args, arg)
     endfor
   endif
@@ -87,8 +81,7 @@ function! s:command.execute(commands, context)"{{{
   if vimshell#util#is_windows() && cmdname == 'cmd'
     " Run cmdproxy.exe instead of cmd.exe.
     if !executable('cmdproxy.exe')
-      call vimshell#error_line(a:context.fd,
-            \ 'iexe: "cmdproxy.exe" is not found. Please install it.')
+      call vimshell#error_line(a:context.fd, 'iexe: "cmdproxy.exe" is not found. Please install it.')
       return
     endif
 
@@ -98,13 +91,11 @@ function! s:command.execute(commands, context)"{{{
   " Encoding conversion.
   if options['--encoding'] != '' && options['--encoding'] != &encoding
     for command in commands
-      call map(command.args,
-            \ 'vimproc#util#iconv(v:val, &encoding, options["--encoding"])')
+      call map(command.args, 'iconv(v:val, &encoding, options["--encoding"])')
     endfor
   endif
 
-  if exists('b:interactive') && !empty(b:interactive.process)
-        \ && b:interactive.process.is_valid
+  if exists('b:interactive') && !empty(b:interactive.process) && b:interactive.process.is_valid
     " Delete zombie process.
     call vimshell#interactive#force_exit()
   endif
@@ -128,9 +119,7 @@ function! s:command.execute(commands, context)"{{{
         \ '$LINES' : winheight(0),
         \ '$VIMSHELL_TERM' : 'interactive',
         \ '$EDITOR' : vimshell#get_editor_name(),
-        \ '$GIT_EDITOR' : vimshell#get_editor_name(),
         \ '$PAGER' : g:vimshell_cat_command,
-        \ '$GIT_PAGER' : g:vimshell_cat_command,
         \})
 
   " Initialize.
@@ -287,6 +276,7 @@ function! s:default_settings()"{{{
 
   " For interactive.
   setlocal wrap
+  setlocal omnifunc=vimshell#complete#interactive_history_complete#omnifunc
 
   " Define mappings.
   call vimshell#int_mappings#define_default_mappings()
@@ -310,14 +300,8 @@ function! vimshell#commands#iexe#init(context, interactive, new_pos, old_pos, is
   " Save current directiory.
   let cwd = getcwd()
 
-  let ret = s:manager.open('iexe-'.substitute(join(a:interactive.args),
-        \ '[<>|]', '_', 'g') .'@'.(bufnr('$')+1))
-  if !ret.loaded
-    call vimshell#echo_error(
-          \ '[vimshell] Failed to open Buffer.')
-    return
-  endif
-
+  silent edit `='iexe-'.substitute(join(a:interactive.args),
+        \ '[<>|]', '_', 'g').'@'.(bufnr('$')+1)`
   let [a:new_pos[2], a:new_pos[3]] = [bufnr('%'), getpos('.')]
 
   call vimshell#cd(cwd)
@@ -337,7 +321,8 @@ function! vimshell#commands#iexe#init(context, interactive, new_pos, old_pos, is
     autocmd InsertEnter <buffer>
           \ call s:insert_enter()
     autocmd BufDelete <buffer>
-          \ call vimshell#interactive#hang_up(expand('<afile>'))
+          \ call vimshell#interactive#hang_up(
+          \    expand('<afile>'))
     autocmd BufWinEnter,WinEnter <buffer>
           \ call s:event_bufwin_enter()
   augroup END
@@ -348,11 +333,14 @@ function! vimshell#commands#iexe#init(context, interactive, new_pos, old_pos, is
   let bufnr = bufnr('%')
   call vimshell#restore_pos(a:old_pos)
 
-  if get(a:context, 'is_single_command', 0)
+  if has_key(a:context, 'is_single_command') && a:context.is_single_command
     call vimshell#next_prompt(a:context, a:is_insert)
     call vimshell#restore_pos(a:new_pos)
   endif
 endfunction"}}}
+
+function! vimshell#commands#iexe#dummy()
+endfunction
 
 function! s:insert_enter()"{{{
   if winwidth(0) != b:interactive.width ||

@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: tags_complete.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 23 Sep 2012.
+" Last Modified: 25 Jun 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -36,6 +36,8 @@ function! s:source.initialize()"{{{
   " Initialize
   let s:async_tags_list = {}
   let s:tags_list = {}
+  let s:completion_length =
+        \ neocomplcache#get_auto_completion_length('tags_complete')
 
   let g:neocomplcache_tags_caching_limit_file_size =
         \ get(g:, 'neocomplcache_tags_caching_limit_file_size', 500000)
@@ -69,13 +71,14 @@ function! s:source.get_keyword_list(cur_keyword_str)"{{{
   endif
 
   call neocomplcache#cache#check_cache(
-        \ 'tags_cache', bufnr('%'), s:async_tags_list, s:tags_list)
+        \ 'tags_cache', bufnr('%'), s:async_tags_list,
+        \ s:tags_list, s:completion_length)
 
   if !has_key(s:tags_list, bufnr('%'))
     return []
   endif
   let keyword_list = neocomplcache#dictionary_filter(
-        \ s:tags_list[bufnr('%')], a:cur_keyword_str)
+        \ s:tags_list[bufnr('%')], a:cur_keyword_str, s:completion_length)
 
   return neocomplcache#keyword_filter(keyword_list, a:cur_keyword_str)
 endfunction"}}}

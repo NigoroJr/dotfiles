@@ -1,4 +1,5 @@
 # This is a file of aliases
+alias rar='/home/naoki/pkg_src/rar/rar'
 
 # Aliases for ls
 alias ls='ls --color=auto'

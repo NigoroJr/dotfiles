@@ -8,7 +8,7 @@ NeoBundle is Vim plugin manager based on Vundle(https://github.com/gmarik/vundle
 
      ```
      $ mkdir -p ~/.vim/bundle
-     $ git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+     $ git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
      ```
 
 2. Configure bundles:
@@ -16,26 +16,26 @@ NeoBundle is Vim plugin manager based on Vundle(https://github.com/gmarik/vundle
      Sample `.vimrc`:
 
      ```vim
-     set nocompatible               " Be iMproved
-     filetype off                   " Required!
+     set nocompatible               " be iMproved
+     filetype off                   " required!
+     filetype plugin indent off     " required!
 
      if has('vim_starting')
        set runtimepath+=~/.vim/bundle/neobundle.vim/
+       call neobundle#rc(expand('~/.vim/bundle/'))
      endif
-
-     call neobundle#rc(expand('~/.vim/bundle/'))
-
-     " Let NeoBundle manage NeoBundle
+     " let NeoBundle manage NeoBundle
+     " required! 
      "NeoBundle 'Shougo/neobundle.vim'
-
-     " Recommended to install
-     " After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
+     " recommended to install
      NeoBundle 'Shougo/vimproc'
+     " after install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
+     NeoBundle 'Shougo/vimshell'
+     NeoBundle 'Shougo/unite.vim'
 
      " My Bundles here:
      "
-     " Note: You don't set neobundle setting in .gvimrc!
-     " Original repos on github
+     " original repos on github
      NeoBundle 'tpope/vim-fugitive'
      NeoBundle 'Lokaltog/vim-easymotion'
      NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -43,32 +43,25 @@ NeoBundle is Vim plugin manager based on Vundle(https://github.com/gmarik/vundle
      NeoBundle 'L9'
      NeoBundle 'FuzzyFinder'
      NeoBundle 'rails.vim'
-     " Non github repos
+     " non github repos
      NeoBundle 'git://git.wincent.com/command-t.git'
-     " Non git repos
+     " non git repos
      NeoBundle 'http://svn.macports.org/repository/macports/contrib/mpvim/'
      NeoBundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
 
      " ...
 
-     filetype plugin indent on     " Required!
+     filetype plugin indent on     " required!
      "
      " Brief help
      " :NeoBundleList          - list configured bundles
      " :NeoBundleInstall(!)    - install(update) bundles
      " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-
-     " Installation check.
-     if neobundle#exists_not_installed_bundles()
-       echomsg 'Not installed bundles : ' .
-             \ string(neobundle#get_not_installed_bundle_names())
-       echomsg 'Please execute ":NeoBundleInstall" command.'
-       "finish
-     endif
+     "
      ```
 3. Install configured bundles:
 
-     Launch `vim`, run `:NeoBundleInstall`, or `:Unite neobundle/install`(required unite.vim)
+     Launch `vim`, run `:NeoBundleInstall`, or `:Unite neobundle/install:!`(required unite.vim)
 ## Docs
 
 see `:h neobundle`

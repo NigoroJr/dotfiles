@@ -109,8 +109,7 @@ function! quickrun#module#get_kinds()
   return keys(s:modules)
 endfunction
 
-function! quickrun#module#load(...)
-  let overwrite = a:0 && a:1
+function! quickrun#module#load()
   for kind in keys(s:templates)
     let pat = 'autoload/quickrun/' . kind . '/*.vim'
     for name in map(split(globpath(&runtimepath, pat), "\n"),
@@ -119,7 +118,7 @@ function! quickrun#module#load(...)
         let module = quickrun#{kind}#{name}#new()
         let module.kind = kind
         let module.name = name
-        call quickrun#module#register(module, overwrite)
+        call quickrun#module#register(module)
       catch /:E\%(117\|716\):/
       endtry
     endfor

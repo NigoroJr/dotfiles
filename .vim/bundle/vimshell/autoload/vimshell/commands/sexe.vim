@@ -40,7 +40,7 @@ function! s:command.execute(args, context)"{{{
   " Execute shell command.
   let cmdline = ''
   for arg in args
-    if vimshell#util#is_windows()
+    if util#is_win
       let arg = substitute(arg, '"', '\\"', 'g')
       let arg = substitute(arg, '[<>|^]', '^\0', 'g')
       let cmdline .= '"' . arg . '" '
@@ -67,14 +67,18 @@ function! s:command.execute(args, context)"{{{
 
   echo 'Running command.'
 
+  if options['--encoding'] != '' && &encoding != options['--encoding']
     " Convert encoding.
-  let cmdline = vimproc#util#iconv(cmdline, &encoding, options['--encoding'])
-  let stdin = vimproc#util#iconv(stdin, &encoding, options['--encoding'])
+    let cmdline = iconv(cmdline, &encoding, options['--encoding'])
+    let stdin = iconv(stdin, &encoding, options['--encoding'])
+  endif
 
   let result = system(printf('%s %s', cmdline, stdin))
 
-  " Convert encoding.
-  let result = vimproc#util#iconv(result, options['--encoding'], &encoding)
+  if options['--encoding'] != '' && &encoding != options['--encoding']
+    " Convert encoding.
+    let result = iconv(result, options['--encoding'], &encoding)
+  endif
 
   call vimshell#print(a:context.fd, result)
   redraw

@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: neobundle.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu at gmail.com>
-" Last Modified: 21 Sep 2012.
+" Last Modified: 23 Jun 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -22,33 +22,14 @@
 "     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 "     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 " }}}
-" Version: 2.1, for Vim 7.2
+" Version: 2.0, for Vim 7.2
 "=============================================================================
 
 let s:save_cpo = &cpo
 set cpo&vim
 
-" Check 'term' option value.
-if !get(g:, 'loaded_neobundle', 0) && &term ==# 'builtin_gui'
-  echoerr 'neobundle is initialized in .gvimrc!'
-        \' neobundle must be initialized in .vimrc.'
-endif
-
-let g:loaded_neobundle = 1
-
-if v:version < 702
-  echoerr 'neobundle does not work this version of Vim (' . v:version . ').'
-  finish
-endif
-
-" Global options definition."{{{
-let g:neobundle_log_filename =
-      \ get(g:, 'neobundle_log_filename', '')
-let g:neobundle_default_site =
-      \ get(g:, 'neobundle_default_site', 'github')
-let g:neobundle_enable_tail_path =
-      \ get(g:, 'neobundle_enable_tail_path', 1)
-"}}}
+let g:neobundle_default_git_protocol =
+      \ get(g:, 'neobundle_default_git_protocol', 'git')
 
 let s:neobundle_dir = get(
       \ filter(split(globpath(&runtimepath, 'bundle', 1), '\n'),
@@ -64,13 +45,6 @@ command! -nargs=+
       \ call neobundle#config#lazy_bundle(
       \   substitute(<q-args>, '\s"[^"]\+$', '', ''))
 command! -nargs=+ NeoExternalBundle NeoBundleLazy <args>
-
-command! -nargs=1 NeoBundleLocal
-      \ call s:neobundle_local(<q-args>)
-
-command! -nargs=+ NeoBundleDepends
-      \ call neobundle#config#depends_bundle(
-      \   substitute(<q-args>, '\s"[^"]\+$', '', ''))
 
 command! -nargs=* -bar
       \ -complete=customlist,neobundle#complete_lazy_bundles
@@ -103,10 +77,6 @@ command! -nargs=0 -bar
       \ NeoBundleLog
       \ echo join(neobundle#installer#get_log(), "\n")
 
-command! -nargs=0 -bar
-      \ NeoBundleUpdatesLog
-      \ echo join(neobundle#installer#get_updates_log(), "\n")
-
 augroup neobundle
   autocmd!
   autocmd Syntax  vim syntax keyword vimCommand NeoBundle
@@ -133,13 +103,13 @@ endfunction
 
 function! neobundle#complete_bundles(arglead, cmdline, cursorpos)
   return filter(map(neobundle#config#get_neobundles(), 'v:val.name'),
-        \ 'stridx(tolower(v:val), tolower(a:arglead)) == 0')
+          \ 'stridx(v:val, a:arglead) == 0')
 endfunction
 
 function! neobundle#complete_lazy_bundles(arglead, cmdline, cursorpos)
   return filter(map(filter(neobundle#config#get_neobundles(),
         \ '!neobundle#config#is_sourced(v:val.name)'), 'v:val.name'),
-        \ 'stridx(tolower(v:val), tolower(a:arglead)) == 0')
+        \ 'stridx(v:val, a:arglead) == 0')
 endfunction
 
 function! neobundle#complete_deleted_bundles(arglead, cmdline, cursorpos)
@@ -152,46 +122,6 @@ function! neobundle#complete_deleted_bundles(arglead, cmdline, cursorpos)
         \ 'stridx(v:val, a:arglead) == 0')
 endfunction
 
-function! s:neobundle_local(localdir)
-  for dir in map(split(glob(neobundle#util#expand(a:localdir)
-        \ . '/*'), '\n'), "fnamemodify(v:val, ':t')")
-    call neobundle#config#bundle([dir,
-          \ { 'type' : 'nosync', 'base' : a:localdir, }])
-  endfor
-endfunction
-
-function! neobundle#exists_not_installed_bundles()
-  return !empty(neobundle#get_not_installed_bundles([]))
-endfunction
-
-function! neobundle#is_installed(...)
-  let bundle_names = type(get(a:000, 0, [])) == type([]) ?
-        \ get(a:000, 0, []) : [a:1]
-
-  return !empty(s:get_installed_bundles(bundle_names))
-endfunction
-
-function! neobundle#get_not_installed_bundle_names()
-  return map(neobundle#get_not_installed_bundles([]), 'v:val.name')
-endfunction
-
-function! neobundle#get_not_installed_bundles(bundle_names)
-  let bundles = empty(a:bundle_names) ?
-        \ neobundle#config#get_neobundles() :
-        \ neobundle#config#search(a:bundle_names)
-
-  return filter(copy(bundles),
-        \ "!isdirectory(neobundle#util#expand(v:val.path))")
-endfunction
-
-function! s:get_installed_bundles(bundle_names)
-  let bundles = empty(a:bundle_names) ?
-        \ neobundle#config#get_neobundles() :
-        \ neobundle#config#search(a:bundle_names)
-
-  return filter(copy(bundles),
-        \ "isdirectory(neobundle#util#expand(v:val.path))")
-endfunction
-
 let &cpo = s:save_cpo
 unlet s:save_cpo
+

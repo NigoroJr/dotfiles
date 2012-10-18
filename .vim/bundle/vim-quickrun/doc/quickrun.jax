@@ -127,9 +127,6 @@ quickrun#run([{config}])			*quickrun#run()*
 quickrun#new([{config}])			*quickrun#new()*
 	{session}(|quickrun-session|) を生成します。
 
-quickrun#config({line})				*quickrun#config()*
-	|:QuickRun| の引数文字列から {config} を生成します。
-
 quickrun#operator({wise})			*quickrun#operator()*
 	'operatorfunc' に対して設定するための関数です。
 	例えば、 >
@@ -157,7 +154,7 @@ quickrun#module#get({kind} [, {name}])		*quickrun#module#get()*
 quickrun#module#get_kinds()			*quickrun#module#get_kinds()*
 	モジュールの種類の名前のリストを取得します。
 
-quickrun#module#load([{overwrite}])		*quickrun#module#load()*
+quickrun#module#load()				*quickrun#module#load()*
 	'runtimepath' 上にあるモジュールをロードします。これは
 	"autoload/quickrun.vim" がロードされる際に自動で呼ばれます。
 
@@ -495,8 +492,6 @@ outputter は結果の出力を行うモジュールです。
   running_mark		デフォルト: ':-)'
 	この値が空文字列でない場合、実行中にこの文字列が出力先に表示されます。
 	表示は実行完了後に削除されます。
-  close_on_empty	Default: 0
-	終了時にバッファが空だった場合、自動的にバッファを閉じます。
 
 - "message"				*quickrun-module-outputter/message*
   |messages| に出力します。

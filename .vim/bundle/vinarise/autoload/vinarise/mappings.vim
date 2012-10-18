@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: mappings.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 09 Sep 2012.
+" Last Modified: 28 Mar 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -88,8 +88,6 @@ function! vinarise#mappings#define_default_mappings()"{{{
         \ :<C-u>call <SID>change_encoding()<CR>
   nnoremap <buffer><silent> <Plug>(vinarise_redraw)
         \ :<C-u>call vinarise#mappings#redraw()<CR>
-  nnoremap <buffer><silent> <Plug>(vinarise_reload)
-        \ :<C-u>call <SID>reload()<CR>
   "}}}
 
   if exists('g:vinarise_no_default_keymappings') &&
@@ -129,8 +127,7 @@ function! vinarise#mappings#define_default_mappings()"{{{
   nmap <buffer> n          <Plug>(vinarise_search_last_pattern)
   nmap <buffer> N          <Plug>(vinarise_search_last_pattern_reverse)
   nmap <buffer> E          <Plug>(vinarise_change_encoding)
-  nmap <buffer> <C-l>      <Plug>(vinarise_redraw)
-  nmap <buffer> g<C-l>     <Plug>(vinarise_reload)
+  nmap <buffer> <C-l>     <Plug>(vinarise_redraw)
 endfunction"}}}
 
 function! vinarise#mappings#move_to_address(address)"{{{
@@ -291,9 +288,7 @@ function! s:move_col(is_next)"{{{
   if a:is_next
     if type ==# 'hex'
       if (address % b:vinarise.width) == (b:vinarise.width - 1)
-            \ || (address == b:vinarise.get_percentage_address(100))
-        silent call search('|', 'W')
-        call cursor(0, col('.') + 4)
+        silent call search('[^ |]', 'W')
       else
         normal! w
       endif
@@ -308,8 +303,7 @@ function! s:move_col(is_next)"{{{
       endif
     else
       if type ==# 'ascii' && address % b:vinarise.width == 0
-        silent call search('|', 'bW')
-        call cursor(0, col('.') - 3)
+        silent call search('[^ |]', 'bW')
       else
         normal! h
       endif
@@ -429,7 +423,9 @@ function! s:search_buffer(type, is_reverse, string)"{{{
     let string = input('Please input search binary(! is not pattern) : ', '0x')
     redraw
   elseif a:type ==# 'string'
-    let string = input('Please input search string : ')
+    let string = iconv(
+          \ input('Please input search string : '), &encoding,
+          \   vinarise#get_current_vinarise().context.encoding)
     redraw
   elseif a:type ==# 'regexp'
     let string = input('Please input Python regexp : ')
@@ -486,17 +482,11 @@ function! s:search_buffer(type, is_reverse, string)"{{{
             \ b:vinarise.find_binary(start, binary)
     endif
   elseif a:type ==# 'regexp'
-    let address = b:vinarise.find_regexp(start, string,
-          \ &encoding,
-          \  vinarise#get_current_vinarise().context.encoding)
+    let address = b:vinarise.find_regexp(start, string)
   else
     let address = a:is_reverse ?
-          \ b:vinarise.rfind(start, string,
-          \  &encoding,
-          \  vinarise#get_current_vinarise().context.encoding) :
-          \ b:vinarise.find(start, string,
-          \  &encoding,
-          \  vinarise#get_current_vinarise().context.encoding)
+          \ b:vinarise.rfind(start, string) :
+          \ b:vinarise.find(start, string)
   endif
 
   if address < 0
@@ -530,12 +520,6 @@ function! s:change_encoding()"{{{
   " Redraw vinarise buffer.
   call vinarise#mappings#redraw()
 endfunction"}}}
-function! s:reload()"{{{
-  let vinarise = vinarise#get_current_vinarise()
-  let context = deepcopy(vinarise.context)
-  let filename = vinarise#get_current_vinarise().filename
 
-  call vinarise#start(filename, context)
-endfunction"}}}
 
 " vim: foldmethod=marker

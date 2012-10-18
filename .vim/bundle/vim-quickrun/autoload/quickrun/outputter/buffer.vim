@@ -13,7 +13,6 @@ let s:outputter = {
 \     'split': '%{winwidth(0) * 2 < winheight(0) * 5 ? "" : "vertical"}',
 \     'into': 0,
 \     'running_mark': ':-)',
-\     'close_on_empty': 0,
 \   }
 \ }
 
@@ -24,18 +23,16 @@ endfunction
 
 function! s:outputter.start(session)
   let winnr = winnr()
-  let wincount = winnr('$')
   call s:open_result_window(self.config)
   if !self._append
     silent % delete _
   endif
   call s:set_running_mark(self.config.running_mark)
-  call s:back_to_previous_window(winnr, wincount)
+  execute winnr 'wincmd w'
 endfunction
 
 function! s:outputter.output(data, session)
   let winnr = winnr()
-  let wincount = winnr('$')
   call s:open_result_window(self.config)
   if self._line == 0
     let self._line = line('$')
@@ -58,31 +55,20 @@ function! s:outputter.output(data, session)
     silent 1 delete _
   endif
   call s:set_running_mark(self.config.running_mark)
-  call s:back_to_previous_window(winnr, wincount)
+  execute winnr 'wincmd w'
   redraw
 endfunction
 
 function! s:outputter.finish(session)
   let winnr = winnr()
-  let wincount = winnr('$')
 
   call s:open_result_window(self.config)
   execute self._line
   silent normal! zt
-  let is_closed = 0
-  if self.config.close_on_empty && line('$') == 1 && getline(1) =~ '^\s*$'
-    quit
-    let is_closed = 1
-  endif
-  if !is_closed && !self.config.into
-    call s:back_to_previous_window(winnr, wincount)
+  if !self.config.into
+    execute winnr 'wincmd w'
   endif
   redraw
-  if is_closed
-    echohl MoreMsg
-    echomsg "quickrun: outputter/buffer: Empty output."
-    echohl NONE
-  endif
 endfunction
 
 
@@ -106,14 +92,6 @@ function! s:open_result_window(config)
   if exists('b:quickrun_running_mark')
     silent undo
     unlet b:quickrun_running_mark
-  endif
-endfunction
-
-function! s:back_to_previous_window(prev_nr, prev_count)
-  if a:prev_count == winnr('$')
-    execute a:prev_nr 'wincmd w'
-  else
-    wincmd p
   endif
 endfunction
 

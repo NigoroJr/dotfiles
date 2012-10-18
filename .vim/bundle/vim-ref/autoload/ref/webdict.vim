@@ -15,7 +15,7 @@ if !exists('g:ref_source_webdict_cmd')
   \ executable('links')  ? 'links -dump %s' :
   \ executable('lynx')   ? 'lynx -dump -nonumbers %s' :
   \ len(globpath(&rtp, 'autoload/wwwrenderer.vim')) > 0
-  \   ? '=wwwrenderer#render("%s")' :
+  \   ? ':wwwrenderer#render("%s")' :
   \ ''
 endif
 
@@ -74,12 +74,8 @@ function! s:source.get_body(query)
 
   let url = printf(site.url, arg)
   call map(cmd, 'substitute(v:val, "%s", url, "g")')
-  if len(cmd) > 0 && cmd[0] =~ '^='
-    let res = eval(join(cmd, ' ')[1:])
-  elseif len(cmd) > 0 && cmd[0] =~ '^:'
-    redir => res
-    silent! exe join(cmd, ' ')[1:]
-    redir END
+  if len(cmd) > 0 && cmd[0] =~ '^:'
+    return eval(join(cmd, ' ')[1:])
   elseif get(site, 'cache', g:ref_source_webdict_use_cache)
     let expr = 'ref#system(' . string(cmd) . ').stdout'
     let res = join(ref#cache('webdict', query, expr), "\n")
@@ -94,13 +90,8 @@ function! s:source.get_body(query)
 endfunction
 
 function! s:source.opened(query)
-  let [name, site, keyword] = s:get_site_and_keyword_from_query(a:query)
-  if has_key(site, 'line')
-    execute site.line
-    execute "normal! z\<CR>"
-  endif
-  call s:syntax(keyword)
-  let b:ref_source_webdict_site = name
+  call s:syntax(matchstr(a:query, '^\s*\S*\s*\zs.*'))
+  let b:ref_source_webdict_site = matchstr(a:query, '^\s*\zs\S*')
 endfunction
 
 function! s:source.get_keyword()

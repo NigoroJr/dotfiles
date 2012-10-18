@@ -1,6 +1,6 @@
 *vinarise.txt*	Ultimate hex editing system with Vim.
 
-Version: 1.1
+Version: 0.3
 Author : Shougo <Shougo.Matsu@gmail.com>
 License: MIT license  {{{
     Permission is hereby granted, free of charge, to any person obtaining
@@ -31,7 +31,6 @@ Interface		|vinarise-interface|
   Variables		  |vinarise-variables|
   Plugins		  |vinarise-plugins|
 Examples		|vinarise-examples|
-Unite sources		|vinarise-unite-sources|
 Changelog		|vinarise-changelog|
 
 ==============================================================================
@@ -73,25 +72,12 @@ COMMANDS 					*vinarise-commands*
 		Specify file encoding type.
 		If omitted it, "latin1" is used.
 		Note: "latin1" is only supported less than Vim 7.3.
-		Note: "latin1", "utf-8", "cp932", "euc-jp", "utf-16le",
-		"utf-16be", "ucs-2le" or "ucs-2be" encodings are supported in
-		this version.
-
-:VinariseScript2Hex [{options}...] [{path}]	*:VinariseScript2Hex*
-		Convert hexript to vinarise binary data.
-		The {options} is same to |:Vinarise|.
-		If {path} is set, vinarise will write the data in {path}.
-		Note: This command uses |hexript.vim| plugin.
-		https://github.com/rbtnn/hexript.vim
-
-:VinariseHex2Script {path}			*:VinariseHex2Script*
-		Convert vinarise binary data to hexript in {path} file.
-		Note: This command uses |hexript.vim| plugin.
-		https://github.com/rbtnn/hexript.vim
+		Note: "latin1" or "utf-8" encodings are supported in this
+		version.
 
 The commands of plugins				*:vinarise-sources-commands*
 
-:VinarisePluginDump				*:VinarisePluginDump*
+:VinariseDump {file}				*:VinariseDump*
 		View executable file with objdump.
 
 :VinarisePluginViewBitmapView			*:VinarisePluginBitmapView*
@@ -109,8 +95,6 @@ g:vinarise_enable_auto_detect			*g:vinarise_enable_auto_detect*
 
 g:vinarise_detect_large_file_size		*g:vinarise_detect_large_file_size*
 		This variable is |vinarise| detect large file size.
-		If this variable value is less equal than 0, will disable large
-		file detection.
 		Note: This variable is valid in |g:vinarise_enable_auto_detect|
 		is 1.
 		
@@ -235,9 +219,6 @@ VINARISE BUFFER KEY MAPPINGS 			*vinarise-buffer-key-mappings*
 <Plug>(vinarise_redraw)				*<Plug>(vinarise_redraw)*
 		Redraw current vinarise buffer.
 
-<Plug>(vinarise_reload)				*<Plug>(vinarise_reload)*
-		Reload opening file.
-
 Normal mode key mappings.
 
 Normal mode default key mappings.
@@ -275,130 +256,16 @@ n			<Plug>(vinarise_search_last_pattern)
 N			<Plug>(vinarise_search_last_pattern_reverse)
 E			<Plug>(vinarise_change_encoding)
 <C-l>			<Plug>(vinarise_redraw)
-g<C-l>			<Plug>(vinarise_reload)
 
 ==============================================================================
 EXAMPLES					*vinarise-examples*
 >
-	let g:vinarise_enable_auto_detect = 1
-<
-==============================================================================
-UNITE SOURCES					*vinarise-unite-sources*
-
-Here let me explain about a source for |unite| provided in vinarise.
-
-						*vinarise-unite-source-vinarise-analysis*
-vinarise/analysis
-		Candidates of vinarise structure analysis.
-
-Actions of source original.
-
-vinarise/analysis				*vinarise-unite-action-vinarise-analysis*
-	jump		Jump to the address
-	edit		Edit item
-
+	
+	
+	
+>
 ==============================================================================
 CHANGELOG					*vinarise-changelog*
-
-2012-09-11
-- Fixed error in saving.
-
-2012-09-10
-- Added :VinariseHex2Script command.
-
-2012-09-09
-- Added bytes.
-- Fixed write behavior.
-- Added :VinariseScript2Hex command.
-
-2012-09-03
-- Improved documentation.
-
-2012-09-02
-- Renamed :VinarisePluginDump.
-
-2012-08-26
-- Improved analysis bitmap.
-- Added zip analyzer.
-
-2012-08-18
-- Use vinarise#util#iconv().
-
-2012-08-15
-- Improved error check.
-- Added vinarise/analysis source.
-- Implemented parser.
-- Improved candidates.
-- Fixed bitmap parser.
-- Improved action.
-
-2012-08-14
-- Ver.1.1 development is started.
-
-------------------------------------------------------------------------------
-ChangeLog vinarise 1.0:
-
-2012-07-31
-- Updated vital.
-- Use vital buffer manager.
-
-2012-07-05
-- Reduced vital.
-- Improved check cmdwin.
-
-2012-05-31
-- Fixed completion.
-
-2012-05-30
-- Fixed filename completion.
-
-2012-05-28
-- Deleted debug message.
-
-2012-05-27
-- Fixed for cpo.
-
-2012-05-19
-- Added <Plug>(vinarise_reload) mapping.
-- Fixed g:vinarise_detect_large_file_size problem.
-
-2012-05-17
-- Fixed auto detection error.
-
-2012-05-16
-- Fixed completion behavior.
-
-2012-05-14
-- Fixed display byte.
-
-2012-05-04
-- Improved empty file behavior.
-- Improved cursor move.
-
-2012-05-03
-- Fixed for vim-fugitive ":Gstatus".
-
-2012-05-02
-- Fixed change window size behavior in vinarise bitmapview.
-
-2012-04-28
-- Updated vital.
-
-2012-04-23
-- Fixed vimfiler dependency.
-- Fixed unite dependency.
-
-2012-04-22
-- Improved bitmapview behavior.
-
-2012-04-13
-- Supported euc-jp.
-
-2012-04-05
-- Fixed search pattern.
-
-2012-03-31
-- Fixed for cmdwin.
 
 2012-03-28
 - Improved encoding completion.

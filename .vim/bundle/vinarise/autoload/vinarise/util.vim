@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: util.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 18 Aug 2012.
+" Last Modified: 21 Mar 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -73,9 +73,6 @@ function! vinarise#util#substitute_path_separator(...)
 endfunction
 function! vinarise#util#escape_file_searching(...)
   return call(s:V.escape_file_searching, a:000)
-endfunction
-function! vinarise#util#iconv(...)
-  return call(s:V.iconv, a:000)
 endfunction
 
 function! vinarise#util#alternate_buffer()"{{{

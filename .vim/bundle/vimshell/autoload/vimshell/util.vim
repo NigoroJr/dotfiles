@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: util.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 07 Sep 2012.
+" Last Modified: 31 Mar 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -25,7 +25,6 @@
 "=============================================================================
 
 let s:V = vital#of('vimshell')
-let s:List = vital#of('vimshell').import('Data.List')
 
 function! vimshell#util#truncate_smart(...)"{{{
   return call(s:V.truncate_smart, a:000)
@@ -97,6 +96,45 @@ else
   endfunction"}}}
 endif
 
+function! vimshell#util#alternate_buffer()"{{{
+  if bufnr('%') != bufnr('#') && s:buflisted(bufnr('#'))
+    buffer #
+    return
+  endif
+
+  let listed_buffer_len = len(filter(range(1, bufnr('$')),
+        \ 's:buflisted(v:val) && v:val != bufnr("%")'))
+  if listed_buffer_len <= 1
+    enew
+    return
+  endif
+
+  let cnt = 0
+  let pos = 1
+  let current = 0
+  while pos <= bufnr('$')
+    if s:buflisted(pos)
+      if pos == bufnr('%')
+        let current = cnt
+      endif
+
+      let cnt += 1
+    endif
+
+    let pos += 1
+  endwhile
+
+  if current > cnt / 2
+    bprevious
+  else
+    bnext
+  endif
+endfunction"}}}
+function! vimshell#util#delete_buffer(...)"{{{
+  let bufnr = get(a:000, 0, bufnr('%'))
+  call vimshell#util#alternate_buffer()
+  execute 'bdelete!' bufnr
+endfunction"}}}
 function! s:buflisted(bufnr)"{{{
   return exists('t:unite_buffer_dictionary') ?
         \ has_key(t:unite_buffer_dictionary, a:bufnr) && buflisted(a:bufnr) :
@@ -123,54 +161,30 @@ function! vimshell#util#set_dictionary_helper(variable, keys, value)"{{{
   endfor
 endfunction"}}}
 
-function! vimshell#util#substitute_path_separator(...)"{{{
+function! vimshell#util#substitute_path_separator(...)
   return call(s:V.substitute_path_separator, a:000)
-endfunction"}}}
-function! vimshell#util#is_windows(...)"{{{
+endfunction
+function! vimshell#util#is_windows(...)
   return call(s:V.is_windows, a:000)
-endfunction"}}}
-function! vimshell#util#escape_file_searching(...)"{{{
+endfunction
+function! vimshell#util#escape_file_searching(...)
   return call(s:V.escape_file_searching, a:000)
-endfunction"}}}
-function! vimshell#util#sort_by(...)"{{{
-  return call(s:List.sort_by, a:000)
-endfunction"}}}
-
-function! vimshell#util#has_vimproc(...)"{{{
-  return call(s:V.has_vimproc, a:000)
-endfunction"}}}
-
-function! vimshell#util#input_yesno(message)"{{{
-  let yesno = input(a:message . ' [yes/no] : ')
-  while yesno !~? '^\%(y\%[es]\|n\%[o]\)$'
-    redraw
-    if yesno == ''
-      echo 'Canceled.'
-      break
-    endif
-
-    " Retry.
-    call unite#print_error('Invalid input.')
-    let yesno = input(a:message . ' [yes/no] : ')
-  endwhile
-
-  return yesno =~? 'y\%[es]'
-endfunction"}}}
+endfunction
 
 function! vimshell#util#is_cmdwin()"{{{
-  let errmsg_save = v:errmsg
-  silent! verbose noautocmd wincmd p
-  if errmsg_save !=# v:errmsg
-        \ && v:errmsg =~ '^E11:'
+  try
+    noautocmd wincmd p
+  catch /^Vim\%((\a\+)\)\=:E11:/
     return 1
-  endif
+  endtry
 
   silent! noautocmd wincmd p
   return 0
 endfunction"}}}
 
 function! vimshell#util#alternate_buffer()"{{{
-  if bufnr('%') != bufnr('#') && s:buflisted(bufnr('#'))
+  if getbufvar('#', "&filetype") !=# "vimshell"
+        \ && s:buflisted(bufnr('#'))
     buffer #
     return
   endif
@@ -189,7 +203,7 @@ endfunction"}}}
 function! vimshell#util#delete_buffer(...)"{{{
   let bufnr = get(a:000, 0, bufnr('%'))
   call vimshell#util#alternate_buffer()
-  execute 'silent bdelete!' bufnr
+  execute 'bdelete!' bufnr
 endfunction"}}}
 function! s:buflisted(bufnr)"{{{
   return exists('t:unite_buffer_dictionary') ?

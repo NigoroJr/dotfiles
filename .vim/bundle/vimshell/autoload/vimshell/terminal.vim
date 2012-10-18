@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: terminal.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 21 Aug 2012.
+" Last Modified: 21 Jun 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -57,9 +57,7 @@ function! vimshell#terminal#print(string, is_error)"{{{
   endif
 
   if &filetype ==# 'vimshell' &&
-        \ empty(b:vimshell.continuation) && (vimshell#check_prompt()
-        \ || vimshell#head_match(getline('.'),
-        \     vimshell#get_secondary_prompt()))
+        \ empty(b:vimshell.continuation) && vimshell#check_prompt()
     " Move line.
     call append(line('.'), '')
     normal! j
@@ -213,8 +211,7 @@ function! vimshell#terminal#print(string, is_error)"{{{
   call s:output_string(newstr)
 
   " Set lines.
-  for linenr in sort(map(keys(s:virtual.lines),
-        \ 'str2nr(v:val)'), 's:sortfunc')
+  for linenr in sort(map(keys(s:virtual.lines), 'str2nr(v:val)'), 's:sortfunc')
     call setline(linenr, s:virtual.lines[linenr])
   endfor
 
@@ -261,12 +258,8 @@ endfunction"}}}
 
 function! s:optimized_print(string, is_error)"{{{
   " Strip <CR>.
-  let string = substitute(substitute(
-        \ a:string, "\<C-g>", '', 'g'), '\r\+\n', '\n', 'g')
-
-  if g:vimshell_enable_debug
-    echomsg 'print optimized output string = ' . string(string)
-  endif
+  let string = substitute(substitute(a:string, "\<C-g>", '', 'g'),
+        \ '\r\+\n', '\n', 'g')
 
   let lines = split(string, '\n', 1)
 
@@ -277,8 +270,7 @@ function! s:optimized_print(string, is_error)"{{{
   endif
 
   normal! $
-  let [s:virtual.line, s:virtual.col] =
-        \ s:get_virtual_col(line('.'), col('.')-1)
+  let [s:virtual.line, s:virtual.col] = s:get_virtual_col(line('.'), col('.')-1)
   call s:set_cursor()
 endfunction"}}}
 function! s:print_with_redraw(is_error, lines)"{{{
@@ -331,8 +323,7 @@ function! s:print_simple(is_error, lines)"{{{
 endfunction"}}}
 function! s:set_cursor()"{{{
   " Get real pos(0 origin).
-  let [line, col] = s:get_real_pos(
-        \ s:virtual.line, s:virtual.col)
+  let [line, col] = s:get_real_pos(s:virtual.line, s:virtual.col)
   call s:set_screen_pos(line, col)
 
   " Convert to 1 origin.
@@ -373,10 +364,6 @@ function! s:output_string(string)"{{{
     return
   endif
 
-  if g:vimshell_enable_debug
-    echomsg 'print output string = ' . string(a:string)
-  endif
-
   if a:string == ''
     return
   endif
@@ -384,8 +371,7 @@ function! s:output_string(string)"{{{
   let string = b:interactive.terminal.is_error ?
         \ '!!!' . a:string . '!!!' : a:string
 
-  if b:interactive.terminal.current_character_set
-        \ ==# 'Line Drawing'
+  if b:interactive.terminal.current_character_set ==# 'Line Drawing'
     " Convert characters.
     let string = ''
     for c in split(a:string, '\zs')
@@ -460,7 +446,7 @@ function! s:get_real_pos(line, col)"{{{
     return [a:line, 0]
   endif
 
-  return s:get_col_current_line(a:line, a:col, 0)
+  return s:get_col(a:line, a:col, 0)
 endfunction"}}}
 function! s:get_virtual_col(line, col)"{{{
   let current_line = get(s:virtual.lines, a:line, getline(a:line))
@@ -468,65 +454,29 @@ function! s:get_virtual_col(line, col)"{{{
     return [a:line, 1]
   endif
 
-  return s:get_col_current_line(a:line, a:col, 1)
+  return s:get_col(a:line, a:col, 1)
 endfunction"}}}
-function! s:get_col_current_line(line, col, is_virtual)"{{{
-  let current_line = get(s:virtual.lines, a:line, getline(a:line))
-  return [a:line, vimshell#terminal#get_col(
-        \ current_line, a:col, a:is_virtual)]
-endfunction"}}}
-function! s:get_screen_character(line, col)"{{{
-  let [line, col] = s:get_real_pos(a:line, a:col)
-  return s:virtual.lines[line][col]
-endfunction"}}}
-function! s:get_virtual_wcswidth(string)"{{{
-  return vimshell#util#wcswidth(
-        \ substitute(a:string, '\e\[[0-9;]*m', '', 'g'))
-endfunction"}}}
-function! s:set_screen_string(line, col, string)"{{{
-  let [line, col] = s:get_real_pos(a:line, a:col)
-  call s:set_screen_pos(line, col)
-
-  let current_line = s:virtual.lines[line]
-  let len = vimshell#util#wcswidth(a:string)
-  let s:virtual.lines[line] =
-        \ (col > 1 ? current_line[:col-2] : '')
-        \ . a:string
-        \ . current_line[col+len :]
-  let len2 = s:get_virtual_wcswidth(a:string)
-  let s:virtual.col += len2
-  if col < 1
-    let s:virtual.col += 1
-  endif
-
-  " let [s:virtual.line, s:virtual.col] = s:get_virtual_col(line, col+len)
-  if g:vimshell_enable_debug
-    echomsg 'current_line = ' . current_line
-    echomsg 'current_line[col:] = ' . current_line[col :]
-    echomsg '[old_virt_col, real_col, new_virt_col, string] = ' .
-          \ string([a:col, col, s:virtual.col, a:string])
-  endif
-endfunction"}}}
-function! s:set_screen_pos(line, col)"{{{
-  if a:line == ''
-    return
-  endif
-
-  if !has_key(s:virtual.lines, a:line)
-    let s:virtual.lines[a:line] = ''
-  endif
-  if a:col > len(s:virtual.lines[a:line])
-    let s:virtual.lines[a:line] .=
-          \ repeat(' ', a:col - len(s:virtual.lines[a:line]))
-  endif
-endfunction"}}}
-function! vimshell#terminal#get_col(line, col, is_virtual)"{{{
+function! s:get_col(line, col, is_virtual)"{{{
   " is_virtual -> a:col : real col.
   " not -> a:col : virtual col.
   let col = 1
   let real_col = 0
 
-  let current_line = a:line
+  let current_line = get(s:virtual.lines, a:line, getline(a:line))
+  if current_line =~ '^ \+'
+    " Optimized.
+    let spaces = len(matchstr(current_line, '^ \+'))
+    let col += spaces
+    let real_col += spaces
+
+    let check_col = a:is_virtual ? real_col : col
+    if check_col > a:col
+      let col -= check_col - a:col
+      let real_col -= check_col - a:col
+    endif
+
+    let current_line = current_line[real_col :]
+  endif
 
   if current_line !~ '\e\[[0-9;]*m'
     " Optimized.
@@ -541,7 +491,7 @@ function! vimshell#terminal#get_col(line, col, is_virtual)"{{{
     endfor
   else
     let skip_cnt = 0
-    for c in split(current_line[real_col :], '\zs')
+    for c in split(current_line, '\zs')
       if skip_cnt > 0
         let skip_cnt -= 1
         continue
@@ -550,8 +500,7 @@ function! vimshell#terminal#get_col(line, col, is_virtual)"{{{
       if c == "\<ESC>"
             \ && current_line[real_col :] =~ '^\e\[[0-9;]*m'
         " Skip.
-        let sequence = matchstr(current_line,
-              \ '^\e\[[0-9;]*m', real_col)
+        let sequence = matchstr(current_line, '^\e\[[0-9;]*m', real_col)
         let skip_cnt = len(sequence)-1
         let real_col += len(sequence)
       else
@@ -576,7 +525,42 @@ function! vimshell#terminal#get_col(line, col, is_virtual)"{{{
     endif
   endif
 
-  return (a:is_virtual ? col : real_col)
+  return [a:line, (a:is_virtual ? col : real_col)]
+endfunction"}}}
+function! s:get_screen_character(line, col)"{{{
+  let [line, col] = s:get_real_pos(a:line, a:col)
+  return s:virtual.lines[line][col]
+endfunction"}}}
+function! s:get_virtual_wcswidth(string)"{{{
+  return vimshell#util#wcswidth(
+        \ substitute(a:string, '\e\[[0-9;]*m', '', 'g'))
+endfunction"}}}
+function! s:set_screen_string(line, col, string)"{{{
+  let [line, col] = s:get_real_pos(a:line, a:col)
+  call s:set_screen_pos(line, col)
+
+  let current_line = s:virtual.lines[line]
+  let len = vimshell#util#wcswidth(a:string)
+  let s:virtual.lines[line] = current_line[ : col]  .  a:string
+        \             . current_line[col+len :]
+  let len2 = s:get_virtual_wcswidth(a:string)
+  let s:virtual.col += len2
+
+  " let [s:virtual.line, s:virtual.col] = s:get_virtual_col(line, col+len)
+  if g:vimshell_enable_debug
+    echomsg 'current_line = ' . current_line
+    echomsg 'current_line[col:] = ' . current_line[col :]
+    echomsg '[virt_col, real_col, string] = ' .
+          \ string([a:col, col, s:virtual.col, a:string])
+  endif
+endfunction"}}}
+function! s:set_screen_pos(line, col)"{{{
+  if !has_key(s:virtual.lines, a:line)
+    let s:virtual.lines[a:line] = ''
+  endif
+  if a:col > len(s:virtual.lines[a:line])
+    let s:virtual.lines[a:line] .= repeat(' ', a:col - len(s:virtual.lines[a:line]))
+  endif
 endfunction"}}}
 
 " Escape sequence functions.
@@ -763,12 +747,6 @@ function! s:escape.move_cursor(matchstr)"{{{
 
   let s:virtual.line = get(args, 0, 1)
   let s:virtual.col = get(args, 1, 1)
-  if s:virtual.line !~ '^\d\+$' || s:virtual.col !~ '^\d\+$'
-    call unite#print_error(
-          \ 'Move cursor escape sequence format error: str = "'
-          \ . a:matchstr . '"')
-    return
-  endif
 
   let [line, col] = s:get_real_pos(s:virtual.line, s:virtual.col)
   call s:set_screen_pos(line, col)

@@ -37,16 +37,11 @@ function! s:source.get_body(query)
   let content = res.stdout
   if s:refe_version() == 2
     " is class or module?
-    let class = matchstr(content, '^\v%(require\s+\S+\n\n)?%(class|module) \zs%(\w|\:)+')
+    let class = matchstr(content, '^\v%(require\s+\S+\n\n)?%(class|module) \zs\S+')
     if class != ''
       for [type, sep] in [['Singleton', '.'], ['Instance', '#']]
-        let refe_result = s:refe(class . sep)
-        if refe_result.result != 0 " Members not found
-          let members = ''
-        else
-          let members = refe_result.stdout
-          let members = substitute(members, '\V' . class . sep, '', 'g')
-        endif
+        let members = s:refe(class . sep).stdout
+        let members = substitute(members, '\V' . class . sep, '', 'g')
         let content .= "\n\n---- " . type . " methods ----\n" . members
       endfor
     endif

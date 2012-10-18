@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: bitmapview.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu at gmail.com>
-" Last Modified: 31 Jul 2012.
+" Last Modified: 26 Feb 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -31,7 +31,6 @@ function! vinarise#plugins#bitmapview#define()
   return s:plugin
 endfunction
 
-" Variables  "{{{
 let s:save_gui = []
 
 let s:font_pattern =
@@ -40,12 +39,6 @@ let s:font_pattern =
       \ has('gui_gtk') ?       '\s\+\zs\d\+$':
       \ has('X11') ?           '\v%([^-]*-){6}\zs\d+\ze%(-[^-]*){7}':
       \                        '*Unknown system*'
-
-let s:V = vital#of('vinarise')
-let s:BM = s:V.import('Vim.Buffer.Manager')
-let s:manager = s:BM.new()  " creates new manager
-call s:manager.config('opener', 'silent edit')
-"}}}
 
 let s:plugin = {
       \ 'name' : 'bitmapview',
@@ -61,15 +54,14 @@ endfunction"}}}
 function! s:bitmapview_open()"{{{
   let vinarise = vinarise#get_current_vinarise()
 
-  let prefix = vinarise#util#is_windows() ?
+  let prefix = vimfiler#util#is_windows() ?
         \ '[bitmapview] - ' : '*bitmapview* - '
-  let ret = s:manager.open(prefix . vinarise.filename)
-  if !ret.loaded
-    call vinarise#print_error(
-          \ '[vinarise] Failed to open Buffer.')
-    return
-  endif
+  edit `=prefix . vinarise.filename`
   match
+
+  let b:bitmapview = {}
+  let b:bitmapview.vinarise = vinarise
+  let b:bitmapview.width = (winwidth(0) - 10) / 16 * 16
 
   setlocal nolist
   setlocal buftype=nofile
@@ -81,17 +73,11 @@ function! s:bitmapview_open()"{{{
 
   " Autocommands.
   augroup plugin-vinarise
-    autocmd BufWinEnter <buffer>
-          \ call s:change_windowsize()
-    autocmd BufWinLeave,BufUnload <buffer>
-          \ call s:restore_windowsize()
+    autocmd BufWinEnter <buffer> call s:change_windowsize()
+    autocmd BufWinLeave <buffer> call s:restore_windowsize()
   augroup END
 
   call s:change_windowsize()
-
-  let b:bitmapview = {}
-  let b:bitmapview.vinarise = vinarise
-  let b:bitmapview.width = (winwidth(0) - 10) / 16 * 16
 
   call s:define_default_mappings()
 
@@ -263,32 +249,28 @@ function! s:set_cursor_address(address)"{{{
 endfunction"}}}
 
 function! s:change_windowsize()"{{{
-  if !has('gui_running') || !empty(s:save_gui)
+  if !has('gui_running')
     return
   endif
+
+  let s:save_gui = [&guifont, &guifontwide, &lines, &columns]
 
   let old_fontsize = matchstr(&guifont, s:font_pattern)
   if old_fontsize == '' || old_fontsize <= 8
     return
   endif
 
-  let s:save_gui = [&guifont, &guifontwide, &lines, &columns,
-        \ getwinposx(), getwinposy()]
-
   let &guifont = s:change_fontsize(&guifont, 8)
   let &guifontwide = s:change_fontsize(&guifontwide, 8)
-  let &lines = (s:save_gui[2] * old_fontsize) / 9
-  let &columns = (s:save_gui[3] * old_fontsize) / 9
+  let &columns = (&columns * old_fontsize) / 8
+  let &lines = (&lines * old_fontsize) / 8
 endfunction"}}}
 function! s:restore_windowsize()"{{{
   if empty(s:save_gui)
     return
   endif
 
-  let [&guifont, &guifontwide, &lines, &columns,
-        \ posx, posy] = s:save_gui
-  execute 'winpos' posx posy
-
+  let [&guifont, &guifontwide, &lines, &columns] = s:save_gui
   let s:save_gui = []
 endfunction"}}}
 function! s:change_fontsize(font, size)

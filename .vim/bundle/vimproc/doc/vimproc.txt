@@ -1,6 +1,6 @@
 *vimproc.txt*	Asynchronous execution plugin for Vim
 
-Version: 7.1
+Version: 7.0
 Author : Shougo <Shougo.Matsu at gmail.com>
 Original Author : Yukihiro Nakadaira <yukihiro.nakadaira at gmail.com>
 License: MIT license  {{{
@@ -281,12 +281,6 @@ g:stdoutencoding		(default : "char")
 g:stderrencoding		(default : "char")
 		The default vimproc stderr encoding.
 
-						*g:vimproc_password_pattern*
-				(default : refer to autoload/vimproc.vim)
-g:vimproc_password_pattern
-		The default password pattern.
-		Note: This variable is used for vimshell.
-
 ==============================================================================
 TIPS						*vimproc-tips*
 
@@ -335,68 +329,6 @@ EXAMPLES					*vimproc-examples*
 <
 ==============================================================================
 CHANGELOG					*vimproc-changelog*
-
-2012-08-29
-- Fixed g:vimproc_dll_path conversion.
-
-2012-08-18
-- Added test.
-
-2012-08-15
-- Improved g:vimproc_password_pattern.
-
-2012-08-14
-- Ver.7.1 development is started.
-- Remain vimproc#version().
-
-------------------------------------------------------------------------------
-ChangeLog 7.0
-
-2012-08-02
-- Fixed analyze shebang.
-
-2012-08-01
-- Improved analyze shebang.
-
-2012-07-25
-- Fixed symbolic link problem.
-
-2012-07-19
-- Added tests.
-
-2012-07-18
-- Fixed escape.
-- Fixed double quote escape.
-- Added parser tests.
-- Improved tests.
-- Invalidate socket test.
-- Fixed fopen test.
-- Check executable().
-- Improved which().
-
-2012-07-17
-- Fixed double quote escape.
-
-2012-07-15
-- Fixed escape error.
-- Fixed vesting test.
-
-2012-07-08
-- Fixed for case sensitive system.
-- Added for vesting test cases.
-
-2012-07-07
-- Fixed which behavior.
-
-2012-07-06
-- Substitute NULL character to "^@".
-- Improved which.
-
-2012-07-03
-- Deleted vital dependency.
-
-2012-06-30
-- Added g:vimproc_password_pattern variable.
 
 2012-06-25
 - Fixed vital which.

@@ -1,3 +1,4 @@
+set noswapfile      " No swap files
 set tabstop=4		" An indentation level every four columns
 set expandtab		" Convert all tabs typed into spaces
 set shiftwidth=4	" Indent/outdent by four columns
@@ -33,7 +34,7 @@ NeoBundle 'vim-scripts/DrawIt'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'taku-o/vim-toggle'
-" NeoBundle 'Shougo/neocomplcache-snippets-complete'
+NeoBundle 'Shougo/neocomplcache-snippets-complete'
 
 filetype plugin indent on
 
@@ -69,3 +70,6 @@ smap <silent> <C-k> <Plug>(neocomplcache_snippets_expand)
 " Toggle Snippet Editor
 nnoremap <silent> <Space>es :<C-u>NeoComplCacheEditSnippets 
 nnoremap <silent> es<Space> :<C-u>NeoComplCacheEditSnippets 
+
+" Vinarise
+let g:vinarise_enable_auto_detect = 1

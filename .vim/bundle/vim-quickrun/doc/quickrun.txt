@@ -127,9 +127,6 @@ quickrun#run([{config}])			*quickrun#run()*
 quickrun#new([{config}])			*quickrun#new()*
 	Creates a {session}(|quickrun-session|).
 
-quickrun#config({line})				*quickrun#config()*
-	Creates {config} from argument line of |:QuickRun|.
-
 quickrun#operator({wise})			*quickrun#operator()*
 	A function for 'operatorfunc'.
 	e.g.: >
@@ -157,7 +154,7 @@ quickrun#module#get({kind} [, {name}])		*quickrun#module#get()*
 quickrun#module#get_kinds()			*quickrun#module#get_kinds()*
 	Returns a list of name of kind of module.
 
-quickrun#module#load([{overwrite}])		*quickrun#module#load()*
+quickrun#module#load()				*quickrun#module#load()*
 	Loads the modules on 'runtimepath'.  This is called by
 	"autoload/quickrun.vim" automatically.
 
@@ -506,8 +503,6 @@ available by default.
   running_mark		Default: ':-)'
 	If this value is not an empty string, |quickrun| displays this string
 	to output buffer while it's running.
-  close_on_empty	Default: 0
-	Automatically close outputter buffer if empty.
 
 - "message"				*quickrun-module-outputter/message*
   Outputs on |messages|.

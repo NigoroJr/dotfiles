@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: vinarise.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 10 Sep 2012.
+" Last Modified: 19 Mar 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -31,9 +31,6 @@ elseif v:version < 702
   finish
 endif
 
-let s:save_cpo = &cpo
-set cpo&vim
-
 " Global options definition."{{{
 let g:vinarise_enable_auto_detect =
       \ get(g:, 'vinarise_enable_auto_detect', 0)
@@ -43,12 +40,10 @@ let g:vinarise_cursor_ascii_highlight =
       \ get(g:, 'vinarise_cursor_ascii_highlight', 'Search')
 "}}}
 
-command! -nargs=* -complete=customlist,vinarise#complete Vinarise
+command! -nargs=? -complete=customlist,vinarise#complete Vinarise
       \ call s:call_vinarise({}, <q-args>)
 command! -nargs=? -complete=customlist,vinarise#complete VinariseDump
       \ call vinarise#dump#open(<q-args>, 0)
-command! -nargs=* -complete=customlist,vinarise#complete VinariseScript2Hex
-      \ call s:call_script2hex({'split' : 1}, <q-args>)
 
 if g:vinarise_enable_auto_detect
   augroup vinarise
@@ -59,27 +54,6 @@ if g:vinarise_enable_auto_detect
 endif
 
 function! s:call_vinarise(default, args)"{{{
-  let [args, context] = s:parse_args(a:default, a:args)
-
-  call vinarise#start(join(args), context)
-endfunction"}}}
-function! s:call_script2hex(default, args)"{{{
-  let [args, context] = s:parse_args(a:default, a:args)
-  if !get(g:, 'loaded_hexript', 0)
-    call vinarise#print_error('hexript plugin is needed.')
-    return
-  elseif &filetype !=# 'hexript' || !filereadable(expand('%'))
-    call vinarise#print_error('hexript file is not found.')
-    return
-  endif
-
-  " Get hexript data.
-  let dict = hexript#file_to_dict(expand('%'))
-  let context.bytes = dict.bytes
-
-  call vinarise#start(join(args), context)
-endfunction"}}}
-function! s:parse_args(default, args)"{{{
   let args = []
   let context = a:default
   for arg in split(a:args, '\%(\\\@<!\s\)\+')
@@ -100,7 +74,7 @@ function! s:parse_args(default, args)"{{{
     endif
   endfor
 
-  return [args, context]
+  call vinarise#open(join(args), context)
 endfunction"}}}
 
 function! s:browse_check(path)"{{{
@@ -109,12 +83,8 @@ function! s:browse_check(path)"{{{
     let path = vinarise#util#expand('~')
   endif
 
-  if (&filetype ==# 'vinarise' && line('$') != 1)
-        \ || !filereadable(path)
+  if &filetype ==# 'vinarise' || !filereadable(path)
         \ || !g:vinarise_enable_auto_detect
-        \ || path =~# '/.git/index$'
-    " Note: vim-fugitive opens ".git/index" binary file when executed
-    " ':Gstatus'.
     return
   endif
 
@@ -125,15 +95,11 @@ function! s:browse_check(path)"{{{
 
   if lines[0] =~ '\%(^.ELF\|!<arch>\|^MZ\)'
     call vinarise#dump#open(path, 1)
-  elseif lines[0] =~ '[\x00-\x09\x10-\x1a\x1c-\x1f]\{5,}'
-        \ || (g:vinarise_detect_large_file_size > 0 &&
-        \        getfsize(path) > g:vinarise_detect_large_file_size)
+  elseif lines[0] =~ '[\x00-\x09\x10-\x1f]\{5,}'
+        \ || getfsize(path) > g:vinarise_detect_large_file_size
     call s:call_vinarise({'overwrite' : 1}, path)
   endif
 endfunction"}}}
-
-let &cpo = s:save_cpo
-unlet s:save_cpo
 
 let g:loaded_vinarise = 1
 
