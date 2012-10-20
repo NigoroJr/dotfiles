@@ -34,7 +34,7 @@ NeoBundle 'vim-scripts/DrawIt'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'taku-o/vim-toggle'
-NeoBundle 'Shougo/neocomplcache-snippets-complete'
+NeoBundle 'Shougo/neosnippet'
 
 filetype plugin indent on
 
@@ -44,16 +44,18 @@ nnoremap <silent> ,is :VimShell<CR>
 " Interactive pythong with ,ipy
 nnoremap <silent> ,ipy :VimShellInteractive python<CR>
 
+" neosnippet settings
+let g:neosnippet#snippets_directory = '~/.vim/bundle/snippets_complete/'
+
 " Setup for neocomplcache
 let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_snippets_dir = '~/.vim/bundle/neocomplcache-snippets-complete/autoload/neocomplcache/sources/snippets_complete/'
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
 
 " <TAB>: completion
-imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " <C-h>, <BS>: close popup and delete backward char
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
@@ -64,12 +66,11 @@ inoremap <expr><C-e> neocomplcache#cancel_popup()
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
 
-imap <silent> <C-k> <Plug>(neocomplcache_snippets_expand)
-smap <silent> <C-k> <Plug>(neocomplcache_snippets_expand)
+imap <silent> <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <silent> <C-k> <Plug>(neosnippet_expand_or_jump)
 
 " Toggle Snippet Editor
-nnoremap <silent> <Space>es :<C-u>NeoComplCacheEditSnippets 
-nnoremap <silent> es<Space> :<C-u>NeoComplCacheEditSnippets 
+nnoremap <silent> es<Space> :<C-u>NeoSnippetEdit
 
 " Vinarise
 let g:vinarise_enable_auto_detect = 1
