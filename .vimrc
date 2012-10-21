@@ -35,6 +35,7 @@ NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'taku-o/vim-toggle'
 NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/unite.vim'
 
 filetype plugin indent on
 
@@ -74,3 +75,9 @@ nnoremap <silent> es<Space> :<C-u>NeoSnippetEdit
 
 " Vinarise
 let g:vinarise_enable_auto_detect = 1
+
+" unite.vim settings
+" Start with insert mode
+let g:unite_enable_start_insert=1
+" Open Unite vertically
+let g:unite_enable_split_vertically=1
