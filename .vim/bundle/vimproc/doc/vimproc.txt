@@ -1,6 +1,6 @@
 *vimproc.txt*	Asynchronous execution plugin for Vim
 
-Version: 7.0
+Version: 7.1
 Author : Shougo <Shougo.Matsu at gmail.com>
 Original Author : Yukihiro Nakadaira <yukihiro.nakadaira at gmail.com>
 License: MIT license  {{{
@@ -175,6 +175,10 @@ vimproc#socket_open({host}, {port})		*vimproc#socket_open()*
 		Opens the {host}:{port} socket and returns socket object.
 		The {host} is string, The {port} is number.
 
+vimproc#host_exists({host})			*vimproc#host_exists()*
+		Check to see if {host} exists.
+		Note: Protocol name and path are ignored.
+
 vimproc#popen2({args})				*vimproc#popen2()*
 		Executes {args} command and returns the process object.
 		If {args} is string, {args} is parsed automatically.
@@ -281,6 +285,12 @@ g:stdoutencoding		(default : "char")
 g:stderrencoding		(default : "char")
 		The default vimproc stderr encoding.
 
+						*g:vimproc_password_pattern*
+				(default : refer to autoload/vimproc.vim)
+g:vimproc_password_pattern
+		The default password pattern.
+		Note: This variable is used for vimshell.
+
 ==============================================================================
 TIPS						*vimproc-tips*
 
@@ -329,6 +339,92 @@ EXAMPLES					*vimproc-examples*
 <
 ==============================================================================
 CHANGELOG					*vimproc-changelog*
+
+2012-10-21
+- Improved garbage collect.
+
+2012-10-18
+- Fixed parse of backquote.
+
+2012-10-17
+- Fixed parse of backquote.
+
+2012-10-16
+- Search from internal commands.
+- Improved vimproc#host_exists() behavior.
+- Added check host in vimproc#open().
+
+2012-10-15
+- Added vimproc#host_exists().
+
+2012-10-13
+- Fixed vimproc#get_command_name() error.
+- Fixed echo in Windows.
+
+2012-10-04
+- Uniq path searching.
+
+2012-08-29
+- Fixed g:vimproc_dll_path conversion.
+
+2012-08-18
+- Added test.
+
+2012-08-15
+- Improved g:vimproc_password_pattern.
+
+2012-08-14
+- Ver.7.1 development is started.
+- Remain vimproc#version().
+
+------------------------------------------------------------------------------
+ChangeLog 7.0
+
+2012-08-02
+- Fixed analyze shebang.
+
+2012-08-01
+- Improved analyze shebang.
+
+2012-07-25
+- Fixed symbolic link problem.
+
+2012-07-19
+- Added tests.
+
+2012-07-18
+- Fixed escape.
+- Fixed double quote escape.
+- Added parser tests.
+- Improved tests.
+- Invalidate socket test.
+- Fixed fopen test.
+- Check executable().
+- Improved which().
+
+2012-07-17
+- Fixed double quote escape.
+
+2012-07-15
+- Fixed escape error.
+- Fixed vesting test.
+
+2012-07-08
+- Fixed for case sensitive system.
+- Added for vesting test cases.
+
+2012-07-07
+- Fixed which behavior.
+
+2012-07-06
+- Substitute NULL character to "^@".
+- Improved which.
+
+2012-07-03
+- Deleted vital dependency.
+
+2012-06-30
+- Added g:vimproc_password_pattern variable.
 
 2012-06-25
 - Fixed vital which.

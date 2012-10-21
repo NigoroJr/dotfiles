@@ -3,8 +3,8 @@
 " @Website:     http://www.vim.org/account/profile.php?user_id=4037
 " @License:     GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created:     2007-09-17.
-" @Last Change: 2012-06-01.
-" @Revision:    0.0.455
+" @Last Change: 2012-09-22.
+" @Revision:    0.0.541
 
 " call tlog#Log('Load: '. expand('<sfile>')) " vimtlib-sfile
 
@@ -22,7 +22,7 @@ endif
 
 if !exists("g:tcommentOpModeExtra")
     " Modifies how the operator works.
-    " See |g:tcommentOpModeExtra| for a list of possible values.
+    " See |g:tcommentModeExtra| for a list of possible values.
     let g:tcommentOpModeExtra = ''   "{{{2
 endif
 
@@ -86,7 +86,7 @@ if !exists("g:tcommentGuessFileType_eruby")
 endif
 
 if !exists("g:tcommentIgnoreTypes_php")
-    " In php files, some syntax regions are wongly highlighted as sql 
+    " In php files, some syntax regions are wrongly highlighted as sql 
     " markup. We thus ignore sql syntax when guessing the filetype in 
     " php files.
     let g:tcommentIgnoreTypes_php = 'sql'   "{{{2
@@ -177,6 +177,12 @@ let s:definitions = {}
 " to have a blank after the comment marker. Block comments work only if 
 " we explicitly define the markup.
 "
+" NAME usually is a 'filetype'. You can use special suffixes to define 
+" special comment types. E.g. the name "FILETYPE_block" is used for 
+" block comments for 'filetype'. The name "FILETYPE_inline" is used for 
+" inline comments. If no specialized comment definition exists, the 
+" normal one with name "FILETYPE" is used.
+"
 " The comment definition can be either a string or a dictionary.
 "
 " If it is a string:
@@ -185,8 +191,14 @@ let s:definitions = {}
 " that defines how "middle lines" (see :h format-comments) should be 
 " displayed.
 "
+" Example: If the string is "--%s--\n-- ", lines will be commented as 
+" "--%s--" but the middle lines in block comments will be commented as 
+" "--%s".
+"
 " If it is a dictionary:
-" See the help on the args argument of |tcomment#Comment|.
+" See the help on the args argument of |tcomment#Comment| (see item 1, 
+" args is a list of key=value pairs) to find out which fields can be 
+" used.
 function! tcomment#DefineType(name, commentdef)
     if !has_key(s:definitions, a:name)
         if type(a:commentdef) == 4
@@ -242,6 +254,10 @@ call tcomment#DefineType('c',                g:tcommentLineC    )
 call tcomment#DefineType('c_inline',         g:tcommentInlineC  )
 call tcomment#DefineType('c_block',          g:tcommentBlockC   )
 call tcomment#DefineType('cfg',              '# %s'             )
+call tcomment#DefineType('clojure',          {'commentstring': '; %s', 'count': 2})
+call tcomment#DefineType('clojure_inline',   '; %s'             )
+call tcomment#DefineType('clojurescript',    ';; %s'            )
+call tcomment#DefineType('clojurescript_inline', '; %s'         )
 call tcomment#DefineType('coffee',           '# %s'             )
 call tcomment#DefineType('conf',             '# %s'             )
 call tcomment#DefineType('conkyrc',          '# %s'             )
@@ -284,6 +300,7 @@ call tcomment#DefineType('html_block',       g:tcommentBlockXML )
 call tcomment#DefineType('htmldjango',           '{# %s #}'     )
 call tcomment#DefineType('htmldjango_block',     "{%% comment %%}%s{%% endcomment %%}\n ")
 call tcomment#DefineType('io',               '// %s'            )
+call tcomment#DefineType('jasmine',          '# %s'             )
 call tcomment#DefineType('javaScript',       '// %s'            )
 call tcomment#DefineType('javaScript_inline', g:tcommentInlineC )
 call tcomment#DefineType('javaScript_block', g:tcommentBlockC   )
@@ -345,13 +362,15 @@ call tcomment#DefineType('sgml',             '<!-- %s -->'      )
 call tcomment#DefineType('sgml_inline',      g:tcommentInlineXML)
 call tcomment#DefineType('sgml_block',       g:tcommentBlockXML )
 call tcomment#DefineType('sh',               '# %s'             )
-call tcomment#DefineType('sql',              '-- %s'            )
+call tcomment#DefineType('smarty',           '{* %s *}'         )
 call tcomment#DefineType('spec',             '# %s'             )
 call tcomment#DefineType('sps',              '* %s.'            )
 call tcomment#DefineType('sps_block',        "* %s."            )
 call tcomment#DefineType('spss',             '* %s.'            )
 call tcomment#DefineType('spss_block',       "* %s."            )
+call tcomment#DefineType('sql',              '-- %s'            )
 call tcomment#DefineType('squid',            '# %s'             )
+call tcomment#DefineType('st',               '" %s "'           )
 call tcomment#DefineType('tcl',              '# %s'             )
 call tcomment#DefineType('tex',              '%% %s'            )
 call tcomment#DefineType('tpl',              '<!-- %s -->'      )
@@ -391,6 +410,7 @@ let s:nullCommentString    = '%s'
 "   1. a list of key=value pairs where known keys are (see also 
 "      |g:tcommentOptions|):
 "         as=STRING        ... Use a specific comment definition
+"         count=N          ... Repeat the comment string N times
 "         col=N            ... Start the comment at column N (in block 
 "                              mode; must be smaller than |indent()|)
 "         mode=STRING      ... See the notes below on the "commentMode" argument
@@ -398,7 +418,7 @@ let s:nullCommentString    = '%s'
 "         end=STRING       ... Comment postfix
 "         middle=STRING    ... Middle line comments in block mode
 "         rxbeg=N          ... Regexp to find the substring of "begin" 
-"                              that should be multipied by "count"
+"                              that should be multiplied by "count"
 "         rxend=N          ... The above for "end"
 "         rxmid=N          ... The above for "middle"
 "         commentstring_rx ... A regexp format string that matches 
@@ -423,7 +443,7 @@ let s:nullCommentString    = '%s'
 function! tcomment#Comment(beg, end, ...)
     let commentMode   = (a:0 >= 1 ? a:1 : 'G') . g:tcommentModeExtra
     let commentAnyway = a:0 >= 2 ? (a:2 == '!') : 0
-    " TLogVAR a:beg, a:end, a:1, commentMode, commentAnyway
+    " TLogVAR a:beg, a:end, commentMode, commentAnyway
     " save the cursor position
     let pos = getpos('.')
     let s:pos_end = getpos("'>")
@@ -434,6 +454,9 @@ function! tcomment#Comment(beg, end, ...)
     " TLogVAR commentMode, lbeg, cbeg, lend, cend
     " get the correct commentstring
     let cdef = copy(g:tcommentOptions)
+    if exists('b:tcommentOptions')
+        let cdef = extend(cdef, copy(b:tcommentOptions))
+    endif
     if a:0 >= 3 && type(a:3) == 4
         call extend(cdef, a:3)
     else
@@ -447,8 +470,10 @@ function! tcomment#Comment(beg, end, ...)
                 let cdef.end = a:4
             endif
         endif
+        " TLogVAR ax, a:0, a:000
         if a:0 >= ax
-            call extend(cdef, s:ParseArgs(lbeg, lend, commentMode, a:000[ax - 1 : -1]))
+            let cdef = extend(cdef, s:ParseArgs(lbeg, lend, commentMode, a:000[ax - 1 : -1]))
+            " TLogVAR cdef
         endif
         if !empty(get(cdef, 'begin', '')) || !empty(get(cdef, 'end', ''))
             let cdef.commentstring = s:EncodeCommentPart(get(cdef, 'begin', ''))
@@ -456,6 +481,12 @@ function! tcomment#Comment(beg, end, ...)
                         \ . s:EncodeCommentPart(get(cdef, 'end', ''))
         endif
         let commentMode = cdef.mode
+    endif
+    if exists('s:temp_options')
+        let cdef = s:ExtendCDef(lbeg, lend, commentMode, cdef, s:temp_options)
+        " TLogVAR cdef
+        " echom "DBG s:temp_options" string(s:temp_options)
+        unlet s:temp_options
     endif
     if !empty(filter(['count', 'cbeg', 'cend', 'cmid'], 'has_key(cdef, v:val)'))
         call s:RepeatCommentstring(cdef)
@@ -519,7 +550,25 @@ function! tcomment#Comment(beg, end, ...)
 endf
 
 
+function! tcomment#SetOption(name, arg) "{{{3
+    " TLogVAR a:name, a:arg
+    if !exists('s:temp_options')
+        let s:temp_options = {}
+    endif
+    " if index(['count', 'as'], a:name) != -1
+        if empty(a:arg)
+            if has_key(s:temp_options, a:name)
+                call remove(s:temp_options, a:name)
+            endif
+        else
+            let s:temp_options[a:name] = a:arg
+        endif
+    " endif
+endf
+
+
 function! s:GetStartEnd(beg, end, commentMode) "{{{3
+    " TLogVAR a:beg, a:end, a:commentMode
     if type(a:beg) == 3
         let [lbeg, cbeg] = a:beg
         let [lend, cend]   = a:end
@@ -527,25 +576,27 @@ function! s:GetStartEnd(beg, end, commentMode) "{{{3
         let lbeg = a:beg
         let lend = a:end
         let commentMode = a:commentMode
-        if commentMode =~# 'R' || commentMode =~# 'I'
+        " TLogVAR commentMode
+        if commentMode =~# 'R'
+            let cbeg = col('.')
+            let cend = 0
+            let commentMode = substitute(commentMode, '\CR', 'G', 'g')
+        elseif commentMode =~# 'I'
             let cbeg = col("'<")
             if cbeg == 0
                 let cbeg = col('.')
             endif
-            if commentMode =~# 'R'
-                let commentMode = substitute(commentMode, '\CR', 'G', 'g')
-                let cend = 0
-            else
-                let cend = col("'>")
-                if commentMode =~# 'o'
-                    let cend += 1
-                endif
+            let cend = col("'>")
+            if cend < col('$') && (commentMode =~# 'o' || &selection == 'inclusive')
+                let cend += 1
+                " TLogVAR cend, col('$')
             endif
         else
             let cbeg = 0
-            let cend   = 0
+            let cend = 0
         endif
     endif
+    " TLogVAR lbeg, cbeg, lend, cend
     return [lbeg, cbeg, lend, cend]
 endf
 
@@ -579,19 +630,34 @@ function! s:ParseArgs(beg, end, commentMode, arglist) "{{{3
     for arg in a:arglist
         let key = matchstr(arg, '^[^=]\+')
         let value = matchstr(arg, '=\zs.*$')
-        if key == 'as'
-            call extend(args, s:GetCommentDefinitionForType(a:beg, a:end, a:commentMode, value))
-        else
+        if !empty(key)
             let args[key] = value
         endif
     endfor
-    return args
+    return s:ExtendCDef(a:beg, a:end, a:commentMode, {}, args)
+endf
+
+
+function! s:ExtendCDef(beg, end, commentMode, cdef, args)
+    for [key, value] in items(a:args)
+        if key == 'as'
+            call extend(a:cdef, s:GetCommentDefinitionForType(a:beg, a:end, a:commentMode, value))
+        elseif key == 'mode'
+            let a:cdef[key] = a:commentMode . value
+        elseif key == 'count'
+            let a:cdef[key] = str2nr(value)
+        else
+            let a:cdef[key] = value
+        endif
+    endfor
+    return a:cdef
 endf
 
 
 function! tcomment#Operator(type, ...) "{{{3
     let commentMode = a:0 >= 1 ? a:1 : ''
     let bang = a:0 >= 2 ? a:2 : ''
+    " TLogVAR a:type, commentMode, bang
     if !exists('w:tcommentPos')
         let w:tcommentPos = getpos(".")
     endif
@@ -599,7 +665,6 @@ function! tcomment#Operator(type, ...) "{{{3
     set selection=inclusive
     let reg_save = @@
     " let pos = getpos('.')
-    " TLogVAR a:type
     try
         if a:type == 'line'
             silent exe "normal! '[V']"
@@ -621,6 +686,7 @@ function! tcomment#Operator(type, ...) "{{{3
         let lend = line("']")
         let cbeg = col("'[")
         let cend = col("']")
+        " TLogVAR lbeg, lend, cbeg, cend
         " echom "DBG tcomment#Operator" lbeg col("'[") col("'<") lend col("']") col("'>")
         norm! 
         let commentMode .= g:tcommentOpModeExtra
@@ -728,7 +794,7 @@ endf
 
 " :nodoc:
 function! tcomment#CompleteArgs(ArgLead, CmdLine, CursorPos) "{{{3
-    let completions = ['as=', 'col=', 'count=', 'mode=', 'begin=', 'end=']
+    let completions = ['as=', 'col=', 'count=', 'mode=', 'begin=', 'end=', 'rxbeg=', 'rxend=', 'rxmid=']
     if !empty(a:ArgLead)
         if a:ArgLead =~ '^as='
             call tcomment#CollectFileTypes()
@@ -796,6 +862,7 @@ function! s:GetCommentDefinition(beg, end, commentMode, ...)
 endf
 
 function! s:StartPosRx(mode, line, col)
+    " TLogVAR a:mode, a:line, a:col
     if a:mode =~# 'I'
         return s:StartLineRx(a:line) . s:StartColRx(a:col)
     else
@@ -952,7 +1019,10 @@ endf
 " endf
 
 function! s:CommentBlock(beg, end, uncomment, checkRx, cdef, indentStr)
+    " TLogVAR a:beg, a:end, a:uncomment, a:checkRx, a:cdef, a:indentStr
     let t = @t
+    let sel_save = &selection
+    set selection=exclusive
     try
         silent exec 'norm! '. a:beg.'G1|v'.a:end.'G$"td'
         let ms = s:BlockGetMiddleString(a:cdef)
@@ -977,6 +1047,7 @@ function! s:CommentBlock(beg, end, uncomment, checkRx, cdef, indentStr)
         endif
         silent norm! "tP
     finally
+        let &selection = sel_save
         let @t = t
     endtry
 endf
@@ -1167,3 +1238,4 @@ endf
 
 redraw
 
+" vi: ft=vim:tw=72:ts=4:fo=w2croql

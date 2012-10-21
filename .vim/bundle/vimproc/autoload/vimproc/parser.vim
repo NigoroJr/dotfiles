@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: parser.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 26 Mar 2012.
+" Last Modified: 18 Oct 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -245,16 +245,17 @@ function! vimproc#parser#split_args(script)"{{{
       endif
     elseif script[i] == '`'
       " Back quote.
+      let head = i > 0 ? script[: i-1] : []
       let [arg_quote, i] = s:parse_back_quote(script, i)
-      let arg .= arg_quote
-      if arg == ''
-        call add(args, '')
-      endif
+
+      " Re-parse script.
+      return vimproc#parser#split_args(
+            \ head + split(arg_quote, '\zs') + script[i :])
     elseif script[i] == '\'
       " Escape.
       let i += 1
 
-      if i > max
+      if i >= max
         throw 'Exception: Join to next line (\).'
       endif
 
@@ -328,7 +329,7 @@ function! vimproc#parser#split_args_through(script)"{{{
       " Escape.
       let i += 1
 
-      if i > max
+      if i >= max
         throw 'Exception: Join to next line (\).'
       endif
 
@@ -410,7 +411,7 @@ function! vimproc#parser#split_commands(script)"{{{
       let command .= script[i]
       let i += 1
 
-      if i > max
+      if i >= max
         throw 'Exception: Join to next line (\).'
       endif
 
@@ -568,7 +569,7 @@ function! s:parse_block(script)"{{{
         " Range block.
         let start = matchstr(block, '^\d\+')
         let end = matchstr(block, '\d\+$')
-        let zero = len(matchstr(block, '^0\+'))
+        let zero = len(matchstr(block, '^0\+'))+1
         let pattern = '%0' . zero . 'd'
         for b in range(start, end)
           " Concat.
@@ -705,14 +706,14 @@ function! s:parse_redirection(script)"{{{
       if a:script[i-2] == 1
         let fd.stdout = matchstr(a:script, '^\s*\zs\f*', i)
       else
-        let fd.stderr = matchstr(a:script, '^\s*\zs\f*', i)
+        let fd.stderr = matchstr(a:script, '^\s*\zs\(\f\+\|&\d\+\)', i)
         if fd.stderr ==# '&1'
           " Redirection to stdout.
           let fd.stderr = '/dev/stdout'
         endif
       endif
 
-      let i = matchend(a:script, '^\s*\zs\f*', i)
+      let i = matchend(a:script, '^\s*\zs\(\f\+\|&\d\+\)', i)
     elseif a:script[i] == '>'
       " Output redirection.
       if a:script[i :] =~ '^>&'
@@ -799,7 +800,7 @@ function! s:parse_double_quote(script, i)"{{{
       " Escape.
       let i += 1
 
-      if i > max
+      if i >= max
         throw 'Exception: Join to next line (\).'
       endif
 
@@ -866,7 +867,7 @@ function! s:skip_single_quote(script, i)"{{{
   let i = a:i
 
   " a:script[i] is always "'" when this function is called
-  if a:script[i] != ''''
+  if i >= max || a:script[i] != ''''
     throw 'Exception: Quote ('') is not found.'
   endif
   let string .= a:script[i]
@@ -904,7 +905,7 @@ function! s:skip_double_quote(script, i)"{{{
   let i = a:i
 
   " a:script[i] is always '"' when this function is called
-  if a:script[i] != '"'
+  if i >= max || a:script[i] != '"'
     throw 'Exception: Quote (") is not found.'
   endif
   let string .= a:script[i]
@@ -914,8 +915,9 @@ function! s:skip_double_quote(script, i)"{{{
     if a:script[i] == '\'
           \ && i+1 < max && a:script[i+1] == '"'
       " Escape quote.
-      let string .= a:script[i] . a:script[i+1]
-      let i += 2
+      let string .= a:script[i]
+      let i += 1
+
     elseif a:script[i] == '"'
       break
     endif
@@ -951,6 +953,15 @@ function! s:skip_back_quote(script, i)"{{{
     let string .= a:script[i]
     let i += 1
   endwhile
+
+  if i < max
+    " must end with "`"
+    if a:script[i] != '`'
+      throw 'Exception: Quote (`) is not found.'
+    endif
+    let string .= a:script[i]
+    let i += 1
+  endif
 
   return [string, i]
 endfunction"}}}

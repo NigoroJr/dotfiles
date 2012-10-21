@@ -92,10 +92,13 @@ EXPORT const char *vp_socket_close(char *args);/* [] (socket) */
 EXPORT const char *vp_socket_read(char *args); /* [hd, eof] (socket, nr, timeout) */
 EXPORT const char *vp_socket_write(char *args);/* [nleft] (socket, hd, timeout) */
 
+EXPORT const char *vp_host_exists(char *args); /* [int] (host) */
+
 EXPORT const char *vp_decode(char *args);      /* [decoded_str] (encode_str) */
 
 EXPORT const char *vp_open(char *args);      /* [] (path) */
 EXPORT const char *vp_readdir(char *args);  /* [files] (dirname) */
+
 
 EXPORT const char * vp_delete_trash(char *args);  /* [filename] */
 
@@ -160,7 +163,7 @@ vp_dlclose(char *args)
 const char *
 vp_dlversion(char *args)
 {
-    vp_stack_push_num(&_result, "%2d%02d", 7, 0);
+    vp_stack_push_num(&_result, "%2d%02d", 7, 1);
     return vp_stack_return(&_result);
 }
 
@@ -874,6 +877,32 @@ vp_socket_write(char *args)
     return vp_stack_return(&_result);
 }
 
+
+/*
+ * Added by Richard Emberson
+ * Check to see if a host exists.
+ */
+const char *
+vp_host_exists(char *args)
+{
+    vp_stack_t stack;
+    char *host;
+    struct hostent *hostent;
+
+    VP_RETURN_IF_FAIL(vp_stack_from_args(&stack, args));
+    VP_RETURN_IF_FAIL(vp_stack_pop_str(&stack, &host));
+
+    hostent = gethostbyname(host);
+    if (hostent) {
+        vp_stack_push_num(&_result, "%d", 1);
+    } else {
+        vp_stack_push_num(&_result, "%d", 0);
+    }
+
+    return vp_stack_return(&_result);
+}
+
+
 /* Referenced from */
 /* http://www.syuhitu.org/other/dir.html */
 const char *
@@ -969,40 +998,60 @@ const char *
 vp_decode(char *args)
 {
     vp_stack_t stack;
-    unsigned num = 0;
-    unsigned i = 0;
-    size_t length;
+    unsigned num;
+    unsigned i, bi;
+    size_t length, max_buf;
     char *str;
     char *buf;
     char *p;
-    char *bp;
 
     VP_RETURN_IF_FAIL(vp_stack_from_args(&stack, args));
     VP_RETURN_IF_FAIL(vp_stack_pop_str(&stack, &str));
 
     length = strlen(str);
-    buf = (char *)malloc(length/2 + 2);
+    max_buf = length/2 + 2;
+    buf = (char *)malloc(max_buf);
     if (buf == NULL) {
         return vp_stack_return_error(&_result, "malloc() error: %s",
                 "Memory cannot allocate");
     }
 
     p = str;
-    bp = buf;
+    bi = 0;
+    num = 0;
     for (i = 0; i < length; i++, p++) {
-        if (isdigit(*p))
+        if (isdigit((int)*p))
             num |= (*p & 15);
         else
             num |= (*p & 15) + 9;
 
-        if (i % 2) {
-            *bp++ = num;
-            num = 0;
-        } else {
+        if (i % 2 == 0) {
             num <<= 4;
+            continue;
         }
+
+        /* Write character. */
+        if (num == 0) {
+            /* Convert NULL character. */
+            max_buf += 1;
+            buf = (char *)realloc(buf, max_buf);
+            if (buf == NULL) {
+                return vp_stack_return_error(
+                        &_result, "realloc() error: %s",
+                        "Memory cannot allocate");
+            }
+
+            buf[bi] = '^';
+            bi++;
+            buf[bi] = '@';
+            bi++;
+        } else {
+            buf[bi] = num;
+            bi++;
+        }
+        num = 0;
     }
-    *bp = '\0';
+    buf[bi] = '\0';
     vp_stack_push_str(&_result, buf);
     free(buf);
     return vp_stack_return(&_result);

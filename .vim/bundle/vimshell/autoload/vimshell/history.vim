@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: history.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 16 Nov 2011.
+" Last Modified: 19 Oct 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -87,11 +87,16 @@ function! s:get_history_path()"{{{
 
     if &filetype ==# 'vimshell'
       " Search program name.
-      let statement = b:vimshell.continuation.statements[0].statement
-      let program = 'int-' . fnamemodify(
-            \ vimshell#parser#parse_program(statement), ':t:r')
+      let program = vimshell#parser#parse_program(
+            \ b:vimshell.continuation.statements[0].statement)
+
+      let program = 'int-' . fnamemodify(program, ':t:r')
     else
       let program = &filetype
+    endif
+
+    if &filetype == ''
+      let program = 'unknown'
     endif
 
     let history_path = history_dir.'/'.program

@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: parser.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 10 Jun 2012.
+" Last Modified: 16 Oct 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -73,14 +73,14 @@ function! vimshell#parser#execute_command(commands, context)"{{{
     return 0
   endif
 
-  let internal_commands = vimshell#available_commands()
-
   let commands = a:commands
   let program = commands[0].args[0]
   let args = commands[0].args[1:]
   let fd = commands[0].fd
   let context = a:context
   let context.fd = fd
+
+  let internal_commands = vimshell#available_commands(program)
 
   let line = join(a:commands[0].args)
   let dir = substitute(substitute(line, '^\~\ze[/\\]',
@@ -92,7 +92,7 @@ function! vimshell#parser#execute_command(commands, context)"{{{
         \ 'kind', '') ==  'execute'
     " Execute execute commands.
     let commands[0].args = args
-    return internal_commands[program].execute(commands, context)
+    return vimshell#execute_internal_command(program, commands, context)
   elseif a:commands[-1].args[-1] =~ '&$'
     " Convert to internal bg command.
     let commands[-1].args[-1] = commands[-1].args[-1][:-2]
@@ -101,7 +101,7 @@ function! vimshell#parser#execute_command(commands, context)"{{{
       call remove(commands[-1].args, -1)
     endif
 
-    return internal_commands['bg'].execute(commands, context)
+    return vimshell#execute_internal_command('bg', commands, context)
   elseif len(a:commands) > 1
     if a:commands[-1].args[0] == 'less'
       " Execute less(Syntax sugar).
@@ -110,44 +110,39 @@ function! vimshell#parser#execute_command(commands, context)"{{{
         let commands[0].args =
               \ a:commands[-1].args[1:] + commands[0].args
       endif
-      return internal_commands['less'].execute(commands, context)
+      return vimshell#execute_internal_command('less', commands, context)
     else
       " Execute external commands.
-      return internal_commands['exe'].execute(a:commands, context)
+      return vimshell#execute_internal_command('exe', commands, context)
     endif
   elseif isdirectory(dir)
     " Directory.
     " Change the working directory like zsh.
     " Call internal cd command.
-    return vimshell#execute_internal_command('cd', [dir], a:context)
+    return vimshell#execute_internal_command('cd', [dir], context)
+  elseif has_key(get(internal_commands, program, {}), 'execute')
+    " Internal commands.
+    return vimshell#execute_internal_command(program, args, context)
   else"{{{
-    let command = vimshell#get_command_path(program)
     let ext = fnamemodify(program, ':e')
 
-    " Check internal commands.
-    if has_key(get(internal_commands, program, {}), 'execute')"{{{
-      " Internal commands.
-      return internal_commands[program].execute(args, a:context)
-      "}}}
-    elseif !empty(ext) && has_key(g:vimshell_execute_file_list, ext)
+    if !empty(ext) && has_key(g:vimshell_execute_file_list, ext)
       " Suffix execution.
       let args = extend(split(g:vimshell_execute_file_list[ext]),
             \ a:commands[0].args)
       let commands = [ { 'args' : args, 'fd' : fd } ]
       return vimshell#parser#execute_command(commands, a:context)
-    elseif command != '' || executable(program)
+    else
       let args = insert(args, program)
 
       if has_key(g:vimshell_terminal_commands, program)
             \ && g:vimshell_terminal_commands[program]
         " Execute terminal commands.
-        return internal_commands['texe'].execute(a:commands, context)
+        return vimshell#execute_internal_command('texe', commands, context)
       else
         " Execute external commands.
-        return internal_commands['exe'].execute(a:commands, context)
+        return vimshell#execute_internal_command('exe', commands, context)
       endif
-    else
-      throw printf('Error: File "%s" is not found.', program)
     endif
   endif"}}}
 endfunction
@@ -247,7 +242,7 @@ function! s:execute_statement(statement, context)"{{{
 
   let program = vimshell#parser#parse_program(statement)
 
-  let internal_commands = vimshell#available_commands()
+  let internal_commands = vimshell#available_commands(program)
   if program =~ '^\s*:'
     " Convert to vexe special command.
     let fd = { 'stdin' : '', 'stdout' : '', 'stderr' : '' }
@@ -315,7 +310,7 @@ function! s:parse_galias(script)"{{{
       " Escape.
       let i += 1
 
-      if i > max
+      if i >= max
         throw 'Exception: Join to next line (\).'
       endif
 
@@ -397,7 +392,7 @@ function! s:recursive_expand_alias(alias_name, args)"{{{
     endwhile
   endtry
 
-  if script ==# alias
+  if script ==# alias && !empty(a:args)
     let script .= ' ' . join(a:args)
   endif
 
@@ -445,10 +440,6 @@ function! vimshell#parser#getopt(args, optsyntax, ...)"{{{
         break
       endif
     endfor
-    if found
-      " Next argument.
-      continue
-    endif
 
     if !found
       call add(args, arg)

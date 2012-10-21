@@ -7,6 +7,7 @@ g:quickrun#default_config	quickrun.jax	/*g:quickrun#default_config*
 g:quickrun_config	quickrun.jax	/*g:quickrun_config*
 g:quickrun_no_default_key_mappings	quickrun.jax	/*g:quickrun_no_default_key_mappings*
 quickrun	quickrun.jax	/*quickrun*
+quickrun#config()	quickrun.jax	/*quickrun#config()*
 quickrun#module#exists()	quickrun.jax	/*quickrun#module#exists()*
 quickrun#module#get()	quickrun.jax	/*quickrun#module#get()*
 quickrun#module#get_kinds()	quickrun.jax	/*quickrun#module#get_kinds()*

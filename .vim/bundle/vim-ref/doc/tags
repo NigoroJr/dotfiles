@@ -25,6 +25,7 @@ g:ref_man_lang	ref-man.txt	/*g:ref_man_lang*
 g:ref_no_default_key_mappings	ref.txt	/*g:ref_no_default_key_mappings*
 g:ref_noenter	ref.txt	/*g:ref_noenter*
 g:ref_open	ref.txt	/*g:ref_open*
+g:ref_perldoc_auto_append_f	ref-perldoc.txt	/*g:ref_perldoc_auto_append_f*
 g:ref_perldoc_cmd	ref-perldoc.txt	/*g:ref_perldoc_cmd*
 g:ref_perldoc_complete_head	ref-perldoc.txt	/*g:ref_perldoc_complete_head*
 g:ref_phpmanual_cmd	ref-phpmanual.txt	/*g:ref_phpmanual_cmd*

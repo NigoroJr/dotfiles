@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: int_mappings.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 07 Mar 2012.
+" Last Modified: 28 Aug 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -55,7 +55,7 @@ function! vimshell#int_mappings#define_default_mappings()"{{{
   nnoremap <silent><buffer> <Plug>(vimshell_int_append_end)
         \ :<C-u>call <SID>append_end()<CR>
   nnoremap <silent><buffer> <Plug>(vimshell_int_clear)
-        \ :<C-u>call <SID>clear()<CR>
+        \ :<C-u>call vimshell#int_mappings#clear()<CR>
   nnoremap <buffer><silent> <Plug>(vimshell_int_interrupt)
         \ :<C-u>call vimshell#interactive#send_char(3)<CR>
 
@@ -66,7 +66,8 @@ function! vimshell#int_mappings#define_default_mappings()"{{{
   inoremap <buffer><expr> <Plug>(vimshell_int_delete_backward_word)
         \ vimshell#interactive#get_cur_text()  == '' ? '' : "\<C-w>"
   inoremap <buffer><silent> <Plug>(vimshell_int_execute_line)
-        \ <C-g>u<ESC>:<C-u>call vimshell#execute_current_line(1)<CR>
+        \ <C-g>u<C-o>:call vimshell#execute_current_line(1)<CR>
+        " \ <C-g>u<ESC>:<C-u>call vimshell#execute_current_line(1)<CR>
   inoremap <buffer><expr> <Plug>(vimshell_int_delete_backward_char)
         \ <SID>delete_backward_char(0)
   " 3 == char2nr("\<C-c>")
@@ -204,7 +205,7 @@ function! vimshell#int_mappings#execute_line(is_insert)"{{{
     let filename = vimshell#get_cursor_filename()
 
     " Convert encoding.
-    let filename = iconv(filename, &encoding, 'char')
+    let filename = vimproc#util#iconv(filename, &encoding, 'char')
 
     " Execute cursor file.
     if filename =~ '^\%(https\?\|ftp\)://'
@@ -260,15 +261,20 @@ function! s:command_complete()"{{{
   let command = b:interactive.command
   let cur_text = vimshell#interactive#get_cur_text()
   call setline('.', prompt)
-  call vimshell#interactive#send_string(cur_text .
-        \ (b:interactive.is_pty ? "\<TAB>" : "\<TAB>\<TAB>"), !0)
-  if !vimshell#head_match(getline('$'), prompt)
-    " Restore prompt.
-    call setline('$', prompt . cur_text . getline('$'))
-    startinsert!
-  endif
+  let prompt_linenr = line('.')
 
-  let b:interactive.prompt_history[line('$')] = getline('$')
+  call vimshell#interactive#iexe_send_string(cur_text .
+        \ (b:interactive.is_pty ? "\<TAB>" : "\<TAB>\<TAB>"), !0, 0)
+
+  " if !vimshell#head_match(getline(prompt_linenr), prompt)
+  "   " Restore prompt.
+  "   call setline(prompt_linenr, prompt . cur_text .
+  "         \  getline(prompt_linenr))
+  "   startinsert!
+  " endif
+
+  let b:interactive.prompt_history[prompt_linenr] =
+   \ getline(prompt_linenr)
 endfunction "}}}
 function! s:insert_enter()"{{{
   if !has_key(b:interactive.prompt_history, line('.')) && line('.') != line('$')
@@ -307,7 +313,7 @@ function! s:append_end()"{{{
 endfunction"}}}
 function! s:send_intrrupt()"{{{
 endfunction"}}}
-function! s:clear()"{{{
+function! vimshell#int_mappings#clear()"{{{
   set modifiable
 
   " Clean up the screen.

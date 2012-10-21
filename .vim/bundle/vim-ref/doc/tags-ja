@@ -26,6 +26,7 @@ g:ref_man_lang	ref-man.jax	/*g:ref_man_lang*
 g:ref_no_default_key_mappings	ref.jax	/*g:ref_no_default_key_mappings*
 g:ref_noenter	ref.jax	/*g:ref_noenter*
 g:ref_open	ref.jax	/*g:ref_open*
+g:ref_perldoc_auto_append_f	ref-perldoc.jax	/*g:ref_perldoc_auto_append_f*
 g:ref_perldoc_cmd	ref-perldoc.jax	/*g:ref_perldoc_cmd*
 g:ref_perldoc_complete_head	ref-perldoc.jax	/*g:ref_perldoc_complete_head*
 g:ref_phpmanual_cmd	ref-phpmanual.jax	/*g:ref_phpmanual_cmd*

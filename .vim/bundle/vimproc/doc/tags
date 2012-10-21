@@ -4,6 +4,7 @@ g:stderrencoding	vimproc.txt	/*g:stderrencoding*
 g:stdinencoding	vimproc.txt	/*g:stdinencoding*
 g:stdoutencoding	vimproc.txt	/*g:stdoutencoding*
 g:vimproc_dll_path	vimproc.txt	/*g:vimproc_dll_path*
+g:vimproc_password_pattern	vimproc.txt	/*g:vimproc_password_pattern*
 g:vimproc_popen2_commands	vimproc.txt	/*g:vimproc_popen2_commands*
 vimproc#delete_trash()	vimproc.txt	/*vimproc#delete_trash()*
 vimproc#dll_version()	vimproc.txt	/*vimproc#dll_version()*
@@ -11,6 +12,7 @@ vimproc#fopen()	vimproc.txt	/*vimproc#fopen()*
 vimproc#get_command_name()	vimproc.txt	/*vimproc#get_command_name()*
 vimproc#get_last_errmsg()	vimproc.txt	/*vimproc#get_last_errmsg()*
 vimproc#get_last_status()	vimproc.txt	/*vimproc#get_last_status()*
+vimproc#host_exists()	vimproc.txt	/*vimproc#host_exists()*
 vimproc#kill()	vimproc.txt	/*vimproc#kill()*
 vimproc#open()	vimproc.txt	/*vimproc#open()*
 vimproc#pgroup_open()	vimproc.txt	/*vimproc#pgroup_open()*

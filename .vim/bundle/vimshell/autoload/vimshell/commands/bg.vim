@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: bg.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 31 Mar 2012.
+" Last Modified: 21 Oct 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -24,6 +24,12 @@
 " }}}
 "=============================================================================
 
+let s:V = vital#of('vimshell')
+let s:BM = s:V.import('Vim.Buffer.Manager')
+let s:manager = s:BM.new()  " creates new manager
+call s:manager.config('opener', 'silent edit')
+call s:manager.config('range', 'current')
+
 let s:command = {
       \ 'name' : 'bg',
       \ 'kind' : 'execute',
@@ -45,7 +51,8 @@ function! s:command.execute(commands, context)"{{{
   endif
 
   " Background execute.
-  if exists('b:interactive') && !empty(b:interactive.process) && b:interactive.process.is_valid
+  if exists('b:interactive') &&
+        \ !empty(b:interactive.process) && b:interactive.process.is_valid
     " Delete zombie process.
     call vimshell#interactive#force_exit()
   endif
@@ -53,7 +60,7 @@ function! s:command.execute(commands, context)"{{{
   " Encoding conversion.
   if options['--encoding'] != '' && options['--encoding'] != &encoding
     for command in commands
-      call map(command.args, 'iconv(v:val, &encoding, options["--encoding"])')
+      call map(command.args, 'vimproc#util#iconv(v:val, &encoding, options["--encoding"])')
     endfor
   endif
 
@@ -66,7 +73,9 @@ function! s:command.execute(commands, context)"{{{
         \ '$LINES' : winheight(0),
         \ '$VIMSHELL_TERM' : 'background',
         \ '$EDITOR' : vimshell#get_editor_name(),
+        \ '$GIT_EDITOR' : vimshell#get_editor_name(),
         \ '$PAGER' : g:vimshell_cat_command,
+        \ '$GIT_PAGER' : g:vimshell_cat_command,
         \})
 
   " Initialize.
@@ -77,12 +86,14 @@ function! s:command.execute(commands, context)"{{{
 
   " Set variables.
   let interactive = {
-        \ 'type' : 'background', 
+        \ 'type' : 'background',
         \ 'syntax' : &syntax,
-        \ 'process' : sub, 
-        \ 'fd' : a:context.fd, 
-        \ 'encoding' : options['--encoding'], 
-        \ 'is_pty' : 0, 
+        \ 'process' : sub,
+        \ 'fd' : a:context.fd,
+        \ 'encoding' : options['--encoding'],
+        \ 'is_pty' : 0,
+        \ 'command' : commands[0].args[0],
+        \ 'cmdline' : join(commands[0].args),
         \ 'echoback_linenr' : 0,
         \ 'stdout_cache' : '',
         \ 'stderr_cache' : '',
@@ -116,15 +127,19 @@ function! vimshell#commands#bg#init(commands, context, options, interactive)"{{{
     let args .= join(command.args)
   endfor
 
-  silent edit `='bg-'.substitute(args, '[<>|]', '_', 'g')
-        \ .'@'.(bufnr('$')+1)`
+  let ret = s:manager.open('bg-'.substitute(args,
+        \ '[<>|]', '_', 'g') .'@'.(bufnr('$')+1))
+  if !ret.loaded
+    call vimshell#echo_error(
+          \ '[vimshell] Failed to open Buffer.')
+    return
+  endif
 
   let [new_pos[2], new_pos[3]] = [bufnr('%'), getpos('.')]
 
   call vimshell#cd(cwd)
 
   " Common.
-  setlocal nocompatible
   setlocal nolist
   setlocal buftype=nofile
   setlocal noswapfile
@@ -156,8 +171,8 @@ function! vimshell#commands#bg#init(commands, context, options, interactive)"{{{
   hi def link InteractiveErrorHidden Error
 
   augroup vimshell
-    autocmd BufDelete <buffer>       call vimshell#interactive#hang_up(
-          \ expand('<afile>'))
+    autocmd BufDelete,VimLeavePre <buffer>
+          \ call vimshell#interactive#hang_up(expand('<afile>'))
     autocmd BufWinEnter,WinEnter <buffer> call s:event_bufwin_enter()
   augroup END
 
