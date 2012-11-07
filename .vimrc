@@ -1,3 +1,4 @@
+set nobackup        " No backup files
 set noswapfile      " No swap files
 set tabstop=4		" An indentation level every four columns
 set expandtab		" Convert all tabs typed into spaces
