@@ -1,0 +1,39 @@
+set noswapfile      " No swap files
+set tabstop=4		" An indentation level every four columns
+set expandtab		" Convert all tabs typed into spaces
+set shiftwidth=4	" Indent/outdent by four columns
+set shiftround		" Always indent/outdent to the nearest tabstop
+set textwidth=78    " Maximum width of text
+set number
+set hlsearch
+set wildmode=longest,list
+
+" Reset hilight search by pressing Escape 2 times
+nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
+let mapleader=";"   " Sets mapleader to ;
+
+" Insert closing braces
+"inoremap {      {}<Left>
+"inoremap {<CR>  {<CR>}<Esc>O
+"inoremap {{     {
+"inoremap {}     {}
+"Insert closing parenthesis
+"inoremap (      ()<Left>
+"inoremap (<CR>  (<CR>)<Esc>O
+"inoremap ((     (
+"inoremap ()     ()
+"Brackets
+"inoremap [      []<Left>
+"inoremap [<CR>  [<CR>]<Esc>O
+"inoremap [[     [
+"inoremap []     []
+
+" ##### Settings for VimShell #####
+" VimShell with ,is
+nnoremap <silent> ,is :VimShell<CR>
+" Interactive pythong with ,ipy
+nnoremap <silent> ,ipy :VimShellInteractive python<CR>
+
+" ##### Settings for NeoSnippet #####
+" Toggle NeoSnippet Editor
+nnoremap <silent> es<Space> :<C-u>NeoSnippetEdit
