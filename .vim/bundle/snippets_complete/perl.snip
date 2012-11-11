@@ -15,11 +15,22 @@ snippet perl5
 
 # print array for debuging
 snippet check_array
+abbr    print join("${1:glue}", ${2:array}), "\n";
     print join("${1:glue}", ${2:array}), "\n";
+
+# STDIN snippet
+snippet     stdin
+abbr        chomp(my ${1} = <STDIN>);
+    chomp(my $${1:var} = <STDIN>);
+    ${0}
 
 snippet five
     use 5.010;
     ${0}
+
+snippet     push
+abbr        push @array, $scalar
+    push @${2}, $${1};
 
 snippet p
     print "${1:}\n";
