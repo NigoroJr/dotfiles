@@ -1,4 +1,4 @@
-set noswapfile      " No swap files
+"set noswapfile      " No swap files
 set tabstop=4		" An indentation level every four columns
 set expandtab		" Convert all tabs typed into spaces
 set shiftwidth=4	" Indent/outdent by four columns
@@ -14,7 +14,7 @@ let mapleader=";"   " Sets mapleader to ;
 
 " Insert closing braces
 "inoremap {      {}<Left>
-"inoremap {<CR>  {<CR>}<Esc>O
+inoremap {<CR>  {<CR>}<Esc>O
 "inoremap {{     {
 "inoremap {}     {}
 "Insert closing parenthesis
