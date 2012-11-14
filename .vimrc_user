@@ -17,12 +17,12 @@ let mapleader=";"   " Sets mapleader to ;
 inoremap {<CR>  {<CR>}<Esc>O
 "inoremap {{     {
 "inoremap {}     {}
-"Insert closing parenthesis
+" Insert closing parenthesis
 "inoremap (      ()<Left>
 "inoremap (<CR>  (<CR>)<Esc>O
 "inoremap ((     (
 "inoremap ()     ()
-"Brackets
+" Brackets
 "inoremap [      []<Left>
 "inoremap [<CR>  [<CR>]<Esc>O
 "inoremap [[     [
@@ -37,3 +37,7 @@ nnoremap <silent> ,ipy :VimShellInteractive python<CR>
 " ##### Settings for NeoSnippet #####
 " Toggle NeoSnippet Editor
 nnoremap <silent> es<Space> :<C-u>NeoSnippetEdit
+
+" ##### Settings for VimFiler #####
+" VimFiler with ,fl
+nnoremap <silent> fv :VimFiler<CR>

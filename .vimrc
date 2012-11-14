@@ -66,3 +66,7 @@ let g:vinarise_enable_auto_detect = 1
 let g:unite_enable_start_insert=1
 " Open Unite vertically
 let g:unite_enable_split_vertically=1
+
+" Settings for VimFiler
+let g:vimfiler_as_default_explorer=1
+let g:vimfiler_time_format="%m/%d/%y %H:%M%S"
