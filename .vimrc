@@ -33,6 +33,9 @@ NeoBundle 'Shougo/vimfiler'
 
 filetype plugin indent on
 
+" Autoclose
+let g:autoclose_on=0
+
 " neosnippet settings
 let g:neosnippet#snippets_directory = '~/.vim/bundle/snippets_complete/'
 
