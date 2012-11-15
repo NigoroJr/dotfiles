@@ -34,7 +34,7 @@ snippet in
 
 
 snippet m
-	${1:void} ${2:method}(${3}) ${4:throws} {
+	${1:void} ${2:method}(${3}) {
 		${0}
 	}
     
@@ -68,24 +68,21 @@ snippet elif
 	else if (${1}) {
 		${2}
 	}
-    
 
 snippet wh
 	while (${1}) {
 		${2}
 	}
-    
 
 snippet for
 	for (${1}; ${2}; ${3}) {
 		${4}
 	}
-	    
-	    
+
 snippet fore
 	for (${1} : ${2}) {
 	${3}
-}
+    }
 
 
 snippet sw
@@ -93,13 +90,11 @@ snippet sw
 		${2}
 	}
     
-    
 snippet case
 abbr ce
 	case ${1}:
 		${2}
 	${0}
-	    
 
 snippet br
     break;
@@ -189,10 +184,6 @@ snippet c
 	 * ${0}
 	 */
     
-" snippet a
-"    @author ${0:$TM_FULLNAME}
-"
-"
 snippet {code
 abbr {
     {@code ${0}
