@@ -40,4 +40,4 @@ nnoremap <silent> es<Space> :<C-u>NeoSnippetEdit
 
 " ##### Settings for VimFiler #####
 " VimFiler with ,fl
-nnoremap <silent> fv :VimFiler<CR>
+nnoremap <silent> vf :VimFiler<CR>
