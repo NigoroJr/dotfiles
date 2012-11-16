@@ -1,16 +1,52 @@
 "set noswapfile      " No swap files
+set backup          " We all know backing up is important
 set tabstop=4		" An indentation level every four columns
 set expandtab		" Convert all tabs typed into spaces
 set shiftwidth=4	" Indent/outdent by four columns
 set shiftround		" Always indent/outdent to the nearest tabstop
 set textwidth=78    " Maximum width of text
 set number
-set hlsearch
 set wildmode=longest,list
-
+set foldmethod=manual
+set viewoptions=folds
+set hlsearch
 " Reset hilight search by pressing Escape 2 times
 nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
 let mapleader=";"   " Sets mapleader to ;
+
+" Set backupdir to be ~/Dropbox/vim/backup/
+"if isdirectory(expand('~/Dropbox/vim/backup/'))
+"    set backupdir=~/Dropbox/vim/backup/
+"else
+    if !isdirectory(expand('~/.vim/backup/'))
+        call mkdir(expand("~/.vim/backup/"))
+    endif
+
+    set backupdir=~/.vim/backup/
+"endif
+
+" Set viewdir to be ~/Dropbox/vim/view/
+if isdirectory(expand('~/Dropbox/vim/view/'))
+    set viewdir=~/Dropbox/vim/view/
+else
+    if !isdirectory(expand('~/.vim/view/'))
+        call mkdir(expand("~/.vim/view/"))
+    endif
+
+    set viewdir=~/.vim/view/
+endif
+
+nnoremap <silent> ,mkv :mkview!<CR>
+nnoremap <silent> ,lv :loadview<CR>
+
+if expand('%') != '' && &buftype !~ 'nofile'
+    autocmd BufWinLeave *.* mkview!
+endif
+
+if expand('%') != '' && &buftype !~ 'nofile'
+    autocmd BufWinEnter *.* silent loadview
+endif
+
 
 " Insert closing braces
 "inoremap {      {}<Left>
