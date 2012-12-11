@@ -103,7 +103,8 @@ alias   #ifndef
 abbr #ifndef ... #define ... #endif
     #ifndef $1
     #define ${1:SYMBOL}
-    #endif${0}
+    ${0}
+    #endif
 
 snippet def
 alias   #def, #define
@@ -126,7 +127,7 @@ snippet conditional
 snippet typedef
     typedef ${1:base_type} ${2:custom_type};
 
-snippet printf
+snippet pf
     printf("${1}\n"${2});${0}
 
 snippet fprintf

@@ -13,6 +13,14 @@ snippet perl5
 	use warnings;
 	${1}
 
+# Package
+snippet package
+    package ${1: package name};
+
+    ${0}
+
+    1;
+
 # print array for debuging
 snippet check_array
 abbr    print join("${1:glue}", ${2:array}), "\n";
