@@ -1,2 +1,5 @@
 # Ignore backup files (keep it local!)
-.vim/backup/*
+.vim/backup
+.vim/bundle
+.vim/view
+!.vim/bundle/snippets_complete/*

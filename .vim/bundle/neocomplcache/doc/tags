@@ -2,8 +2,6 @@
 :NeoComplCacheAutoCompletionLength	neocomplcache.txt	/*:NeoComplCacheAutoCompletionLength*
 :NeoComplCacheCachingBuffer	neocomplcache.txt	/*:NeoComplCacheCachingBuffer*
 :NeoComplCacheCachingDictionary	neocomplcache.txt	/*:NeoComplCacheCachingDictionary*
-:NeoComplCacheCachingDisable	neocomplcache.txt	/*:NeoComplCacheCachingDisable*
-:NeoComplCacheCachingEnable	neocomplcache.txt	/*:NeoComplCacheCachingEnable*
 :NeoComplCacheCachingInclude	neocomplcache.txt	/*:NeoComplCacheCachingInclude*
 :NeoComplCacheCachingSyntax	neocomplcache.txt	/*:NeoComplCacheCachingSyntax*
 :NeoComplCacheCachingTags	neocomplcache.txt	/*:NeoComplCacheCachingTags*
@@ -25,6 +23,7 @@ b:neocomplcache_sources_list	neocomplcache.txt	/*b:neocomplcache_sources_list*
 buffer_complete	neocomplcache.txt	/*buffer_complete*
 dictionary_complete	neocomplcache.txt	/*dictionary_complete*
 filename_complete	neocomplcache.txt	/*filename_complete*
+filename_include	neocomplcache.txt	/*filename_include*
 g:neocomplcache_auto_completion_start_length	neocomplcache.txt	/*g:neocomplcache_auto_completion_start_length*
 g:neocomplcache_caching_limit_file_size	neocomplcache.txt	/*g:neocomplcache_caching_limit_file_size*
 g:neocomplcache_compare_function	neocomplcache.txt	/*g:neocomplcache_compare_function*
@@ -37,6 +36,7 @@ g:neocomplcache_dictionary_filetype_lists	neocomplcache.txt	/*g:neocomplcache_di
 g:neocomplcache_dictionary_patterns	neocomplcache.txt	/*g:neocomplcache_dictionary_patterns*
 g:neocomplcache_disable_auto_complete	neocomplcache.txt	/*g:neocomplcache_disable_auto_complete*
 g:neocomplcache_disable_caching_file_path_pattern	neocomplcache.txt	/*g:neocomplcache_disable_caching_file_path_pattern*
+g:neocomplcache_disabled_sources_list	neocomplcache.txt	/*g:neocomplcache_disabled_sources_list*
 g:neocomplcache_enable_at_startup	neocomplcache.txt	/*g:neocomplcache_enable_at_startup*
 g:neocomplcache_enable_auto_delimiter	neocomplcache.txt	/*g:neocomplcache_enable_auto_delimiter*
 g:neocomplcache_enable_auto_select	neocomplcache.txt	/*g:neocomplcache_enable_auto_select*
@@ -77,7 +77,6 @@ g:neocomplcache_next_keyword_patterns	neocomplcache.txt	/*g:neocomplcache_next_k
 g:neocomplcache_omni_functions	neocomplcache.txt	/*g:neocomplcache_omni_functions*
 g:neocomplcache_omni_patterns	neocomplcache.txt	/*g:neocomplcache_omni_patterns*
 g:neocomplcache_plugin_completion_length	neocomplcache.txt	/*g:neocomplcache_plugin_completion_length*
-g:neocomplcache_plugin_disable	neocomplcache.txt	/*g:neocomplcache_plugin_disable*
 g:neocomplcache_plugin_rank	neocomplcache.txt	/*g:neocomplcache_plugin_rank*
 g:neocomplcache_release_cache_time	neocomplcache.txt	/*g:neocomplcache_release_cache_time*
 g:neocomplcache_same_filetype_lists	neocomplcache.txt	/*g:neocomplcache_same_filetype_lists*
@@ -121,8 +120,8 @@ neocomplcache-introduction	neocomplcache.txt	/*neocomplcache-introduction*
 neocomplcache-key-mappings	neocomplcache.txt	/*neocomplcache-key-mappings*
 neocomplcache-sources	neocomplcache.txt	/*neocomplcache-sources*
 neocomplcache-sources-neco-ghc	neocomplcache.txt	/*neocomplcache-sources-neco-ghc*
-neocomplcache-sources-neco-ruby	neocomplcache.txt	/*neocomplcache-sources-neco-ruby*
-neocomplcache-sources-snippets_complete	neocomplcache.txt	/*neocomplcache-sources-snippets_complete*
+neocomplcache-sources-neosnippet	neocomplcache.txt	/*neocomplcache-sources-neosnippet*
+neocomplcache-todo	neocomplcache.txt	/*neocomplcache-todo*
 neocomplcache-unite-source-neocomplcache	neocomplcache.txt	/*neocomplcache-unite-source-neocomplcache*
 neocomplcache-unite-sources	neocomplcache.txt	/*neocomplcache-unite-sources*
 neocomplcache-user-sources	neocomplcache.txt	/*neocomplcache-user-sources*

@@ -198,7 +198,7 @@ COMMANDS 					*vimshell-commands*
 		It sends selected string to the interpreter in background
 		buffer of vimshell, iexe, texe.  You can control interpreter
 		as if you are using |quickrun|.
-		Cf: |vimshell#interactive#send_string()|
+		Cf: |vimshell#interactive#send()|
 		Note: If interpreter is not loaded in current tab, you can run
 		interpreter command.
 
@@ -758,14 +758,20 @@ Insert mode default key mappings.
 ------------------------------------------------------------------------------
 FUNCTIONS 						*vimshell-functions*
 
-vimshell#interactive#send_string({expr})
-					*vimshell#interactive#send_string()*
+vimshell#interactive#send({expr})
+					*vimshell#interactive#send()*
 		It sends {expr} to the interpreter in background buffer of
 		vimshell, iexe, texe.  You can control interpreter as if you
 		are using |quickrun|.
 		{expr} is string or list.
 		Note: If interpreter is not loaded in current tab, you can run
 		interpreter command.
+
+vimshell#interactive#send_string({expr})
+					*vimshell#interactive#send_string()*
+		Deprecated. Use |vimshell#interactive#send()| instead; they
+		are equivalent.
+
 
 vimshell#hook#set({hook-point}, {func-list})		*vimshell#hook#set()*
 		Defines hook functions {func-list} in {hook-point}. The old
@@ -1319,10 +1325,10 @@ UNITE SOURCES						*vimshell-unite-sources*
 						*vimshell-unite-source-vimshell-history*
 vimshell/history
 		Nominates vimshell histories as candidates. This source is also
-		available in interactive buffer. This source is used in
+		available on interactive buffer. This source is used in
 		|unite#sources#vimshell_history#start_complete()|.
 		Note: Default mapping is <C-l>.
-		
+
 		Exmaple:
 >
 		inoremap <buffer> <expr><silent> <C-l>  unite#sources#vimshell_history#start_complete()
@@ -1341,7 +1347,7 @@ kind actions:
 
 vimshell/history					*vimshell-unite-action-vimshell-history*
 	execute		Execute history.
-			If you selected several histories, "; " will be inserted.
+			If you selected several histories, it joins with "; ".
 	edit		Edit history.
 	delete		Delete history.
 
@@ -1350,6 +1356,10 @@ CREATE PLUGIN						*vimshell-create-plugin*
 
 In this clause, I comment on a method to make plugin of vimshell.  The
 ability of vimshell will spread by creating plugin by yourself.
+
+You can add a new vimshell command easily just by adding a plugin file under
+autoload/internal/ directory; vimshell reads *.vim files there as internal
+command.
 
 ==============================================================================
 FAQ						*vimshell-faq*
@@ -1365,8 +1375,24 @@ https://github.com/chikatoike/concealedyank.vim
 ==============================================================================
 CHANGELOG						*vimshell-changelog*
 
+2012-12-21
+- Fixed :VimShellSendString behavior.
+
+2012-12-02
+- Fixed auto_cd behavior.
+
+2012-11-17
+- Fixed for skip next complete.
+
+2012-10-26
+- Fixed error message on exit.
+
+2012-10-23
+- Fixed check of autochdir.
+
 2012-10-21
 - Improved hangup behavior.
+- Renamed vimshell#interactive#send_string() to vimshell#interactive#send()
 
 2012-10-20
 - Added postexit hook.

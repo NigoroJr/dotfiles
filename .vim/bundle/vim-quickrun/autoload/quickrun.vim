@@ -196,47 +196,11 @@ let g:quickrun#default_config = {
 \   'hook/sweep/files': ['%S:p:r'],
 \ },
 \ 'go': {
-\   'type':
-\     executable('8g') || executable('6g') || executable('5g') ?
-\     $GOARCH ==# '386'   ? (s:is_win ? 'go/386/win' : 'go/386'):
-\     $GOARCH ==# 'amd64' ? 'go/amd64':
-\     $GOARCH ==# 'arm'   ? 'go/arm': '' :
-\     executable('go') ? (s:is_win ? 'go/go/win' : 'go/go'): '',
-\ },
-\ 'go/386': {
-\   'exec': ['8g %o -o %s:p:r.8 %s', '8l -o %s:p:r %s:p:r.8', '%s:p:r %a'],
+\   'command': 'go',
+\   'exec': '%c run %s:p:t %a',
 \   'tempfile': '%{tempname()}.go',
 \   'hook/output_encode/encoding': 'utf-8',
-\   'hook/sweep/files': '%S:p:r',
-\ },
-\ 'go/386/win': {
-\   'exec': ['8g %o -o %s:p:r.8 %s', '8l -o %s:p:r.exe %s:p:r.8',
-\            '%s:p:r.exe %a'],
-\   'tempfile': '%{tempname()}.go',
-\   'hook/output_encode/encoding': 'utf-8',
-\   'hook/sweep/files': '%S:p:r.exe',
-\ },
-\ 'go/amd64': {
-\   'exec': ['6g %o -o %s:p:r.6 %s', '6l -o %s:p:r %s:p:r.6', '%s:p:r %a'],
-\   'tempfile': '%{tempname()}.go',
-\   'hook/output_encode/encoding': 'utf-8',
-\   'hook/sweep/files': '%S:p:r',
-\ },
-\ 'go/arm': {
-\   'exec': ['5g %o -o %s:p:r.5 %s', '5l -o %s:p:r %s:p:r.5', '%s:p:r %a'],
-\   'tempfile': '%{tempname()}.go',
-\   'hook/output_encode/encoding': 'utf-8',
-\   'hook/sweep/files': '%S:p:r',
-\ },
-\ 'go/go': {
-\   'exec': ['cd %s:p:h \&\& go run %s:p:t'],
-\   'tempfile': '%{tempname()}.go',
-\   'output_encode': 'utf-8',
-\ },
-\ 'go/go/win': {
-\   'exec': ['cmd /c (cd %s:p:h ^\& go run %s:p:t)'],
-\   'tempfile': '%{tempname()}.go',
-\   'output_encode': 'utf-8',
+\   'hook/cd/directory': '%S:p:h',
 \ },
 \ 'groovy': {
 \   'cmdopt': '-c %{&fenc==#""?&enc:&fenc}'
@@ -318,7 +282,8 @@ let g:quickrun#default_config = {
 \           executable('kramdown') ? 'markdown/kramdown':
 \           executable('bluecloth') ? 'markdown/bluecloth':
 \           executable('redcarpet') ? 'markdown/redcarpet':
-\           executable('pandoc') ? 'markdown/pandoc': '',
+\           executable('pandoc') ? 'markdown/pandoc':
+\           executable('markdown_py') ? 'markdown/markdown_py': '',
 \ },
 \ 'markdown/Markdown.pl': {
 \   'command': 'Markdown.pl',
@@ -336,6 +301,9 @@ let g:quickrun#default_config = {
 \ },
 \ 'markdown/redcarpet': {
 \   'command': 'redcarpet',
+\ },
+\ 'markdown/markdown_py': {
+\   'command': 'markdown_py',
 \ },
 \ 'ocaml': {},
 \ 'perl': {
@@ -689,12 +657,23 @@ endfunction
 function! s:Session.invoke_hook(point, ...)
   let context = a:0 ? a:1 : {}
   let func = 'on_' . a:point
-  let pri = printf('v:val.priority(%s) - 0', string(a:point))
-  for hook in s:V.Data.List.sort_by(self.hooks, pri)
+  let hooks = copy(self.hooks)
+  let hooks = map(hooks, '[v:val, s:get_hook_priority(v:val, a:point)]')
+  let hooks = s:V.Data.List.sort_by(hooks, 'v:val[1]')
+  let hooks = map(hooks, 'v:val[0]')
+  for hook in hooks
     if has_key(hook, func) && s:V.is_funcref(hook[func])
       call call(hook[func], [self, context], hook)
     endif
   endfor
+endfunction
+
+function! s:get_hook_priority(hook, point)
+  try
+    return a:hook.priority(a:point) - 0
+  catch
+    return 0
+  endtry
 endfunction
 
 

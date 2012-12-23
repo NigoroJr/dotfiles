@@ -1,6 +1,6 @@
 "=============================================================================
 " FILE: util.vim
-" Last Modified: 13 Oct 2012.
+" Last Modified: 17 Dec 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -30,12 +30,12 @@ set cpo&vim
 
 let s:is_windows = has('win16') || has('win32') || has('win64')
 let s:is_cygwin = has('win32unix')
-let s:is_mac = !s:is_windows && !s:is_cygwin
+let s:is_mac = !s:is_windows
       \ && (has('mac') || has('macunix') || has('gui_macvim') ||
-      \   (!executable('xdg-open') && system('uname') =~? '^darwin'))
+      \   (!isdirectory('/proc') && executable('sw_vers')))
 
 " iconv() wrapper for safety.
-function! vimproc#util#iconv(expr, from, to)"{{{
+function! vimproc#util#iconv(expr, from, to) "{{{
   if !has('iconv')
         \ || a:expr == '' || a:from == ''
         \ || a:to == '' || a:from ==# a:to
@@ -45,36 +45,36 @@ function! vimproc#util#iconv(expr, from, to)"{{{
   let result = iconv(a:expr, a:from, a:to)
   return result != '' ? result : a:expr
 endfunction"}}}
-function! vimproc#util#termencoding()"{{{
+function! vimproc#util#termencoding() "{{{
   return 'char'
 endfunction"}}}
-function! vimproc#util#stdinencoding()"{{{
+function! vimproc#util#stdinencoding() "{{{
   return exists('g:stdinencoding') && type(g:stdinencoding) == type("") ?
         \ g:stdinencoding : vimproc#util#termencoding()
 endfunction"}}}
-function! vimproc#util#stdoutencoding()"{{{
+function! vimproc#util#stdoutencoding() "{{{
   return exists('g:stdoutencoding') && type(g:stdoutencoding) == type("") ?
         \ g:stdoutencoding : vimproc#util#termencoding()
 endfunction"}}}
-function! vimproc#util#stderrencoding()"{{{
+function! vimproc#util#stderrencoding() "{{{
   return exists('g:stderrencoding') && type(g:stderrencoding) == type("") ?
         \ g:stderrencoding : vimproc#util#termencoding()
 endfunction"}}}
-function! vimproc#util#expand(path)"{{{
+function! vimproc#util#expand(path) "{{{
   return expand(escape(a:path,
         \ vimproc#util#is_windows() ? '*?"={}' : '*?"={}[]'), 1)
 endfunction"}}}
-function! vimproc#util#is_windows()"{{{
+function! vimproc#util#is_windows() "{{{
   return s:is_windows
 endfunction"}}}
-function! vimproc#util#is_mac()"{{{
+function! vimproc#util#is_mac() "{{{
   return s:is_mac
 endfunction"}}}
-function! vimproc#util#substitute_path_separator(path)"{{{
+function! vimproc#util#substitute_path_separator(path) "{{{
   return s:is_windows ? substitute(a:path, '\\', '/', 'g') : a:path
 endfunction"}}}
 
-function! vimproc#util#uniq(list, ...)
+function! vimproc#util#uniq(list, ...) "{{{
   let list = a:0 ? map(copy(a:list), printf('[v:val, %s]', a:1)) : copy(a:list)
   let i = 0
   let seen = {}
@@ -88,7 +88,24 @@ function! vimproc#util#uniq(list, ...)
     endif
   endwhile
   return a:0 ? map(list, 'v:val[0]') : list
-endfunction
+endfunction"}}}
+function! vimproc#util#set_default(var, val, ...)  "{{{
+  if !exists(a:var) || type({a:var}) != type(a:val)
+    let alternate_var = get(a:000, 0, '')
+
+    let {a:var} = exists(alternate_var) ?
+          \ {alternate_var} : a:val
+  endif
+endfunction"}}}
+
+" Global options definition. "{{{
+call vimproc#util#set_default(
+      \ 'g:stdinencoding', 'char')
+call vimproc#util#set_default(
+      \ 'g:stdoutencoding', 'char')
+call vimproc#util#set_default(
+      \ 'g:stderrencoding', 'char')
+"}}}
 
 " Restore 'cpoptions' {{{
 let &cpo = s:save_cpo

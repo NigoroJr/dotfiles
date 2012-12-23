@@ -113,6 +113,7 @@ vimshell#hook#add()	vimshell.txt	/*vimshell#hook#add()*
 vimshell#hook#get()	vimshell.txt	/*vimshell#hook#get()*
 vimshell#hook#remove()	vimshell.txt	/*vimshell#hook#remove()*
 vimshell#hook#set()	vimshell.txt	/*vimshell#hook#set()*
+vimshell#interactive#send()	vimshell.txt	/*vimshell#interactive#send()*
 vimshell#interactive#send_string()	vimshell.txt	/*vimshell#interactive#send_string()*
 vimshell-alter-command	vimshell.txt	/*vimshell-alter-command*
 vimshell-buffer-key-mappings	vimshell.txt	/*vimshell-buffer-key-mappings*

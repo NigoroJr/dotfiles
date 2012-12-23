@@ -34,10 +34,12 @@ g:tcomment_types	tcomment.txt	/*g:tcomment_types*
 tcomment#Comment()	tcomment.txt	/*tcomment#Comment()*
 tcomment#CommentAs()	tcomment.txt	/*tcomment#CommentAs()*
 tcomment#DefineType()	tcomment.txt	/*tcomment#DefineType()*
+tcomment#GuessCommentType()	tcomment.txt	/*tcomment#GuessCommentType()*
 tcomment#Operator()	tcomment.txt	/*tcomment#Operator()*
 tcomment#OperatorAnyway()	tcomment.txt	/*tcomment#OperatorAnyway()*
 tcomment#OperatorLine()	tcomment.txt	/*tcomment#OperatorLine()*
 tcomment#OperatorLineAnyway()	tcomment.txt	/*tcomment#OperatorLineAnyway()*
+tcomment#SetOption()	tcomment.txt	/*tcomment#SetOption()*
 tcomment-maps	tcomment.txt	/*tcomment-maps*
 tcomment-operator	tcomment.txt	/*tcomment-operator*
 tcomment.txt	tcomment.txt	/*tcomment.txt*

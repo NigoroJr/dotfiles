@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: neobundle_lazy.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 13 May 2012.
+" Last Modified: 30 Aug 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -27,10 +27,7 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-" Create vital module for neobundle
-let s:V = vital#of('neobundle.vim')
-
-function! unite#sources#neobundle_lazy#define()"{{{
+function! unite#sources#neobundle_lazy#define() "{{{
   return s:source
 endfunction"}}}
 
@@ -39,10 +36,9 @@ let s:source = {
       \ 'description' : 'candidates from lazy bundles',
       \ 'action_table' : {},
       \ 'default_action' : 'source',
-      \ 'parents' : ['uri'],
       \ }
 
-function! s:source.gather_candidates(args, context)"{{{
+function! s:source.gather_candidates(args, context) "{{{
   let _ = []
   for bundle in filter(copy(neobundle#config#get_neobundles()),
         \ '!neobundle#config#is_sourced(v:val.name)')
@@ -50,7 +46,7 @@ function! s:source.gather_candidates(args, context)"{{{
         \  '^\%(https\?\|git\)://\%(github.com/\)\?', '', '')
     let dict = {
         \ 'word' : name,
-        \ 'kind' : 'directory',
+        \ 'kind' : 'neobundle',
         \ 'action__path' : bundle.path,
         \ 'action__directory' : bundle.path,
         \ 'action__bundle' : bundle,
@@ -63,13 +59,13 @@ function! s:source.gather_candidates(args, context)"{{{
   return _
 endfunction"}}}
 
-" Actions"{{{
+" Actions "{{{
 let s:source.action_table.source = {
       \ 'description' : 'source bundles',
       \ 'is_selectable' : 1,
       \ 'is_invalidate_cache' : 1,
       \ }
-function! s:source.action_table.source.func(candidates)"{{{
+function! s:source.action_table.source.func(candidates) "{{{
   call call('neobundle#config#source',
         \ map(copy(a:candidates), 'v:val.action__bundle_name'))
 endfunction"}}}

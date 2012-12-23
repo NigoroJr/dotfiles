@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: neobundle.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 17 Jun 2012.
+" Last Modified: 11 Dec 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -27,31 +27,17 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-" Create vital module for neobundle
-let s:V = vital#of('neobundle.vim')
-
-function! s:system(...)
-  return call(s:V.system, a:000, s:V)
-endfunction
-
-function! s:get_last_status(...)
-  return call(s:V.get_last_status, a:000, s:V)
-endfunction
-
-function! unite#sources#neobundle#define()"{{{
-  return unite#util#has_vimproc() ? s:source : {}
+function! unite#sources#neobundle#define() "{{{
+  return s:source
 endfunction"}}}
 
 let s:source = {
       \ 'name' : 'neobundle',
       \ 'description' : 'candidates from bundles',
       \ 'hooks' : {},
-      \ 'action_table' : {},
-      \ 'default_action' : 'update',
-      \ 'parents' : ['uri'],
       \ }
 
-function! s:source.hooks.on_init(args, context)"{{{
+function! s:source.hooks.on_init(args, context) "{{{
   let bundle_names = filter(copy(a:args), 'v:val != "!"')
   let a:context.source__bang =
         \ index(a:args, '!') >= 0
@@ -60,8 +46,8 @@ function! s:source.hooks.on_init(args, context)"{{{
         \ neobundle#config#search(bundle_names)
 endfunction"}}}
 
-" Filters"{{{
-function! s:source.source__converter(candidates, context)"{{{
+" Filters "{{{
+function! s:source.source__converter(candidates, context) "{{{
   for candidate in a:candidates
     if candidate.source__uri =~
           \ '^\%(https\?\|git\)://github.com/'
@@ -81,11 +67,11 @@ let s:source.filters =
       \      s:source.source__converter]
 "}}}
 
-function! s:source.gather_candidates(args, context)"{{{
-  let _ = map(neobundle#config#get_neobundles(), "{
+function! s:source.gather_candidates(args, context) "{{{
+  let _ = map(copy(a:context.source__bundles), "{
         \ 'word' : substitute(v:val.orig_name,
         \  '^\%(https\?\|git\)://\%(github.com/\)\?', '', ''),
-        \ 'kind' : 'directory',
+        \ 'kind' : 'neobundle',
         \ 'action__path' : v:val.path,
         \ 'action__directory' : v:val.path,
         \ 'action__bundle' : v:val,
@@ -105,7 +91,7 @@ function! s:source.gather_candidates(args, context)"{{{
   return _
 endfunction"}}}
 
-function! s:get_commit_status(bang, bundle)
+function! s:get_commit_status(bang, bundle) "{{{
   if !isdirectory(a:bundle.path)
     return 'Not installed'
   endif
@@ -116,15 +102,11 @@ function! s:get_commit_status(bang, bundle)
           \ fnamemodify(a:bundle.path, ':~'))
   endif
 
-  if a:bundle.type == 'svn'
-    " Todo:
-    return ''
-  elseif a:bundle.type == 'hg'
-    " Todo:
-    return ''
-  elseif a:bundle.type == 'git'
-    let cmd = 'git log -1 --pretty=format:''%h [%cr] %s'''
-  else
+  let type = neobundle#config#get_types()[a:bundle.type]
+  let cmd = has_key(type, 'get_revision_pretty_command') ?
+        \ type.get_revision_pretty_command(a:bundle) :
+        \ type.get_revision_number_command(a:bundle)
+  if cmd == ''
     return ''
   endif
 
@@ -132,58 +114,17 @@ function! s:get_commit_status(bang, bundle)
 
   lcd `=a:bundle.path`
 
-  let output = s:system(cmd)
+  let output = neobundle#util#system(cmd)
 
   lcd `=cwd`
 
-  if s:get_last_status()
+  if neobundle#util#get_last_status()
     return printf('Error(%d) occured when executing "%s"',
-          \ s:get_last_status(), cmd)
+          \ neobundle#util#get_last_status(), cmd)
   endif
 
   return output
-endfunction
-
-" Actions"{{{
-let s:source.action_table.update = {
-      \ 'description' : 'update bundles',
-      \ 'is_selectable' : 1,
-      \ }
-function! s:source.action_table.update.func(candidates)"{{{
-  call unite#start([['neobundle/install', '!']
-        \ + map(copy(a:candidates), 'v:val.action__bundle_name')])
 endfunction"}}}
-let s:source.action_table.delete = {
-      \ 'description' : 'delete bundles',
-      \ 'is_invalidate_cache' : 1,
-      \ 'is_quit' : 0,
-      \ 'is_selectable' : 1,
-      \ }
-function! s:source.action_table.delete.func(candidates)"{{{
-  call call('neobundle#installer#clean', insert(map(copy(a:candidates),
-        \ 'v:val.action__bundle_name'), 0))
-endfunction"}}}
-let s:source.action_table.reinstall = {
-      \ 'description' : 'reinstall bundles',
-      \ 'is_selectable' : 1,
-      \ }
-function! s:source.action_table.reinstall.func(candidates)"{{{
-  for candidate in a:candidates
-    " Save info.
-    let arg = candidate.action__bundle.orig_arg
-
-    " Remove.
-    call neobundle#installer#clean(1, candidate.action__bundle_name)
-
-    call call('neobundle#config#bundle',
-          \ [candidate.action__bundle.orig_arg])
-  endfor
-
-  " Install.
-  call unite#start([['neobundle/install', '!']
-        \ + map(copy(a:candidates), 'v:val.action__bundle_name')])
-endfunction"}}}
-"}}}
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
