@@ -1,8 +1,8 @@
 snippet     calloc
 abbr        calloc(num, size)
-    ${1} = calloc(${2: how many}, sizeof(${3: that}));${0}
-    if (${1} == NULL) {
-        ${4: when allocation fails}
+    ${1:} = calloc(${2:how many}, sizeof(${3:what}));
+    if ($1 == NULL) {
+        ${4:when allocation fails}
     }
 
 snippet     array
