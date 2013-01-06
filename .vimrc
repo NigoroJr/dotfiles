@@ -37,7 +37,7 @@ filetype plugin indent on
 let g:autoclose_on=0
 
 " neosnippet settings
-let g:neosnippet#snippets_directory = '~/.vim/bundle/snippets_complete/'
+let g:neosnippet#snippets_directory = '~/.vim/snippets_complete/'
 
 " Setup for neocomplcache
 let g:neocomplcache_enable_at_startup = 1
