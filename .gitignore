@@ -2,4 +2,4 @@
 .vim/backup
 .vim/bundle
 .vim/view
-!.vim/bundle/snippets_complete/*
+!.vim/bundle/snippets_complete

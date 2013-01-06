@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: texe.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 21 Oct 2012.
+" Last Modified: 25 Dec 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -25,7 +25,7 @@
 "=============================================================================
 
 let s:V = vital#of('vimshell')
-let s:BM = s:V.import('Vim.Buffer.Manager')
+let s:BM = s:V.import('Vim.BufferManager')
 let s:manager = s:BM.new()  " creates new manager
 call s:manager.config('opener', 'silent edit')
 call s:manager.config('range', 'current')
@@ -59,24 +59,27 @@ function! s:command.execute(commands, context) "{{{
     call insert(args, 'fakecygpty')
 
     if !executable('fakecygpty')
-      call vimshell#error_line(a:context.fd, 'texe: "fakecygpty.exe" is required. Please install it.')
+      call vimshell#error_line(a:context.fd,
+            \ 'texe: "fakecygpty.exe" is required. Please install it.')
       return
     endif
 
     if len(args) < 2
-      call vimshell#error_line(a:context.fd, 'texe: command is required.')
+      call vimshell#error_line(
+            \ a:context.fd, 'texe: command is required.')
       return
     endif
 
     " Get program path from g:vimshell_interactive_cygwin_path.
-    let args[1] = vimproc#get_command_name(args[1], g:vimshell_interactive_cygwin_path)
+    let args[1] = vimproc#get_command_name(
+          \ args[1], g:vimshell_interactive_cygwin_path)
   endif
 
   let cmdname = fnamemodify(args[0], ':r')
   if !has_key(options, '--encoding')
     if vimshell#util#is_windows()
       " Use UTF-8 Cygwin.
-      let options['--encoding'] = 'utf8'
+      let options['--encoding'] = 'utf-8'
     else
       let options['--encoding'] =
             \ has_key(g:vimshell_interactive_encodings, cmdname) ?
@@ -235,8 +238,10 @@ function! s:init_bg(args, context) "{{{
 
   call s:default_settings()
 
-  let use_cygpty = vimshell#util#is_windows() && a:args[0] =~ '^fakecygpty\%(\.exe\)\?$'
-  execute 'set filetype=term-'.fnamemodify(use_cygpty ? a:args[1] : a:args[0], ':t:r')
+  let use_cygpty = vimshell#util#is_windows() &&
+        \ a:args[0] =~ '^fakecygpty\%(\.exe\)\?$'
+  execute 'set filetype=term-'.fnamemodify(
+        \ use_cygpty ? a:args[1] : a:args[0], ':t:r')
 
   " Set autocommands.
   augroup vimshell

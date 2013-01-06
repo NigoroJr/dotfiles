@@ -1,6 +1,6 @@
 *neobundle.txt*	Ultimate Vim package manager
 
-Version: 2.1
+Version: 3.0
 Author : Shougo <Shougo.Matsu at gmail.com>
 License: MIT license  {{{
     Permission is hereby granted, free of charge, to any person obtaining
@@ -30,8 +30,8 @@ Install			|neobundle-install|
 Interface		|neobundle-interface|
   Functions		  |neobundle-functions|
   Commands		  |neobundle-commands|
-    Options		    |neobundle-options|
   Variables		  |neobundle-variables|
+  Options		    |neobundle-options|
 Configulation Examples	|neobundle-examples|
 Unite sources		|neobundle-unite-sources|
 Recipe			|neobundle-recipe|
@@ -144,6 +144,54 @@ neobundle#is_sourced({bundle-name})
 				*neobundle#is_sourced()*
 		Checks if {bundle-name} bundle is loaded.
 
+neobundle#local({directory}, {options})		 *neobundle#local()*
+		This command add the sub directories in {directory} to
+		runtimepath like |pathogen|. The {options} is following keys:
+		|neobundle-options|
+		Note: |:NeoBundleLocal| is syntax sugar command.
+		Note: All plugins in {directory} are loaded instead of
+		|:NeoBundleLocal|.
+
+neobundle#get({bundle-name})			 *neobundle#get()*
+		Get {bundle-name} neobundle dictionary.
+		It is useful for setting hooks.
+		Example:
+>
+	NeoBundleLazy 'tyru/open-browser.vim', '', 'same', { 'autoload' : {
+	      \ 'mappings' : '<Plug>(open-browser-wwwsearch)',
+	      \ }}
+	nmap gs <Plug>(open-browser-wwwsearch)
+	
+	let bundle = neobundle#get('open-browser.vim')
+	function! bundle.hooks.on_source(bundle)
+	  nnoremap <Plug>(open-browser-wwwsearch)
+	        \ :<C-u>call <SID>www_search()<CR>
+	  function! s:www_search()
+	    let search_word = input('Please input search word: ', '',
+	          \ 'customlist,wwwsearch#cmd_Wwwsearch_complete')
+	    if search_word != ''
+	      execute 'OpenBrowserSearch' escape(search_word, '"')
+	    endif
+	  endfunction
+	endfunction
+<
+neobundle#call_hook({hook-name})		 *neobundle#call_hook()*
+		Call {hook-name} hooks.
+		Note: If {hook-name} is "on_source", neobundle call
+		"on_source" hooks in sourced bundles.
+
+neobundle#config({bundle-name}, {dict})		 *neobundle#config()*
+		Change {bundle-name} plugin options.
+		Note: To load plugin lazily, you can set "lazy" flag after
+		|:NeoBundle| or |:NeoBundleLocal|.
+>
+	NeoBundle 'Shougo/neocomplcache'
+	call neobundle#config('neocomplcache', {
+	\ 'lazy' : 1,
+	\ 'autoload' : {
+	\   'insert' : 1,
+	\ }})
+<
 ------------------------------------------------------------------------------
 COMMANDS 					*neobundle-commands*
 
@@ -162,8 +210,203 @@ COMMANDS 					*neobundle-commands*
 		Note: If you manage bundle by neobundle, it may be error
 		occurred when update bundles.
 
-						*neobundle-options*
-		The {options} has following keys:
+		The {options} is following keys: |neobundle-options|
+
+:NeoBundleLocal {base-directory-path}		*:NeoBundleLocal*
+		Likes pathogen.vim wrapper.  This command add
+		{base-directory-path} directories in runtimepath.
+
+		Note: If you want to use neobundle like pathogen.vim, you
+		should set base path to separate from standard neobundle
+		bundles paths.
+>
+		NeoBundleLocal ~/.vim/bundle
+
+:NeoBundleInstall [{name}...]			*:NeoBundleInstall*
+		Installs {name} plugins. {name} is fuzzy searched.
+		If {name} is omited, all configured plugin is installed.
+		Note: {name} is plugin name like "neobundle.vim". Not
+		"Shougo/neobundle.vim".
+
+:NeoBundleInstall! [{name}...]			*:NeoBundleInstall!*
+		Same to |:NeoBundleUpdate|.
+
+:NeoBundleUpdate [{name}...]			*:NeoBundleUpdate*
+		Installs and updates {name} plugins. {name} is fuzzy searched.
+		If {name} is omited, all configured plugin without "nosync"
+		option is installed and updated.
+		Note: {name} is plugin name like "neobundle.vim". Not
+		"Shougo/neobundle.vim".
+
+:NeoBundleUpdate! [{name}...]			*:NeoBundleUpdate!*
+		Same to |:NeoBundleUpdate|. But it also updates plugins which
+		has "nosync" option.
+
+:NeoBundleClean [{bang} [{name}...]] 		*:NeoBundleClean*
+		Removes non configured bundles. If {bang} is added, force
+		remove bundles. If {name} are added, remove {name} bundles.
+
+:NeoBundleReinstall {name}...]		 	*:NeoBundleReinstall*
+		Reinstall {name} bundles.
+
+:NeoBundleList 					*:NeoBundleList*
+		Print list of configured bundles.
+
+:NeoBundleLog 					*:NeoBundleLog*
+		Print previous all install logs.
+
+:NeoBundleUpdatesLog 				*:NeoBundleUpdatesLog*
+		Print previous update logs.
+
+:NeoBundleLazy {repository} [[,{revision}] [,{options}]]
+:NeoBundleLazy {repository} ,{revision}, {default} [,{options}]]
+						*:NeoBundleLazy*
+		This command register bundle, but don't add to 'runtimepath'.
+>
+		NeoBundleLazy 'The-NERD-tree', {'augroup' : 'NERDTree'}
+		NeoBundleSource The-NERD-tree
+<
+		You can use it to load plugins in specific filetype.
+>
+		NeoBundleLazy 'Rip-Rip/clang_complete'
+		autocmd FileType c,cpp NeoBundleSource clang_complete
+<
+:NeoBundleSource [{name}...]			*:NeoBundleSource*
+		|:source| {name} bundles.
+		If omit {name}, |:source| all lazy bundles.
+		Note: This command is used to load the neobundles configured
+		by |:NeoBundleLazy|.
+
+:NeoBundleFetch {repository} [, {options}]	*:NeoBundleFetch*
+		This command register bundle, but don't add to 'runtimepath'.
+		Instead of |:NeoBundleLazy|, you cannot load the bundle with
+		|:NeoBundleSource|. It is useful for managing non-Vim plugins
+		using neobundle.
+>
+		NeoBundleFetch 'davidhalter/jedi'
+<
+:NeoBundleDocs					*:NeoBundleDocs*
+		Execute |:helptags|all bundles manually.
+
+:NeoBundleDepends {repository} [, {options}]
+						*:NeoBundleDepends*
+		This command registers bundle and install the plugin.  It is
+		useful to define Vim plugin dependency.
+		Note: This command is not overwritten user neobundle
+		configuration.
+>
+		if exists(':NeoBundleDepends')
+		  NeoBundleDepends 'Shougo/unite.vim.git'
+		endif
+<
+:NeoBundleDirectInstall {repository} [, {options}]
+						*:NeoBundleDirectInstall*
+		This command registers bundle, and installs it directly.
+		Note: If you used the command, you cannot customize the bundle
+		settings.
+		Note: The settings is saved in ".direct_bundles" in bundle
+		directory.
+>
+		NeoBundleDirectInstall 'Shougo/neocomplcache'
+<
+:NeoBundleDisable {name}...			*:NeoBundleDisable*
+		This command disables {name} bundles.
+		If bundle is disabled, it's path will be removed from
+		'runtimepath'.
+		Note: This command must be execute until neobundle loads
+		plugins.
+
+------------------------------------------------------------------------------
+VARIABLES 					*neobundle-variables*
+
+g:neobundle#default_site			*g:neobundle#default_site*
+		The default repository site if site attribute is omitted.
+
+						*g:neobundle_default_site*
+		Note: |g:neobundle_default_site| is obsolete name.
+
+		Default value is "github".
+
+g:neobundle#log_filename			*g:neobundle#log_filename*
+		The filename of outputting log. If it is "", don't output log
+		to file.
+
+						*g:neobundle_log_filename*
+		Note: |g:neobundle_log_filename| is obsolete name.
+
+		Default value is "".
+
+g:neobundle#enable_tail_path			*g:neobundle#enable_tail_path*
+		If it is 1, default "tail_path" attribute will be 1 in bundle.
+
+						*g:neobundle_enable_tail_path*
+		Note: |g:neobundle_enable_tail_path| is obsolete name.
+
+		Default value is 0.
+
+g:neobundle#rm_command				*g:neobundle#rm_command*
+		The remove file command in |:NeoBundleClean|.
+
+						*g:neobundle_rm_command*
+		Note: |g:neobundle_rm_command| is obsolete name.
+
+		Default value is "rmdir /S /Q" on Windows or "rm -rf" in
+		others.
+
+g:neobundle#install_max_processes
+					*g:neobundle#install_max_processes*
+		The max processes number in neobundle/install source
+		asyncronous update.
+
+			*g:unite_source_neobundle_install_max_processes*
+		Note: |g:unite_source_neobundle_install_max_processes| is
+		obsolete name.
+
+		Default value is "5".
+
+g:neobundle#default_options			*g:neobundle#default_options*
+		It is a dictionary for default options if options are omitted.
+		The key is default options name and the value is default
+		options.
+		If the key is "_", it is used for omitting default options
+		name.
+		Example:
+>
+		let g:neobundle#default_options =
+		          \ { 'rev' : {'type__update_style' : 'current'} }
+		NeoBundle 'Shougo/neocomplcache', '', 'rev'
+<
+		Default value is "{}".
+
+g:neobundle#types#raw#calc_hash_command
+				*g:neobundle#types#raw#calc_hash_command*
+		The calc command in raw repository type.
+
+		Default value is "sha1sum" or "md5sum".
+
+g:neobundle#types#git#default_protocol
+				*g:neobundle#types#git#default_protocol*
+		The default protocol used for git(github).
+		Note: If you must use proxy server, you may change the value
+		to "https".
+
+					*g:neobundle_default_git_protocol*
+		Note: |g:neobundle_default_git_protocol| is obsolete name.
+
+		Default value is "git".
+
+g:neobundle#types#hg#default_protocol
+				*g:neobundle#types#hg#default_protocol*
+		The default protocol used for hg(bitbucket).
+
+					*g:neobundle_default_hg_protocol*
+		Note: |g:neobundle_default_git_protocol| is obsolete name.
+
+		Default value is "https".
+
+------------------------------------------------------------------------------
+OPTIONS 					*neobundle-options*
+		The {options} in neobundle commands has following keys:
 
 						*neobundle-options-name*
 		name			(String)
@@ -199,6 +442,8 @@ COMMANDS 					*neobundle-commands*
 		Specify relative directory path from base directory(set by
 		|neobundle#rc()| or "base" attribute). If you omit it, used
 		"name" attribute.
+		Note: If you set rev "foo" when the name key is "neobundle",
+		the directory key is "neobundle_foo".
 
 		Example:
 >
@@ -378,8 +623,76 @@ COMMANDS 					*neobundle-commands*
 >
 		NeoBundle 'Shougo/neobundle', { 'stay_same' : 1 }
 <
+						*neobundle-options-lazy*
+		lazy			(Number)
+		If it is 1, neobundle doesn't add the path to user
+		runtimepath.
+
+						*neobundle-options-autoload*
+		autoload		(Dictionary)
+		Specify autoload conditions.
+		If you set it, neobundle will execute |:NeoBundleSource|
+		automatically.
+
+		This dictionary has following keys:
+
+			filetypes	(List) or (String)
+			Filetype list.
+
+			commands	(List) or (String)
+			Command list.
+
+			functions	(List)
+			Functions list.
+
+			mappings	(List)
+			Mappings list. The item is {mapping} or [{mode}, {mapping}].
+			If {mode} is omitted, "nxo" is used.
+
+			insert		(Insert)
+			If it is non zero, neobundle will |:NeoBundleSource|
+			in |InsertEnter| autocmd.
+
+		Example:
+>
+	NeoBundleLazy 'Rip-Rip/clang_complete', {
+	      \ 'autoload' : {
+	      \     'filetypes' : ['c', 'cpp'],
+	      \    },
+	      \ }
+	NeoBundleLazy 'basyura/TweetVim', { 'depends' :
+	      \ ['basyura/twibill.vim', 'tyru/open-browser.vim'],
+	      \ 'autoload' : { 'commands' : 'TweetVimHomeTimeline' }}
+	NeoBundleLazy 'kana/vim-smartword', { 'autoload' : {
+	      \ 'mappings' : [
+	      \   '<Plug>(smartword-w)', '<Plug>(smartword-b)', '<Plug>(smartword-ge)']
+	      \ }}
+	NeoBundleLazy 'Shougo/vim-vcs', {
+	      \ 'depends' : 'thinca/vim-openbuf',
+	      \ 'autoload' : {'functions' : 'vcs#info', 'commands' : 'Vcs'},
+	      \   }
+<
+						*neobundle-options-overwrite*
+		overwrite		(Number)
+		If it is 1, neobundle doesn't overwrite the path to user
+		runtimepath.
+
+						*neobundle-options-resettable*
+		resettable		(Number)
+		If it is 0, neobundle doesn't reset the path in
+		|neobundle#rc()|.
+
+						*neobundle-options-hooks*
+		hooks			(Dictionary)
+		Specify hook functions. The following hook functions are
+		defined:
+
+			on_source		*neobundle-hooks-on_source*
+			Called after loaded bundles. It is useful for plugin
+			initilization in lazy bundles.
+
 					*neobundle-options-type__shallow*
-		type__shallow	(Number)
+		type__shallow		(Number)
 		If it is 1, neobundle will use "shallow clone" in plugin
 		install.
 		If you omit it, 1 is used. But if you used "git@github.com:~"
@@ -459,199 +772,6 @@ COMMANDS 					*neobundle-commands*
 >
 		NeoBundle 'git://github.com/Shougo/neobundle.vim.git', {'type': 'hg'}
 <
-:NeoBundleLocal {base-directory-path}		*:NeoBundleLocal*
-		Likes pathogen.vim wrapper.  This command add
-		{base-directory-path} directories in runtimepath.
-
-		Note: If you want to use neobundle like pathogen.vim, you
-		should set base path to separate from standard neobundle
-		bundles paths.
->
-		NeoBundleLocal ~/.vim/bundle
-
-:NeoBundleInstall [{name}...]			*:NeoBundleInstall*
-		Installs {name} plugins. {name} is fuzzy searched.
-		If {name} is omited, all configured plugin is installed.
-		Note: {name} is plugin name like "neobundle.vim". Not
-		"Shougo/neobundle.vim".
-
-:NeoBundleInstall! [{name}...]			*:NeoBundleInstall!*
-		Same to |:NeoBundleUpdate|.
-
-:NeoBundleUpdate [{name}...]			*:NeoBundleUpdate*
-		Installs and updates {name} plugins. {name} is fuzzy searched.
-		If {name} is omited, all configured plugin without "nosync"
-		option is installed and updated.
-		Note: {name} is plugin name like "neobundle.vim". Not
-		"Shougo/neobundle.vim".
-
-:NeoBundleUpdate! [{name}...]			*:NeoBundleUpdate!*
-		Same to |:NeoBundleUpdate|. But it also updates plugins which
-		has "nosync" option.
-
-:NeoBundleClean [{bang} [{name}...]] 		*:NeoBundleClean*
-		Removes non configured bundles. If {bang} is added, force
-		remove bundles. If {name} are added, remove {name} bundles.
-
-:NeoBundleReinstall {name}...]		 	*:NeoBundleReinstall*
-		Reinstall {name} bundles.
-
-:NeoBundleList 					*:NeoBundleList*
-		Print list of configured bundles.
-
-:NeoBundleLog 					*:NeoBundleLog*
-		Print previous all install logs.
-
-:NeoBundleUpdatesLog 				*:NeoBundleUpdatesLog*
-		Print previous update logs.
-
-:NeoBundleLazy {repository} [, {options}]	*:NeoBundleLazy*
-:NeoExternalBundle {repository} [, {options}]
-						*:NeoExternalBundle*
-		This command register bundle, but don't add to 'runtimepath'.
-		Note: |:NeoExternalBundle| is deprecated name.
->
-		NeoBundleLazy 'The-NERD-tree', {'augroup' : 'NERDTree'}
-		NeoBundleSource The-NERD-tree
-<
-		You can use it to load plugins in specific filetype.
->
-		NeoBundleLazy 'Rip-Rip/clang_complete'
-		autocmd FileType c,cpp NeoBundleSource clang_complete
-<
-:NeoBundleSource [{name}...]			*:NeoBundleSource*
-		|:source| {name} bundles.
-		If omit {name}, |:source| all lazy bundles.
-		Note: This command is used to load the neobundles configured
-		by |:NeoBundleLazy|.
-
-:NeoBundleFetch {repository} [, {options}]	*:NeoBundleFetch*
-		This command register bundle, but don't add to 'runtimepath'.
-		Instead of |:NeoBundleLazy|, you cannot load the bundle with
-		|:NeoBundleSource|. It is useful for managing non-Vim plugins
-		using neobundle.
->
-		NeoBundleFetch 'davidhalter/jedi'
-<
-:NeoBundleDocs					*:NeoBundleDocs*
-		Execute |:helptags|all bundles manually.
-
-:NeoBundleDepends {repository} [, {options}]
-						*:NeoBundleDepends*
-		This command registers bundle and install the plugin.  It is
-		useful to define Vim plugin dependency.
-		Note: This command is not overwritten user neobundle
-		configuration.
->
-		if exists(':NeoBundleDepends')
-		  NeoBundleDepends 'Shougo/unite.vim.git'
-		endif
-<
-:NeoBundleDirectInstall {repository} [, {options}]
-						*:NeoBundleDirectInstall*
-		This command registers bundle, and installs it directly.
-		Note: If you used the command, you cannot customize the bundle
-		settings.
-		Note: The settings is saved in ".direct_bundles" in bundle
-		directory.
->
-		NeoBundleDirectInstall 'Shougo/neocomplcache'
-<
-:NeoBundleDisable {name}...			*:NeoBundleDisable*
-		This command disables {name} bundles.
-		If bundle is disabled, it's path will be removed from
-		'runtimepath'.
-		Note: This command must be execute until neobundle loads
-		plugins.
-
-------------------------------------------------------------------------------
-VARIABLES 					*neobundle-variables*
-
-g:neobundle#default_site			*g:neobundle#default_site*
-		The default repository site if site attribute is omitted.
-
-						*g:neobundle_default_site*
-		Note: |g:neobundle_default_site| is obsolete name.
-
-		Default value is "github".
-
-g:neobundle#log_filename			*g:neobundle#log_filename*
-		The filename of outputting log. If it is "", don't output log
-		to file.
-
-						*g:neobundle_log_filename*
-		Note: |g:neobundle_log_filename| is obsolete name.
-
-		Default value is "".
-
-g:neobundle#enable_tail_path			*g:neobundle#enable_tail_path*
-		If it is 1, default "tail_path" attribute will be 1 in bundle.
-
-						*g:neobundle_enable_tail_path*
-		Note: |g:neobundle_enable_tail_path| is obsolete name.
-
-		Default value is 0.
-
-g:neobundle#rm_command				*g:neobundle#rm_command*
-		The remove file command in |:NeoBundleClean|.
-
-						*g:neobundle_rm_command*
-		Note: |g:neobundle_rm_command| is obsolete name.
-
-		Default value is "rmdir /S /Q" on Windows or "rm -rf" in
-		others.
-
-g:neobundle#install_max_processes
-					*g:neobundle#install_max_processes*
-		The max processes number in neobundle/install source
-		asyncronous update.
-
-			*g:unite_source_neobundle_install_max_processes*
-		Note: |g:unite_source_neobundle_install_max_processes| is
-		obsolete name.
-
-		Default value is "5".
-
-g:neobundle#default_options			*g:neobundle#default_options*
-		It is a dictionary for default options if options are omitted.
-		The key is default options name and the value is default
-		options.
-		If the key is "_", it is used for omitting default options
-		name.
-		Example:
->
-		let g:neobundle#default_options =
-		          \ { 'rev' : {'type__update_style' : 'current'} }
-		NeoBundle 'Shougo/neocomplcache', '', 'rev'
-<
-		Default value is "{}".
-
-g:neobundle#types#raw#calc_hash_command
-				*g:neobundle#types#raw#calc_hash_command*
-		The calc command in raw repository type.
-
-		Default value is "sha1sum" or "md5sum".
-
-g:neobundle#types#git#default_protocol
-				*g:neobundle#types#git#default_protocol*
-		The default protocol used for git(github).
-		Note: If you must use proxy server, you may change the value
-		to "https".
-
-					*g:neobundle_default_git_protocol*
-		Note: |g:neobundle_default_git_protocol| is obsolete name.
-
-		Default value is "git".
-
-g:neobundle#types#hg#default_protocol
-				*g:neobundle#types#hg#default_protocol*
-		The default protocol used for hg(bitbucket).
-
-					*g:neobundle_default_hg_protocol*
-		Note: |g:neobundle_default_git_protocol| is obsolete name.
-
-		Default value is "https".
-
 ==============================================================================
 EXAMPLES					*neobundle-examples*
 >
@@ -667,7 +787,7 @@ EXAMPLES					*neobundle-examples*
 	call neobundle#rc(expand('~/.vim/bundle'))
 	
 	" Let neobundle manage neobundle
-	"NeoBundleFetch 'Shougo/neobundle.vim'
+	NeoBundleFetch 'Shougo/neobundle.vim'
 	
 	" Use neobundle standard recipes.
 	NeoBundle 'Shougo/neobundle-vim-scripts'
@@ -790,7 +910,7 @@ neobundle/search			*unite-action-neobundle-search*
 			Note: The settings is saved in ".direct_bundles" in
 			bundle directory.
 	start		Browse github plugin page
-	open		Open receipe file
+	open		Open recipe file
 
 	Note: If you used the install action, you cannot customize the bundle
 	settings.
@@ -801,7 +921,7 @@ neobundle/lazy					*unite-action-neobundle-lazy*
 ==============================================================================
 RECIPE						*neobundle-recipe*
 
-neobundle/search source loads recipes from "recipes/*.json" files in
+neobundle/search source loads recipes from "recipes/*.vimrecipe" files in
 'runtimepath'.
 
 The standard recipes are in "neobundle-vim-scripts".
@@ -816,6 +936,7 @@ You can use the recipes using following command in .vimrc.
 The recipe file is json format like this:
 
 >
+	# Vim recipe file for neobundle.
 	{
 	        'name' : 'neobundle',
 	        'path' : 'Shougo/neobundle',
@@ -826,6 +947,7 @@ The recipe file is json format like this:
 <
 		The recipe has the following keys. Most of keys are same to
 		neobundle configuration dictionary.
+		"#" is comment string. But comment must be line head.
 
 		name			(String)	(Required)
 		Specify plugin name.
@@ -889,6 +1011,51 @@ A: Please change |g:neobundle#types#git#default_protocol| value.
 
 ==============================================================================
 CHANGELOG					*neobundle-changelog*
+
+2013-01-04
+- Added "insert" flag in autoload.
+- Added neobundle#config().
+- Improved :NeoBundleDocs.
+
+2013-01-03
+- Improved documentation.
+- Improved :helptags behavior.
+- Improved :NeoBundleSource behavior.
+- Improved for depends.
+
+2013-01-02
+- Optimised startup.
+- Supported imap in autoload mappings.
+
+2013-01-01
+- Improved bundle initilization.
+- Added overwrite flag.
+- Improved :NeoBundleDepends behavior.
+- Fixed initilization errors.
+- Added neobundle#local().
+- Added neobundle#get() and neobundle#call_hook().
+- Fixed neobundle#config#source() behavior.
+
+2012-12-31
+- Fixed for :NeoBundleLazy.
+- Supported bang in autoload.
+
+2012-12-29
+- Deleted :NeoExternalBundle.
+- Implemented autoload filetypes.
+- Implemented autoload commands.
+- Implemented autoload mappings.
+- Added neobundle#util#convert_list().
+- Fixed neobundle autocmds.
+
+2012-12-27
+- Fixed shallow behavior when locked revision.
+- Changed recipe files extension.
+- Version 3.0 development is started.
+- Change directory key behavior.
+
+------------------------------------------------------------------------------
+ChangeLog neobundle 2.1:
 
 2012-12-17
 - Added :NeoBundleFetch.
@@ -1123,298 +1290,6 @@ CHANGELOG					*neobundle-changelog*
 
 2012-08-14
 - Ver.2.1 development is started.
-
-------------------------------------------------------------------------------
-ChangeLog neobundle 2.0:
-
-2012-08-11
-- Improved error message.
-- Improved neobundle#config#get_neobundles().
-- Added nosync type.
-- Improved documentation.
-- Fixed uri parse.
-
-2012-08-08
-- Fixed documentation.
-- Deleted vital.
-- Fixed :NeoBundleInstall behavior.
-- Reduced runtimepath.
-- Improved reload behavior.
-
-2012-08-07
-- Fixed neobundle config problem.
-
-2012-08-05
-- Fixed typo.
-
-2012-08-03
-- Added version check.
-
-2012-07-25
-- Improved vcs types.
-
-2012-07-24
-- Renamed vcs to types.
-- Added vesting tests.
-
-2012-07-23
-- Added depends.
-- Improved for repository errors.
-- Added vcs files.
-
-2012-07-22
-- Fixed documentation.
-
-2012-07-18
-- Fixed documentation.
-
-2012-07-12
-- Improved chomp behavior.
-
-2012-07-08
-- Improved installer.
-- Fixed for new git.
-
-2012-06-23
-- Fixed s:neobundle_dir problem.
-
-2012-06-17
-- Added .gitignore.
-- Improved neobundle sources behavior.
-
-2012-06-07
-- Added augroup attribute.
-
-2012-06-06
-- Improved neobundle#rc() behavior.
-
-2012-06-02
-- Added .git suffix.
-
-2012-05-20
-- Fixed reinstall error.
-
-2012-05-16
-- Improved :NeoBundleSource behavior.
-- Deleted :NeoBundleFileTypeSource command.
-
-2012-05-14
-- Added :NeoBundleFileTypeSource command.
-
-2012-05-13
-- Fixed tags error.
-- Improved reload behavior.
-- Fixed :NeoBundleLazy.
-- Added neobundle/lazy source.
-- Fixed :NeoBundleExternal.
-- Added test.
-- Improved :NeoBundleSource.
-
-2012-05-12
-- Added NeoBundleLazy and NeoBundleSource command.
-- Improved command implementation.
-- Fixed NeoBundleSource behavior.
-
-2012-05-06
-- Improved neobundle source.
-
-2012-05-03
-- Added build option.
-- Improved test.
-- Improved revision lock behavior.
-- Added neobundle/search source.
-- Added start action.
-
-2012-05-02
-- Added g:neobundle_rm_command option.
-
-2012-04-28
-- Updated vital.
-
-2012-04-25
-- Improved :NeoBundleClean behavior.
-- Added test.
-
-2012-04-22
-- Ver.2.0 development is started.
-- Implemented :NeoBundleClean completion.
-- Improved reload behavior.
-
-------------------------------------------------------------------------------
-ChangeLog neobundle 1.0:
-
-2012-04-21
-- Ver.1.0.
-- Fixed documentation.
-
-2012-04-19
-- Fixed examples.
-
-2012-04-17
-- Updated documentation.
-- Added base attribute.
-
-2012-04-13
-- Added g:neobundle_default_git_protocol variable.
-
-2012-03-27
-- Added neobundle/update source.
-- Improved log.
-
-2012-03-26
-- Improved :NeoBundleInstall behavior.
-- Improved neobundle/install source.
-- Added :NeoBundleUpdate command.
-- Implemented completion.
-
-2012-03-03
-- Improved documentation.
-
-2012-02-24
-- Fixed :NeoBundleInstall bug.
-
-2012-02-16
-- Fixed neobundle initialization.
-
-2012-02-15
-- Added neobundle#installer#has_vimproc().
-
-2012-01-17
-- Added Vimpusher web service description.
-
-2012-01-11
-- Fixed :NeoBundleClean bug.
-- Comment line is allowed.
-- Improved :NeoBundle parse.
-- Fixed example.
-
-2012-01-08
-- Fixed clean eror.
-
-2012-01-06
-- Improved neobundle source view.
-- Improved neobundle source behavior.
-- Improved :NeoBundleClean behavior.
-
-2012-01-05
-- Fixed expand() problem.
-- Improved neobundle source.
-
-2012-01-03
-- Added source completion.
-- Improved neobundle/install source behavior.
-
-2011-12-31
-- Improved neobundle initialize.
-
-2011-12-21
-- Fixed substitute path separator.
-- Improved use vital module.
-- Don't independent unite.
-
-2011-12-20
-- Added edit and narrow action.
-
-2011-12-19
-- Added NeoExternalBundle command.
-
-2011-12-07
-- Improved assume protocols.
-
-2011-12-06
-- Improved option parse.
-
-2011-12-02
-- Improved reload.
-
-2011-11-25
-- Fixed for Mercurial.
-
-2011-11-21
-- Added README.
-
-2011-11-18
-- Improved installer.
-- Improved examples.
-- Added :NeoBundleList command.
-- Fixed neobundle source error.
-
-2011-11-17
-- Improved parse name.
-- Fixed parse config.
-
-2011-11-16
-- Reload autoload scripts.
-
-2011-11-15
-- Improved nosync.
-- Implemented plugins reload.
-
-2011-11-10
-- Fixed parse bug.
-
-2011-11-04
-- Added :NeoBundleLog command.
-- Added neobundle/log source.
-- Improved log.
-- Fixed for Vim 7.2.
-- Fixed helptags error.
-- Improved error message.
-
-2011-11-02
-- Fixed helptags.
-
-2011-11-01
-- Use git protocol instead of https.
-
-2011-10-28
-- Fixed :NeoBundleInstall error.
-- Use --rebase.
-- Supported change dicretory name.
-- Improved documentation.
-
-2011-10-26
-- Improved lock revision.
-- Fixed sync.
-
-2011-10-25
-- Improved install message.
-- Fixed lock revision.
-
-2011-10-23
-- Fixed vimproc check.
-- Improved neobundle/install source status messages.
-
-2011-10-19
-- Fixed documentation.
-- Improved NeoBundleClean.
-- Fixed :NeoBundleInstall bug.
-- Improved :NeoBundleClean.
-- Improved detect error.
-- Added neobundle source.
-
-2011-10-18
-- Refactored.
-- Fixed examples.
-
-2011-10-17
-- Improved neobundle source.
-
-2011-10-06
-- Supported revision.
-
-2011-09-25
-- Supported Subversion and Mercurial.
-
-2011-09-24
-- Fixed parse name.
-
-2011-09-19
-- Refactored local variable names.
-- Fixed installer.
-
-2011-09-18
-- Added documentation.
 
 ==============================================================================
 vim:tw=78:ts=8:ft=help:norl:noet:fen:fdl=0:

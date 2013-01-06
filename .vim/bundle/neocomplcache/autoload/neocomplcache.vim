@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: neocomplcache.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 17 Dec 2012.
+" Last Modified: 02 Jan 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -904,6 +904,8 @@ function! s:do_auto_complete(event) "{{{
       return
     endif
   endif
+
+  call s:save_foldinfo()
 
   " Set options.
   set completeopt-=menu
@@ -2002,11 +2004,6 @@ endfunction"}}}
 
 " Command functions. "{{{
 function! neocomplcache#toggle_lock() "{{{
-  if !neocomplcache#is_enabled()
-    call neocomplcache#enable()
-    return
-  endif
-
   if neocomplcache#get_current_neocomplcache().lock
     echo 'neocomplcache is unlocked!'
     call neocomplcache#unlock()
@@ -2016,18 +2013,10 @@ function! neocomplcache#toggle_lock() "{{{
   endif
 endfunction"}}}
 function! neocomplcache#lock() "{{{
-  if !neocomplcache#is_enabled()
-    return
-  endif
-
   let neocomplcache = neocomplcache#get_current_neocomplcache()
   let neocomplcache.lock = 1
 endfunction"}}}
 function! neocomplcache#unlock() "{{{
-  if !neocomplcache#is_enabled()
-    return
-  endif
-
   let neocomplcache = neocomplcache#get_current_neocomplcache()
   let neocomplcache.lock = 0
 endfunction"}}}
@@ -2397,14 +2386,19 @@ function! s:on_insert_leave() "{{{
     endfor
   endfor
 endfunction"}}}
-function! s:on_insert_enter() "{{{
-  " Save foldinfo.
+function! s:save_foldinfo() "{{{
   " Note: settabwinvar() in insert mode has bug.
   " for tabnr in range(1, tabpagenr('$'))
-  for tabnr in [tabpagenr()]
-    for winnr in filter(range(1, tabpagewinnr(tabnr, '$')),
-          \ "gettabwinvar(tabnr, v:val, '&foldmethod') ==# 'expr' &&
+  for tabnr in filter([tabpagenr()],
+        \ "index(tabpagebuflist(v:val), bufnr('%')) >= 0")
+    let winnrs = range(1, tabpagewinnr(tabnr, '$'))
+    if tabnr == tabpagenr()
+      call filter(winnrs, "winbufnr(v:val) == bufnr('%')")
+    endif
+    call filter(winnrs, "
+          \  gettabwinvar(tabnr, v:val, '&foldmethod') ==# 'expr' &&
           \  gettabwinvar(tabnr, v:val, '&modifiable')")
+    for winnr in winnrs
       call settabwinvar(tabnr, winnr, 'neocomplcache_foldinfo', {
             \ 'foldmethod' : gettabwinvar(tabnr, winnr, '&foldmethod'),
             \ 'foldexpr'   : gettabwinvar(tabnr, winnr, '&foldexpr')
@@ -2413,7 +2407,8 @@ function! s:on_insert_enter() "{{{
       call settabwinvar(tabnr, winnr, '&foldexpr', 0)
     endfor
   endfor
-
+endfunction"}}}
+function! s:on_insert_enter() "{{{
   if &l:foldmethod ==# 'expr' && foldlevel('.') != 0
     foldopen
   endif
@@ -2830,7 +2825,7 @@ endfunction"}}}
 function! s:is_skip_auto_complete(cur_text) "{{{
   let neocomplcache = neocomplcache#get_current_neocomplcache()
 
-  if a:cur_text == ''
+  if a:cur_text =~ '^\s*$\|\s\+$'
         \ || a:cur_text == neocomplcache.old_cur_text
         \ || (g:neocomplcache_lock_iminsert && &l:iminsert)
         \ || (&l:formatoptions =~# '[tc]' && &l:textwidth > 0

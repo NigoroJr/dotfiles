@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: vimshell.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 21 Dec 2012.
+" Last Modified: 02 Jan 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -68,7 +68,7 @@ let s:vimshell_options = [
       \]
 
 let s:V = vital#of('vimshell')
-let s:BM = s:V.import('Vim.Buffer.Manager')
+let s:BM = s:V.import('Vim.BufferManager')
 let s:manager = s:BM.new()  " creates new manager
 call s:manager.config('opener', 'silent edit')
 call s:manager.config('range', 'current')
@@ -904,6 +904,10 @@ function! s:initialize_vimshell(path, context) "{{{
 
   setfiletype vimshell
 
+  call vimshell#help#init()
+  call vimshell#interactive#init()
+endfunction"}}}
+function! vimshell#set_highlight()
   " Set syntax.
   let prompt_pattern = "'^" . escape(
         \ vimshell#escape_match(vimshell#get_prompt()), "'") . "'"
@@ -932,10 +936,7 @@ function! s:initialize_vimshell(path, context) "{{{
         \ 'vimshellDirectory,vimshellConstants,vimshellArguments,'.
         \ 'vimshellQuoted,vimshellString,vimshellVariable,'.
         \ 'vimshellSpecial,vimshellComment'
-
-  call vimshell#help#init()
-  call vimshell#interactive#init()
-endfunction"}}}
+endfunction
 function! s:initialize_context(context) "{{{
   let default_context = {
     \ 'buffer_name' : 'default',

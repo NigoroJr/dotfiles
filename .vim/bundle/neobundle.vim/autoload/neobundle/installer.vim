@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: installer.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu at gmail.com>
-" Last Modified: 02 Dec 2012.
+" Last Modified: 04 Jan 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -99,9 +99,14 @@ function! neobundle#installer#helptags(bundles)
 
   call map(help_dirs, 's:helptags(v:val.rtp)')
   if !empty(help_dirs)
-    call neobundle#installer#log('[neobundle/install] Helptags: done. '
+    call s:helptags(neobundle#get_runtime_dir())
+    call s:update_tags()
+
+    call neobundle#installer#log(
+          \ '[neobundle/install] Helptags: done. '
           \ .len(help_dirs).' bundles processed')
   endif
+
   return help_dirs
 endfunction
 
@@ -545,7 +550,8 @@ function! s:install(bang, bundles)
 endfunction
 
 function! s:has_doc(path)
-  return isdirectory(a:path.'/doc')
+  return a:path != '' &&
+        \ isdirectory(a:path.'/doc')
         \   && (!filereadable(a:path.'/doc/tags')
         \       || filewritable(a:path.'/doc/tags'))
         \   && (!filereadable(a:path.'/doc/tags-??')
@@ -561,6 +567,26 @@ function! s:helptags(path)
     call neobundle#installer#error('Error generating helptags in '.a:path)
     call neobundle#installer#error(v:exception . ' ' . v:throwpoint)
   endtry
+endfunction
+
+function! s:update_tags()
+  let tags = {}
+  for bundle in [{ 'rtp' : neobundle#get_runtime_dir()}]
+        \ + neobundle#config#get_neobundles()
+    for tag in split(globpath(
+          \ bundle.rtp, 'doc/{tags,tags-*}'), '\n')
+      let filename = fnamemodify(tag, ':t')
+      if !has_key(tags, filename)
+        let tags[filename] = []
+      endif
+
+      let tags[filename] += readfile(tag)
+    endfor
+  endfor
+
+  for [filename, list] in items(tags)
+    call writefile(list, neobundle#get_tags_dir() . '/' . filename)
+  endfor
 endfunction
 
 function! s:check_really_clean(dirs)
