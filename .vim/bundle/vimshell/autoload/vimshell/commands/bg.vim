@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: bg.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 25 Dec 2012.
+" Last Modified: 12 Jan 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -41,7 +41,7 @@ function! s:command.execute(commands, context) "{{{
   let [commands[0].args, options] = vimshell#parser#getopt(commands[0].args, {
         \ 'arg=' : ['--encoding', '--syntax', '--split'],
         \ }, {
-        \ '--encoding' : 'char',
+        \ '--encoding' : vimshell#interactive#get_default_encoding(a:commands),
         \ '--syntax' : 'vimshell-bg',
         \ '--split' : g:vimshell_split_command,
         \ })
@@ -152,7 +152,6 @@ function! vimshell#commands#bg#init(commands, context, options, interactive) "{{
   endif
 
   " For bg.
-  setlocal wrap
   setlocal nomodifiable
   setlocal filetype=vimshell-bg
   let &syntax = a:options['--syntax']

@@ -175,6 +175,10 @@ neobundle#get({bundle-name})			 *neobundle#get()*
 	  endfunction
 	endfunction
 <
+neobundle#get_hooks({bundle-name})		 *neobundle#get_hooks()*
+		Get {bundle-name} neobundle "hooks" dictionary.
+		It is useful for setting hooks.
+
 neobundle#call_hook({hook-name})		 *neobundle#call_hook()*
 		Call {hook-name} hooks.
 		Note: If {hook-name} is "on_source", neobundle call
@@ -315,6 +319,10 @@ COMMANDS 					*neobundle-commands*
 		'runtimepath'.
 		Note: This command must be execute until neobundle loads
 		plugins.
+
+:NeoBundleCheck					*:NeoBundleCheck*
+		Check plugins installation. If plugins are not installed, it
+		will execute |:NeoBundleInstall| automatically.
 
 ------------------------------------------------------------------------------
 VARIABLES 					*neobundle-variables*
@@ -682,6 +690,23 @@ OPTIONS 					*neobundle-options*
 		If it is 0, neobundle doesn't reset the path in
 		|neobundle#rc()|.
 
+						*neobundle-options-gui*
+		gui			(Number)
+		If it is 1, neobundle will load the plugin in GUI Vim only.
+
+		Example:
+>
+	NeoBundleLazy 'tyru/restart.vim', '', 'same', {
+	      \ 'gui' : 1,
+	      \ 'autoload' : {
+	      \  'commands' : 'Restart'
+	      \ }}
+<
+						*neobundle-options-terminal*
+		terminal		(Number)
+		If it is 1, neobundle will load the plugin in Terminal Vim
+		only.
+
 						*neobundle-options-hooks*
 		hooks			(Dictionary)
 		Specify hook functions. The following hook functions are
@@ -802,7 +827,6 @@ EXAMPLES					*neobundle-examples*
 
 	" Installation check.
 	NeoBundleCheck
-
 <
 ==============================================================================
 UNITE SOURCES					*neobundle-unite-sources*
@@ -1007,6 +1031,19 @@ A: Please change |g:neobundle#types#git#default_protocol| value.
 
 ==============================================================================
 CHANGELOG					*neobundle-changelog*
+
+2013-01-13
+- Improved calling on_source hooks timing.
+- Fixed neobundle#set() behavior.
+- Added gui and terminal options.
+
+2013-01-12
+- Arrowed range in autoload commands.
+- Added neobundle#get_hooks().
+
+2013-01-11
+- Fixed depends bundle behavior.
+- Fixed :NeoBundleDocs.
 
 2013-01-04
 - Added "insert" flag in autoload.
@@ -1288,4 +1325,4 @@ ChangeLog neobundle 2.1:
 - Ver.2.1 development is started.
 
 ==============================================================================
-vim:tw=78:ts=8:ft=help:norl:noet:fen:fdl=0:
+vim:tw=78:ts=8:ft=help:norl:noet:fen:

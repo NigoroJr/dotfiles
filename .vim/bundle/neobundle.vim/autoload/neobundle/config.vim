@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: config.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu at gmail.com>
-" Last Modified: 06 Jan 2013.
+" Last Modified: 13 Jan 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -581,12 +581,20 @@ function! neobundle#config#check_external_commands(bundle)
 endfunction
 
 function! neobundle#config#set(name, dict)
-  let bundle = extend(neobundle#config#get(a:name), a:dict)
+  let bundle = neobundle#config#get(a:name)
+  if empty(bundle)
+    return
+  endif
+
+  let bundle = s:init_bundle(extend(bundle, a:dict))
+  let bundle.overwrite = 1
   if bundle.lazy && !get(s:sourced_neobundles, bundle.name, 0)
-    " Remove runtimepath.
+    " Remove from runtimepath.
     call s:rtp_rm(bundle)
     let s:loaded_neobundles[bundle.name] = 0
   endif
+
+  call s:add_bundle(bundle)
 endfunction
 
 function! s:load_depends(bundle, lazy)
@@ -599,10 +607,8 @@ function! s:load_depends(bundle, lazy)
     let depend_bundle = neobundle#config#bundle(depend, 1)
     let depend_bundle.lazy = a:lazy
     if !has_key(s:neobundles, depend_bundle.name)
-      call neobundle#config#bundle(depend)
+      call s:add_bundle(depend_bundle)
     endif
-
-    call neobundle#config#bundle(depend)
 
     unlet depend
   endfor
@@ -613,6 +619,8 @@ function! s:add_bundle(bundle)
 
   if get(s:disabled_neobundles, bundle.name, 0)
         \ || (!bundle.overwrite && has_key(s:neobundles, bundle.name))
+        \ || (bundle.gui && !has('gui_running'))
+        \ || (bundle.terminal && has('gui_running'))
     return
   endif
 
@@ -627,14 +635,14 @@ function! s:add_bundle(bundle)
 
     let s:loaded_neobundles[bundle.name] = 1
     call s:rtp_add(bundle)
-    call neobundle#call_hook('on_source', [bundle])
   elseif bundle.lazy && has_key(bundle, 'autoload') &&
         \ !neobundle#config#is_sourced(bundle.name)
     for command in neobundle#util#convert_list(
           \ get(bundle.autoload, 'commands', []))
       " Define dummy commands.
-      execute 'command! -bang -nargs=*' command printf(
-            \ "call neobundle#autoload#command(%s, %s, <q-args>, expand('<bang>'))",
+      execute 'command! -bang -range -nargs=*' command printf(
+            \ "call neobundle#autoload#command(%s, %s, <q-args>,
+            \  expand('<bang>'), expand('<line1>'), expand('<line2>'))",
             \   string(command), string(bundle.name))
     endfor
 
@@ -670,6 +678,8 @@ function! s:get_default()
           \ 'rtp' : '',
           \ 'depends' : [],
           \ 'lazy' : 0,
+          \ 'gui' : 0,
+          \ 'terminal' : 0,
           \ 'overwrite' : 1,
           \ 'resettable' : 1,
           \ 'hooks' : {},
@@ -728,6 +738,9 @@ function! s:on_vim_enter()
   for bundle in neobundle#config#get_neobundles()
     let s:sourced_neobundles[bundle.name] = 1
   endfor
+
+  " Call hooks.
+  call neobundle#call_hook('on_source')
 endfunction
 
 let &cpo = s:save_cpo

@@ -17,6 +17,7 @@ g:tcommentGuessFileType_dsl	tcomment.txt	/*g:tcommentGuessFileType_dsl*
 g:tcommentGuessFileType_eruby	tcomment.txt	/*g:tcommentGuessFileType_eruby*
 g:tcommentGuessFileType_html	tcomment.txt	/*g:tcommentGuessFileType_html*
 g:tcommentGuessFileType_php	tcomment.txt	/*g:tcommentGuessFileType_php*
+g:tcommentGuessFileType_smarty	tcomment.txt	/*g:tcommentGuessFileType_smarty*
 g:tcommentGuessFileType_tskeleton	tcomment.txt	/*g:tcommentGuessFileType_tskeleton*
 g:tcommentGuessFileType_vim	tcomment.txt	/*g:tcommentGuessFileType_vim*
 g:tcommentIgnoreTypes_php	tcomment.txt	/*g:tcommentIgnoreTypes_php*
@@ -26,6 +27,7 @@ g:tcommentMapLeader1	tcomment.txt	/*g:tcommentMapLeader1*
 g:tcommentMapLeader2	tcomment.txt	/*g:tcommentMapLeader2*
 g:tcommentMapLeaderOp1	tcomment.txt	/*g:tcommentMapLeaderOp1*
 g:tcommentMapLeaderOp2	tcomment.txt	/*g:tcommentMapLeaderOp2*
+g:tcommentMaps	tcomment.txt	/*g:tcommentMaps*
 g:tcommentModeExtra	tcomment.txt	/*g:tcommentModeExtra*
 g:tcommentOpModeExtra	tcomment.txt	/*g:tcommentOpModeExtra*
 g:tcommentOptions	tcomment.txt	/*g:tcommentOptions*
