@@ -61,7 +61,7 @@ inoremap <expr><C-l> neocomplcache#complete_common_string()
 imap <silent> <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <silent> <C-k> <Plug>(neosnippet_expand_or_jump)
 
-" Vinarise
+" Settings for Vinarise
 let g:vinarise_enable_auto_detect = 1
 
 " unite.vim settings
