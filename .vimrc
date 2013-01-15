@@ -30,8 +30,16 @@ NeoBundle 'taku-o/vim-toggle'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'tpope/vim-markdown'
 
 filetype plugin indent on
+
+" Settings for quickrun
+let g:quickrun_config = {}
+let g:quickrun_config['markdown'] = {
+    \ 'outputter': 'browser'
+    \ }
 
 " Autoclose
 let g:autoclose_on=0
@@ -47,7 +55,7 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
 
 " <TAB>: completion
-imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " <C-h>, <BS>: close popup and delete backward char
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
@@ -61,7 +69,7 @@ inoremap <expr><C-l> neocomplcache#complete_common_string()
 imap <silent> <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <silent> <C-k> <Plug>(neosnippet_expand_or_jump)
 
-" Settings for Vinarise
+" Vinarise
 let g:vinarise_enable_auto_detect = 1
 
 " unite.vim settings
