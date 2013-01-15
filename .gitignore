@@ -1,4 +1,4 @@
 # Ignore backup files (keep it local!)
 .vim/backup/
 .vim/view/
-.vim/bundle/
+.vim/bundle/*
