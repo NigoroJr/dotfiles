@@ -1,3 +1,13 @@
+snippet     fopen
+abbr    fopen(filename, mode)
+    FILE *${1};
+    if (($1 = fopen(${2:file name}, "${3:mode}")) == NULL) {
+        ${4:when failed to open}
+    }
+    else {
+        ${0}
+    }
+
 snippet     calloc
 abbr        calloc(num, size)
     ${1:} = calloc(${2:how many}, sizeof(${3:what}));
@@ -90,8 +100,7 @@ abbr        enum {}
 
 # main function.
 snippet main
-	int main(int argc, char const* argv[])
-	{
+	int main(int argc, char const* argv[]) {
 		${0}
 		return 0;
 	}
