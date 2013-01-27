@@ -32,6 +32,7 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'tpope/vim-markdown'
+NeoBundle 'goldfeld/vim-seek'
 
 filetype plugin indent on
 
