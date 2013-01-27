@@ -12,7 +12,7 @@ set viewoptions=folds
 set hlsearch
 " Reset hilight search by pressing Escape 2 times
 nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
-let mapleader=";"   " Sets mapleader to ;
+"let mapleader=";"   " Sets mapleader to ;
 
 " Set backupdir to be ~/Dropbox/vim/backup/
 "if isdirectory(expand('~/Dropbox/vim/backup/'))
