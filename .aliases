@@ -1,6 +1,4 @@
 # This is a file of aliases
-alias rar='/home/naoki/pkg_src/rar/rar'
-
 alias sudo='sudo -H'
 
 # Aliases for ls
