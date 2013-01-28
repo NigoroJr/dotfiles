@@ -8,6 +8,13 @@ if [ -f ~/.zshrc_prompt ]; then
     source ~/.zshrc_prompt
 fi
 
+# See if it's Mac
+case `uname -s` in
+    Darwin)
+        PATH=$PATH:$(brew --prefix coreutils)/libexec/gnubin
+        ;;
+esac
+
 zstyle :compinstall filename '/home/naoki/.zshrc'
 
 autoload -Uz compinit
