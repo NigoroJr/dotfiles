@@ -10,9 +10,28 @@ fi
 
 # See if it's Mac
 case `uname -s` in
+    # Macintosh
     Darwin)
-        PATH=$PATH:$(brew --prefix coreutils)/libexec/gnubin
-        alias ls='gls --color=auto'
+        #PATH=$PATH:$(brew --prefix coreutils)/libexec/gnubin
+        local gnubin=$(brew --prefix coreutils)/libexec/gnubin
+        PATH=$PATH:$gnubin
+        # No dircolors
+        if [ ! -f $gnubin/dircolors ]; then
+            alias ls='ls -G'
+        else
+            # colorize list
+            eval `dircolors`
+            export ZLS_COLORS=$LS_COLORS
+            zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+            alias ls='gls --color=auto'
+        fi
+        ;;
+    *)
+        # colorize list
+        eval `dircolors`
+        export ZLS_COLORS=$LS_COLORS
+        zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
         ;;
 esac
 
@@ -24,11 +43,6 @@ compinit
 HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
-
-# colorize list
-eval `dircolors`
-export ZLS_COLORS=$LS_COLORS
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # Limit Coredump size
 limit coredumpsize 102400
