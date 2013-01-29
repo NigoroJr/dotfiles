@@ -10,8 +10,24 @@ fi
 
 # See if it's Mac
 case `uname -s` in
+    # Macintosh
     Darwin)
-        PATH=$PATH:$(brew --prefix coreutils)/libexec/gnubin
+        local gnubin = $(brew --prefix coreutils)/libexec/gnubin
+        PATH=$PATH:$gnubin
+        if [ !(-f $gnubin/dircolors) ]; then
+            alias ls='ls -G'
+        else
+            # colorize list
+            eval `dircolors`
+            export ZLS_COLORS=$LS_COLORS
+            zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+        fi
+        ;;
+    *)
+        # colorize list
+        eval `dircolors`
+        export ZLS_COLORS=$LS_COLORS
+        zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
         ;;
 esac
 
@@ -26,11 +42,6 @@ SAVEHIST=100000
 
 # Limit Coredump size
 limit coredumpsize 102400
-
-# colorize list
-eval `dircolors`
-export ZLS_COLORS=$LS_COLORS
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # Show even when no Return at the end
 unsetopt promptcr
