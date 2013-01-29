@@ -12,6 +12,7 @@ fi
 case `uname -s` in
     Darwin)
         PATH=$PATH:$(brew --prefix coreutils)/libexec/gnubin
+        alias ls='gls --color=auto'
         ;;
 esac
 
@@ -24,13 +25,13 @@ HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
 
-# Limit Coredump size
-limit coredumpsize 102400
-
 # colorize list
 eval `dircolors`
 export ZLS_COLORS=$LS_COLORS
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# Limit Coredump size
+limit coredumpsize 102400
 
 # Show even when no Return at the end
 unsetopt promptcr
