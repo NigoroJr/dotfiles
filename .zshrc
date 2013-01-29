@@ -16,9 +16,7 @@ case `uname -s` in
         local gnubin=$(brew --prefix coreutils)/libexec/gnubin
         PATH=$PATH:$gnubin
         # No dircolors
-        if [ ! -f $gnubin/dircolors ]; then
-            alias ls='ls -G'
-        else
+        if [ -f $gnubin/dircolors ]; then
             # colorize list
             eval `dircolors`
             export ZLS_COLORS=$LS_COLORS

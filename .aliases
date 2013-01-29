@@ -1,10 +1,22 @@
+# Check Operating System
+case `uname -s` in
+    Darwin)
+        alias ls='ls -G'
+        export GREP_OPTIONS='--color=auto'
+        export GREP_COLOR='1;37;31'
+        ;;
+    *)
+        alias ls='ls --color=auto'
+        alias grep='grep -P --color=auto'
+        ;;
+esac
+
 # This is a file of aliases
 alias sudo='sudo -H'
 
 # Aliases for ls
-alias ls='ls --color=auto'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
+alias dir='ls'
+alias vdir='ls -lb'
 
 alias lsl='ls -l'
 alias ll='ls -l'
@@ -13,8 +25,10 @@ alias la='ls -A'
 alias l='ls -CF'
 
 # Aliases for grep
-alias grep='grep -P --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+alias fgrep='grep -F'
+alias egrep='grep -E'
 
-alias lg='| grep -P'
+alias -g lg='| grep -P'
+
+# Make cd a little easier
+alias ..='cd ..'
