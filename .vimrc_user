@@ -12,7 +12,7 @@ set viewoptions=folds
 set hlsearch
 " Reset hilight search by pressing Escape 2 times
 nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
-"let mapleader=";"   " Sets mapleader to ;
+let mapleader=","   " Sets mapleader to ,
 
 " Set backupdir to be ~/Dropbox/vim/backup/
 "if isdirectory(expand('~/Dropbox/vim/backup/'))
@@ -36,8 +36,8 @@ else
     set viewdir=~/.vim/view/
 endif
 
-nnoremap <silent> ,mkv :mkview!<CR>
-nnoremap <silent> ,lv :loadview<CR>
+nnoremap <silent> <Leader>mkv :mkview!<CR>
+nnoremap <silent> <Leader>lv :loadview<CR>
 
 if expand('%') != '' && &buftype !~ 'nofile'
     autocmd BufWinLeave *.* mkview!
@@ -66,9 +66,10 @@ inoremap {<CR>  {<CR>}<Esc>O
 
 " ##### Settings for VimShell #####
 " VimShell with ,is
-nnoremap <silent> ,is :VimShell<CR>
+" nnoremap <silent> <Leader>is :VimShell<CR>
+nnoremap <silent> <Leader>is :VimShell<CR>
 " Interactive pythong with ,ipy
-nnoremap <silent> ,ipy :VimShellInteractive python<CR>
+nnoremap <silent> <Leader>ipy :VimShellInteractive python<CR>
 
 " ##### Settings for NeoSnippet #####
 " Toggle NeoSnippet Editor
