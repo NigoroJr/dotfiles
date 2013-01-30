@@ -36,17 +36,21 @@ NeoBundle 'goldfeld/vim-seek'
 
 filetype plugin indent on
 
+
 " Settings for quickrun
 let g:quickrun_config = {}
 let g:quickrun_config['markdown'] = {
     \ 'outputter': 'browser'
     \ }
 
+
 " Autoclose
 let g:autoclose_on=0
 
+
 " neosnippet settings
 let g:neosnippet#snippets_directory = '~/.vim/snippets_complete/'
+
 
 " Setup for neocomplcache
 let g:neocomplcache_enable_at_startup = 1
@@ -70,14 +74,50 @@ inoremap <expr><C-l> neocomplcache#complete_common_string()
 imap <silent> <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <silent> <C-k> <Plug>(neosnippet_expand_or_jump)
 
+
 " Vinarise
 let g:vinarise_enable_auto_detect = 1
+
 
 " unite.vim settings
 " Start with insert mode
 let g:unite_enable_start_insert=1
 " Open Unite vertically
 let g:unite_enable_split_vertically=1
+" Recently used files
+noremap <Leader>uru :Unite file_mru -buffer-name=file_mru<CR>
+noremap <Leader>ureg :Unite register -buffer-name=register<CR>
+noremap <Leader>ubu :Unite buffer -buffer-name=buffer<CR>
+" File in current directory
+noremap <Leader>uf :UniteWithBufferDir file -buffer-name=file<CR>
+noremap <Leader>ure :UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
+" Hit Esc twice to exit Unite
+autocmd FileType unite nmap <silent> <buffer> <Esc><Esc> <Plug>(unite_exit)
+autocmd FileType unite imap <silent> <buffer> <Esc><Esc> <Plug>(unite_exit)
+" Move cursor with j, k in normal mode and do default action with l
+" autocmd FileType unite nmap <silent> <buffer> j <Plug>(unite_loop_cursor_down)
+" autocmd FileType unite nmap <silent> <buffer> k <Plug>(unite_loop_cursor_up)
+autocmd FileType unite nmap <silent> <buffer> l <Plug>(unite_do_default_action)
+autocmd FileType unite nmap <silent> <buffer> h <Plug>(unite_delete_backward_path)
+" Move down when hitting jj, wrap and go to the bottom when hitting kk
+autocmd FileType unite imap <buffer> kk <Esc><Plug>(unite_cursor_bottom)
+autocmd FileType unite imap <buffer> jj <Esc><Plug>(unite_loop_cursor_down)
+" Move cursor with C-j and C-k in insert mode
+autocmd FileType unite imap <silent> <buffer> <C-k> <Esc><Plug>(unite_cursor_bottom)
+autocmd FileType unite imap <silent> <buffer> <C-j> <Esc><Plug>(unite_loop_cursor_down)
+
+autocmd FileType unite nmap <silent> <buffer> <C-k> <Esc><Plug>(unite_loop_cursor_up)
+autocmd FileType unite nmap <silent> <buffer> <C-j> <Esc><Plug>(unite_loop_cursor_down)
+" Open or go up directory with C-l, C-h
+autocmd FileType unite nmap <silent> <buffer> <C-h> <Plug>(unite_delete_backward_path) <Plug>(unite_insert_enter)
+
+autocmd FileType unite imap <silent> <buffer> <C-l> <Plug>(unite_do_default_action)
+autocmd FileType unite nmap <silent> <buffer> <C-l> <Plug>(unite_do_default_action)
+
+autocmd FileType unite imap <silent> <buffer> <C-w> <Plug>(unite_delete_backward_path)
+autocmd FileType unite nmap <silent> <buffer> <C-w> <Plug>(unite_delete_backward_path)
+" Go back to insert mode with /
+autocmd FileType unite nmap <buffer> / <Plug>(unite_insert_enter)
 
 " Settings for VimFiler
 let g:vimfiler_as_default_explorer=1
