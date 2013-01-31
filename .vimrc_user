@@ -14,6 +14,8 @@ set hlsearch
 nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
 let mapleader=","   " Sets mapleader to ,
 
+set splitright      " split to the right
+
 " Set backupdir to be ~/Dropbox/vim/backup/
 "if isdirectory(expand('~/Dropbox/vim/backup/'))
 "    set backupdir=~/Dropbox/vim/backup/
@@ -64,17 +66,3 @@ inoremap {<CR>  {<CR>}<Esc>O
 "inoremap [[     [
 "inoremap []     []
 
-" ##### Settings for VimShell #####
-" VimShell with ,is
-" nnoremap <silent> <Leader>is :VimShell<CR>
-nnoremap <silent> <Leader>is :VimShell<CR>
-" Interactive pythong with ,ipy
-nnoremap <silent> <Leader>ipy :VimShellInteractive python<CR>
-
-" ##### Settings for NeoSnippet #####
-" Toggle NeoSnippet Editor
-nnoremap <silent> es<Space> :<C-u>NeoSnippetEdit
-
-" ##### Settings for VimFiler #####
-" VimFiler with ,fl
-nnoremap <silent> vf :VimFiler<CR>

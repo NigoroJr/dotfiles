@@ -122,3 +122,23 @@ autocmd FileType unite nmap <buffer> / <Plug>(unite_insert_enter)
 " Settings for VimFiler
 let g:vimfiler_as_default_explorer=1
 let g:vimfiler_time_format="%m/%d/%y %H:%M%S"
+
+" ##### Settings for VimShell #####
+" VimShell with ,is
+" nnoremap <silent> <Leader>is :VimShell<CR>
+nnoremap <silent> <Leader>vs :VimShellBuffer -split<CR>
+" Interactive python with ,ipe
+nnoremap <silent> <Leader>ipe :VimShellInteractive perl<CR>
+" Interactive python with ,ipy
+nnoremap <silent> <Leader>ipy :VimShellInteractive python<CR>
+" Hit escape twice to exit vimshell
+autocmd FileType vimshell imap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
+autocmd FileType vimshell nmap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
+
+" ##### Settings for NeoSnippet #####
+" Toggle NeoSnippet Editor
+nnoremap <silent> es<Space> :<C-u>NeoSnippetEdit
+
+" ##### Settings for VimFiler #####
+" VimFiler with ,fl
+nnoremap <silent> vf :VimFiler<CR>
