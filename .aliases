@@ -28,7 +28,17 @@ alias l='ls -CF'
 alias fgrep='grep -F'
 alias egrep='grep -E'
 
-alias -g lg='| grep -P'
+# If shell is zsh
+if [[ $zsh =~ zsh ]]; then
+        alias -g lg='| grep -P'
+fi
+# case $SHELL in
+#     *zsh*)
+#         alias -g lg='| grep -P'
+#         ;;
+#     *)
+#         ;;
+# esac
 
 # Make cd a little easier
 alias ..='cd ..'
