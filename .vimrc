@@ -89,8 +89,8 @@ noremap <Leader>uru :Unite file_mru -buffer-name=file_mru<CR>
 noremap <Leader>ureg :Unite register -buffer-name=register<CR>
 noremap <Leader>ubu :Unite buffer -buffer-name=buffer<CR>
 " File in current directory
-noremap <Leader>uf :UniteWithBufferDir file -buffer-name=file<CR>
-noremap <Leader>ure :UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
+noremap <Leader>uf :UniteWithBufferDir file -buffer-name=file -create<CR>
+noremap <Leader>ure :UniteWithBufferDir file_rec -buffer-name=file_rec -create<CR>
 " Hit Esc twice to exit Unite
 autocmd FileType unite nmap <silent> <buffer> <Esc><Esc> <Plug>(unite_exit)
 autocmd FileType unite imap <silent> <buffer> <Esc><Esc> <Plug>(unite_exit)
