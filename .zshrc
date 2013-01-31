@@ -33,6 +33,11 @@ case `uname -s` in
         ;;
 esac
 
+# add android sdk to PATH
+# local ANDROID_SDK=$HOME/pkg_src/adt-bundle-linux/sdk
+local ANDROID_SDK=/usr/local/src/adt-bundle/sdk
+export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
+
 zstyle :compinstall filename '/home/naoki/.zshrc'
 
 autoload -Uz compinit
