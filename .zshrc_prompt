@@ -27,6 +27,9 @@ case ${UID} in
         PROMPT="%F$GREEN%n%f@%m:%d%F$CYAN#%f "
         [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
             PROMPT="%F$PURPLE${HOST%%.*}%f ${PROMPT}"
+
+        # Add alias
+        alias rm='rm -i'
         ;;
     *)
         PROMPT="%F$BLUE%n%f@%m:%~%F$RED$%f "
