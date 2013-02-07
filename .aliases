@@ -29,9 +29,21 @@ alias fgrep='grep -F'
 alias egrep='grep -E'
 
 # If shell is zsh
-if [[ $zsh =~ zsh ]]; then
-        alias -g lg='| grep -P'
+if [[ $SHELL =~ zsh ]]; then
+    # Global alias
+    alias -g lg='| grep -P'
+
+    # Execute command for specific filetype
+    alias -s java=vi
+    alias -s c=vi
+    alias -s h=vi
+    alias -s cpp=vi
+    #alias -s sh=vi
+    #alias -s pl=vi
+    #alias -s rb=vi
+    #alias -s py=vi
 fi
+
 # case $SHELL in
 #     *zsh*)
 #         alias -g lg='| grep -P'
