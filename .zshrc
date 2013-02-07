@@ -1,3 +1,8 @@
+# Read local enviroment File if there is one
+if [ -f ~/.zshrc_local ]; then
+    source ~/.zshrc_local
+fi
+
 # Read Source File
 if [ -f ~/.aliases ]; then
     source ~/.aliases
