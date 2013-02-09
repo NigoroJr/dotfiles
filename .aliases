@@ -11,6 +11,9 @@ case `uname -s` in
         ;;
 esac
 
+# I hate the GUI emacs
+alias emacs='emacs -nw'
+
 # This is a file of aliases
 alias sudo='sudo -H'
 
