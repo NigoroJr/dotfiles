@@ -119,16 +119,13 @@ autocmd FileType unite nmap <silent> <buffer> <C-w> <Plug>(unite_delete_backward
 " Go back to insert mode with /
 autocmd FileType unite nmap <buffer> / <Plug>(unite_insert_enter)
 
-" Settings for VimFiler
-let g:vimfiler_as_default_explorer=1
-let g:vimfiler_time_format="%m/%d/%y %H:%M%S"
-
 " ##### Settings for VimShell #####
 " VimShell with ,is
 " nnoremap <silent> <Leader>is :VimShell<CR>
-nnoremap <silent> <Leader>vs :VimShellBuffer -split<CR>
-" Interactive python with ,ipe
-nnoremap <silent> <Leader>ipe :VimShellInteractive perl<CR>
+nnoremap <silent> <Leader>vs :VimShell -split-command=vsplit<CR>
+" Open VimShell vertically
+"nnoremap <silent> <Leader>vvs :sp<CR><C-w>j:VimShell<CR>
+nnoremap <silent> <Leader>vvs :VimShell -split-command=split<CR>
 " Interactive python with ,ipy
 nnoremap <silent> <Leader>ipy :VimShellInteractive python<CR>
 " Hit escape twice to exit vimshell
@@ -140,5 +137,8 @@ autocmd FileType vimshell nmap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit
 nnoremap <silent> es<Space> :<C-u>NeoSnippetEdit
 
 " ##### Settings for VimFiler #####
+let g:vimfiler_as_default_explorer=1
+let g:vimfiler_time_format="%m/%d/%y %H:%M%S"
+
 " VimFiler with ,fl
 nnoremap <silent> vf :VimFiler<CR>
