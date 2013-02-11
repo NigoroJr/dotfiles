@@ -1,7 +1,4 @@
-# Read local enviroment File if there is one
-if [ -f ~/.zshrc_local ]; then
-    source ~/.zshrc_local
-fi
+# The local .zshrc (.zshrc_local) is read at the end
 
 # Read Source File
 if [ -f ~/.aliases ]; then
@@ -135,3 +132,8 @@ setopt hist_ignore_space
 
 # enable cursor selection
 zstyle ':completion:*:default' menu select=1
+
+# Read local enviroment File if there is one
+if [ -f ~/.zshrc_local ]; then
+    source ~/.zshrc_local
+fi
