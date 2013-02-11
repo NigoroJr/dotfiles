@@ -15,6 +15,7 @@ nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
 let mapleader=","   " Sets mapleader to ,
 
 set splitright      " split to the right
+set splitbelow      " split below
 
 " Set backupdir to be ~/Dropbox/vim/backup/
 "if isdirectory(expand('~/Dropbox/vim/backup/'))
