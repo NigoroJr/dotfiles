@@ -7,12 +7,13 @@ case `uname -s` in
         ;;
     *)
         alias ls='ls --color=auto'
-        alias grep='grep -P --color=auto'
+        alias grep='grep --color=auto'
+        alias pgrep='grep -P'
         ;;
 esac
 
 # I hate the GUI emacs
-alias emacs='emacs -nw'
+alias emacs='emacs23 -nw'
 
 # This is a file of aliases
 alias sudo='sudo -H'
