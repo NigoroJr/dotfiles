@@ -15,8 +15,11 @@ case `uname -s` in
     # Macintosh
     Darwin)
         #PATH=$PATH:$(brew --prefix coreutils)/libexec/gnubin
-        local gnubin=$(brew --prefix coreutils)/libexec/gnubin
-        PATH=$PATH:$gnubin
+        local brewfound=`which brew`
+        if [ $brewfound != brew ]; then
+            local gnubin=$(brew --prefix coreutils)/libexec/gnubin
+            PATH=$PATH:$gnubin
+        fi
         # No dircolors
         if [ -f $gnubin/dircolors ]; then
             # colorize list
