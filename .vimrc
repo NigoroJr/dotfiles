@@ -122,10 +122,10 @@ autocmd FileType unite nmap <buffer> / <Plug>(unite_insert_enter)
 " ##### Settings for VimShell #####
 " VimShell with ,is
 " nnoremap <silent> <Leader>is :VimShell<CR>
-nnoremap <silent> <Leader>vs :VimShell -split-command=vsplit<CR>
+nnoremap <silent> <Leader>vs :VimShellBuffer -split-command=vsplit<CR>
 " Open VimShell vertically
 "nnoremap <silent> <Leader>vvs :sp<CR><C-w>j:VimShell<CR>
-nnoremap <silent> <Leader>vvs :VimShell -split-command=split<CR>
+nnoremap <silent> <Leader>vvs :VimShellBuffer -split-command=split<CR>
 " Interactive python with ,ipy
 nnoremap <silent> <Leader>ipy :VimShellInteractive python<CR>
 " Hit escape twice to exit vimshell
