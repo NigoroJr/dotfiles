@@ -28,6 +28,9 @@ alias lal='ls -Al'
 alias la='ls -A'
 alias l='ls -CF'
 
+# Alias for g++
+alias gpp='g++'
+
 # Aliases for grep
 alias fgrep='grep -F'
 alias egrep='grep -E'
