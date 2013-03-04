@@ -132,6 +132,7 @@ nnoremap <silent> <Leader>ipy :VimShellInteractive python<CR>
 autocmd FileType vimshell imap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
 autocmd FileType vimshell nmap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
 
+
 " ##### Settings for NeoSnippet #####
 " Toggle NeoSnippet Editor
 nnoremap <silent> es<Space> :<C-u>NeoSnippetEdit
