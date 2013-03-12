@@ -18,7 +18,15 @@ endif
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimproc', {
+    " Build vimproc automatically
+    \ 'build' : {
+    \ 'windows' : 'make -f make_mingw32.mak',
+    \ 'cygwin' : 'make -f make_cygwin.mak',
+    \ 'mac' : 'make -f make_mac.mak',
+    \ 'unix' : 'make -f make_unix.mak',
+    \ },
+    \ }
 NeoBundle 'Shougo/vinarise'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
@@ -33,6 +41,7 @@ NeoBundle 'Shougo/vimfiler'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'goldfeld/vim-seek'
+
 
 filetype plugin indent on
 
@@ -131,7 +140,6 @@ nnoremap <silent> <Leader>ipy :VimShellInteractive python<CR>
 " Hit escape twice to exit vimshell
 autocmd FileType vimshell imap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
 autocmd FileType vimshell nmap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
-
 
 " ##### Settings for NeoSnippet #####
 " Toggle NeoSnippet Editor
