@@ -18,15 +18,15 @@ endif
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/vimshell'
+" Make vimproc automatically
 NeoBundle 'Shougo/vimproc', {
-    " Build vimproc automatically
-    \ 'build' : {
-    \ 'windows' : 'make -f make_mingw32.mak',
-    \ 'cygwin' : 'make -f make_cygwin.mak',
-    \ 'mac' : 'make -f make_mac.mak',
-    \ 'unix' : 'make -f make_unix.mak',
-    \ },
-    \ }
+\    'build' : {
+\        'windows' : 'make -f make_mingw32.mak',
+\        'cygwin' : 'make -f make_cygwin.mak',
+\        'mac' : 'make -f make_mac.mak',
+\        'unix' : 'make -f make_unix.mak',
+\    },
+\}
 NeoBundle 'Shougo/vinarise'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
