@@ -151,3 +151,6 @@ let g:vimfiler_time_format="%m/%d/%y %H:%M%S"
 
 " VimFiler with ,fl
 nnoremap <silent> vf :VimFiler<CR>
+
+" Disable preview window
+set completeopt-=preview
