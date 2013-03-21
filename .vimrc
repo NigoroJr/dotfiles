@@ -32,7 +32,6 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'vim-scripts/sudo.vim'
 NeoBundle 'vim-scripts/DrawIt'
-NeoBundle 'vim-scripts/javacomplete'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'taku-o/vim-toggle'
@@ -45,11 +44,6 @@ NeoBundle 'goldfeld/vim-seek'
 
 
 filetype plugin indent on
-
-
-" javacomplete
-autocmd FileType java :setlocal omnifunc=javacomplete#Complete
-autocmd FileType java :setlocal completefunc=javacomplete#CompleteParamsInfo
 
 
 " Settings for quickrun
