@@ -27,19 +27,25 @@ NeoBundle 'Shougo/vimproc', {
 \        'unix' : 'make -f make_unix.mak',
 \    },
 \}
-NeoBundle 'Shougo/vinarise'
+NeoBundleLazy 'Shougo/vinarise'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
-NeoBundle 'vim-scripts/sudo.vim'
-NeoBundle 'vim-scripts/DrawIt'
-NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundleLazy 'vim-scripts/sudo.vim'
+NeoBundleLazy 'vim-scripts/DrawIt'
+NeoBundleLazy 'Lokaltog/vim-easymotion'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'taku-o/vim-toggle'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'tpope/vim-markdown'
+NeoBundleLazy 'tyru/open-browser.vim', {
+            \ 'autoload' : {
+            \   'filetypes' : ['markdown']
+            \ }}
+NeoBundleLazy 'tpope/vim-markdown', {
+            \ 'autoload' : {
+            \   'filetypes' : ['markdown']
+            \ }}
 NeoBundle 'goldfeld/vim-seek'
 
 
@@ -47,11 +53,15 @@ filetype plugin indent on
 
 
 " Settings for quickrun
-let g:quickrun_config = {}
+let g:quickrun_config = {
+    \ '*': {'hook/time/enable': '1'},
+    \ }
 let g:quickrun_config['markdown'] = {
     \ 'outputter': 'browser'
     \ }
 
+" Settings for vim-seek
+let g:seek_ignorecase = 1
 
 " Autoclose
 let g:autoclose_on=0
