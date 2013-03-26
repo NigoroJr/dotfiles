@@ -23,6 +23,7 @@ local CYAN=$'%{[36m%}'
 local WHITE=$'%{[37m%}'
 
 case ${UID} in
+    # When root
     0)
         PROMPT="%F$GREEN%n%f@%m:%d%F$CYAN#%f "
         [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
@@ -33,6 +34,7 @@ case ${UID} in
         ;;
     *)
         PROMPT="%F$BLUE%n%f@%m:%~%F$RED$%f "
+	RPROMPT=" %* (%W)"
 #         PROMPT="%n@%m:%~$ "
         [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
             PROMPT="%F$PURPLE${HOST%%.*}%f ${PROMPT}"
