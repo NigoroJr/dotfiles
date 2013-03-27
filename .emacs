@@ -8,8 +8,9 @@
 (global-linum-mode t)
 (setq linum-format "%d ")
 
-;; Show numbers on the left
-(linum-mode t)
+;; Follow symbolic link
+(setq follow-link t)
+(setq vc-follow-symlinks t)
 
 ;; Enable auto indent
 (global-set-key "\C-m" 'newline-and-indent)
@@ -19,7 +20,7 @@
 (setq kill-whole-line t)
 
 ;; Use zsh as shell
-(setq shell-file-name "/bin/zsh")
+(setq shell-file-name "/usr/local/bin/zsh")
 
 ;; auto-complete
 (add-to-list 'load-path "~/.emacs.d")
