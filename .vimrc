@@ -151,6 +151,10 @@ nnoremap <silent> <Leader>ipy :VimShellInteractive python<CR>
 autocmd FileType vimshell imap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
 autocmd FileType vimshell nmap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
 
+" zsh-like completion
+" Figuring out what this does
+" autocmd FileType vimshell nmap <silent> <buffer> <C-k> <Plug>(vimshell_zsh_complete)
+
 " ##### Settings for NeoSnippet #####
 " Toggle NeoSnippet Editor
 nnoremap <silent> es<Space> :<C-u>NeoSnippetEdit
