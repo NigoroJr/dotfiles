@@ -38,7 +38,8 @@ alias egrep='grep -E'
 # If shell is zsh
 if [[ $SHELL =~ zsh ]]; then
     # Global alias
-    alias -g lg='| grep -P'
+    alias -g G='| grep'
+    alias -g Gp='| grep -P'
 
     # Execute command for specific filetype
     alias -s java=vi

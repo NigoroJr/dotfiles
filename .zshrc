@@ -85,6 +85,9 @@ setopt auto_resume
 # show list of completion
 setopt auto_list
 
+# Suggest correction
+setopt correct
+
 # show file types
 setopt list_types
 
