@@ -50,6 +50,8 @@ if [[ $SHELL =~ zsh ]]; then
     #alias -s pl=vi
     #alias -s rb=vi
     #alias -s py=vi
+
+    alias -g dn='> /dev/null 2>&1'
 fi
 
 # case $SHELL in
