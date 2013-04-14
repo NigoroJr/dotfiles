@@ -67,3 +67,10 @@ inoremap {<CR>  {<CR>}<Esc>O
 "inoremap [[     [
 "inoremap []     []
 
+
+" Move by physical line
+nnoremap j gj
+nnoremap k gk
+
+" Set textwidth to 0 when using text files
+autocmd FileType text set textwidth=0
