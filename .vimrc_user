@@ -54,6 +54,7 @@ endif
 " Insert closing braces
 "inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
+inoremap {{<CR> {{<CR>}};<Esc>O
 "inoremap {{     {
 "inoremap {}     {}
 " Insert closing parenthesis
@@ -67,6 +68,8 @@ inoremap {<CR>  {<CR>}<Esc>O
 "inoremap [[     [
 "inoremap []     []
 
+" Create and auto-close comment blocks in Java
+autocmd FileType java imap /**<CR>    /**<CR>/<Esc>O
 
 " Move by physical line
 nnoremap j gj
