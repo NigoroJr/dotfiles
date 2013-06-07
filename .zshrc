@@ -46,10 +46,13 @@ else
 	PATH="/usr/local/bin:/usr/bin:/bin:${PATH}"
 fi
 
-# add android sdk to PATH
-local ANDROID_SDK=$HOME/pkg_src/adt-bundle/sdk
-# local ANDROID_SDK=/usr/local/src/adt-bundle/sdk
-export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
+# Add adt-bundle to PATH if the directory exists
+if [ -d ~/pkg_src/adt-bundle ]; then
+    # add android sdk to PATH
+    local ANDROID_SDK=$HOME/pkg_src/adt-bundle/sdk
+    # local ANDROID_SDK=/usr/local/src/adt-bundle/sdk
+    export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
+fi
 
 zstyle :compinstall filename '/home/naoki/.zshrc'
 
