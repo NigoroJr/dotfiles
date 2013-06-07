@@ -15,8 +15,8 @@ case `uname -s` in
     # Macintosh
     Darwin)
         #PATH=$PATH:$(brew --prefix coreutils)/libexec/gnubin
-        local brewfound=`which brew`
-        if [ $brewfound != brew ]; then
+        local brewloc=`which brew`
+        if [ $brewloc != brew ]; then
             local gnubin=$(brew --prefix coreutils)/libexec/gnubin
             PATH=$PATH:$gnubin
         fi
@@ -37,6 +37,14 @@ case `uname -s` in
         zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
         ;;
 esac
+
+# Change the PATH according to whether the user is root or not
+# Copied from /etc/profile
+if [ "$EUID" = "0" ] || [ "$USER" = "root" ] ; then
+	PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${ROOTPATH}"
+else
+	PATH="/usr/local/bin:/usr/bin:/bin:${PATH}"
+fi
 
 # add android sdk to PATH
 local ANDROID_SDK=$HOME/pkg_src/adt-bundle/sdk
