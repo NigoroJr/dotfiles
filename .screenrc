@@ -1,0 +1,12 @@
+escape 
+
+shell /bin/zsh
+autodetach on
+startup_message off
+vbell off
+vbell_msg "Beep, Beep!"
+
+bind V split -v
+
+defhstatus "[n: t]"
+hardstatus alwayslastline "%h"
