@@ -34,7 +34,8 @@ case ${UID} in
         ;;
     *)
         PROMPT="%F$BLUE%n%f@%m:%~%F$RED$%f "
-	RPROMPT=" %* (%W)"
+        # Add right prompt
+        RPROMPT=" %* (%W)"
 #         PROMPT="%n@%m:%~$ "
         [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
             PROMPT="%F$PURPLE${HOST%%.*}%f ${PROMPT}"
