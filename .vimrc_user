@@ -11,6 +11,7 @@ set foldmethod=manual
 set viewoptions=folds
 set hlsearch
 set encoding=utf-8
+set fileencoding=guess
 " Reset hilight search by pressing Escape 2 times
 nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
 let mapleader=","   " Sets mapleader to ,
