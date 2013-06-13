@@ -1,3 +1,7 @@
 colorscheme ansi_blows
 " Font for programming
-set guifont=Ricty\ 13
+if has('mac') || has('unix')
+    set guifont=Ricty:h16
+elseif has('windows')
+    set guifont=Ricty\ 13
+endif
