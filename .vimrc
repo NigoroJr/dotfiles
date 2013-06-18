@@ -68,7 +68,7 @@ let g:autoclose_on=0
 
 
 " neosnippet settings
-let g:neosnippet#snippets_directory = '~/.vim/snippets_complete/'
+let g:neosnippet#snippets_directory = '~/.vim/snippets/'
 
 
 " Setup for neocomplcache
