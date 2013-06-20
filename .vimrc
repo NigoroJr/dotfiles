@@ -154,6 +154,12 @@ nnoremap <silent> <Leader>ipy :VimShellInteractive python<CR>
 autocmd FileType vimshell imap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
 autocmd FileType vimshell nmap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
 
+" Set user prompt to pwd
+let g:vimshell_prompt="$ "
+let g:vimshell_secondary_prompt="> "
+" This makes the prompt use 2 lines
+"let g:vimshell_user_prompt = 'getcwd()'
+
 " zsh-like completion
 " Figuring out what this does
 " autocmd FileType vimshell nmap <silent> <buffer> <C-k> <Plug>(vimshell_zsh_complete)
