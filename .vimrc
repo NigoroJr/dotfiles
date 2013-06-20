@@ -2,8 +2,8 @@
 if filereadable(expand('~/.vimrc.user'))
     source ~/.vimrc.user
 endif
-if filereadable(expand('~/.vimrc.keybinds'))
-    source ~/.vimrc.keybinds
+if filereadable(expand('~/.vimrc.keybindings'))
+    source ~/.vimrc.keybindings
 endif
 " #############################################################
 syntax on
@@ -88,7 +88,7 @@ imap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<P
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e> neocomplcache#cancel_popup()
+"inoremap <expr><C-e> neocomplcache#cancel_popup()
 
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()

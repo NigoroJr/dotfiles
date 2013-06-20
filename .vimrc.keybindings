@@ -1,0 +1,32 @@
+" This is a file for custom key bindings.
+
+" C-d is "Delete"
+inoremap <C-d> <Del>
+
+" C-a is "Go to beginning of row"
+inoremap <C-a> <Esc>I
+
+" C-e is "Go to last of row"
+inoremap <C-e> <Esc>A
+
+" Move by physical line
+nnoremap j gj
+nnoremap k gk
+
+" Insert closing braces
+"inoremap {      {}<Left>
+inoremap {<CR>  {<CR>}<Esc>O
+inoremap {{<CR> {{<CR>}};<Esc>O
+"inoremap {{     {
+"inoremap {}     {}
+" Insert closing parenthesis
+"inoremap (      ()<Left>
+"inoremap (<CR>  (<CR>)<Esc>O
+"inoremap ((     (
+"inoremap ()     ()
+" Brackets
+"inoremap [      []<Left>
+"inoremap [<CR>  [<CR>]<Esc>O
+"inoremap [[     [
+"inoremap []     []
+
