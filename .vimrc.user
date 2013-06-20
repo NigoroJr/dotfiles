@@ -54,32 +54,8 @@ if expand('%') != '' && &buftype !~ 'nofile'
 endif
 
 
-" Insert closing braces
-"inoremap {      {}<Left>
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap {{<CR> {{<CR>}};<Esc>O
-"inoremap {{     {
-"inoremap {}     {}
-" Insert closing parenthesis
-"inoremap (      ()<Left>
-"inoremap (<CR>  (<CR>)<Esc>O
-"inoremap ((     (
-"inoremap ()     ()
-" Brackets
-"inoremap [      []<Left>
-"inoremap [<CR>  [<CR>]<Esc>O
-"inoremap [[     [
-"inoremap []     []
-
 " Create and auto-close comment blocks in Java
 " autocmd FileType java imap /**<CR>    /**<CR>/<Esc>O
-
-" Move by physical line
-nnoremap j gj
-nnoremap k gk
-
-" C-d is "Delete"
-inoremap <C-d> <Del>
 
 " Set textwidth to 0 when using text files
 autocmd FileType text set textwidth=0

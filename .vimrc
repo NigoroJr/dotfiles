@@ -1,6 +1,9 @@
 " ######################## Read Source ########################
-if filereadable(expand('~/.vimrc_user'))
-    source ~/.vimrc_user
+if filereadable(expand('~/.vimrc.user'))
+    source ~/.vimrc.user
+endif
+if filereadable(expand('~/.vimrc.keybinds'))
+    source ~/.vimrc.keybinds
 endif
 " #############################################################
 syntax on
