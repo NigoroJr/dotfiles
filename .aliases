@@ -42,10 +42,10 @@ if [[ $SHELL =~ zsh ]]; then
     alias -g Gp='| grep -P'
 
     # Execute command for specific filetype
-    alias -s java=vi
-    alias -s c=vi
-    alias -s h=vi
-    alias -s cpp=vi
+    #alias -s java=vi
+    #alias -s c=vi
+    #alias -s h=vi
+    #alias -s cpp=vi
     #alias -s sh=vi
     #alias -s pl=vi
     #alias -s rb=vi
