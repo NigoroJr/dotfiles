@@ -1,3 +1,5 @@
+# Vim swap files
+*.swp
 # Ignore backup files (keep it local!)
 .vim/backup/
 .vim/view/
