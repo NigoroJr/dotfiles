@@ -153,6 +153,8 @@ nnoremap <silent> <Leader>ipy :VimShellInteractive python<CR>
 " Hit escape twice to exit vimshell
 autocmd FileType vimshell imap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
 autocmd FileType vimshell nmap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
+" Enter in normal mode goes into insertion mode first
+autocmd FileType vimshell nmap <silent> <buffer> <CR> A<CR>
 
 " Set user prompt to pwd
 let g:vimshell_prompt="$ "
