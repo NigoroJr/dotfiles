@@ -20,7 +20,7 @@ let mapleader=","   " Sets mapleader to ,
 set splitright      " split to the right
 set splitbelow      " split below
 
-" Set backupdir to be ~/Dropbox/vim/backup/
+" Set backupdir to ~/Dropbox/vim/backup/
 "if isdirectory(expand('~/Dropbox/vim/backup/'))
 "    set backupdir=~/Dropbox/vim/backup/
 "else
@@ -57,5 +57,5 @@ endif
 " Create and auto-close comment blocks in Java
 " autocmd FileType java imap /**<CR>    /**<CR>/<Esc>O
 
-" Set textwidth to 0 when using text files
+" Set textwidth 0 when using text files
 autocmd FileType text set textwidth=0
