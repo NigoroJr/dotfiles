@@ -30,3 +30,4 @@ inoremap {{<CR> {{<CR>}};<Esc>O
 "inoremap [[     [
 "inoremap []     []
 
+nnoremap <silent> cd<Space> :cd %:h
