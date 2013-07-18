@@ -31,3 +31,4 @@ inoremap {{<CR> {{<CR>}};<Esc>O
 "inoremap []     []
 
 nnoremap <silent> cd<Space> :cd %:h
+nnoremap <silent><Leader>cdb :cd %:h<CR>
