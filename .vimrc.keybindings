@@ -32,3 +32,7 @@ inoremap {{<CR> {{<CR>}};<Esc>O
 
 nnoremap <silent> cd<Space> :cd %:h
 nnoremap <silent><Leader>cdb :cd %:h<CR>
+
+nnoremap <Leader>ws :w sudo:%<CR>
+nnoremap <Leader>xs :x sudo:%<CR>
+nnoremap <Leader>es :e sudo:%<CR>
