@@ -9,3 +9,7 @@ snippet main
 snippet inc
 alias   #inc, #include
     #include <${1:stdio}.h>
+
+# print
+snippet pf
+    printf("${1}\n"${2});${0}
