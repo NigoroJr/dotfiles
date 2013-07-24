@@ -12,11 +12,16 @@ case `uname -s` in
         ;;
 esac
 
-# I hate the GUI emacs
-alias emacs='emacs23 -nw'
-
 # This is a file of aliases
-alias sudo='sudo -H'
+#alias "sudo vim"="sudoedit"
+sudo() {
+    if [ $1 = "vi" ] || [ $1 = "vim" ]; then
+        shift
+        command sudoedit "$@"
+    else
+        command sudo "$@"
+    fi
+}
 
 # Aliases for ls
 alias dir='ls'
