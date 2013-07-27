@@ -14,8 +14,14 @@ esac
 
 # This is a file of aliases
 #alias "sudo vim"="sudoedit"
+# sudo vi /some/file    --> sudoedit
 sudo() {
-    if [ $1 = "vi" ] || [ $1 = "vim" ]; then
+    if [ $1 = "normal" ] && {[ $2 = "vi" ] || [ $2 = "vim" ]}; then
+        echo "hello there"
+        shift
+        shift
+        command sudo vim "$@"
+    elif [ $1 = "vi" ] || [ $1 = "vim" ]; then
         shift
         command sudoedit "$@"
     else
