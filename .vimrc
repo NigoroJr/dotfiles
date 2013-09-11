@@ -91,7 +91,6 @@ inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 "inoremap <expr><C-e> neocomplcache#cancel_popup()
-
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
 
@@ -159,10 +158,8 @@ autocmd FileType vimshell nmap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit
 autocmd FileType vimshell nmap <silent> <buffer> <CR> A<CR>
 
 " Set user prompt to pwd
-let g:vimshell_prompt="$ "
-let g:vimshell_secondary_prompt="> "
-" This makes the prompt use 2 lines
-"let g:vimshell_user_prompt = 'getcwd()'
+let g:vimshell_prompt_expr = 'getcwd()." > "'
+let g:vimshell_prompt_pattern = '^\f\+ > '
 
 " zsh-like completion
 " Figuring out what this does
