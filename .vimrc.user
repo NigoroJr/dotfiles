@@ -61,7 +61,7 @@ endif
 " autocmd FileType java imap /**<CR>    /**<CR>/<Esc>O
 
 " Set textwidth 0 when using text files
-autocmd FileType text set textwidth=0
+autocmd FileType text,vimshell set textwidth=0
 
 " Set shiftwidth to 2 in particular file
-autocmd FileType ruby,html set shiftwidth=2 tabstop=2
+autocmd FileType python,ruby,html set shiftwidth=2 tabstop=2

@@ -60,8 +60,8 @@ autoload -Uz compinit
 compinit
 
 HISTFILE=~/.histfile
-HISTSIZE=100000
-SAVEHIST=100000
+HISTSIZE=6000000
+SAVEHIST=6000000
 
 # seach history
 autoload history-search-end
