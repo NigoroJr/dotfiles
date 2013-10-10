@@ -16,8 +16,7 @@ esac
 #alias "sudo vim"="sudoedit"
 # sudo vi /some/file    --> sudoedit
 sudo() {
-    if [ $1 = "normal" ] && {[ $2 = "vi" ] || [ $2 = "vim" ]}; then
-        echo "hello there"
+    if [ $1 = "root" ] && {[ $2 = "vi" ] || [ $2 = "vim" ]}; then
         shift
         shift
         command sudo vim "$@"
@@ -45,6 +44,9 @@ alias gpp='g++'
 # Aliases for grep
 alias fgrep='grep -F'
 alias egrep='grep -E'
+
+# emacs is too long to type!
+alias em='emacs'
 
 # If shell is zsh
 if [[ $SHELL =~ zsh ]]; then
