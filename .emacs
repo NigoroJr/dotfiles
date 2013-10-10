@@ -1,5 +1,32 @@
 (add-to-list 'load-path "~/.emacs.d/")
 
+;; C-h as backspace
+(global-set-key "\C-h" 'delete-backward-char)
+;; C-w as delete previous word
+(global-set-key "\C-w" 'backward-kill-word)
+
+;; Auto indent
+(define-key global-map (kbd "RET") 'newline-and-indent)
+
+;; Don't create backup files in current directory
+(setq backup-directory-alist
+      `((".*" . "~/.emacs.backup")))
+;; Safest, but slowest
+(setq backup-by-copying t)
+
+;; zsh as shell
+(setq shell-file-name "/bin/zsh")
+
+;; Show numbers
+(global-linum-mode t)
+
+;; Follow symbolic link
+(setq follow-link t)
+(setq vc-follow-symlinks t)
+
+;; Use Emacs term info, not the system
+(setq system-uses-term-info nil)
+
 ;; load path after installing el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 ;; install el-get if not present
@@ -43,26 +70,7 @@
 (require 'flex-autopair)
 (flex-autopair-mode 1)
 
-;; C-h as backspace
-(global-set-key "\C-h" 'delete-backward-char)
-;; C-w as delete previous word
-(global-set-key "\C-w" 'backward-kill-word)
-
-;; Auto indent
-(define-key global-map (kbd "RET") 'newline-and-indent)
-
-;; Don't create backup files in current directory
-(setq backup-directory-alist
-      `((".*" . "~/.emacs.backup")))
-;; Safest, but slowest
-(setq backup-by-copying t)
-
-;; zsh as shell
-(setq shell-file-name "/bin/zsh")
-
-;; Show numbers
-(global-linum-mode t)
-
-;; Follow symbolic link
-(setq follow-link t)
-(setq vc-follow-symlinks t)
+;; MultiTerm
+(add-to-list 'load-path "~/.emacs.d/el-get/multi-term")
+(require 'multi-term)
+(setq multi-term-program "/bin/zsh")
