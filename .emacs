@@ -1,5 +1,20 @@
 (add-to-list 'load-path "~/.emacs.d/")
 
+;; Auto insert matching brace
+(defun my-c-mode-insert-brace ()
+  (interactive)
+  (insert "{")
+  (let ((pps (syntax-ppss)))
+    (when (and (eolp) (not (or (nth 3 pps) (nth 4 pps))))
+      (c-indent-line)
+      (insert "\n\n}")
+      (c-indent-line)
+      (forward-line -1)
+      (c-indent-line))))
+(add-hook 'c-mode-common-hook
+  (lambda ()
+    (define-key c-mode-base-map "{" 'my-c-mode-insert-brace)))
+
 ;; C-h as backspace
 (global-set-key "\C-h" 'delete-backward-char)
 ;; C-w as delete previous word
@@ -7,6 +22,9 @@
 
 ;; Auto indent
 (define-key global-map (kbd "RET") 'newline-and-indent)
+
+;; Indentation level to 4
+(setq c-basic-offset 4)
 
 ;; Don't create backup files in current directory
 (setq backup-directory-alist
@@ -57,10 +75,10 @@
                :website "https://github.com/auto-complete/auto-complete"
                :pkgname "auto-complete/auto-complete"
         )
-        (:name flex-autopair
-               :type github
-               :url "https://github.com/uk-ar/flex-autopair"
-        )
+;;        (:name flex-autopair
+;;               :type github
+;;               :url "https://github.com/uk-ar/flex-autopair"
+;;        )
     )
 )
 
@@ -72,9 +90,9 @@
 (ac-config-default)
 
 ;; flex-autopair
-(add-to-list 'load-path "~/.emacs.d/el-get/flex-autopair")
-(require 'flex-autopair)
-(flex-autopair-mode 1)
+;;(add-to-list 'load-path "~/.emacs.d/el-get/flex-autopair")
+;;(require 'flex-autopair)
+;;(flex-autopair-mode 1)
 
 ;; MultiTerm
 (add-to-list 'load-path "~/.emacs.d/el-get/multi-term")
