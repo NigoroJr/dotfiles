@@ -27,6 +27,12 @@
 ;; Use Emacs term info, not the system
 (setq system-uses-term-info nil)
 
+;; Set tab width to 4, use space instead of tab
+(setq-default
+          c-basic-offset 4
+          tab-width 4
+	      indent-tabs-mode nil)
+
 ;; load path after installing el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 ;; install el-get if not present
