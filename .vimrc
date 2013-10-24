@@ -30,6 +30,12 @@ NeoBundle 'Shougo/vimproc', {
 \        'unix' : 'make -f make_unix.mak',
 \    },
 \}
+NeoBundle 'Valloric/YouCompleteMe', {
+\   'build' : {
+\       'mac' : 'sh $HOME/.vim/bundle/YouCompleteMe/install.sh',
+\       'unix' : 'sh $HOME/.vim/bundle/YouCompleteMe/install.sh',
+\   },
+\}
 NeoBundleLazy 'Shougo/vinarise'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
