@@ -38,6 +38,9 @@ case `uname -s` in
         ;;
 esac
 
+# Set EDITOR to my *favorite* editor
+export EDITOR="vim"
+
 # Change the PATH according to whether the user is root or not
 # Copied from /etc/profile
 if [ "$EUID" = "0" ] || [ "$USER" = "root" ] ; then
