@@ -1,0 +1,11 @@
+"^Chromium$"
+None, Left, Control_L|Shift_L|Tab
+None, Right, Control_L|Tab
+None, ExtBt7, Control_L|w
+
+"^Quartus"
+None, Left, Left
+None, Right, Right
+
+".*"
+None, ExtBt7, Control_L|w
