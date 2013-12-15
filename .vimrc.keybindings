@@ -36,3 +36,5 @@ nnoremap <silent><Leader>cdb :cd %:h<CR>
 nnoremap <Leader>ws :w sudo:%<CR>
 nnoremap <Leader>xs :x sudo:%<CR>
 nnoremap <Leader>es :e sudo:%<CR>
+
+nnoremap <Leader>a $i
