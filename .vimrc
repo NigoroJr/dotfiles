@@ -173,14 +173,14 @@ let g:vimshell_prompt_pattern = '^\f\+ > '
 
 " ##### Settings for NeoSnippet #####
 " Toggle NeoSnippet Editor
-nnoremap <silent> es<Space> :<C-u>NeoSnippetEdit
+nnoremap <silent> <Leader>es :<C-u>NeoSnippetEdit
 
 " ##### Settings for VimFiler #####
 let g:vimfiler_as_default_explorer=1
 let g:vimfiler_time_format="%m/%d/%y %H:%M%S"
 
 " VimFiler with ,fl
-nnoremap <silent> vf :VimFiler<CR>
+nnoremap <silent> <Leader>vf :VimFiler<CR>
 
 " Disable preview window
 set completeopt-=preview
