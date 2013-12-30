@@ -38,3 +38,5 @@ nnoremap <Leader>xs :x sudo:%<CR>
 nnoremap <Leader>es :e sudo:%<CR>
 
 nnoremap <Leader>a $i
+
+command Rtree NERDTreeFind

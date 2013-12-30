@@ -58,6 +58,9 @@ NeoBundleLazy 'tpope/vim-markdown', {
             \   'filetypes' : ['markdown']
             \ }}
 NeoBundle 'goldfeld/vim-seek'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'vim-scripts/dbext.vim'
 
 
 filetype plugin indent on
