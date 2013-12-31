@@ -39,4 +39,5 @@ nnoremap <Leader>es :e sudo:%<CR>
 
 nnoremap <Leader>a $i
 
+" rails.vim used to have a Rtree command
 command Rtree NERDTreeFind
