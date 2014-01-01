@@ -1,0 +1,20 @@
+
+URxvt.depth: 32
+URxvt.foreground: snow
+URxvt.background: black
+! Blue
+URxvt.color4: #5566FF
+! light blue
+URxvt.color12: #7799FF
+
+URxvt.transparent: true
+URxvt.shading: 15
+
+! Disable scrollbar
+URxvt.scrollBar: false
+
+! URxvt.font: xft:Ricty Discord:Regular:size=10:antialias=true
+URxvt.font:\
+    xft:Ricty Discord:Regular:size=10:antialias=true,
+    xft:Hiragino Maru Gothic Pro W4:size=10:antialias=true
+!URxvt.letterSpace: -5
