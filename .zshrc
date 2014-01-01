@@ -15,8 +15,8 @@ case `uname -s` in
     # Macintosh
     Darwin)
         #PATH=$PATH:$(brew --prefix coreutils)/libexec/gnubin
-        local brewloc=`which brew`
-        if [ $brewloc != brew ]; then
+        local PATH_TO_BREW=`which brew | awk '{ print $1 }'`
+        if [ $PATH_TO_BREW != brew ]; then
             local gnubin=$(brew --prefix coreutils)/libexec/gnubin
             PATH=$PATH:$gnubin
         fi
