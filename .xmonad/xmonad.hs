@@ -8,7 +8,7 @@ main = do
     myStatusBar <- spawnPipe "xmobar"
     xmonad defaultConfig {
         terminal = "urxvt"
-        , borderWidth = 2
+        , borderWidth = 1
         , normalBorderColor = "black"
         , focusedBorderColor = "blue"
 
