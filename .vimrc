@@ -1,11 +1,12 @@
-" ######################## Read Source ########################
+" Source separate files
 if filereadable(expand('~/.vimrc.user'))
     source ~/.vimrc.user
 endif
 if filereadable(expand('~/.vimrc.keybindings'))
     source ~/.vimrc.keybindings
 endif
-" #############################################################
+" ----------------------------------
+
 syntax on
 
 " setup for neobundle
@@ -17,11 +18,10 @@ if has('vim_starting')
     call neobundle#rc(expand('~/.vim/bundle'))
 endif
 
-" Repositories to sync automatically
 NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/neocomplcache'
+"NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/vimshell'
-" Make vimproc automatically
 NeoBundle 'Shougo/vimproc', {
 \    'build' : {
 \        'windows' : 'make -f make_mingw32.mak',
@@ -30,25 +30,22 @@ NeoBundle 'Shougo/vimproc', {
 \        'unix' : 'make -f make_unix.mak',
 \    },
 \}
-" NeoBundle 'Valloric/YouCompleteMe', {
-" \   'build' : {
-" \       'mac' : 'sh $HOME/.vim/bundle/YouCompleteMe/install.sh',
-" \       'unix' : 'sh $HOME/.vim/bundle/YouCompleteMe/install.sh',
-" \   },
-" \}
-NeoBundleLazy 'Shougo/vinarise'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'vim-scripts/sudo.vim'
-" NeoBundle 'chrisbra/SudoEdit.vim'
 NeoBundle 'ciaranm/securemodelines'
-NeoBundleLazy 'vim-scripts/DrawIt'
-NeoBundleLazy 'Lokaltog/vim-easymotion'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'taku-o/vim-toggle'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
+NeoBundle 'goldfeld/vim-seek'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'vim-scripts/dbext.vim'
+NeoBundleLazy 'Shougo/vinarise'
+NeoBundleLazy 'vim-scripts/DrawIt'
+NeoBundleLazy 'Lokaltog/vim-easymotion'
 NeoBundleLazy 'tyru/open-browser.vim', {
             \ 'autoload' : {
             \   'filetypes' : ['markdown']
@@ -57,61 +54,54 @@ NeoBundleLazy 'tpope/vim-markdown', {
             \ 'autoload' : {
             \   'filetypes' : ['markdown']
             \ }}
-NeoBundle 'goldfeld/vim-seek'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'vim-scripts/dbext.vim'
-
 
 filetype plugin indent on
 
-
-" Settings for quickrun
+" quickrun {{{
 let g:quickrun_config = {
     \ '*': {'hook/time/enable': '1'},
     \ }
 let g:quickrun_config['markdown'] = {
     \ 'outputter': 'browser'
     \ }
+" }}}
 
 " Settings for vim-seek
 let g:seek_ignorecase = 1
 
-" Autoclose
-let g:autoclose_on=0
-
-
-" neosnippet settings
-let g:neosnippet#snippets_directory = '~/.vim/snippets/'
-
-
-" Setup for neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_min_syntax_length = 3
-
-" <TAB>: completion
-imap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+" neocomplcache {{{
+" let g:neocomplcache_enable_at_startup = 1
+" let g:neocomplcache_enable_smart_case = 1
+" let g:neocomplcache_enable_camel_case_completion = 1
+" let g:neocomplcache_enable_underbar_completion = 1
+" let g:neocomplcache_min_syntax_length = 3
 
 " <C-h>, <BS>: close popup and delete backward char
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
+" inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-y>  neocomplcache#close_popup()
 "inoremap <expr><C-e> neocomplcache#cancel_popup()
-inoremap <expr><C-g> neocomplcache#undo_completion()
-inoremap <expr><C-l> neocomplcache#complete_common_string()
+" inoremap <expr><C-g> neocomplcache#undo_completion()
+" inoremap <expr><C-l> neocomplcache#complete_common_string()
 
-imap <silent> <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <silent> <C-k> <Plug>(neosnippet_expand_or_jump)
+" }}}
 
+" neocomplete {{{
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#min_keyword_length = 3
 
-" Vinarise
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<BS>"
+inoremap <expr><C-y> neocomplete#close_popup()
+inoremap <expr><C-g> neocomplete#cancel_popup()
+
+" }}}
+
+" vinarise
 let g:vinarise_enable_auto_detect = 1
 
-
-" unite.vim settings
+" unite.vim {{{
 " Start with insert mode
 let g:unite_enable_start_insert=1
 " Open Unite vertically
@@ -151,7 +141,9 @@ autocmd FileType unite nmap <silent> <buffer> <C-w> <Plug>(unite_delete_backward
 " Go back to insert mode with /
 autocmd FileType unite nmap <buffer> / <Plug>(unite_insert_enter)
 
-" ##### Settings for VimShell #####
+" }}}
+
+" vimshell {{{
 " VimShell with ,is
 " nnoremap <silent> <Leader>is :VimShell<CR>
 nnoremap <silent> <Leader>vs :VimShellBuffer -split-command=vsplit<CR>
@@ -174,16 +166,31 @@ let g:vimshell_prompt_pattern = '^\f\+ > '
 " Figuring out what this does
 " autocmd FileType vimshell nmap <silent> <buffer> <C-k> <Plug>(vimshell_zsh_complete)
 
-" ##### Settings for NeoSnippet #####
+" }}}
+
+" neosnippet {{{
 " Toggle NeoSnippet Editor
 nnoremap <silent> <Leader>es :<C-u>NeoSnippetEdit
 
-" ##### Settings for VimFiler #####
+" neosnippet settings
+let g:neosnippet#snippets_directory = '~/.vim/snippets/'
+
+" <TAB>: completion
+imap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+
+imap <silent> <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <silent> <C-k> <Plug>(neosnippet_expand_or_jump)
+
+" }}}
+
+" vimfiler {{{
 let g:vimfiler_as_default_explorer=1
 let g:vimfiler_time_format="%m/%d/%y %H:%M%S"
 
 " VimFiler with ,fl
 nnoremap <silent> <Leader>vf :VimFiler<CR>
+
+" }}}
 
 " Disable preview window
 set completeopt-=preview

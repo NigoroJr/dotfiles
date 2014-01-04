@@ -7,7 +7,9 @@ set shiftround		" Always indent/outdent to the nearest tabstop
 set textwidth=78    " Maximum width of text
 set number
 set wildmode=longest,list
-set foldmethod=manual
+set foldenable
+set foldmethod=marker
+
 set viewoptions=folds
 set hlsearch
 set encoding=utf-8
@@ -23,16 +25,11 @@ set splitbelow      " split below
 " Use modeline
 set modeline
 
-" Set backupdir to ~/Dropbox/vim/backup/
-"if isdirectory(expand('~/Dropbox/vim/backup/'))
-"    set backupdir=~/Dropbox/vim/backup/
-"else
-    if !isdirectory(expand('~/.vim/backup/'))
-        call mkdir(expand("~/.vim/backup/"))
-    endif
-
-    set backupdir=~/.vim/backup/
-"endif
+" Create backup dir if it doesn't exist
+if !isdirectory(expand('~/.vim/backup/'))
+    call mkdir(expand("~/.vim/backup/"))
+endif
+set backupdir=~/.vim/backup/
 
 " Set viewdir to be ~/Dropbox/vim/view/
 if isdirectory(expand('~/Dropbox/vim/view/'))
@@ -57,11 +54,8 @@ if expand('%') != '' && &buftype !~ 'nofile'
 endif
 
 
-" Create and auto-close comment blocks in Java
-" autocmd FileType java imap /**<CR>    /**<CR>/<Esc>O
-
 " Set textwidth 0 when using text files
 autocmd FileType text,vimshell set textwidth=0
 
-" Set shiftwidth to 2 in particular file
+" Set shiftwidth to 2 for particular files
 autocmd FileType python,ruby,html set shiftwidth=2 tabstop=2
