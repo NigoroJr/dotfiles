@@ -1,0 +1,4 @@
+/usr/lib/gcc/x86_64-pc-linux-gnu/4.7.3/../../../../x86_64-pc-linux-gnu/bin/ld: reopening xmonad-x86_64-linux: Text file busy
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/4.7.3/../../../../x86_64-pc-linux-gnu/bin/ld: final link failed: Text file busy
+collect2: error: ld returned 1 exit status
