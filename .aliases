@@ -46,7 +46,7 @@ alias fgrep='grep -F'
 alias egrep='grep -E'
 
 # emacs is too long to type!
-alias em='emacs'
+alias em='emacs -nw'
 
 # If shell is zsh
 if [[ $SHELL =~ zsh ]]; then
