@@ -9,15 +9,30 @@ endif
 
 syntax on
 
-" setup for neobundle
+" setup for neobundle.vim {{{
 filetype off
 filetype plugin indent off
 
+let s:neobundle_dir = expand('~/.vim/bundle')
 if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-    call neobundle#rc(expand('~/.vim/bundle'))
-endif
+    if isdirectory('neobundle.vim')
+        set runtimepath^=neobundle.vim
+    elseif finddir('neobundle.vim', '.;') != ''
+        execute 'set runtimepath^=' . finddir('neobundle.vim')
+    elseif &runtimepath !~ '/neobundle.vim'
+        if !isdirectory(s:neobundle_dir.'/neobundle.vim')
+            execute printf('get clone %s://github.com/Shougo/neobundle.vim.git',
+                        \ (exists('$http_proxy') ? 'https' : 'git'))
+                        \ s:neobundle_dir.'/neobundle.vim'
+        endif
 
+        execute 'set runtimepath^=' . s:neobundle_dir.'/neobundle.vim'
+    endif
+endif
+call neobundle#rc(s:neobundle_dir)
+" }}}
+
+" neobundle.vim {{{
 NeoBundle 'Shougo/neobundle.vim'
 "NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neocomplete'
@@ -57,6 +72,8 @@ NeoBundleLazy 'tpope/vim-markdown', {
 
 filetype plugin indent on
 
+" }}}
+
 " quickrun {{{
 let g:quickrun_config = {
     \ '*': {'hook/time/enable': '1'},
@@ -66,7 +83,7 @@ let g:quickrun_config['markdown'] = {
     \ }
 " }}}
 
-" Settings for vim-seek
+" vim-seek
 let g:seek_ignorecase = 1
 
 " neocomplcache {{{
