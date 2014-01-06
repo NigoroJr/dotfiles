@@ -10,7 +10,8 @@ ibus-daemon -dx &
 
 export LANG="en_US.UTF-8"
 
-xrandr --output VGA1 --primary --auto --left-of LVDS1 1>/dev/null 2>&1
+xrandr --output HDMI1 --primary --auto --output LVDS1 --auto --right-of HDMI1
+#xrandr --output VGA1 --primary --auto --pos 0x180 --output LVDS1 --auto --pos 1440x0
 
 imwheel -b -k "0 0 6 7 0 0 10" 1>/dev/null 2>&1
 
