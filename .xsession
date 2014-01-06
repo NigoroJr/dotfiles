@@ -8,7 +8,7 @@ export QT_IM_MODULE=ibus
 # Start ibus daemon
 ibus-daemon -dx &
 
-export LANG=en_US.UTF-8
+export LANG="en_US.UTF-8"
 
 xrandr --output VGA1 --primary --auto --left-of LVDS1 1>/dev/null 2>&1
 
