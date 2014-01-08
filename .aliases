@@ -33,10 +33,10 @@ alias dir='ls'
 alias vdir='ls -lb'
 
 alias lsl='ls -l'
-alias ll='ls -l'
+alias l='ls -l'
 alias lal='ls -Al'
 alias la='ls -A'
-alias l='ls -CF'
+alias ll='ls -CF'
 
 # Alias for g++
 alias gpp='g++'
