@@ -57,7 +57,7 @@ if [ -d ~/pkg_src/adt-bundle ]; then
     export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
 fi
 
-zstyle :compinstall filename '/home/naoki/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
 compinit
@@ -66,7 +66,7 @@ HISTFILE=~/.histfile
 HISTSIZE=6000000
 SAVEHIST=6000000
 
-# seach history
+# search history
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
