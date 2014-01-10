@@ -10,7 +10,7 @@ set wildmode=longest,list
 set foldenable
 set foldmethod=marker
 
-set viewoptions=folds
+set viewoptions=cursor,folds
 set hlsearch
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,sjis,cp932,euc-jp,cp20932,guess
@@ -46,15 +46,18 @@ nnoremap <silent> <Leader>mkv :mkview!<CR>
 nnoremap <silent> <Leader>lv :loadview<CR>
 
 " Set filetypes to not save/load the view
+au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 let no_view = ['gitcommit']
-if expand('%') != '' && &buftype !~ 'nofile' && index(no_view, &filetype) == -1
-    autocmd BufWinLeave *.* mkview!
-endif
-
-if expand('%') != '' && &buftype !~ 'nofile' && index(no_view, &filetype) == -1
-    autocmd BufWinEnter *.* silent loadview
-endif
-
+augroup vimrc
+    autocmd BufWritePost *
+        \   if expand('%') != '' && &buftype !~ 'nofile' && index(no_view, &filetype) == -1
+        \|      mkview!
+        \|  endif
+    autocmd BufRead *
+        \   if expand('%') != '' && &buftype !~ 'nofile' && index(no_view, &filetype) == -1
+        \|      silent loadview
+        \|  endif
+augroup END
 
 " Set textwidth 0 when using text files
 autocmd FileType text,vimshell set textwidth=0
