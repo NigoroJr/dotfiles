@@ -45,11 +45,13 @@ endif
 nnoremap <silent> <Leader>mkv :mkview!<CR>
 nnoremap <silent> <Leader>lv :loadview<CR>
 
-if expand('%') != '' && &buftype !~ 'nofile'
+" Set filetypes to not save/load the view
+let no_view = ['gitcommit']
+if expand('%') != '' && &buftype !~ 'nofile' && index(no_view, &filetype) == -1
     autocmd BufWinLeave *.* mkview!
 endif
 
-if expand('%') != '' && &buftype !~ 'nofile'
+if expand('%') != '' && &buftype !~ 'nofile' && index(no_view, &filetype) == -1
     autocmd BufWinEnter *.* silent loadview
 endif
 
