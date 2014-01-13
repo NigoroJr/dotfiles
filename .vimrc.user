@@ -1,9 +1,9 @@
 "set noswapfile      " No swap files
 set backup          " We all know backing up is important
-set tabstop=4		" An indentation level every four columns
-set expandtab		" Convert all tabs typed into spaces
-set shiftwidth=4	" Indent/outdent by four columns
-set shiftround		" Always indent/outdent to the nearest tabstop
+set tabstop=4       " An indentation level every four columns
+set expandtab       " Convert all tabs typed into spaces
+set shiftwidth=4    " Indent/outdent by four columns
+set shiftround      " Always indent/outdent to the nearest tabstop
 set textwidth=78    " Maximum width of text
 set number
 set wildmode=longest,list
