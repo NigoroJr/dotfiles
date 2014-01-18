@@ -37,7 +37,7 @@ NeoBundle 'Shougo/neobundle.vim'
 "NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/vimproc', {
+NeoBundle 'Shougo/vimproc.vim', {
 \    'build' : {
 \        'windows' : 'make -f make_mingw32.mak',
 \        'cygwin' : 'make -f make_cygwin.mak',
@@ -59,6 +59,13 @@ NeoBundle 'goldfeld/vim-seek'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'vim-scripts/dbext.vim'
+NeoBundle 'osyo-manga/vim-marching', {
+            \ 'depends' : ['Shougo/vimproc.vim', 'osyo-manga/vim-reunions'],
+            \ 'autoload' : {'filetypes' : ['c', 'cpp']}
+            \ }
+NeoBundle 'osyo-manga/vim-stargate', {
+            \ 'autoload' : {'filetypes' : ['cpp']}
+            \ }
 NeoBundleLazy 'Shougo/vinarise'
 NeoBundleLazy 'vim-scripts/DrawIt'
 NeoBundleLazy 'Lokaltog/vim-easymotion'
@@ -114,7 +121,30 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<BS>"
 inoremap <expr><C-y> neocomplete#close_popup()
 inoremap <expr><C-g> neocomplete#cancel_popup()
 
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+
+let g:neocomplete#force_omni_input_patterns.cpp =
+            \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+
 " }}}
+
+" vim-marching
+let g:marching_enable_neocomplete = 1
+let g:marching_include_paths = filter(
+            \ split(glob('/usr/include/c++/*'), '\n') +
+            \ split(glob('/usr/include/*/c++/*'), '\n') +
+            \ split(glob('/usr/include/*/'), '\n') +
+            \ split(glob('/usr/local/include/*/'), '\n'),
+            \ 'isdirectory(v:val)') +
+            \ ['/usr/local/include/']
+set updatetime=200
+
+" vim-stargate
+let g:stargate#include_paths = {
+            \ "cpp" : marching_include_paths
+            \ }
 
 " vinarise
 let g:vinarise_enable_auto_detect = 1
