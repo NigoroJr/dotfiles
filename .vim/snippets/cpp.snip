@@ -1,6 +1,4 @@
-# #include <...>
-# with using namespace std
-snippet inc
+snippet incl
 alias   #inc, #include
     #include <iostream>
     #include <string>
@@ -8,5 +6,7 @@ alias   #inc, #include
 
     ${0}
 
-snippet incl
+# #include <...>
+# with using namespace std
+snippet inc
     #include <${1}>${0}
