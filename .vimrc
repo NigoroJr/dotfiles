@@ -136,9 +136,12 @@ let g:marching_include_paths = filter(
             \ split(glob('/usr/include/c++/*'), '\n') +
             \ split(glob('/usr/include/*/c++/*'), '\n') +
             \ split(glob('/usr/include/*/'), '\n') +
-            \ split(glob('/usr/local/include/*/'), '\n'),
-            \ 'isdirectory(v:val)') +
-            \ ['/usr/local/include/']
+            \ split(glob('/usr/lib/gcc/**/'), '\n') +
+            \ split(glob('/usr/local/include/*/'), '\n') +
+            \ [
+            \ '/usr/local/include/',
+            \ ],
+            \ 'isdirectory(v:val)')
 set updatetime=200
 
 " vim-stargate
