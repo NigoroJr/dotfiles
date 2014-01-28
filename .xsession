@@ -16,4 +16,9 @@ xrandr --output HDMI1 --primary --auto --output LVDS1 --auto --right-of HDMI1
 imwheel -b -k "0 0 6 7 0 0 10" 1>/dev/null 2>&1
 
 xsetroot -cursor_name left_ptr
+
+xset s off
+xset -dpms
+setterm -blank 0 -powerdown 0
+
 exec xmonad
