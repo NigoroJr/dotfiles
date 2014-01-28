@@ -66,15 +66,6 @@ HISTFILE=~/.histfile
 HISTSIZE=6000000
 SAVEHIST=6000000
 
-# search history
-autoload history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "" history-beginning-search-backward-end
-bindkey "" history-beginning-search-forward-end
-bindkey '' history-incremental-pattern-search-backward
-bindkey 's' history-incremental-pattern-search-forward
-
 # Limit Coredump size
 limit coredumpsize 102400
 
@@ -157,3 +148,13 @@ zstyle ':completion:*:default' menu select=1
 if [ -f ~/.zshrc_local ]; then
     source ~/.zshrc_local
 fi
+
+# search history
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "" history-beginning-search-backward-end
+bindkey "" history-beginning-search-forward-end
+bindkey '' history-incremental-pattern-search-backward
+bindkey 's' history-incremental-pattern-search-forward
+
