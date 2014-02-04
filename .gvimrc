@@ -11,8 +11,12 @@ colorscheme molokai
 " 'zenburn'     : 4
 
 " Font for programming
-if has('mac') || has('unix')
-    set guifont=Ricty:h16
-elseif has('windows')
-    set guifont=Ricty\ 13
+if has('gui_running')
+    if has('gui_mac')
+        set guifont=Ricty Discord:h16
+    elseif has('gui_gtk')
+        set guifont=Ricty\ Discord 10
+    elseif has('gui_win32')
+        set guifont=Ricty\ 13
+    endif
 endif
