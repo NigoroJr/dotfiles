@@ -20,6 +20,7 @@ inoremap {{<CR> {{<CR>}};<Esc>O
 " Move pwd to directory of buffer
 nnoremap <silent><Leader>cd :cd %:h<CR>
 
+" Save as super user
 nnoremap <Leader>ws :w sudo:%<CR>
 nnoremap <Leader>xs :x sudo:%<CR>
 nnoremap <Leader>es :e sudo:%<CR>
