@@ -67,6 +67,7 @@ NeoBundle 'osyo-manga/vim-stargate', {
             \ 'autoload' : {'filetypes' : ['cpp']}
             \ }
 NeoBundle 'kana/vim-altr'
+NeoBundleLazy 'dkasak/manpageview'
 NeoBundleLazy 'Shougo/vinarise'
 NeoBundleLazy 'vim-scripts/DrawIt'
 NeoBundleLazy 'Lokaltog/vim-easymotion'
@@ -247,3 +248,6 @@ nnoremap <silent> <Leader>vf :VimFiler<CR>
 
 " Disable preview window
 set completeopt-=preview
+
+" manpageview.vim
+let g:manpageview_winopen='vsplit='
