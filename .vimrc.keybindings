@@ -14,21 +14,8 @@ nnoremap j gj
 nnoremap k gk
 
 " Insert closing braces
-"inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap {{<CR> {{<CR>}};<Esc>O
-"inoremap {{     {
-"inoremap {}     {}
-" Insert closing parenthesis
-"inoremap (      ()<Left>
-"inoremap (<CR>  (<CR>)<Esc>O
-"inoremap ((     (
-"inoremap ()     ()
-" Brackets
-"inoremap [      []<Left>
-"inoremap [<CR>  [<CR>]<Esc>O
-"inoremap [[     [
-"inoremap []     []
 
 nnoremap <silent> cd<Space> :cd %:h
 nnoremap <silent><Leader>cdb :cd %:h<CR>
