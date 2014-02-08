@@ -98,6 +98,8 @@ let g:quickrun_config = {
             \ 'hook/close_buffer/enable_empty_data': 1,
             \ 'outputter': 'multi:buffer:quickfix',
             \ 'outputter/buffer/close_on_empty': 1,
+            \ 'hook/quickfix_replate_tempname_to_bufnr/enable_exit' : 1,
+            \ 'hook/quickfix_replate_tempname_to_bufnr/priority_exit' : -10,
             \ 'runmode': 'async:remote:vimproc',
             \ 'runner': 'vimproc',
             \ 'runner/vimproc/updatetime': 60,
