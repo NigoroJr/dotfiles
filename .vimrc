@@ -66,7 +66,10 @@ NeoBundle 'osyo-manga/vim-marching', {
 NeoBundle 'osyo-manga/vim-stargate', {
             \ 'autoload' : {'filetypes' : ['cpp']}
             \ }
+NeoBundle 'rhysd/wandbox-vim'
 NeoBundle 'kana/vim-altr'
+NeoBundle 'osyo-manga/unite-quickfix'
+NeoBundle 'osyo-manga/shabadou.vim'
 NeoBundleLazy 'dkasak/manpageview'
 NeoBundleLazy 'Shougo/vinarise'
 NeoBundleLazy 'vim-scripts/DrawIt'
@@ -86,8 +89,25 @@ filetype plugin indent on
 
 " quickrun {{{
 let g:quickrun_config = {
-    \ '*': {'hook/time/enable': '1'},
-    \ }
+            \ '_' : {
+            \ 'hook/time/enable': 0,
+            \ 'hook/close_unite_quickfix/enable_hook_loaded' : 1,
+            \ 'hook/close_unite/enable_failure': 1,
+            \ 'hook/close_quickfix/enable_exit': 1,
+            \ 'hook/close_buffer/enable_empty_failure': 1,
+            \ 'hook/close_buffer/enable_empty_data': 1,
+            \ 'outputter': 'multi:buffer:quickfix',
+            \ 'outputter/buffer/close_on_empty': 1,
+            \ 'runmode': 'async:remote:vimproc',
+            \ 'runner': 'vimproc',
+            \ 'runner/vimproc/updatetime': 60,
+            \ },
+            \ }
+let g:quickrun_config.cpp = {
+            \ 'command': 'g++',
+            \ 'cmdopt': '-std=c++11 -Wall -Wextra',
+            \ 'hook/quickrunex/enable': 1,
+            \ }
 let g:quickrun_config.markdown = {
             \ 'outputter': 'browser',
             \ 'hook/time/enable': 0,
@@ -160,13 +180,20 @@ let g:vinarise_enable_auto_detect = 1
 let g:unite_enable_start_insert=1
 " Open Unite vertically
 let g:unite_enable_split_vertically=1
+let g:unite_split_rule='botright'
+
 " Recently used files
 noremap <Leader>uru :Unite file_mru -buffer-name=file_mru<CR>
 noremap <Leader>ureg :Unite register -buffer-name=register<CR>
 noremap <Leader>ubu :Unite buffer -buffer-name=buffer<CR>
+
 " File in current directory
 noremap <Leader>uf :UniteWithBufferDir file -buffer-name=file -create<CR>
 noremap <Leader>ure :UniteWithBufferDir file_rec -buffer-name=file_rec -create<CR>
+
+" QuickFix in Unite
+noremap <Leader>uq :Unite -horizontal -no-quit -direction=botright quickfix<CR>
+
 " Hit Esc twice to exit Unite
 autocmd FileType unite nmap <silent> <buffer> <Esc><Esc> <Plug>(unite_exit)
 autocmd FileType unite imap <silent> <buffer> <Esc><Esc> <Plug>(unite_exit)
