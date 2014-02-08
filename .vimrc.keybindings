@@ -37,7 +37,9 @@ nnoremap <Leader>ws :w sudo:%<CR>
 nnoremap <Leader>xs :x sudo:%<CR>
 nnoremap <Leader>es :e sudo:%<CR>
 
-nnoremap <Leader>a $i
+" vim-altr
+nmap <Leader>a <Plug>(altr-forward)
+nmap <Leader>A <Plug>(altr-back)
 
 " rails.vim used to have a Rtree command
 command Rtree NERDTreeFind

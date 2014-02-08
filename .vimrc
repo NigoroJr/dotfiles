@@ -66,6 +66,7 @@ NeoBundle 'osyo-manga/vim-marching', {
 NeoBundle 'osyo-manga/vim-stargate', {
             \ 'autoload' : {'filetypes' : ['cpp']}
             \ }
+NeoBundle 'kana/vim-altr'
 NeoBundleLazy 'Shougo/vinarise'
 NeoBundleLazy 'vim-scripts/DrawIt'
 NeoBundleLazy 'Lokaltog/vim-easymotion'
