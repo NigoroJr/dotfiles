@@ -44,6 +44,9 @@ nmap <Leader>A <Plug>(altr-back)
 " rails.vim used to have a Rtree command
 command Rtree NERDTreeFind
 
+" Map K to ref.vim
+nmap K <Plug>(ref-keyword)
+
 " snippet
 augroup cpp-namespace
     autocmd!

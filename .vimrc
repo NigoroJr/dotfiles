@@ -249,5 +249,14 @@ nnoremap <silent> <Leader>vf :VimFiler<CR>
 " Disable preview window
 set completeopt-=preview
 
+" ref.vim
+let g:ref_open='vsplit'
+let g:ref_detect_filetype = {
+            \ 'sh': 'man',
+            \ 'zsh': 'man',
+            \ 'bash': 'man',
+            \ }
+let g:ref_use_vimproc=1
+
 " manpageview.vim
 let g:manpageview_winopen='vsplit='
