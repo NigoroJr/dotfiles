@@ -69,7 +69,7 @@ NeoBundle 'osyo-manga/vim-stargate', {
 NeoBundleLazy 'Shougo/vinarise'
 NeoBundleLazy 'vim-scripts/DrawIt'
 NeoBundleLazy 'Lokaltog/vim-easymotion'
-NeoBundleLazy 'tyru/open-browser.vim', {
+NeoBundle 'tyru/open-browser.vim', {
             \ 'autoload' : {
             \   'filetypes' : ['markdown']
             \ }}
@@ -86,9 +86,10 @@ filetype plugin indent on
 let g:quickrun_config = {
     \ '*': {'hook/time/enable': '1'},
     \ }
-let g:quickrun_config['markdown'] = {
-    \ 'outputter': 'browser'
-    \ }
+let g:quickrun_config.markdown = {
+            \ 'outputter': 'browser',
+            \ 'hook/time/enable': 0,
+            \ }
 " }}}
 
 " vim-seek
