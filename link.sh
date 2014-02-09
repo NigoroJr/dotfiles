@@ -1,5 +1,14 @@
 #!/bin/sh
+
 for F in `find ~/dotfiles/ -maxdepth 1 -name '.*' | grep -v .git`; do
     F=`basename $F`
-    ln --verbose -sf ~/dotfiles/$F ~/$F
+    if [ "$F" = "." -o "$F" = ".." ]; then
+        continue
+    fi
+
+    if [ "$1" = "unlink" ]; then
+        unlink ~/$F
+    else
+        ln --verbose -sf ~/dotfiles/$F ~/$F
+    fi
 done
