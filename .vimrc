@@ -33,10 +33,10 @@ call neobundle#rc(s:neobundle_dir)
 " }}}
 
 " neobundle.vim {{{
-NeoBundle 'Shougo/neobundle.vim'
+NeoBundleFetch 'Shougo/neobundle.vim'
 "NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neocomplete'
-NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/vimproc.vim', {
 \    'build' : {
 \        'windows' : 'make -f make_mingw32.mak',
@@ -51,10 +51,10 @@ NeoBundle 'vim-scripts/sudo.vim'
 NeoBundle 'ciaranm/securemodelines'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'taku-o/vim-toggle'
-NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/vimfiler'
+NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'goldfeld/vim-seek'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'scrooloose/nerdtree'
@@ -71,9 +71,9 @@ NeoBundle 'kana/vim-altr'
 NeoBundle 'osyo-manga/unite-quickfix'
 NeoBundle 'osyo-manga/shabadou.vim'
 NeoBundleLazy 'dkasak/manpageview'
-NeoBundleLazy 'Shougo/vinarise'
-NeoBundleLazy 'vim-scripts/DrawIt'
-NeoBundleLazy 'Lokaltog/vim-easymotion'
+NeoBundleLazy 'Shougo/vinarise.vim'
+" NeoBundleLazy 'vim-scripts/DrawIt'
+" NeoBundleLazy 'Lokaltog/vim-easymotion'
 NeoBundle 'tyru/open-browser.vim', {
             \ 'autoload' : {
             \   'filetypes' : ['markdown']
