@@ -15,7 +15,7 @@ if has('gui_running')
     if has('gui_mac')
         set guifont=Ricty Discord:h16
     elseif has('gui_gtk')
-        set guifont=Ricty\ Discord 10
+        set guifont=Ricty\ Discord\ 10
     elseif has('gui_win32')
         set guifont=Ricty\ 13
     endif
