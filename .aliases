@@ -28,6 +28,16 @@ sudo() {
     fi
 }
 
+# Use vim as pager
+less() {
+    if test $# = 0; then
+        vim --cmd 'let no_plugin_maps = 1' -c 'runtime! macros/less.vim' -
+    else
+        vim --cmd 'let no_plugin_maps = 1' -c 'runtime! macros/less.vim' "$@"
+    fi
+}
+alias vless='less'
+
 # Aliases for ls
 alias dir='ls'
 alias vdir='ls -lb'
