@@ -167,7 +167,6 @@ let g:marching_include_paths = filter(
             \ '/usr/local/include/',
             \ ],
             \ 'isdirectory(v:val)')
-set updatetime=200
 
 " vim-stargate
 let g:stargate#include_paths = {
