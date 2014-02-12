@@ -1,3 +1,4 @@
+# vim: foldmethod=marker
 # The local .zshrc (.zshrc_local) is read at the end
 
 # Read Source File
@@ -10,7 +11,7 @@ if [ -f ~/.zshrc_prompt ]; then
     source ~/.zshrc_prompt
 fi
 
-# See if it's Mac
+# ls colors {{{
 case `uname -s` in
     # Macintosh
     Darwin)
@@ -37,6 +38,7 @@ case `uname -s` in
         zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
         ;;
 esac
+# }}}
 
 # Set EDITOR to my *favorite* editor
 export EDITOR="vim"
