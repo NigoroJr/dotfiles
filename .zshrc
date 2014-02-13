@@ -42,6 +42,12 @@ esac
 
 # Set EDITOR to my *favorite* editor
 export EDITOR="vim"
+if [ `which vimpager` != "vimpager not found" ]; then
+    export PAGER=vimpager
+fi
+if [ `which vimmanpager` != "vimmanpager not found" ]; then
+    export MANPAGER=vimmanpager
+fi
 
 # Change the PATH according to whether the user is root or not
 # Copied from /etc/profile
