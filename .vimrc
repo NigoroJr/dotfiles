@@ -92,10 +92,10 @@ let g:quickrun_config = {
             \ '_' : {
             \ 'hook/time/enable': 0,
             \ 'hook/close_unite_quickfix/enable_hook_loaded' : 1,
-            \ 'hook/close_unite/enable_failure': 1,
+            \ 'hook/unite_quickfix/enable_failure': 1,
             \ 'hook/close_quickfix/enable_exit': 1,
-            \ 'hook/close_buffer/enable_empty_failure': 1,
             \ 'hook/close_buffer/enable_empty_data': 1,
+            \ 'hook/close_buffer/enable_failure': 1,
             \ 'outputter': 'multi:buffer:quickfix',
             \ 'outputter/buffer/close_on_empty': 1,
             \ 'hook/quickfix_replate_tempname_to_bufnr/enable_exit' : 1,
