@@ -15,3 +15,7 @@ alias   #inc, #include
 # with using namespace std
 snippet inc
     #include <${1}>${0}
+
+snippet cout
+alias std::cout << std::endl;
+    std::cout << ${1} << std::endl;${0}
