@@ -104,6 +104,11 @@ let g:quickrun_config = {
             \ 'runner': 'vimproc',
             \ 'runner/vimproc/updatetime': 60,
             \ },
+            \ 'make': {
+            \ 'command': 'make',
+            \ 'exec': "%c %o",
+            \ 'runner': 'vimproc',
+            \ },
             \ }
 let g:quickrun_config.cpp = {
             \ 'command': 'g++',

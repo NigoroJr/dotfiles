@@ -31,6 +31,8 @@ nmap <Leader>A <Plug>(altr-back)
 
 " Use wandbox for quickrun
 nnoremap <Leader>wb :QuickRun -runner wandbox<CR>
+" make
+nnoremap <Leader>m :QuickRun make<CR>
 
 " rails.vim used to have a Rtree command
 command Rtree NERDTreeFind
