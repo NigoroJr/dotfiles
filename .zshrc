@@ -58,6 +58,9 @@ else
 	PATH="/usr/local/bin:/usr/bin:/bin:${PATH}"
 fi
 
+# Add ~/bin to PATH
+PATH=$HOME/bin:$PATH
+
 # Add adt-bundle to PATH if the directory exists
 if [ -d ~/pkg_src/adt-bundle ]; then
     # add android sdk to PATH
