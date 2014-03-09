@@ -71,6 +71,7 @@ NeoBundle 'kana/vim-altr'
 NeoBundle 'osyo-manga/unite-quickfix'
 NeoBundle 'osyo-manga/shabadou.vim'
 NeoBundle 'gcmt/wildfire.vim'
+NeoBundle 'wesQ3/vim-windowswap'
 NeoBundleLazy 'dkasak/manpageview'
 NeoBundleLazy 'Shougo/vinarise.vim'
 " NeoBundleLazy 'vim-scripts/DrawIt'
@@ -294,3 +295,8 @@ let g:ref_use_vimproc=1
 
 " manpageview.vim
 let g:manpageview_winopen='vsplit='
+
+" swap windows
+let g:windowswap_map_keys = 0 "prevent default bindings
+nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
+nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
