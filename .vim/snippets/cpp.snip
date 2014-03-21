@@ -3,7 +3,7 @@ snippet main
         return 0;
     }
 
-snippet incl
+snippet include
 alias   #inc, #include
     #include <iostream>
     #include <string>
@@ -15,6 +15,9 @@ alias   #inc, #include
 # with using namespace std
 snippet inc
     #include <${1}>${0}
+
+snippet incl
+    #include "${1}"${0}
 
 snippet cout
 alias std::cout << std::endl;
