@@ -72,8 +72,8 @@ NeoBundle 'osyo-manga/unite-quickfix'
 NeoBundle 'osyo-manga/shabadou.vim'
 NeoBundle 'gcmt/wildfire.vim'
 NeoBundle 'wesQ3/vim-windowswap'
-NeoBundle 'osyo-manga/vim-watchdogs'
-NeoBundle 'jceb/vim-hier'
+" NeoBundleLazy 'osyo-manga/vim-watchdogs'
+" NeoBundleLazy 'jceb/vim-hier'
 NeoBundleLazy 'dkasak/manpageview'
 NeoBundleLazy 'Shougo/vinarise.vim'
 " NeoBundleLazy 'vim-scripts/DrawIt'
@@ -131,9 +131,9 @@ let g:quickrun_config.markdown = {
 " }}}
 
 " watchdogs.vim
-let g:watchdogs_check_BufWritePost_enable = 1
-call watchdogs#setup(g:quickrun_config)
-nmap <silent> <Leader>wd :WatchdogsRun<CR>
+" let g:watchdogs_check_BufWritePost_enable = 1
+" call watchdogs#setup(g:quickrun_config)
+" nmap <silent> <Leader>wd :WatchdogsRun<CR>
 
 " vim-seek
 let g:seek_ignorecase = 1
