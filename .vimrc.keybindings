@@ -14,8 +14,14 @@ nnoremap j gj
 nnoremap k gk
 
 " Insert closing braces
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap {{<CR> {{<CR>}};<Esc>O
+fun! CloseBraces()
+    " Don't do this for LaTeX documents
+    if &filetype !~ 'tex\|plaintex'
+        inoremap {<CR> {<CR>}<Esc>O
+        " inoremap {{<CR> {{<CR>}};<Esc>O
+    endif
+endfun
+autocmd FileType * call CloseBraces()
 
 " Move pwd to directory of buffer
 nnoremap <silent><Leader>cd :cd %:h<CR>
