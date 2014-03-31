@@ -181,7 +181,6 @@ let g:marching_include_paths = filter(
             \ split(glob('/usr/include/boost/*'), '\n') +
             \ split(glob('/usr/include/*'), '\n') +
             \ split(glob('/usr/include/c++/*'), '\n') +
-            \ split(glob('/usr/include/*/c++/*'), '\n') +
             \ split(glob('/usr/local/include/*/'), '\n'),
             \ 'isdirectory(v:val)')
 
