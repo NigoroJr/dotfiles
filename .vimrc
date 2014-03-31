@@ -185,10 +185,16 @@ let g:marching_include_paths = filter(
             \ split(glob('/usr/local/include/*/'), '\n'),
             \ 'isdirectory(v:val)')
 
+imap <C-x><C-o> <Plug>(marching_start_omni_complete)
+imap <C-x><C-o> <Plug>(marching_force_start_omni_complete)
+nmap <Leader>mc :MarchingBufferClearCache<CR>
+
 " vim-stargate
 let g:stargate#include_paths = {
             \ "cpp" : marching_include_paths
             \ }
+
+nmap <Leader>sg :StargateInclude<Space>
 
 " vinarise
 let g:vinarise_enable_auto_detect = 1
