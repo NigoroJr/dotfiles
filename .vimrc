@@ -177,14 +177,12 @@ let g:neocomplete#force_omni_input_patterns.cpp =
 " vim-marching
 let g:marching_enable_neocomplete = 1
 let g:marching_include_paths = filter(
+            \ split(glob('/usr/lib/gcc/**/include/*/'), '\n') +
+            \ split(glob('/usr/include/boost/*'), '\n') +
+            \ split(glob('/usr/include/*'), '\n') +
             \ split(glob('/usr/include/c++/*'), '\n') +
             \ split(glob('/usr/include/*/c++/*'), '\n') +
-            \ split(glob('/usr/include/*/'), '\n') +
-            \ split(glob('/usr/lib/gcc/**/'), '\n') +
-            \ split(glob('/usr/local/include/*/'), '\n') +
-            \ [
-            \ '/usr/local/include/',
-            \ ],
+            \ split(glob('/usr/local/include/*/'), '\n'),
             \ 'isdirectory(v:val)')
 
 " vim-stargate
