@@ -1,7 +1,7 @@
 "(Chromium|Chrome)$"
-None, Left, Control_L|Shift_L|Tab
-None, Right, Control_L|Tab
-None, ExtBt7, Control_L|F4
+None, Left, Control_R|Shift_R|Tab
+None, Right, Control_R|Tab
+None, ExtBt7, Control_R|F4
 
 "^Quartus"
 None, Left, Left
