@@ -22,5 +22,7 @@ xset -dpms
 setterm -blank 0 -powerdown 0
 
 feh --bg-fill ~/Dropbox/Pictures/Wallpapers/PS/Saber\ and\ Haqua.png
+# Start DropBox daemon
+dropbox &
 
 exec xmonad
