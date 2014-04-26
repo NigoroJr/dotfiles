@@ -74,6 +74,7 @@ NeoBundle 'gcmt/wildfire.vim'
 NeoBundle 'wesQ3/vim-windowswap'
 NeoBundle 'tkztmk/vim-vala'
 NeoBundle 'vim-scripts/mips.vim'
+NeoBundle 'davidhalter/jedi-vim'
 " NeoBundleLazy 'osyo-manga/vim-watchdogs'
 " NeoBundleLazy 'jceb/vim-hier'
 NeoBundleLazy 'dkasak/manpageview'
@@ -317,3 +318,10 @@ let g:manpageview_winopen='vsplit='
 let g:windowswap_map_keys = 0 "prevent default bindings
 nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
 nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
+
+" jedi-vim
+autocmd FileType python setlocal omnifunc=jedi#completions
+"let g:jedi#popup_select_first=0
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
