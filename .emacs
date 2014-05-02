@@ -45,6 +45,12 @@
 ;; Use Emacs term info, not the system
 (setq system-uses-term-info nil)
 
+;; Use utf-8
+(prefer-coding-system 'utf-8)
+
+;; Don't show startup message
+(setq inhibit-startup-message t)
+
 ;; Set tab width to 4, use space instead of tab
 (setq-default
           c-basic-offset 4
@@ -88,6 +94,16 @@
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/ac-dict")
 (ac-config-default)
+
+(tool-bar-mode -1)
+
+;; save cursor position
+(setq save-place-file "~/.emacs.d/saveplace")
+(setq-default save-place t)
+(require 'saveplace)
+
+;; Use Ricty Discord
+(set-frame-font "Ricty Discord-9")
 
 ;; flex-autopair
 ;;(add-to-list 'load-path "~/.emacs.d/el-get/flex-autopair")
