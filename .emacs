@@ -26,9 +26,12 @@
 ;; Indentation level to 4
 (setq c-basic-offset 4)
 
-;; Don't create backup files in current directory
+;; Use temporary file directory for backups and autosaves
 (setq backup-directory-alist
-      `((".*" . "~/.emacs.backup")))
+      `((".*" ., temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*", temporary-file-directory)))
+
 ;; Safest, but slowest
 (setq backup-by-copying t)
 
