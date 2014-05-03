@@ -48,6 +48,9 @@
 ;; Use Emacs term info, not the system
 (setq system-uses-term-info nil)
 
+;; Use Japanese
+(set-language-environment 'Japanese)
+
 ;; Use utf-8
 (prefer-coding-system 'utf-8)
 
