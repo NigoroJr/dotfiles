@@ -3,15 +3,15 @@
 " C-d is "Delete"
 inoremap <C-d> <Del>
 
-" C-a is "Go to beginning of row"
-inoremap <C-a> <Esc>I
-
-" C-e is "Go to last of row"
-inoremap <C-e> <Esc>A
-
-" Move by physical line
+" Move by physical/logical line
+nnoremap gj j
+nnoremap gk k
 nnoremap j gj
 nnoremap k gk
+
+" More powerful ex command history
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 " Insert closing braces
 fun! CloseBraces()
