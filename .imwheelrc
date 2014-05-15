@@ -7,5 +7,10 @@ None, ExtBt7, Control_R|F4
 None, Left, Left
 None, Right, Right
 
+" qpdfview$"
+None, Left, Control_R|Shift_R|Tab
+None, Right, Control_R|Tab
+None, ExtBt7, Control_R|w
+
 ".*"
 None, ExtBt7, Control_L|w
