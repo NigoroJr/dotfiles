@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for F in `find ~/dotfiles/ -maxdepth 1 -name '.*' | grep -v .git`; do
+for F in `find ~/dotfiles/ -maxdepth 1 -name '.*' | grep -v '\.git'`; do
     F=`basename $F`
     if [ "$F" = "." -o "$F" = ".." ]; then
         continue
