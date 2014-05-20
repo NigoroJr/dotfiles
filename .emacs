@@ -101,7 +101,8 @@
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/ac-dict")
 (ac-config-default)
 
-(tool-bar-mode -1)
+(if (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
 
 ;; save cursor position
 (setq save-place-file "~/.emacs.d/saveplace")
