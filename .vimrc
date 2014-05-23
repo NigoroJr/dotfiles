@@ -1,13 +1,43 @@
-" Source separate files
-if filereadable(expand('~/.vimrc.user'))
-    source ~/.vimrc.user
+"set noswapfile      " No swap files
+set backup          " We all know backing up is important
+set tabstop=4       " An indentation level every four columns
+set expandtab       " Convert all tabs typed into spaces
+set shiftwidth=4    " Indent/outdent by four columns
+set shiftround      " Always indent/outdent to the nearest tabstop
+set textwidth=78    " Maximum width of text
+set number
+set wildmode=longest,list
+set foldenable
+set foldmethod=marker
+
+set viewoptions=cursor,folds
+set hlsearch
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,iso-2022-jp,sjis,cp932,euc-jp,cp20932,guess
+set backspace=indent,eol,start
+" Reset hilight search by pressing Escape 2 times
+nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
+let mapleader=","   " Sets mapleader to ,
+
+set splitright      " split to the right
+set splitbelow      " split below
+
+" Use modeline
+set modeline
+
+" Create backup dir if it doesn't exist
+if !isdirectory(expand('~/.vim/backup/'))
+    call mkdir(expand("~/.vim/backup/"))
 endif
-if filereadable(expand('~/.vimrc.keybindings'))
-    source ~/.vimrc.keybindings
-endif
-" ----------------------------------
+set backupdir=~/.vim/backup/
 
 syntax on
+
+" Set textwidth 0 when using text files
+autocmd FileType text,vimshell set textwidth=0
+
+" Set shiftwidth to 2 for particular files
+autocmd FileType python,ruby,html set shiftwidth=2 tabstop=2
 
 " setup for neobundle.vim {{{
 filetype off
@@ -352,3 +382,95 @@ function! s:my_tabline()  "{{{
 endfunction "}}}
 let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 " set showtabline=2 " Always show tabline
+
+" views {{{
+" Set viewdir to be ~/Dropbox/vim/view/
+if isdirectory(expand('~/Dropbox/vim/view/'))
+    set viewdir=~/Dropbox/vim/view/
+else
+    if !isdirectory(expand('~/.vim/view/'))
+        call mkdir(expand("~/.vim/view/"))
+    endif
+
+    set viewdir=~/.vim/view/
+endif
+
+" Set filetypes to not save/load the view
+au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+let no_view = ['gitcommit']
+augroup vimrc
+    autocmd BufWritePost *
+        \   if expand('%') != '' && &buftype !~ 'nofile' && index(no_view, &filetype) == -1
+        \|      mkview!
+        \|  endif
+    autocmd BufRead *
+        \   if expand('%') != '' && &buftype !~ 'nofile' && index(no_view, &filetype) == -1
+        \|      silent loadview
+        \|  endif
+augroup END
+" }}}
+
+" C-d is "Delete"
+inoremap <C-d> <Del>
+
+" Move by physical/logical line
+nnoremap gj j
+nnoremap gk k
+nnoremap j gj
+nnoremap k gk
+
+" More powerful ex command history
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
+" Insert closing braces {{{
+fun! CloseBraces()
+    " Don't do this for LaTeX documents
+    if &filetype !~ 'tex\|plaintex'
+        inoremap {<CR> {<CR>}<Esc>O
+    endif
+endfun
+autocmd FileType * call CloseBraces()
+" }}}
+
+" Move pwd to directory of buffer
+nnoremap <silent><Leader>cd :cd %:h<CR>
+
+" Save as super user
+nnoremap <Leader>ws :w sudo:%<CR>
+nnoremap <Leader>xs :x sudo:%<CR>
+nnoremap <Leader>es :e sudo:%<CR>
+
+" vim-altr
+nmap <Leader>a <Plug>(altr-forward)
+nmap <Leader>A <Plug>(altr-back)
+
+" rails.vim used to have a Rtree command
+command Rtree NERDTreeFind
+
+" Map K to ref.vim
+nmap K <Plug>(ref-keyword)
+
+" C++ snippets {{{
+augroup cpp-namespace
+    autocmd!
+    autocmd FileType cpp inoremap <buffer><expr>; <SID>expand_namespace()
+augroup END
+function! s:expand_namespace()
+    let s = getline('.')[0:col('.')-1]
+    if s =~# '\<b;$'
+        return "\<BS>oost::"
+    elseif s =~# '\<s;$'
+        return "\<BS>td::"
+    elseif s =~# '\<d;$'
+        return "\<BS>etail::"
+    else
+        return ';'
+    endif
+endfunction
+" }}}
+
+" Source local configurations if any
+if exists(expand('~/.vimrc_local'))
+    source ~/.vimrc_local
+endif
