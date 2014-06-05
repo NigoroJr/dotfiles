@@ -109,7 +109,7 @@ NeoBundle 'davidhalter/jedi-vim'
 " NeoBundleLazy 'osyo-manga/vim-watchdogs'
 " NeoBundleLazy 'jceb/vim-hier'
 NeoBundleLazy 'dkasak/manpageview'
-NeoBundleLazy 'Shougo/vinarise.vim'
+NeoBundle 'Shougo/vinarise.vim'
 " NeoBundleLazy 'vim-scripts/DrawIt'
 " NeoBundleLazy 'Lokaltog/vim-easymotion'
 NeoBundle 'tyru/open-browser.vim', {
@@ -168,6 +168,8 @@ let g:quickrun_config.markdown = {
 " let g:watchdogs_check_BufWritePost_enable = 1
 " call watchdogs#setup(g:quickrun_config)
 " nmap <silent> <Leader>wd :WatchdogsRun<CR>
+
+runtime macros/matchit.vim
 
 " vim-seek
 let g:seek_ignorecase = 1
