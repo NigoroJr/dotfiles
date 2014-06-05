@@ -18,6 +18,7 @@ set backspace=indent,eol,start
 " Reset hilight search by pressing Escape 2 times
 nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
 let mapleader=","   " Sets mapleader to ,
+noremap \ ,
 
 set splitright      " split to the right
 set splitbelow      " split below
