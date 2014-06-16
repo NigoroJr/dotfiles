@@ -37,6 +37,7 @@ alias l='ls -l'
 alias lal='ls -Al'
 alias la='ls -A'
 alias ll='ls -CF'
+alias lh='ls -lh'
 
 # Alias for g++
 alias gpp='g++'
