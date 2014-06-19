@@ -9,6 +9,7 @@ set number
 set wildmode=longest,list
 set foldenable
 set foldmethod=marker
+set history=1000000
 
 set viewoptions=cursor,folds
 set hlsearch
