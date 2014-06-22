@@ -2,12 +2,14 @@ import XMonad
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
--- spawnPipe
 import XMonad.Util.Run
+-- import XMonad.Layout.ThreeColumns
+import XMonad.Layout.NoBorders
+import XMonad.Layout.Master
 
 main = do
     myStatusBar <- spawnPipe "xmobar"
-    xmonad defaultConfig {
+    xmonad $ defaultConfig {
         terminal = "urxvt"
         , borderWidth = 1
         , normalBorderColor = "black"
@@ -22,7 +24,18 @@ main = do
 
 -- myModMask = mod4Mask
 
-myLayoutHook = avoidStruts $ layoutHook defaultConfig
+-- myLayoutHook = avoidStruts $ layoutHook defaultConfig
+myLayoutHook = avoidStruts $ smartBorders $ ((mastered (1/100) (1/2) $ tiled) ||| Full ||| Mirror tiled)
+    where
+    -- three_col = ThreeCol nmaster delta ratio
+
+    tiled = Tall nmaster delta ratio
+
+    nmaster = 1
+
+    ratio = 1/2
+
+    delta = 1/100
 
 myManageHook = manageDocks <+> manageHook defaultConfig
 
