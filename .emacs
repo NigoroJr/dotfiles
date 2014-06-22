@@ -107,6 +107,19 @@
 (if (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
 
+;; Anything
+(add-to-list 'load-path "~/.emacs.d/el-get/anything")
+(when (require 'anything nil t)
+  (setq
+   anything-idle-delay 0.3
+   anything-input-idle-delay 0.2
+   anything-candidate-number-limit 100
+   anything-quick-update t)
+
+   (when (require 'anything-config nil t)
+     (setq anything-su-or-sudo "sudo"))
+   )
+
 ;; save cursor position
 (setq save-place-file "~/.emacs.d/saveplace")
 (setq-default save-place t)
