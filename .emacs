@@ -41,6 +41,9 @@
 ;; Show numbers
 (global-linum-mode t)
 
+;; Make file executable if file has #! at beginning
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
 ;; Follow symbolic link
 (setq follow-link t)
 (setq vc-follow-symlinks t)
