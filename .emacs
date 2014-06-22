@@ -18,7 +18,7 @@
 ;; C-h as backspace
 (global-set-key "\C-h" 'delete-backward-char)
 ;; C-w as delete previous word
-(global-set-key "\C-w" 'backward-kill-word)
+;; (global-set-key "\C-w" 'backward-kill-word)
 
 ;; Auto indent
 (define-key global-map (kbd "RET") 'newline-and-indent)
