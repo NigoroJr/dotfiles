@@ -117,6 +117,8 @@ NeoBundle 'tyru/open-browser.vim', {
             \ 'autoload' : {
             \   'filetypes' : ['markdown']
             \ }}
+NeoBundle 'c9s/perlomni.vim'
+NeoBundle 'hotchpotch/perldoc-vim'
 NeoBundleLazy 'tpope/vim-markdown', {
             \ 'autoload' : {
             \   'filetypes' : ['markdown']
@@ -208,6 +210,10 @@ endif
 
 let g:neocomplete#force_omni_input_patterns.cpp =
             \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+
+" perlomni.vim
+let g:neocomplete#force_omni_input_patterns.perl =
+            \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 
 " }}}
 
