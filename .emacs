@@ -139,6 +139,25 @@
 ;; Use Ricty Discord
 (set-frame-font "Ricty Discord-9")
 
+;; Use CPerl mode
+(defalias 'perl-mode 'cperl-mode)
+(setq cperl-indent-level 4
+      cperl-brace-offset -4
+      cperl-label-offset -4
+      cperl-highlight-variables-indiscriminately t
+      )
+;; perl-completion
+(add-to-list 'load-path "~/.emacs.d/el-get/perl-completion")
+(defun perl-completion-hook ()
+  (when (require 'perl-completion nil t)
+    (perl-completion-mode t)
+    (when (require 'auto-complete nil t)
+      (auto-complete-mode t)
+      (make-variable-buffer-local 'ac-sources)
+      (setq ac-sources
+            '(ac-source-perl-completion)))))
+(add-hook 'cperl-mode-hook 'perl-completion-hook)
+
 ;; flex-autopair
 ;;(add-to-list 'load-path "~/.emacs.d/el-get/flex-autopair")
 ;;(require 'flex-autopair)
