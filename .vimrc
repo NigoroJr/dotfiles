@@ -462,6 +462,9 @@ command Rtree NERDTreeFind
 " Map K to ref.vim
 nmap K <Plug>(ref-keyword)
 
+" Don't use NERDTree when opening directory
+let g:NERDTreeHijackNetrw = 0
+
 " C++ snippets {{{
 augroup cpp-namespace
     autocmd!
