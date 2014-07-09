@@ -46,7 +46,7 @@ export EDITOR="vim"
 # if [ `which vimpager` != "vimpager not found" ]; then
 #     export PAGER=vimpager
 # fi
-if [ `which vimmanpager` != "vimmanpager not found" ]; then
+if [ `which vimmanpager | awk '{ print $1 }'` != "vimmanpager" ]; then
     export MANPAGER=vimmanpager
 fi
 
