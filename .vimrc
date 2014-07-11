@@ -450,7 +450,6 @@ nnoremap <silent><Leader>cd :cd %:h<CR>
 " Save as super user
 nnoremap <Leader>ws :w sudo:%<CR>
 nnoremap <Leader>xs :x sudo:%<CR>
-nnoremap <Leader>es :e sudo:%<CR>
 
 " vim-altr
 nmap <Leader>a <Plug>(altr-forward)
