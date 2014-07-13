@@ -21,7 +21,11 @@ xset s off
 xset -dpms
 setterm -blank 0 -powerdown 0
 
-feh --bg-fill ~/Dropbox/Pictures/Wallpapers/PS/Saber\ and\ Haqua.png
+WALLPAPER=~/Dropbox/Pictures/background.png
+if [ ! -e ~/Dropbox/Pictures/background.png ]; then
+    WALLPAPER=~/Dropbox/Pictures/background.jpg
+fi
+feh --bg-fill $WALLPAPER
 # Start DropBox daemon
 dropbox &
 
