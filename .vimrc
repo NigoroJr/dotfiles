@@ -127,6 +127,7 @@ NeoBundleLazy 'tpope/vim-markdown', {
             \   'filetypes' : ['markdown']
             \ }}
 NeoBundle 'Align'
+NeoBundle 'TextFormat'
 
 filetype plugin indent on
 
