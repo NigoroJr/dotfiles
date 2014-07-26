@@ -39,9 +39,9 @@ syntax on
 autocmd FileType text,vimshell set textwidth=0
 
 " Set shiftwidth to 2 for particular files
-autocmd FileType python,ruby,html,eruby set shiftwidth=2 tabstop=2
-" SCSS files are 4
-autocmd FileType scss set shiftwidth=4 tabstop=4
+autocmd FileType ruby,html,eruby set shiftwidth=2 tabstop=2
+" Filetypes with 4-spaces indentation
+autocmd FileType python,scss set shiftwidth=4 tabstop=4
 
 " setup for neobundle.vim {{{
 filetype off
