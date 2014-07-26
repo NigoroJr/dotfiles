@@ -108,7 +108,7 @@ NeoBundle 'gcmt/wildfire.vim'
 NeoBundle 'wesQ3/vim-windowswap'
 NeoBundle 'tkztmk/vim-vala'
 NeoBundle 'vim-scripts/mips.vim'
-NeoBundle 'davidhalter/jedi-vim'
+" NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'tpope/vim-fugitive'
 " NeoBundleLazy 'osyo-manga/vim-watchdogs'
 " NeoBundleLazy 'jceb/vim-hier'
@@ -365,7 +365,7 @@ nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
 nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
 
 " jedi-vim
-autocmd FileType python setlocal omnifunc=jedi#completions
+" autocmd FileType python setlocal omnifunc=jedi#completions
 "let g:jedi#popup_select_first=0
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_vim_configuration = 0
