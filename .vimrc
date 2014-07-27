@@ -43,6 +43,9 @@ autocmd FileType ruby,html,eruby set shiftwidth=2 tabstop=2
 " Filetypes with 4-spaces indentation
 autocmd FileType python,scss set shiftwidth=4 tabstop=4
 
+" Use tabs for Go
+autocmd FileType go se noexpandtab
+
 " setup for neobundle.vim {{{
 filetype off
 filetype plugin indent off
