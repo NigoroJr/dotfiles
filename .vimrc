@@ -131,6 +131,7 @@ NeoBundleLazy 'tpope/vim-markdown', {
             \ }}
 NeoBundle 'Align'
 NeoBundle 'TextFormat'
+NeoBundle 'kannokanno/previm'
 
 filetype plugin indent on
 
@@ -169,8 +170,11 @@ let g:quickrun_config.cpp = {
             \ 'cmdopt': '-std=c++11 -Wall -Wextra',
             \ 'hook/quickrunex/enable': 1,
             \ }
+" Open in browser using previm
 let g:quickrun_config.markdown = {
-            \ 'outputter': 'browser',
+            \ 'runner': 'vimscript',
+            \ 'exec': 'PrevimOpen',
+            \ 'outputter': 'null',
             \ 'hook/time/enable': 0,
             \ }
 " }}}
