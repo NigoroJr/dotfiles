@@ -132,6 +132,7 @@ NeoBundleLazy 'tpope/vim-markdown', {
 NeoBundle 'Align'
 NeoBundle 'TextFormat'
 NeoBundle 'kannokanno/previm'
+NeoBundle 'rhysd/clever-f.vim'
 
 filetype plugin indent on
 
@@ -477,6 +478,10 @@ nmap K <Plug>(ref-keyword)
 let g:NERDTreeHijackNetrw = 0
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeDirArrows = 0
+
+" clever-f.vim
+let g:clever_f_fix_key_direction = 1
+let g:clever_f_chars_match_any_signs = 1
 
 " C++ snippets {{{
 augroup cpp-namespace
