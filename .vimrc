@@ -9,7 +9,7 @@ set number
 set wildmode=longest,list
 set foldenable
 set foldmethod=marker
-set history=1000000
+set history=100000
 
 set viewoptions=cursor,folds
 set hlsearch
@@ -58,7 +58,7 @@ if has('vim_starting')
         execute 'set runtimepath^=' . finddir('neobundle.vim')
     elseif &runtimepath !~ '/neobundle.vim'
         if !isdirectory(s:neobundle_dir.'/neobundle.vim')
-            execute printf('get clone %s://github.com/Shougo/neobundle.vim.git',
+            execute printf('git clone %s://github.com/Shougo/neobundle.vim.git',
                         \ (exists('$http_proxy') ? 'https' : 'git'))
                         \ s:neobundle_dir.'/neobundle.vim'
         endif
@@ -117,8 +117,6 @@ NeoBundle 'tpope/vim-fugitive'
 " NeoBundleLazy 'jceb/vim-hier'
 NeoBundleLazy 'dkasak/manpageview'
 NeoBundle 'Shougo/vinarise.vim'
-" NeoBundleLazy 'vim-scripts/DrawIt'
-" NeoBundleLazy 'Lokaltog/vim-easymotion'
 NeoBundle 'tyru/open-browser.vim', {
             \ 'autoload' : {
             \   'filetypes' : ['markdown']
@@ -373,38 +371,11 @@ nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
 nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
 
 " jedi-vim
-" autocmd FileType python setlocal omnifunc=jedi#completions
+"autocmd FileType python setlocal omnifunc=jedi#completions
 "let g:jedi#popup_select_first=0
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-
-" Anywhere SID.
-function! s:SID_PREFIX()
-    return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
-endfunction
-
-" Set tabline.
-function! s:my_tabline()  "{{{
-    let s = ''
-    for i in range(1, tabpagenr('$'))
-        let bufnrs = tabpagebuflist(i)
-        let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
-        let no = i  " display 0-origin tabpagenr.
-        let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
-        let title = fnamemodify(bufname(bufnr), ':t')
-        let title = '[' . title . ']'
-        let s .= '%'.i.'T'
-        let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
-        let s .= no . ':' . title
-        let s .= mod
-        let s .= '%#TabLineFill# '
-    endfor
-    let s .= '%#TabLineFill#%T%=%#TabLine#'
-    return s
-endfunction "}}}
-let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
-" set showtabline=2 " Always show tabline
+"let g:jedi#completions_enabled = 0
+"let g:jedi#auto_vim_configuration = 0
+"let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
 " views {{{
 " Set viewdir to be ~/Dropbox/vim/view/
