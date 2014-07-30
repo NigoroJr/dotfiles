@@ -8,7 +8,6 @@ case `uname -s` in
     *)
         alias ls='ls --color=auto'
         alias grep='grep --color=auto'
-        alias pgrep='grep -P'
         ;;
 esac
 
