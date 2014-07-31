@@ -74,7 +74,9 @@ HISTSIZE=6000000
 SAVEHIST=6000000
 
 # Go completion
-if [ -f `go env GOROOT`/misc/zsh/go ]; then
+if [ -f ~/.zshcomp_go ]; then
+    source ~/.zshcomp_go
+elif hash go 2>/dev/null && [ -f `go env GOROOT`/misc/zsh/go ]; then
     source `go env GOROOT`/misc/zsh/go
 fi
 
