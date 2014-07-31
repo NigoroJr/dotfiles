@@ -131,6 +131,7 @@ NeoBundle 'Align'
 NeoBundle 'TextFormat'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'rhysd/clever-f.vim'
+NeoBundle 'fatih/vim-go'
 
 filetype plugin indent on
 
@@ -225,6 +226,10 @@ let g:neocomplete#force_omni_input_patterns.cpp =
 " perlomni.vim
 let g:neocomplete#force_omni_input_patterns.perl =
             \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+
+" Go
+let g:neocomplete#force_omni_input_patterns.go =
+            \ '[^.[:digit:] *\t]\.\w*'
 
 " }}}
 
