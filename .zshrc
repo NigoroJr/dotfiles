@@ -46,12 +46,8 @@ case `uname -s` in
 esac
 # }}}
 
-# Set EDITOR to my *favorite* editor
+# Environment variables
 export EDITOR="vim"
-# Text garbled when using git diff
-# if [ `which vimpager` != "vimpager not found" ]; then
-#     export PAGER=vimpager
-# fi
 if [ `which vimmanpager | awk '{ print $1 }'` != "vimmanpager" ]; then
     export MANPAGER=vimmanpager
 fi
@@ -102,7 +98,7 @@ setopt nobeep
 # set jobs -l as the output for jobs
 setopt long_list_jobs
 
-# resume when susupended command is entered
+# resume when suspended command is entered
 setopt auto_resume
 
 # show list of completion
@@ -159,10 +155,13 @@ setopt share_history
 # don't add to history when command starts with ' ' (space)
 setopt hist_ignore_space
 
+# Allow things like HEAD^^ in Git repositories
+setopt no_nomatch
+
 # enable cursor selection
 zstyle ':completion:*:default' menu select=1
 
-# Read local enviroment File if there is one
+# Read local environment File if there is one
 if [ -f ~/.zshrc_local ]; then
     source ~/.zshrc_local
 fi
@@ -175,4 +174,3 @@ bindkey "" history-beginning-search-backward-end
 bindkey "" history-beginning-search-forward-end
 bindkey '' history-incremental-pattern-search-backward
 bindkey 's' history-incremental-pattern-search-forward
-
