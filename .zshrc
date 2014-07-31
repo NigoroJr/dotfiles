@@ -1,6 +1,12 @@
 # vim: foldmethod=marker
 # The local .zshrc (.zshrc_local) is read at the end
 
+# Enable completion
+zstyle :compinstall filename "$HOME/.zshrc"
+
+autoload -Uz compinit
+compinit
+
 # Read Source File
 if [ -f ~/.aliases ]; then
     source ~/.aliases
@@ -69,16 +75,14 @@ if [ -d ~/pkg_src/adt-bundle ]; then
     export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
 fi
 
-setopt no_nomatch
-
-zstyle :compinstall filename "$HOME/.zshrc"
-
-autoload -Uz compinit
-compinit
-
 HISTFILE=~/.histfile
 HISTSIZE=6000000
 SAVEHIST=6000000
+
+# Go completion
+if [ -f `go env GOROOT`/misc/zsh/go ]; then
+    source `go env GOROOT`/misc/zsh/go
+fi
 
 # Limit Coredump size
 limit coredumpsize 102400
