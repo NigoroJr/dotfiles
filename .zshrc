@@ -21,9 +21,7 @@ fi
 case `uname -s` in
     # Macintosh
     Darwin)
-        #PATH=$PATH:$(brew --prefix coreutils)/libexec/gnubin
-        local PATH_TO_BREW=`which brew | awk '{ print $1 }'`
-        if [ $PATH_TO_BREW != brew ]; then
+        if hash brew 2>/dev/null; then
             local gnubin=$(brew --prefix coreutils)/libexec/gnubin
             PATH=$PATH:$gnubin
         fi
@@ -48,7 +46,7 @@ esac
 
 # Environment variables
 export EDITOR="vim"
-if [ `which vimmanpager | awk '{ print $1 }'` != "vimmanpager" ]; then
+if hash vimmanpager 2>/dev/null; then
     export MANPAGER=vimmanpager
 fi
 
