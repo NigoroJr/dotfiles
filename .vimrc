@@ -460,6 +460,11 @@ let g:clever_f_fix_key_direction = 1
 let g:clever_f_chars_match_any_signs = 1
 let g:clever_f_across_no_line = 1
 
+" vim-go
+let g:go_snippet_engine = 'neosnippet'
+let g:go_highlight_trailing_whitespace_error = 0
+let g:go_highlight_operators = 0
+
 " C++ snippets {{{
 augroup cpp-namespace
     autocmd!
