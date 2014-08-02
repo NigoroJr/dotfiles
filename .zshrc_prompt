@@ -1,45 +1,49 @@
 # Prompt
-# local DEFAULT=$'%{\e[1;m%}'
-# local BLACK=$'%{\e[1;30m%}'
-# local RED=$'%{\e[1;31m%}'
-# local GREEN=$'%{\e[1;32m%}'
-# local YELLOW=$'%{\e[1;33m%}'
-# local BLUE=$'%{\e[1;34m%}'
-# local PURPLE=$'%{\e[1;35m%}'
-# local CYAN=$'%{\e[1;36m%}'
-# local WHITE=$'%{\e[1;37m%}'
-# local DEFAULT=$'%{\e[1;m%}'
 
-# Using ESC as char code
-# To enter ESC, use Ctrl-v Esc for Vim
-# and Ctrl-q Esc for Emacs
-local BLACK=$'%{[30m%}'
-local RED=$'%{[31m%}'
-local GREEN=$'%{[32m%}'
-local YELLOW=$'%{[33m%}'
-local BLUE=$'%{[34m%}'
-local PURPLE=$'%{[35m%}'
-local CYAN=$'%{[36m%}'
-local WHITE=$'%{[37m%}'
+autoload colors
+colors
 
-case ${UID} in
-    # When root
-    0)
-        PROMPT="%F$GREEN%n%f@%m:%d%F$CYAN#%f "
-        [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-            PROMPT="%F$PURPLE${HOST%%.*}%f ${PROMPT}"
+autoload -U add-zsh-hook
+add-zsh-hook precmd random_colored_prompt
 
-        # Add alias
-        alias rm='rm -i'
-        ;;
-    *)
-        PROMPT="%F$BLUE%n%f@%m:%~%F$RED$%f "
-        # Add right prompt if not in Emacs?
-        # if [ "$INSIDE_EMACS" = "" ]; then
-            RPROMPT=" %* (%W)"
-        # fi
-#         PROMPT="%n@%m:%~$ "
-        [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-            PROMPT="%F$PURPLE${HOST%%.*}%f ${PROMPT}"
-        ;;
-esac
+random_colored_prompt() {
+
+# Hostname
+local p_info=""
+if [ -n "${REMOTEHOST}${SSH_CONNECTION}" ]; then
+    p_info="%F{207}%m%f"
+else
+    p_info="%F{222}%m%f"
+fi
+
+# Arrow with random colors
+valid_colors=({001..015} {022..051} {058..087} {094..159} {161..231} {242..255})
+local random_index=$(( $RANDOM % ${#valid_colors[@]} ))
+local signs="%F{${valid_colors[$random_index]}}->%f"
+# echo "COLOR" ${valid_colors[$random_index]}
+
+# username
+p_info="$p_info$signs%F{45}%n%f"
+# p_info="$p_info$signs%F{039}%n%f"
+
+# Arrow sign that changes color depending on return state of previous command
+local sign=' > '
+p_info+="%0(?,%F{046}$sign%f,%20(?,%F{046}$sign%f,%F{009}$sign%f))"
+
+PROMPT="$p_info"
+RPROMPT="[ %40<...<%F{087}%~%f ]"
+
+}
+
+set_random_color() {
+
+    random_color=${list[$index]}
+}
+
+#local p_pwd="[ %F{087}%~%f ]"$'\n'
+#PROMPT="$p_pwd$p_info"
+
+# naoki@nigorojr:~/src$ ls
+#PROMPT="%F$BLUE%n%f@%m:%~%F$RED$%f "
+# Show time and date
+#RPROMPT=" %* (%W)"

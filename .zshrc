@@ -1,11 +1,10 @@
-# vim: foldmethod=marker
+# vim: foldmethod=marker ft=zsh
 # The local .zshrc (.zshrc_local) is read at the end
 
 # Enable completion
 zstyle :compinstall filename "$HOME/.zshrc"
 
-autoload -Uz compinit
-compinit
+autoload -Uz compinit && compinit
 
 # Read Source File
 if [ -f ~/.aliases ]; then
@@ -43,35 +42,6 @@ case `uname -s` in
         ;;
 esac
 # }}}
-
-# Environment variables
-export EDITOR="vim"
-if hash vimmanpager 2>/dev/null; then
-    export MANPAGER=vimmanpager
-fi
-
-# Change the PATH according to whether the user is root or not
-# Copied from /etc/profile
-if [ "$EUID" = "0" ] || [ "$USER" = "root" ] ; then
-	PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${ROOTPATH}"
-else
-	PATH="/usr/local/bin:/usr/bin:/bin:${PATH}"
-fi
-
-# Add ~/bin to PATH
-PATH=$HOME/bin:$PATH
-
-# Add adt-bundle to PATH if the directory exists
-if [ -d ~/pkg_src/adt-bundle ]; then
-    # add android sdk to PATH
-    local ANDROID_SDK=$HOME/pkg_src/adt-bundle/sdk
-    # local ANDROID_SDK=/usr/local/src/adt-bundle/sdk
-    export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
-fi
-
-HISTFILE=~/.histfile
-HISTSIZE=6000000
-SAVEHIST=6000000
 
 # Go completion
 if [ -f ~/.zshcomp_go ]; then
