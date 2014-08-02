@@ -9,6 +9,9 @@ export QT_IM_MODULE=ibus
 ibus-daemon -dx &
 
 export LANG="en_US.UTF-8"
+if [ -d $HOME/src/go ]; then
+    export GOPATH=$HOME/src/go
+fi
 
 xrandr --output HDMI1 --primary --auto --output LVDS1 --auto --right-of HDMI1
 #xrandr --output VGA1 --primary --auto --pos 0x180 --output LVDS1 --auto --pos 1440x0
