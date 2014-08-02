@@ -1,4 +1,5 @@
 # Prompt
+# vim: foldmethod=marker
 
 autoload colors
 colors
@@ -6,9 +7,64 @@ colors
 autoload -U add-zsh-hook
 add-zsh-hook precmd random_colored_prompt
 
+get_git_prompt() {  # {{{
+    local prompt=""
+
+    local branch_name=`git rev-parse --abbrev-ref HEAD 2>/dev/null`
+    if [[ -z $branch_name ]]; then
+        # Not in git repository
+        return
+    fi
+
+    if [[ -z `git status --short 2>/dev/null` ]]; then
+        # Clean
+        echo "[ %F{046}$branch_name%f ]"
+        return
+    fi
+
+    # Dirty
+
+    # Total number of files
+    #local files_changed=`git status --short | wc -l`
+    #prompt+="%F{014}T%f$files_changed "
+
+    # Number of staged files
+    local staged_files=`git status --short | grep '^\s*A' | wc -l`
+    if [ $staged_files -ne 0 ]; then
+        prompt+="%F{010}S%f$staged_files "
+    fi
+
+    # Number of modified files
+    local modified_files=`git status --short | grep '^\s*M' | wc -l`
+    if [ $modified_files -ne 0 ]; then
+        prompt+="%F{009}M%f$modified_files "
+    fi
+
+    # Number of untracked files
+    local untracked_files=`git status --short | grep '^\s*??' | wc -l`
+    if [ $untracked_files -ne 0 ]; then
+        # prompt+="%F{226}U%f$untracked_files "
+        prompt+="%F{099}U%f$untracked_files "
+    fi
+
+    local conflicts=`git status --short | grep '^\s*UU' | wc -l`
+    if [ $conflicts -ne 0 ]; then
+        prompt+="%F{190}C%f$conflicts "
+    fi
+
+    if [[ ! -z "`git status | grep '^rebase in progress'`" ]]; then
+        # Rebase is in progress
+        prompt+="%F{039}REBASE%f"
+    else
+        prompt+="%F{197}$branch_name%f"
+    fi
+
+    echo "[ $prompt ]"
+}   # }}}
+
 random_colored_prompt() {
 
-# Hostname
+# Change hostname on remote login
 local p_info=""
 if [ -n "${REMOTEHOST}${SSH_CONNECTION}" ]; then
     p_info="%F{207}%m%f"
@@ -20,28 +76,38 @@ fi
 valid_colors=({001..015} {022..051} {058..087} {094..159} {161..231} {242..255})
 local random_index=$(( $RANDOM % ${#valid_colors[@]} ))
 local signs="%F{${valid_colors[$random_index]}}->%f"
-# echo "COLOR" ${valid_colors[$random_index]}
 
 # username
 p_info="$p_info$signs%F{45}%n%f"
 # p_info="$p_info$signs%F{039}%n%f"
 
+# Display in one line if short enough
+local pwd_length=`expr length $PWD`
+if [ $pwd_length -lt 45 ]; then
+    p_info+=":%~"
+fi
+
 # Arrow sign that changes color depending on return state of previous command
 local sign=' > '
 p_info+="%0(?,%F{046}$sign%f,%20(?,%F{046}$sign%f,%F{009}$sign%f))"
 
-PROMPT="$p_info"
-RPROMPT="[ %40<...<%F{087}%~%f ]"
+# Display in two lines if too long
+if [ $pwd_length -ge 45 ]; then
+    # PROMPT="[ %F{142}%~%f ]"$'\n'"$PROMPT"
+    PROMPT="[ %F{219}%~%f ]"$'\n'"$p_info"
+else
+    PROMPT="$p_info"
+fi
+
+# Show git repository info
+local git_prompt="`get_git_prompt`"
+if [[ ! -z $git_prompt ]]; then
+   RPROMPT="$git_prompt"
+else
+   unset RPROMPT
+fi
 
 }
-
-set_random_color() {
-
-    random_color=${list[$index]}
-}
-
-#local p_pwd="[ %F{087}%~%f ]"$'\n'
-#PROMPT="$p_pwd$p_info"
 
 # naoki@nigorojr:~/src$ ls
 #PROMPT="%F$BLUE%n%f@%m:%~%F$RED$%f "
