@@ -128,6 +128,9 @@ setopt hist_ignore_space
 # Allow things like HEAD^^ in Git repositories
 setopt no_nomatch
 
+# Only show last RPROMPT
+#setopt transient_rprompt
+
 # enable cursor selection
 zstyle ':completion:*:default' menu select=1
 
