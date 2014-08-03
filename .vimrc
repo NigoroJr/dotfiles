@@ -132,6 +132,7 @@ NeoBundle 'TextFormat'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'fatih/vim-go'
+NeoBundle 'rhysd/vim-go-impl'
 
 filetype plugin indent on
 
