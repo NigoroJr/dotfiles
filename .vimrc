@@ -325,10 +325,6 @@ autocmd FileType vimshell nmap <silent> <buffer> <CR> A<CR>
 let g:vimshell_prompt_expr = 'getcwd()." > "'
 let g:vimshell_prompt_pattern = '^\f\+ > '
 
-" zsh-like completion
-" Figuring out what this does
-" autocmd FileType vimshell nmap <silent> <buffer> <C-k> <Plug>(vimshell_zsh_complete)
-
 " }}}
 
 " neosnippet {{{
@@ -336,7 +332,6 @@ autocmd FileType neosnippet set noexpandtab
 " Toggle NeoSnippet Editor
 nnoremap <silent> <Leader>es :<C-u>NeoSnippetEdit
 
-" neosnippet settings
 let g:neosnippet#snippets_directory = '~/.vim/snippets/'
 
 " <TAB>: completion
