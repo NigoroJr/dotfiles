@@ -29,13 +29,13 @@ get_git_prompt() {  # {{{
     #prompt+="%F{014}T%f$files_changed "
 
     # Number of staged files
-    local staged_files="`git status --short | grep '^\s*A' | wc -l | tr -d ' '`"
+    local staged_files="`git diff --cached --numstat | wc -l | tr -d ' '`"
     if [ "$staged_files" -ne 0 ]; then
         prompt+="%F{010}S%f$staged_files "
     fi
 
     # Number of modified files
-    local modified_files="`git status --short | grep '^\s*M' | wc -l | tr -d ' '`"
+    local modified_files="`git diff --numstat | wc -l | tr -d ' '`"
     if [ "$modified_files" -ne 0 ]; then
         prompt+="%F{009}M%f$modified_files "
     fi
