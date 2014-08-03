@@ -1,61 +1,46 @@
-snippet perl 
+snippet		perl
 	#!/usr/bin/perl
 
 	use strict;
 	use warnings;
 
-	${1}
-
-snippet perl5
-	#!/usr/bin/perl
-
-    use 5.010;
-	use strict;
-	use warnings;
 	${1}
 
 # Package
-snippet package
-    package ${1: package name};
+snippet		package
+	package ${1: package name};
 
-    ${0}
+	${0}
 
-    1;
+	1;
 
-# print array for debuging
-snippet check_array
-abbr    print join("${1:glue}", ${2:array}), "\n";
-    print join("${1:glue}", ${2:array}), "\n";
+# Store STDIN into variable
+snippet		stdin
+abbr		chomp(my ${1} = <STDIN>);
+	chomp(my $${1:var} = <STDIN>);
+	${0}
 
-# STDIN snippet
-snippet     stdin
-abbr        chomp(my ${1} = <STDIN>);
-    chomp(my $${1:var} = <STDIN>);
-    ${0}
+# Swap variables
+snippet		swap
+abbr		($var1, $var2) = ($var2, $var1);
+	(${1:var1}, ${2:var2}) = ($2, $1);
+	${0}
 
-# Swap 2 variables
-snippet     swap
-abbr        ($var1, $var2) = ($var2, $var1);
-    (${1:var1}, ${2:var2}) = ($2, $1);
-    ${0}
+snippet		push
+abbr		push @array, $scalar
+	push @${2}, $${1};
 
-snippet five
-    use 5.010;
-    ${0}
+snippet		p
+	print "${1}\n";
 
-snippet     push
-abbr        push @array, $scalar
-    push @${2}, $${1};
+snippet		pf
+	printf "${1}\n", ${2};
 
-snippet p
-    print "${1:}\n";
+snippet		pd
+alias		dumper
+	print Dumper(${1});
 
-snippet pf
-    printf "${1}\n", ${2};
-
-snippet dp
-    print Dumper(${1});
-
-snippet data
-    use Data::Dumper;
-
+snippet		dd
+abbr		use Data::Dumper;
+	use Data::Dumper;
+	${0}

@@ -332,6 +332,7 @@ let g:vimshell_prompt_pattern = '^\f\+ > '
 " }}}
 
 " neosnippet {{{
+autocmd FileType neosnippet set noexpandtab
 " Toggle NeoSnippet Editor
 nnoremap <silent> <Leader>es :<C-u>NeoSnippetEdit
 
