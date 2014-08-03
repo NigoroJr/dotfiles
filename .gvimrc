@@ -1,3 +1,4 @@
+" vim: foldmethod=marker
 "colorscheme ansi_blows
 colorscheme molokai
 " Favorites
@@ -25,3 +26,11 @@ set guioptions-=m " Hide menubar
 set guioptions-=T " Hide toolbar
 set guioptions-=r " Hide right scrollbar
 set guioptions-=L " Hide left scrollbar
+
+NeoBundleSource 'vim-watchdogs' 
+NeoBundleSource 'vim-hier'
+" {{{
+let g:watchdogs_check_BufWritePost_enable = 1
+call watchdogs#setup(g:quickrun_config)
+nmap <silent> <Leader>wd :WatchdogsRun<CR>
+" }}}
