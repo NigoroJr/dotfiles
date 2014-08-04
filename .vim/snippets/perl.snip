@@ -46,3 +46,23 @@ snippet		dd
 abbr		use Data::Dumper;
 	use Data::Dumper;
 	${0}
+
+snippet     benchmark
+abbr        use Benchmark(:all);
+options     head
+	use Benchmark qw(:all);
+
+snippet     cmpthese
+abbr        cmpthese(100000, {...})
+	cmpthese(${1:100000}, {
+		${2:sub1} => sub { ${3:$2()} },
+		${4:sub2} => sub { ${5:$4()} },${0}
+	});
+
+snippet     timethese
+abbr        timethese(100000, {...})
+	timethese(${1:100000}, {
+		${2:sub1} => sub { ${3:$2()} },
+		${4:sub2} => sub { ${5:$4()} },${0}
+	});
+
