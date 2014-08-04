@@ -1,3 +1,5 @@
+# vim: noexpandtab
+
 snippet		main
 	int main(int argc, char const* argv[]) {${0:TARGET}
 		return 0;
@@ -6,22 +8,21 @@ snippet		main
 
 snippet		inc
 	#include <${1:iostream}>
-    ${0}
+	${0}
 
 snippet		incl
 	#include "${1}"
-    ${0}
+	${0}
 
 snippet		pl
 	std::cout << ${1} << std::endl;${0}
 
-snippet     cout
-    std::cout << ${0}
+snippet		cout
+	std::cout << ${0}
 
-snippet     endl
-    std::endl;${0}
+snippet		endl
+	std::endl;${0}
 
-# class
 snippet		class
 	class ${1:Name} {
 	public:
@@ -30,5 +31,5 @@ snippet		class
 
 snippet		using
 abbr		using namespace std;
-    using namespace ${1:std};
-    ${0}
+	using namespace ${1:std};
+	${0}
