@@ -27,10 +27,10 @@ syntax on
 autocmd FileType text,vimshell set textwidth=0
 autocmd FileType ruby,html,eruby,vim set shiftwidth=2 tabstop=2
 autocmd FileType python,scss set shiftwidth=4 tabstop=4
-" Hard-tabs for Go
+" Hard-tabs
 autocmd FileType go set noexpandtab
 
-" Jump to matching keywords
+" Jump to matching keyword
 runtime macros/matchit.vim
 
 " Case-sensitive search, case-insensitive command completion  {{{
@@ -265,9 +265,7 @@ let g:quickrun_config.markdown = {
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 " {{{
-autocmd FileType neosnippet set noexpandtab
-" Toggle NeoSnippet Editor
-nnoremap <silent> <Leader>es :<C-u>NeoSnippetEdit
+nnoremap <Leader>es :<C-u>NeoSnippetEdit
 
 let g:neosnippet#snippets_directory = '~/.vim/snippets/'
 
@@ -442,7 +440,7 @@ NeoBundle 'tyru/open-browser.vim', {
 NeoBundle 'rhysd/clever-f.vim'
 " {{{
 let g:clever_f_fix_key_direction = 1
-let g:clever_f_chars_match_any_signs = 1
+let g:clever_f_chars_match_any_signs = 0
 let g:clever_f_across_no_line = 1
 " }}}
 
