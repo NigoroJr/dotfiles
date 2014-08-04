@@ -1,0 +1,26 @@
+# vim: noexpandtab
+
+snippet		p
+abbr		fmt.Print()
+	fmt.Print(${1})${0}
+
+snippet		pl
+abbr		fmt.Println()
+	fmt.Println(${1})${0}
+
+snippet     pf
+abbr        fmt.Printf()
+	fmt.Printf("${1}", ${2})${0}
+
+snippet     fp
+abbr        fmt.Fprint()
+	fmt.Fprint(${1:w}, ${2})${0}
+
+snippet     fpl
+abbr        fmt.Fprintln()
+	fmt.Fprintln(${1:w}, ${2})${0}
+
+snippet     fpf
+abbr        fmt.Fprintf()
+	fmt.Fprintf(${1:w}, "${2}", ${3})${0}
+
