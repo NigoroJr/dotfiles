@@ -474,7 +474,7 @@ NeoBundle 'ciaranm/securemodelines'
 " }}}
 
 NeoBundleLazy 'osyo-manga/vim-watchdogs'
-NeoBundle 'jceb/vim-hier'
+NeoBundleLazy 'jceb/vim-hier'
 
 NeoBundleLazy 'dkasak/manpageview'
 " {{{
