@@ -42,6 +42,10 @@ alias gpp='g++'
 alias fgrep='grep -F'
 alias egrep='grep -E'
 
+# vi foobar.txt
+# <C-a>g instead of having to type gvim
+alias gvi='gvim'
+
 # emacs is too long to type!
 alias em='emacs -nw'
 
