@@ -194,12 +194,12 @@ let g:vimshell_prompt_pattern = '^\f\+ > '
 " }}}
 
 NeoBundle 'Shougo/vimproc.vim', {
-      \    'build' : {
-      \        'windows' : 'make -f make_mingw32.mak',
-      \        'cygwin' : 'make -f make_cygwin.mak',
-      \        'mac' : 'make -f make_mac.mak',
-      \        'unix' : 'make -f make_unix.mak',
-      \    },
+      \ 'build' : {
+      \   'windows' : 'make -f make_mingw32.mak',
+      \   'cygwin' : 'make -f make_cygwin.mak',
+      \   'mac' : 'make -f make_mac.mak',
+      \   'unix' : 'make -f make_unix.mak',
+      \ },
       \ }
 
 NeoBundle 'thinca/vim-quickrun'
@@ -207,30 +207,30 @@ NeoBundle 'osyo-manga/shabadou.vim'
 NeoBundle 'rhysd/wandbox-vim'
 " {{{
 let g:quickrun_config = {
-      \ '_' : {
-      \ 'hook/time/enable': 0,
-      \ 'hook/close_unite_quickfix/enable_hook_loaded' : 1,
-      \ 'hook/unite_quickfix/enable_failure': 1,
-      \ 'hook/close_quickfix/enable_exit': 1,
-      \ 'hook/close_buffer/enable_empty_data': 1,
-      \ 'hook/close_buffer/enable_failure': 1,
-      \ 'outputter': 'multi:buffer:quickfix',
-      \ 'outputter/buffer/close_on_empty': 1,
-      \ 'hook/quickfix_replate_tempname_to_bufnr/enable_exit' : 1,
-      \ 'hook/quickfix_replate_tempname_to_bufnr/priority_exit' : -10,
-      \ 'runmode': 'async:remote:vimproc',
-      \ 'runner': 'vimproc',
-      \ 'runner/vimproc/updatetime': 60,
+      \ '_': {
+      \   'hook/time/enable': 0,
+      \   'hook/close_unite_quickfix/enable_hook_loaded' : 1,
+      \   'hook/unite_quickfix/enable_failure': 1,
+      \   'hook/close_quickfix/enable_exit': 1,
+      \   'hook/close_buffer/enable_empty_data': 1,
+      \   'hook/close_buffer/enable_failure': 1,
+      \   'outputter': 'multi:buffer:quickfix',
+      \   'outputter/buffer/close_on_empty': 1,
+      \   'hook/quickfix_replate_tempname_to_bufnr/enable_exit' : 1,
+      \   'hook/quickfix_replate_tempname_to_bufnr/priority_exit' : -10,
+      \   'runmode': 'async:remote:vimproc',
+      \   'runner': 'vimproc',
+      \   'runner/vimproc/updatetime': 60,
       \ },
       \ 'make': {
-      \ 'command': 'make',
-      \ 'exec': "%c %o",
-      \ 'runner': 'vimproc',
+      \   'command': 'make',
+      \   'exec': "%c %o",
+      \   'runner': 'vimproc',
       \ },
-      \ 'watchdogs_checker/_' : {
-      \ 'hook/close_quickfix/enable_exit': 1,
-      \ 'hook/unite_quickfix/enable': 0,
-      \ 'hook/close_unite_quickfix/enable_exit': 1,
+      \ 'watchdogs_checker/_': {
+      \   'hook/close_quickfix/enable_exit': 1,
+      \   'hook/unite_quickfix/enable': 0,
+      \   'hook/close_unite_quickfix/enable_exit': 1,
       \ },
       \ }
 let g:quickrun_config.cpp = {
@@ -325,9 +325,7 @@ NeoBundle 'Shougo/vimfiler.vim'
 let g:vimfiler_as_default_explorer=1
 let g:vimfiler_time_format="%m/%d/%y %H:%M%S"
 
-" VimFiler with ,fl
 nnoremap <silent> <Leader>vf :VimFiler<CR>
-
 " }}}
 
 NeoBundleLazy 'osyo-manga/vim-marching', {
@@ -357,7 +355,7 @@ NeoBundleLazy 'osyo-manga/vim-stargate', {
       \ }
 " {{{
 let g:stargate#include_paths = {
-      \ "cpp" : marching_include_paths
+      \ 'cpp': marching_include_paths,
       \ }
 nmap <Leader>sg :StargateInclude<Space>
 " }}}
@@ -442,7 +440,8 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tyru/open-browser.vim', {
       \ 'autoload' : {
       \   'filetypes' : ['markdown']
-      \ }}
+      \ },
+      \ }
 
 NeoBundle 'rhysd/clever-f.vim'
 " {{{
@@ -515,7 +514,8 @@ let g:manpageview_winopen='vsplit='
 NeoBundleLazy 'tpope/vim-markdown', {
       \ 'autoload' : {
       \   'filetypes' : ['markdown']
-      \ }}
+      \ },
+      \ }
 NeoBundleLazy 'vim-scripts/sudo.vim'
 " NeoBundleLazy 'davidhalter/jedi-vim'
 " {{{
