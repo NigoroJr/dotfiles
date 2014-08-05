@@ -51,6 +51,8 @@ alias em='emacs -nw'
 
 alias reload='source ~/.zshrc'
 
+alias g='git --no-pager'
+
 # If shell is zsh
 if [[ $SHELL =~ zsh ]]; then
     # Global alias
