@@ -25,7 +25,7 @@ main = do
 -- myModMask = mod4Mask
 
 -- myLayoutHook = avoidStruts $ layoutHook defaultConfig
-myLayoutHook = avoidStruts $ smartBorders $ ((mastered (1/100) (50/100) $ Tall nmaster delta (36/50)) ||| Full ||| tiled ||| Mirror tiled)
+myLayoutHook = avoidStruts $ smartBorders $ ((mastered (1/100) (42/100) $ Tall nmaster delta (38/50)) ||| Full ||| tiled ||| Mirror tiled)
     where
     -- three_col = ThreeCol nmaster delta ratio
 
