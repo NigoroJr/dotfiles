@@ -104,7 +104,8 @@ local git_prompt="`get_git_prompt`"
 if [[ -n $git_prompt ]]; then
    RPROMPT="$git_prompt"
 else
-   unset RPROMPT
+   #unset RPROMPT
+   RPROMPT="[ %F{051}%~%f ]"
 fi
 
 }
