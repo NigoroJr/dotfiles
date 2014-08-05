@@ -131,6 +131,9 @@ setopt no_nomatch
 # Only show last RPROMPT
 #setopt transient_rprompt
 
+# C-s for incremental forward search
+setopt noflowcontrol
+
 # enable cursor selection
 zstyle ':completion:*:default' menu select=1
 
@@ -143,7 +146,27 @@ fi
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-bindkey "" history-beginning-search-backward-end
-bindkey "" history-beginning-search-forward-end
-bindkey '' history-incremental-pattern-search-backward
+bindkey '' history-beginning-search-backward-end
+bindkey '' history-beginning-search-forward-end
+
+# Do an incremental backward search starting from previously executed command
+history-incremental-pattern-search-backward-start-from-previous() {
+    CMD=$BUFFER
+    zle up-history
+    zle history-incremental-pattern-search-backward
+
+    # Was aborted
+    # Either works
+    #if (( #KEYS == ##\C-g )) || (( #KEYS == ##\C-c )) || (( #KEYS == ##\C-\\ )); then
+    if [ "$KEYS" == "" ] || [ "$KEYS" == "" ] || [ "$KEYS" == "" ]; then
+        BUFFER=$CMD
+    fi
+}
+zle -N history-incremental-pattern-search-backward-start-from-previous
+
+# bindkey '' history-incremental-pattern-search-backward
+bindkey '' history-incremental-pattern-search-backward-start-from-previous
 bindkey 's' history-incremental-pattern-search-forward
+
+bindkey -M isearch '' backward-kill-word
+bindkey -M isearch '' history-incremental-pattern-search-backward

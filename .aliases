@@ -49,6 +49,8 @@ alias gvi='gvim'
 # emacs is too long to type!
 alias em='emacs -nw'
 
+alias reload='source ~/.zshrc'
+
 # If shell is zsh
 if [[ $SHELL =~ zsh ]]; then
     # Global alias
