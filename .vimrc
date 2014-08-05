@@ -275,7 +275,7 @@ NeoBundle 'osyo-manga/unite-quickfix'
 " Start with insert mode
 let g:unite_enable_start_insert=1
 " Open Unite vertically
-let g:unite_enable_split_vertically=1
+" let g:unite_enable_split_vertically=1
 let g:unite_split_rule='botright'
 
 " Recently used files
