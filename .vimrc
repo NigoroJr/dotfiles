@@ -526,6 +526,10 @@ NeoBundleLazy 'vim-scripts/sudo.vim'
 "let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 " }}}
 
+NeoBundle 'mattn/disableitalic-vim', {
+      \ 'gui': 1,
+      \ }
+
 call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck
