@@ -345,9 +345,10 @@ nnoremap <silent> <Leader>vf :VimFiler<CR>
 
 " }}}
 
-NeoBundle 'osyo-manga/vim-marching', {
-      \ 'depends' : ['Shougo/vimproc.vim', 'osyo-manga/vim-reunions'],
-      \ 'autoload' : {'filetypes' : ['c', 'cpp']}
+NeoBundleLazy 'osyo-manga/vim-marching', {
+      \ 'depends': ['Shougo/vimproc.vim', 'osyo-manga/vim-reunions'],
+      \ 'autoload': {
+      \   'filetypes': ['c', 'cpp']}
       \ }
 " {{{
 let g:marching_enable_neocomplete = 1
@@ -364,8 +365,10 @@ imap <C-x><C-o> <Plug>(marching_force_start_omni_complete)
 nmap <Leader>mc :MarchingBufferClearCache<CR>
 " }}}
 
-NeoBundle 'osyo-manga/vim-stargate', {
-      \ 'autoload' : {'filetypes' : ['cpp']}
+NeoBundleLazy 'osyo-manga/vim-stargate', {
+      \ 'autoload': {
+      \   'filetypes': ['cpp']
+      \ },
       \ }
 " {{{
 let g:stargate#include_paths = {
@@ -402,25 +405,44 @@ let g:ref_use_vimproc=1
 nmap K <Plug>(ref-keyword)
 " }}}
 
-NeoBundle 'fatih/vim-go'
-NeoBundle 'rhysd/vim-go-impl'
+" Go programming
 " {{{
-let g:go_snippet_engine = 'neosnippet'
-let g:go_highlight_trailing_whitespace_error = 0
-let g:go_highlight_operators = 0
+NeoBundleLazy 'fatih/vim-go', {
+      \ 'autoload': {
+      \   'filetypes': ['go'],
+      \ },
+      \ }
+" {{{
+let s:bundle = neobundle#get('vim-go')
+function! s:bundle.hooks.on_source(bundle)
+  let g:go_snippet_engine = 'neosnippet'
+  let g:go_highlight_trailing_whitespace_error = 0
+  let g:go_highlight_operators = 0
+endfunction
+" }}}
+NeoBundleLazy 'rhysd/vim-go-impl', {
+      \ 'autoload': {
+      \   'filetypes': ['go'],
+      \ },
+      \ }
 " }}}
 
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'vim-scripts/dbext.vim'
-
+" Ruby on Rails
+" {{{
+NeoBundleLazy 'tpope/vim-rails', {
+      \ 'autoload': {
+      \   'filetypes': ['ruby', 'eruby', 'css', 'scss', 'html', 'javascript', 'yaml'],
+      \ },
+      \ }
 NeoBundle 'scrooloose/nerdtree'
 " {{{
 command Rtree NERDTreeFind
-
 " Don't use NERDTree when opening directory
 let g:NERDTreeHijackNetrw = 0
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeDirArrows = 0
+" }}}
+NeoBundleLazy 'vim-scripts/dbext.vim'
 " }}}
 
 NeoBundle 'wesQ3/vim-windowswap'
@@ -444,8 +466,20 @@ let g:clever_f_chars_match_any_signs = 0
 let g:clever_f_across_no_line = 1
 " }}}
 
-NeoBundle 'c9s/perlomni.vim'
-NeoBundle 'hotchpotch/perldoc-vim'
+" Perl
+" {{{
+NeoBundleLazy 'c9s/perlomni.vim', {
+      \ 'autoload': {
+      \   'filetypes': ['perl'],
+      \ },
+      \ }
+NeoBundleLazy 'hotchpotch/perldoc-vim'
+NeoBundleLazy 'c9s/perlomni.vim', {
+      \ 'autoload': {
+      \   'filetypes': ['perl'],
+      \ },
+      \ }
+" }}}
 
 NeoBundle 'Align'
 NeoBundle 'tomtom/tcomment_vim'
@@ -473,8 +507,20 @@ NeoBundle 'ciaranm/securemodelines'
 "inoremap <expr><C-l> neocomplcache#complete_common_string()
 " }}}
 
-NeoBundleLazy 'osyo-manga/vim-watchdogs'
-NeoBundleLazy 'jceb/vim-hier'
+NeoBundle 'osyo-manga/vim-watchdogs', {
+      \ 'gui': 1,
+      \ }
+" {{{
+let s:bundle = neobundle#get('vim-watchdogs')
+function! s:bundle.hooks.on_source(bundle)
+  let g:watchdogs_check_BufWritePost_enable = 1
+  call watchdogs#setup(g:quickrun_config)
+endfunction
+nmap <silent> <Leader>wd :WatchdogsRun<CR>
+" }}}
+NeoBundle 'jceb/vim-hier', {
+      \ 'gui': 1,
+      \ }
 
 NeoBundleLazy 'dkasak/manpageview'
 " {{{
