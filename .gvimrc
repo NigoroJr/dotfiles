@@ -26,3 +26,5 @@ set guioptions-=m " Hide menubar
 set guioptions-=T " Hide toolbar
 set guioptions-=r " Hide right scrollbar
 set guioptions-=L " Hide left scrollbar
+
+set iminsert=2
