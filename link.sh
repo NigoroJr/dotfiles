@@ -9,6 +9,6 @@ for F in `find ~/dotfiles/ -maxdepth 1 -name '.*' | grep -v '\.git'`; do
     if [ "$1" = "unlink" ]; then
         unlink ~/$F
     else
-        ln --verbose -sfn ~/dotfiles/$F ~/$F
+        ln -vsfn ~/dotfiles/$F ~/$F
     fi
 done
