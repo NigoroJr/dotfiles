@@ -52,6 +52,7 @@ alias em='emacs -nw'
 alias reload='source ~/.zshrc'
 
 alias g='git --no-pager'
+alias gap='git add -p'
 
 # If shell is zsh
 if [[ $SHELL =~ zsh ]]; then
