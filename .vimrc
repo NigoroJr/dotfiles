@@ -1,5 +1,6 @@
 set backup
 set backupdir=~/.vim/backup/
+set viewdir=~/.vim/view/
 set tabstop=4
 set expandtab
 set shiftwidth=4
@@ -19,37 +20,19 @@ set splitright
 set splitbelow
 set modeline
 set completeopt-=preview
-let mapleader=","
+let mapleader=','
 noremap \ ,
 syntax on
-
-" Indentations
-autocmd FileType text,vimshell set textwidth=0
-autocmd FileType ruby,html,eruby,vim set shiftwidth=2 tabstop=2
-autocmd FileType python,scss set shiftwidth=4 tabstop=4
-" Hard-tabs
-autocmd FileType go set noexpandtab
-
 " Jump to matching keyword
 runtime macros/matchit.vim
 
-" Case-sensitive search, case-insensitive command completion  {{{
-let b:case_insensitive_cmd = 0
-if b:case_insensitive_cmd
-  nnoremap : :call IgnoreCase()<CR>:
-  function! IgnoreCase()
-    set ignorecase
-  endfunction
-  nnoremap / :call NoIgnoreCase()<CR>/
-  function! NoIgnoreCase()
-    set noignorecase
-  endfunction
-endif
+" Filetype-specific text properties {{{
+autocmd FileType text,vimshell set textwidth=0
+autocmd FileType ruby,html,eruby,vim set shiftwidth=2 tabstop=2
+autocmd FileType python,scss set shiftwidth=4 tabstop=4
+autocmd FileType go set noexpandtab
 " }}}
-
-" Keybindings   {{{
-inoremap <C-d> <Del>
-
+" General keybindings   {{{
 " Move by physical/logical line
 nnoremap gj j
 nnoremap gk k
@@ -70,7 +53,19 @@ nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
 " Move pwd to directory of buffer
 nnoremap <silent><Leader>cd :cd %:h<CR>
 " }}}
-
+" Case-sensitive search, case-insensitive command completion  {{{
+let b:case_insensitive_cmd = 0
+if b:case_insensitive_cmd
+  nnoremap : :call IgnoreCase()<CR>:
+  function! IgnoreCase()
+    set ignorecase
+  endfunction
+  nnoremap / :call NoIgnoreCase()<CR>/
+  function! NoIgnoreCase()
+    set noignorecase
+  endfunction
+endif
+" }}}
 " Insert closing braces {{{
 fun! CloseBraces()
   " Don't do this for LaTeX documents
@@ -80,7 +75,6 @@ fun! CloseBraces()
 endfun
 autocmd FileType * call CloseBraces()
 " }}}
-
 " C++ snippets {{{
 augroup cpp-namespace
   autocmd!
@@ -99,27 +93,8 @@ function! s:expand_namespace()
   endif
 endfunction
 " }}}
-
-" Create backup dir if it doesn't exist {{{
-if !isdirectory(expand('~/.vim/backup/'))
-  call mkdir(expand("~/.vim/backup/"))
-endif
-" }}}
-
-" views {{{
-" Set viewdir to be ~/Dropbox/vim/view/
-if isdirectory(expand('~/Dropbox/vim/view/'))
-  set viewdir=~/Dropbox/vim/view/
-else
-  if !isdirectory(expand('~/.vim/view/'))
-    call mkdir(expand("~/.vim/view/"))
-  endif
-
-  set viewdir=~/.vim/view/
-endif
-
-" Set filetypes to not save/load the view
-au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+" Set filetypes to not save/load the view {{{
+autocmd FileType gitcommit autocmd! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 let no_view = ['gitcommit']
 augroup vimrc
   autocmd BufWritePost *
@@ -132,20 +107,119 @@ augroup vimrc
         \|  endif
 augroup END
 " }}}
-
-" setup for neobundle.vim {{{
+" Setup for neobundle.vim {{{
 if has('vim_starting')
   set nocompatible
   set runtimepath+=~/.vim/bundle/neobundle.vim
 endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 " }}}
-
-" neobundle.vim {{{
+" Plugins managed with neobundle.vim {{{
 NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundleFetch 'davidhalter/jedi'
 
+NeoBundle 'Align'
+NeoBundle 'ciaranm/securemodelines'
+NeoBundle 'gcmt/wildfire.vim'
+NeoBundle 'goldfeld/vim-seek'
+NeoBundle 'jceb/vim-hier', {
+      \ 'gui': 1,
+      \ }
+NeoBundle 'kana/vim-altr'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'mattn/disableitalic-vim', {
+      \ 'gui': 1,
+      \ }
+NeoBundle 'mips.vim'
+NeoBundle 'osyo-manga/shabadou.vim'
+NeoBundle 'osyo-manga/unite-quickfix'
+NeoBundle 'osyo-manga/vim-watchdogs', {
+      \ 'gui': 1,
+      \ }
+NeoBundle 'rhysd/clever-f.vim'
+NeoBundle 'rhysd/wandbox-vim'
+NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Shougo/neocomplete.vim'
-" {{{
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'Shougo/vimproc.vim', {
+      \ 'build': {
+      \   'windows': 'make -f make_mingw32.mak',
+      \   'cygwin': 'make -f make_cygwin.mak',
+      \   'mac': 'make -f make_mac.mak',
+      \   'unix': 'make -f make_unix.mak',
+      \ },
+      \ }
+NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'Shougo/vinarise.vim'
+NeoBundle 'TextFormat'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'thinca/vim-ref'
+NeoBundle 'tkztmk/vim-vala'
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'wesQ3/vim-windowswap'
+" Lazy-loaded plugins {{{
+NeoBundleLazy 'c9s/perlomni.vim', {
+      \ 'autoload': {
+      \   'filetypes': ['perl'],
+      \ },
+      \ }
+NeoBundleLazy 'davidhalter/jedi-vim', {
+      \ 'autoload': {
+      \   'filetypes': ['python'],
+      \ }
+      \ }
+NeoBundleLazy 'dbext.vim'
+NeoBundleLazy 'dkasak/manpageview'
+NeoBundleLazy 'fatih/vim-go', {
+      \ 'autoload': {
+      \   'filetypes': ['go'],
+      \ },
+      \ }
+NeoBundleLazy 'hotchpotch/perldoc-vim'
+NeoBundleLazy 'osyo-manga/vim-marching', {
+      \ 'depends': ['Shougo/vimproc.vim', 'osyo-manga/vim-reunions'],
+      \ 'autoload': {
+      \   'filetypes': ['c', 'cpp']}
+      \ }
+NeoBundleLazy 'osyo-manga/vim-stargate', {
+      \ 'autoload': {
+      \   'filetypes': ['cpp']
+      \ },
+      \ }
+NeoBundleLazy 'rhysd/vim-go-impl', {
+      \ 'autoload': {
+      \   'filetypes': ['go'],
+      \ },
+      \ }
+NeoBundleLazy 'Shougo/neocomplcache.vim'
+NeoBundleLazy 'sudo.vim'
+NeoBundleLazy 'tpope/vim-markdown', {
+      \ 'autoload': {
+      \   'filetypes': ['markdown']
+      \ },
+      \ }
+NeoBundleLazy 'tpope/vim-rails', {
+      \ 'autoload': {
+      \   'filetypes': ['ruby', 'eruby', 'css', 'scss', 'html', 'javascript', 'yaml'],
+      \ },
+      \ }
+NeoBundleLazy 'tyru/open-browser.vim', {
+      \ 'autoload': {
+      \   'filetypes': ['markdown']
+      \ },
+      \ }
+" }}}
+
+call neobundle#end()
+filetype plugin indent on
+NeoBundleCheck
+" }}}
+" Configurations for individual plugins {{{
+" neocomplete.vim {{{
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#min_keyword_length = 3
@@ -171,9 +245,20 @@ let g:neocomplete#force_omni_input_patterns.go =
       \ '[^.[:digit:] *\t]\.\w*'
 
 " }}}
+" unite.vim {{{
+call unite#custom#profile('default', 'context', {
+            \ 'start_insert': 1,
+            \ 'direction': 'botright',
+            \ })
 
-NeoBundle 'Shougo/vimshell.vim'
-" {{{
+noremap <Leader>ur :Unite register -buffer-name=register<CR>
+noremap <Leader>uf :UniteWithBufferDir file_rec/async -buffer-name=file -create<CR>
+"noremap <Leader>uf :UniteWithBufferDir file/async file_rec/async -buffer-name=file -create<CR>
+noremap <Leader>uq :Unite -horizontal -no-quit quickfix<CR>
+
+autocmd FileType unite imap <silent> <buffer> <C-w> <Plug>(unite_delete_backward_path)
+" }}}
+" vimshell.vim {{{
 " VimShell with ,is
 " nnoremap <silent> <Leader>is :VimShell<CR>
 nnoremap <silent> <Leader>vs :VimShellBuffer -split-command=vsplit<CR>
@@ -192,32 +277,19 @@ autocmd FileType vimshell nmap <silent> <buffer> <CR> A<CR>
 let g:vimshell_prompt_expr = 'getcwd()." > "'
 let g:vimshell_prompt_pattern = '^\f\+ > '
 " }}}
-
-NeoBundle 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \   'windows' : 'make -f make_mingw32.mak',
-      \   'cygwin' : 'make -f make_cygwin.mak',
-      \   'mac' : 'make -f make_mac.mak',
-      \   'unix' : 'make -f make_unix.mak',
-      \ },
-      \ }
-
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'osyo-manga/shabadou.vim'
-NeoBundle 'rhysd/wandbox-vim'
-" {{{
+" vim-quickrun {{{
 let g:quickrun_config = {
       \ '_': {
       \   'hook/time/enable': 0,
-      \   'hook/close_unite_quickfix/enable_hook_loaded' : 1,
+      \   'hook/close_unite_quickfix/enable_hook_loaded': 1,
       \   'hook/unite_quickfix/enable_failure': 1,
       \   'hook/close_quickfix/enable_exit': 1,
       \   'hook/close_buffer/enable_empty_data': 1,
       \   'hook/close_buffer/enable_failure': 1,
       \   'outputter': 'multi:buffer:quickfix',
       \   'outputter/buffer/close_on_empty': 1,
-      \   'hook/quickfix_replate_tempname_to_bufnr/enable_exit' : 1,
-      \   'hook/quickfix_replate_tempname_to_bufnr/priority_exit' : -10,
+      \   'hook/quickfix_replate_tempname_to_bufnr/enable_exit': 1,
+      \   'hook/quickfix_replate_tempname_to_bufnr/priority_exit': -10,
       \   'runmode': 'async:remote:vimproc',
       \   'runner': 'vimproc',
       \   'runner/vimproc/updatetime': 60,
@@ -246,10 +318,7 @@ let g:quickrun_config.markdown = {
       \ 'hook/time/enable': 0,
       \ }
 " }}}
-
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-" {{{
+" neosnippet.vim {{{
 nnoremap <Leader>es :<C-u>NeoSnippetEdit
 
 let g:neosnippet#snippets_directory = '~/.vim/snippets/'
@@ -268,42 +337,21 @@ imap <silent> <C-k> <Plug>(neosnippet_jump_or_expand)
 smap <silent> <C-k> <Plug>(neosnippet_jump_or_expand)
 
 " }}}
-
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'osyo-manga/unite-quickfix'
-" {{{
-" Start with insert mode
-let g:unite_enable_start_insert=1
-" Open Unite vertically
-let g:unite_split_rule='botright'
-
-" Recently used files
-noremap <Leader>ur :Unite register -buffer-name=register<CR>
-
-" File in current directory
-noremap <Leader>uf :UniteWithBufferDir file_rec -buffer-name=file -create<CR>
-"noremap <Leader>uf :UniteWithBufferDir file/async file_rec/async -buffer-name=file -create<CR>
-
-" QuickFix in Unite
-noremap <Leader>uq :Unite -horizontal -no-quit quickfix<CR>
-
-autocmd FileType unite imap <silent> <buffer> <C-w> <Plug>(unite_delete_backward_path)
+" clever-f.vim {{{
+let g:clever_f_fix_key_direction = 1
+let g:clever_f_chars_match_any_signs = ''
+let g:clever_f_across_no_line = 1
 " }}}
-
-NeoBundle 'Shougo/vimfiler.vim'
-" {{{
+" manpageview {{{
+let g:manpageview_winopen='vsplit='
+" }}}
+" vimfiler.vim {{{
 let g:vimfiler_as_default_explorer=1
 let g:vimfiler_time_format="%m/%d/%y %H:%M%S"
 
 nnoremap <silent> <Leader>vf :VimFiler<CR>
 " }}}
-
-NeoBundleLazy 'osyo-manga/vim-marching', {
-      \ 'depends': ['Shougo/vimproc.vim', 'osyo-manga/vim-reunions'],
-      \ 'autoload': {
-      \   'filetypes': ['c', 'cpp']}
-      \ }
-" {{{
+" vim-marching {{{
 let g:marching_enable_neocomplete = 1
 let g:marching_include_paths = filter(
       \ split(glob('/usr/lib/gcc/**/include/*/'), '\n') +
@@ -317,136 +365,22 @@ imap <C-x><C-o> <Plug>(marching_start_omni_complete)
 imap <C-x><C-o> <Plug>(marching_force_start_omni_complete)
 nmap <Leader>mc :MarchingBufferClearCache<CR>
 " }}}
-
-NeoBundleLazy 'osyo-manga/vim-stargate', {
-      \ 'autoload': {
-      \   'filetypes': ['cpp']
-      \ },
-      \ }
-" {{{
-let g:stargate#include_paths = {
-      \ 'cpp': marching_include_paths,
-      \ }
-nmap <Leader>sg :StargateInclude<Space>
+" jedi-vim {{{
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#popup_select_first=0
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 " }}}
-
-NeoBundle 'kana/vim-altr'
-" {{{
-nmap <Leader>a <Plug>(altr-forward)
-nmap <Leader>A <Plug>(altr-back)
-" }}}
-
-NeoBundle 'Shougo/vinarise.vim'
-" {{{
-let g:vinarise_enable_auto_detect = 1
-" }}}
-
-NeoBundle 'goldfeld/vim-seek'
-" {{{
-let g:seek_ignorecase = 1
-" }}}
-
-NeoBundle 'thinca/vim-ref'
-" {{{
-let g:ref_open='vsplit'
-let g:ref_detect_filetype = {
-      \ 'sh': 'man',
-      \ 'zsh': 'man',
-      \ 'bash': 'man',
-      \ }
-let g:ref_use_vimproc=1
-nmap K <Plug>(ref-keyword)
-" }}}
-
-" Go programming
-" {{{
-NeoBundleLazy 'fatih/vim-go', {
-      \ 'autoload': {
-      \   'filetypes': ['go'],
-      \ },
-      \ }
-" {{{
-let s:bundle = neobundle#get('vim-go')
+" vim-watchdogs {{{
+let s:bundle = neobundle#get('vim-watchdogs')
 function! s:bundle.hooks.on_source(bundle)
-  let g:go_snippet_engine = 'neosnippet'
-  let g:go_highlight_trailing_whitespace_error = 0
-  let g:go_highlight_operators = 0
+  let g:watchdogs_check_BufWritePost_enable = 1
+  call watchdogs#setup(g:quickrun_config)
 endfunction
+nmap <silent> <Leader>wd :WatchdogsRun<CR>
 " }}}
-NeoBundleLazy 'rhysd/vim-go-impl', {
-      \ 'autoload': {
-      \   'filetypes': ['go'],
-      \ },
-      \ }
-" }}}
-
-" Ruby on Rails
-" {{{
-NeoBundleLazy 'tpope/vim-rails', {
-      \ 'autoload': {
-      \   'filetypes': ['ruby', 'eruby', 'css', 'scss', 'html', 'javascript', 'yaml'],
-      \ },
-      \ }
-NeoBundle 'scrooloose/nerdtree'
-" {{{
-command! Rtree NERDTreeFind
-" Don't use NERDTree when opening directory
-let g:NERDTreeHijackNetrw = 0
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeDirArrows = 0
-" }}}
-NeoBundleLazy 'vim-scripts/dbext.vim'
-" }}}
-
-NeoBundle 'wesQ3/vim-windowswap'
-" {{{
-let g:windowswap_map_keys = 0 "prevent default bindings
-nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
-nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
-" }}}
-
-NeoBundle 'tpope/vim-fugitive'
-
-NeoBundleLazy 'tyru/open-browser.vim', {
-      \ 'autoload' : {
-      \   'filetypes' : ['markdown']
-      \ },
-      \ }
-
-NeoBundle 'rhysd/clever-f.vim'
-" {{{
-let g:clever_f_fix_key_direction = 1
-let g:clever_f_chars_match_any_signs = ''
-let g:clever_f_across_no_line = 1
-" }}}
-
-" Perl
-" {{{
-NeoBundleLazy 'c9s/perlomni.vim', {
-      \ 'autoload': {
-      \   'filetypes': ['perl'],
-      \ },
-      \ }
-NeoBundleLazy 'hotchpotch/perldoc-vim'
-NeoBundleLazy 'c9s/perlomni.vim', {
-      \ 'autoload': {
-      \   'filetypes': ['perl'],
-      \ },
-      \ }
-" }}}
-
-NeoBundle 'Align'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'kannokanno/previm'
-
-NeoBundle 'gcmt/wildfire.vim'
-NeoBundle 'tkztmk/vim-vala'
-NeoBundle 'vim-scripts/mips.vim'
-NeoBundle 'TextFormat'
-NeoBundle 'ciaranm/securemodelines'
-
-"NeoBundle 'Shougo/neocomplcache'
-" {{{
+" neocomplcache.vim {{{
 "let g:neocomplcache_enable_at_startup = 1
 "let g:neocomplcache_enable_smart_case = 1
 "let g:neocomplcache_enable_camel_case_completion = 1
@@ -460,52 +394,55 @@ NeoBundle 'ciaranm/securemodelines'
 "inoremap <expr><C-g> neocomplcache#undo_completion()
 "inoremap <expr><C-l> neocomplcache#complete_common_string()
 " }}}
-
-NeoBundle 'osyo-manga/vim-watchdogs', {
-      \ 'gui': 1,
-      \ }
-" {{{
-let s:bundle = neobundle#get('vim-watchdogs')
+" vim-windowswap {{{
+let g:windowswap_map_keys = 0 "prevent default bindings
+nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
+nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
+" }}}
+" nerdtree {{{
+command! Rtree NERDTreeFind
+" Don't use NERDTree when opening directory
+let g:NERDTreeHijackNetrw = 0
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeDirArrows = 0
+" }}}
+" vim-go {{{
+let s:bundle = neobundle#get('vim-go')
 function! s:bundle.hooks.on_source(bundle)
-  let g:watchdogs_check_BufWritePost_enable = 1
-  call watchdogs#setup(g:quickrun_config)
+  let g:go_snippet_engine = 'neosnippet'
+  let g:go_highlight_trailing_whitespace_error = 0
+  let g:go_highlight_operators = 0
 endfunction
-nmap <silent> <Leader>wd :WatchdogsRun<CR>
 " }}}
-NeoBundle 'jceb/vim-hier', {
-      \ 'gui': 1,
+" vim-ref {{{
+let g:ref_open='vsplit'
+let g:ref_detect_filetype = {
+      \ 'sh': 'man',
+      \ 'zsh': 'man',
+      \ 'bash': 'man',
       \ }
-
-NeoBundleLazy 'dkasak/manpageview'
-" {{{
-let g:manpageview_winopen='vsplit='
+let g:ref_use_vimproc=1
+nmap K <Plug>(ref-keyword)
 " }}}
-
-NeoBundleLazy 'tpope/vim-markdown', {
-      \ 'autoload' : {
-      \   'filetypes' : ['markdown']
-      \ },
+" vim-seek {{{
+let g:seek_ignorecase = 1
+" }}}
+" vinarise.vim {{{
+let g:vinarise_enable_auto_detect = 1
+" }}}
+" vim-altr {{{
+nmap <Leader>a <Plug>(altr-forward)
+nmap <Leader>A <Plug>(altr-back)
+" }}}
+" vim-stargate {{{
+let g:stargate#include_paths = {
+      \ 'cpp': marching_include_paths,
       \ }
-NeoBundleLazy 'vim-scripts/sudo.vim'
-" NeoBundleLazy 'davidhalter/jedi-vim'
-" {{{
-"autocmd FileType python setlocal omnifunc=jedi#completions
-"let g:jedi#popup_select_first=0
-"let g:jedi#completions_enabled = 0
-"let g:jedi#auto_vim_configuration = 0
-"let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+nmap <Leader>sg :StargateInclude<Space>
 " }}}
-
-NeoBundle 'mattn/disableitalic-vim', {
-      \ 'gui': 1,
-      \ }
-
-call neobundle#end()
-filetype plugin indent on
-NeoBundleCheck
 " }}}
-
-" Source local configurations if any
+" Source local configurations if any {{{
 if exists(expand('~/.vimrc_local'))
   source ~/.vimrc_local
 endif
+" }}}
