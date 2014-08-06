@@ -275,49 +275,19 @@ NeoBundle 'osyo-manga/unite-quickfix'
 " Start with insert mode
 let g:unite_enable_start_insert=1
 " Open Unite vertically
-" let g:unite_enable_split_vertically=1
 let g:unite_split_rule='botright'
 
 " Recently used files
-noremap <Leader>uru :Unite file_mru -buffer-name=file_mru<CR>
-noremap <Leader>ureg :Unite register -buffer-name=register<CR>
-noremap <Leader>ubu :Unite buffer -buffer-name=buffer<CR>
+noremap <Leader>ur :Unite register -buffer-name=register<CR>
 
 " File in current directory
-noremap <Leader>uf :UniteWithBufferDir file -buffer-name=file -create<CR>
-noremap <Leader>ure :UniteWithBufferDir file_rec -buffer-name=file_rec -create<CR>
+noremap <Leader>uf :UniteWithBufferDir file_rec -buffer-name=file -create<CR>
+"noremap <Leader>uf :UniteWithBufferDir file/async file_rec/async -buffer-name=file -create<CR>
 
 " QuickFix in Unite
-noremap <Leader>uq :Unite -horizontal -no-quit -direction=botright quickfix<CR>
-
-" Hit Esc twice to exit Unite
-autocmd FileType unite nmap <silent> <buffer> <Esc><Esc> <Plug>(unite_exit)
-autocmd FileType unite imap <silent> <buffer> <Esc><Esc> <Plug>(unite_exit)
-" Move cursor with j, k in normal mode and do default action with l
-" autocmd FileType unite nmap <silent> <buffer> j <Plug>(unite_loop_cursor_down)
-" autocmd FileType unite nmap <silent> <buffer> k <Plug>(unite_loop_cursor_up)
-autocmd FileType unite nmap <silent> <buffer> l <Plug>(unite_do_default_action)
-autocmd FileType unite nmap <silent> <buffer> h <Plug>(unite_delete_backward_path)
-" Move down when hitting jj, wrap and go to the bottom when hitting kk
-autocmd FileType unite imap <buffer> kk <Esc><Plug>(unite_cursor_bottom)
-autocmd FileType unite imap <buffer> jj <Esc><Plug>(unite_loop_cursor_down)
-" Move cursor with C-j and C-k in insert mode
-autocmd FileType unite imap <silent> <buffer> <C-k> <Esc><Plug>(unite_cursor_bottom)
-autocmd FileType unite imap <silent> <buffer> <C-j> <Esc><Plug>(unite_loop_cursor_down)
-
-autocmd FileType unite nmap <silent> <buffer> <C-k> <Esc><Plug>(unite_loop_cursor_up)
-autocmd FileType unite nmap <silent> <buffer> <C-j> <Esc><Plug>(unite_loop_cursor_down)
-" Open or go up directory with C-l, C-h
-autocmd FileType unite nmap <silent> <buffer> <C-h> <Plug>(unite_delete_backward_path) <Plug>(unite_insert_enter)
-
-autocmd FileType unite imap <silent> <buffer> <C-l> <Plug>(unite_do_default_action)
-autocmd FileType unite nmap <silent> <buffer> <C-l> <Plug>(unite_do_default_action)
+noremap <Leader>uq :Unite -horizontal -no-quit quickfix<CR>
 
 autocmd FileType unite imap <silent> <buffer> <C-w> <Plug>(unite_delete_backward_path)
-autocmd FileType unite nmap <silent> <buffer> <C-w> <Plug>(unite_delete_backward_path)
-" Go back to insert mode with /
-autocmd FileType unite nmap <buffer> / <Plug>(unite_insert_enter)
-
 " }}}
 
 NeoBundle 'Shougo/vimfiler.vim'
