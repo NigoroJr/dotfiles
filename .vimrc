@@ -419,7 +419,7 @@ NeoBundleLazy 'tpope/vim-rails', {
       \ }
 NeoBundle 'scrooloose/nerdtree'
 " {{{
-command Rtree NERDTreeFind
+command! Rtree NERDTreeFind
 " Don't use NERDTree when opening directory
 let g:NERDTreeHijackNetrw = 0
 let g:NERDTreeMinimalUI = 1
