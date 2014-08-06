@@ -437,7 +437,7 @@ nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
 
 NeoBundle 'tpope/vim-fugitive'
 
-NeoBundle 'tyru/open-browser.vim', {
+NeoBundleLazy 'tyru/open-browser.vim', {
       \ 'autoload' : {
       \   'filetypes' : ['markdown']
       \ },
