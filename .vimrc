@@ -58,7 +58,7 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
 " Save as super user
-nnoremap <Leader>ws :w sudo:% \| e sudo:%<CR>
+nnoremap <Leader>ws :w sudo:%<CR>
 nnoremap <Leader>xs :x sudo:%<CR>
 au BufWriteCmd  sudo:*,sudo:*/* SudoWrite <afile>
 au FileWriteCmd sudo:*,sudo:*/* SudoWrite <afile>
