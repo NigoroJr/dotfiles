@@ -58,8 +58,10 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
 " Save as super user
-nnoremap <Leader>ws :w sudo:%<CR>
+nnoremap <Leader>ws :w sudo:% \| e sudo:%<CR>
 nnoremap <Leader>xs :x sudo:%<CR>
+au BufWriteCmd  sudo:*,sudo:*/* SudoWrite <afile>
+au FileWriteCmd sudo:*,sudo:*/* SudoWrite <afile>
 
 " Reset hilight search by pressing Escape 2 times
 nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
@@ -140,14 +142,12 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundleFetch 'davidhalter/jedi'
 " }}}
 " NeoBundle {{{
-NeoBundle 'Align'
 NeoBundle 'ciaranm/securemodelines'
 NeoBundle 'gcmt/wildfire.vim'
 NeoBundle 'goldfeld/vim-seek'
 NeoBundle 'mattn/disableitalic-vim', {
       \ 'gui': 1,
       \ }
-NeoBundle 'mips.vim'
 NeoBundle 'osyo-manga/vim-watchdogs', {
       \ 'gui': 1,
       \ 'depends': ['thinca/vim-quickrun', 'jceb/vim-hier'],
@@ -168,7 +168,8 @@ NeoBundle 'Shougo/neosnippet.vim'
 NeoBundleLazy 'Shougo/vimfiler.vim', {
       \ 'autoload': {
       \   'commands': ['VimFiler', 'VimFilerCurrentDir',
-      \     'VimFilerBufferDir', 'VimFilerExplorer'],
+      \     'VimFilerBufferDir', 'VimFilerExplorer'
+      \   ],
       \ },
       \ }
 NeoBundle 'Shougo/vimproc.vim', {
@@ -179,18 +180,16 @@ NeoBundle 'Shougo/vimproc.vim', {
       \   'unix': 'make -f make_unix.mak',
       \ },
       \ }
-NeoBundle 'Shougo/vimshell.vim', {
-      \ 'depends': ['Shougo/vimproc.vim'],
-      \ }
 NeoBundle 'Shougo/vinarise.vim'
-NeoBundle 'TextFormat'
-NeoBundle 'thinca/vim-ref'
 NeoBundle 'tkztmk/vim-vala'
 NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'wesQ3/vim-windowswap'
 " }}}
 " NeoBundleLazy {{{
+NeoBundleLazy 'Align', {
+      \ 'autoload': {
+      \   'commands': ['Align', 'AlignCtrl'],
+      \ },
+      \ }
 NeoBundleLazy 'c9s/perlomni.vim', {
       \ 'autoload': {
       \   'filetypes': 'perl',
@@ -220,6 +219,10 @@ NeoBundleLazy 'jceb/vim-hier', {
 NeoBundleLazy 'kana/vim-altr', {
       \ 'autoload': {
       \   'filetypes': ['c', 'cpp'],
+      \   'mappings': [
+      \     ['nxo', '<Plug>(altr-forward)'],
+      \     ['nxo', '<Plug>(altr-back)'],
+      \   ],
       \ },
       \ }
 NeoBundleLazy 'kana/vim-textobj-user'
@@ -227,6 +230,11 @@ NeoBundleLazy 'kannokanno/previm', {
       \ 'autoload': {
       \   'commands': 'PrevimOpen',
       \   'filetypes': 'markdown',
+      \ },
+      \ }
+NeoBundleLazy 'mips.vim', {
+      \ 'autoload': {
+      \   'filetypes': 'asm',
       \ },
       \ }
 NeoBundleLazy 'osyo-manga/shabadou.vim', {
@@ -257,13 +265,38 @@ NeoBundleLazy 'rhysd/vim-go-impl', {
 NeoBundleLazy 'rhysd/wandbox-vim', {
       \ 'depends': 'thinca/vim-quickrun',
       \ }
-NeoBundleLazy 'scrooloose/nerdtree'
+NeoBundleLazy 'scrooloose/nerdtree', {
+      \ 'augroup': 'NERDTreeHijackNetrw',
+      \ }
 NeoBundleLazy 'Shougo/context_filetype.vim'
 NeoBundleLazy 'Shougo/unite.vim', {
       \ 'autoload': {
       \   'commands': ['Unite', 'UniteWithBufferDir',
       \     'UniteWithCurrentDir', 'UniteWithProjectDir',
-      \     'UniteWithInputDirectory', 'UniteWithCursorWord'],
+      \     'UniteWithInputDirectory', 'UniteWithCursorWord'
+      \   ],
+      \ },
+      \ }
+NeoBundleLazy 'Shougo/vimshell.vim', {
+      \ 'depends': ['Shougo/vimproc.vim'],
+      \ }
+NeoBundleLazy 'sudo.vim', {
+      \ 'augroup': 'Sudo',
+      \ 'autoload': {
+      \   'commands': ['SudoRead', 'SudoWrite'],
+      \ },
+      \ }
+NeoBundleLazy 'TextFormat', {
+      \ 'autoload': {
+      \   'commands': ['AlignCenter', 'AlignJustify',
+      \     'AlignRight', 'AlignLeft'
+      \   ],
+      \ },
+      \ }
+NeoBundleLazy 'thinca/vim-ref', {
+      \ 'autoload': {
+      \   'commands': 'Ref',
+      \   'mappings': ['nxo', '<Plug>(ref-keyword)'],
       \ },
       \ }
 NeoBundleLazy 'thinca/vim-quickrun', {
@@ -273,6 +306,9 @@ NeoBundleLazy 'thinca/vim-quickrun', {
       \     ['nxo', '<Plug>(quickrun)'],
       \   ],
       \ },
+      \ }
+NeoBundleLazy 'tpope/vim-fugitive', {
+      \ 'augroup': 'fugitive',
       \ }
 NeoBundleLazy 'tpope/vim-markdown', {
       \ 'autoload': {
@@ -289,6 +325,13 @@ NeoBundleLazy 'tyru/open-browser.vim', {
       \   'filetypes': 'markdown',
       \ },
       \ }
+NeoBundleLazy 'wesQ3/vim-windowswap', {
+      \ 'autoload': {
+      \   'functions': ['WindowSwap#MarkWindowSwap',
+      \     'WindowSwap#DoWindowSwap', 'WindowSwap#EasyWindowSwap',
+      \   ],
+      \ },
+      \ }
 " }}}
 
 call neobundle#end()
@@ -296,6 +339,69 @@ filetype plugin indent on
 NeoBundleCheck
 " }}}
 " Configurations for individual plugins {{{
+" Align.vim {{{
+call neobundle#config('Align', {
+      \ 'autoload': {
+      \   'mappings': [
+      \     [ 'nox', '<Plug>AM_tt'],
+      \     [ 'nox', '<Plug>AM_tsq'],
+      \     [ 'nox', '<Plug>AM_tsp'],
+      \     [ 'nox', '<Plug>AM_tml'],
+      \     [ 'nox', '<Plug>AM_tab'],
+      \     [ 'nox', '<Plug>AM_m='],
+      \     [ 'nox', '<Plug>AM_tW@'],
+      \     [ 'nox', '<Plug>AM_t@'],
+      \     [ 'nox', '<Plug>AM_t~'],
+      \     [ 'nox', '<Plug>AM_t?'],
+      \     [ 'nox', '<Plug>AM_w='],
+      \     [ 'nox', '<Plug>AM_ts='],
+      \     [ 'nox', '<Plug>AM_ts<'],
+      \     [ 'nox', '<Plug>AM_ts;'],
+      \     [ 'nox', '<Plug>AM_ts:'],
+      \     [ 'nox', '<Plug>AM_ts,'],
+      \     [ 'nox', '<Plug>AM_t='],
+      \     [ 'nox', '<Plug>AM_t<'],
+      \     [ 'nox', '<Plug>AM_t;'],
+      \     [ 'nox', '<Plug>AM_t:'],
+      \     [ ''   , '<Plug>AM_t,'],
+      \     [ 'nox', '<Plug>AM_t#'],
+      \     [ ''   , '<Plug>AM_t|'],
+      \     [ 'nox', '<Plug>AM_T~'],
+      \     [ 'nox', '<Plug>AM_Tsp'],
+      \     [ 'nox', '<Plug>AM_Tab'],
+      \     [ 'nox', '<Plug>AM_TW@'],
+      \     [ 'nox', '<Plug>AM_T@'],
+      \     [ 'nox', '<Plug>AM_T?'],
+      \     [ 'nox', '<Plug>AM_T='],
+      \     [ 'nox', '<Plug>AM_T<'],
+      \     [ 'nox', '<Plug>AM_T;'],
+      \     [ 'nox', '<Plug>AM_T:'],
+      \     [ 'nox', '<Plug>AM_Ts,'],
+      \     [ ''   , '<Plug>AM_T,o'],
+      \     [ 'nox', '<Plug>AM_T#'],
+      \     [ ''   , '<Plug>AM_T|'],
+      \     [ 'nox', '<Plug>AM_Htd'],
+      \     [ 'nox', '<Plug>AM_aunum'],
+      \     [ 'nox', '<Plug>AM_aenum'],
+      \     [ 'nox', '<Plug>AM_aunum'],
+      \     [ 'nox', '<Plug>AM_afnc'],
+      \     [ 'nox', '<Plug>AM_adef'],
+      \     [ 'nox', '<Plug>AM_adec'],
+      \     [ 'nox', '<Plug>AM_ascom'],
+      \     [ 'nox', '<Plug>AM_aocom'],
+      \     [ 'nox', '<Plug>AM_adcom'],
+      \     [ 'nox', '<Plug>AM_acom'],
+      \     [ 'nox', '<Plug>AM_abox'],
+      \     [ 'nox', '<Plug>AM_a('],
+      \     [ 'nox', '<Plug>AM_a='],
+      \     [ 'nox', '<Plug>AM_a<'],
+      \     [ ''   , '<Plug>AM_a,'],
+      \     [ 'nox', '<Plug>AM_a?'],
+      \   ],
+      \ },
+      \ }
+      \ )
+" }}}
 " context_filetype.vim {{{
 let s:bundle = neobundle#get('context_filetype.vim')
 function! s:bundle.hooks.on_source(bundle)
@@ -424,6 +530,50 @@ endfunction
 nmap <Leader>a <Plug>(altr-forward)
 nmap <Leader>A <Plug>(altr-back)
 " }}}
+" vim-fugitive {{{
+call neobundle#config('vim-fugitive', {
+      \ 'autoload': {
+      \   'commands': [
+      \     'Git',
+      \     'Git!',
+      \     'Gcd',
+      \     'Glcd',
+      \     'Gstatus',
+      \     'Gcommit',
+      \     'Gmerge',
+      \     'Gpull',
+      \     'Gpush',
+      \     'Gfetch',
+      \     'Ggrep',
+      \     'Glgrep',
+      \     'Glog',
+      \     'Gllog',
+      \     'Gedit',
+      \     'Gsplit',
+      \     'Gvsplit',
+      \     'Gtabedit',
+      \     'Gpedit',
+      \     'Gsplit!',
+      \     'Gvsplit!',
+      \     'Gtabedit!',
+      \     'Gpedit!',
+      \     'Gread',
+      \     'Gread!',
+      \     'Gwrite',
+      \     'Gwrite',
+      \     'Gwq',
+      \     'Gwq!',
+      \     'Gdiff',
+      \     'Gsdiff',
+      \     'Gvdiff',
+      \     'Gmove',
+      \     'Gremove',
+      \     'Gblame',
+      \   ],
+      \ },
+      \ }
+      \ )
+" }}}
 " vim-go {{{
 let s:bundle = neobundle#get('vim-go')
 function! s:bundle.hooks.on_source(bundle)
@@ -535,9 +685,10 @@ endfunction
 nmap <silent> <Leader>wd :WatchdogsRun<CR>
 " }}}
 " vim-windowswap {{{
-let g:windowswap_map_keys = 0 "prevent default bindings
-nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
-nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
+let g:windowswap_map_keys = 0
+nnoremap <silent> <Leader>ww :call WindowSwap#EasyWindowSwap()<CR>
+nnoremap <silent> <Leader>pw :call WindowSwap#DoWindowSwap()<CR>
+nnoremap <silent> <Leader>yw :call WindowSwap#MarkWindowSwap()<CR>
 " }}}
 " vimfiler.vim {{{
 nnoremap <silent> <Leader>f :VimFilerBufferDir -status<CR>
@@ -557,23 +708,48 @@ function! s:bundle.hooks.on_source(bundle)
 endfunction
 " }}}
 " vimshell.vim {{{
-" VimShell with ,is
-" nnoremap <silent> <Leader>is :VimShell<CR>
+call neobundle#config('vimshell.vim', {
+      \ 'autoload': {
+      \   'commands': [
+      \     'VimShell',
+      \     'VimShellCreate',
+      \     'VimShellTab',
+      \     'VimShellPop',
+      \     'VimShellCurrentDir',
+      \     'VimShellBufferDir',
+      \     'VimShellExecute',
+      \     'VimShellInteractive',
+      \     'VimShellTerminal',
+      \     'VimShellSendString',
+      \     'VimShellSendBuffer',
+      \   ],
+      \ },
+      \ }
+      \ )
+
+let s:bundle = neobundle#get('vimshell.vim')
+function! s:bundle.hooks.on_source(bundle)
+endfunction
+" VimShell with ,vs
 nnoremap <silent> <Leader>vs :VimShellBuffer -split-command=vsplit<CR>
 " Open VimShell vertically
-"nnoremap <silent> <Leader>vvs :sp<CR><C-w>j:VimShell<CR>
 nnoremap <silent> <Leader>vvs :VimShellBuffer -split-command=split<CR>
-" Interactive python with ,ipy
-nnoremap <silent> <Leader>ipy :VimShellInteractive python<CR>
-" Hit escape twice to exit vimshell
-autocmd FileType vimshell imap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
-autocmd FileType vimshell nmap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
-" Enter in normal mode goes into insertion mode first
-autocmd FileType vimshell nmap <silent> <buffer> <CR> A<CR>
+" Interactive python with ,py
+nnoremap <silent> <Leader>py :VimShellInteractive python<CR>
 
-" Set user prompt to pwd
-let g:vimshell_prompt_expr = 'getcwd()." > "'
-let g:vimshell_prompt_pattern = '^\f\+ > '
+let s:bundle = neobundle#get('vimshell.vim')
+function! s:bundle.hooks.on_source(bundle)
+  " Hit escape twice to exit vimshell
+  autocmd FileType vimshell imap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
+  autocmd FileType vimshell nmap <silent> <buffer> <Esc><Esc> <Plug>(vimshell_exit)
+  " Enter in normal mode goes into insertion mode first
+  autocmd FileType vimshell nmap <silent> <buffer> <CR> A<CR>
+
+  " Set user prompt to pwd
+  let g:vimshell_prompt_expr = 'getcwd()." > "'
+  let g:vimshell_prompt_pattern = '^\f\+ > '
+endfunction
+
 " }}}
 " vinarise.vim {{{
 let g:vinarise_enable_auto_detect = 1
