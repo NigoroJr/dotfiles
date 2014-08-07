@@ -183,7 +183,6 @@ NeoBundle 'Shougo/vimshell.vim', {
       \ 'depends': ['Shougo/vimproc.vim'],
       \ }
 NeoBundle 'Shougo/vinarise.vim'
-NeoBundle 't9md/vim-choosewin'
 NeoBundle 'TextFormat'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'tkztmk/vim-vala'
@@ -424,9 +423,6 @@ endfunction
 " vim-altr {{{
 nmap <Leader>a <Plug>(altr-forward)
 nmap <Leader>A <Plug>(altr-back)
-" }}}
-" vim-choosewin {{{
-nmap - <Plug>(choosewin)
 " }}}
 " vim-go {{{
 let s:bundle = neobundle#get('vim-go')
