@@ -736,6 +736,7 @@ nnoremap <silent> <Leader>vs :VimShellBuffer -split-command=vsplit<CR>
 nnoremap <silent> <Leader>vvs :VimShellBuffer -split-command=split<CR>
 " Interactive python with ,py
 nnoremap <silent> <Leader>py :VimShellInteractive python<CR>
+nnoremap <silent> <Leader>irb :VimShellInteractive irb<CR>
 
 let s:bundle = neobundle#get('vimshell.vim')
 function! s:bundle.hooks.on_source(bundle)
