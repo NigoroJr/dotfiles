@@ -1,3 +1,9 @@
+" Setup runtimepath on start {{{
+if has('vim_starting')
+  set nocompatible
+  set runtimepath+=~/.vim/bundle/neobundle.vim
+endif
+" }}}
 set backup
 set backupdir=~/.vim/backup/
 set viewdir=~/.vim/view/
@@ -127,12 +133,6 @@ augroup END
 " }}}
 
 " Plugins managed by neobundle.vim {{{
-" Setup runtimepath on start {{{
-if has('vim_starting')
-  set nocompatible
-  set runtimepath+=~/.vim/bundle/neobundle.vim
-endif
-" }}}
 call neobundle#begin(expand('~/.vim/bundle/'))
 
 " NeoBundleFetch {{{
