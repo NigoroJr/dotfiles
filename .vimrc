@@ -1,7 +1,7 @@
 " Setup runtimepath on start {{{
 if has('vim_starting')
   set nocompatible
-  set runtimepath+=~/.vim/bundle/neobundle.vim
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 " }}}
 set backup
@@ -68,6 +68,9 @@ nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
 
 " Move pwd to directory of buffer
 nnoremap <silent><Leader>cd :cd %:h<CR>
+
+" EXPERIMENTAL: Q to quit (overrides 'Q', but this is the same as 'gq')
+nmap <silent> Q :q<CR>
 " }}}
 " Case-sensitive search, case-insensitive command completion  {{{
 let b:case_insensitive_cmd = 0
@@ -143,7 +146,6 @@ NeoBundleFetch 'davidhalter/jedi'
 " }}}
 " NeoBundle {{{
 NeoBundle 'ciaranm/securemodelines'
-NeoBundle 'gcmt/wildfire.vim'
 NeoBundle 'goldfeld/vim-seek'
 NeoBundle 'mattn/disableitalic-vim', {
       \ 'gui': 1,
@@ -165,13 +167,6 @@ NeoBundle 'Shougo/neocomplcache.vim', {
       \ }
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neosnippet.vim'
-NeoBundleLazy 'Shougo/vimfiler.vim', {
-      \ 'autoload': {
-      \   'commands': ['VimFiler', 'VimFilerCurrentDir',
-      \     'VimFilerBufferDir', 'VimFilerExplorer'
-      \   ],
-      \ },
-      \ }
 NeoBundle 'Shougo/vimproc.vim', {
       \ 'build': {
       \   'windows': 'mingw32-make -f make_mingw32.mak',
@@ -185,6 +180,8 @@ NeoBundle 'tkztmk/vim-vala'
 NeoBundle 'tomtom/tcomment_vim'
 " }}}
 " NeoBundleLazy {{{
+" Plugins with '*' uses neobundle#config() in the individual sections
+" *
 NeoBundleLazy 'Align', {
       \ 'autoload': {
       \   'commands': ['Align', 'AlignCtrl'],
@@ -206,6 +203,14 @@ NeoBundleLazy 'dkasak/manpageview'
 NeoBundleLazy 'fatih/vim-go', {
       \ 'autoload': {
       \   'filetypes': 'go',
+      \ },
+      \ }
+NeoBundleLazy 'gcmt/wildfire.vim', {
+      \ 'autoload': {
+      \   'mappings': [
+      \     ['nxo', '<Plug>(wildfire-water)'],
+      \     ['nxo', '<Plug>(wildfire-fuel)'],
+      \   ],
       \ },
       \ }
 NeoBundleLazy 'hotchpotch/perldoc-vim', {
@@ -254,6 +259,7 @@ NeoBundleLazy 'osyo-manga/vim-precious', {
       \ }
 NeoBundleLazy 'osyo-manga/vim-stargate', {
       \ 'autoload': {
+      \   'commands': 'StargateInclude',
       \   'filetypes': 'cpp',
       \ },
       \ }
@@ -269,19 +275,20 @@ NeoBundleLazy 'scrooloose/nerdtree', {
       \ 'augroup': 'NERDTreeHijackNetrw',
       \ }
 NeoBundleLazy 'Shougo/context_filetype.vim'
-NeoBundleLazy 'Shougo/unite.vim', {
+" *
+NeoBundleLazy 'Shougo/unite.vim'
+NeoBundleLazy 'Shougo/vimfiler.vim', {
       \ 'autoload': {
-      \   'commands': ['Unite', 'UniteWithBufferDir',
-      \     'UniteWithCurrentDir', 'UniteWithProjectDir',
-      \     'UniteWithInputDirectory', 'UniteWithCursorWord'
+      \   'commands': ['VimFiler', 'VimFilerCurrentDir',
+      \     'VimFilerBufferDir', 'VimFilerExplorer'
       \   ],
       \ },
       \ }
+" *
 NeoBundleLazy 'Shougo/vimshell.vim', {
       \ 'depends': ['Shougo/vimproc.vim'],
       \ }
 NeoBundleLazy 'sudo.vim', {
-      \ 'augroup': 'Sudo',
       \ 'autoload': {
       \   'commands': ['SudoRead', 'SudoWrite'],
       \ },
@@ -295,18 +302,25 @@ NeoBundleLazy 'TextFormat', {
       \ }
 NeoBundleLazy 'thinca/vim-ref', {
       \ 'autoload': {
-      \   'commands': 'Ref',
-      \   'mappings': ['nxo', '<Plug>(ref-keyword)'],
+      \   'commands': {
+      \     'name': 'Ref',
+      \     'complete': 'customlist,ref#complete',
+      \ },
+      \   'mappings': ['<Plug>(ref-keyword)'],
       \ },
       \ }
 NeoBundleLazy 'thinca/vim-quickrun', {
       \ 'autoload': {
-      \   'commands': 'QuickRun',
+      \   'commands': {
+      \     'name': 'QuickRun',
+      \     'complete': 'customlist,quickrun#complete',
+      \   },
       \   'mappings': [
       \     ['nxo', '<Plug>(quickrun)'],
       \   ],
       \ },
       \ }
+" *
 NeoBundleLazy 'tpope/vim-fugitive', {
       \ 'augroup': 'fugitive',
       \ }
@@ -315,6 +329,7 @@ NeoBundleLazy 'tpope/vim-markdown', {
       \   'filetypes': 'markdown',
       \ },
       \ }
+" *
 NeoBundleLazy 'tpope/vim-rails', {
       \ 'autoload': {
       \   'filetypes': ['ruby', 'eruby', 'css', 'scss', 'html', 'javascript', 'yaml'],
@@ -322,6 +337,7 @@ NeoBundleLazy 'tpope/vim-rails', {
       \ }
 NeoBundleLazy 'tyru/open-browser.vim', {
       \ 'autoload': {
+      \   'commands': 'OpenBrowser',
       \   'filetypes': 'markdown',
       \ },
       \ }
@@ -505,18 +521,38 @@ smap <silent> <C-k> <Plug>(neosnippet_jump_or_expand)
 
 " }}}
 " nerdtree {{{
-command! Rtree NERDTreeFind
-" Don't use NERDTree when opening directory
-let g:NERDTreeHijackNetrw = 0
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeDirArrows = 0
+let s:bundle = neobundle#get('nerdtree')
+function! s:bundle.hooks.on_source(bundle)
+  " Don't use NERDTree when opening directory
+  let g:NERDTreeHijackNetrw = 0
+  let g:NERDTreeMinimalUI = 1
+  let g:NERDTreeDirArrows = 0
+endfunction
 " }}}
 " unite.vim {{{
+call neobundle#config('unite.vim', {
+      \ 'autoload': {
+      \   'commands': [
+      \     {
+      \       'name': 'Unite',
+      \       'complete': 'customlist,unite#complete#source',
+      \     },
+      \     {
+      \       'name': 'UniteWithBufferDir',
+      \       'complete': 'customlist,unite#complete',
+      \     },
+      \     'UniteWithCurrentDir', 'UniteWithProjectDir',
+      \     'UniteWithInputDirectory', 'UniteWithCursorWord'
+      \   ],
+      \ },
+      \ }
+      \ )
 let s:bundle = neobundle#get('unite.vim')
-noremap <Leader>ur :Unite register -buffer-name=register<CR>
+nnoremap <Leader>uu :Unite<Space>
+nnoremap <Leader>ur :Unite register -buffer-name=register<CR>
+nnoremap <Leader>uq :Unite -horizontal -no-quit quickfix<CR>
+nnoremap <Leader>uf :Unite file_rec/async -buffer-name=file -create<CR>
 "noremap <Leader>uf :UniteWithBufferDir file/async file_rec/async -buffer-name=file -create<CR>
-noremap <Leader>uq :Unite -horizontal -no-quit quickfix<CR>
-noremap <Leader>uf :UniteWithBufferDir file_rec/async -buffer-name=file -create<CR>
 
 function! s:bundle.hooks.on_source(bundle)
   call unite#custom#profile('default', 'context', {
@@ -655,10 +691,11 @@ let s:bundle = neobundle#get('vim-rails')
 function! s:bundle.hooks.on_source(bundle)
   call neobundle#source('vimfiler.vim')
   "call neobundle#source('nerdtree')
+
+  command! Rtree VimFilerExplorer -find
 endfunction
 " }}}
 " vim-ref {{{
-let g:ref_open = 'vsplit'
 let g:ref_detect_filetype = {
       \ 'sh': 'man',
       \ 'zsh': 'man',
@@ -711,12 +748,18 @@ endfunction
 call neobundle#config('vimshell.vim', {
       \ 'autoload': {
       \   'commands': [
-      \     'VimShell',
+      \     {
+      \       'name': 'VimShell',
+      \       'complete': 'customlist,vimshell#complete',
+      \     },
+      \     {
+      \       'name': 'VimShellBufferDir',
+      \       'complete': 'customlist,vimshell#complete',
+      \     },
       \     'VimShellCreate',
       \     'VimShellTab',
       \     'VimShellPop',
       \     'VimShellCurrentDir',
-      \     'VimShellBufferDir',
       \     'VimShellExecute',
       \     'VimShellInteractive',
       \     'VimShellTerminal',
@@ -754,6 +797,10 @@ endfunction
 " }}}
 " vinarise.vim {{{
 let g:vinarise_enable_auto_detect = 1
+" }}}
+" wildfire.vim {{{
+map <silent> <CR> <Plug>(wildfire-fuel)
+vmap <silent> <BS> <Plug>(wildfire-water)
 " }}}
 " }}}
 
