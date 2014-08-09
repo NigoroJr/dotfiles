@@ -273,6 +273,15 @@ NeoBundleLazy 'rhysd/wandbox-vim', {
       \ }
 NeoBundleLazy 'scrooloose/nerdtree', {
       \ 'augroup': 'NERDTreeHijackNetrw',
+      \ 'autoload': {
+      \   'commands': [
+      \     {
+      \       'name': 'NERDTree',
+      \       'complete': 'dir',
+      \     },
+      \     'NERDTreeFind',
+      \   ],
+      \ },
       \ }
 NeoBundleLazy 'Shougo/context_filetype.vim'
 " *
@@ -525,10 +534,12 @@ smap <silent> <C-k> <Plug>(neosnippet_jump_or_expand)
 " nerdtree {{{
 let s:bundle = neobundle#get('nerdtree')
 function! s:bundle.hooks.on_source(bundle)
-  " Don't use NERDTree when opening directory
+  " Don't use nerdtree when opening directory (use vimfiler.vim)
   let g:NERDTreeHijackNetrw = 0
   let g:NERDTreeMinimalUI = 1
   let g:NERDTreeDirArrows = 0
+  let g:NERDTreeMapToggleHidden = '.'
+  let g:NERDTreeShowHidden = 0
 endfunction
 " }}}
 " unite.vim {{{
@@ -691,10 +702,10 @@ endfunction
 " vim-rails {{{
 let s:bundle = neobundle#get('vim-rails')
 function! s:bundle.hooks.on_source(bundle)
-  call neobundle#source('vimfiler.vim')
-  "call neobundle#source('nerdtree')
+  "call neobundle#source('vimfiler.vim')
+  call neobundle#source('nerdtree')
 
-  command! Rtree VimFilerExplorer -find
+  command! Rtree NERDTreeFind
 endfunction
 " }}}
 " vim-ref {{{
