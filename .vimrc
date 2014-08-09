@@ -439,10 +439,10 @@ let g:clever_f_across_no_line = 1
 let s:bundle = neobundle#get('jedi-vim')
 function! s:bundle.hooks.on_source(bundle)
   autocmd FileType python setlocal omnifunc=jedi#completions
+
   let g:jedi#popup_select_first = 0
   let g:jedi#completions_enabled = 0
   let g:jedi#auto_vim_configuration = 0
-  let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 endfunction
 " }}}
 " manpageview {{{
@@ -472,6 +472,8 @@ function! s:bundle.hooks.on_source(bundle)
         \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
   let g:neocomplcache#force_omni_input_patterns.go =
         \ '[^.[:digit:] *\t]\.\w*'
+  let g:neocomplete#force_omni_input_patterns.python =
+        \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 endfunction
 " }}}
 " neocomplete.vim {{{
@@ -504,6 +506,10 @@ function! s:bundle.hooks.on_source(bundle)
   " Go
   let g:neocomplete#force_omni_input_patterns.go =
         \ '[^.[:digit:] *\t]\.\w*'
+
+  " Python
+  let g:neocomplete#force_omni_input_patterns.python =
+        \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 endfunction
 
 " }}}
