@@ -309,7 +309,7 @@ NeoBundleLazy 'thinca/vim-ref', {
       \   'commands': {
       \     'name': 'Ref',
       \     'complete': 'customlist,ref#complete',
-      \ },
+      \   },
       \   'mappings': [
       \     ['nxo', '<Plug>(ref-keyword)'],
       \   ],
