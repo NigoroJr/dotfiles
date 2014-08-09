@@ -286,13 +286,8 @@ NeoBundleLazy 'scrooloose/nerdtree', {
 NeoBundleLazy 'Shougo/context_filetype.vim'
 " *
 NeoBundleLazy 'Shougo/unite.vim'
-NeoBundleLazy 'Shougo/vimfiler.vim', {
-      \ 'autoload': {
-      \   'commands': ['VimFiler', 'VimFilerCurrentDir',
-      \     'VimFilerBufferDir', 'VimFilerExplorer'
-      \   ],
-      \ },
-      \ }
+" *
+NeoBundleLazy 'Shougo/vimfiler.vim'
 " *
 NeoBundleLazy 'Shougo/vimshell.vim', {
       \ 'depends': ['Shougo/vimproc.vim'],
@@ -742,6 +737,30 @@ nnoremap <silent> <Leader>yw :call WindowSwap#MarkWindowSwap()<CR>
 " }}}
 " vimfiler.vim {{{
 nnoremap <silent> <Leader>f :VimFilerBufferDir -status<CR>
+
+call neobundle#config('vimfiler.vim', {
+      \ 'autoload': {
+      \   'commands': [
+      \     {
+      \       'name': 'VimFiler',
+      \       'complete': 'customlist,vimfiler#complete',
+      \     },
+      \     {
+      \       'name': 'VimFilerCurrentDir',
+      \       'complete': 'customlist,vimfiler#complete',
+      \     },
+      \     {
+      \       'name': 'VimFilerBufferDir',
+      \       'complete': 'customlist,vimfiler#complete',
+      \     },
+      \     {
+      \       'name':  'VimFilerExplorer',
+      \       'complete': 'customlist,vimfiler#complete',
+      \     },
+      \   ],
+      \ },
+      \ }
+      \ )
 
 let s:bundle = neobundle#get('vimfiler.vim')
 function! s:bundle.hooks.on_source(bundle)
