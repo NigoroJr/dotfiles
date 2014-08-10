@@ -59,7 +59,7 @@ get_git_prompt() {  # {{{
         prompt+="%F{197}$branch_name%f"
     fi
 
-    echo "[ $prompt ]"
+    echo $prompt
 }   # }}}
 
 random_colored_prompt() {
@@ -102,11 +102,16 @@ fi
 # Show git repository info
 local git_prompt="`get_git_prompt`"
 if [[ -n $git_prompt ]]; then
-   RPROMPT="$git_prompt"
+   RPROMPT="[ $git_prompt"
 else
-   #unset RPROMPT
-   RPROMPT="[ %F{051}%~%f ]"
+   RPROMPT="[ %F{051}%~%f"
 fi
+
+if [[ -n $TMUX ]]; then
+    RPROMPT+=" (%F{046}TMUX%f)"
+fi
+
+RPROMPT+=" ]"
 
 }
 

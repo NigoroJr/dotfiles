@@ -49,6 +49,8 @@ alias gvi='gvim'
 # emacs is too long to type!
 alias em='emacs -nw'
 
+alias tm='tmux'
+
 alias reload='source ~/.zshrc'
 
 alias g='git --no-pager'

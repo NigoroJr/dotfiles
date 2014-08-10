@@ -50,6 +50,15 @@ elif hash go 2>/dev/null && [ -f `go env GOROOT`/misc/zsh/go ]; then
     source `go env GOROOT`/misc/zsh/go
 fi
 
+# In tmux, don't show status bar if there's only one window
+if [[ -n $TMUX ]]; then
+    if [ $(tmux list-windows | wc -l) -eq 1 ]; then
+        tmux set-option status off >/dev/null
+    else
+        tmux set-option status on >/dev/null
+    fi
+fi
+
 # Limit Coredump size
 limit coredumpsize 102400
 
