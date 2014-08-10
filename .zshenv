@@ -1,5 +1,10 @@
 # vim: ft=zsh
 
+export LANG="en_US.UTF-8"
+if [ -d $HOME/src/go ]; then
+    export GOPATH=$HOME/src/go
+fi
+
 export EDITOR="vim"
 if hash vimmanpager 2>/dev/null; then
     export MANPAGER=vimmanpager
