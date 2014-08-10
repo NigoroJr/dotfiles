@@ -102,16 +102,14 @@ fi
 # Show git repository info
 local git_prompt="`get_git_prompt`"
 if [[ -n $git_prompt ]]; then
-   RPROMPT="[ $git_prompt"
+   RPROMPT="[ $git_prompt ]"
 else
-   RPROMPT="[ %F{051}%~%f"
+   RPROMPT="[ %F{051}%~%f ]"
 fi
 
 if [[ -n $TMUX ]]; then
     RPROMPT+=" (%F{046}TMUX%f)"
 fi
-
-RPROMPT+=" ]"
 
 }
 
