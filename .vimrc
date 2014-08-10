@@ -246,6 +246,11 @@ NeoBundleLazy 'mips.vim', {
 NeoBundleLazy 'osyo-manga/shabadou.vim', {
       \ 'depends': 'thinca/vim-quickrun',
       \ }
+NeoBundleLazy 'osyo-manga/vim-snowdrop', {
+      \ 'autoload': {
+      \   'filetypes': 'cpp',
+      \ },
+      \ }
 NeoBundleLazy 'osyo-manga/unite-quickfix', {
       \ 'depends': 'Shougo/unite.vim',
       \ }
@@ -285,6 +290,9 @@ NeoBundleLazy 'scrooloose/nerdtree', {
       \ },
       \ }
 NeoBundleLazy 'Shougo/context_filetype.vim'
+NeoBundleLazy 'Shougo/neomru.vim', {
+      \ 'depends': 'Shougo/unite.vim',
+      \ }
 " *
 NeoBundleLazy 'Shougo/unite.vim'
 " *
@@ -554,7 +562,7 @@ call neobundle#config('unite.vim', {
       \     },
       \     {
       \       'name': 'UniteWithBufferDir',
-      \       'complete': 'customlist,unite#complete',
+      \       'complete': 'customlist,unite#complete#source',
       \     },
       \     'UniteWithCurrentDir', 'UniteWithProjectDir',
       \     'UniteWithInputDirectory', 'UniteWithCursorWord'
@@ -574,6 +582,8 @@ function! s:bundle.hooks.on_source(bundle)
         \ 'start_insert': 1,
         \ 'direction': 'botright',
         \ })
+
+  call neobundle#source('neomru.vim')
   autocmd FileType unite imap <silent> <buffer> <C-w> <Plug>(unite_delete_backward_path)
 endfunction
 " }}}
@@ -722,11 +732,25 @@ nmap K <Plug>(ref-keyword)
 " vim-seek {{{
 let g:seek_ignorecase = 1
 " }}}
+" vim-snowdrop {{{
+let s:bundle = neobundle#get('vim-snowdrop')
+function! s:bundle.hooks.on_source(bundle)
+  let g:snowdrop#libclang_directory = '/usr/lib/'
+  let g:snowdrop#include_paths = {
+        \ 'cpp': g:marching_include_paths,
+        \ }
+  let g:neocomplete#sources#snowdrop#enable = 1
+  let g:neocomplete#skip_auto_completion_time = ''
+endfunction
+"}}}
 " vim-stargate {{{
-let g:stargate#include_paths = {
-      \ 'cpp': marching_include_paths,
-      \ }
 nmap <Leader>sg :StargateInclude<Space>
+let s:bundle = neobundle#get('vim-stargate')
+function! s:bundle.hooks.on_source(bundle)
+  let g:stargate#include_paths = {
+        \ 'cpp': g:marching_include_paths,
+        \ }
+endfunction
 " }}}
 " vim-watchdogs {{{
 let s:bundle = neobundle#get('vim-watchdogs')
