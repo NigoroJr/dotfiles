@@ -770,6 +770,9 @@ call neobundle#config('vimfiler.vim', {
 
 let s:bundle = neobundle#get('vimfiler.vim')
 function! s:bundle.hooks.on_source(bundle)
+  " Override ':Unite file_rec/async' if in vimfiler.vim
+  autocmd FileType vimfiler nmap <silent> <Leader>uf :UniteWithBufferDir file_rec/async<CR>
+
   " Disable netrw.vim
   let g:loaded_netrwPlugin = 1
   let g:vimfiler_as_default_explorer = 1
