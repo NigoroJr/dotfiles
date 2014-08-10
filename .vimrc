@@ -572,15 +572,16 @@ call neobundle#config('unite.vim', {
       \ )
 let s:bundle = neobundle#get('unite.vim')
 nnoremap <Leader>uu :Unite<Space>
-nnoremap <Leader>ur :Unite register -buffer-name=register<CR>
-nnoremap <Leader>uq :Unite -horizontal -no-quit quickfix<CR>
-nnoremap <Leader>uf :Unite file_rec/async -buffer-name=file -create<CR>
-"noremap <Leader>uf :UniteWithBufferDir file/async file_rec/async -buffer-name=file -create<CR>
+nnoremap <silent> <Leader>ur :Unite register -buffer-name=register<CR>
+nnoremap <silent> <Leader>uq :Unite -horizontal -no-quit quickfix<CR>
+nnoremap <silent> <Leader>uf :Unite file_rec/async -buffer-name=file -create<CR>
+nnoremap <silent> <Leader>ul :Unite file/async -buffer-name=file -create<CR>
+nnoremap <silent> <Leader>um :Unite neomru/file -buffer-name=mru -create<CR>
 
 function! s:bundle.hooks.on_source(bundle)
   call unite#custom#profile('default', 'context', {
         \ 'start_insert': 1,
-        \ 'direction': 'botright',
+        \ 'prompt_direction': 'top',
         \ })
 
   call neobundle#source('neomru.vim')
@@ -646,11 +647,9 @@ endfunction
 " vim-marching {{{
 let g:marching_enable_neocomplete = 1
 let g:marching_include_paths = filter(
-      \ split(glob('/usr/lib/gcc/**/include/*/'), '\n') +
-      \ split(glob('/usr/include/boost/*'), '\n') +
-      \ split(glob('/usr/include/*'), '\n') +
-      \ split(glob('/usr/include/c++/*'), '\n') +
-      \ split(glob('/usr/local/include/*/'), '\n'),
+      \ split(glob('/usr/lib/gcc/x86_64-pc-linux-gnu/*/include/*/'), '\n') +
+      \ split(glob('/usr/include/boost/'), '\n') +
+      \ split(glob('/usr/include/c++/'), '\n'),
       \ 'isdirectory(v:val)')
 
 imap <C-x><C-o> <Plug>(marching_start_omni_complete)
