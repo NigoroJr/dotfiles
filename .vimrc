@@ -275,7 +275,10 @@ NeoBundleLazy 'rhysd/vim-go-impl', {
       \ },
       \ }
 NeoBundleLazy 'rhysd/wandbox-vim', {
-      \ 'depends': 'thinca/vim-quickrun',
+      \ 'autoload': {
+      \   'commands': ['Wandbox', 'WandboxAsync'],
+      \ },
+      \ 'depends': ['thinca/vim-quickrun', 'Shougo/vimproc.vim'],
       \ }
 NeoBundleLazy 'scrooloose/nerdtree', {
       \ 'augroup': 'NERDTreeHijackNetrw',
@@ -334,6 +337,7 @@ NeoBundleLazy 'thinca/vim-quickrun', {
       \     ['nxo', '<Plug>(quickrun)'],
       \   ],
       \ },
+      \ 'depends': 'Shougo/vimproc.vim',
       \ }
 " *
 NeoBundleLazy 'tpope/vim-fugitive', {
@@ -581,6 +585,7 @@ nnoremap <silent> <Leader>um :Unite neomru/file -buffer-name=mru -create<CR>
 function! s:bundle.hooks.on_source(bundle)
   call unite#custom#profile('default', 'context', {
         \ 'start_insert': 1,
+        \ 'direction': 'botright',
         \ 'prompt_direction': 'top',
         \ })
 
@@ -678,8 +683,8 @@ function! s:bundle.hooks.on_source(bundle)
         \   'hook/close_buffer/enable_failure': 1,
         \   'outputter': 'multi:buffer:quickfix',
         \   'outputter/buffer/close_on_empty': 1,
-        \   'hook/quickfix_replate_tempname_to_bufnr/enable_exit': 1,
-        \   'hook/quickfix_replate_tempname_to_bufnr/priority_exit': -10,
+        \   'hook/quickfix_replace_tempname_to_bufnr/enable_exit': 1,
+        \   'hook/quickfix_replace_tempname_to_bufnr/priority_exit': -10,
         \   'runmode': 'async:remote:vimproc',
         \   'runner': 'vimproc',
         \   'runner/vimproc/updatetime': 60,
@@ -698,7 +703,6 @@ function! s:bundle.hooks.on_source(bundle)
   let g:quickrun_config.cpp = {
         \ 'command': 'g++',
         \ 'cmdopt': '-std=c++11 -Wall -Wextra',
-        \ 'hook/quickrunex/enable': 1,
         \ }
   " Open in browser using previm
   let g:quickrun_config.markdown = {
@@ -835,9 +839,6 @@ call neobundle#config('vimshell.vim', {
       \ }
       \ )
 
-let s:bundle = neobundle#get('vimshell.vim')
-function! s:bundle.hooks.on_source(bundle)
-endfunction
 " VimShell with ,vs
 nnoremap <silent> <Leader>vs :VimShellBuffer -split-command=vsplit<CR>
 " Open VimShell vertically
