@@ -664,9 +664,9 @@ endif
 
 let s:bundle = neobundle#get('vim-quickrun')
 function! s:bundle.hooks.on_source(bundle)
+  call neobundle#source(['shabadou.vim', 'wandbox-vim', 'unite-quickfix'])
+
   nnoremap <Leader>wb :QuickRun -runner wandbox<CR>
-  call neobundle#source(['osyo-manga/shabadou.vim',
-        \ 'rhysd/wandbox-vim', 'osyo-manga/unite-quickfix'])
 
   let g:quickrun_config = {
         \ '_': {
@@ -806,7 +806,7 @@ endfunction
 " vim-precious {{{
 let s:bundle = neobundle#get('vim-precious')
 function! s:bundle.hooks.on_source(bundle)
-  call neobundle#source('kana/vim-textobj-user')
+  call neobundle#source('vim-textobj-user')
 endfunction
 " }}}
 " vimshell.vim {{{
