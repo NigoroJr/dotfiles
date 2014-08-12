@@ -647,6 +647,9 @@ function! s:bundle.hooks.on_source(bundle)
   let g:go_snippet_engine = 'neosnippet'
   let g:go_highlight_trailing_whitespace_error = 0
   let g:go_highlight_operators = 0
+  let g:go_fmt_autosave = 0
+
+  nmap <silent> <Leader>gf :GoFmt<CR>
 endfunction
 " }}}
 " vim-marching {{{
