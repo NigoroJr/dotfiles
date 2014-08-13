@@ -556,6 +556,8 @@ function! s:bundle.hooks.on_source(bundle)
   let g:NERDTreeShowHidden = 0
 endfunction
 " }}}
+" unite-quickfix {{{
+" }}}
 " unite.vim {{{
 call neobundle#config('unite.vim', {
       \ 'autoload': {
@@ -650,6 +652,7 @@ function! s:bundle.hooks.on_source(bundle)
   let g:go_fmt_autosave = 0
 
   nmap <silent> <Leader>gf :GoFmt<CR>
+  nmap <silent> <Leader>gi :GoImport<CR>
 endfunction
 " }}}
 " vim-marching {{{

@@ -24,3 +24,8 @@ snippet     fpf
 abbr        fmt.Fprintf()
 	fmt.Fprintf(${1:w}, "${2}", ${3})${0}
 
+snippet     impl
+options     head
+	func (${1:#:name} ${2:#:interface}) ${3:Func}(${4:#:args}) ${5:#:ret}{
+		${0}
+	}
