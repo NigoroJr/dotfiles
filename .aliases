@@ -37,8 +37,9 @@ alias la='ls -A'
 alias ll='ls -CF'
 alias lh='ls -lh'
 
-# Because for some reason I mistype this a lot
+# Because for some reason I mistype these a lot
 alias rm_r='rm -r'
+alias gS='git status'
 
 # Alias for g++
 alias gpp='g++'
