@@ -59,6 +59,14 @@ if [[ -n $TMUX ]]; then
     fi
 fi
 
+# enable cursor selection
+zstyle ':completion:*:default' menu select=1
+zstyle ':completion:*:(processes|jobs)' menu yes select=2
+bindkey '[Z' reverse-menu-complete
+
+# Keybindings
+#bindkey -s 'a' " | awk '{ print $ }'"
+
 # Limit Coredump size
 limit coredumpsize 102400
 
@@ -142,9 +150,6 @@ setopt no_nomatch
 
 # C-s for incremental forward search
 setopt noflowcontrol
-
-# enable cursor selection
-zstyle ':completion:*:default' menu select=1
 
 # Read local environment File if there is one
 if [ -f ~/.zshrc_local ]; then
