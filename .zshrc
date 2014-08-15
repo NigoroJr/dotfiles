@@ -6,7 +6,7 @@ zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit && compinit
 
-# Read Source File
+# Read aliases
 if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
@@ -62,108 +62,53 @@ fi
 # enable cursor selection
 zstyle ':completion:*:default' menu select=1
 zstyle ':completion:*:(processes|jobs)' menu yes select=2
-bindkey '[Z' reverse-menu-complete
-
-# Keybindings
-#bindkey -s 'a' " | awk '{ print $ }'"
 
 # Limit Coredump size
 limit coredumpsize 102400
 
-# Show even when no Return at the end
-unsetopt promptcr
-
-# emacs keybind
-bindkey -e
-
-# use colors
-setopt prompt_subst
-
-# don't beep
-setopt nobeep
-
-# set jobs -l as the output for jobs
-setopt long_list_jobs
-
-# resume when suspended command is entered
-setopt auto_resume
-
-# show list of completion
-setopt auto_list
-
-# Suggest correction
-setopt correct
-
-# show file types
-setopt list_types
-
-# compact list
-setopt list_packed
-
-# don't add history when it's the same command as previous
-setopt hist_ignore_dups
-
-# auto push when cd
+# Options {{{
+##############################################################################
+setopt auto_cd             #cd when only directory is entered
+setopt auto_list           #Show list of completion
+setopt auto_param_keys     #Complete variables
+setopt auto_param_slash    #Complete / automatically
 setopt auto_pushd
-
-# but don't push the same directory
-setopt pushd_ignore_dups
-
-# use # ~ ^ as regex
+setopt auto_resume         #Resume when suspended command is entered
+setopt correct             #Suggest correction
 setopt extended_glob
-
-# don't switch completion with Tab
-unsetopt auto_menu
-
-# edit before running history
-setopt hist_verify
-
-# completion after =/usr etc.
-setopt magic_equal_subst
-
-# sort files numerically
+setopt hist_ignore_space   #Don't add to history when command starts with ' ' (space)
+setopt hist_save_no_dups   #Add only last command on duplicate
+setopt hist_verify         #Edit before running history
+setopt list_packed         #Compact list
+setopt list_types          #Show file types
+setopt long_list_jobs      #Set jobs -l as the output for jobs
+setopt magic_equal_subst   #Completion like --prefix=/usr etc.
+setopt nobeep
+setopt noflowcontrol       #C-s for incremental forward search
+setopt no_nomatch          #Allow things like HEAD^^ in Git repositories
 setopt numeric_glob_sort
-
-# only directories when cd
-setopt auto_cd
-
-# complete / automatically
-setopt auto_param_slash
-
-# complete variable
-setopt auto_param_keys
-
-# don't remove last / automatically
-unsetopt auto_remove_slash
-
-# share history
+setopt prompt_subst
+setopt pushd_ignore_dups   #Don't pushd the same directory
 setopt share_history
+unsetopt auto_menu         #Don't change completion with Tab
+unsetopt auto_remove_slash #Don't remove last / automatically
+unsetopt promptcr          #Show even when no Return at the end
+# }}}
 
-# don't add to history when command starts with ' ' (space)
-setopt hist_ignore_space
+# Key bindings {{{
+#############################################################################
 
-# Allow things like HEAD^^ in Git repositories
-setopt no_nomatch
+bindkey -e
+# emacs keybinding
 
-# Only show last RPROMPT
-#setopt transient_rprompt
-
-# C-s for incremental forward search
-setopt noflowcontrol
-
-# Read local environment File if there is one
-if [ -f ~/.zshrc_local ]; then
-    source ~/.zshrc_local
-fi
-
-# search history
+# Better history search
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey '' history-beginning-search-backward-end
 bindkey '' history-beginning-search-forward-end
 
-# Do an incremental backward search starting from previously executed command
+# Incremental backward search starting from previously executed command {{{
 history-incremental-pattern-search-backward-start-from-previous() {
     CMD=$BUFFER
     zle up-history
@@ -177,6 +122,7 @@ history-incremental-pattern-search-backward-start-from-previous() {
     fi
 }
 zle -N history-incremental-pattern-search-backward-start-from-previous
+# }}}
 
 # bindkey '' history-incremental-pattern-search-backward
 bindkey '' history-incremental-pattern-search-backward-start-from-previous
@@ -184,3 +130,14 @@ bindkey 's' history-incremental-pattern-search-forward
 
 bindkey -M isearch '' backward-kill-word
 bindkey -M isearch '' history-incremental-pattern-search-backward
+
+bindkey '[Z' reverse-menu-complete # S-Tab to reverse traverse completion
+
+#bindkey -s 'a' " | awk '{ print $ }'"
+
+# }}}
+
+# Read local environment File if there is one
+if [ -f ~/.zshrc_local ]; then
+    source ~/.zshrc_local
+fi
