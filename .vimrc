@@ -68,7 +68,7 @@ au FileWriteCmd sudo:*,sudo:*/* SudoWrite <afile>
 nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
 
 " Move pwd to directory of buffer
-nnoremap <silent><Leader>cd :cd %:h<CR>
+nnoremap <Leader>cd :cd %:h<CR>
 
 " EXPERIMENTAL: Q to quit (overrides 'Q', but this is the same as 'gq')
 nmap <silent> Q :q<CR>
@@ -727,6 +727,7 @@ function! s:bundle.hooks.on_source(bundle)
   call neobundle#source('nerdtree')
 
   command! Rtree NERDTreeFind
+  nmap <Leader>uf :Unite file_rec/async:!<CR>
 endfunction
 " }}}
 " vim-ref {{{
