@@ -90,19 +90,22 @@ fi
 p_info+="%0(?,%F{046}$sign%f,%20(?,%F{046}$sign%f,%F{009}$sign%f))"
 
 # Display in two lines if too long
+local pwd_length=`expr length $PWD`
 if [ "$pwd_length" -ge 45 ]; then
     PROMPT="[ %F{219}%~%f ]"$'\n'"$p_info"
 else
     PROMPT="$p_info"
 fi
 
-# Right prompt
-RPROMPT="[ %F{051}%~%f ]"
-
+unset RPROMPT
 # Show git repository info
 local git_prompt="`get_git_prompt`"
 if [[ -n $git_prompt ]]; then
-    RPROMPT+=" ($git_prompt)"
+    RPROMPT+="($git_prompt)"
 fi
 
+# Right prompt
+if [ "$pwd_length" -lt 45 ]; then
+    RPROMPT+=" [ %F{051}%~%f ]"
+fi
 }
