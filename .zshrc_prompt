@@ -79,41 +79,30 @@ local signs="%F{${valid_colors[$random_index]}}->%f"
 
 # username
 p_info="$p_info$signs%F{45}%n%f"
-# p_info="$p_info$signs%F{039}%n%f"
-
-# Display in one line if short enough
-local pwd_length=`expr length $PWD`
-if [ "$pwd_length" -lt 45 ]; then
-    p_info+=":%~"
-fi
 
 # Arrow sign that changes color depending on return state of previous command
+# Show double arrow if in tmux
 local sign=' > '
+if [[ -n $TMUX ]]; then
+    sign='>> '
+fi
+
 p_info+="%0(?,%F{046}$sign%f,%20(?,%F{046}$sign%f,%F{009}$sign%f))"
 
 # Display in two lines if too long
 if [ "$pwd_length" -ge 45 ]; then
-    # PROMPT="[ %F{142}%~%f ]"$'\n'"$PROMPT"
     PROMPT="[ %F{219}%~%f ]"$'\n'"$p_info"
 else
     PROMPT="$p_info"
 fi
 
+# Right prompt
+RPROMPT="[ %F{051}%~%f ]"
+
 # Show git repository info
 local git_prompt="`get_git_prompt`"
 if [[ -n $git_prompt ]]; then
-   RPROMPT="[ $git_prompt ]"
-else
-   RPROMPT="[ %F{051}%~%f ]"
-fi
-
-if [[ -n $TMUX ]]; then
-    RPROMPT+=" (%F{046}TMUX%f)"
+    RPROMPT+=" ($git_prompt)"
 fi
 
 }
-
-# naoki@nigorojr:~/src$ ls
-#PROMPT="%F$BLUE%n%f@%m:%~%F$RED$%f "
-# Show time and date
-#RPROMPT=" %* (%W)"
