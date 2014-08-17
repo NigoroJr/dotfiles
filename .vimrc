@@ -737,8 +737,8 @@ function! s:bundle.hooks.on_source(bundle)
     endif
   endfunction
 
-  nmap <Leader>uf :call UniteInRails('file_rec/async')<CR>
-  nmap <Leader>ug :call UniteInRails('grep')<CR>
+  nmap <silent> <Leader>uf :call UniteInRails('file_rec/async')<CR>
+  nmap <silent> <Leader>ug :call UniteInRails('grep')<CR>
 endfunction
 " }}}
 " vim-ref {{{
