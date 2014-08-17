@@ -37,7 +37,7 @@ autocmd FileType text,vimshell set textwidth=0
 autocmd FileType ruby,html,eruby,vim set shiftwidth=2 tabstop=2
 autocmd FileType python,scss set shiftwidth=4 tabstop=4
 autocmd FileType go set noexpandtab
-autocmd FileType man set nonumber
+autocmd FileType man set nonumber noexpandtab shiftwidth=8 tabstop=8
 " }}}
 " General keybindings   {{{
 " Move by physical/logical line
