@@ -72,6 +72,9 @@ nnoremap <Leader>cd :cd %:h<CR>
 
 " EXPERIMENTAL: Q to quit (overrides 'Q', but this is the same as 'gq')
 nmap <silent> Q :q<CR>
+
+" Toggle spell check
+nmap <Leader>ss :set spell!<CR>
 " }}}
 " Case-sensitive search, case-insensitive command completion  {{{
 let b:case_insensitive_cmd = 0
