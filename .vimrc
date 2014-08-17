@@ -733,13 +733,12 @@ function! s:bundle.hooks.on_source(bundle)
     if exists('b:rails_root')
       execute 'Unite' a:source . ':' . b:rails_root
     else
-      execute 'Unite' a:source . ':.'
+      execute 'Unite' a:source
     endif
   endfunction
 
   nmap <Leader>uf :call UniteInRails('file_rec/async')<CR>
   nmap <Leader>ug :call UniteInRails('grep')<CR>
-
 endfunction
 " }}}
 " vim-ref {{{
