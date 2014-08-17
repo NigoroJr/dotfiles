@@ -586,6 +586,7 @@ nnoremap <silent> <Leader>uq :Unite -horizontal -no-quit quickfix<CR>
 nnoremap <silent> <Leader>uf :Unite file_rec/async -buffer-name=file -create<CR>
 nnoremap <silent> <Leader>ul :Unite file/async -buffer-name=file -create<CR>
 nnoremap <silent> <Leader>um :Unite neomru/file -buffer-name=mru -create<CR>
+nnoremap <silent> <Leader>ug :Unite grep<CR>
 
 function! s:bundle.hooks.on_source(bundle)
   call unite#custom#profile('default', 'context', {
@@ -726,11 +727,9 @@ endfunction
 " vim-rails {{{
 let s:bundle = neobundle#get('vim-rails')
 function! s:bundle.hooks.on_source(bundle)
-  "call neobundle#source('vimfiler.vim')
-  call neobundle#source('nerdtree')
-
   command! Rtree NERDTreeFind
-  nmap <Leader>uf :Unite file_rec/async:!<CR>
+  nmap <Leader>uf :execute "Unite file_rec/async:" . b:rails_root<CR>
+  nmap <Leader>ug :execute "Unite grep:" . b:rails_root<CR>
 endfunction
 " }}}
 " vim-ref {{{
