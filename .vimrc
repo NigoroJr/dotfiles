@@ -728,8 +728,18 @@ endfunction
 let s:bundle = neobundle#get('vim-rails')
 function! s:bundle.hooks.on_source(bundle)
   command! Rtree NERDTreeFind
-  nmap <Leader>uf :execute "Unite file_rec/async:" . b:rails_root<CR>
-  nmap <Leader>ug :execute "Unite grep:" . b:rails_root<CR>
+
+  function! UniteInRails(source)
+    if exists('b:rails_root')
+      execute 'Unite' a:source . ':' . b:rails_root
+    else
+      execute 'Unite' a:source . ':.'
+    endif
+  endfunction
+
+  nmap <Leader>uf :call UniteInRails('file_rec/async')<CR>
+  nmap <Leader>ug :call UniteInRails('grep')<CR>
+
 endfunction
 " }}}
 " vim-ref {{{
