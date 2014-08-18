@@ -656,7 +656,7 @@ function! s:bundle.hooks.on_source(bundle)
   let g:go_fmt_autosave = 0
 
   nmap <silent> <Leader>gf :GoFmt<CR>
-  nmap <silent> <Leader>gi :GoImport<CR>
+  nmap <Leader>gi :GoImport<Space>
 endfunction
 " }}}
 " vim-marching {{{
