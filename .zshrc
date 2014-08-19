@@ -68,31 +68,33 @@ limit coredumpsize 102400
 
 # Options {{{
 ##############################################################################
-setopt auto_cd             #cd when only directory is entered
-setopt auto_list           #Show list of completion
-setopt auto_param_keys     #Complete variables
-setopt auto_param_slash    #Complete / automatically
+setopt auto_cd             # cd when only directory is entered
+setopt auto_list           # Show list of completion
+setopt auto_param_keys     # Complete variables
+setopt auto_param_slash    # Complete / automatically
 setopt auto_pushd
-setopt auto_resume         #Resume when suspended command is entered
-setopt correct             #Suggest correction
+setopt auto_resume         # Resume when suspended command is entered
+setopt correct             # Suggest correction
 setopt extended_glob
-setopt hist_ignore_space   #Don't add to history when command starts with ' ' (space)
-setopt hist_save_no_dups   #Add only last command on duplicate
-setopt hist_verify         #Edit before running history
-setopt list_packed         #Compact list
-setopt list_types          #Show file types
-setopt long_list_jobs      #Set jobs -l as the output for jobs
-setopt magic_equal_subst   #Completion like --prefix=/usr etc.
+setopt hist_ignore_all_dups
+setopt hist_ignore_space   # Don't add commands that start with space
+setopt hist_reduce_blanks
+setopt hist_save_no_dups   # Add only last command on duplicate
+setopt hist_verify         # Edit before running history
+setopt list_packed         # Compact list
+setopt list_types          # Show file types
+setopt long_list_jobs      # Set jobs -l as the output for jobs
+setopt magic_equal_subst   # Completion like --prefix=/usr etc.
 setopt nobeep
-setopt noflowcontrol       #C-s for incremental forward search
-setopt no_nomatch          #Allow things like HEAD^^ in Git repositories
+setopt noflowcontrol       # C-s for incremental forward search
+setopt no_nomatch          # Allow things like HEAD^^ in Git repositories
 setopt numeric_glob_sort
 setopt prompt_subst
-setopt pushd_ignore_dups   #Don't pushd the same directory
+setopt pushd_ignore_dups   # Don't pushd the same directory
 setopt share_history
-unsetopt auto_menu         #Don't change completion with Tab
-unsetopt auto_remove_slash #Don't remove last / automatically
-unsetopt promptcr          #Show even when no Return at the end
+unsetopt auto_menu         # Don't change completion with Tab
+unsetopt auto_remove_slash # Don't remove last / automatically
+unsetopt promptcr          # Show even when no Return at the end
 # }}}
 
 # Key bindings {{{
