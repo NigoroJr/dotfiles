@@ -14,18 +14,16 @@ URxvt.shading: 15
 ! Disable scrollbar
 URxvt.scrollBar: false
 
-! URxvt.font: xft:Ricty Discord:Regular:size=10:antialias=true
+URxvt.saveLines: 5000
+URxvt.pointerBlank: true
+
 URxvt.font:\
     xft:Ricty Discord:Regular:size=9:antialias=true,
     xft:Hiragino Maru Gothic Pro W4:size=9:antialias=true
-!URxvt.letterSpace: -5
 
-
-! Copy and paste
-URxvt.perl-ext-common: url-select,clipboard
-! left click to open URL
+! Left click to open URL
+URxvt.perl-ext-common: url-select
 URxvt.url-select.button: 1
-! underline URLs
+! Underline URLs
 URxvt.url-select.underline: true
-URxvt.keysym.C-C: perl:clipboard:copy
-URxvt.keysym.C-V: perl:clipboard:paste
+URxvt.url-select.launcher: chromium --incognito
