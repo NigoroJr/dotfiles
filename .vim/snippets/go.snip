@@ -8,24 +8,84 @@ snippet		pl
 abbr		fmt.Println()
 	fmt.Println(${1})${0}
 
-snippet     pf
-abbr        fmt.Printf()
+snippet		pf
+abbr		fmt.Printf()
 	fmt.Printf("${1}", ${2})${0}
 
-snippet     fp
-abbr        fmt.Fprint()
+snippet		fp
+abbr		fmt.Fprint()
 	fmt.Fprint(${1:w}, ${2})${0}
 
-snippet     fpl
-abbr        fmt.Fprintln()
+snippet		fpl
+abbr		fmt.Fprintln()
 	fmt.Fprintln(${1:w}, ${2})${0}
 
-snippet     fpf
-abbr        fmt.Fprintf()
+snippet		fpf
+abbr		fmt.Fprintf()
 	fmt.Fprintf(${1:w}, "${2}", ${3})${0}
 
-snippet     impl
-options     head
+snippet		impl
 	func (${1:#:name} ${2:#:interface}) ${3:Func}(${4:#:args}) ${5:#:ret}{
 		${0}
+	}
+
+snippet		main
+abbr		func main()
+options		head
+	func main() {
+		${1}
+	}
+
+snippet		if
+abbr		if
+	if ${1:err != nil} {
+		${0}
+	}
+
+snippet		el
+abbr		else
+	else {
+		${0}
+	}
+
+snippet		ife
+abbr		if-else
+	if ${1:#:cond} {
+		${2}
+	} else {
+		${0}
+	}
+
+snippet		for
+	for ${1:k}, ${2:v} := range ${3} {
+		${0}
+	}
+
+snippet		for2
+	for ${1:i} := ${2}; $1 < ${3}; $1++ {
+		${0}
+	}
+
+snippet		swi
+abbr		switch
+	switch ${1:val} {
+	case ${2:#:cond}:
+		${0}
+	}
+
+snippet	 	sel
+abbr		select
+	select {
+	case ${1:v} := <-${2:ch}
+		${0}
+	}
+
+snippet		def
+abbr		default:
+	default:
+		${0}
+
+snippet test
+	func Test${1:Function}(t *testing.T) {
+		${2}
 	}
