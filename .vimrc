@@ -246,6 +246,11 @@ NeoBundleLazy 'mips.vim', {
       \   'filetypes': 'asm',
       \ },
       \ }
+NeoBundleLazy 'marcus/rsense', {
+      \ 'autoload': {
+      \   'filetypes': 'ruby',
+      \ },
+      \ }
 NeoBundleLazy 'osyo-manga/shabadou.vim', {
       \ 'depends': 'thinca/vim-quickrun',
       \ }
@@ -299,6 +304,9 @@ NeoBundleLazy 'Shougo/context_filetype.vim'
 NeoBundleLazy 'Shougo/neomru.vim', {
       \ 'depends': 'Shougo/unite.vim',
       \ }
+NeoBundleLazy 'Shougo/neocomplcache-rsense.vim', {
+      \ 'depends': ['Shougo/neocomplcache.vim', 'marcus/rsense'],
+      \ }
 " *
 NeoBundleLazy 'Shougo/unite.vim'
 " *
@@ -311,6 +319,9 @@ NeoBundleLazy 'sudo.vim', {
       \ 'autoload': {
       \   'commands': ['SudoRead', 'SudoWrite'],
       \ },
+      \ }
+NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', {
+      \ 'depends': ['Shougo/neocomplete.vim', 'marcus/rsense'],
       \ }
 NeoBundleLazy 'TextFormat', {
       \ 'autoload': {
@@ -469,6 +480,10 @@ let s:bundle = neobundle#get('neocomplcache.vim')
 function! s:bundle.hooks.on_source(bundle)
   call neocomplcache#initialize()
 
+  if &filetype == 'ruby'
+    call neobundle#source('neocomplcache-rsense.vim')
+  endif
+
   let g:neocomplcache#enable_at_startup = 1
   let g:neocomplcache#enable_smart_case = 1
   let g:neocomplcache#min_keyword_length = 3
@@ -488,16 +503,28 @@ function! s:bundle.hooks.on_source(bundle)
         \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
   let g:neocomplcache#force_omni_input_patterns.go =
         \ '[^.[:digit:] *\t]\.\w*'
-  let g:neocomplete#force_omni_input_patterns.python =
+  let g:neocomplcache#force_omni_input_patterns.python =
         \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+  let g:neocomplcache#force_omni_input_patterns.ruby =
+        \ '[^. *\t]\.\w*\|\h\w*::'
+endfunction
+" }}}
+" neocomplcache-rsense.vim {{{
+let s:bundle = neobundle#get('neocomplcache-rsense.vim')
+function! s:bundle.hooks.on_source(bundle)
+  let g:neocomplcache#sources#rsense#home_directory = g:rsenseHome
 endfunction
 " }}}
 " neocomplete.vim {{{
 let s:bundle = neobundle#get('neocomplete.vim')
 function! s:bundle.hooks.on_source(bundle)
-  call neobundle#source('context_filetype.vim')
+  "call neobundle#source('context_filetype.vim')
 
   call neocomplete#initialize()
+
+  if &filetype == 'ruby'
+    call neobundle#source('neocomplete-rsense.vim')
+  endif
 
   let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#enable_smart_case = 1
@@ -526,8 +553,18 @@ function! s:bundle.hooks.on_source(bundle)
   " Python
   let g:neocomplete#force_omni_input_patterns.python =
         \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+
+  " Ruby
+  let g:neocomplete#force_omni_input_patterns.ruby =
+        \ '[^. *\t]\.\w*\|\h\w*::'
 endfunction
 
+" }}}
+" neocomplete-rsense.vim {{{
+let s:bundle = neobundle#get('neocomplete-rsense.vim')
+function! s:bundle.hooks.on_source(bundle)
+  let g:neocomplete#sources#rsense#home_directory = g:rsenseHome
+endfunction
 " }}}
 " neosnippet.vim {{{
 nnoremap <Leader>es :<C-u>NeoSnippetEdit
@@ -557,6 +594,12 @@ function! s:bundle.hooks.on_source(bundle)
   let g:NERDTreeDirArrows = 0
   let g:NERDTreeMapToggleHidden = '.'
   let g:NERDTreeShowHidden = 0
+endfunction
+" }}}
+" rsense.vim {{{
+let s:bundle = neobundle#get('rsense')
+function! s:bundle.hooks.on_source(bundle)
+  let g:rsenseUseOmniFunc = 1
 endfunction
 " }}}
 " unite-quickfix {{{
@@ -666,8 +709,8 @@ let g:marching_include_paths = filter(
       \ split(glob('/usr/include/c++/'), '\n'),
       \ 'isdirectory(v:val)')
 
-imap <C-x><C-o> <Plug>(marching_start_omni_complete)
-imap <C-x><C-o> <Plug>(marching_force_start_omni_complete)
+"imap <C-x><C-o> <Plug>(marching_start_omni_complete)
+"imap <C-x><C-o> <Plug>(marching_force_start_omni_complete)
 nmap <Leader>mc :MarchingBufferClearCache<CR>
 " }}}
 " vim-quickrun {{{
