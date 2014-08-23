@@ -600,6 +600,10 @@ endfunction
 let s:bundle = neobundle#get('rsense')
 function! s:bundle.hooks.on_source(bundle)
   let g:rsenseUseOmniFunc = 1
+
+  " Since it does basically the same thing as :MarchingClearCache
+  " TODO: <Leader>cc for both MarchingClearCache and this?
+  nmap <silent> <Leader>mc :RSenseClear<CR>
 endfunction
 " }}}
 " unite-quickfix {{{
