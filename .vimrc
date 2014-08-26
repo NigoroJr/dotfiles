@@ -554,9 +554,11 @@ function! s:bundle.hooks.on_source(bundle)
   let g:neocomplete#force_omni_input_patterns.python =
         \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
-  " Ruby
-  let g:neocomplete#force_omni_input_patterns.ruby =
-        \ '[^. *\t]\.\w*\|\h\w*::'
+  " Ruby (unless in Rails project)
+  if neobundle#is_sourced('rsense')
+    let g:neocomplete#force_omni_input_patterns.ruby =
+          \ '[^. *\t]\.\w*\|\h\w*::'
+  endif
 endfunction
 
 " }}}
@@ -774,6 +776,9 @@ endfunction
 let s:bundle = neobundle#get('vim-rails')
 function! s:bundle.hooks.on_source(bundle)
   command! Rtree NERDTreeFind
+
+  " Don't use RSense in Rails projects
+  execute 'NeoBundleDisable rsense'
 
   function! UniteInRails(source)
     if exists('b:rails_root')
