@@ -246,11 +246,7 @@ NeoBundleLazy 'mips.vim', {
       \   'filetypes': 'asm',
       \ },
       \ }
-NeoBundleLazy 'marcus/rsense', {
-      \ 'autoload': {
-      \   'filetypes': 'ruby',
-      \ },
-      \ }
+NeoBundleLazy 'marcus/rsense'
 NeoBundleLazy 'osyo-manga/shabadou.vim', {
       \ 'depends': 'thinca/vim-quickrun',
       \ }
@@ -480,10 +476,6 @@ let s:bundle = neobundle#get('neocomplcache.vim')
 function! s:bundle.hooks.on_source(bundle)
   call neocomplcache#initialize()
 
-  if &filetype == 'ruby'
-    call neobundle#source('neocomplcache-rsense.vim')
-  endif
-
   let g:neocomplcache#enable_at_startup = 1
   let g:neocomplcache#enable_smart_case = 1
   let g:neocomplcache#min_keyword_length = 3
@@ -505,8 +497,12 @@ function! s:bundle.hooks.on_source(bundle)
         \ '[^.[:digit:] *\t]\.\w*'
   let g:neocomplcache#force_omni_input_patterns.python =
         \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-  let g:neocomplcache#force_omni_input_patterns.ruby =
-        \ '[^. *\t]\.\w*\|\h\w*::'
+  " Only if RSense is in use
+  if neobundle#is_sourced('rsense')
+    let g:neocomplcache#force_omni_input_patterns.ruby =
+          \ '[^. *\t]\.\w*\|\h\w*::'
+    call neobundle#source('neocomplcache-rsense.vim')
+  endif
 endfunction
 " }}}
 " neocomplcache-rsense.vim {{{
@@ -521,10 +517,6 @@ function! s:bundle.hooks.on_source(bundle)
   "call neobundle#source('context_filetype.vim')
 
   call neocomplete#initialize()
-
-  if &filetype == 'ruby'
-    call neobundle#source('neocomplete-rsense.vim')
-  endif
 
   let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#enable_smart_case = 1
@@ -554,13 +546,14 @@ function! s:bundle.hooks.on_source(bundle)
   let g:neocomplete#force_omni_input_patterns.python =
         \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
-  " Ruby (unless in Rails project)
+  " Ruby (only if RSense is in use)
+  " NOTE: Not guaranteed that rsense will be sourced before neocomplete.vim
   if neobundle#is_sourced('rsense')
     let g:neocomplete#force_omni_input_patterns.ruby =
           \ '[^. *\t]\.\w*\|\h\w*::'
+    call neobundle#source('neocomplete-rsense.vim')
   endif
 endfunction
-
 " }}}
 " neocomplete-rsense.vim {{{
 let s:bundle = neobundle#get('neocomplete-rsense.vim')
@@ -777,9 +770,6 @@ let s:bundle = neobundle#get('vim-rails')
 function! s:bundle.hooks.on_source(bundle)
   command! Rtree NERDTreeFind
 
-  " Don't use RSense in Rails projects
-  execute 'NeoBundleDisable rsense'
-
   function! UniteInRails(source)
     if exists('b:rails_root')
       execute 'Unite' a:source . ':' . b:rails_root
@@ -790,6 +780,13 @@ function! s:bundle.hooks.on_source(bundle)
 
   nmap <silent> <Leader>uf :call UniteInRails('file_rec/async')<CR>
   nmap <silent> <Leader>ug :call UniteInRails('grep')<CR>
+endfunction
+
+function! s:bundle.hooks.on_post_source(bundle)
+  " Use RSense only in normal Ruby codes
+  if !exists('b:rails_root') && &filetype == 'ruby'
+    call neobundle#source('rsense')
+  endif
 endfunction
 " }}}
 " vim-ref {{{
