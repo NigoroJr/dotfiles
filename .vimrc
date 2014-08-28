@@ -65,7 +65,7 @@ au BufWriteCmd  sudo:*,sudo:*/* SudoWrite <afile>
 au FileWriteCmd sudo:*,sudo:*/* SudoWrite <afile>
 
 " Reset hilight search by pressing Escape 2 times
-nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 
 " Move pwd to directory of buffer
 nnoremap <Leader>cd :cd %:h<CR>
