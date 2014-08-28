@@ -701,16 +701,20 @@ function! s:bundle.hooks.on_source(bundle)
 endfunction
 " }}}
 " vim-marching {{{
-let g:marching_enable_neocomplete = 1
 let g:marching_include_paths = filter(
       \ split(glob('/usr/lib/gcc/x86_64-pc-linux-gnu/*/include/*/'), '\n') +
       \ split(glob('/usr/include/boost/'), '\n') +
       \ split(glob('/usr/include/c++/'), '\n'),
       \ 'isdirectory(v:val)')
+let s:bundle = neobundle#get('vim-marching')
+function! s:bundle.hooks.on_source(bundle)
+  let g:marching_enable_neocomplete = 1
 
-"imap <C-x><C-o> <Plug>(marching_start_omni_complete)
-"imap <C-x><C-o> <Plug>(marching_force_start_omni_complete)
-nmap <Leader>mc :MarchingBufferClearCache<CR>
+  imap <buffer> <C-x><C-o> <Plug>(marching_force_start_omni_complete)
+  set updatetime=200
+
+  nmap <Leader>mc :MarchingBufferClearCache<CR>
+endfunction
 " }}}
 " vim-quickrun {{{
 if neobundle#tap('vim-quickrun')
