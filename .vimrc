@@ -104,6 +104,7 @@ autocmd FileType * call CloseBraces()
 augroup cpp-namespace
   autocmd!
   autocmd FileType cpp inoremap <buffer><expr>; <SID>expand_namespace()
+  autocmd FileType cpp inoremap <buffer><expr>{<CR> <SID>class_declaration()
 augroup END
 function! s:expand_namespace()
   let s = getline('.')[0:col('.')-1]
@@ -115,6 +116,15 @@ function! s:expand_namespace()
     return "\<BS>etail::"
   else
     return ';'
+  endif
+endfunction
+
+function! s:class_declaration()
+  let s = getline('.')[0:col('.')-1]
+  if s =~# '\<class\>'
+    return "{\<CR>};\<Esc>O"
+  else
+    return "{\<CR>}\<Esc>O"
   endif
 endfunction
 " }}}
