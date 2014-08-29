@@ -123,9 +123,14 @@ function! s:class_declaration()
   let s = getline('.')[0:col('.')-1]
   if s =~# '\<class\>'
     return "{\<CR>};\<Esc>O"
-  else
-    return "{\<CR>}\<Esc>O"
+  elseif s =~# '\<struct\>'
+    if s !~# '\<typedef\>'
+      return "{\<CR>};\<Esc>O"
+    endif
   endif
+
+  " Otherwise insert closing '}'
+  return "{\<CR>}\<Esc>O"
 endfunction
 " }}}
 " Create backup and view directories {{{
