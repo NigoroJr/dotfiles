@@ -714,7 +714,7 @@ endfunction
 let g:marching_include_paths = filter(
       \ split(glob('/usr/lib/gcc/x86_64-pc-linux-gnu/*/include/*/'), '\n') +
       \ split(glob('/usr/include/boost/'), '\n') +
-      \ split(glob('/usr/include/c++/'), '\n'),
+      \ split(glob('/usr/include/c++/*'), '\n'),
       \ 'isdirectory(v:val)')
 let s:bundle = neobundle#get('vim-marching')
 function! s:bundle.hooks.on_source(bundle)
