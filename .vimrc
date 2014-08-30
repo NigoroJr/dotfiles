@@ -121,12 +121,9 @@ endfunction
 
 function! s:class_declaration()
   let s = getline('.')[0:col('.')-1]
-  if s =~# '\<class\>'
+  if s =~# '\<class\>' ||
+        \ (s =~# '\<struct\>' && s !~# '\<typedef\>')
     return "{\<CR>};\<Esc>O"
-  elseif s =~# '\<struct\>'
-    if s !~# '\<typedef\>'
-      return "{\<CR>};\<Esc>O"
-    endif
   endif
 
   " Otherwise insert closing '}'
