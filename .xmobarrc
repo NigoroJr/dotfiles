@@ -1,0 +1,14 @@
+-- vim: ft=haskell
+
+Config { font = "xft:Ricty Discord:size=9"
+       , bgColor  = "#000000"
+       , fgColor  = "#BFBFBF"
+       , position = Top
+       , lowerOnStart = True
+       , commands = [ Run Date "%a %b %_d %Y * %H:%M:%S" "date" 10
+                    , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ <fc=#00FF00>%date%</fc>"
+    }
