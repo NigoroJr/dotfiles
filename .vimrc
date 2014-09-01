@@ -108,11 +108,11 @@ augroup cpp-namespace
 augroup END
 function! s:expand_namespace()
   let s = getline('.')[0:col('.')-1]
-  if s =~# '\<b;$'
+  if s =~# '\<b;'
     return "\<BS>oost::"
-  elseif s =~# '\<s;$'
+  elseif s =~# '\<s;'
     return "\<BS>td::"
-  elseif s =~# '\<d;$'
+  elseif s =~# '\<d;'
     return "\<BS>etail::"
   else
     return ';'
