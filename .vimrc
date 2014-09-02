@@ -548,7 +548,7 @@ function! s:bundle.hooks.on_source(bundle)
 
   " perlomni.vim
   let g:neocomplete#force_omni_input_patterns.perl =
-        \ '\h\w*->\h\w*\|\h\w*::'
+        \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 
   " Go
   let g:neocomplete#force_omni_input_patterns.go =
