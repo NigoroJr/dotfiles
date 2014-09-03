@@ -1,1 +1,1 @@
-alias gpp=g++
+alias gpp='g++ -std=c++11'
