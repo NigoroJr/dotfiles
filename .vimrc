@@ -722,6 +722,9 @@ let g:marching_include_paths = filter(
 let s:bundle = neobundle#get('vim-marching')
 function! s:bundle.hooks.on_source(bundle)
   let g:marching_enable_neocomplete = 1
+  " let g:marching#clang_command#options = {
+  "       \ 'cpp': '-std=c++11',
+  "       \ }
 
   imap <buffer> <C-x><C-o> <Plug>(marching_force_start_omni_complete)
   set updatetime=200
