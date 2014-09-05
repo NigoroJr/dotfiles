@@ -16,7 +16,7 @@ set number
 set wildmode=longest,list
 set foldenable
 set foldmethod=marker
-set history=100000
+set history=10000
 set viewoptions=cursor,folds
 set hlsearch
 set encoding=utf-8
