@@ -196,7 +196,7 @@ NeoBundle 'tkztmk/vim-vala'
 NeoBundle 'tomtom/tcomment_vim'
 " }}}
 " NeoBundleLazy {{{
-" Plugins with '*' uses neobundle#config() in the individual sections
+" Plugins with '*' use neobundle#config() in their configuration sections
 " *
 NeoBundleLazy 'Align', {
       \ 'autoload': {
