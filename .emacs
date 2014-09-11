@@ -160,8 +160,8 @@
 (require 'saveplace)
 
 ;; Use Ricty Discord
-(if (eq system-type 'gnu/linx)
-  (set-frame-font "Ricty Discord-9"))
+(if (eq system-type 'gnu/linux)
+  (set-frame-font "RictyDiscord-9"))
 (if (eq system-type 'darwin)
   (set-frame-font "RictyDiscord-13"))
 
