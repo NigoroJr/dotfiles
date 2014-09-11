@@ -122,7 +122,7 @@
 (require 'auto-complete-clang-async)
 (defun ac-cc-mode-setup ()
   (setq ac-clang-complete-executable (expand-file-name "~/.emacs.d/el-get/auto-complete-clang-async/clang-complete"))
-  (setq ac-sources '(ac-source-clang-async))
+  (setq ac-sources (append '(ac-source-clang-async) ac-sources))
   (setq ac-clang-cflags '("-std=c++11"))
   (ac-clang-launch-completion-process))
 (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
