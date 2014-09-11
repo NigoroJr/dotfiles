@@ -162,6 +162,8 @@
 ;; Use Ricty Discord
 (if (eq system-type 'gnu/linx)
   (set-frame-font "Ricty Discord-9"))
+(if (eq system-type 'darwin)
+  (set-frame-font "RictyDiscord-13"))
 
 ;; Use CPerl mode
 (defalias 'perl-mode 'cperl-mode)
