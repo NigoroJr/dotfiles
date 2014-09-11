@@ -1,4 +1,5 @@
 (add-to-list 'load-path "~/.emacs.d/")
+(setq default-directory "~/")
 
 ;; Auto insert matching brace
 (defun my-c-mode-insert-brace ()
@@ -20,22 +21,15 @@
 ;; C-w as delete previous word
 ;; (global-set-key "\C-w" 'backward-kill-word)
 
-;; Solarized color theme
-(add-to-list 'load-path "~/.emacs.d/el-get/color-theme")
-(add-to-list 'load-path "~/.emacs.d/el-get/color-theme-solarized")
-(require 'color-theme)
-(require 'color-theme-solarized)
-
-;; Only apply color theme when in GUI
-(when window-system
-  (load-theme 'solarized-light t))
-;;(load-theme 'solarized-dark t))
-
 ;; Auto indent
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;; Indentation level to 4
 (setq c-basic-offset 4)
+
+;; Hide tool bar and menu bar
+(tool-bar-mode -1)
+(menu-bar-mode -1)
 
 ;; Use temporary file directory for backups and autosaves
 (setq backup-directory-alist
@@ -149,13 +143,25 @@
      (setq anything-su-or-sudo "sudo"))
    )
 
+;; Solarized color theme
+(add-to-list 'load-path "~/.emacs.d/el-get/color-theme")
+(add-to-list 'load-path "~/.emacs.d/el-get/color-theme-solarized")
+(require 'color-theme)
+(require 'color-theme-solarized)
+
+;; Only apply color theme when in GUI
+(when window-system
+  (load-theme 'solarized-light t))
+;;(load-theme 'solarized-dark t))
+
 ;; save cursor position
 (setq save-place-file "~/.emacs.d/saveplace")
 (setq-default save-place t)
 (require 'saveplace)
 
 ;; Use Ricty Discord
-(set-frame-font "Ricty Discord-9")
+(if (eq system-type 'gnu/linx)
+  (set-frame-font "Ricty Discord-9"))
 
 ;; Use CPerl mode
 (defalias 'perl-mode 'cperl-mode)
