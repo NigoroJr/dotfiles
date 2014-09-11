@@ -101,6 +101,11 @@
                :website "https://github.com/auto-complete/auto-complete"
                :pkgname "auto-complete/auto-complete"
         )
+        (:name auto-complete-clang-async
+               :type github
+               :website "https://github.com/Golevka/emacs-clang-complete-async"
+               :pkgname "Golevka/emacs-clang-complete-async"
+        )
 ;;        (:name flex-autopair
 ;;               :type github
 ;;               :url "https://github.com/uk-ar/flex-autopair"
@@ -117,6 +122,19 @@
 
 (if (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
+
+;; Clang complete
+(add-to-list 'load-path "~/.emacs.d/el-get/auto-complete-clang-async")
+(require 'auto-complete-clang-async)
+(defun ac-cc-mode-setup ()
+  (setq ac-clang-complete-executable (expand-file-name "~/.emacs.d/el-get/auto-complete-clang-async/clang-complete"))
+  (setq ac-sources '(ac-source-clang-async))
+  (setq ac-clang-cflags '("-std=c++11"))
+  (ac-clang-launch-completion-process))
+(add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
+(add-hook 'c++-mode-common-hook 'ac-cc-mode-setup)
+(add-hook 'auto-complete-mode-hook 'ac-common-setup)
+(global-auto-complete-mode t)
 
 ;; Anything
 (add-to-list 'load-path "~/.emacs.d/el-get/anything")
