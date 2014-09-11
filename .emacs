@@ -44,7 +44,7 @@
 (setq shell-file-name "/bin/zsh")
 
 ;; Show numbers
-(global-linum-mode t)
+;;(global-linum-mode t)
 
 ;; Make file executable if file has #! at beginning
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
@@ -187,10 +187,6 @@
 ;;(require 'flex-autopair)
 ;;(flex-autopair-mode 1)
 
-;; MultiTerm
-(add-to-list 'load-path "~/.emacs.d/el-get/multi-term")
-(require 'multi-term)
-(setq multi-term-program "/bin/zsh")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
