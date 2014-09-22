@@ -610,6 +610,14 @@ function! s:bundle.hooks.on_source(bundle)
   let g:NERDTreeShowHidden = 0
 endfunction
 " }}}
+" previm {{{
+let s:bundle = neobundle#get('previm')
+function! s:bundle.hooks.on_source(bundle)
+  if filereadable(expand('~/Dropbox/Vim/previm.css'))
+    let g:previm_custom_css_path = expand('~/Dropbox/Vim/previm.css')
+  endif
+endfunction
+" }}}
 " rsense.vim {{{
 let s:bundle = neobundle#get('rsense')
 function! s:bundle.hooks.on_source(bundle)
