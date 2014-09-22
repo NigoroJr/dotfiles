@@ -38,6 +38,7 @@ autocmd FileType ruby,html,eruby,vim set shiftwidth=2 tabstop=2
 autocmd FileType python,scss set shiftwidth=4 tabstop=4
 autocmd FileType go set noexpandtab
 autocmd FileType man set nonumber noexpandtab shiftwidth=8 tabstop=8
+autocmd BufNewFile,BufRead *.tex set filetype=tex
 " }}}
 " General keybindings   {{{
 " Move by physical/logical line
@@ -140,7 +141,7 @@ endif
 " }}}
 " Set filetypes to not save/load the view {{{
 autocmd FileType gitcommit autocmd! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-let no_view = ['gitcommit']
+let no_view = ['gitcommit', 'tex', 'plaintex']
 augroup vimrc
   autocmd BufWritePost *
         \   if expand('%') != '' && &buftype !~ 'nofile' && index(no_view, &filetype) == -1
@@ -251,6 +252,11 @@ NeoBundleLazy 'kannokanno/previm', {
       \ 'autoload': {
       \   'commands': 'PrevimOpen',
       \   'filetypes': 'markdown',
+      \ },
+      \ }
+NeoBundleLazy 'lervag/vim-latex', {
+      \ 'autoload': {
+      \   'filetypes': ['tex'],
       \ },
       \ }
 NeoBundleLazy 'mips.vim', {
@@ -711,6 +717,20 @@ function! s:bundle.hooks.on_source(bundle)
 
   nmap <silent> <Leader>gf :GoFmt<CR>
   nmap <Leader>gi :GoImport<Space>
+endfunction
+" }}}
+" vim-latex {{{
+let s:bundle = neobundle#get('vim-latex')
+function! s:bundle.hooks.on_source(bundle)
+  let g:latex_indent_enabled = 1
+  let g:latex_motion_matchparen = 0
+endfunction
+function! s:bundle.hooks.on_post_source(bundle)
+  " Start auto-compile
+  silent call latex#latexmk#compile()
+
+  " Re-set shiftwidth and tapstop
+  set shiftwidth=4 tabstop=4
 endfunction
 " }}}
 " vim-marching {{{
