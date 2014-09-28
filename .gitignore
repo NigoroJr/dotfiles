@@ -5,6 +5,7 @@
 .vim/view/
 .vim/bundle/*
 !.vim/bundle/.keep
+.vim/.netrwhist
 
 .xmonad/*
 !.xmonad/xmonad.hs
