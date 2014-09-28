@@ -265,6 +265,11 @@ NeoBundleLazy 'mips.vim', {
       \ },
       \ }
 NeoBundleLazy 'marcus/rsense'
+NeoBundleLazy 'NigoroJr/foofile.vim', {
+      \ 'autoload': {
+      \   'commands': ['FooFile', 'FooFileLast', 'FooFileDelete'],
+      \ },
+      \ }
 NeoBundleLazy 'osyo-manga/shabadou.vim', {
       \ 'depends': 'thinca/vim-quickrun',
       \ }
