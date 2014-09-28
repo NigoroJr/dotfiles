@@ -267,7 +267,24 @@ NeoBundleLazy 'mips.vim', {
 NeoBundleLazy 'marcus/rsense'
 NeoBundleLazy 'NigoroJr/foofile.vim', {
       \ 'autoload': {
-      \   'commands': ['FooFile', 'FooFileLast', 'FooFileDelete'],
+      \   'commands': [
+      \     {
+      \       'name': 'FooFile',
+      \       'complete': 'customlist,foofile#complete',
+      \     },
+      \     {
+      \       'name': 'FooFileLast',
+      \       'complete': 'customlist,foofile#complete',
+      \     },
+      \     {
+      \       'name': 'FooFileDelete',
+      \       'complete': 'customlist,foofile#complete',
+      \     },
+      \     {
+      \       'name': 'FooFileSaveAs',
+      \       'complete': 'file',
+      \     },
+      \   ],
       \ },
       \ }
 NeoBundleLazy 'osyo-manga/shabadou.vim', {
