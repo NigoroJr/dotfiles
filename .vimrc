@@ -595,6 +595,11 @@ function! s:bundle.hooks.on_source(bundle)
     call neobundle#source('neocomplete-rsense.vim')
   endif
 endfunction
+
+let s:bundle = neobundle#get('neocomplete.vim')
+function! s:bundle.hooks.on_post_source(bundle)
+  call neocomplete#initialize()
+endfunction
 " }}}
 " neocomplete-rsense.vim {{{
 let s:bundle = neobundle#get('neocomplete-rsense.vim')
