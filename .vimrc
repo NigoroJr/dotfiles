@@ -299,7 +299,7 @@ NeoBundleLazy 'osyo-manga/unite-quickfix', {
       \ 'depends': 'Shougo/unite.vim',
       \ }
 NeoBundleLazy 'osyo-manga/vim-marching', {
-      \ 'depends': ['Shougo/vimproc.vim', 'osyo-manga/vim-reunions'],
+      \ 'depends': ['Shougo/neocomplete.vim', 'Shougo/vimproc.vim', 'osyo-manga/vim-reunions'],
       \ 'autoload': {
       \   'filetypes': ['c', 'cpp'],
       \ },
@@ -555,8 +555,6 @@ endfunction
 let s:bundle = neobundle#get('neocomplete.vim')
 function! s:bundle.hooks.on_source(bundle)
   "call neobundle#source('context_filetype.vim')
-
-  call neocomplete#initialize()
 
   let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#enable_smart_case = 1
