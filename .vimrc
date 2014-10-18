@@ -75,7 +75,15 @@ nnoremap <Leader>cd :cd %:h<CR>
 nmap <silent> Q :q<CR>
 
 " Toggle spell check
-nmap <Leader>ss :set spell!<CR>
+nmap <silent> <Leader>ss :call ToggleSpellcheck()<CR>
+function! ToggleSpellcheck()
+  silent setlocal spell!
+  if &spell == 0
+    echo 'Spellcheck OFF'
+  else
+    echo 'Spellcheck ON'
+  endif
+endfunction
 " }}}
 " Case-sensitive search, case-insensitive command completion  {{{
 let b:case_insensitive_cmd = 0
