@@ -71,7 +71,7 @@ nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 " Move pwd to directory of buffer
 nnoremap <Leader>cd :cd %:h<CR>
 
-" EXPERIMENTAL: Q to quit (overrides 'Q', but this is the same as 'gq')
+" Q to quit (overrides 'Q', but this is the same as 'gq')
 nmap <silent> Q :q<CR>
 
 " Toggle spell check
