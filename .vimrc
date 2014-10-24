@@ -238,6 +238,15 @@ NeoBundleLazy 'gcmt/wildfire.vim', {
       \   ],
       \ },
       \ }
+NeoBundleLazy 'haya14busa/incsearch.vim', {
+      \ 'autoload': {
+      \   'mappings': [
+      \     ['nxo', '<Plug>(incsearch-forward)'],
+      \     ['nxo', '<Plug>(incsearch-backward)'],
+      \     ['nxo', '<Plug>(incsearch-stay)'],
+      \   ],
+      \ },
+      \ }
 NeoBundleLazy 'hotchpotch/perldoc-vim', {
       \ 'autoload': {
       \   'filetypes': 'perl',
@@ -505,6 +514,23 @@ endfunction
 let g:clever_f_fix_key_direction = 0
 let g:clever_f_chars_match_any_signs = ''
 let g:clever_f_across_no_line = 1
+" }}}
+" incsearch.vim {{{
+map / <Plug>(incsearch-forward)
+map ? <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+let s:bundle = neobundle#get('incsearch.vim')
+function! s:bundle.hooks.on_source(bundle)
+  let g:incsearch#consistent_n_direction = 1
+  let g:incsearch#emacs_like_keymap = 1
+  let g:incsearch#auto_no_hlsearch = 1
+  map n  <Plug>(incsearch-nohl-n)
+  map N  <Plug>(incsearch-nohl-N)
+  map *  <Plug>(incsearch-nohl-*)
+  map #  <Plug>(incsearch-nohl-#)
+  map g* <Plug>(incsearch-nohl-g*)
+  map g# <Plug>(incsearch-nohl-g#)
+endfunction
 " }}}
 " jedi-vim {{{
 let s:bundle = neobundle#get('jedi-vim')
