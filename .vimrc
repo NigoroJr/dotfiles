@@ -1021,7 +1021,7 @@ vmap <silent> <BS> <Plug>(wildfire-water)
 " }}}
 
 " Source local configurations if any {{{
-if exists(expand('~/.vimrc_local'))
+if filereadable(expand('~/.vimrc_local'))
   source ~/.vimrc_local
 endif
 " }}}
