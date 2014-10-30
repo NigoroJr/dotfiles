@@ -7,6 +7,7 @@ endif
 set backup
 set backupdir=~/.vim/backup/
 set viewdir=~/.vim/view/
+set undodir=~/.vim/undo/
 set tabstop=4
 set expandtab
 set shiftwidth=4

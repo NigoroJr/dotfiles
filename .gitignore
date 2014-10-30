@@ -3,6 +3,7 @@
 # Ignore backup files (keep it local!)
 .vim/backup/
 .vim/view/
+.vim/undo/
 .vim/bundle/*
 !.vim/bundle/.keep
 .vim/.netrwhist
