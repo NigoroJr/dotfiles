@@ -882,11 +882,11 @@ if neobundle#tap('vim-marching')
   let g:marching#clang_command#options = {
         \ 'cpp': '-std=c++11',
         \ }
-  imap <buffer> <C-x><C-o> <Plug>(marching_force_start_omni_complete)
-  nmap <Leader>mc :MarchingBufferClearCache<CR>
 
   function! neobundle#hooks.on_source(bundle)
     set updatetime=200
+    imap <buffer> <C-x><C-o> <Plug>(marching_force_start_omni_complete)
+    nmap <Leader>mc :MarchingBufferClearCache<CR>
   endfunction
 
   call neobundle#untap()
