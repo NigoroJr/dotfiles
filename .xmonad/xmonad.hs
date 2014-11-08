@@ -45,12 +45,16 @@ myLayoutHook = avoidStruts $ smartBorders $
 -- Manage Hook
 myManageHook = manageSpawn <+> myFloatHook <+> manageHook defaultConfig
 
+-- To get the class name, xprop | grep WM_CLASS
 myFloatHook = composeAll
     [ className =? "Chromium-browser"   --> moveTo2
     , className =? "Gvim"               --> moveTo3
     , className =? "Emacs"              --> moveTo3
     , className =? "Eclipse"            --> moveTo3
+    , className =? "Qpdfview"           --> moveTo3
     , className =? "mplayer2"           --> moveTo5
+    , className =? "feh"                --> moveTo5
+    , className =? "Comix"              --> moveTo5
     , className =? "Java"               --> doFloat
     , manageDocks ]
     where
