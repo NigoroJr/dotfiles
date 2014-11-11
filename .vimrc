@@ -868,7 +868,7 @@ if neobundle#tap('vim-marching')
         \ 'autoload': {
         \   'filetypes': ['c', 'cpp'],
         \   'commands': ['MarchingBufferClearCache'],
-        \   'mappings': ['nxo', '<Plug>(marching_force_start_omni_complete)'],
+        \   'mappings': ['ixo', '<Plug>(marching_force_start_omni_complete)'],
         \ },
         \ })
 
@@ -885,8 +885,8 @@ if neobundle#tap('vim-marching')
 
   function! neobundle#hooks.on_source(bundle)
     set updatetime=200
-    imap <buffer> <C-x><C-o> <Plug>(marching_force_start_omni_complete)
     nmap <Leader>mc :MarchingBufferClearCache<CR>
+    imap <C-x><C-o> <Plug>(marching_force_start_omni_complete)
   endfunction
 
   call neobundle#untap()
