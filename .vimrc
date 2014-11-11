@@ -174,7 +174,6 @@ NeoBundleFetch 'davidhalter/jedi'
 NeoBundle 'ciaranm/securemodelines'
 NeoBundle 'goldfeld/vim-seek'
 NeoBundle 'mattn/disableitalic-vim'
-NeoBundle 'osyo-manga/vim-watchdogs'
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
@@ -208,6 +207,7 @@ NeoBundleLazy 'osyo-manga/vim-marching'
 NeoBundleLazy 'osyo-manga/vim-precious'
 NeoBundleLazy 'osyo-manga/vim-snowdrop'
 NeoBundleLazy 'osyo-manga/vim-stargate'
+NeoBundleLazy 'osyo-manga/vim-watchdogs'
 NeoBundleLazy 'rhysd/vim-go-impl'
 NeoBundleLazy 'rhysd/wandbox-vim'
 NeoBundleLazy 'scrooloose/nerdtree'
@@ -1079,9 +1079,13 @@ endif
 " }}}
 " vim-watchdogs {{{
 if neobundle#tap('vim-watchdogs')
-  nmap <silent> <Leader>wd :WatchdogsRun<CR>
+  call neobundle#config({
+        \ 'gui': 1,
+        \ 'depends': ['thinca/vim-quickrun', 'osyo-manga/vim-marching'],
+        \ })
 
   function! neobundle#hooks.on_source(bundle)
+    nmap <silent> <Leader>wd :WatchdogsRun<CR>
     let g:watchdogs_check_BufWritePost_enable = 1
     call watchdogs#setup(g:quickrun_config)
   endfunction
