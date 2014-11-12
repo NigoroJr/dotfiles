@@ -1081,6 +1081,9 @@ endif
 if neobundle#tap('vim-watchdogs')
   call neobundle#config({
         \ 'gui': 1,
+        \ 'autoload': {
+        \   'filetypes': ['c', 'cpp'],
+        \ },
         \ 'depends': ['thinca/vim-quickrun', 'osyo-manga/vim-marching'],
         \ })
 
