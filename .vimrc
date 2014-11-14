@@ -1081,10 +1081,8 @@ endif
 if neobundle#tap('vim-watchdogs')
   call neobundle#config({
         \ 'gui': 1,
-        \ 'autoload': {
-        \   'filetypes': ['c', 'cpp'],
-        \ },
-        \ 'depends': ['thinca/vim-quickrun', 'osyo-manga/vim-marching'],
+        \ 'filetypes': ['c', 'cpp'],
+        \ 'depends': ['jceb/vim-hier', 'thinca/vim-quickrun', 'osyo-manga/vim-marching'],
         \ })
 
   function! neobundle#hooks.on_source(bundle)
@@ -1164,15 +1162,6 @@ if neobundle#tap('vim-precious')
     call neobundle#source('vim-textobj-user')
   endfunction
 
-  call neobundle#untap()
-endif
-" }}}
-" vim-watchdogs {{{
-if neobundle#tap('vim-watchdogs')
-  call neobundle#config({
-        \ 'gui': 1,
-        \ 'depends': ['thinca/vim-quickrun', 'jceb/vim-hier'],
-        \ })
   call neobundle#untap()
 endif
 " }}}
