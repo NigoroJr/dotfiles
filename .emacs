@@ -136,6 +136,23 @@
 (add-hook 'auto-complete-mode-hook 'ac-common-setup)
 (global-auto-complete-mode t)
 
+;; AucTeX
+(add-to-list 'load-path "~/.emacs.d/el-get/auctex")
+;(require 'auctex)
+
+;; auto-complete-auctex
+(add-to-list 'load-path "~/.emacs.d/el-get/auto-complete-auctex")
+;(require 'auto-complete-auctex)
+(defun ac-LaTeX-mode-setup ()
+  (setq ac-sources
+        (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands) ac-sources)))
+(add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
+
+;; ac-math
+(add-to-list 'load-path "~/.emacs.d/el-get/ac-math")
+(require 'ac-math)
+(add-to-list 'ac-modes 'latex-mode)
+
 ;; Anything
 (add-to-list 'load-path "~/.emacs.d/el-get/anything")
 (when (require 'anything nil t)
