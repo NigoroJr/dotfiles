@@ -354,10 +354,6 @@ if neobundle#tap('foofile.vim')
 endif
 " }}}
 " incsearch.vim {{{
-map / <Plug>(incsearch-forward)
-map ? <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-
 if neobundle#tap('incsearch.vim')
   call neobundle#config({
         \ 'autoload': {
@@ -368,6 +364,10 @@ if neobundle#tap('incsearch.vim')
         \   ],
         \ },
         \ })
+
+  map / <Plug>(incsearch-forward)
+  map ? <Plug>(incsearch-backward)
+  map g/ <Plug>(incsearch-stay)
 
   function! neobundle#hooks.on_source(bundle)
     let g:incsearch#consistent_n_direction = 1
@@ -393,12 +393,12 @@ if neobundle#tap('jedi-vim')
         \ 'depends': 'davidhalter/jedi',
         \ })
 
+  let g:jedi#popup_select_first = 0
+  let g:jedi#completions_enabled = 0
+  let g:jedi#auto_vim_configuration = 0
+
   function! neobundle#hooks.on_source(bundle)
     autocmd FileType python setlocal omnifunc=jedi#completions
-
-    let g:jedi#popup_select_first = 0
-    let g:jedi#completions_enabled = 0
-    let g:jedi#auto_vim_configuration = 0
   endfunction
 
   call neobundle#untap()
@@ -481,16 +481,14 @@ if neobundle#tap('neocomplete.vim')
         \ })
 
   function! neobundle#hooks.on_source(bundle)
-    "call neobundle#source('context_filetype.vim')
-
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#enable_smart_case = 1
-    let g:neocomplete#min_keyword_length = 3
-
     inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><BS> neocomplete#smart_close_popup()."\<BS>"
     inoremap <expr><C-y> neocomplete#close_popup()
     inoremap <expr><C-g> neocomplete#cancel_popup()
+
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_smart_case = 1
+    let g:neocomplete#min_keyword_length = 3
 
     if !exists('g:neocomplete#force_omni_input_patterns')
       let g:neocomplete#force_omni_input_patterns = {}
