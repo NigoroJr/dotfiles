@@ -1099,7 +1099,7 @@ if neobundle#tap('vim-watchdogs')
   call neobundle#config({
         \ 'gui': 1,
         \ 'filetypes': ['c', 'cpp'],
-        \ 'depends': ['jceb/vim-hier', 'thinca/vim-quickrun', 'osyo-manga/vim-marching'],
+        \ 'depends': ['jceb/vim-hier', 'thinca/vim-quickrun'],
         \ })
 
   function! neobundle#hooks.on_source(bundle)
