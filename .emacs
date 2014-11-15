@@ -1,5 +1,6 @@
 (add-to-list 'load-path "~/.emacs.d/")
 (setq default-directory "~/")
+(setenv "ESHELL" "/bin/zsh")
 
 ;; Auto insert matching brace
 (defun my-c-mode-insert-brace ()
