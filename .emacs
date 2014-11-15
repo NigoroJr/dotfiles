@@ -101,6 +101,11 @@
                :website "https://github.com/Golevka/emacs-clang-complete-async"
                :pkgname "Golevka/emacs-clang-complete-async"
         )
+        (:name exec-path-from-shell
+               :type github
+               :website "https://github.com/purcell/exec-path-from-shell"
+               :pkgname "purcell/exec-path-from-shell"
+        )
 ;;        (:name flex-autopair
 ;;               :type github
 ;;               :url "https://github.com/uk-ar/flex-autopair"
@@ -189,6 +194,11 @@
 ;;(add-to-list 'load-path "~/.emacs.d/el-get/flex-autopair")
 ;;(require 'flex-autopair)
 ;;(flex-autopair-mode 1)
+
+;; exec-path-from-shell
+;;(add-to-list 'load-path "~/.emacs.d/el-get/exec-path-from-shell")
+;;(when (memq window-system '(mac ns))
+;;  (exec-path-from-shell-initialize))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
