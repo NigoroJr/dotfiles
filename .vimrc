@@ -303,10 +303,15 @@ if neobundle#tap('Align')
 endif
 " }}}
 " context_filetype.vim {{{
-let s:bundle = neobundle#get('context_filetype.vim')
-function! s:bundle.hooks.on_source(bundle)
-  call neobundle#source('osyo-manga/vim-precious')
-endfunction
+if neobundle#tap('context_filetype.vim')
+  call neobundle#config({
+        \ 'autoload': {
+        \   'on_source': ['Shougo/neocomplete.vim'],
+        \ },
+        \ })
+
+  call neobundle#untap()
+endif
 " }}}
 " clever-f.vim {{{
 let g:clever_f_fix_key_direction = 0
@@ -905,8 +910,11 @@ endif
 " vim-precious {{{
 if neobundle#tap('vim-precious')
   call neobundle#config({
-        \ 'depends': ['Shougo/context_filetype.vim'],
+        \ 'autoload': {
+        \   'on_source': ['context_filetype.vim'],
+        \ },
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -1077,6 +1085,17 @@ if neobundle#tap('vim-stargate')
   call neobundle#untap()
 endif
 " }}}
+" vim-textobj-user {{{
+if neobundle#tap('vim-textobj-user')
+  call neobundle#config({
+        \ 'autoload': {
+        \   'on_source': ['osyo-manga/vim-precious'],
+        \ },
+        \ })
+
+  call neobundle#untap()
+endif
+" }}}
 " vim-watchdogs {{{
 if neobundle#tap('vim-watchdogs')
   call neobundle#config({
@@ -1151,15 +1170,6 @@ if neobundle#tap('vimfiler.vim')
     let g:loaded_netrwPlugin = 1
     let g:vimfiler_as_default_explorer = 1
     let g:vimfiler_time_format = "%m/%d/%y %H:%M%S"
-  endfunction
-
-  call neobundle#untap()
-endif
-" }}}
-" vim-precious {{{
-if neobundle#tap('vim-precious')
-  function! neobundle#hooks.on_source(bundle)
-    call neobundle#source('vim-textobj-user')
   endfunction
 
   call neobundle#untap()
