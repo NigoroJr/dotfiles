@@ -140,12 +140,14 @@
 (add-hook 'auto-complete-mode-hook 'ac-common-setup)
 
 ;; auto-complete-auctex
+(require 'auto-complete-auctex)
 (defun ac-LaTeX-mode-setup ()
   (setq ac-sources
         (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands) ac-sources)))
 (add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
 
 ;; ac-math
+(require 'ac-math)
 (add-to-list 'ac-modes 'latex-mode)
 
 ;; Anything
