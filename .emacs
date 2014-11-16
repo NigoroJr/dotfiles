@@ -82,79 +82,69 @@
         (let (el-get-master-branch)
             (end-of-buffer)
             (eval-print-last-sexp)))))
-(require 'el-get)
+
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 
 (setq el-get-sources
       '(
-        (:name popup
-               :type github
-               :website "https://github.com/auto-complete/popup-el"
-               :pkgname "auto-complete/popup-el"
-        )
-        (:name auto-complete
-               :type github
-               :website "https://github.com/auto-complete/auto-complete"
-               :pkgname "auto-complete/auto-complete"
-        )
         (:name auto-complete-clang-async
                :type github
                :website "https://github.com/Golevka/emacs-clang-complete-async"
                :pkgname "Golevka/emacs-clang-complete-async"
+               :build ("make")
         )
-        (:name exec-path-from-shell
-               :type github
-               :website "https://github.com/purcell/exec-path-from-shell"
-               :pkgname "purcell/exec-path-from-shell"
-        )
-;;        (:name flex-autopair
-;;               :type github
-;;               :url "https://github.com/uk-ar/flex-autopair"
-;;        )
+;        (:name exec-path-from-shell
+;               :type github
+;               :website "https://github.com/purcell/exec-path-from-shell"
+;               :pkgname "purcell/exec-path-from-shell"
+;        )
     )
 )
 
+(setq my:el-get-packages
+  '(init-auctex
+    init-auto-complete
+    popup
+    auto-complete
+    auto-complete-clang-async
+    auctex
+    auto-complete-auctex
+    ac-math
+    anything
+    color-theme
+    color-theme-solarized
+    perl-completion))
+
+(el-get 'sync my:el-get-packages)
+
 ;; AutoComplete
-(add-to-list 'load-path "~/.emacs.d/el-get/popup")
-(add-to-list 'load-path "~/.emacs.d/el-get/auto-complete")
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/ac-dict")
 (ac-config-default)
-
-(if (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
+(global-auto-complete-mode t)
 
 ;; Clang complete
-(add-to-list 'load-path "~/.emacs.d/el-get/auto-complete-clang-async")
 (require 'auto-complete-clang-async)
 (defun ac-cc-mode-setup ()
   (setq ac-clang-complete-executable (expand-file-name "~/.emacs.d/el-get/auto-complete-clang-async/clang-complete"))
   (setq ac-sources (append '(ac-source-clang-async) ac-sources))
   (setq ac-clang-cflags '("-std=c++11"))
   (ac-clang-launch-completion-process))
+
 (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
 (add-hook 'c++-mode-common-hook 'ac-cc-mode-setup)
 (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-(global-auto-complete-mode t)
-
-;; AucTeX
-(add-to-list 'load-path "~/.emacs.d/el-get/auctex")
-;(require 'auctex)
 
 ;; auto-complete-auctex
-(add-to-list 'load-path "~/.emacs.d/el-get/auto-complete-auctex")
-;(require 'auto-complete-auctex)
 (defun ac-LaTeX-mode-setup ()
   (setq ac-sources
         (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands) ac-sources)))
 (add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
 
 ;; ac-math
-(add-to-list 'load-path "~/.emacs.d/el-get/ac-math")
-(require 'ac-math)
 (add-to-list 'ac-modes 'latex-mode)
 
 ;; Anything
-(add-to-list 'load-path "~/.emacs.d/el-get/anything")
 (when (require 'anything nil t)
   (setq
    anything-idle-delay 0.3
@@ -167,10 +157,6 @@
    )
 
 ;; Solarized color theme
-(add-to-list 'load-path "~/.emacs.d/el-get/color-theme")
-(add-to-list 'load-path "~/.emacs.d/el-get/color-theme-solarized")
-(require 'color-theme)
-(require 'color-theme-solarized)
 
 ;; Only apply color theme when in GUI
 (when window-system
@@ -196,7 +182,6 @@
       cperl-highlight-variables-indiscriminately t
       )
 ;; perl-completion
-(add-to-list 'load-path "~/.emacs.d/el-get/perl-completion")
 (defun perl-completion-hook ()
   (when (require 'perl-completion nil t)
     (perl-completion-mode t)
@@ -206,11 +191,6 @@
       (setq ac-sources
             '(ac-source-perl-completion)))))
 (add-hook 'cperl-mode-hook 'perl-completion-hook)
-
-;; flex-autopair
-;;(add-to-list 'load-path "~/.emacs.d/el-get/flex-autopair")
-;;(require 'flex-autopair)
-;;(flex-autopair-mode 1)
 
 ;; exec-path-from-shell
 ;;(add-to-list 'load-path "~/.emacs.d/el-get/exec-path-from-shell")
