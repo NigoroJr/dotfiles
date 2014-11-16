@@ -68,9 +68,12 @@
 
 ;; Set tab width to 4, use space instead of tab
 (setq-default
-          c-basic-offset 4
-          tab-width 4
-	      indent-tabs-mode nil)
+  c-basic-offset 4
+  tab-width 4
+  indent-tabs-mode nil)
+
+(if (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
 
 ;; load path after installing el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
