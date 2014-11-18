@@ -1,0 +1,4 @@
+# key: inc
+# name: #include <foo>
+# --
+#include <${1:iostream}>

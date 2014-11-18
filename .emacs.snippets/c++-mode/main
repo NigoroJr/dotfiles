@@ -1,0 +1,7 @@
+# key: main
+# name: main function
+# --
+int main(int argc, char const* argv[]) {
+    $0
+    return 0;
+}
