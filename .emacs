@@ -20,8 +20,6 @@
 
 ;; C-h as backspace
 (global-set-key "\C-h" 'delete-backward-char)
-;; C-w as delete previous word
-;; (global-set-key "\C-w" 'backward-kill-word)
 
 ;; Auto indent
 (define-key global-map (kbd "RET") 'newline-and-indent)
@@ -69,9 +67,9 @@
 
 ;; Set tab width to 4, use space instead of tab
 (setq-default
-  c-basic-offset 4
-  tab-width 4
-  indent-tabs-mode nil)
+ c-basic-offset 4
+ tab-width 4
+ indent-tabs-mode nil)
 
 (if (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
@@ -97,34 +95,50 @@
                :pkgname "Golevka/emacs-clang-complete-async"
                :build ("make")
         )
-;        (:name exec-path-from-shell
-;               :type github
-;               :website "https://github.com/purcell/exec-path-from-shell"
-;               :pkgname "purcell/exec-path-from-shell"
-;        )
+        (:name exec-path-from-shell
+               :type github
+               :website "https://github.com/purcell/exec-path-from-shell"
+               :pkgname "purcell/exec-path-from-shell"
+        )
     )
 )
 
 (setq my:el-get-packages
-  '(init-auctex
-    init-auto-complete
-    popup
-    auto-complete
-    auto-complete-clang-async
-    auctex
-    auto-complete-auctex
-    ac-math
-    anything
-    color-theme
-    color-theme-solarized
-    perl-completion))
+      '(init-auctex
+        init-auto-complete
+        yasnippet
+        popup
+        auto-complete
+        auto-complete-clang-async
+        auto-complete-yasnippet
+        auctex
+        auto-complete-auctex
+        ac-math
+        anything
+        color-theme
+        color-theme-solarized
+        perl-completion
+        ))
 
 (el-get 'sync my:el-get-packages)
+
+;; yasnippet
+(setq yas-snippet-dirs
+      '("~/.emacs.snippets"
+;        "~/.emacs.d/el-get/yasnippet/yasmate/snippets"
+;        "~/.emacs.d/el-get/yasnippet/snippets"
+        ))
+(require 'yasnippet)
+(yas-global-mode 1)
 
 ;; AutoComplete
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/ac-dict")
 (ac-config-default)
+;; Set it large enough to give time for yasnippet to expand
+(setq ac-delay 0.5)
+(ac-set-trigger-key "TAB")
+(ac-set-trigger-key "<tab>")
 (global-auto-complete-mode t)
 
 ;; Clang complete
@@ -162,14 +176,13 @@
      (setq anything-su-or-sudo "sudo"))
    )
 
-;; Solarized color theme
 
 ;; Only apply color theme when in GUI
 (when window-system
   (load-theme 'solarized-light t))
-;;(load-theme 'solarized-dark t))
+;(load-theme 'solarized-dark t))
 
-;; save cursor position
+;; Save cursor position
 (setq save-place-file "~/.emacs.d/saveplace")
 (setq-default save-place t)
 (require 'saveplace)
