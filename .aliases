@@ -65,9 +65,6 @@ alias reload='source ~/.zshrc'
 alias g='git --no-pager'
 alias gap='git add -p'
 
-# EXPERIMENTAL: See if showing PWD in prompt is actually helpful or not
-alias p='pwd'
-
 if [[ $SHELL =~ zsh ]]; then
     # Global alias
     alias -g G='| grep'
