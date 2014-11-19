@@ -9,6 +9,7 @@ export EDITOR="vim"
 if hash vimmanpager 2>/dev/null; then
     export MANPAGER=vimmanpager
 fi
+export ALTERNATE_EDITOR=""
 
 path=($HOME/bin(N) \
     $HOME/.rbenv/bin(N) \
