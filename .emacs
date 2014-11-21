@@ -23,6 +23,13 @@
 ;(global-set-key "\C-h" 'delete-backward-char)
 (keyboard-translate ?\C-h ?\C-?)
 
+;; Traverse history with C-p and C-n
+(define-key minibuffer-local-map "\C-p" 'previous-history-element)
+(define-key minibuffer-local-map "\C-n" 'next-history-element)
+(define-key minibuffer-local-must-match-map "\C-p" 'previous-history-element)
+(define-key minibuffer-local-must-match-map "\C-n" 'next-history-element)
+(define-key minibuffer-local-completion-map "\C-p" 'previous-history-element)
+(define-key minibuffer-local-completion-map "\C-n" 'next-history-element)
 ;; Auto indent
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
