@@ -19,7 +19,9 @@
     (define-key c-mode-base-map "{" 'my-c-mode-insert-brace)))
 
 ;; C-h as backspace
-(global-set-key "\C-h" 'delete-backward-char)
+;; Following configuration does not work in minibuffer when using anything.el
+;(global-set-key "\C-h" 'delete-backward-char)
+(keyboard-translate ?\C-h ?\C-?)
 
 ;; Auto indent
 (define-key global-map (kbd "RET") 'newline-and-indent)
