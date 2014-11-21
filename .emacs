@@ -30,6 +30,13 @@
 (define-key minibuffer-local-must-match-map "\C-n" 'next-history-element)
 (define-key minibuffer-local-completion-map "\C-p" 'previous-history-element)
 (define-key minibuffer-local-completion-map "\C-n" 'next-history-element)
+
+;; Show full path of file in modeline
+(setq-default mode-line-buffer-identification
+              (list 'buffer-file-name
+                    (propertized-buffer-identification "%12f")
+                    (propertized-buffer-identification "%12b")))
+
 ;; Auto indent
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
