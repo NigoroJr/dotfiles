@@ -53,6 +53,10 @@
 (setq auto-save-file-name-transforms
       `((".*", temporary-file-directory)))
 
+;; Auto-save interval
+(setq auto-save-timeout 1)
+(setq auto-save-interval 20)
+
 ;; Safest, but slowest
 (setq backup-by-copying t)
 
