@@ -5,7 +5,11 @@ autoload colors
 colors
 
 autoload -U add-zsh-hook
-add-zsh-hook precmd random_colored_prompt
+if [ $TERM =~ "256color" ]; then
+    add-zsh-hook precmd random_colored_prompt
+else
+    add-zsh-hook precmd simple_prompt
+fi
 
 get_git_prompt() {  # {{{
     local prompt=""
@@ -62,7 +66,7 @@ get_git_prompt() {  # {{{
     echo $prompt
 }   # }}}
 
-random_colored_prompt() {
+random_colored_prompt() {   # {{{
 
 # Change hostname on remote login
 local p_info=""
@@ -74,6 +78,7 @@ fi
 
 # Arrow with random colors
 valid_colors=({001..015} {022..051} {058..087} {094..159} {161..231} {242..255})
+
 local random_index=$(( $RANDOM % ${#valid_colors[@]} ))
 local signs="%F{${valid_colors[$random_index]}}->%f"
 
@@ -108,4 +113,21 @@ fi
 if [ "$pwd_length" -lt 45 ]; then
     RPROMPT+=" [ %F{051}%~%f ]"
 fi
+}   # }}}
+
+simple_prompt() {
+    valid_colors=("white" "light red" "light green" "brown" "yellow" "light blue" "purple" "pink" "cyan" "light cyan")
+    local random_index=$(( $RANDOM % ${#valid_colors[@]} ))
+    local signs="%F{${valid_colors[$random_index]}}%B->%b%f"
+
+    local front="%m$signs%F{blue}%B%m%b%f"
+
+    local sign=' > '
+    if [[ -n $TMUX ]]; then
+        sign='>> '
+    fi
+
+    p_info="%0(?,%F{green}%B$sign%b%f,%20(?,%F{green}%B$sign%b%f,%F{red}%B$sign%b%f))"
+
+    PROMPT=$front$p_info
 }

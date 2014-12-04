@@ -11,11 +11,6 @@ if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
 
-# Settings for prompt
-if [ -f ~/.zshrc_prompt ]; then
-    source ~/.zshrc_prompt
-fi
-
 # ls colors {{{
 case `uname -s` in
     # Macintosh
@@ -138,6 +133,11 @@ bindkey '[Z' reverse-menu-complete # S-Tab to reverse traverse completion
 #bindkey -s 'a' " | awk '{ print $ }'"
 
 # }}}
+
+# Settings for prompt
+if [ -f ~/.zshrc_prompt ]; then
+    source ~/.zshrc_prompt
+fi
 
 # Read local environment File if there is one
 if [ -f ~/.zshrc_local ]; then
