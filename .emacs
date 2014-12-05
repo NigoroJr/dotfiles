@@ -20,7 +20,7 @@
 ;; C-h as backspace
 ;; Following configuration does not work in minibuffer when using anything.el
 ;(global-set-key "\C-h" 'delete-backward-char)
-(keyboard-translate ?\C-h ?\C-?)
+(define-key key-translation-map [?\C-h] [?\C-?])
 
 ;; Traverse history with C-p and C-n
 (define-key minibuffer-local-map "\C-p" 'previous-history-element)
