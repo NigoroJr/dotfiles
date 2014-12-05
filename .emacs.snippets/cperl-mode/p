@@ -1,0 +1,4 @@
+# key: p
+# name: print function
+# --
+print "$1\n";
