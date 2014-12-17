@@ -199,6 +199,8 @@ NeoBundleLazy 'kana/vim-textobj-user'
 NeoBundleLazy 'kannokanno/previm'
 NeoBundleLazy 'lervag/vim-latex'
 NeoBundleLazy 'marcus/rsense'
+NeoBundleLazy 'mattn/gist-vim'
+NeoBundleLazy 'mattn/webapi-vim'
 NeoBundleLazy 'mips.vim'
 NeoBundleLazy 'NigoroJr/foofile.vim'
 NeoBundleLazy 'osyo-manga/shabadou.vim'
@@ -350,6 +352,20 @@ if neobundle#tap('foofile.vim')
         \   ],
         \ },
         \ })
+  call neobundle#untap()
+endif
+" }}}
+" gist.vim {{{
+if neobundle#tap('gist-vim')
+  call neobundle#config({
+    \ 'autoload': {
+    \   'commands': [
+    \     'Gist',
+    \   ],
+    \ },
+    \ 'depends': 'mattn/webapi-vim',
+    \ })
+
   call neobundle#untap()
 endif
 " }}}
