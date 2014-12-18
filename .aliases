@@ -30,7 +30,7 @@ sudo() {
 }
 
 # Aliases for ls
-alias lsl='ls -l'
+alias lsl='ls -l --full-time'
 alias l='ls -l'
 alias lal='ls -Al'
 alias la='ls -A'
