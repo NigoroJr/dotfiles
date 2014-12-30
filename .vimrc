@@ -197,6 +197,7 @@ NeoBundleLazy 'jceb/vim-hier'
 NeoBundleLazy 'kana/vim-altr'
 NeoBundleLazy 'kana/vim-textobj-user'
 NeoBundleLazy 'kannokanno/previm'
+NeoBundleLazy 'lambdalisue/vim-gista'
 NeoBundleLazy 'lervag/vim-latex'
 NeoBundleLazy 'marcus/rsense'
 NeoBundleLazy 'mattn/gist-vim'
@@ -815,6 +816,22 @@ if neobundle#tap('vim-fugitive')
         \   ],
         \ },
         \ })
+  call neobundle#untap()
+endif
+" }}}
+" vim-gista {{{
+if neobundle#tap('vim-gista')
+  call neobundle#config({
+        \ 'autoload': {
+        \   'commands': 'Gista',
+        \ },
+        \ 'unite_sources': 'gista',
+        \ })
+
+  function! neobundle#hooks.on_source(bundle)
+    let g:gista#github_user = 'NigoroJr'
+  endfunction
+
   call neobundle#untap()
 endif
 " }}}
