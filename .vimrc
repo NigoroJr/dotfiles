@@ -27,6 +27,7 @@ set splitright
 set splitbelow
 set modeline
 set completeopt-=preview
+set cryptmethod=blowfish2
 let mapleader = ','
 noremap \ ,
 syntax on
