@@ -1279,7 +1279,15 @@ endif
 
 " }}}
 " vinarise.vim {{{
-let g:vinarise_enable_auto_detect = 1
+if neobundle#tap('vinarise.vim')
+  call neobundle#config({
+        \ 'vim_version': '7.3',
+        \ })
+
+  let g:vinarise_enable_auto_detect = 1
+
+  call neobundle#untap()
+endif
 " }}}
 " wandbox-vim {{{
 if neobundle#tap('wandbox-vim')
