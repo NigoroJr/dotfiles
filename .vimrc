@@ -163,6 +163,13 @@ augroup vimrc
         \|  endif
 augroup END
 " }}}
+" Whether neocomplete.vim can be run on Vim {{{
+function! NeoCompleteCompatible()
+  " Vim must be compiled with lua interface AND version larger than 7.3.855
+  return has('lua') && (v:version > 703 ||
+        \ (v:version == 703 && has('patch855')))
+endfunction
+" }}}
 
 " Plugins managed by neobundle.vim {{{
 call neobundle#begin(expand('~/.vim/bundle/'))
@@ -439,7 +446,7 @@ endif
 if neobundle#tap('neocomplcache.vim')
   call neobundle#config({
         \ 'depends': 'Shougo/vimproc.vim',
-        \ 'disabled': neobundle#is_sourced('neocomplete.vim'),
+        \ 'disabled': NeoCompleteCompatible(),
         \ })
 
   function! neobundle#hooks.on_source(bundle)
@@ -494,8 +501,7 @@ endif
 if neobundle#tap('neocomplete.vim')
   call neobundle#config({
         \ 'depends': ['Shougo/vimproc.vim'],
-        \ 'disabled': !has('lua'),
-        \ 'vim_version': '7.3.885',
+        \ 'disabled': !NeoCompleteCompatible(),
         \ })
 
   function! neobundle#hooks.on_source(bundle)
@@ -539,7 +545,10 @@ if neobundle#tap('neocomplete.vim')
   endfunction
 
   function! neobundle#hooks.on_post_source(bundle)
-    call neocomplete#initialize()
+    " Only execute if neocomplete.vim can be used
+    if NeoCompleteCompatible()
+      call neocomplete#initialize()
+    endif
   endfunction
 
   call neobundle#untap()
