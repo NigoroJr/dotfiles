@@ -4,10 +4,25 @@ if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 " }}}
+" Function to check current Vim's version {{{
+function! s:has_version(ver_str)
+  let split_version = split(a:ver_str, '\.')
+  let major = get(split_version, 0, 0)
+  let minor = get(split_version, 1, 0)
+  let patch = get(split_version, 2, 0)
+
+  let min_version = major * 100 + minor
+  return v:version > min_version ||
+        \ (patch != 0 && v:version == min_version && has('patch'.patch))
+endfunction
+" }}}
 set backup
 set backupdir=~/.vim/backup/
 set viewdir=~/.vim/view/
-set undodir=~/.vim/undo/
+" Persistent undo requires Vim 7.3+
+if s:has_version('7.3')
+  set undodir=~/.vim/undo/
+endif
 set tabstop=4
 set expandtab
 set shiftwidth=4
@@ -27,7 +42,10 @@ set splitright
 set splitbelow
 set modeline
 set completeopt-=preview
-set cryptmethod=blowfish2
+" blowfish2 requires Vim 7.4.399. Encryption available after Vim 7.3
+if s:has_version('7.3')
+  execute 'set cryptmethod='.(s:has_version('7.4.399') ? 'blowfish2' : 'blowfish')
+endif
 let mapleader = ','
 noremap \ ,
 syntax on
