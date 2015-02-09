@@ -27,15 +27,13 @@ xset s off
 xset -dpms
 setterm -blank 0 -powerdown 0
 
-WALLPAPER=~/Dropbox/Pictures/background.png
-if [ ! -e "$WALLPAPER" ]; then
-    # Use jpg file if png does not exist
-    WALLPAPER=~/Dropbox/Pictures/background.jpg
-fi
 if hash dropbox; then
     dropbox &
 fi
 
-feh --bg-fill $WALLPAPER
+# Run any local configurations (such as setting wallpaper)
+if [ -e ~/.xsession_local ]; then
+    sh ~/.xsession_local
+fi
 
 exec xmonad
