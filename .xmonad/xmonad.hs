@@ -28,9 +28,10 @@ myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 -- Layout Hook
 myLayoutHook = avoidStruts $ smartBorders $
+    onWorkspace "1" (mastered_tall ||| Full ||| tiled ||| Mirror tiled) $
     onWorkspaces ["2", "3"] (Full ||| tiled ||| Mirror tiled) $
     onWorkspace "4" (Tall 2 delta ratio)                      $ -- 2x2
-    (mastered_tall ||| Full ||| tiled ||| Mirror tiled)         -- Otherwise
+    (Full ||| tiled ||| Mirror tiled)                           -- Otherwise
     where
     mastered_tall = mastered (3/100) (28/100) $ Tall nmaster delta (46/50)
 
