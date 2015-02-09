@@ -14,7 +14,10 @@ xrandr --output $EXTERNAL_DISPLAY --primary --auto \
     --output $LAPTOP_DISPLAY --auto \
     --right-of $EXTERNAL_DISPLAY
 
-imwheel -b -k "0 0 6 7 0 0 10" 1>/dev/null 2>&1
+# Customizing mouse
+if hash imwheel; then
+    imwheel -b -k "0 0 6 7 0 0 10" 1>/dev/null 2>&1
+fi
 
 # Set cursor to pointer
 xsetroot -cursor_name left_ptr
