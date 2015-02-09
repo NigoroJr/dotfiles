@@ -189,6 +189,12 @@ function! NeoCompleteCompatible()
 endfunction
 " }}}
 
+" Clone neobundle.vim if not installed {{{
+if !isdirectory(expand('~/.vim/bundle/neobundle.vim'))
+  !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+endif
+" }}}
+
 " Plugins managed by neobundle.vim {{{
 call neobundle#begin(expand('~/.vim/bundle/'))
 
