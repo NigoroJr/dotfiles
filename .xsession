@@ -8,9 +8,11 @@ export QT_IM_MODULE=ibus
 # Start ibus daemon
 ibus-daemon -dx
 
-xrandr --output HDMI-0 --primary --auto --output LVDS-0 --auto --right-of HDMI-0
-#xrandr --output HDMI1 --primary --auto --output LVDS1 --auto --right-of HDMI1
-#xrandr --output VGA1 --primary --auto --pos 0x180 --output LVDS1 --auto --pos 1440x0
+LAPTOP_DISPLAY=`xrandr | grep -o 'LVDS[^ ]*'`
+EXTERNAL_DISPLAY=`xrandr | grep -o 'HDMI[^ ]*'`
+xrandr --output $EXTERNAL_DISPLAY --primary --auto \
+    --output $LAPTOP_DISPLAY --auto \
+    --right-of $EXTERNAL_DISPLAY
 
 imwheel -b -k "0 0 6 7 0 0 10" 1>/dev/null 2>&1
 
