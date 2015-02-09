@@ -29,8 +29,10 @@ if [ ! -e "$WALLPAPER" ]; then
     # Use jpg file if png does not exist
     WALLPAPER=~/Dropbox/Pictures/background.jpg
 fi
+if hash dropbox; then
+    dropbox &
+fi
+
 feh --bg-fill $WALLPAPER
-# Start DropBox daemon
-dropbox &
 
 exec xmonad
