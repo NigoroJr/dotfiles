@@ -54,8 +54,10 @@ myFloatHook = composeAll
     , className =? "Eclipse"            --> moveTo3
     , className =? "Qpdfview"           --> moveTo3
     , className =? "mplayer2"           --> moveTo5
+    , className =? "MPlayer"            --> moveTo5
     , className =? "feh"                --> moveTo5
     , className =? "Comix"              --> moveTo5
+    , className =? "Geeqie"             --> moveTo5
     , className =? "Java"               --> doFloat
     , manageDocks ]
     where
