@@ -4,6 +4,7 @@
 .vim/backup/
 .vim/view/
 .vim/undo/
+.vim/spell/
 .vim/bundle/*
 !.vim/bundle/.keep
 .vim/.netrwhist
