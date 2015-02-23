@@ -28,4 +28,4 @@ typeset -U path
 HISTFILE=~/.histfile
 HISTSIZE=6000000
 SAVEHIST=6000000
-
+WORDCHARS="*?_-.[]~=&;!#$%^(){}<>"
