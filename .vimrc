@@ -501,7 +501,6 @@ if neobundle#tap('neocomplcache.vim')
     if neobundle#is_sourced('rsense')
       let g:neocomplcache#force_omni_input_patterns.ruby =
             \ '[^. *\t]\.\w*\|\h\w*::'
-      call neobundle#source('neocomplcache-rsense.vim')
     endif
   endfunction
 
@@ -563,7 +562,6 @@ if neobundle#tap('neocomplete.vim')
     if neobundle#is_installed('rsense')
       let g:neocomplete#force_omni_input_patterns.ruby =
             \ '[^. *\t]\.\w*\|\h\w*::'
-      call neobundle#source('neocomplete-rsense.vim')
     endif
 
   endfunction
@@ -1076,6 +1074,12 @@ if neobundle#tap('vim-rails')
     " Use RSense only in normal Ruby codes
     if !exists('b:rails_root') && &filetype == 'ruby'
       call neobundle#source('rsense')
+
+      if NeoCompleteCompatible()
+        call neobundle#source('neocomplete-rsense.vim')
+      else
+        call neobundle#source('neocomplcache-rsense.vim')
+      endif
     endif
   endfunction
 
