@@ -13,6 +13,7 @@ export ALTERNATE_EDITOR=""
 
 path=($HOME/bin(N) \
     $HOME/usr/bin(N) \
+    ${GOPATH:+$GOPATH/bin}(N) \
     $HOME/.rbenv/bin(N) \
     $HOME/.rbenv/shims(N) \
     $HOME/*/adt-bundle/sdk/{tools,platform-tools}(N) \
