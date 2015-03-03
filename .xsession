@@ -33,7 +33,7 @@ if hash dropbox; then
 fi
 
 # Run any local configurations (such as setting wallpaper)
-if [ -e ~/.xsession_local ]; then
+if [ -f ~/.xsession_local ]; then
     sh ~/.xsession_local
 fi
 
