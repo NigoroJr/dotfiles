@@ -30,9 +30,7 @@ sudo() {
 }
 
 # Aliases for ls
-alias lsl='ls -l --full-time'
 alias l='ls -l'
-alias lal='ls -Al'
 alias la='ls -A'
 alias ll='ls -CF'
 alias lh='ls -lh'
@@ -43,10 +41,6 @@ alias gS='git status'
 
 # Alias for g++
 alias gpp='g++'
-
-# Aliases for grep
-alias fgrep='grep -F'
-alias egrep='grep -E'
 
 # vi foobar.txt
 # <C-a>g instead of having to type gvim
@@ -60,9 +54,7 @@ alias emacs-kill='emacsclient -e "(kill-emacs)"'
 
 alias tm='tmux'
 
-alias reload='source ~/.zshrc'
-
-alias g='git --no-pager'
+alias g='git'
 alias gap='git add -p'
 
 if [[ $SHELL =~ zsh ]]; then
