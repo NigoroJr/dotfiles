@@ -159,12 +159,15 @@ function! s:class_declaration()
   return "{\<CR>}\<Esc>O"
 endfunction
 " }}}
-" Create backup and view directories {{{
+" Create backup view, and undo directories {{{
 if !isdirectory(expand(&backupdir))
   call mkdir(&backupdir)
 endif
 if !isdirectory(expand(&viewdir))
   call mkdir(&viewdir)
+endif
+if !isdirectory(expand(&undodir)) && s:has_version('7.3')
+  call mkdir(&undodir)
 endif
 " }}}
 " Set filetypes to not save/load the view {{{
