@@ -25,6 +25,8 @@ path=($HOME/bin(N) \
     /sbin(N) \
     $path)
 typeset -U path
+fpath=($HOME/.zsh/functions(N) \
+    $fpath)
 
 HISTFILE=~/.histfile
 HISTSIZE=6000000
