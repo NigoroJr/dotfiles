@@ -139,7 +139,7 @@ function! s:expand_namespace()
   let s = getline('.')[0:col('.')-1]
   if s =~# '\<b;'
     return "\<BS>oost::"
-  elseif s =~# '\<s;'
+  elseif s =~# '\<s;' && s[col('.')-2] != 's'
     return "\<BS>td::"
   elseif s =~# '\<d;'
     return "\<BS>etail::"
