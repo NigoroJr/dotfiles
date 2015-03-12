@@ -40,7 +40,7 @@ alias rm_r='rm -r'
 alias gS='git status'
 
 # Alias for g++
-alias gpp='g++'
+alias gpp='g++ -std=c++11'
 
 # vi foobar.txt
 # <C-a>g instead of having to type gvim
