@@ -1304,7 +1304,12 @@ if neobundle#tap('vimshell.vim')
     autocmd FileType vimshell nmap <silent> <buffer> <CR> A<CR>
 
     " Set user prompt to pwd
-    let g:vimshell_prompt_expr = 'getcwd()." > "'
+    function! GetShortedCWD() abort
+      " Use ~ for $HOME
+      return substitute(getcwd(), '^'.$HOME, '~', '')
+    endfunction
+    let g:vimshell_prompt_expr = 'GetShortedCWD()." > "'
+    " let g:vimshell_prompt_expr = 'getcwd()." > "'
     let g:vimshell_prompt_pattern = '^\f\+ > '
   endfunction
 endif
