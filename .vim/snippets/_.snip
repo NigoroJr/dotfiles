@@ -31,3 +31,31 @@ options     head
 snippet		copyright
 abbr        Copyright
 	Copyright `strftime("%Y")` ${1:Naoki Mizuno}
+
+snippet		sh
+abbr		Shebang for sh
+options		head
+	#!/bin/sh
+
+    ${0}
+
+snippet		bash
+abbr		Shebang for bash
+options		head
+	#!/bin/bash
+
+    ${0}
+
+snippet		ruby
+abbr		Shebang for Ruby
+options		head
+	#!/usr/bin/env ruby
+
+    ${0}
+
+snippet		perl
+abbr		Shebang for Perl
+options		head
+	#!/usr/bin/env perl
+
+    ${0}
