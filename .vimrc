@@ -43,6 +43,7 @@ set splitright
 set splitbelow
 set modeline
 set completeopt-=preview
+set autoread
 " blowfish2 requires Vim 7.4.399. Encryption available after Vim 7.3
 if s:has_version('7.3')
   execute 'set cryptmethod='.(s:has_version('7.4.399') ? 'blowfish2' : 'blowfish')
@@ -191,6 +192,15 @@ function! NeoCompleteCompatible()
   return has('lua') && (v:version > 703 ||
         \ (v:version == 703 && has('patch855')))
 endfunction
+" }}}
+" Make scripts executable if it's a script {{{
+function! s:make_executable(filename)
+  let line = getline(1)
+  if line =~ '^#!' && line =~ '/bin'
+    execute 'silent !chmod a+x' a:filename
+  endif
+endfunction
+autocmd BufWritePost * call s:make_executable(@%)
 " }}}
 
 " Clone neobundle.vim if not installed {{{
