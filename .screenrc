@@ -1,4 +1,5 @@
-escape 
+escape 
+# escape 
 
 shell /bin/zsh
 autodetach on
