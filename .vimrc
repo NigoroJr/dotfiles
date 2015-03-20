@@ -22,6 +22,7 @@ set viewdir=~/.vim/view/
 " Persistent undo requires Vim 7.3+
 if s:has_version('7.3')
   set undodir=~/.vim/undo/
+  set undofile
 endif
 set tabstop=4
 set expandtab
