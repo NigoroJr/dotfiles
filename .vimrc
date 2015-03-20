@@ -198,6 +198,7 @@ function! s:make_executable(filename)
   let line = getline(1)
   if line =~ '^#!' && line =~ '/bin'
     execute 'silent !chmod a+x' a:filename
+    filetype detect
   endif
 endfunction
 autocmd BufWritePost * call s:make_executable(@%)
