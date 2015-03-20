@@ -35,7 +35,6 @@ set foldenable
 set foldmethod=marker
 set history=10000
 set viewoptions=cursor,folds
-set hlsearch
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,sjis,cp932,euc-jp,cp20932,guess
 set backspace=indent,eol,start
@@ -88,7 +87,9 @@ au BufWriteCmd  sudo:*,sudo:*/* SudoWrite <afile>
 au FileWriteCmd sudo:*,sudo:*/* SudoWrite <afile>
 
 " Reset hilight search by pressing Escape 2 times
-nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
+" Not needed because of incsearch.vim
+"set hlsearch
+"nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 
 " Move pwd to directory of buffer
 nnoremap <Leader>cd :cd %:h<CR>
