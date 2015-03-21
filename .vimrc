@@ -1306,8 +1306,8 @@ if neobundle#tap('vimshell.vim')
   " Open VimShell vertically
   nnoremap <silent> <Leader>vvs :VimShellBuffer -split-command=split<CR>
   " Interactive python with ,py
-  nnoremap <silent> <Leader>py :VimShellInteractive python<CR>
-  nnoremap <silent> <Leader>irb :VimShellInteractive irb<CR>
+  nnoremap <silent> <Leader>vp :VimShellInteractive python<CR>
+  nnoremap <silent> <Leader>vr :VimShellInteractive irb<CR>
 
   function! neobundle#hooks.on_source(bundle)
     " Hit escape twice to exit vimshell
