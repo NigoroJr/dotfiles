@@ -38,6 +38,7 @@ set viewoptions=cursor,folds
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,sjis,cp932,euc-jp,cp20932,guess
 set backspace=indent,eol,start
+set hlsearch
 set splitright
 set splitbelow
 set modeline
@@ -88,7 +89,6 @@ au FileWriteCmd sudo:*,sudo:*/* SudoWrite <afile>
 
 " Reset hilight search by pressing Escape 2 times
 " Not needed because of incsearch.vim
-"set hlsearch
 "nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 
 " Move pwd to directory of buffer
@@ -437,7 +437,7 @@ if neobundle#tap('incsearch.vim')
   function! neobundle#hooks.on_source(bundle)
     let g:incsearch#consistent_n_direction = 1
     let g:incsearch#emacs_like_keymap = 1
-    let g:incsearch#auto_no_hlsearch = 1
+    let g:incsearch#auto_nohlsearch = 1
     map n  <Plug>(incsearch-nohl-n)
     map N  <Plug>(incsearch-nohl-N)
     map *  <Plug>(incsearch-nohl-*)
