@@ -97,7 +97,7 @@ nnoremap <Leader>cd :cd %:h<CR>
 " Q to quit (overrides 'Q', but this is the same as 'gq')
 nmap <silent> Q :q<CR>
 
-" Toggle spell check
+" Toggle spell check {{{
 nmap <silent> <Leader>ss :call ToggleSpellcheck()<CR>
 function! ToggleSpellcheck()
   silent setlocal spell!
@@ -119,6 +119,7 @@ function! TogglePaste()
     echo 'Paste ON'
   endif
 endfunction
+" }}}
 " }}}
 " Case-sensitive search, case-insensitive command completion  {{{
 let b:case_insensitive_cmd = 0
