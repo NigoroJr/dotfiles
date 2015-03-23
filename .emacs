@@ -137,6 +137,7 @@
         color-theme
         color-theme-solarized
         perl-completion
+        rsense
         ))
 
 (el-get 'sync my:el-get-packages)
@@ -229,6 +230,15 @@
       (setq ac-sources
             '(ac-source-perl-completion)))))
 (add-hook 'cperl-mode-hook 'perl-completion-hook)
+
+;; rsense
+(setq rsense-home (expand-file-name "~/.emacs.d/el-get/rsense"))
+(add-to-list 'load-path (concat rsense-home "/etc"))
+(require 'rsense)
+(add-hook 'ruby-mode-hook
+          (lambda ()
+            (add-to-list 'ac-sources 'ac-source-rsense-method)
+            (add-to-list 'ac-sources 'ac-source-rsense-constant)))
 
 ;; exec-path-from-shell
 ;;(add-to-list 'load-path "~/.emacs.d/el-get/exec-path-from-shell")
