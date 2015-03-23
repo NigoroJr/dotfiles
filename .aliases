@@ -62,7 +62,9 @@ if [[ $SHELL =~ zsh ]]; then
     # Global alias
     alias -g G='| grep'
 
-    alias -g dn='1>/dev/null 2>&1'
+    alias -g DN1='1>/dev/null'
+    alias -g DN2='2>/dev/null'
+    alias -g DN12='1>/dev/null 2>&1'
 fi
 
 if [ -f ~/.aliases_local ]; then
