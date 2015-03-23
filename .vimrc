@@ -108,6 +108,18 @@ function! ToggleSpellcheck()
   endif
 endfunction
 " }}}
+
+" Toggle paste {{{
+nmap <silent> <Leader>sp :call TogglePaste()<CR>
+function! TogglePaste()
+  silent setlocal paste!
+  if &paste == 0
+    echo 'Paste OFF'
+  else
+    echo 'Paste ON'
+  endif
+endfunction
+" }}}
 " Case-sensitive search, case-insensitive command completion  {{{
 let b:case_insensitive_cmd = 0
 if b:case_insensitive_cmd
