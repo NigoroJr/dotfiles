@@ -1,0 +1,5 @@
+# key: ruby
+# --
+#!/usr/bin/env ruby
+
+$0
