@@ -88,8 +88,7 @@ au BufWriteCmd  sudo:*,sudo:*/* SudoWrite <afile>
 au FileWriteCmd sudo:*,sudo:*/* SudoWrite <afile>
 
 " Reset hilight search by pressing Escape 2 times
-" Not needed because of incsearch.vim
-"nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 
 " Move pwd to directory of buffer
 nnoremap <Leader>cd :cd %:h<CR>
