@@ -3,8 +3,11 @@
 # Check Operating System
 case `uname -s` in
     Darwin)
-        alias ls='ls -G'
-        export GREP_OPTIONS='--color=auto'
+        if hash gls 2>/dev/null; then
+            alias ls='gls'
+        else
+            alias ls='ls -G'
+        fi
         export GREP_COLOR='1;37;31'
         ;;
     *)
