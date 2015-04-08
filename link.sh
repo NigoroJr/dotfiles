@@ -7,9 +7,14 @@ case `uname -s` in
         ;;
 esac
 
-FILES=`find ~/dotfiles/ -maxdepth 1 -name '.*' \
-    | grep -v '\.git' \
-    | grep -v "$IGNORE"`
+if [[ -n $IGNORE ]]; then
+    FILES=`find ~/dotfiles/ -maxdepth 1 -name '.*' \
+        | grep -v '\.git' \
+        | grep -v "$IGNORE"`
+else
+    FILES=`find ~/dotfiles/ -maxdepth 1 -name '.*' \
+        | grep -v '\.git'`
+fi
 
 for F in $FILES; do
     F=`basename $F`
