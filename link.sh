@@ -1,6 +1,17 @@
 #!/bin/sh
 
-for F in `find ~/dotfiles/ -maxdepth 1 -name '.*' | grep -v '\.git'`; do
+case `uname -s` in
+    Darwin)
+        # Ignore X11 files
+        IGNORE='\.[xX]'
+        ;;
+esac
+
+FILES=`find ~/dotfiles/ -maxdepth 1 -name '.*' \
+    | grep -v '\.git' \
+    | grep -v "$IGNORE"`
+
+for F in $FILES; do
     F=`basename $F`
     if [ "$F" = "." -o "$F" = ".." ]; then
         continue
