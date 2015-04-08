@@ -289,6 +289,7 @@ NeoBundleLazy 'thinca/vim-ref'
 NeoBundleLazy 'tpope/vim-fugitive'
 NeoBundleLazy 'tpope/vim-markdown'
 NeoBundleLazy 'tpope/vim-rails'
+NeoBundleLazy 'tpope/vim-surround'
 NeoBundleLazy 'tyru/open-browser.vim'
 NeoBundleLazy 'wesQ3/vim-windowswap'
 " }}}
@@ -754,6 +755,23 @@ if neobundle#tap('sudo.vim')
         \ })
   call neobundle#untap()
 endif
+" }}}
+" surround.vim {{{
+if neobundle#tap('surround.vim')
+  call neobundle#config({
+        \ 'autoload': {
+        \   'filetypes': ['c', 'cpp'],
+        \ },
+        \ })
+
+  let g:surround_no_mappings = 1
+  let g:surround_no_insert_mappings = 1
+
+  call neobundle#untap()
+endif
+" Only enable some key bindings
+nmap <Leader>sy <Plug>Ysurround
+nmap <Leader>sd <Plug>Dsurround
 " }}}
 " TextFormat {{{
 if neobundle#tap('TextFormat')
