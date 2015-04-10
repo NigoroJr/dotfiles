@@ -24,11 +24,6 @@ snippet		class
 		${0}
 	};
 
-snippet		using
-abbr		using namespace std;
-	using namespace ${1:std};
-	${0}
-
 snippet		cpp
 options		head
 	#include <iostream>
@@ -49,3 +44,6 @@ options		head
 		return 0;
 	}
 
+snippet     param
+abbr        \param[in] param desc
+	\param[${1:in}] ${2:param} ${3:description}

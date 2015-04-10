@@ -1,14 +1,18 @@
-snippet     templ
-abbr        Template for g++
-options     head
+snippet		templ
+abbr		Template for g++
+options	 head
 	CXX=${1:g++}
 	CXXFLAGS=-std=c++11 -Wall
 	PROG_NAME=${2}
 	OBJS=${3}
-	
+
 	all: $(PROG_NAME)
 
-	$(PROG_NAME): $(OBJS) ${4}
+	$(PROG_NAME): $(OBJS) ${4:main.cpp}
+		$(CXX) $(CXXFLAGS) -o $@ $^
+
+	%.o: %.cpp %.h
+		$(CXX) $(CXXFLAGS) -c $<
 
 	clean:
 		rm -rf $(PROG_NAME) *.o
