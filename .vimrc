@@ -630,7 +630,11 @@ endif
 if neobundle#tap('neosnippet.vim')
   nnoremap <Leader>es :<C-u>NeoSnippetEdit
 
-  let g:neosnippet#snippets_directory = '~/.vim/snippets/'
+  " First directory has the local snippets.  Note that this risks local
+  " snippets being overwritten by the global snippets loaded later. However,
+  " it is set like this so that it's easier to add global snippets when doing
+  " <Leader>es
+  let g:neosnippet#snippets_directory = '~/.local_snippets/,~/.vim/snippets/'
 
   " <TAB>: completion
   imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
