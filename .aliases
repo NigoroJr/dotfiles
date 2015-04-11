@@ -64,6 +64,8 @@ alias ga.='git add .'
 alias df='df -h'
 alias du='du -h'
 
+alias watch='watch -n 0.5'
+
 if [[ $SHELL =~ zsh ]]; then
     # Global alias
     alias -g G='| grep'
