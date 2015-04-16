@@ -64,6 +64,8 @@
 
 ;; Show numbers
 ;;(global-linum-mode t)
+;; Show column number
+(setq column-number-mode t)
 
 ;; Make file executable if file has #! at beginning
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
