@@ -160,11 +160,18 @@
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/ac-dict")
 (ac-config-default)
-;; Set it large enough to give time for yasnippet to expand
-(setq ac-delay 0.5)
+(setq ac-delay 0.1)
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
 (global-auto-complete-mode t)
+
+;; yasnippet sources for AutoComplete
+(defun add-yasnippet-ac-sources ()
+  (add-to-list 'ac-sources 'ac-source-yasnippet))
+(add-hook 'c-mode-hook 'add-yasnippet-ac-sources)
+(add-hook 'c++-mode-hook 'add-yasnippet-ac-sources)
+(add-hook 'ruby-mode-hook 'add-yasnippet-ac-sources)
+(add-hook 'cperl-mode-hook 'add-yasnippet-ac-sources)
 
 ;; Clang complete
 (require 'auto-complete-clang-async)
