@@ -150,6 +150,9 @@
         color-theme-solarized
         perl-completion
         rsense
+        ruby-electric
+        ruby-block
+        inf-ruby
         ))
 
 (el-get 'sync my:el-get-packages)
@@ -258,6 +261,14 @@
           (lambda ()
             (add-to-list 'ac-sources 'ac-source-rsense-method)
             (add-to-list 'ac-sources 'ac-source-rsense-constant)))
+
+(require 'ruby-electric nil t)
+(when (require 'ruby-block nil t)
+  (setq ruby-block-highlight-toggle t))
+(defun my-ruby-mode-hooks ()
+  (ruby-electric-mode t)
+  (ruby-block-mode t))
+(add-hook 'ruby-mode-hook 'my-ruby-mode-hooks)
 
 ;; exec-path-from-shell
 ;;(add-to-list 'load-path "~/.emacs.d/el-get/exec-path-from-shell")
