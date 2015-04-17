@@ -124,6 +124,13 @@
                :website "https://github.com/purcell/exec-path-from-shell"
                :pkgname "purcell/exec-path-from-shell"
         )
+        (:name rsense
+               :type http-tar
+               :url "http://cx4a.org/pub/rsense/rsense-0.3.tar.bz2"
+               :options ("xjf")
+               :website "http://cx4a.org/software/rsense/index"
+               :pkgname "m2ym/rsense"
+         )
     )
 )
 
