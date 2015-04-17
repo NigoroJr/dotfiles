@@ -66,6 +66,9 @@
 ;;(global-linum-mode t)
 ;; Show column number
 (setq column-number-mode t)
+;; Show time
+(setq display-time-day-and-date t)
+(display-time-mode t)
 
 ;; Make file executable if file has #! at beginning
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
