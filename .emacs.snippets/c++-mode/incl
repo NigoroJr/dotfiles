@@ -1,4 +1,4 @@
-# key: inc2
+# key: incl
 # name: #include "foo.h"
 # --
 #incldue "$1"
