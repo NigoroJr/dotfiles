@@ -1,4 +1,0 @@
-# key: inc2
-# name: #include "foo.h"
-# --
-#incldue "$1"
