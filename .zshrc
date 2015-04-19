@@ -65,10 +65,12 @@ limit coredumpsize 102400
 ##############################################################################
 setopt auto_cd             # cd when only directory is entered
 setopt auto_list           # Show list of completion
+setopt auto_name_dirs      # Use named dirs automatically
 setopt auto_param_keys     # Complete variables
 setopt auto_param_slash    # Complete / automatically
 setopt auto_pushd
 setopt auto_resume         # Resume when suspended command is entered
+setopt cdable_vars         # cd to named dirs without ~ at beginning
 setopt correct             # Suggest correction
 setopt extended_glob
 setopt hist_ignore_all_dups
