@@ -33,8 +33,8 @@ if hash dropbox; then
 fi
 
 # Run any local configurations (such as setting wallpaper)
-if [ -f ~/.xsession_local ]; then
-    sh ~/.xsession_local
+if [ -f ~/.localrc/xsession ]; then
+    sh ~/.localrc/xsession
 fi
 
 # Use bumblebee if installed

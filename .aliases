@@ -75,6 +75,6 @@ if [[ $SHELL =~ zsh ]]; then
     alias -g DN12='1>/dev/null 2>&1'
 fi
 
-if [ -f ~/.aliases_local ]; then
-    source ~/.aliases_local
+if [ -f ~/.localrc/aliases ]; then
+    source ~/.localrc/aliases
 fi

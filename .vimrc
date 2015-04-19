@@ -1403,7 +1403,7 @@ endif
 " }}}
 
 " Source local configurations if any {{{
-if filereadable(expand('~/.vimrc_local'))
-  source ~/.vimrc_local
+if filereadable(expand('~/.localrc/vimrc'))
+  source ~/.localrc/vimrc
 endif
 " }}}

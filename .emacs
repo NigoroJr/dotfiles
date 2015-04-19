@@ -289,4 +289,4 @@
  ;; If there is more than one, they won't work right.
  )
 
-(if (file-exists-p "~/.emacs_local") (load-file "~/.emacs_local") nil)
+(if (file-exists-p "~/.localrc/emacs") (load-file "~/.localrc/emacs") nil)

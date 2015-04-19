@@ -1,5 +1,5 @@
 # vim: foldmethod=marker ft=zsh
-# The local .zshrc (.zshrc_local) is read at the end
+# The local .zshrc is read at the end
 
 # Enable completion
 zstyle :compinstall filename "$HOME/.zshrc"
@@ -142,6 +142,6 @@ if [ -f ~/.zshrc_prompt ]; then
 fi
 
 # Read local environment File if there is one
-if [ -f ~/.zshrc_local ]; then
-    source ~/.zshrc_local
+if [ -f ~/.localrc/zshrc ]; then
+    source ~/.localrc/zshrc
 fi
