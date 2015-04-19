@@ -5,7 +5,6 @@
 ;; Auto insert matching brace
 (defun my-c-mode-insert-brace ()
   (interactive)
-  (insert "{")
   (let ((pps (syntax-ppss)))
     (when (and (eolp) (not (or (nth 3 pps) (nth 4 pps))))
       (c-indent-line)
@@ -13,10 +12,14 @@
       (c-indent-line)
       (forward-line -1)
       (c-indent-line))))
+(defun my-return-binding ()
+  (interactive)
+  (if (char-equal (char-before) ?{)
+      (my-c-mode-insert-brace)
+    (newline-and-indent)))
 (add-hook 'c-mode-common-hook
           (lambda ()
-            (define-key c-mode-base-map (kbd "{") 'nil)
-            (define-key c-mode-base-map (kbd "{ RET") 'my-c-mode-insert-brace)))
+            (global-set-key (kbd "RET") 'my-return-binding)))
 
 ;; C-h as backspace
 (define-key key-translation-map [?\C-h] [?\C-?])
