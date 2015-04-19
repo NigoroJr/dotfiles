@@ -42,7 +42,8 @@
 (setq c-basic-offset 4)
 
 ;; Hide tool bar and menu bar
-(tool-bar-mode -1)
+(if window-system
+    (tool-bar-mode -1))
 (menu-bar-mode -1)
 
 ;; Use temporary file directory for backups and autosaves
