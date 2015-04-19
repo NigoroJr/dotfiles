@@ -250,6 +250,7 @@ NeoBundleLazy 'davidhalter/jedi-vim'
 NeoBundleLazy 'dbext.vim'
 NeoBundleLazy 'dkasak/manpageview'
 NeoBundleLazy 'fatih/vim-go'
+NeoBundleLazy 'flazz/vim-colorschemes'
 NeoBundleLazy 'gcmt/wildfire.vim'
 NeoBundleLazy 'haya14busa/incsearch.vim'
 NeoBundleLazy 'hotchpotch/perldoc-vim'
@@ -853,6 +854,14 @@ if neobundle#tap('vim-altr')
 endif
 nmap <Leader>a <Plug>(altr-forward)
 nmap <Leader>A <Plug>(altr-back)
+" }}}
+" vim-colorschemes {{{
+if neobundle#tap('vim-colorschemes')
+  call neobundle#config({
+        \ 'gui': 1,
+        \ })
+  call neobundle#untap()
+endif
 " }}}
 " vim-fugitive {{{
 if neobundle#tap('vim-fugitive')
