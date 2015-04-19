@@ -19,8 +19,6 @@
             (define-key c-mode-base-map (kbd "{ RET") 'my-c-mode-insert-brace)))
 
 ;; C-h as backspace
-;; Following configuration does not work in minibuffer when using anything.el
-;(global-set-key "\C-h" 'delete-backward-char)
 (define-key key-translation-map [?\C-h] [?\C-?])
 
 ;; Traverse history with C-p and C-n
