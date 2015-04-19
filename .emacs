@@ -14,8 +14,9 @@
       (forward-line -1)
       (c-indent-line))))
 (add-hook 'c-mode-common-hook
-  (lambda ()
-    (define-key c-mode-base-map "{" 'my-c-mode-insert-brace)))
+          (lambda ()
+            (define-key c-mode-base-map (kbd "{") 'nil)
+            (define-key c-mode-base-map (kbd "{ RET") 'my-c-mode-insert-brace)))
 
 ;; C-h as backspace
 ;; Following configuration does not work in minibuffer when using anything.el
