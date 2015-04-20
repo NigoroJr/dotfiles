@@ -52,6 +52,7 @@ alias gvi='gvim'
 # emacs is too long to type!
 # alias em='emacs -nw'
 alias em='emacsclient -nw'
+alias emacs='emacs -nw'
 alias emd='emacs --daemon'
 alias emacs-kill='emacsclient -e "(kill-emacs)"'
 
