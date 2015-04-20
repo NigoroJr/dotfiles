@@ -1,6 +1,7 @@
 (setq default-directory "~/")
 (setenv "ESHELL" "/bin/zsh")
 (fset 'yes-or-no-p 'y-or-n-p)
+(show-paren-mode t)
 
 ;; Auto insert matching brace
 (defun my-c-mode-insert-brace ()
