@@ -38,8 +38,8 @@
 
 (add-hook 'c-mode-common-hook
           (lambda ()
-            (global-set-key (kbd "RET") 'my-return-binding)))
             (define-key c-mode-base-map (kbd ";") 'my-semicolon-expansion)
+            (define-key c-mode-base-map (kbd "RET") 'my-return-binding)))
 
 ;; C-h as backspace
 (define-key key-translation-map [?\C-h] [?\C-?])
