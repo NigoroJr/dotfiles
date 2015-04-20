@@ -17,9 +17,28 @@
   (if (char-equal (char-before) ?{)
       (my-c-mode-insert-brace)
     (newline-and-indent)))
+
+;; 's;;' to insert 'std::' in C++
+(defun replace-last-two-with-std ()
+  (interactive)
+      (c-indent-line)
+      (delete-backward-char 2)
+      (c-indent-line)
+      (insert "std:")
+      (c-indent-line)
+      (insert ":")
+      (auto-complete))
+(defun my-semicolon-expansion ()
+  (interactive)
+  (if (and (char-equal (char-before (- (point) 0)) ?\;)
+           (char-equal (char-before (- (point) 1)) ?s))
+      (replace-last-two-with-std)
+    (insert ";")))
+
 (add-hook 'c-mode-common-hook
           (lambda ()
             (global-set-key (kbd "RET") 'my-return-binding)))
+            (define-key c-mode-base-map (kbd ";") 'my-semicolon-expansion)
 
 ;; C-h as backspace
 (define-key key-translation-map [?\C-h] [?\C-?])
