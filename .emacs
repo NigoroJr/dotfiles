@@ -1,7 +1,62 @@
 (setq default-directory "~/")
+;; zsh as shell
+(setq shell-file-name "/bin/zsh")
 (setenv "ESHELL" "/bin/zsh")
 (fset 'yes-or-no-p 'y-or-n-p)
+;; Highlight matching paren
 (show-paren-mode t)
+;; C-h as backspace
+(define-key key-translation-map [?\C-h] [?\C-?])
+;; Traverse history with C-p and C-n
+(define-key minibuffer-local-map "\C-p" 'previous-history-element)
+(define-key minibuffer-local-map "\C-n" 'next-history-element)
+(define-key minibuffer-local-must-match-map "\C-p" 'previous-history-element)
+(define-key minibuffer-local-must-match-map "\C-n" 'next-history-element)
+(define-key minibuffer-local-completion-map "\C-p" 'previous-history-element)
+(define-key minibuffer-local-completion-map "\C-n" 'next-history-element)
+;; Auto indent
+(define-key global-map (kbd "RET") 'newline-and-indent)
+;; Indentation level to 4
+(setq c-basic-offset 4)
+;; Hide tool bar and menu bar
+(if window-system
+    (tool-bar-mode -1))
+(menu-bar-mode -1)
+;; Use temporary file directory for backups and autosaves
+(setq backup-directory-alist
+      `((".*" ., temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*", temporary-file-directory)))
+;; Auto-save interval
+(setq auto-save-timeout 1)
+(setq auto-save-interval 20)
+;; Safest, but slowest
+(setq backup-by-copying t)
+;; Show numbers
+;(global-linum-mode t)
+;; Show column number
+(setq column-number-mode t)
+;; Show time on modeline
+(setq display-time-day-and-date t)
+(display-time-mode t)
+;; Make file executable if file has #! at beginning
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+;; Follow symbolic link
+(setq follow-link t)
+(setq vc-follow-symlinks t)
+;; Use Emacs term info, not the system
+(setq system-uses-term-info nil)
+;; Use Japanese
+(set-language-environment 'Japanese)
+;; Use utf-8
+(prefer-coding-system 'utf-8)
+;; Don't show startup message
+(setq inhibit-startup-message t)
+;; Set tab width to 4, use space instead of tab
+(setq-default
+ c-basic-offset 4
+ tab-width 4
+ indent-tabs-mode nil)
 
 ;; Auto insert matching brace
 (defun my-c-mode-insert-brace ()
@@ -37,85 +92,11 @@
             (define-key c-mode-base-map (kbd ";") 'my-semicolon-expansion)
             (define-key c-mode-base-map (kbd "RET") 'my-return-binding)))
 
-;; C-h as backspace
-(define-key key-translation-map [?\C-h] [?\C-?])
-
-;; Traverse history with C-p and C-n
-(define-key minibuffer-local-map "\C-p" 'previous-history-element)
-(define-key minibuffer-local-map "\C-n" 'next-history-element)
-(define-key minibuffer-local-must-match-map "\C-p" 'previous-history-element)
-(define-key minibuffer-local-must-match-map "\C-n" 'next-history-element)
-(define-key minibuffer-local-completion-map "\C-p" 'previous-history-element)
-(define-key minibuffer-local-completion-map "\C-n" 'next-history-element)
-
 ;; Show full path of file in modeline
 (setq-default mode-line-buffer-identification
               (list 'buffer-file-name
                     (propertized-buffer-identification "%12f")
                     (propertized-buffer-identification "%12b")))
-
-;; Auto indent
-(define-key global-map (kbd "RET") 'newline-and-indent)
-
-;; Indentation level to 4
-(setq c-basic-offset 4)
-
-;; Hide tool bar and menu bar
-(if window-system
-    (tool-bar-mode -1))
-(menu-bar-mode -1)
-
-;; Use temporary file directory for backups and autosaves
-(setq backup-directory-alist
-      `((".*" ., temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*", temporary-file-directory)))
-
-;; Auto-save interval
-(setq auto-save-timeout 1)
-(setq auto-save-interval 20)
-
-;; Safest, but slowest
-(setq backup-by-copying t)
-
-;; zsh as shell
-(setq shell-file-name "/bin/zsh")
-
-;; Show numbers
-;;(global-linum-mode t)
-;; Show column number
-(setq column-number-mode t)
-;; Show time
-(setq display-time-day-and-date t)
-(display-time-mode t)
-
-;; Make file executable if file has #! at beginning
-(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-
-;; Follow symbolic link
-(setq follow-link t)
-(setq vc-follow-symlinks t)
-
-;; Use Emacs term info, not the system
-(setq system-uses-term-info nil)
-
-;; Use Japanese
-(set-language-environment 'Japanese)
-
-;; Use utf-8
-(prefer-coding-system 'utf-8)
-
-;; Don't show startup message
-(setq inhibit-startup-message t)
-
-;; Set tab width to 4, use space instead of tab
-(setq-default
- c-basic-offset 4
- tab-width 4
- indent-tabs-mode nil)
-
-(if (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
 
 ;; load path after installing el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -305,4 +286,5 @@
  ;; If there is more than one, they won't work right.
  )
 
-(if (file-exists-p "~/.localrc/emacs") (load-file "~/.localrc/emacs") nil)
+(if (file-exists-p "~/.localrc/emacs")
+    (load-file "~/.localrc/emacs") nil)
