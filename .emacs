@@ -295,6 +295,7 @@
 (define-key global-map (kbd "C-M-s") 'vr/isearch-forward)
 
 ;; ace-jump-mode
+(require 'ace-jump-mode)
 (global-set-key (kbd "C-o") 'ace-jump-char-mode)
 (setq ace-jump-mode-gray-background nil)
 (setq ace-jump-mode-move-keys
