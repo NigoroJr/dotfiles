@@ -57,6 +57,9 @@
  c-basic-offset 4
  tab-width 4
  indent-tabs-mode nil)
+;; Enable fuzzy match
+(ido-mode t)
+(setq ido-enable-flex-matching t)
 
 ;; Auto insert matching brace
 (defun my-c-mode-insert-brace ()
