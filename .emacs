@@ -171,6 +171,8 @@
         rsense
         ruby-block
         inf-ruby
+        visual-regexp-steroids
+        ace-jump-mode
         ))
 
 (el-get 'sync my:el-get-packages)
@@ -285,6 +287,19 @@
 (add-hook 'ruby-mode-hook
           (lambda ()
             (ruby-block-mode t)))
+
+;; visual-regexp-steroids
+(define-key global-map (kbd "C-c r") 'vr/replace)
+(define-key global-map (kbd "C-c q") 'vr/query-replace)
+(define-key global-map (kbd "C-M-r") 'vr/isearch-backward)
+(define-key global-map (kbd "C-M-s") 'vr/isearch-forward)
+
+;; ace-jump-mode
+(global-set-key (kbd "C-o") 'ace-jump-char-mode)
+(setq ace-jump-mode-gray-background nil)
+(setq ace-jump-mode-move-keys
+      (loop for c from ?a to ?z collect c))
+(set-face-foreground 'ace-jump-face-foreground "brightgreen")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
