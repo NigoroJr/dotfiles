@@ -61,6 +61,22 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 
+;; Insert newline below
+(define-key global-map (kbd "C-c o")
+  (lambda ()
+    (interactive)
+    (next-line)
+    (beginning-of-line)
+    (insert "\n")
+    (previous-line)))
+;; Insert newline above
+(define-key global-map (kbd "C-c C-o")
+  (lambda ()
+    (interactive)
+    (beginning-of-line)
+    (insert "\n")
+    (previous-line)))
+
 ;; Auto insert matching brace
 (defun my-c-mode-insert-brace ()
   (interactive)
