@@ -1,7 +1,7 @@
 (setq default-directory "~/")
 ;; zsh as shell
-(setq shell-file-name "/bin/zsh")
-(setenv "ESHELL" "/bin/zsh")
+(setq shell-file-name (getenv "SHELL"))
+(setenv "ESHELL" (getenv "SHELL"))
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; Highlight matching paren
 (show-paren-mode t)
