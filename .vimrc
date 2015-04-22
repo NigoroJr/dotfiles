@@ -17,7 +17,7 @@ function! s:has_version(ver_str)
 endfunction
 " }}}
 set backup
-set backupdir=~/.vim/backup/
+set backupdir=~/.vim/backups/
 set viewdir=~/.vim/view/
 " Persistent undo requires Vim 7.3+
 if s:has_version('7.3')
