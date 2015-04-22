@@ -22,16 +22,27 @@
 (if window-system
     (tool-bar-mode -1))
 (menu-bar-mode -1)
-;; Use temporary file directory for backups and autosaves
+;; Backups and autosaves
+(setq delete-old-versions t
+      ;; Auto-save interval
+      auto-save-timeout 1
+      auto-save-interval 20
+      ;; Safest, but slowest
+      backup-by-copying t
+      kept-new-versions 6
+      kept-old-versions 2
+      version-control t)
+(defvar BACKUPS_DIR "~/.emacs.d/backups/")
+(defvar AUTOSAVES_DIR "~/.emacs.d/autosaves/")
+;; Create directories if they don't exist
+(if (not (file-directory-p BACKUPS_DIR))
+    (mkdir BACKUPS_DIR))
+(if (not (file-directory-p AUTOSAVES_DIR))
+    (mkdir AUTOSAVES_DIR))
 (setq backup-directory-alist
-      `((".*" ., temporary-file-directory)))
+      `((".*" . ,BACKUPS_DIR)))
 (setq auto-save-file-name-transforms
-      `((".*", temporary-file-directory)))
-;; Auto-save interval
-(setq auto-save-timeout 1)
-(setq auto-save-interval 20)
-;; Safest, but slowest
-(setq backup-by-copying t)
+      `((".*" , AUTOSAVES_DIR t)))
 ;; Show numbers
 (global-linum-mode t)
 (setq linum-format "%3d ")
