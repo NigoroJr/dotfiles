@@ -33,7 +33,9 @@
 ;; Safest, but slowest
 (setq backup-by-copying t)
 ;; Show numbers
-;(global-linum-mode t)
+(global-linum-mode t)
+(setq linum-format "%3d ")
+
 ;; Show column number
 (setq column-number-mode t)
 ;; Show time on modeline
