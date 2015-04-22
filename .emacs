@@ -187,6 +187,9 @@
         visual-regexp-steroids
         ace-jump-mode
         ))
+;; Load any local-only elisps
+(if (file-exists-p "~/.localrc/el-get")
+    (load-file "~/.localrc/el-get"))
 
 (el-get 'sync my:el-get-packages)
 
