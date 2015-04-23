@@ -83,12 +83,12 @@
     (insert "\n")
     (previous-line)))
 ;; Insert newline above
-(define-key global-map (kbd "C-c C-o")
-  (lambda ()
+(defun insert-newline-above ()
     (interactive)
     (beginning-of-line)
     (insert "\n")
-    (previous-line)))
+    (previous-line))
+(define-key global-map (kbd "C-c C-o") 'insert-newline-above)
 
 ;; Auto insert matching brace
 (defun my-c-mode-insert-brace ()
@@ -122,7 +122,8 @@
 (add-hook 'c-mode-common-hook
           (lambda ()
             (define-key c-mode-base-map (kbd ";") 'my-semicolon-expansion)
-            (define-key c-mode-base-map (kbd "RET") 'my-return-binding)))
+            (define-key c-mode-base-map (kbd "RET") 'my-return-binding)
+            (define-key c-mode-base-map (kbd "C-c C-o") 'insert-newline-above)))
 
 ;; Show full path of file in modeline
 (setq-default mode-line-buffer-identification
