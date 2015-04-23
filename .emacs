@@ -180,6 +180,9 @@
         anything
         color-theme
         color-theme-solarized
+        emacs-async
+        helm
+        helm-descbinds
         perl-completion
         rsense
         ruby-block
@@ -244,18 +247,17 @@
     (require 'ac-math)
   (add-to-list 'ac-modes 'latex-mode))
 
-;; Anything
-(when (require 'anything nil t)
-  (setq
-   anything-idle-delay 0.3
-   anything-input-idle-delay 0.2
-   anything-candidate-number-limit 100
-   anything-quick-update t)
-
-   (when (require 'anything-config nil t)
-     (setq anything-su-or-sudo "sudo"))
-   )
-
+;; helm
+(require 'helm)
+(require 'helm-config)
+;; Jump back and forth with C-M-p and C-M-n
+(define-key helm-map (kbd "C-M-p") 'helm-follow-action-backward)
+(define-key helm-map (kbd "C-M-n") 'helm-follow-action-forward)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x c o") 'helm-occur)
+(global-set-key (kbd "C-x C-b") 'helm-mini)
+;; autoresizef
+(helm-autoresize-mode t)
 
 ;; Only apply color theme when in GUI
 (when window-system
