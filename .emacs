@@ -187,6 +187,7 @@
         rsense
         ruby-block
         inf-ruby
+        slime
         visual-regexp-steroids
         ace-jump-mode
         ))
@@ -321,6 +322,9 @@
 (setq ace-jump-mode-move-keys
       (loop for c from ?a to ?z collect c))
 (set-face-foreground 'ace-jump-face-foreground "brightgreen")
+
+;; SLIME
+(setq inferior-lisp-program "clisp")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
