@@ -84,10 +84,10 @@
     (previous-line)))
 ;; Insert newline above
 (defun insert-newline-above ()
-    (interactive)
-    (beginning-of-line)
-    (insert "\n")
-    (previous-line))
+  (interactive)
+  (beginning-of-line)
+  (insert "\n")
+  (previous-line))
 (define-key global-map (kbd "C-c C-o") 'insert-newline-above)
 
 ;; Auto insert matching brace
@@ -135,12 +135,12 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 ;; install el-get if not present
 (unless (require 'el-get nil t)
-    (url-retrieve
-      "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-    (lambda (s)
-        (let (el-get-master-branch)
-            (end-of-buffer)
-            (eval-print-last-sexp)))))
+  (url-retrieve
+   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
+   (lambda (s)
+     (let (el-get-master-branch)
+       (end-of-buffer)
+       (eval-print-last-sexp)))))
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 
@@ -151,21 +151,20 @@
                :website "https://github.com/Golevka/emacs-clang-complete-async"
                :pkgname "Golevka/emacs-clang-complete-async"
                :build ("make")
-        )
+               )
         (:name exec-path-from-shell
                :type github
                :website "https://github.com/purcell/exec-path-from-shell"
                :pkgname "purcell/exec-path-from-shell"
-        )
+               )
         (:name rsense
                :type http-tar
                :url "http://cx4a.org/pub/rsense/rsense-0.3.tar.bz2"
                :options ("xjf")
                :website "http://cx4a.org/software/rsense/index"
                :pkgname "m2ym/rsense"
-         )
-    )
-)
+               )
+        ))
 
 (setq my:el-get-packages
       '(
@@ -263,7 +262,6 @@
 ;; Only apply color theme when in GUI
 (when window-system
   (load-theme 'solarized-light t))
-;(load-theme 'solarized-dark t))
 
 ;; Save cursor position
 (setq save-place-file "~/.emacs.d/saveplace")
@@ -272,9 +270,9 @@
 
 ;; Use Ricty Discord
 (if (eq system-type 'gnu/linux)
-  (set-frame-font "RictyDiscord-9"))
+    (set-frame-font "RictyDiscord-9"))
 (if (eq system-type 'darwin)
-  (set-frame-font "RictyDiscord-13"))
+    (set-frame-font "RictyDiscord-13"))
 
 ;; Use CPerl mode
 (defalias 'perl-mode 'cperl-mode)
