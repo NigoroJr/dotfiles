@@ -167,29 +167,29 @@
 )
 
 (setq my:el-get-packages
-      '(init-auctex
-        init-auto-complete
-        yasnippet
-        popup
+      '(
+        ac-math
+        ace-jump-mode
+        auctex
         auto-complete
+        auto-complete-auctex
         auto-complete-clang-async
         auto-complete-yasnippet
-        auctex
-        auto-complete-auctex
-        ac-math
-        anything
         color-theme
         color-theme-solarized
         emacs-async
         helm
         helm-descbinds
+        inf-ruby
+        init-auctex
+        init-auto-complete
         perl-completion
+        popup
         rsense
         ruby-block
-        inf-ruby
         slime
         visual-regexp-steroids
-        ace-jump-mode
+        yasnippet
         ))
 ;; Load any local-only elisps
 (if (file-exists-p "~/.localrc/el-get")
@@ -200,11 +200,10 @@
 ;; yasnippet
 (setq yas-snippet-dirs
       '("~/.emacs.snippets"
-;        "~/.emacs.d/el-get/yasnippet/yasmate/snippets"
-;        "~/.emacs.d/el-get/yasnippet/snippets"
+        ;; Add any other snippits directory here
         ))
 (require 'yasnippet)
-(yas-global-mode 1)
+(yas-global-mode t)
 
 ;; AutoComplete
 (require 'auto-complete-config)
