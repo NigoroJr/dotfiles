@@ -762,10 +762,14 @@ if neobundle#tap('sudo.vim')
 endif
 " }}}
 " surround.vim {{{
-if neobundle#tap('surround.vim')
+if neobundle#tap('vim-surround')
   call neobundle#config({
         \ 'autoload': {
         \   'filetypes': ['c', 'cpp'],
+        \   'mappings': [
+        \     ['nxo', '<Plug>Ysurround'],
+        \     ['nxo', '<Plug>Dsurround'],
+        \   ],
         \ },
         \ })
 
