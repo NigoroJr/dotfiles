@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Update PATH so that dmenu can see stuff in ~/bin
+export PATH="$HOME/bin:$PATH"
+
 # Input Method setup
 export GTK_IM_MODULE=ibus
 export GTK_IM_MODULE_FILE=/etc/gtk-2.0/x86_64-pc-linux-gnu/gtk.immodules
