@@ -212,8 +212,10 @@
 
 ;; AutoComplete
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/ac-dict")
-(ac-config-default)
+;; Complete filename (must come to the beginning of ac-sources)
+(defun ac-common-setup ()
+  (add-to-list 'ac-sources 'ac-source-filename))
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/dict")
 (setq ac-delay 0.1)
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
@@ -234,10 +236,11 @@
   (setq ac-sources (append '(ac-source-clang-async) ac-sources))
   (setq ac-clang-cflags '("-std=c++11"))
   (ac-clang-launch-completion-process))
-
 (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
 (add-hook 'c++-mode-common-hook 'ac-cc-mode-setup)
-(add-hook 'auto-complete-mode-hook 'ac-common-setup)
+
+;; Apply ac-sources
+(ac-config-default)
 
 ;; Only require auto-complete-auctex if managed by el-get
 (if (member 'auto-complete-auctex 'my:el-get-packages)
