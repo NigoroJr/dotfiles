@@ -16,6 +16,8 @@
 (define-key minibuffer-local-completion-map "\C-n" 'next-history-element)
 ;; Auto indent
 (define-key global-map (kbd "RET") 'newline-and-indent)
+;; Go to previous buffer
+(define-key global-map (kbd "C-x O") 'previous-multiframe-window)
 ;; Indentation level to 4
 (setq c-basic-offset 4)
 ;; Hide tool bar and menu bar
