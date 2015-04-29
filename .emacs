@@ -20,10 +20,10 @@
 (define-key global-map (kbd "C-x O") 'previous-multiframe-window)
 ;; Indentation level to 4
 (setq c-basic-offset 4)
-;; Hide tool bar and menu bar
-(if window-system
-    (tool-bar-mode -1))
+;; Hide tool bar, menu bar, and scroll bar
+(tool-bar-mode -1)
 (menu-bar-mode -1)
+(scroll-bar-mode -1)
 ;; Backups and autosaves
 (setq delete-old-versions t
       ;; Auto-save interval
