@@ -220,10 +220,16 @@
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
 (global-auto-complete-mode t)
+(add-hook 'auto-complete-mode-hook 'ac-common-setup)
 
 ;; yasnippet sources for AutoComplete
 (defun add-yasnippet-ac-sources ()
-  (add-to-list 'ac-sources 'ac-source-yasnippet))
+  (add-to-list 'ac-sources 'ac-source-yasnippet)
+  ;; Adding ac-source-dictionary to last of ac-sources did not
+  ;; help move yasnippets source to top of completion list.
+  ;; Thus, dictionary is disabled when yasnippet is enabled.
+  ;; Another workaround is to edit ac-dictionary-directories.
+  (setq ac-sources (remove 'ac-source-dictionary ac-sources)))
 (add-hook 'c-mode-hook 'add-yasnippet-ac-sources)
 (add-hook 'c++-mode-hook 'add-yasnippet-ac-sources)
 (add-hook 'ruby-mode-hook 'add-yasnippet-ac-sources)
