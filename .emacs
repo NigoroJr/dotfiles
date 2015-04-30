@@ -59,6 +59,11 @@
 ;; Follow symbolic link
 (setq follow-link t)
 (setq vc-follow-symlinks t)
+;; Save history
+(savehist-mode t)
+(setq history-length 10000)
+;; Enable recursive call in mini-buffer
+(setq enable-recursive-minibuffers t)
 ;; Use Emacs term info, not the system
 (setq system-uses-term-info nil)
 ;; Use Japanese
