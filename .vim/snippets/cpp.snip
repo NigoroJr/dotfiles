@@ -26,9 +26,14 @@ snippet		class
 
 snippet		cpp
 options		head
+	#include <algorithm>
 	#include <iostream>
+	#include <iterator>
+	#include <string>
+	#include <vector>
 
-	int main() {${0}
+	int main(const int argc, char const* argv[]) {${0}
+
 		return 0;
 	}
 
