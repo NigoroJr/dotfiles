@@ -422,6 +422,7 @@
 
 ;; SLIME
 (setq inferior-lisp-program "clisp")
+(slime-setup '(slime-fancy slime-banner))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
