@@ -209,6 +209,14 @@
 
 (el-get 'sync my:el-get-packages)
 
+;; Inherit environment variables
+(when (memq window-system '(mac ns))
+  (lambda ()
+    (require 'exec-path-from-shell)
+    (exec-path-from-shell-initialize)
+    (exec-path-from-shell-copy-envs
+     '("SHELL"))))
+
 ;; yasnippet
 (setq yas-snippet-dirs
       '("~/.emacs.snippets"
