@@ -176,6 +176,7 @@
 (setq my:el-get-packages
       '(
         ac-math
+        ac-slime
         ace-jump-mode
         ace-isearch
         auctex
@@ -198,6 +199,7 @@
         rsense
         ruby-block
         slime
+        ws-butler
         visual-regexp-steroids
         yasnippet
         ))
