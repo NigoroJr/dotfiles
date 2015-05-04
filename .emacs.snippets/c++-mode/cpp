@@ -3,6 +3,9 @@
 #include <algorithm>
 #include <iostream>
 #include <iterator>
+#include <string>
+#include <unordered_map>
+#include <utility>
 #include <vector>
 
 int main(const int argc, char* const argv[]) {
