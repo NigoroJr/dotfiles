@@ -278,6 +278,7 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x c o") 'helm-occur)
 (global-set-key (kbd "C-x C-b") 'helm-mini)
+(global-set-key (kbd "C-x c C-r") 'helm-recentf)
 ;; autoresizef
 (helm-autoresize-mode t)
 
