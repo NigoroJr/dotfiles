@@ -9,6 +9,10 @@
 !.vim/bundle/.keep
 .vim/.netrwhist
 
+.emacs.d/*
+!.emacs.d/snippets
+!.emacs.d/init.el
+
 .xmonad/*
 !.xmonad/xmonad.hs
 *.un~

@@ -194,6 +194,7 @@
         inf-ruby
         init-auctex
         init-auto-complete
+        init-loader
         perl-completion
         popup
         rsense
@@ -219,7 +220,7 @@
 
 ;; yasnippet
 (setq yas-snippet-dirs
-      '("~/.emacs.snippets"
+      '("~/.emacs.d/snippets"
         ;; Add any other snippits directory here
         ))
 (require 'yasnippet)
