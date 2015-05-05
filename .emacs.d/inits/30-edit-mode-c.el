@@ -1,4 +1,4 @@
-;;;; c-mode hooks
+;;;; c-mode
 ;;; Auto insert matching brace
 (defun my-c-mode-insert-brace ()
   (interactive)
