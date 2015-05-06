@@ -40,6 +40,7 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-c h o") 'helm-occur)
 (global-set-key (kbd "C-c h C-r") 'helm-recentf)
+(global-set-key (kbd "C-c h C-f") 'helm-find-files)
 
 ;;; Replace: next-error / previous-error
 (ignore-errors (helm-anything-set-keys))
