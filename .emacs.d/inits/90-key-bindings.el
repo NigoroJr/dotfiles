@@ -16,14 +16,7 @@
 ;;; Go to previous buffer
 (define-key global-map (kbd "C-x O") 'previous-multiframe-window)
 ;;; Insert newline below
-(define-key global-map (kbd "C-c o")
-  (lambda ()
-    (interactive)
-    (next-line)
-    (beginning-of-line)
-    (insert "\n")
-    (previous-line)
-    (indent-for-tab-command)))
+(define-key global-map (kbd "C-c o") 'insert-newline-below)
 ;;; Insert newline above
 (define-key global-map (kbd "C-c C-o") 'insert-newline-above)
 

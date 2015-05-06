@@ -1,4 +1,11 @@
 ;;;; General functions
+(defun insert-newline-below ()
+  (interactive)
+  (next-line)
+  (beginning-of-line)
+  (insert "\n")
+  (previous-line)
+  (indent-for-tab-command))
 
 (defun insert-newline-above ()
   (interactive)
