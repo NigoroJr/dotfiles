@@ -1,5 +1,6 @@
 ;;;; helm
 (require 'helm)
+(define-key global-map (kbd "C-c h") 'helm-command-prefix)
 (require 'helm-config)
 ;; autoresizef
 (helm-autoresize-mode t)
