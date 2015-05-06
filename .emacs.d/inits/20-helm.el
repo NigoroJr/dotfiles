@@ -1,8 +1,7 @@
 ;;;; helm
 (require 'helm)
-(define-key global-map (kbd "C-c h") 'helm-command-prefix)
 (require 'helm-config)
-;; autoresizef
+(define-key global-map (kbd "C-c h") 'helm-command-prefix)
 (helm-autoresize-mode t)
 
 ;;;; replacement of `next-error' and `previous-error'

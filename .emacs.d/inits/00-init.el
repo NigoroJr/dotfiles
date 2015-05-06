@@ -21,17 +21,17 @@
       kept-new-versions 6
       kept-old-versions 2
       version-control t)
-(defvar BACKUPS_DIR "~/.emacs.d/backups/")
-(defvar AUTOSAVES_DIR "~/.emacs.d/autosaves/")
+(defvar backups_dir "~/.emacs.d/backups/")
+(defvar autosaves_dir "~/.emacs.d/autosaves/")
 ;; Create directories if they don't exist
-(if (not (file-directory-p BACKUPS_DIR))
-    (mkdir BACKUPS_DIR))
-(if (not (file-directory-p AUTOSAVES_DIR))
-    (mkdir AUTOSAVES_DIR))
+(if (not (file-directory-p backups_dir))
+    (mkdir backups_dir))
+(if (not (file-directory-p autosaves_dir))
+    (mkdir autosaves_dir))
 (setq backup-directory-alist
-      `((".*" . ,BACKUPS_DIR)))
+      `((".*" . ,backups_dir)))
 (setq auto-save-file-name-transforms
-      `((".*" , AUTOSAVES_DIR t)))
+      `((".*" ,autosaves_dir t)))
 
 ;; Save cursor position
 (setq save-place-file "~/.emacs.d/saveplace")
