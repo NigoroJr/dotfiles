@@ -4,4 +4,5 @@
   (interactive)
   (beginning-of-line)
   (insert "\n")
-  (previous-line))
+  (previous-line)
+  (indent-for-tab-command))

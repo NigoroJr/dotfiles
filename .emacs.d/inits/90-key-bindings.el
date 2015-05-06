@@ -22,7 +22,8 @@
     (next-line)
     (beginning-of-line)
     (insert "\n")
-    (previous-line)))
+    (previous-line)
+    (indent-for-tab-command))
 ;;; Insert newline above
 (define-key global-map (kbd "C-c C-o") 'insert-newline-above)
 
