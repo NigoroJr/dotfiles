@@ -61,6 +61,7 @@
         auctex
         auto-complete
         auto-complete-auctex
+        auto-complete-c-headers
         auto-complete-clang-async
         auto-complete-yasnippet
         color-theme

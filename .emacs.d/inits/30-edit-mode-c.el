@@ -16,3 +16,7 @@
       (my-c-mode-insert-brace)
     (newline-and-indent)))
 
+;;; Completion for header files (C/C++ mode)
+(defun ac-c-headers-init ()
+  (require 'auto-complete-c-headers)
+  (add-to-list 'ac-sources 'ac-source-c-headers))

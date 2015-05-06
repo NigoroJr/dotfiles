@@ -8,6 +8,7 @@
 (setq ac-delay 0.1)
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
+(setq ac-disable-faces nil)
 (global-auto-complete-mode t)
 
 ;; Apply ac-sources

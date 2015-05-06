@@ -21,3 +21,6 @@
 (add-hook 'ruby-mode-hook 'add-yasnippet-ac-sources)
 (add-hook 'c++-mode-hook 'add-yasnippet-ac-sources)
 (add-hook 'c-mode-hook 'add-yasnippet-ac-sources)
+
+;; auto-complete-c-headers
+(add-hook 'c-mode-common-hook 'ac-c-headers-init)
