@@ -1,14 +1,17 @@
 ;;; 's;;' to insert 'std::' in C++
-(defun replace-last-two-with-std ()
+(defun replace-last-two-with (str)
+  "Replaces the last two characters (s;) with str (std::)"
   (interactive)
   (delete-char -2)
-  (insert "std::")
+  (insert str)
   (auto-complete))
 
 (defun my-semicolon-expansion ()
   (interactive)
-  (if (and (char-equal (char-before (- (point) 0)) ?\;)
-           (char-equal (char-before (- (point) 1)) ?s))
-      (replace-last-two-with-std)
+  (if (char-equal (char-before (- (point) 0)) ?\;)
+      (if (char-equal (char-before (- (point) 1)) ?s)
+          (replace-last-two-with "std::")
+        (if (char-equal (char-before (- (point) 1)) ?b)
+            (replace-last-two-with "boost::")))
     (insert ";")))
 
