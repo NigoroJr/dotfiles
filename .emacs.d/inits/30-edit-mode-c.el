@@ -11,7 +11,8 @@
       (c-indent-line))))
 (defun my-return-binding ()
   (interactive)
-  (if (char-equal (char-before) ?{)
+  (if (and (not (equal (current-column) 0))
+           (char-equal (char-before) ?{))
       (my-c-mode-insert-brace)
     (newline-and-indent)))
 
