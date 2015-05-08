@@ -295,9 +295,6 @@ NeoBundleLazy 'tyru/open-browser.vim'
 NeoBundleLazy 'wesQ3/vim-windowswap'
 " }}}
 
-call neobundle#end()
-filetype plugin indent on
-NeoBundleCheck
 " }}}
 
 " Configurations for individual plugins {{{
@@ -1420,3 +1417,8 @@ if filereadable(expand('~/.localrc/vimrc'))
   source ~/.localrc/vimrc
 endif
 " }}}
+
+" Finish config
+call neobundle#end()
+filetype plugin indent on
+NeoBundleCheck
