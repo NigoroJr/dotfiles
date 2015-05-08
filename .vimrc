@@ -361,6 +361,7 @@ if neobundle#tap('Align')
         \   ],
         \ },
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -376,15 +377,20 @@ if neobundle#tap('context_filetype.vim')
 endif
 " }}}
 " clever-f.vim {{{
-let g:clever_f_fix_key_direction = 0
-let g:clever_f_chars_match_any_signs = ''
-let g:clever_f_across_no_line = 1
+if neobundle#tap('clever-f.vim')
+  let g:clever_f_fix_key_direction = 0
+  let g:clever_f_chars_match_any_signs = ''
+  let g:clever_f_across_no_line = 1
+
+  call neobundle#untap()
+endif
 " }}}
 " disableitalic.vim {{{
 if neobundle#tap('disableitalic-vim')
   call neobundle#config({
         \ 'gui': 1,
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -412,6 +418,7 @@ if neobundle#tap('foofile.vim')
         \   ],
         \ },
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -481,7 +488,11 @@ if neobundle#tap('jedi-vim')
 endif
 " }}}
 " manpageview {{{
-let g:manpageview_winopen = 'vsplit='
+if neobundle#tap('manpageview')
+  let g:manpageview_winopen = 'vsplit='
+
+  call neobundle#untap()
+endif
 " }}}
 " mips.vim {{{
 if neobundle#tap('mips.vim')
@@ -490,6 +501,7 @@ if neobundle#tap('mips.vim')
         \   'filetypes': 'asm',
         \ },
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -621,6 +633,7 @@ if neobundle#tap('neomru.vim')
   call neobundle#config({
         \ 'depends': 'Shougo/unite.vim',
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -685,6 +698,7 @@ if neobundle#tap('open-browser.vim')
         \   'filetypes': 'markdown',
         \ },
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -695,6 +709,7 @@ if neobundle#tap('perldoc-vim')
         \   'filetypes': 'perl',
         \ },
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -705,6 +720,7 @@ if neobundle#tap('perlomni.vim')
         \   'filetypes': 'perl',
         \ },
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -745,6 +761,7 @@ if neobundle#tap('shabadou.vim')
   call neobundle#config({
         \ 'depends': 'thinca/vim-quickrun',
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -755,6 +772,7 @@ if neobundle#tap('sudo.vim')
         \   'commands': ['SudoRead', 'SudoWrite'],
         \ },
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -774,10 +792,11 @@ if neobundle#tap('vim-surround')
   let g:surround_no_insert_mappings = 1
 
   call neobundle#untap()
+
+  " Only enable some key bindings
+  nmap <Leader>sy <Plug>Ysurround
+  nmap <Leader>sd <Plug>Dsurround
 endif
-" Only enable some key bindings
-nmap <Leader>sy <Plug>Ysurround
-nmap <Leader>sd <Plug>Dsurround
 " }}}
 " TextFormat {{{
 if neobundle#tap('TextFormat')
@@ -788,6 +807,7 @@ if neobundle#tap('TextFormat')
         \   ],
         \ },
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -796,6 +816,7 @@ if neobundle#tap('unite-quickfix')
   call neobundle#config({
         \ 'depends': 'Shougo/unite.vim',
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -852,15 +873,17 @@ if neobundle#tap('vim-altr')
         \ },
         \ })
   call neobundle#untap()
+
+  nmap <Leader>a <Plug>(altr-forward)
+  nmap <Leader>A <Plug>(altr-back)
 endif
-nmap <Leader>a <Plug>(altr-forward)
-nmap <Leader>A <Plug>(altr-back)
 " }}}
 " vim-colorschemes {{{
 if neobundle#tap('vim-colorschemes')
   call neobundle#config({
         \ 'gui': 1,
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -908,6 +931,7 @@ if neobundle#tap('vim-fugitive')
         \   ],
         \ },
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -954,6 +978,7 @@ if neobundle#tap('vim-go-impl')
         \   'filetypes': 'go',
         \ },
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -962,6 +987,7 @@ if neobundle#tap('vim-hier')
   call neobundle#config({
         \ 'gui': 1,
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -1027,6 +1053,7 @@ if neobundle#tap('vim-markdown')
         \   'filetypes': 'markdown',
         \ },
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -1173,7 +1200,11 @@ if neobundle#tap('vim-ref')
 endif
 " }}}
 " vim-seek {{{
-let g:seek_ignorecase = 1
+if neobundle#tap('vim-seek')
+  let g:seek_ignorecase = 1
+
+  call neobundle#untap()
+endif
 " }}}
 " vim-snowdrop {{{
 if neobundle#tap('vim-snowdrop')
@@ -1315,6 +1346,7 @@ if neobundle#tap('vimproc.vim')
         \   'unix': 'make -f make_unix.mak',
         \ },
         \ })
+
   call neobundle#untap()
 endif
 " }}}
@@ -1368,6 +1400,8 @@ if neobundle#tap('vimshell.vim')
     let g:vimshell_prompt_expr = 'GetShortenedCWD()." > "'
     let g:vimshell_prompt_pattern = '^\f\+ > '
   endfunction
+
+  call neobundle#untap()
 endif
 
 " }}}
@@ -1390,6 +1424,7 @@ if neobundle#tap('wandbox-vim')
         \ },
         \ 'depends': ['thinca/vim-quickrun', 'Shougo/vimproc.vim'],
         \ })
+
   call neobundle#untap()
 endif
 " }}}
