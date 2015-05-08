@@ -73,6 +73,8 @@
 ;; Enable fuzzy match
 (ido-mode t)
 (setq ido-enable-flex-matching t)
+;; Auto-reload file when changed
+(global-auto-revert-mode t)
 ;; Show full path of file in modeline
 (setq-default mode-line-buffer-identification
               (list 'buffer-file-name
