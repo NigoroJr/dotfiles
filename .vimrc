@@ -235,7 +235,6 @@ NeoBundle 'ciaranm/securemodelines'
 NeoBundle 'goldfeld/vim-seek'
 NeoBundle 'mattn/disableitalic-vim'
 NeoBundle 'rhysd/clever-f.vim'
-NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/vimproc.vim'
@@ -278,6 +277,7 @@ NeoBundleLazy 'scrooloose/nerdtree'
 NeoBundleLazy 'Shougo/context_filetype.vim'
 NeoBundleLazy 'Shougo/neocomplcache-rsense.vim'
 NeoBundleLazy 'Shougo/neocomplcache.vim'
+NeoBundleLazy 'Shougo/neocomplete.vim'
 NeoBundleLazy 'Shougo/neomru.vim'
 NeoBundleLazy 'Shougo/unite.vim'
 NeoBundleLazy 'Shougo/vimfiler.vim'
@@ -562,6 +562,9 @@ endif
 " neocomplete.vim {{{
 if neobundle#tap('neocomplete.vim')
   call neobundle#config({
+        \ 'autoload': {
+        \   'insert': 1,
+        \ },
         \ 'depends': ['Shougo/vimproc.vim'],
         \ 'disabled': !NeoCompleteCompatible(),
         \ })
