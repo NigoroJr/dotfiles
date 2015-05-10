@@ -24,3 +24,9 @@
 
 ;; auto-complete-c-headers
 (add-hook 'c-mode-common-hook 'ac-c-headers-init)
+
+;; Wrap lines
+(add-hook 'text-mode-hook
+          (lambda ()
+            (turn-on-auto-fill)
+            (set-fill-column 78)))
