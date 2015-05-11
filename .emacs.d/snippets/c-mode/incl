@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# key: incl
+# name: #include "foo.h"
+# --
+#include "$1"

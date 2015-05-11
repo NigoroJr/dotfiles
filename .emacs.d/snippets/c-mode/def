@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+# key: def
+# --
+#define $1

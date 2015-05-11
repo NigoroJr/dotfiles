@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: printf
+# key: pf
+# --
+printf("${1:}\n"${2:});$0
