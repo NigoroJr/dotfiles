@@ -25,6 +25,7 @@ if s:has_version('7.3')
   set undofile
 endif
 set tabstop=4
+set softtabstop=4
 set expandtab
 set shiftwidth=4
 set shiftround
