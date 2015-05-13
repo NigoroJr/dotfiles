@@ -31,3 +31,7 @@ if has('gui_running')
 
   set iminsert=2
 endif
+
+if filereadable(expand('~/.localrc/gvimrc'))
+  source ~/.localrc/gvimrc
+end
