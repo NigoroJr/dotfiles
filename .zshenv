@@ -33,3 +33,5 @@ HISTFILE=~/.histfile
 HISTSIZE=6000000
 SAVEHIST=6000000
 WORDCHARS="*?_-.[]~=&;!#$%^(){}<>"
+# Don't trim space after completion for these chars
+ZLE_SPACE_SUFFIX_CHARS=$'|&'
