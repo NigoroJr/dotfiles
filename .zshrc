@@ -97,8 +97,10 @@ unsetopt promptcr          # Show even when no Return at the end
 # Key bindings {{{
 #############################################################################
 
-bindkey -e
 # emacs keybinding
+bindkey -e
+bindkey -M emacs 'n' down-line-or-history
+bindkey -M emacs 'p' up-line-or-history
 
 # Better history search
 autoload history-search-end
