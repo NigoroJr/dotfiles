@@ -443,21 +443,24 @@ if neobundle#tap('incsearch.vim')
   call neobundle#config({
         \ 'autoload': {
         \   'mappings': [
-        \     ['nxo', '<Plug>(incsearch-forward)'],
-        \     ['nxo', '<Plug>(incsearch-backward)'],
-        \     ['nxo', '<Plug>(incsearch-stay)'],
+        \     ['nxo', '/'],
+        \     ['nxo', '?'],
+        \     ['nxo', 'g/'],
         \   ],
+        \ 'disabled': &filetype == 'man' && has('macunix'),
         \ },
         \ })
-
-  map / <Plug>(incsearch-forward)
-  map ? <Plug>(incsearch-backward)
-  map g/ <Plug>(incsearch-stay)
 
   function! neobundle#hooks.on_source(bundle)
     let g:incsearch#consistent_n_direction = 1
     let g:incsearch#emacs_like_keymap = 1
     let g:incsearch#auto_nohlsearch = 1
+
+    " Only set mappings when sourced
+    map / <Plug>(incsearch-forward)
+    map ? <Plug>(incsearch-backward)
+    map g/ <Plug>(incsearch-stay)
+
     map n  <Plug>(incsearch-nohl-n)
     map N  <Plug>(incsearch-nohl-N)
     map *  <Plug>(incsearch-nohl-*)
