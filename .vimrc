@@ -802,11 +802,11 @@ if neobundle#tap('vim-surround')
   let g:surround_no_mappings = 1
   let g:surround_no_insert_mappings = 1
 
-  call neobundle#untap()
-
   " Only enable some key bindings
   nmap <Leader>sy <Plug>Ysurround
   nmap <Leader>sd <Plug>Dsurround
+
+  call neobundle#untap()
 endif
 " }}}
 " TextFormat {{{
@@ -883,10 +883,11 @@ if neobundle#tap('vim-altr')
         \   ],
         \ },
         \ })
-  call neobundle#untap()
 
   nmap <Leader>a <Plug>(altr-forward)
   nmap <Leader>A <Plug>(altr-back)
+
+  call neobundle#untap()
 endif
 " }}}
 " vim-colorschemes {{{
