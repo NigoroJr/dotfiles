@@ -68,6 +68,7 @@
         color-theme-solarized
         emacs-async
         emacs-plsense
+        exec-path-from-shell
         helm
         helm-ag
         helm-descbinds
