@@ -514,7 +514,7 @@ endif
 if neobundle#tap('neocomplcache.vim')
   call neobundle#config({
         \ 'autoload': {
-        \   'insert': 1,
+        \   'insert': !NeoCompleteCompatible(),
         \ },
         \ 'depends': 'Shougo/vimproc.vim',
         \ 'disabled': NeoCompleteCompatible(),
@@ -571,7 +571,7 @@ endif
 if neobundle#tap('neocomplete.vim')
   call neobundle#config({
         \ 'autoload': {
-        \   'insert': 1,
+        \   'insert': NeoCompleteCompatible(),
         \ },
         \ 'depends': ['Shougo/vimproc.vim'],
         \ 'disabled': !NeoCompleteCompatible(),
