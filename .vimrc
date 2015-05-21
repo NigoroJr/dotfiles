@@ -294,6 +294,7 @@ NeoBundleLazy 'tpope/vim-markdown'
 NeoBundleLazy 'tpope/vim-rails'
 NeoBundleLazy 'tpope/vim-surround'
 NeoBundleLazy 'tyru/open-browser.vim'
+NeoBundleLazy 'tyru/restart.vim'
 NeoBundleLazy 'wesQ3/vim-windowswap'
 " }}}
 
@@ -749,6 +750,24 @@ if neobundle#tap('previm')
       let g:previm_custom_css_path = expand('~/Dropbox/Vim/previm.css')
     endif
   endfunction
+
+  call neobundle#untap()
+endif
+" }}}
+" restart.vim {{{
+if neobundle#tap('restart.vim')
+  call neobundle#config({
+        \ 'autoload': {
+        \   'commands': [
+        \       'Restart',
+        \       'Restart!',
+        \   ],
+        \ },
+        \ 'gui': 1,
+        \ })
+
+  let g:restart_sessionoptions
+        \ = 'blank, buffers, curdir, folds, help, localoptions, tabpages'
 
   call neobundle#untap()
 endif
