@@ -98,6 +98,14 @@ nnoremap <Leader>cd :cd %:h<CR>
 " Q to quit (overrides 'Q', but this is the same as 'gq')
 nmap <silent> Q :q<CR>
 
+" tab key bindings
+nnoremap <silent> <Leader>ts :tabs<CR>
+nnoremap <silent> <Leader>tn :tabnext<CR>
+nnoremap <silent> <Leader>tp :tabprevious<CR>
+nnoremap <silent> <Leader>tf :tabfirst<CR>
+nnoremap <silent> <Leader>tl :tablast<CR>
+nnoremap <silent> <Leader>tw :tabnew<CR>
+
 " Toggle spell check {{{
 nmap <silent> <Leader>ss :call ToggleSpellcheck()<CR>
 function! ToggleSpellcheck()
