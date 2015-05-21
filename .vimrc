@@ -45,6 +45,7 @@ set splitbelow
 set modeline
 set completeopt-=preview
 set autoread
+set showtabline=0
 " blowfish2 requires Vim 7.4.399. Encryption available after Vim 7.3
 if s:has_version('7.3')
   execute 'set cryptmethod='.(s:has_version('7.4.399') ? 'blowfish2' : 'blowfish')
@@ -767,7 +768,8 @@ if neobundle#tap('restart.vim')
         \ })
 
   let g:restart_sessionoptions
-        \ = 'blank, buffers, curdir, folds, help, localoptions, tabpages'
+        \ = 'blank,buffers,curdir,folds,help,localoptions,tabpages'
+  let g:restart_no_default_menus = 1
 
   call neobundle#untap()
 endif
