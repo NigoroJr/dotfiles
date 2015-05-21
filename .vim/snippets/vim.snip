@@ -29,3 +29,10 @@ options     head
 		${0}
 		call neobundle#untap()
 	endif
+
+snippet     neobundle_config
+abbr        call neobundle#config
+options     head
+  call neobundle#config({
+        \ '${1:autoload}': ${2},
+        \ })
