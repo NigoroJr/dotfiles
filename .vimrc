@@ -545,7 +545,8 @@ endif
 " }}}
 " neobundle.vim {{{
 if neobundle#tap('neobundle.vim')
-  let g:neobundle#install_process_timeout = 1500
+  let g:neobundle#types#git#enable_submodule = 1
+  "let g:neobundle#install_process_timeout = 1500
 
   call neobundle#untap()
 endif
