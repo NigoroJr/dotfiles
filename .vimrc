@@ -64,7 +64,7 @@ autocmd FileType go set noexpandtab
 autocmd FileType man set nonumber noexpandtab shiftwidth=8 tabstop=8
 autocmd BufNewFile,BufRead *.tex set filetype=tex
 " }}}
-" General keybindings   {{{
+" General key bindings   {{{
 " Move by physical/logical line
 nnoremap gj j
 nnoremap gk k
@@ -74,7 +74,7 @@ nnoremap k gk
 " More powerful ex command history
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
-" Shell keybindings in ex mode
+" Shell key bindings in ex mode
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 " NOTE: Meta keys do not work in terminal Vim
@@ -89,7 +89,7 @@ nnoremap <Leader>xs :x sudo:%<CR>
 au BufWriteCmd  sudo:*,sudo:*/* SudoWrite <afile>
 au FileWriteCmd sudo:*,sudo:*/* SudoWrite <afile>
 
-" Reset hilight search by pressing Escape 2 times
+" Reset highlight search by pressing Escape 2 times
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 
 " Move pwd to directory of buffer
@@ -98,7 +98,7 @@ nnoremap <Leader>cd :cd %:h<CR>
 " Q to quit (overrides 'Q', but this is the same as 'gq')
 nmap <silent> Q :q<CR>
 
-" tab key bindings
+" Key bindings for tab operations
 nnoremap <silent> <Leader>ts :tabs<CR>
 nnoremap <silent> <Leader>tn :tabnext<CR>
 nnoremap <silent> <Leader>tp :tabprevious<CR>
