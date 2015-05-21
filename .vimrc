@@ -237,8 +237,8 @@ endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 
 " NeoBundleFetch {{{
-NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundleFetch 'davidhalter/jedi'
+NeoBundleFetch 'Shougo/neobundle.vim'
 " }}}
 " NeoBundle {{{
 NeoBundle 'ciaranm/securemodelines'
@@ -293,6 +293,7 @@ NeoBundleLazy 'Shougo/neomru.vim'
 NeoBundleLazy 'Shougo/unite.vim'
 NeoBundleLazy 'Shougo/vimfiler.vim'
 NeoBundleLazy 'Shougo/vimshell.vim'
+NeoBundleLazy 'starcraftman/vim-eclim'
 NeoBundleLazy 'sudo.vim'
 NeoBundleLazy 'supermomonga/neocomplete-rsense.vim'
 NeoBundleLazy 'TextFormat'
@@ -415,6 +416,19 @@ if neobundle#tap('disableitalic-vim')
   call neobundle#untap()
 endif
 " }}}
+" vim-eclim {{{
+if neobundle#tap('vim-eclim')
+  call neobundle#config({
+        \ 'autoload': {
+        \   'filetypes': ['java'],
+        \ },
+        \ })
+
+  let g:EclimCompletionMethod = 'omnifunc'
+
+  call neobundle#untap()
+endif
+" }}}
 " foofile.vim {{{
 if neobundle#tap('foofile.vim')
   call neobundle#config({
@@ -529,6 +543,13 @@ if neobundle#tap('mips.vim')
   call neobundle#untap()
 endif
 " }}}
+" neobundle.vim {{{
+if neobundle#tap('neobundle.vim')
+  let g:neobundle#install_process_timeout = 1500
+
+  call neobundle#untap()
+endif
+" }}}
 " neocomplcache.vim {{{
 if neobundle#tap('neocomplcache.vim')
   call neobundle#config({
@@ -561,6 +582,8 @@ if neobundle#tap('neocomplcache.vim')
           \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
     let g:neocomplcache#force_omni_input_patterns.go =
           \ '[^.[:digit:] *\t]\.\w*'
+    let g:neocomplcache#force_omni_input_patterns.java =
+          \ '\%(\h\w*\|)\)\.\w*'
     let g:neocomplcache#force_omni_input_patterns.python =
           \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
     " Only if RSense is in use
@@ -621,6 +644,10 @@ if neobundle#tap('neocomplete.vim')
     " Go
     let g:neocomplete#force_omni_input_patterns.go =
           \ '[^.[:digit:] *\t]\.\w*'
+
+    " Java
+    let g:neocomplete#force_omni_input_patterns.java =
+          \ '\%(\h\w*\|)\)\.\w*'
 
     " Python
     let g:neocomplete#force_omni_input_patterns.python =
