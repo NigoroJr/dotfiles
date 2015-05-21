@@ -242,9 +242,6 @@ NeoBundleFetch 'davidhalter/jedi'
 " }}}
 " NeoBundle {{{
 NeoBundle 'ciaranm/securemodelines'
-NeoBundle 'goldfeld/vim-seek'
-NeoBundle 'mattn/disableitalic-vim'
-NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/vimproc.vim'
@@ -261,6 +258,7 @@ NeoBundleLazy 'dkasak/manpageview'
 NeoBundleLazy 'fatih/vim-go'
 NeoBundleLazy 'flazz/vim-colorschemes'
 NeoBundleLazy 'gcmt/wildfire.vim'
+NeoBundleLazy 'goldfeld/vim-seek'
 NeoBundleLazy 'haya14busa/incsearch.vim'
 NeoBundleLazy 'hotchpotch/perldoc-vim'
 NeoBundleLazy 'jceb/vim-hier'
@@ -271,6 +269,7 @@ NeoBundleLazy 'lambdalisue/vim-gista'
 NeoBundleLazy 'lervag/vim-latex'
 "NeoBundleLazy 'marcus/rsense'
 NeoBundleLazy 'NigoroJr/rsense', 'fix_E670'
+NeoBundleLazy 'mattn/disableitalic-vim'
 NeoBundleLazy 'mattn/gist-vim'
 NeoBundleLazy 'mattn/webapi-vim'
 NeoBundleLazy 'mips.vim'
@@ -282,6 +281,7 @@ NeoBundleLazy 'osyo-manga/vim-precious'
 NeoBundleLazy 'osyo-manga/vim-snowdrop'
 NeoBundleLazy 'osyo-manga/vim-stargate'
 NeoBundleLazy 'osyo-manga/vim-watchdogs'
+NeoBundleLazy 'rhysd/clever-f.vim'
 NeoBundleLazy 'rhysd/vim-go-impl'
 NeoBundleLazy 'rhysd/wandbox-vim'
 NeoBundleLazy 'scrooloose/nerdtree'
@@ -390,6 +390,12 @@ endif
 " }}}
 " clever-f.vim {{{
 if neobundle#tap('clever-f.vim')
+  call neobundle#config({
+        \ 'autoload': {
+        \   'mappings': ['f', 'F', 't', 'T'],
+        \ },
+        \ })
+
   let g:clever_f_fix_key_direction = 0
   let g:clever_f_chars_match_any_signs = ''
   let g:clever_f_across_no_line = 1
@@ -400,6 +406,9 @@ endif
 " disableitalic.vim {{{
 if neobundle#tap('disableitalic-vim')
   call neobundle#config({
+        \ 'autoload': {
+        \   'commands': 'DisableItalic',
+        \ },
         \ 'gui': 1,
         \ })
 
@@ -1242,6 +1251,12 @@ endif
 " }}}
 " vim-seek {{{
 if neobundle#tap('vim-seek')
+  call neobundle#config({
+        \ 'autoload': {
+        \   'mappings': ['s', 'S'],
+        \ },
+        \ })
+
   let g:seek_ignorecase = 1
 
   call neobundle#untap()
