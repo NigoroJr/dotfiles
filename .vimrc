@@ -1223,7 +1223,20 @@ if neobundle#tap('vim-snowdrop')
   call neobundle#config({
         \ 'autoload': {
         \   'filetypes': 'cpp',
+        \   'commands': [
+        \       'SnowdropClearLogs',
+        \       'SnowdropEchoClangVersion',
+        \       'SnowdropEchoIncludes',
+        \       'SnowdropEchoResultTypeof',
+        \       'SnowdropEchoTypeof',
+        \       'SnowdropErrorCheck',
+        \       'SnowdropFixit',
+        \       'SnowdropGotoDefinition',
+        \       'SnowdropLogs',
+        \       'SnowdropVerify',
+        \   ],
         \ },
+        \ 'disabled': !has('python'),
         \ })
 
   function! neobundle#hooks.on_source(bundle)
