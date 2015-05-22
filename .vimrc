@@ -1410,6 +1410,7 @@ if neobundle#tap('vimfiler.vim')
         \     },
         \   ],
         \ },
+        \ 'explorer': 1,
         \ })
 
   nnoremap <silent> <Leader>f :VimFilerBufferDir -status<CR>
