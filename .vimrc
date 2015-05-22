@@ -200,8 +200,7 @@ augroup END
 " Whether neocomplete.vim can be run on Vim {{{
 function! NeoCompleteCompatible()
   " Vim must be compiled with lua interface AND version larger than 7.3.855
-  return has('lua') && (v:version > 703 ||
-        \ (v:version == 703 && has('patch855')))
+  return has('lua') && s:has_version('7.3.855')
 endfunction
 " }}}
 " Make scripts executable if it's a script {{{
