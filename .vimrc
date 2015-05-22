@@ -242,7 +242,6 @@ NeoBundle 'ciaranm/securemodelines'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/vimproc.vim'
-NeoBundle 'tkztmk/vim-vala'
 NeoBundle 'tomtom/tcomment_vim'
 " }}}
 " NeoBundleLazy {{{
@@ -297,6 +296,7 @@ NeoBundleLazy 'supermomonga/neocomplete-rsense.vim'
 NeoBundleLazy 'TextFormat'
 NeoBundleLazy 'thinca/vim-quickrun'
 NeoBundleLazy 'thinca/vim-ref'
+NeoBundleLazy 'tkztmk/vim-vala'
 NeoBundleLazy 'tpope/vim-fugitive'
 NeoBundleLazy 'tpope/vim-markdown'
 NeoBundleLazy 'tpope/vim-rails'
@@ -1364,6 +1364,17 @@ if neobundle#tap('vim-textobj-user')
   call neobundle#config({
         \ 'autoload': {
         \   'on_source': ['osyo-manga/vim-precious'],
+        \ },
+        \ })
+
+  call neobundle#untap()
+endif
+" }}}
+" vim-vala {{{
+if neobundle#tap('vim-vala')
+  call neobundle#config({
+        \ 'autoload': {
+        \   'filename_patterns': '\.vala$',
         \ },
         \ })
 
