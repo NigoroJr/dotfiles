@@ -926,6 +926,7 @@ if neobundle#tap('unite.vim')
   nnoremap <silent> <Leader>ul :Unite file/async -buffer-name=file -create<CR>
   nnoremap <silent> <Leader>um :Unite neomru/file -buffer-name=mru -create<CR>
   nnoremap <silent> <Leader>ug :Unite grep<CR>
+  nnoremap <silent> <Leader>ut :Unite tab:no-current<CR>
 
   function! neobundle#hooks.on_source(bundle)
     call unite#custom#profile('default', 'context', {
