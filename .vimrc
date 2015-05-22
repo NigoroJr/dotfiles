@@ -58,10 +58,10 @@ runtime macros/matchit.vim
 
 " Filetype-specific text properties {{{
 autocmd FileType text,vimshell set textwidth=0
-autocmd FileType ruby,html,eruby,vim set shiftwidth=2 tabstop=2
-autocmd FileType python,scss set shiftwidth=4 tabstop=4
+autocmd FileType ruby,html,eruby,vim set shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType python,scss set shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType go set noexpandtab
-autocmd FileType man set nonumber noexpandtab shiftwidth=8 tabstop=8
+autocmd FileType man set nonumber noexpandtab shiftwidth=8 tabstop=8 softtabstop=8
 autocmd BufNewFile,BufRead *.tex set filetype=tex
 " }}}
 " General key bindings   {{{
