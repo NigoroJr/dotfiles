@@ -137,16 +137,17 @@ if b:case_insensitive_cmd
   endfunction
 endif
 " }}}
-" Insert closing braces {{{
-fun! CloseBraces()
+" Mapping for inserting closing curly brace {{{
+function! s:closing_brace_mapping()
   if &filetype == 'vim'
     inoremap {<CR> {<CR>\<Space>}<Esc>O\<Space>
   " Don't do this for LaTeX documents
   elseif &filetype !~ 'tex\|plaintex'
     inoremap {<CR> {<CR>}<Esc>O
   endif
+  " Otherwise, no mapping is done
 endfun
-autocmd FileType * call CloseBraces()
+autocmd FileType * call <SID>closing_brace_mapping()
 " }}}
 " C++ snippets {{{
 augroup cpp-namespace
