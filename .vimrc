@@ -1308,12 +1308,6 @@ if neobundle#tap('vim-snowdrop')
         \   'commands': [
         \       'SnowdropClearLogs',
         \       'SnowdropEchoClangVersion',
-        \       'SnowdropEchoIncludes',
-        \       'SnowdropEchoResultTypeof',
-        \       'SnowdropEchoTypeof',
-        \       'SnowdropErrorCheck',
-        \       'SnowdropFixit',
-        \       'SnowdropGotoDefinition',
         \       'SnowdropLogs',
         \       'SnowdropVerify',
         \   ],
