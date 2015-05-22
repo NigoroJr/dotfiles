@@ -242,7 +242,6 @@ NeoBundle 'ciaranm/securemodelines'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/vimproc.vim'
-NeoBundle 'Shougo/vinarise.vim'
 NeoBundle 'tkztmk/vim-vala'
 NeoBundle 'tomtom/tcomment_vim'
 " }}}
@@ -291,6 +290,7 @@ NeoBundleLazy 'Shougo/unite-outline'
 NeoBundleLazy 'Shougo/unite.vim'
 NeoBundleLazy 'Shougo/vimfiler.vim'
 NeoBundleLazy 'Shougo/vimshell.vim'
+NeoBundleLazy 'Shougo/vinarise.vim'
 NeoBundleLazy 'starcraftman/vim-eclim'
 NeoBundleLazy 'sudo.vim'
 NeoBundleLazy 'supermomonga/neocomplete-rsense.vim'
@@ -1503,10 +1503,23 @@ endif
 " vinarise.vim {{{
 if neobundle#tap('vinarise.vim')
   call neobundle#config({
+        \ 'autoload': {
+        \   'commands': [
+        \       {
+        \           'name': 'Vinarise',
+        \           'complete': 'file',
+        \       },
+        \   ],
+        \ },
         \ 'vim_version': '7.3',
         \ })
 
   let g:vinarise_enable_auto_detect = 1
+
+  " Source when -b option is specified when starting Vim
+  if &binary
+    call neobundle#source('vinarise.vim')
+  end
 
   call neobundle#untap()
 endif
