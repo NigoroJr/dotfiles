@@ -790,8 +790,8 @@ if neobundle#tap('restart.vim')
   call neobundle#config({
         \ 'autoload': {
         \   'commands': [
-        \       'Restart',
-        \       'Restart!',
+        \     'Restart',
+        \     'Restart!',
         \   ],
         \ },
         \ 'gui': 1,
@@ -1318,10 +1318,10 @@ if neobundle#tap('vim-snowdrop')
         \ 'autoload': {
         \   'filetypes': 'cpp',
         \   'commands': [
-        \       'SnowdropClearLogs',
-        \       'SnowdropEchoClangVersion',
-        \       'SnowdropLogs',
-        \       'SnowdropVerify',
+        \     'SnowdropClearLogs',
+        \     'SnowdropEchoClangVersion',
+        \     'SnowdropLogs',
+        \     'SnowdropVerify',
         \   ],
         \ },
         \ 'disabled': !has('python'),
@@ -1524,10 +1524,10 @@ if neobundle#tap('vinarise.vim')
   call neobundle#config({
         \ 'autoload': {
         \   'commands': [
-        \       {
-        \           'name': 'Vinarise',
-        \           'complete': 'file',
-        \       },
+        \     {
+        \       'name': 'Vinarise',
+        \       'complete': 'file',
+        \     },
         \   ],
         \ },
         \ 'vim_version': '7.3',
