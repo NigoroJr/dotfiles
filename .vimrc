@@ -414,19 +414,6 @@ if neobundle#tap('disableitalic-vim')
   call neobundle#untap()
 endif
 " }}}
-" vim-eclim {{{
-if neobundle#tap('vim-eclim')
-  call neobundle#config({
-        \ 'autoload': {
-        \   'filetypes': ['java'],
-        \ },
-        \ })
-
-  let g:EclimCompletionMethod = 'omnifunc'
-
-  call neobundle#untap()
-endif
-" }}}
 " foofile.vim {{{
 if neobundle#tap('foofile.vim')
   call neobundle#config({
@@ -965,6 +952,19 @@ if neobundle#tap('vim-colorschemes')
   call neobundle#config({
         \ 'gui': 1,
         \ })
+
+  call neobundle#untap()
+endif
+" }}}
+" vim-eclim {{{
+if neobundle#tap('vim-eclim')
+  call neobundle#config({
+        \ 'autoload': {
+        \   'filetypes': ['java'],
+        \ },
+        \ })
+
+  let g:EclimCompletionMethod = 'omnifunc'
 
   call neobundle#untap()
 endif
