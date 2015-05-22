@@ -106,29 +106,17 @@ nnoremap <silent> <Leader>tf :tabfirst<CR>
 nnoremap <silent> <Leader>tl :tablast<CR>
 nnoremap <silent> <Leader>tw :tabnew<CR>
 
-" Toggle spell check {{{
-nmap <silent> <Leader>ss :call ToggleSpellcheck()<CR>
-function! ToggleSpellcheck()
-  silent setlocal spell!
-  if &spell == 0
-    echo 'Spellcheck OFF'
-  else
-    echo 'Spellcheck ON'
-  endif
+" Function to toggle variables and show message
+function! s:toggle(var, mes) abort
+  silent exec 'setlocal '.a:var.'!'
+  echo a:mes.' '.(eval('&'.a:var) ? 'ON' : 'OFF')
 endfunction
-" }}}
 
-" Toggle paste {{{
-nmap <silent> <Leader>sp :call TogglePaste()<CR>
-function! TogglePaste()
-  silent setlocal paste!
-  if &paste == 0
-    echo 'Paste OFF'
-  else
-    echo 'Paste ON'
-  endif
-endfunction
-" }}}
+" Toggle spell check
+nmap <silent> <Leader>ss :call <SID>toggle('spell', 'Spell')<CR>
+
+" Toggle paste
+nmap <silent> <Leader>sp :call <SID>toggle('paste', 'Paste')<CR>
 " }}}
 " Case-sensitive search, case-insensitive command completion  {{{
 let b:case_insensitive_cmd = 0
