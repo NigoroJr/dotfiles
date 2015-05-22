@@ -909,16 +909,12 @@ if neobundle#tap('unite.vim')
   call neobundle#config({
         \ 'autoload': {
         \   'commands': [
-        \     {
-        \       'name': 'Unite',
-        \       'complete': 'customlist,unite#complete#source',
-        \     },
-        \     {
-        \       'name': 'UniteWithBufferDir',
-        \       'complete': 'customlist,unite#complete#source',
-        \     },
-        \     'UniteWithCurrentDir', 'UniteWithProjectDir',
-        \     'UniteWithInputDirectory', 'UniteWithCursorWord'
+        \       'Unite',
+        \       'UniteWithBufferDir',
+        \       'UniteWithCurrentDir',
+        \       'UniteWithProjectDir',
+        \       'UniteWithInputDirectory',
+        \       'UniteWithCursorWord',
         \   ],
         \ },
         \ })
