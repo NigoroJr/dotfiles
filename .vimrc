@@ -290,6 +290,7 @@ NeoBundleLazy 'Shougo/neocomplcache-rsense.vim'
 NeoBundleLazy 'Shougo/neocomplcache.vim'
 NeoBundleLazy 'Shougo/neocomplete.vim'
 NeoBundleLazy 'Shougo/neomru.vim'
+NeoBundleLazy 'Shougo/unite-outline'
 NeoBundleLazy 'Shougo/unite.vim'
 NeoBundleLazy 'Shougo/vimfiler.vim'
 NeoBundleLazy 'Shougo/vimshell.vim'
@@ -883,6 +884,15 @@ if neobundle#tap('TextFormat')
         \     'AlignRight', 'AlignLeft'
         \   ],
         \ },
+        \ })
+
+  call neobundle#untap()
+endif
+" }}}
+" unite-outline {{{
+if neobundle#tap('unite-outline')
+  call neobundle#config({
+        \ 'depends': 'Shougo/unite.vim',
         \ })
 
   call neobundle#untap()
