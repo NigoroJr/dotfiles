@@ -904,8 +904,22 @@ if neobundle#tap('unite.vim')
         \       'name': 'UniteWithBufferDir',
         \       'complete': 'customlist,unite#complete#source',
         \     },
-        \     'UniteWithCurrentDir', 'UniteWithProjectDir',
-        \     'UniteWithInputDirectory', 'UniteWithCursorWord'
+        \     {
+        \       'name': 'UniteWithCurrentDir',
+        \       'complete': 'customlist,unite#complete#source',
+        \     },
+        \     {
+        \       'name': 'UniteWithProjectDir',
+        \       'complete': 'customlist,unite#complete#source',
+        \     },
+        \     {
+        \       'name': 'UniteWithInputDirectory',
+        \       'complete': 'customlist,unite#complete#source',
+        \     },
+        \     {
+        \       'name': 'UniteWithCursorWord',
+        \       'complete': 'customlist,unite#complete#source',
+        \     },
         \   ],
         \ },
         \ })
