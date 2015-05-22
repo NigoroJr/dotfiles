@@ -1437,8 +1437,8 @@ if neobundle#tap('vimfiler.vim')
     " vim-rails maps <Leader>uf to file_rec/async:!
     if !neobundle#is_sourced('vim-rails')
       " Otherwise override ':Unite file_rec/async' if in vimfiler.vim
-      autocmd FileType vimfiler nmap <silent> <Leader>uf :UniteWithBufferDir file_rec/async<CR>
-      autocmd FileType vimfiler nmap <silent> <Leader>ul :UniteWithBufferDir file/async<CR>
+      autocmd FileType vimfiler nmap <buffer> <silent> <Leader>uf :UniteWithBufferDir file_rec/async<CR>
+      autocmd FileType vimfiler nmap <buffer> <silent> <Leader>ul :UniteWithBufferDir file/async<CR>
     endif
 
     " Disable netrw.vim
