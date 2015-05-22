@@ -99,6 +99,12 @@ nnoremap <Leader>cd :cd %:h<CR>
 nmap <silent> Q :q<CR>
 
 " Key bindings for tab operations
+" Go to specefic tab
+function! s:goto_tab() abort
+  let tab_num = nr2char(getchar())
+  silent exec ':tabnext '.tab_num
+endfunction
+nnoremap <silent> <Leader>tg :call <SID>goto_tab()<CR>
 nnoremap <silent> <Leader>ts :tabs<CR>
 nnoremap <silent> <Leader>tn :tabnext<CR>
 nnoremap <silent> <Leader>tp :tabprevious<CR>
