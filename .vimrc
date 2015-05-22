@@ -241,7 +241,6 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'ciaranm/securemodelines'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/vimproc.vim'
 NeoBundle 'tomtom/tcomment_vim'
 " }}}
 " NeoBundleLazy {{{
@@ -288,6 +287,7 @@ NeoBundleLazy 'Shougo/neomru.vim'
 NeoBundleLazy 'Shougo/unite-outline'
 NeoBundleLazy 'Shougo/unite.vim'
 NeoBundleLazy 'Shougo/vimfiler.vim'
+NeoBundleLazy 'Shougo/vimproc.vim'
 NeoBundleLazy 'Shougo/vimshell.vim'
 NeoBundleLazy 'Shougo/vinarise.vim'
 NeoBundleLazy 'starcraftman/vim-eclim'
@@ -530,6 +530,10 @@ endif
 " }}}
 " neobundle.vim {{{
 if neobundle#tap('neobundle.vim')
+  call neobundle#config({
+        \ 'depends': 'Shougo/vimproc.vim',
+        \ })
+
   let g:neobundle#types#git#enable_submodule = 1
   "let g:neobundle#install_process_timeout = 1500
 
@@ -894,6 +898,7 @@ endif
 " unite.vim {{{
 if neobundle#tap('unite.vim')
   call neobundle#config({
+        \ 'depends': ['Shougo/vimproc.vim'],
         \ 'autoload': {
         \   'commands': [
         \     {
