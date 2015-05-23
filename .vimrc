@@ -269,6 +269,7 @@ NeoBundleLazy 'mattn/webapi-vim'
 NeoBundleLazy 'mips.vim'
 NeoBundleLazy 'NigoroJr/foofile.vim'
 NeoBundleLazy 'osyo-manga/shabadou.vim'
+NeoBundleLazy 'osyo-manga/unite-boost-online-doc'
 NeoBundleLazy 'osyo-manga/unite-quickfix'
 NeoBundleLazy 'osyo-manga/vim-marching'
 NeoBundleLazy 'osyo-manga/vim-precious'
@@ -872,6 +873,22 @@ if neobundle#tap('TextFormat')
         \     'AlignRight', 'AlignLeft'
         \   ],
         \ },
+        \ })
+
+  call neobundle#untap()
+endif
+" }}}
+" unite-boost-online-doc {{{
+if neobundle#tap('unite-boost-online-doc')
+  call neobundle#config({
+        \ 'autoload': {
+        \   'filetypes': 'cpp',
+        \ },
+        \ 'depends': [
+        \   'Shougo/unite.vim',
+        \   'tyru/open-browser.vim',
+        \   'mattn/webapi-vim',
+        \ ],
         \ })
 
   call neobundle#untap()
