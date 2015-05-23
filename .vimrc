@@ -252,6 +252,7 @@ NeoBundleLazy 'dkasak/manpageview'
 NeoBundleLazy 'fatih/vim-go'
 NeoBundleLazy 'flazz/vim-colorschemes'
 NeoBundleLazy 'gcmt/wildfire.vim'
+NeoBundleLazy 'godlygeek/tabular'
 NeoBundleLazy 'goldfeld/vim-seek'
 NeoBundleLazy 'haya14busa/incsearch.vim'
 NeoBundleLazy 'hotchpotch/perldoc-vim'
@@ -875,6 +876,17 @@ if neobundle#tap('vim-surround')
   call neobundle#untap()
 endif
 " }}}
+" tabular {{{
+if neobundle#tap('tabular')
+  call neobundle#config({
+        \ 'autoload': {
+        \   'commands': ['Tab', 'Tabularize'],
+        \ },
+        \ })
+
+  call neobundle#untap()
+endif
+" }}}
 " TextFormat {{{
 if neobundle#tap('TextFormat')
   call neobundle#config({
@@ -1184,6 +1196,7 @@ if neobundle#tap('vim-markdown')
         \ 'autoload': {
         \   'filetypes': 'markdown',
         \ },
+        \ 'depends': 'godlygeek/tabular',
         \ })
 
   call neobundle#untap()
