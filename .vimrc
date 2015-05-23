@@ -266,6 +266,7 @@ NeoBundleLazy 'NigoroJr/rsense', 'fix_E670'
 NeoBundleLazy 'mattn/disableitalic-vim'
 NeoBundleLazy 'mattn/gist-vim'
 NeoBundleLazy 'mattn/webapi-vim'
+NeoBundleLazy 'mattn/quickrunex-vim'
 NeoBundleLazy 'mips.vim'
 NeoBundleLazy 'NigoroJr/foofile.vim'
 NeoBundleLazy 'osyo-manga/shabadou.vim'
@@ -786,6 +787,15 @@ if neobundle#tap('previm')
       let g:previm_custom_css_path = expand('~/Dropbox/Vim/previm.css')
     endif
   endfunction
+
+  call neobundle#untap()
+endif
+" }}}
+" quickrunex-vim {{{
+if neobundle#tap('quickrunex-vim')
+  call neobundle#config({
+        \ 'depends': 'thinca/vim-quickrun',
+        \ })
 
   call neobundle#untap()
 endif
