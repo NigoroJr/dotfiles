@@ -743,7 +743,6 @@ if neobundle#tap('open-browser.vim')
   call neobundle#config({
         \ 'autoload': {
         \   'commands': 'OpenBrowser',
-        \   'filetypes': 'markdown',
         \ },
         \ })
 
@@ -779,6 +778,7 @@ if neobundle#tap('previm')
         \   'commands': 'PrevimOpen',
         \   'filetypes': 'markdown',
         \ },
+        \ 'depends': 'tyru/open-browser.vim',
         \ })
 
   function! neobundle#hooks.on_source(bundle)
@@ -1196,6 +1196,10 @@ if neobundle#tap('vim-markdown')
         \ },
         \ 'depends': 'godlygeek/tabular',
         \ })
+
+  function! neobundle#hooks.on_source(bundle)
+    let g:vim_markdown_no_default_key_mappings = 1
+  endfunction
 
   call neobundle#untap()
 endif
