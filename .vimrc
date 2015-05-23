@@ -381,11 +381,9 @@ endif
 " }}}
 " context_filetype.vim {{{
 if neobundle#tap('context_filetype.vim')
-  call neobundle#config({
-        \ 'autoload': {
-        \   'on_source': ['Shougo/neocomplete.vim'],
-        \ },
-        \ })
+  function! neobundle#hooks.on_source(bundle)
+    let g:context_filetype#search_offset = 150
+  endfunction
 
   call neobundle#untap()
 endif
@@ -1206,7 +1204,11 @@ endif
 if neobundle#tap('vim-precious')
   call neobundle#config({
         \ 'autoload': {
-        \   'on_source': ['context_filetype.vim'],
+        \   'depends': [
+        \     'Shougo/context_filetype.vim',
+        \     'vim-textobj-user',
+        \     'thinca/vim-quickrun',
+        \ ],
         \ },
         \ })
 
@@ -1406,11 +1408,6 @@ endif
 " }}}
 " vim-textobj-user {{{
 if neobundle#tap('vim-textobj-user')
-  call neobundle#config({
-        \ 'autoload': {
-        \   'on_source': ['osyo-manga/vim-precious'],
-        \ },
-        \ })
 
   call neobundle#untap()
 endif
