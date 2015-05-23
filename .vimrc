@@ -1018,13 +1018,17 @@ endif
 " }}}
 " vim-eclim {{{
 if neobundle#tap('vim-eclim')
+  " Disable vim-eclim when no eclimd is running
   call neobundle#config({
         \ 'autoload': {
         \   'filetypes': ['java'],
         \ },
+        \ 'disabled': !filereadable(expand('~/.eclim/.eclimd_instances')),
         \ })
 
-  let g:EclimCompletionMethod = 'omnifunc'
+  function! neobundle#hooks.on_source(bundle)
+    let g:EclimCompletionMethod = 'omnifunc'
+  endfunction
 
   call neobundle#untap()
 endif
