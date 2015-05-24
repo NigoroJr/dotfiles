@@ -274,6 +274,7 @@ NeoBundleLazy 'mattn/webapi-vim'
 NeoBundleLazy 'mattn/quickrunex-vim'
 NeoBundleLazy 'mips.vim'
 NeoBundleLazy 'NigoroJr/foofile.vim'
+NeoBundleLazy 'NigoroJr/unite-matcher-hide-hidden-directories'
 NeoBundleLazy 'osyo-manga/shabadou.vim'
 NeoBundleLazy 'osyo-manga/unite-boost-online-doc'
 NeoBundleLazy 'osyo-manga/unite-quickfix'
@@ -921,6 +922,17 @@ if neobundle#tap('unite-boost-online-doc')
   call neobundle#untap()
 endif
 " }}}
+" unite-matcher-hide-hidden-directories {{{
+if neobundle#tap('unite-matcher-hide-hidden-directories')
+  call neobundle#config({
+        \ 'depends': 'Shougo/unite.vim',
+        \ 'autoload': {
+        \   'on_source': 'unite.vim',
+        \ },
+        \ })
+  call neobundle#untap()
+endif
+" }}}
 " unite-outline {{{
 if neobundle#tap('unite-outline')
   call neobundle#config({
@@ -974,12 +986,15 @@ if neobundle#tap('unite.vim')
         \ })
 
   nnoremap <Leader>uu :Unite<Space>
-  nnoremap <silent> <Leader>ur :Unite register -buffer-name=register<CR>
-  nnoremap <silent> <Leader>uq :Unite -horizontal -no-quit quickfix<CR>
-  nnoremap <silent> <Leader>uf :Unite file_rec/async -buffer-name=file -create<CR>
-  nnoremap <silent> <Leader>ul :Unite file/async -buffer-name=file -create<CR>
+  nnoremap <Leader>ud :UniteWithBufferDir<Space>
+  nnoremap <Leader>ug :Unite grep:
+  nnoremap <silent> <Leader>ub :Unite buffer<CR>
+  nnoremap <silent> <Leader>uc :Unite command<CR>
+  nnoremap <silent> <Leader>uf :Unite file_rec/async<CR>
+  nnoremap <silent> <Leader>ul :Unite file/async<CR>
   nnoremap <silent> <Leader>um :Unite neomru/file -buffer-name=mru -create<CR>
-  nnoremap <silent> <Leader>ug :Unite grep<CR>
+  nnoremap <silent> <Leader>uq :Unite quickfix -horizontal -no-quit<CR>
+  nnoremap <silent> <Leader>ur :Unite register -buffer-name=register<CR>
   nnoremap <silent> <Leader>ut :Unite tab:no-current<CR>
 
   function! neobundle#hooks.on_source(bundle)
@@ -987,9 +1002,35 @@ if neobundle#tap('unite.vim')
           \ 'start_insert': 1,
           \ 'direction': 'botright',
           \ 'prompt_direction': 'top',
+          \ 'auto_resize': 1,
           \ })
 
+    call unite#custom#profile('file/async,file_rec/async', 'context', {
+          \ 'profile_name': 'files',
+          \ 'buffer_name': 'file',
+          \ 'create': 1,
+          \ })
+
+    call unite#custom#profile('command', 'context', {
+          \ 'ignorecase': 1,
+          \ })
+
+    call unite#custom#source('file_rec/async',
+          \ 'matchers', [
+          \   'matcher_hide_hidden_files',
+          \   'matcher_hide_hidden_directories',
+          \   'converter_relative_word',
+          \   ])
+
+    let g:unite_source_alias_aliases = {
+          \ 'fra': {
+          \   'source': 'file_rec/async',
+          \ },
+          \ }
+
     autocmd FileType unite imap <silent> <buffer> <C-w> <Plug>(unite_delete_backward_path)
+    " helm-like preview
+    autocmd FileType unite imap <silent> <buffer> <C-z> <Esc><Plug>(unite_smart_preview)i
   endfunction
 
   call neobundle#untap()
@@ -1678,4 +1719,6 @@ endif
 " Finish config
 call neobundle#end()
 filetype plugin indent on
-NeoBundleCheck
+if has('vim_starting')
+    NeoBundleCheck
+end
