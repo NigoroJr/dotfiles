@@ -684,6 +684,9 @@ endif
 if neobundle#tap('neomru.vim')
   call neobundle#config({
         \ 'depends': 'Shougo/unite.vim',
+        \ 'autoload': {
+        \   'on_source': 'unite.vim',
+        \ },
         \ })
 
   call neobundle#untap()
@@ -986,7 +989,6 @@ if neobundle#tap('unite.vim')
           \ 'prompt_direction': 'top',
           \ })
 
-    call neobundle#source('neomru.vim')
     autocmd FileType unite imap <silent> <buffer> <C-w> <Plug>(unite_delete_backward_path)
   endfunction
 
