@@ -1,3 +1,6 @@
+" Don't go further if feature size is tiny or small
+if !1 | finish | end
+
 " Setup runtimepath on start {{{
 if has('vim_starting')
   set nocompatible
