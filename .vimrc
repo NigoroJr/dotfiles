@@ -85,6 +85,7 @@ cnoremap <M-f> <S-Right>
 cnoremap <M-b> <S-Left>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
+cnoremap <C-g> <C-c>
 
 " Save as super user
 nnoremap <Leader>ws :w sudo:%<CR>
