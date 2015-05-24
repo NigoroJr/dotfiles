@@ -1212,13 +1212,41 @@ endif
 if neobundle#tap('vim-precious')
   call neobundle#config({
         \ 'autoload': {
-        \   'depends': [
-        \     'Shougo/context_filetype.vim',
-        \     'vim-textobj-user',
-        \     'thinca/vim-quickrun',
-        \ ],
+        \   'filetypes': ['html', 'xhtml', 'markdown'],
+        \   'commands': [
+        \     'PreciousSwitch',
+        \     'PreciousSetContextLocal',
+        \     'PreciousReset',
+        \   ],
         \ },
+        \ 'depends': [
+        \   'Shougo/context_filetype.vim',
+        \   'vim-textobj-user',
+        \   'thinca/vim-quickrun',
+        \ ],
         \ })
+
+  function! neobundle#hooks.on_source(bundle)
+    " Don't change the filetype because that will change the
+    " shiftwidth, tabstop, and softtabstop and leave it after exiting
+    let g:precious_enable_switchers = {
+          \ '*': {
+          \   'setfiletype': 0,
+          \ },
+          \ 'html': {
+          \   'setfiletype': 1,
+          \ },
+          \ 'xhtml': {
+          \   'setfiletype': 1,
+          \ },
+          \ }
+
+    " Only change syntax
+    augroup PreciousSyntaxChange
+      autocmd!
+      autocmd User PreciousFileType let &l:syntax = precious#context_filetype()
+    augroup END
+  endfunction
 
   call neobundle#untap()
 endif
