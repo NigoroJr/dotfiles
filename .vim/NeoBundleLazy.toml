@@ -39,9 +39,9 @@ repository = 'goldfeld/vim-seek'
 mappings = ['s', 'S']
 
 [[plugins]]
-# Has disabled in .vimrc
 repository = 'haya14busa/incsearch.vim'
 mappings = ['/', '?', 'g/']
+disabled = '&filetype == "man" && has("macunix")'
 
 [[plugins]]
 repository = 'hotchpotch/perldoc-vim'
@@ -171,7 +171,6 @@ depends = [
 ]
 
 [[plugins]]
-# Has disabled in .vimrc
 repository = 'osyo-manga/vim-snowdrop'
 filetypes = 'cpp'
 commands = [
@@ -180,6 +179,7 @@ commands = [
   'SnowdropLogs',
   'SnowdropVerify',
 ]
+disabled = '!filereadable(expand("~/.eclim/.eclimd_instances"))'
 
 [[plugins]]
 repository = 'osyo-manga/vim-stargate'
@@ -217,20 +217,22 @@ commands = 'NERDTreeFind'
 repository = 'Shougo/context_filetype.vim'
 
 [[plugins]]
-# Has disabled in .vimrc
 repository = 'Shougo/neocomplcache-rsense.vim'
 depends = ['Shougo/neocomplcache.vim', 'rsense']
 on_source = 'rsense'
+disabled = 'NeoCompleteCompatible()'
 
 [[plugins]]
-# Has disabled and autoload.insert in .vimrc
+# Has autoload.insert in .vimrc
 repository = 'Shougo/neocomplcache.vim'
 depends = 'Shougo/vimproc.vim'
+disabled = 'NeoCompleteCompatible()'
 
 [[plugins]]
-# Has disabled and autoload.insert in .vimrc
+# Has autoload.insert in .vimrc
 repository = 'Shougo/neocomplete.vim'
 depends = 'Shougo/vimproc.vim'
+disabled = '!NeoCompleteCompatible()'
 
 [[plugins]]
 repository = 'Shougo/neomru.vim'
@@ -298,19 +300,19 @@ vim_version = '7.3'
   complete = 'file'
 
 [[plugins]]
-# Has disabled in .vimrc
 repository = 'starcraftman/vim-eclim'
 filetypes = 'java'
+disabled = '!filereadable(expand("~/.eclim/.eclimd_instances"))'
 
 [[plugins]]
 repository = 'sudo.vim'
 commands = ['SudoRead', 'SudoWrite']
 
 [[plugins]]
-# Has disabled in .vimrc
 repository = 'supermomonga/neocomplete-rsense.vim'
 depends = ['Shougo/neocomplete.vim', 'rsense']
 on_source = 'rsense'
+disabled = '!NeoCompleteCompatible()'
 
 [[plugins]]
 repository = 'TextFormat'

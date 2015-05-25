@@ -278,10 +278,6 @@ endif
 " }}}
 " incsearch.vim {{{
 if neobundle#tap('incsearch.vim')
-  call neobundle#config({
-        \ 'disabled': &filetype == 'man' && has('macunix'),
-        \ })
-
   function! neobundle#hooks.on_source(bundle)
     let g:incsearch#consistent_n_direction = 1
     let g:incsearch#emacs_like_keymap = 1
@@ -330,7 +326,6 @@ if neobundle#tap('neocomplcache.vim')
         \ 'autoload': {
         \   'insert': !NeoCompleteCompatible(),
         \ },
-        \ 'disabled': NeoCompleteCompatible(),
         \ })
 
   function! neobundle#hooks.on_source(bundle)
@@ -371,10 +366,6 @@ endif
 " }}}
 " neocomplcache-rsense.vim {{{
 if neobundle#tap('neocomplcache-rsense.vim')
-  call neobundle#config({
-        \ 'disabled': NeoCompleteCompatible(),
-        \ })
-
   function! neobundle#hooks.on_source(bundle)
     let g:neocomplcache#sources#rsense#home_directory = g:rsenseHome
   endfunction
@@ -388,7 +379,6 @@ if neobundle#tap('neocomplete.vim')
         \ 'autoload': {
         \   'insert': NeoCompleteCompatible(),
         \ },
-        \ 'disabled': !NeoCompleteCompatible(),
         \ })
 
   function! neobundle#hooks.on_source(bundle)
@@ -446,10 +436,6 @@ endif
 " }}}
 " neocomplete-rsense.vim {{{
 if neobundle#tap('neocomplete-rsense.vim')
-  call neobundle#config({
-        \ 'disabled': !NeoCompleteCompatible(),
-        \ })
-
   function! neobundle#hooks.on_source(bundle)
     let g:neocomplete#sources#rsense#home_directory = g:rsenseHome
   endfunction
@@ -622,11 +608,6 @@ endif
 " }}}
 " vim-eclim {{{
 if neobundle#tap('vim-eclim')
-  " Disable vim-eclim when no eclimd is running
-  call neobundle#config({
-        \ 'disabled': !filereadable(expand('~/.eclim/.eclimd_instances')),
-        \ })
-
   function! neobundle#hooks.on_source(bundle)
     let g:EclimCompletionMethod = 'omnifunc'
   endfunction
@@ -839,10 +820,6 @@ endif
 " }}}
 " vim-snowdrop {{{
 if neobundle#tap('vim-snowdrop')
-  call neobundle#config({
-        \ 'disabled': !has('python'),
-        \ })
-
   function! neobundle#hooks.on_source(bundle)
     let g:snowdrop#libclang_directory = '/usr/lib/'
     let g:snowdrop#include_paths = {
