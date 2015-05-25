@@ -1,0 +1,380 @@
+[[plugins]]
+repository = 'Align'
+commands = ['Align', 'AlignCtrl']
+mappings = '<Plug>AM_'
+
+[[plugins]]
+repository = 'c9s/perlomni.vim'
+
+[[plugins]]
+repository = 'cespare/vim-toml'
+filename_patterns = '\.toml$'
+
+[[plugins]]
+repository = 'davidhalter/jedi-vim'
+filetypes = 'python'
+depends = 'davidhalter/jedi'
+
+[[plugins]]
+repository = 'dbext.vim'
+
+[[plugins]]
+repository = 'fatih/vim-go'
+filetypes = 'go'
+
+[[plugins]]
+repository = 'flazz/vim-colorschemes'
+gui = 1
+
+[[plugins]]
+repository = 'gcmt/wildfire.vim'
+mappings = ['<Plug>(wildfire-water)', '<Plug>(wildfire-fuel)']
+
+[[plugins]]
+repository = 'godlygeek/tabular'
+commands = ['Tab', 'Tabularize']
+
+[[plugins]]
+repository = 'goldfeld/vim-seek'
+mappings = ['s', 'S']
+
+[[plugins]]
+# Has disabled in .vimrc
+repository = 'haya14busa/incsearch.vim'
+mappings = ['/', '?', 'g/']
+
+[[plugins]]
+repository = 'hotchpotch/perldoc-vim'
+filetypes = 'perl'
+commands = 'Perldoc'
+# TODO: completion list s:PerldocComplete
+
+[[plugins]]
+repository = 'jceb/vim-hier'
+gui = 1
+
+[[plugins]]
+repository = 'kana/vim-altr'
+filetypes = ['c', 'cpp']
+mappings = ['<Plug>(altr-forward)', '<Plug>(altr-back)']
+
+[[plugins]]
+repository = 'kana/vim-textobj-user'
+
+[[plugins]]
+repository = 'kannokanno/previm'
+commands = 'PrevimOpen'
+filetypes = 'markdown'
+depends = 'tyru/open-browser.vim'
+
+[[plugins]]
+repository = 'lambdalisue/vim-gista'
+commands = 'Gista'
+unite_sources = 'gista'
+
+[[plugins]]
+repository = 'lervag/vim-latex'
+filetypes = 'tex'
+
+[[plugins]]
+#repository = 'marcus/rsense'
+repository = 'NigoroJr/rsense'
+rev = 'fix_E670'
+
+[[plugins]]
+repository = 'mattn/disableitalic-vim'
+commands = 'DisableItalic'
+gui = 1
+
+[[plugins]]
+repository = 'mattn/gist-vim'
+commands = 'Gist'
+depends = 'mattn/webapi-vim'
+
+[[plugins]]
+repository = 'mattn/webapi-vim'
+
+[[plugins]]
+repository = 'mattn/quickrunex-vim'
+depends = 'thinca/vim-quickrun'
+
+[[plugins]]
+repository = 'mips.vim'
+filetypes = 'asm'
+
+[[plugins]]
+repository = 'NigoroJr/foofile.vim'
+
+  [plugins.commands]
+  name = 'FooFile'
+  complete = 'customlist,foofile#complete'
+
+  [plugins.commands]
+  name = 'FooFileLast'
+  complete = 'customlist,foofile#complete'
+
+  [plugins.commands]
+  name = 'FooFileDelete'
+  complete = 'customlist,foofile#complete'
+
+  [plugins.commands]
+  name = 'FooFileSaveAs'
+  complete = 'file'
+
+[[plugins]]
+repository = 'NigoroJr/unite-matcher-hide-hidden-directories'
+depends = 'Shougo/unite.vim'
+on_source = 'unite.vim'
+
+[[plugins]]
+repository = 'osyo-manga/shabadou.vim'
+depends = 'thinca/vim-quickrun'
+
+[[plugins]]
+repository = 'osyo-manga/unite-boost-online-doc'
+filetypes = 'cpp'
+depends = [
+  'Shougo/unite.vim',
+  'tyru/open-browser.vim',
+  'mattn/webapi-vim',
+]
+
+[[plugins]]
+repository = 'osyo-manga/unite-quickfix'
+depends = 'Shougo/unite.vim'
+
+[[plugins]]
+repository = 'osyo-manga/vim-marching'
+depends = [
+  'Shougo/neocomplete.vim',
+  'Shougo/vimproc.vim',
+  'osyo-manga/vim-reunions',
+]
+filetypes = ['c', 'cpp']
+commands = 'MarchingBufferClearCache'
+mappings = [
+  ['ixo', '<Plug>(marching_force_start_omni_complete)']
+]
+
+[[plugins]]
+repository = 'osyo-manga/vim-precious'
+filetypes = ['html', 'xhtml', 'markdown']
+commands = [
+  'PreciousSwitch',
+  'PreciousSetContextLocal',
+  'PreciousReset',
+]
+depends = [
+  'Shougo/context_filetype.vim',
+  'vim-textobj-user',
+  'thinca/vim-quickrun',
+]
+
+[[plugins]]
+# Has disabled in .vimrc
+repository = 'osyo-manga/vim-snowdrop'
+filetypes = 'cpp'
+commands = [
+  'SnowdropClearLogs',
+  'SnowdropEchoClangVersion',
+  'SnowdropLogs',
+  'SnowdropVerify',
+]
+
+[[plugins]]
+repository = 'osyo-manga/vim-stargate'
+commands = 'StargateInclude'
+filetypes = 'cpp'
+
+[[plugins]]
+repository = 'osyo-manga/vim-watchdogs'
+filetypes = ['c', 'cpp']
+depends = ['jceb/vim-hier', 'thinca/vim-quickrun']
+gui = 1
+
+[[plugins]]
+repository = 'rhysd/clever-f.vim'
+mappings = ['f', 'F', 't', 'T']
+
+[[plugins]]
+repository = 'rhysd/vim-go-impl'
+filetypes = 'go'
+
+[[plugins]]
+repository = 'rhysd/wandbox-vim'
+commands = ['Wandbox', 'WandboxAsync']
+depends = ['thinca/vim-quickrun', 'Shougo/vimproc.vim']
+
+[[plugins]]
+repository = 'scrooloose/nerdtree'
+commands = 'NERDTreeFind'
+
+  [plugins.commands]
+  name = 'NERDTree'
+  complete = 'dir'
+
+[[plugins]]
+repository = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+# Has disabled in .vimrc
+repository = 'Shougo/neocomplcache-rsense.vim'
+depends = ['Shougo/neocomplcache.vim', 'rsense']
+on_source = 'rsense'
+
+[[plugins]]
+# Has disabled and autoload.insert in .vimrc
+repository = 'Shougo/neocomplcache.vim'
+depends = 'Shougo/vimproc.vim'
+
+[[plugins]]
+# Has disabled and autoload.insert in .vimrc
+repository = 'Shougo/neocomplete.vim'
+depends = 'Shougo/vimproc.vim'
+
+[[plugins]]
+repository = 'Shougo/neomru.vim'
+depends = 'Shougo/unite.vim'
+on_source = 'unite.vim'
+
+[[plugins]]
+repository = 'Shougo/unite-outline'
+depends = 'Shougo/unite.vim'
+
+[[plugins]]
+repository = 'Shougo/unite.vim'
+depends = 'Shougo/vimproc.vim'
+
+  [plugins.commands]
+  name = [
+    'Unite',
+    'UniteWithBufferDir',
+    'UniteWithCurrentDir',
+    'UniteWithProjectDir',
+    'UniteWithInputDirectory',
+    'UniteWithCursorWord',
+  ]
+  complete = 'customlist,unite#complete#source'
+
+[[plugins]]
+repository = 'Shougo/vimfiler.vim'
+explorer = 1
+
+  [plugins.commands]
+  name = [
+    'VimFiler',
+    'VimFilerCurrentDir',
+    'VimFilerBufferDir',
+    'VimFilerExplorer',
+  ]
+  complete = 'customlist,vimfiler#complete'
+
+[[plugins]]
+repository = 'Shougo/vimshell.vim'
+depends = 'Shougo/vimproc.vim'
+
+  [plugins.commands]
+  name = [
+    'VimShell',
+    'VimShellBufferDir',
+    'VimShellCreate',
+    'VimShellTab',
+    'VimShellPop',
+    'VimShellCurrentDir',
+    'VimShellExecute',
+    'VimShellInteractive',
+    'VimShellTerminal',
+    'VimShellSendString',
+    'VimShellSendBuffer',
+  ]
+  complete = 'customlist,vimshell#complete'
+
+[[plugins]]
+repository = 'Shougo/vinarise.vim'
+vim_version = '7.3'
+
+  [plugins.commands]
+  name = 'Vinarise'
+  complete = 'file'
+
+[[plugins]]
+# Has disabled in .vimrc
+repository = 'starcraftman/vim-eclim'
+filetypes = 'java'
+
+[[plugins]]
+repository = 'sudo.vim'
+commands = ['SudoRead', 'SudoWrite']
+
+[[plugins]]
+# Has disabled in .vimrc
+repository = 'supermomonga/neocomplete-rsense.vim'
+depends = ['Shougo/neocomplete.vim', 'rsense']
+on_source = 'rsense'
+
+[[plugins]]
+repository = 'TextFormat'
+commands = ['AlignCenter', 'AlignJustify', 'AlignRight', 'AlignLeft']
+
+[[plugins]]
+repository = 'thinca/vim-quickrun'
+depends = 'Shougo/vimproc.vim'
+mappings = '<Plug>(quickrun)'
+
+  [plugins.commands]
+  name = 'QuickRun'
+  complete = 'customlist,quickrun#complete'
+
+[[plugins]]
+repository = 'thinca/vim-ref'
+mappings = '<Plug>(ref-keyword)'
+
+  [plugins.commands]
+  name = 'Ref'
+  complete = 'customlist,ref#complete'
+
+[[plugins]]
+repository = 'tkztmk/vim-vala'
+filename_patterns = '\.vala$'
+
+[[plugins]]
+repository = 'tpope/vim-fugitive'
+augroup = 'fugitive'
+# TODO: Completions?
+commands = [
+  'Git', 'Git!', 'Gcd', 'Glcd', 'Gstatus', 'Gcommit', 'Gmerge', 'Gpull',
+  'Gpush', 'Gfetch', 'Ggrep', 'Glgrep', 'Glog', 'Gllog', 'Gedit', 'Gsplit',
+  'Gvsplit', 'Gtabedit', 'Gpedit', 'Gsplit!', 'Gvsplit!', 'Gtabedit!',
+  'Gpedit!', 'Gread', 'Gread!', 'Gwrite', 'Gwrite', 'Gwq', 'Gwq!', 'Gdiff',
+  'Gsdiff', 'Gvdiff', 'Gmove', 'Gremove', 'Gblame',
+]
+
+[[plugins]]
+repository = 'tpope/vim-markdown'
+depends = 'godlygeek/tabular'
+filetypes = 'markdown'
+
+[[plugins]]
+repository = 'tpope/vim-rails'
+filetypes = ['ruby', 'eruby', 'css', 'scss', 'html', 'javascript', 'yaml']
+
+[[plugins]]
+repository = 'tpope/vim-surround'
+mappings = ['<Plug>Ysurround', '<Plug>Dsurround']
+
+[[plugins]]
+repository = 'tyru/open-browser.vim'
+commands = 'OpenBrowser'
+
+[[plugins]]
+repository = 'tyru/restart.vim'
+commands = ['Restart', 'Restart!']
+gui = 1
+
+[[plugins]]
+repository = 'wesQ3/vim-windowswap'
+functions = [
+  'WindowSwap#MarkWindowSwap',
+  'WindowSwap#DoWindowSwap',
+  'WindowSwap#EasyWindowSwap',
+]
