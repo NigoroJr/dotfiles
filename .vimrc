@@ -597,6 +597,13 @@ if neobundle#tap('unite.vim')
           \ },
           \ }
 
+    " Use ag if available
+    if executable('ag')
+      let g:unite_source_grep_command = 'ag'
+      let g:unite_source_grep_default_opts = '--nocolor --nogroup --line-numbers '
+            \ . '--ignore ".git" --ignore ".svn" --ignore ".hg"'
+    end
+
     autocmd FileType unite imap <silent> <buffer> <C-w> <Plug>(unite_delete_backward_path)
     " helm-like preview
     autocmd FileType unite imap <silent> <buffer> <C-z> <Esc><Plug>(unite_smart_preview)i
