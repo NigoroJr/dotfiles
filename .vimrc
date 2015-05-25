@@ -229,8 +229,11 @@ autocmd BufWritePost * call s:make_executable(@%)
 " }}}
 
 " Clone neobundle.vim if not installed {{{
-if !isdirectory(expand('~/.vim/bundle/neobundle.vim'))
-  !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+if !isdirectory(expand('~/.vim/bundle/neobundle.vim')) && executable('git')
+  let url = 'https://github.com/Shougo/neobundle.vim'
+  let dest = '~/.vim/bundle/neobundle.vim'
+  let cmd = 'git clone '.url.' '.dest
+  call system(cmd)
 endif
 " }}}
 
