@@ -57,6 +57,10 @@ alias emd='emacs --daemon'
 alias emacs-kill='emacsclient -e "(kill-emacs)"'
 alias emacs-restart='emacs-kill && em'
 
+if hash nvim 2>/dev/null; then
+    alias nv='nvim'
+fi
+
 alias tm='tmux'
 
 alias g='git'
