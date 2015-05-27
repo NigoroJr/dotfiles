@@ -809,6 +809,19 @@ if neobundle#tap('vim-ref')
   call neobundle#untap()
 endif
 " }}}
+" vim-rooter {{{
+if neobundle#tap('vim-rooter')
+  nmap <Leader>cr <Plug>RooterChangeToRootDirectory
+
+  function! neobundle#hooks.on_source(bundle)
+    let g:rooter_disable_map = 1
+    let g:rooter_use_lcd = 1
+    let g:rooter_manual_only = 1
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
 " vim-seek {{{
 if neobundle#tap('vim-seek')
   function! neobundle#hooks.on_source(bundle)

@@ -4,6 +4,10 @@ commands = ['Align', 'AlignCtrl']
 mappings = '<Plug>AM_'
 
 [[plugins]]
+repository = 'airblade/vim-rooter'
+mappings = '<Plug>RooterChangeToRootDirectory'
+
+[[plugins]]
 repository = 'c9s/perlomni.vim'
 
 [[plugins]]
