@@ -54,6 +54,10 @@ commands = 'Perldoc'
 # TODO: completion list s:PerldocComplete
 
 [[plugins]]
+repository = 'artur-shaik/vim-javacomplete2'
+filetypes = 'java'
+
+[[plugins]]
 repository = 'jceb/vim-hier'
 gui = 1
 

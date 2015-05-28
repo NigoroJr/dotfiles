@@ -640,6 +640,15 @@ if neobundle#tap('vim-go')
   call neobundle#untap()
 endif
 " }}}
+" vim-javacomplete2 {{{
+if neobundle#tap('vim-javacomplete2')
+  function! neobundle#hooks.on_source(bundle)
+    autocmd FileType java set omnifunc=javacomplete#Complete
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
 " vim-latex {{{
 if neobundle#tap('vim-latex')
   function! neobundle#hooks.on_source(bundle)
