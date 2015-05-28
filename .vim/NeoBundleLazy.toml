@@ -374,7 +374,7 @@ filetypes = ['ruby', 'eruby', 'css', 'scss', 'html', 'javascript', 'yaml']
 
 [[plugins]]
 repository = 'tpope/vim-surround'
-mappings = ['<Plug>Ysurround', '<Plug>Dsurround']
+mappings = ['<Plug>Ysurround', '<Plug>Dsurround', '<Plug>Csurround']
 
 [[plugins]]
 repository = 'tyru/open-browser.vim'

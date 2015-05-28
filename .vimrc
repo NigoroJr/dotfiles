@@ -536,6 +536,7 @@ if neobundle#tap('vim-surround')
   " Only enable some key bindings
   nmap <Leader>sy <Plug>Ysurround
   nmap <Leader>sd <Plug>Dsurround
+  nmap <Leader>sc <Plug>Csurround
 
   call neobundle#untap()
 endif
