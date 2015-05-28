@@ -570,6 +570,11 @@ if neobundle#tap('unite.vim')
           \   'smartcase': 1,
           \ })
 
+    call unite#custom#profile('source/boost-online-doc',
+          \ 'context', {
+          \   'smartcase': 1,
+          \ })
+
     call unite#custom#source('file_rec/async',
           \ 'matchers', [
           \   'matcher_hide_hidden_files',
