@@ -47,3 +47,7 @@
 (ignore-errors (helm-anything-set-keys))
 (global-set-key (kbd "M-g M-n") 'helm-resume-and-next)
 (global-set-key (kbd "M-g M-p") 'helm-resume-and-previous)
+
+;;; multiple-cursors
+(global-set-key (kbd "C-M-SPC") 'mc/mark-all-dwim-or-mark-sexp)
+(global-set-key (kbd "C-x r t") 'mc/edit-lines-or-string-rectangle)

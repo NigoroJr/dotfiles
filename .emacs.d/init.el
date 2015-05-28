@@ -77,6 +77,7 @@
         init-auctex
         init-auto-complete
         init-loader
+        multiple-cursors
         popup
         rsense
         ruby-block
