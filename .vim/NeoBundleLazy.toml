@@ -8,6 +8,10 @@ repository = 'airblade/vim-rooter'
 mappings = '<Plug>RooterChangeToRootDirectory'
 
 [[plugins]]
+repository = 'ahayman/vim-nodejs-complete'
+filetypes = 'javascript'
+
+[[plugins]]
 repository = 'c9s/perlomni.vim'
 
 [[plugins]]

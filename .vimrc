@@ -356,6 +356,9 @@ if neobundle#tap('neocomplcache.vim')
           \ '\%(\h\w*\|)\)\.\w*'
     let g:neocomplcache#force_omni_input_patterns.python =
           \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+    let g:neocomplcache#force_omni_input_patterns.javascript =
+          \ '[^.[:digit:] *\t]\.\w*'
+
     " Only if RSense is in use
     if neobundle#is_sourced('rsense')
       let g:neocomplcache#force_omni_input_patterns.ruby =
@@ -416,6 +419,9 @@ if neobundle#tap('neocomplete.vim')
     " Python
     let g:neocomplete#force_omni_input_patterns.python =
           \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+
+    let g:neocomplete#force_omni_input_patterns.javascript =
+          \ '[^.[:digit:] *\t]\.\w*\|\<require('
 
     " Ruby (only if RSense is in use)
     " NOTE: Not guaranteed that rsense will be sourced before neocomplete.vim
