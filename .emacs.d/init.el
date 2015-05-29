@@ -58,7 +58,7 @@
         ac-slime
         ace-isearch
         ace-jump-mode
-        auctex
+        ;auctex
         auto-complete
         auto-complete-auctex
         auto-complete-c-headers
