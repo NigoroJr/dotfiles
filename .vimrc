@@ -97,9 +97,8 @@ au FileWriteCmd sudo:*,sudo:*/* SudoWrite <afile>
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 
 " Move pwd to directory of buffer
-nnoremap <Leader>cd :cd %:h<CR>
-nnoremap <Leader>cdc :cd %:h<CR>
-nnoremap <Leader>cdl :lcd %:h<CR>
+nnoremap <silent> <Leader>cdc :cd %:h<CR>
+nnoremap <silent> <Leader>cdl :lcd %:h<CR>
 
 " Q to quit (overrides 'Q', but this is the same as 'gq')
 nmap <silent> Q :q<CR>
@@ -834,7 +833,7 @@ endif
 " }}}
 " vim-rooter {{{
 if neobundle#tap('vim-rooter')
-  nmap <Leader>cdr <Plug>RooterChangeToRootDirectory
+  nmap <silent> <Leader>cdr <Plug>RooterChangeToRootDirectory
 
   function! neobundle#hooks.on_source(bundle)
     let g:rooter_disable_map = 1
