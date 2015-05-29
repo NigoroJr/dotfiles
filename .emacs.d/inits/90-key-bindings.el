@@ -20,34 +20,12 @@
 ;;; Insert newline above
 (define-key global-map (kbd "C-c C-o") 'insert-newline-above)
 
-;;;; visual-regexp-steroids
+;;;; Packages
+;;; visual-regexp-steroids
 (define-key global-map (kbd "C-c r") 'vr/replace)
 (define-key global-map (kbd "C-c q") 'vr/query-replace)
 (define-key global-map (kbd "C-M-r") 'vr/isearch-backward)
 (define-key global-map (kbd "C-M-s") 'vr/isearch-forward)
 
-;;;; ace-jump-mode
+;;; ace-jump-mode
 (global-set-key (kbd "C-o") 'ace-jump-char-mode)
-
-;;;; helm
-;; Use C-c h because C-x c is too dangerous (C-x C-c)
-(define-key global-map (kbd "C-c h") 'helm-command-prefix)
-(global-unset-key (kbd "C-x c"))
-
-;; Jump back and forth with C-M-p and C-M-n
-(define-key helm-map (kbd "C-M-p") 'helm-follow-action-backward)
-(define-key helm-map (kbd "C-M-n") 'helm-follow-action-forward)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-c h o") 'helm-occur)
-(global-set-key (kbd "C-c h C-r") 'helm-recentf)
-(global-set-key (kbd "C-c h C-f") 'helm-find-files)
-(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-
-;;; Replace: next-error / previous-error
-(ignore-errors (helm-anything-set-keys))
-(global-set-key (kbd "M-g M-n") 'helm-resume-and-next)
-(global-set-key (kbd "M-g M-p") 'helm-resume-and-previous)
-
-;;; multiple-cursors
-(global-set-key (kbd "C-M-SPC") 'mc/mark-all-dwim-or-mark-sexp)
-(global-set-key (kbd "C-x r t") 'mc/edit-lines-or-string-rectangle)

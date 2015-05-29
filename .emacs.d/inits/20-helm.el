@@ -61,3 +61,22 @@
   (or (helm-resume-and- "C-n")
       (call-interactively 'next-error)))
 
+;;;; Key bindings
+;; Use C-c h because C-x c is too dangerous (C-x C-c)
+(define-key global-map (kbd "C-c h") 'helm-command-prefix)
+(global-unset-key (kbd "C-x c"))
+
+;; Jump back and forth with C-M-p and C-M-n
+(define-key helm-map (kbd "C-M-p") 'helm-follow-action-backward)
+(define-key helm-map (kbd "C-M-n") 'helm-follow-action-forward)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-c h o") 'helm-occur)
+(global-set-key (kbd "C-c h C-r") 'helm-recentf)
+(global-set-key (kbd "C-c h C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+
+;;; Replace: next-error / previous-error
+(ignore-errors (helm-anything-set-keys))
+(global-set-key (kbd "M-g M-n") 'helm-resume-and-next)
+(global-set-key (kbd "M-g M-p") 'helm-resume-and-previous)
+

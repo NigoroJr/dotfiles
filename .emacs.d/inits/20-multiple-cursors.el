@@ -1,3 +1,4 @@
+;;;; multiple-cursors
 (require 'multiple-cursors)
 (defun mc/edit-lines-or-string-rectangle (s e)
   (interactive "r")
@@ -12,3 +13,7 @@
     (16 (mc/mark-all-dwim t))
     (4 (mc/mark-all-dwim nil))
     (1 (mark-sexp 1))))
+
+;;; Key bindings
+(global-set-key (kbd "C-M-SPC") 'mc/mark-all-dwim-or-mark-sexp)
+(global-set-key (kbd "C-x r t") 'mc/edit-lines-or-string-rectangle)
