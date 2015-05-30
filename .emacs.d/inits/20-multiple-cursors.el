@@ -19,7 +19,7 @@
 (global-set-key (kbd "C-M-SPC") 'mc/mark-all-dwim-or-mark-sexp)
 (global-set-key (kbd "C-x r t") 'mc/edit-lines-or-string-rectangle)
 
-(global-set-key (kbd "C-c C-m C-n") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-c C-m C-p") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-m n") 'mc/unmark-next-like-this)
-(global-set-key (kbd "C-c C-m p") 'mc/unmark-previous-like-this)P
+(global-set-key (kbd "C-c C-m n") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-c C-m p") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-m N") 'mc/unmark-next-like-this)
+(global-set-key (kbd "C-c C-m P") 'mc/unmark-previous-like-this)P
