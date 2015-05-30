@@ -1,3 +1,4 @@
+;;;; c++-mode
 ;;; 's;;' to insert 'std::' in C++
 (defun replace-last-two-with (str)
   "Replaces the last two characters (s;) with str (std::)"

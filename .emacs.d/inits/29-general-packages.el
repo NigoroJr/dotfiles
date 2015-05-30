@@ -10,7 +10,7 @@
 ;;; ace-isearch
 (global-ace-isearch-mode t)
 
-;; SLIME
+;;; SLIME
 (setq inferior-lisp-program "clisp")
 (slime-setup '(slime-fancy slime-banner))
 
