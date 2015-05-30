@@ -32,3 +32,7 @@
 (add-hook 'c-mode-hook 'add-yasnippet-ac-sources)
 ;; auto-complete-c-headers
 (add-hook 'c-mode-common-hook 'ac-c-headers-init)
+;; Go back and forth between header and source file
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (define-key c-mode-base-map (kbd "C-c a") 'ff-find-other-file)))
