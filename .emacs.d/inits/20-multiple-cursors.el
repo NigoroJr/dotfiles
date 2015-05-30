@@ -22,4 +22,4 @@
 (global-set-key (kbd "C-c C-m n") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-c C-m p") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-m N") 'mc/unmark-next-like-this)
-(global-set-key (kbd "C-c C-m P") 'mc/unmark-previous-like-this)P
+(global-set-key (kbd "C-c C-m P") 'mc/unmark-previous-like-this)
