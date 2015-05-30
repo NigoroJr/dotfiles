@@ -79,6 +79,7 @@
         init-loader
         multiple-cursors
         popup
+        projectile
         rsense
         ruby-block
         slime

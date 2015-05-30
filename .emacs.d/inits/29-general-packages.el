@@ -19,3 +19,7 @@
 
 ;;; cc-mode
 (require 'cc-mode)
+
+;;; Projectile
+(require 'projectile)
+(projectile-global-mode)
