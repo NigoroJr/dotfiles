@@ -3,7 +3,6 @@ set backspace=indent,eol,start
 set backup
 set backupdir=~/.vim/backups/
 set completeopt-=preview
-set encoding=utf-8
 set expandtab
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,sjis,cp932,euc-jp,cp20932,guess
 set foldenable
@@ -11,7 +10,6 @@ set foldmethod=marker
 set history=10000
 set hlsearch
 set modeline
-set nocompatible
 set number
 set shiftround
 set shiftwidth=4
