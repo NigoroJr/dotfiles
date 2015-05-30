@@ -131,6 +131,9 @@ nmap <silent> <Leader>sp :call <SID>toggle('paste', 'Paste')<CR>
 
 " Toggle scrollbind
 nmap <silent> <Leader>sb :call <SID>toggle('scrollbind', 'Scrollbind')<CR>
+
+" expandtab
+nmap <silent> <Leader>set :call <SID>toggle('expandtab', 'expandtab')<CR>
 " }}}
 " Case-sensitive search, case-insensitive command completion  {{{
 let b:case_insensitive_cmd = 0
