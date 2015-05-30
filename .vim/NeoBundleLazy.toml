@@ -71,6 +71,10 @@ filetypes = ['c', 'cpp']
 mappings = ['<Plug>(altr-forward)', '<Plug>(altr-back)']
 
 [[plugins]]
+repository = 'kana/vim-smartchr'
+filetypes = 'cpp'
+
+[[plugins]]
 repository = 'kana/vim-textobj-user'
 
 [[plugins]]

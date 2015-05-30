@@ -527,6 +527,23 @@ if neobundle#tap('rsense')
   call neobundle#untap()
 endif
 " }}}
+" smartchr {{{
+if neobundle#tap('vim-smartchr')
+  function! s:smartchr_cpp()
+    " Stream operators
+    inoremap <expr> > smartchr#loop('>> ', '>')
+    inoremap <expr> < smartchr#loop('<< ', '<')
+  endfunction
+
+  function! neobundle#hooks.on_post_source(bundle)
+    if exists('*s:smartchr_'.&filetype)
+      execute 'call s:smartchr_'.&filetype.'()'
+    end
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
 " surround.vim {{{
 if neobundle#tap('vim-surround')
   let g:surround_no_mappings = 1
