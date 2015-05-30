@@ -17,8 +17,7 @@
     (insert ";")))
 
 (defun smartchr-cpp ()
-  (define-key c++-mode-map (kbd ">") (smartchr '(">> " ">")))
-  (define-key c++-mode-map (kbd "<") (smartchr '("<< " "<"))))
+  (define-key c++-mode-map (kbd "@") (smartchr '("<< " ">> " "@"))))
 
 ;;; Hooks
 (add-hook 'c++-mode-hook
