@@ -15,3 +15,5 @@
           (lambda ()
             (ruby-block-mode t)))
 
+;;; Hooks
+(add-hook 'ruby-mode-hook 'add-yasnippet-ac-sources)

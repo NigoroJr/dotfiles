@@ -15,3 +15,8 @@
             (replace-last-two-with "boost::")))
     (insert ";")))
 
+;;; Hooks
+(add-hook 'c++-mode-hook
+          (lambda ()
+            (define-key c-mode-base-map (kbd ";") 'my-semicolon-expansion)))
+(add-hook 'c++-mode-hook 'add-yasnippet-ac-sources)

@@ -10,3 +10,8 @@
 ;;; plsense
 (require 'plsense)
 (plsense-config-default)
+
+;;; Hooks
+;; perl-completion
+(add-hook 'cperl-mode-hook 'perl-completion-hook)
+(add-hook 'cperl-mode-hook 'add-yasnippet-ac-sources)

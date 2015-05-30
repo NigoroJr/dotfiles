@@ -20,3 +20,15 @@
 (defun ac-c-headers-init ()
   (require 'auto-complete-c-headers)
   (add-to-list 'ac-sources 'ac-source-c-headers))
+
+;;; Hooks
+;; Enable auto-complete-clang-async in CC Mode
+(add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
+
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (define-key c-mode-base-map (kbd "RET") 'my-return-binding)
+            (define-key c-mode-base-map (kbd "C-c C-o") 'insert-newline-above)))
+(add-hook 'c-mode-hook 'add-yasnippet-ac-sources)
+;; auto-complete-c-headers
+(add-hook 'c-mode-common-hook 'ac-c-headers-init)
