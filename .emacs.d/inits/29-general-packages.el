@@ -14,3 +14,8 @@
 (setq inferior-lisp-program "clisp")
 (slime-setup '(slime-fancy slime-banner))
 
+;;; smartchr
+(require 'smartchr)
+
+;;; cc-mode
+(require 'cc-mode)

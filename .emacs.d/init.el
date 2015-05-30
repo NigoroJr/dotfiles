@@ -82,6 +82,7 @@
         rsense
         ruby-block
         slime
+        smartchr
         smartrep
         visual-regexp-steroids
         ws-butler

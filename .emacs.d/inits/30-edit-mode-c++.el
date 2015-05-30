@@ -15,8 +15,13 @@
             (replace-last-two-with "boost::")))
     (insert ";")))
 
+(defun smartchr-cpp ()
+  (define-key c++-mode-map (kbd ">") (smartchr '(">> " ">")))
+  (define-key c++-mode-map (kbd "<") (smartchr '("<< " "<"))))
+
 ;;; Hooks
 (add-hook 'c++-mode-hook
           (lambda ()
             (define-key c-mode-base-map (kbd ";") 'my-semicolon-expansion)))
 (add-hook 'c++-mode-hook 'add-yasnippet-ac-sources)
+(add-hook 'c++-mode-hook 'smartchr-cpp)
