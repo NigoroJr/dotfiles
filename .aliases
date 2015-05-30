@@ -45,6 +45,10 @@ alias gS='git status'
 # Alias for g++
 alias gpp='g++ -std=c++11'
 
+if hash clang++ 2>/dev/null; then
+    alias clpp='clang++ -std=c++11'
+fi
+
 # vi foobar.txt
 # <C-a>g instead of having to type gvim
 alias gvi='gvim'
