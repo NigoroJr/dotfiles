@@ -66,6 +66,11 @@ repository = 'jceb/vim-hier'
 gui = 1
 
 [[plugins]]
+repository = 'justmao945/vim-clang'
+filetypes = ['c', 'cpp']
+disabled = 'neobundle#is_installed("vim-marching") || !executable("clang")'
+
+[[plugins]]
 repository = 'kana/vim-altr'
 filetypes = ['c', 'cpp']
 mappings = ['<Plug>(altr-forward)', '<Plug>(altr-back)']

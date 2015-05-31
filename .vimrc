@@ -614,6 +614,17 @@ if neobundle#tap('vim-altr')
   call neobundle#untap()
 endif
 " }}}
+" vim-clang {{{
+if neobundle#tap('vim-clang')
+  function! neobundle#hooks.on_source(bundle)
+    let g:clang_cpp_options = '-std=c++11'
+    let g:clang_c_completeopt = 'longest,menuone'
+    let g:clang_cpp_completeopt = 'longest,menuone'
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
 " vim-eclim {{{
 if neobundle#tap('vim-eclim')
   function! neobundle#hooks.on_source(bundle)
