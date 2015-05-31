@@ -350,6 +350,23 @@ if neobundle#tap('neobundle.vim')
   let g:neobundle#types#git#enable_submodule = 1
   "let g:neobundle#install_process_timeout = 1500
 
+  " Smart cache clearing
+  function! s:clear_cache() abort
+    if neobundle#is_sourced('vim-marching')
+      MarchingBufferClearCache
+      let what = 'marching.vim'
+    elseif neobundle#is_sourced('rsense')
+      RSenseClear
+      let what = 'rsense'
+    else
+      NeoBundleClearCache
+      let what = 'neobundle.vim'
+    end
+    echo 'Cleared cache: '.what
+  endfunction
+
+  nmap <silent> <Leader>cc :call <SID>clear_cache()<CR>
+
   call neobundle#untap()
 endif
 " }}}
@@ -519,10 +536,6 @@ endif
 if neobundle#tap('rsense')
   function! neobundle#hooks.on_source(bundle)
     let g:rsenseUseOmniFunc = 1
-
-    " Since it does basically the same thing as :MarchingClearCache
-    " TODO: <Leader>cc for both MarchingClearCache and this?
-    nmap <silent> <Leader>mc :RSenseClear<CR>
   endfunction
 
   call neobundle#untap()
@@ -695,7 +708,6 @@ if neobundle#tap('vim-marching')
           \ }
 
     set updatetime=200
-    nmap <Leader>mc :MarchingBufferClearCache<CR>
     imap <C-x><C-o> <Plug>(marching_force_start_omni_complete)
   endfunction
 
