@@ -203,7 +203,7 @@ function! s:class_declaration()
 endfunction
 
 " Include paths
-let g:cpp_include_path = filter(
+let g:cpp_include_paths = filter(
       \ split(glob('/usr/lib/gcc/x86_64-pc-linux-gnu/*/include/*/'), '\n') +
       \ split(glob('/usr/include/boost/'), '\n') +
       \ split(glob('/usr/include/c++/*'), '\n'),
@@ -687,7 +687,7 @@ endif
 " vim-marching {{{
 if neobundle#tap('vim-marching')
   function! neobundle#hooks.on_source(bundle)
-    let g:marching_include_paths = g:cpp_include_path
+    let g:marching_include_paths = g:cpp_include_paths
     let g:marching_enable_neocomplete = 1
     let g:marching_clang_command = 'clang++'
     let g:marching#clang_command#options = {
@@ -882,7 +882,7 @@ if neobundle#tap('vim-snowdrop')
   function! neobundle#hooks.on_source(bundle)
     let g:snowdrop#libclang_directory = '/usr/lib/'
     let g:snowdrop#include_paths = {
-          \ 'cpp': g:cpp_include_path,
+          \ 'cpp': g:cpp_include_paths,
           \ }
     let g:neocomplete#sources#snowdrop#enable = 1
     let g:neocomplete#skip_auto_completion_time = ''
@@ -897,7 +897,7 @@ if neobundle#tap('vim-stargate')
 
   function! neobundle#hooks.on_source(bundle)
     let g:stargate#include_paths = {
-          \ 'cpp': g:cpp_include_path,
+          \ 'cpp': g:cpp_include_paths,
           \ }
   endfunction
 
