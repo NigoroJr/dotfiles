@@ -537,6 +537,10 @@ if neobundle#tap('unite.vim')
   nnoremap [unite]r :Unite register -buffer-name=register<CR>
   nnoremap [unite]t :Unite tab:no-current<CR>
 
+  if neobundle#is_installed('unite-outline')
+    nnoremap [unite]o :Unite outline<CR>
+  end
+
   function! neobundle#hooks.on_source(bundle)
     call unite#custom#profile('default',
           \ 'context', {
