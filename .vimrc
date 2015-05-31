@@ -273,20 +273,20 @@ end
 " }}}
 
 " Configurations for individual plugins {{{
-" context_filetype.vim {{{
-if neobundle#tap('context_filetype.vim')
-  function! neobundle#hooks.on_source(bundle)
-    let g:context_filetype#search_offset = 150
-  endfunction
-
-  call neobundle#untap()
-endif
-" }}}
 " clever-f.vim {{{
 if neobundle#tap('clever-f.vim')
   let g:clever_f_fix_key_direction = 0
   let g:clever_f_chars_match_any_signs = ''
   let g:clever_f_across_no_line = 1
+
+  call neobundle#untap()
+endif
+" }}}
+" context_filetype.vim {{{
+if neobundle#tap('context_filetype.vim')
+  function! neobundle#hooks.on_source(bundle)
+    let g:context_filetype#search_offset = 150
+  endfunction
 
   call neobundle#untap()
 endif
@@ -516,35 +516,6 @@ if neobundle#tap('rsense')
     " TODO: <Leader>cc for both MarchingClearCache and this?
     nmap <silent> <Leader>mc :RSenseClear<CR>
   endfunction
-
-  call neobundle#untap()
-endif
-" }}}
-" smartchr {{{
-if neobundle#tap('vim-smartchr')
-  function! s:smartchr_cpp()
-    " Stream operators
-    inoremap <expr> @ smartchr#loop('<< ', '>> ', '@')
-  endfunction
-
-  function! neobundle#hooks.on_post_source(bundle)
-    if exists('*s:smartchr_'.&filetype)
-      execute 'call s:smartchr_'.&filetype.'()'
-    end
-  endfunction
-
-  call neobundle#untap()
-endif
-" }}}
-" surround.vim {{{
-if neobundle#tap('vim-surround')
-  let g:surround_no_mappings = 1
-  let g:surround_no_insert_mappings = 1
-
-  " Only enable some key bindings
-  nmap <Leader>sy <Plug>Ysurround
-  nmap <Leader>sd <Plug>Dsurround
-  nmap <Leader>sc <Plug>Csurround
 
   call neobundle#untap()
 endif
@@ -869,6 +840,22 @@ if neobundle#tap('vim-seek')
   call neobundle#untap()
 endif
 " }}}
+" vim-smartchr {{{
+if neobundle#tap('vim-smartchr')
+  function! s:smartchr_cpp()
+    " Stream operators
+    inoremap <expr> @ smartchr#loop('<< ', '>> ', '@')
+  endfunction
+
+  function! neobundle#hooks.on_post_source(bundle)
+    if exists('*s:smartchr_'.&filetype)
+      execute 'call s:smartchr_'.&filetype.'()'
+    end
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
 " vim-snowdrop {{{
 if neobundle#tap('vim-snowdrop')
   function! neobundle#hooks.on_source(bundle)
@@ -892,6 +879,19 @@ if neobundle#tap('vim-stargate')
           \ 'cpp': g:marching_include_paths,
           \ }
   endfunction
+
+  call neobundle#untap()
+endif
+" }}}
+" vim-surround {{{
+if neobundle#tap('vim-surround')
+  let g:surround_no_mappings = 1
+  let g:surround_no_insert_mappings = 1
+
+  " Only enable some key bindings
+  nmap <Leader>sy <Plug>Ysurround
+  nmap <Leader>sd <Plug>Dsurround
+  nmap <Leader>sc <Plug>Csurround
 
   call neobundle#untap()
 endif
