@@ -1,17 +1,23 @@
-if exists(':NeoBundleSource')
-      \ && neobundle#is_installed('vim-colorschemes')
-  call neobundle#source('vim-colorschemes')
+if exists('*neobundle#is_installed')
+  if neobundle#is_installed('vim-colorschemes')
+    call neobundle#source('vim-colorschemes')
 
-  colorscheme molokai
-  " Other good colorschemes
-  " desert
-  " gentooish
-  " jellybeans
-  " molokai
-  " moria
-  " solarazed
-  " wombat
-  " zenburn
+    colorscheme molokai
+    " Other good colorschemes
+    " desert
+    " gentooish
+    " jellybeans
+    " molokai
+    " moria
+    " solarazed
+    " wombat
+    " zenburn
+  end
+
+  if neobundle#is_installed('disableitalic-vim')
+    call neobundle#source('disableitalic-vim')
+    DisableItalic
+  end
 endif
 
 if has('gui_running')
