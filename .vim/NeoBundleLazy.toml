@@ -172,8 +172,9 @@ depends = [
 filetypes = ['c', 'cpp']
 commands = 'MarchingBufferClearCache'
 mappings = [
-  ['ixo', '<Plug>(marching_force_start_omni_complete)']
+  ['i', '<Plug>(marching_force_start_omni_complete)']
 ]
+disabled = '!executable("clang")'
 
 [[plugins]]
 repository = 'osyo-manga/vim-monster'
