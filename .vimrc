@@ -87,6 +87,10 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-g> <C-c>
 
+" Use modifiers for substitution
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
+
 " Save as super user
 nnoremap <Leader>ws :w sudo:%<CR>
 nnoremap <Leader>xs :x sudo:%<CR>
