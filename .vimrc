@@ -134,6 +134,17 @@ nmap <silent> <Leader>sb :call <SID>toggle('scrollbind', 'Scrollbind')<CR>
 
 " expandtab
 nmap <silent> <Leader>set :call <SID>toggle('expandtab', 'expandtab')<CR>
+
+" Toggle diff
+function! s:toggle_diff() abort
+  if &diff
+    diffoff
+  else
+    diffthis
+  end
+  echo 'Diff '.(&diff ? 'ON' : 'OFF')
+endfunction
+nmap <silent> <Leader>dt :call <SID>toggle_diff()<CR>
 " }}}
 " Case-sensitive search, case-insensitive command completion  {{{
 let b:case_insensitive_cmd = 0
