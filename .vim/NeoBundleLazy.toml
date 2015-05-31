@@ -96,6 +96,9 @@ filetypes = 'tex'
 #repository = 'marcus/rsense'
 repository = 'NigoroJr/rsense'
 rev = 'fix_E670'
+filetypes = 'ruby'
+# When vim-monster can be used
+disabled = 'executable("rct-complete")'
 
 [[plugins]]
 repository = 'mattn/disableitalic-vim'
@@ -171,6 +174,12 @@ commands = 'MarchingBufferClearCache'
 mappings = [
   ['ixo', '<Plug>(marching_force_start_omni_complete)']
 ]
+
+[[plugins]]
+repository = 'osyo-manga/vim-monster'
+filetypes = 'ruby'
+depends = 'Shougo/vimproc.vim'
+disabled = '!executable("rct-complete")'
 
 [[plugins]]
 repository = 'osyo-manga/vim-precious'

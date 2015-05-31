@@ -327,6 +327,16 @@ if neobundle#tap('jedi-vim')
   call neobundle#untap()
 endif
 " }}}
+" monster.vim {{{
+if neobundle#tap('vim-monster')
+  function! neobundle#hooks.on_source(bundle)
+    let g:monster#completion#rcodetools#backend = 'async_rct_complete'
+    set updatetime=100
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
 " neobundle.vim {{{
 if neobundle#tap('neobundle.vim')
   let g:neobundle#types#git#enable_submodule = 1
@@ -364,6 +374,13 @@ if neobundle#tap('neocomplcache.vim')
           \ 'python': '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*',
           \ 'javascript': '[^.[:digit:] *\t]\.\w*\|\<require(',
           \ }
+
+    " Note: This is taking advantage of the fact that neocomplcache.vim is
+    " lazy-loaded when it goes into insert mode, thus, will be sourced after
+    " vim-rails is sourced.
+    if exists('b:rails_root')
+      call remove(g:neocomplcache#force_omni_input_patterns, 'ruby')
+    end
   endfunction
 
   call neobundle#untap()
@@ -405,6 +422,13 @@ if neobundle#tap('neocomplete.vim')
           \ 'python': '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*',
           \ 'javascript': '[^.[:digit:] *\t]\.\w*\|\<require(',
           \ }
+
+    " Note: This is taking advantage of the fact that neocomplete.vim is
+    " lazy-loaded when it goes into insert mode, thus, will be sourced after
+    " vim-rails is sourced.
+    if exists('b:rails_root')
+      call remove(g:neocomplete#force_omni_input_patterns, 'ruby')
+    end
   endfunction
 
   call neobundle#untap()
@@ -820,10 +844,17 @@ if neobundle#tap('vim-rails')
   endfunction
 
   function! neobundle#hooks.on_post_source(bundle)
-    " Use RSense only in normal Ruby codes
-    if !exists('b:rails_root') && &filetype == 'ruby' &&
-          \ neobundle#is_installed('rsense')
-      call neobundle#source('rsense')
+    " Don't overrwrite omnifunc
+    " Also, omni complete is disabled in neocomplete.vim and neocomplcache.vim
+    if exists('b:rails_root') && &filetype == 'ruby'
+      if neobundle#is_installed('rsense')
+        NeoBundleDisable rsense
+        call neobundle#config('rsense', { 'disabled': 1 })
+      end
+      if neobundle#is_installed('vim-monster')
+        NeoBundleDisable vim-monster
+        call neobundle#config('vim-monster', { 'disabled': 1 })
+      end
     endif
   endfunction
 
