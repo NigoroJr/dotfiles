@@ -195,11 +195,11 @@ function! s:class_declaration()
   let s = getline('.')[0:col('.')-1]
   if s =~# '\<class\>' ||
         \ (s =~# '\<struct\>' && s !~# '\<typedef\>')
-    return "{\<CR>};\<Esc>O"
+    return '{\<CR>};\<Esc>O'
   endif
 
   " Otherwise insert closing '}'
-  return "{\<CR>}\<Esc>O"
+  return '{\<CR>}\<Esc>O'
 endfunction
 
 " Include paths
@@ -790,7 +790,6 @@ if neobundle#tap('vim-quickrun')
 
   call neobundle#untap()
 endif
-
 " }}}
 " vim-rails {{{
 if neobundle#tap('vim-rails')
@@ -997,7 +996,6 @@ if neobundle#tap('vimshell.vim')
 
   call neobundle#untap()
 endif
-
 " }}}
 " vinarise.vim {{{
 if neobundle#tap('vinarise.vim')
