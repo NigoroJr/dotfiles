@@ -365,6 +365,11 @@ repository = 'tkztmk/vim-vala'
 filename_patterns = '\.vala$'
 
 [[plugins]]
+repository = 'tpope/vim-abolish'
+commands = ['Abolish', 'Subvert', 'S']
+mappings = 'cr'
+
+[[plugins]]
 repository = 'tpope/vim-fugitive'
 augroup = 'fugitive'
 # TODO: Completions?
