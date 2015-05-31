@@ -355,6 +355,7 @@ mappings = '<Plug>(quickrun)'
 [[plugins]]
 repository = 'thinca/vim-ref'
 mappings = '<Plug>(ref-keyword)'
+unite_sources = 'ref'
 
   [plugins.commands]
   name = 'Ref'
