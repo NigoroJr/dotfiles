@@ -485,33 +485,6 @@ if neobundle#tap('nerdtree')
   call neobundle#untap()
 endif
 " }}}
-" precious.vim {{{
-if neobundle#tap('vim-precious')
-  function! neobundle#hooks.on_source(bundle)
-    " Don't change the filetype because that will change the
-    " shiftwidth, tabstop, and softtabstop and leave it after exiting
-    let g:precious_enable_switchers = {
-          \ '*': {
-          \   'setfiletype': 0,
-          \ },
-          \ 'html': {
-          \   'setfiletype': 1,
-          \ },
-          \ 'xhtml': {
-          \   'setfiletype': 1,
-          \ },
-          \ }
-
-    " Only change syntax
-    augroup PreciousSyntaxChange
-      autocmd!
-      autocmd User PreciousFileType let &l:syntax = precious#context_filetype()
-    augroup END
-  endfunction
-
-  call neobundle#untap()
-endif
-" }}}
 " previm {{{
 if neobundle#tap('previm')
   function! neobundle#hooks.on_source(bundle)
@@ -558,33 +531,6 @@ if neobundle#tap('vim-smartchr')
     if exists('*s:smartchr_'.&filetype)
       execute 'call s:smartchr_'.&filetype.'()'
     end
-  endfunction
-
-  call neobundle#untap()
-endif
-" }}}
-" snowdrop.vim {{{
-if neobundle#tap('vim-snowdrop')
-  function! neobundle#hooks.on_source(bundle)
-    let g:snowdrop#libclang_directory = '/usr/lib/'
-    let g:snowdrop#include_paths = {
-          \ 'cpp': g:marching_include_paths,
-          \ }
-    let g:neocomplete#sources#snowdrop#enable = 1
-    let g:neocomplete#skip_auto_completion_time = ''
-  endfunction
-
-  call neobundle#untap()
-endif
-"}}}
-" stargate.vim {{{
-if neobundle#tap('vim-stargate')
-  nmap <Leader>sg :StargateInclude<Space>
-
-  function! neobundle#hooks.on_source(bundle)
-    let g:stargate#include_paths = {
-          \ 'cpp': g:marching_include_paths,
-          \ }
   endfunction
 
   call neobundle#untap()
@@ -772,6 +718,33 @@ if neobundle#tap('vim-markdown')
   call neobundle#untap()
 endif
 " }}}
+" vim-precious {{{
+if neobundle#tap('vim-precious')
+  function! neobundle#hooks.on_source(bundle)
+    " Don't change the filetype because that will change the
+    " shiftwidth, tabstop, and softtabstop and leave it after exiting
+    let g:precious_enable_switchers = {
+          \ '*': {
+          \   'setfiletype': 0,
+          \ },
+          \ 'html': {
+          \   'setfiletype': 1,
+          \ },
+          \ 'xhtml': {
+          \   'setfiletype': 1,
+          \ },
+          \ }
+
+    " Only change syntax
+    augroup PreciousSyntaxChange
+      autocmd!
+      autocmd User PreciousFileType let &l:syntax = precious#context_filetype()
+    augroup END
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
 " vim-quickrun {{{
 if neobundle#tap('vim-quickrun')
   nmap <silent> <Leader>r <Plug>(quickrun)
@@ -891,6 +864,33 @@ endif
 if neobundle#tap('vim-seek')
   function! neobundle#hooks.on_source(bundle)
     let g:seek_ignorecase = 1
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
+" vim-snowdrop {{{
+if neobundle#tap('vim-snowdrop')
+  function! neobundle#hooks.on_source(bundle)
+    let g:snowdrop#libclang_directory = '/usr/lib/'
+    let g:snowdrop#include_paths = {
+          \ 'cpp': g:marching_include_paths,
+          \ }
+    let g:neocomplete#sources#snowdrop#enable = 1
+    let g:neocomplete#skip_auto_completion_time = ''
+  endfunction
+
+  call neobundle#untap()
+endif
+"}}}
+" vim-stargate {{{
+if neobundle#tap('vim-stargate')
+  nmap <Leader>sg :StargateInclude<Space>
+
+  function! neobundle#hooks.on_source(bundle)
+    let g:stargate#include_paths = {
+          \ 'cpp': g:marching_include_paths,
+          \ }
   endfunction
 
   call neobundle#untap()
