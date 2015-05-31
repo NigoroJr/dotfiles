@@ -526,6 +526,12 @@ endif
 if neobundle#tap('rsense')
   function! neobundle#hooks.on_source(bundle)
     let g:rsenseUseOmniFunc = 1
+
+    " Generate ~/.rsense if it doesn't exist
+    if !filereadable(expand('~/.rsense'))
+      let config_rb = '~/.vim/bundle/rsense/etc/config.rb'
+      call system('ruby '.config_rb.' > ~/.rsense')
+    end
   endfunction
 
   call neobundle#untap()
