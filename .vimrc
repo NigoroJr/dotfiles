@@ -113,13 +113,15 @@ function! s:goto_tab() abort
   let tab_num = nr2char(getchar())
   silent exec ':tabnext '.tab_num
 endfunction
-nnoremap <silent> <Leader>tg :call <SID>goto_tab()<CR>
-nnoremap <silent> <Leader>ts :tabs<CR>
-nnoremap <silent> <Leader>tn :tabnext<CR>
-nnoremap <silent> <Leader>tp :tabprevious<CR>
-nnoremap <silent> <Leader>tf :tabfirst<CR>
-nnoremap <silent> <Leader>tl :tablast<CR>
-nnoremap <silent> <Leader>tw :tabnew<CR>
+nnoremap [tab] <Nop>
+nmap <Leader>t [tab]
+nnoremap <silent> [tab]g :call <SID>goto_tab()<CR>
+nnoremap <silent> [tab]s :tabs<CR>
+nnoremap <silent> [tab]n :tabnext<CR>
+nnoremap <silent> [tab]p :tabprevious<CR>
+nnoremap <silent> [tab]f :tabfirst<CR>
+nnoremap <silent> [tab]l :tablast<CR>
+nnoremap <silent> [tab]w :tabnew<CR>
 
 " Function to toggle variables and show message
 function! s:toggle(var, mes) abort
@@ -526,17 +528,20 @@ endif
 " }}}
 " unite.vim {{{
 if neobundle#tap('unite.vim')
-  nnoremap <Leader>uu :Unite<Space>
-  nnoremap <Leader>ud :UniteWithBufferDir<Space>
-  nnoremap <Leader>ug :Unite grep:
-  nnoremap <silent> <Leader>ub :Unite buffer<CR>
-  nnoremap <silent> <Leader>uc :Unite command<CR>
-  nnoremap <silent> <Leader>uf :Unite file_rec/async<CR>
-  nnoremap <silent> <Leader>ul :Unite file/async<CR>
-  nnoremap <silent> <Leader>um :Unite neomru/file -buffer-name=mru -create<CR>
-  nnoremap <silent> <Leader>uq :Unite quickfix -horizontal -no-quit<CR>
-  nnoremap <silent> <Leader>ur :Unite register -buffer-name=register<CR>
-  nnoremap <silent> <Leader>ut :Unite tab:no-current<CR>
+  nnoremap [unite] <Nop>
+  nmap <Leader>u [unite]
+  nnoremap [unite]n :Unite<Space>
+  nnoremap [unite]u :UniteWithBufferDir<Space>
+  nnoremap [unite]gg :UniteWithBufferDir grep<CR>
+  nnoremap [unite]gn :Unite grep:
+  nnoremap [unite]b :Unite buffer<CR>
+  nnoremap [unite]c :Unite command<CR>
+  nnoremap [unite]f :Unite file_rec/async<CR>
+  nnoremap [unite]l :Unite file/async<CR>
+  nnoremap [unite]m :Unite neomru/file -buffer-name=mru -create<CR>
+  nnoremap [unite]q :Unite quickfix -horizontal -no-quit<CR>
+  nnoremap [unite]r :Unite register -buffer-name=register<CR>
+  nnoremap [unite]t :Unite tab:no-current<CR>
 
   function! neobundle#hooks.on_source(bundle)
     call unite#custom#profile('default',
