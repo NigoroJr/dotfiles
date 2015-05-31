@@ -335,16 +335,6 @@ if neobundle#tap('jedi-vim')
   call neobundle#untap()
 endif
 " }}}
-" monster.vim {{{
-if neobundle#tap('vim-monster')
-  function! neobundle#hooks.on_source(bundle)
-    let g:monster#completion#rcodetools#backend = 'async_rct_complete'
-    set updatetime=100
-  endfunction
-
-  call neobundle#untap()
-endif
-" }}}
 " neobundle.vim {{{
 if neobundle#tap('neobundle.vim')
   let g:neobundle#types#git#enable_submodule = 1
@@ -718,6 +708,16 @@ endif
 if neobundle#tap('vim-markdown')
   function! neobundle#hooks.on_source(bundle)
     let g:vim_markdown_no_default_key_mappings = 1
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
+" vim-monster {{{
+if neobundle#tap('vim-monster')
+  function! neobundle#hooks.on_source(bundle)
+    let g:monster#completion#rcodetools#backend = 'async_rct_complete'
+    set updatetime=100
   endfunction
 
   call neobundle#untap()
