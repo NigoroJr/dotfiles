@@ -355,28 +355,15 @@ if neobundle#tap('neocomplcache.vim')
     inoremap <expr><C-y> neocomplcache#close_popup()
     inoremap <expr><C-g> neocomplcache#cancel_popup()
 
-    if !exists('g:neocomplcache#force_omni_input_patterns')
-      let g:neocomplcache#force_omni_input_patterns = {}
-    endif
-
-    let g:neocomplcache#force_omni_input_patterns.cpp =
-          \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-    let g:neocomplcache#force_omni_input_patterns.perl =
-          \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-    let g:neocomplcache#force_omni_input_patterns.go =
-          \ '[^.[:digit:] *\t]\.\w*'
-    let g:neocomplcache#force_omni_input_patterns.java =
-          \ '\%(\h\w*\|)\)\.\w*'
-    let g:neocomplcache#force_omni_input_patterns.python =
-          \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-    let g:neocomplcache#force_omni_input_patterns.javascript =
-          \ '[^.[:digit:] *\t]\.\w*'
-
-    " Only if RSense is in use
-    if neobundle#is_sourced('rsense')
-      let g:neocomplcache#force_omni_input_patterns.ruby =
-            \ '[^. *\t]\.\w*\|\h\w*::'
-    endif
+    let g:neocomplcache#force_omni_input_patterns = {
+          \ 'go': '[^.[:digit:] *\t]\.\w*',
+          \ 'cpp': '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*',
+          \ 'java': '\%(\h\w*\|)\)\.\w*',
+          \ 'perl': '[^. \t]->\%(\h\w*\)\?\|use.*\w*::\%(\h\w*\)\?',
+          \ 'ruby': '[^. *\t]\.\w*\|\h\w*::',
+          \ 'python': '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*',
+          \ 'javascript': '[^.[:digit:] *\t]\.\w*\|\<require(',
+          \ }
   endfunction
 
   call neobundle#untap()
@@ -409,47 +396,15 @@ if neobundle#tap('neocomplete.vim')
     let g:neocomplete#enable_smart_case = 1
     let g:neocomplete#min_keyword_length = 3
 
-    if !exists('g:neocomplete#force_omni_input_patterns')
-      let g:neocomplete#force_omni_input_patterns = {}
-    endif
-
-    let g:neocomplete#force_omni_input_patterns.cpp =
-          \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-
-    " perlomni.vim
-    let g:neocomplete#force_omni_input_patterns.perl =
-          \ '[^. \t]->\%(\h\w*\)\?\|use.*\w*::\%(\h\w*\)\?'
-          " \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-
-    " Go
-    let g:neocomplete#force_omni_input_patterns.go =
-          \ '[^.[:digit:] *\t]\.\w*'
-
-    " Java
-    let g:neocomplete#force_omni_input_patterns.java =
-          \ '\%(\h\w*\|)\)\.\w*'
-
-    " Python
-    let g:neocomplete#force_omni_input_patterns.python =
-          \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-
-    let g:neocomplete#force_omni_input_patterns.javascript =
-          \ '[^.[:digit:] *\t]\.\w*\|\<require('
-
-    " Ruby (only if RSense is in use)
-    " NOTE: Not guaranteed that rsense will be sourced before neocomplete.vim
-    if neobundle#is_installed('rsense')
-      let g:neocomplete#force_omni_input_patterns.ruby =
-            \ '[^. *\t]\.\w*\|\h\w*::'
-    endif
-
-  endfunction
-
-  function! neobundle#hooks.on_post_source(bundle)
-    " Only execute if neocomplete.vim can be used
-    if NeoCompleteCompatible()
-      call neocomplete#initialize()
-    endif
+    let g:neocomplete#force_omni_input_patterns = {
+          \ 'go': '[^.[:digit:] *\t]\.\w*',
+          \ 'cpp': '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*',
+          \ 'java': '\%(\h\w*\|)\)\.\w*',
+          \ 'perl': '[^. \t]->\%(\h\w*\)\?\|use.*\w*::\%(\h\w*\)\?',
+          \ 'ruby': '[^. *\t]\.\w*\|\h\w*::',
+          \ 'python': '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*',
+          \ 'javascript': '[^.[:digit:] *\t]\.\w*\|\<require(',
+          \ }
   endfunction
 
   call neobundle#untap()
