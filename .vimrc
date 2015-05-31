@@ -129,16 +129,9 @@ function! s:toggle(var, mes) abort
   echo a:mes.' '.(eval('&'.a:var) ? 'ON' : 'OFF')
 endfunction
 
-" Toggle spell check
 nmap <silent> <Leader>ss :call <SID>toggle('spell', 'Spell')<CR>
-
-" Toggle paste
 nmap <silent> <Leader>sp :call <SID>toggle('paste', 'Paste')<CR>
-
-" Toggle scrollbind
 nmap <silent> <Leader>sb :call <SID>toggle('scrollbind', 'Scrollbind')<CR>
-
-" expandtab
 nmap <silent> <Leader>set :call <SID>toggle('expandtab', 'expandtab')<CR>
 
 " Toggle diff
@@ -150,6 +143,7 @@ function! s:toggle_diff() abort
   end
   echo 'Diff '.(&diff ? 'ON' : 'OFF')
 endfunction
+" Note that <Leader>sd is mapped to surround.vim <Plug>Dsurround
 nmap <silent> <Leader>dt :call <SID>toggle_diff()<CR>
 " }}}
 " Case-sensitive search, case-insensitive command completion  {{{
