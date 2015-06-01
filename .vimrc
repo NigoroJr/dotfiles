@@ -865,6 +865,7 @@ if neobundle#tap('vim-rooter')
     let g:rooter_disable_map = 1
     let g:rooter_use_lcd = 1
     let g:rooter_manual_only = 1
+    let g:rooter_patterns = ['pom.xml', '.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/']
   endfunction
 
   call neobundle#untap()
