@@ -179,8 +179,8 @@ autocmd FileType * call <SID>closing_brace_mapping()
 " Snippets
 augroup cpp-namespace
   autocmd!
-  autocmd FileType cpp inoremap <buffer><expr>; <SID>expand_namespace()
-  autocmd FileType cpp inoremap <buffer><expr>{<CR> <SID>class_declaration()
+  autocmd FileType cpp inoremap <buffer> <expr> ; <SID>expand_namespace()
+  autocmd FileType cpp inoremap <buffer> <expr> {<CR> <SID>class_declaration()
 augroup END
 function! s:expand_namespace()
   let s = getline('.')[0:col('.')-1]
@@ -379,10 +379,10 @@ if neobundle#tap('neocomplcache.vim')
     let g:neocomplcache#enable_smart_case = 1
     let g:neocomplcache#min_keyword_length = 3
 
-    inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-    inoremap <expr><BS> neocomplcache#smart_close_popup()."\<BS>"
-    inoremap <expr><C-y> neocomplcache#close_popup()
-    inoremap <expr><C-g> neocomplcache#cancel_popup()
+    inoremap <expr> <C-h> neocomplcache#smart_close_popup()."\<C-h>"
+    inoremap <expr> <BS> neocomplcache#smart_close_popup()."\<BS>"
+    inoremap <expr> <C-y> neocomplcache#close_popup()
+    inoremap <expr> <C-g> neocomplcache#cancel_popup()
 
     let g:neocomplcache#force_omni_input_patterns = {
           \ 'go': '[^.[:digit:] *\t]\.\w*',
@@ -423,10 +423,10 @@ if neobundle#tap('neocomplete.vim')
         \ })
 
   function! neobundle#hooks.on_source(bundle)
-    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-    inoremap <expr><BS> neocomplete#smart_close_popup()."\<BS>"
-    inoremap <expr><C-y> neocomplete#close_popup()
-    inoremap <expr><C-g> neocomplete#cancel_popup()
+    inoremap <expr> <C-h> neocomplete#smart_close_popup()."\<C-h>"
+    inoremap <expr> <BS> neocomplete#smart_close_popup()."\<BS>"
+    inoremap <expr> <C-y> neocomplete#close_popup()
+    inoremap <expr> <C-g> neocomplete#cancel_popup()
 
     let g:neocomplete#enable_at_startup = 1
     let g:neocomplete#enable_smart_case = 1
