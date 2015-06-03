@@ -417,6 +417,10 @@ repository = 'tpope/vim-surround'
 mappings = ['<Plug>Ysurround', '<Plug>Dsurround', '<Plug>Csurround']
 
 [[plugins]]
+repository = 'tsukkee/unite-help'
+depends = 'Shougo/unite.vim'
+
+[[plugins]]
 repository = 'tyru/open-browser.vim'
 commands = 'OpenBrowser'
 
