@@ -466,24 +466,32 @@ endif
 if neobundle#tap('neosnippet.vim')
   nnoremap <Leader>es :<C-u>NeoSnippetEdit
 
-  " First directory has the local snippets.  Note that this risks local
-  " snippets being overwritten by the global snippets loaded later. However,
-  " it is set like this so that it's easier to add global snippets when doing
-  " <Leader>es
-  let g:neosnippet#snippets_directory = '~/.local_snippets/,~/.vim/snippets/'
+  function! neobundle#hooks.on_source(bundle)
+    " First directory has the local snippets.  Note that this risks local
+    " snippets being overwritten by the global snippets loaded later. However,
+    " it is set like this so that it's easier to add global snippets when doing
+    " <Leader>es
+    let g:neosnippet#snippets_directory = '~/.local_snippets/,~/.vim/snippets/'
 
-  " <TAB>: completion
-  imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-        \ "\<Plug>(neosnippet_expand_or_jump)" :
-        \ pumvisible() ?
-        \ "\<C-n>" : "\<TAB>"
-  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-        \ "\<Plug>(neosnippet_jump_or_expand)" :
-        \ pumvisible() ?
-        \ "\<C-n>" : "\<TAB>"
+    if !neobundle#is_sourced('neosnippet-snippets')
+      let g:neosnippet#disable_runtime_snippets = {
+            \ '_': 1,
+            \ }
+    end
 
-  imap <silent> <C-k> <Plug>(neosnippet_jump_or_expand)
-  smap <silent> <C-k> <Plug>(neosnippet_jump_or_expand)
+    " <TAB>: completion
+    imap <expr> <TAB> neosnippet#expandable_or_jumpable() ?
+          \ "\<Plug>(neosnippet_expand_or_jump)" :
+          \ pumvisible() ?
+          \ "\<C-n>" : "\<TAB>"
+    smap <expr> <TAB> neosnippet#expandable_or_jumpable() ?
+          \ "\<Plug>(neosnippet_jump_or_expand)" :
+          \ pumvisible() ?
+          \ "\<C-n>" : "\<TAB>"
+
+    imap <silent> <C-k> <Plug>(neosnippet_jump_or_expand)
+    smap <silent> <C-k> <Plug>(neosnippet_jump_or_expand)
+  endfunction
 
   call neobundle#untap()
 endif
