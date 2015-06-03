@@ -70,6 +70,7 @@ autocmd FileType ruby,html,xhtml,eruby,vim,toml setlocal shiftwidth=2 tabstop=2 
 autocmd FileType python,scss setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType go setlocal noexpandtab
 autocmd FileType man setlocal nonumber noexpandtab shiftwidth=8 tabstop=8 softtabstop=8
+autocmd FileType help syntax clear helpNote
 autocmd BufNewFile,BufRead *.tex setlocal filetype=tex
 " }}}
 " General key bindings   {{{
