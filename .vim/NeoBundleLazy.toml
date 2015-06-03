@@ -60,6 +60,7 @@ commands = 'Perldoc'
 [[plugins]]
 repository = 'artur-shaik/vim-javacomplete2'
 filetypes = 'java'
+disabled = 'filereadable(expand("~/.eclim/.eclimd_instances"))'
 
 [[plugins]]
 repository = 'jceb/vim-hier'
