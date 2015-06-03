@@ -103,7 +103,9 @@ repository = 'NigoroJr/rsense'
 rev = 'fix_E670'
 filetypes = 'ruby'
 # When vim-monster can be used
-disabled = 'executable("rct-complete")'
+disabled = """
+executable('rct-complete') \
+&& (!exists('g:use_rsense') || !g:use_rsense)"""
 
 [[plugins]]
 repository = 'mattn/disableitalic-vim'
@@ -185,7 +187,9 @@ disabled = '!executable("clang")'
 repository = 'osyo-manga/vim-monster'
 filetypes = 'ruby'
 depends = 'Shougo/vimproc.vim'
-disabled = '!executable("rct-complete")'
+disabled = """
+!executable('rct-complete') \
+|| (exists('g:use_rsense') && g:use_rsense)"""
 
 [[plugins]]
 repository = 'osyo-manga/vim-precious'

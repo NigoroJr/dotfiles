@@ -59,6 +59,11 @@ syntax on
 " Jump to matching keyword
 runtime macros/matchit.vim
 
+" Global variables {{{
+let g:case_insensitive_cmd = 0
+" Whether to use rsense or monster.vim for Ruby completion
+let g:use_rsense = 0
+" }}}
 " Filetype-specific text properties {{{
 autocmd FileType text,vimshell setlocal textwidth=0
 autocmd FileType ruby,html,xhtml,eruby,vim,toml setlocal shiftwidth=2 tabstop=2 softtabstop=2
@@ -147,8 +152,7 @@ endfunction
 nmap <silent> <Leader>dt :call <SID>toggle_diff()<CR>
 " }}}
 " Case-sensitive search, case-insensitive command completion  {{{
-let b:case_insensitive_cmd = 0
-if b:case_insensitive_cmd
+if g:case_insensitive_cmd
   nnoremap : :call IgnoreCase()<CR>:
   function! IgnoreCase()
     set ignorecase
