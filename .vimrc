@@ -63,6 +63,17 @@ runtime macros/matchit.vim
 let g:case_insensitive_cmd = 0
 " Whether to use rsense or monster.vim for Ruby completion
 let g:use_rsense = 0
+let g:show_startup_time = 1
+" }}}
+" Measure startup time in milliseconds {{{
+if exists('g:show_startup_time') && g:show_startup_time
+      \ && has('vim_starting') && has('reltime')
+  let s:start = reltime()
+  autocmd VimEnter *
+        \ | let s:startuptime = str2float(reltimestr(reltime(s:start)))
+        \ | let s:startuptime = s:startuptime * 1000
+        \ | echomsg string(s:startuptime)
+end
 " }}}
 " Filetype-specific text properties {{{
 autocmd FileType text,vimshell setlocal textwidth=0
