@@ -6,13 +6,6 @@ repository = 'Shougo/neobundle.vim'
 depends = 'Shougo/vimproc.vim'
 
 [[plugins]]
-repository = 'Shougo/neosnippet-snippets'
-depends = 'Shougo/neosnippet.vim'
-
-[[plugins]]
-repository = 'Shougo/neosnippet.vim'
-
-[[plugins]]
 repository = 'Shougo/vimproc.vim'
 
   [plugins.build]

@@ -276,6 +276,16 @@ depends = 'Shougo/unite.vim'
 on_source = 'unite.vim'
 
 [[plugins]]
+repository = 'Shougo/neosnippet-snippets'
+on_source = 'neosnippet.vim'
+depends = 'Shougo/neosnippet.vim'
+
+[[plugins]]
+repository = 'Shougo/neosnippet.vim'
+on_source = ['neocomplcache.vim', 'neocomplete.vim']
+commands = 'NeoSnippetEdit'
+
+[[plugins]]
 repository = 'Shougo/unite-outline'
 depends = 'Shougo/unite.vim'
 
