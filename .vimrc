@@ -68,11 +68,18 @@ let g:show_startup_time = 1
 " Measure startup time in milliseconds {{{
 if exists('g:show_startup_time') && g:show_startup_time
       \ && has('vim_starting') && has('reltime')
+  function! s:show_elapsed_millisec(start) abort
+    if &filetype == 'man'
+      return
+    end
+
+    let duration = str2float(reltimestr(reltime(a:start)))
+    let duration = duration * 1000
+    echomsg string(duration)
+  endfunction
+
   let s:start = reltime()
-  autocmd VimEnter *
-        \ | let s:startuptime = str2float(reltimestr(reltime(s:start)))
-        \ | let s:startuptime = s:startuptime * 1000
-        \ | echomsg string(s:startuptime)
+  autocmd VimEnter * call s:show_elapsed_millisec(s:start)
 end
 " }}}
 " Filetype-specific text properties {{{
