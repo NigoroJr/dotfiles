@@ -397,6 +397,16 @@ repository = 'tkztmk/vim-vala'
 filename_patterns = '\.vala$'
 
 [[plugins]]
+repository = 'tomtom/tcomment_vim'
+mappings = [
+  'gc', 'g<', 'g>',
+  '<Plug>TComment_',
+  'i_<Plug>TComment_',
+  'v_<Plug>TComment_',
+  'x_<Plug>TComment_',
+]
+
+[[plugins]]
 repository = 'tpope/vim-abolish'
 commands = ['Abolish', 'Subvert', 'S']
 mappings = 'cr'
