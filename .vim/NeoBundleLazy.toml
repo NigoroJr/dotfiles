@@ -48,7 +48,17 @@ mappings = ['s', 'S']
 
 [[plugins]]
 repository = 'haya14busa/incsearch.vim'
-mappings = ['/', '?', 'g/', '*', '#', 'g*', 'g#', 'n', 'N']
+mappings = [
+  '<Plug>(incsearch-forward)',
+  '<Plug>(incsearch-backward)',
+  '<Plug>(incsearch-stay)',
+  '<Plug>(incsearch-nohl-n)',
+  '<Plug>(incsearch-nohl-N)',
+  '<Plug>(incsearch-nohl-*)',
+  '<Plug>(incsearch-nohl-#)',
+  '<Plug>(incsearch-nohl-g*)',
+  '<Plug>(incsearch-nohl-g#)',
+]
 disabled = '&filetype == "man" && has("macunix")'
 
 [[plugins]]
