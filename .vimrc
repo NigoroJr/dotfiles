@@ -164,7 +164,7 @@ endfunction
 nmap <silent> <Leader>dt :call <SID>toggle_diff()<CR>
 " }}}
 " Case-sensitive search, case-insensitive command completion  {{{
-if g:case_insensitive_cmd
+if exists('g:case_insensitive_cmd') && g:case_insensitive_cmd
   nnoremap : :call IgnoreCase()<CR>:
   function! IgnoreCase()
     set ignorecase
