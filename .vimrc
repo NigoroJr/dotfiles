@@ -485,7 +485,7 @@ if neobundle#tap('neosnippet.vim')
     " <Leader>es
     let g:neosnippet#snippets_directory = '~/.local_snippets/,~/.vim/snippets/'
 
-    if !neobundle#is_sourced('neosnippet-snippets')
+    if !neobundle#is_installed('neosnippet-snippets')
       let g:neosnippet#disable_runtime_snippets = {
             \ '_': 1,
             \ }
