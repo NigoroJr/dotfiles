@@ -329,17 +329,17 @@ if neobundle#tap('incsearch.vim')
     let g:incsearch#emacs_like_keymap = 1
     let g:incsearch#auto_nohlsearch = 1
 
-    " Only set mappings when sourced
-    nmap / <Plug>(incsearch-forward)
-    nmap ? <Plug>(incsearch-backward)
-    nmap g/ <Plug>(incsearch-stay)
+    " neobundle.vim sources incsearch.vim on these key bindings
+    map / <Plug>(incsearch-forward)
+    map ? <Plug>(incsearch-backward)
+    map g/ <Plug>(incsearch-stay)
 
-    nmap n  <Plug>(incsearch-nohl-n)
-    nmap N  <Plug>(incsearch-nohl-N)
-    nmap *  <Plug>(incsearch-nohl-*)
-    nmap #  <Plug>(incsearch-nohl-#)
-    nmap g* <Plug>(incsearch-nohl-g*)
-    nmap g# <Plug>(incsearch-nohl-g#)
+    map n  <Plug>(incsearch-nohl-n)
+    map N  <Plug>(incsearch-nohl-N)
+    map *  <Plug>(incsearch-nohl-*)
+    map #  <Plug>(incsearch-nohl-#)
+    map g* <Plug>(incsearch-nohl-g*)
+    map g# <Plug>(incsearch-nohl-g#)
   endfunction
 
   call neobundle#untap()
