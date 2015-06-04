@@ -1,5 +1,5 @@
 " Don't go further if feature size is tiny or small
-if !1 | finish | end
+if 0 | endif
 
 " Setup runtimepath on start {{{
 if has('vim_starting')
