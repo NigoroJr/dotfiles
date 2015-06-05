@@ -60,10 +60,10 @@ syntax on
 runtime macros/matchit.vim
 
 " Global variables {{{
-let g:case_insensitive_cmd = 0
-" Whether to use rsense or monster.vim for Ruby completion
 let g:use_rsense = 0
+let g:use_vim_clang = 0
 let g:show_startup_time = 1
+let g:case_insensitive_cmd = 0
 " }}}
 " Measure startup time in milliseconds {{{
 if exists('g:show_startup_time') && g:show_startup_time

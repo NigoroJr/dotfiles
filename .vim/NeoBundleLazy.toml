@@ -81,7 +81,9 @@ repository = 'justmao945/vim-clang'
 filetypes = ['c', 'cpp']
 # Ideally neobundle#is_installed('vim-marching'), but not due to the parsing.
 # See vim-clang section in .vimrc for more details.
-disabled = 'neobundle#is_installed("vimproc.vim") || !executable("clang")'
+disabled = """
+!exists('g:use_vim_clang') || !g:use_vim_clang \
+&& (neobundle#is_installed('vimproc.vim') || !executable('clang'))"""
 
 [[plugins]]
 repository = 'kana/vim-altr'
@@ -194,7 +196,9 @@ commands = 'MarchingBufferClearCache'
 mappings = [
   ['i', '<Plug>(marching_force_start_omni_complete)']
 ]
-disabled = '!executable("clang")'
+disabled = """
+(exists('g:use_vim_clang') && g:use_vim_clang) \
+|| !executable('clang')"""
 
 [[plugins]]
 repository = 'osyo-manga/vim-monster'
