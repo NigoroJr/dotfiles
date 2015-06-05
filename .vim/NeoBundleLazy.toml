@@ -79,7 +79,9 @@ gui = 1
 [[plugins]]
 repository = 'justmao945/vim-clang'
 filetypes = ['c', 'cpp']
-disabled = 'neobundle#is_installed("vim-marching") || !executable("clang")'
+# Ideally neobundle#is_installed('vim-marching'), but not due to the parsing.
+# See vim-clang section in .vimrc for more details.
+disabled = 'neobundle#is_installed("vimproc.vim") || !executable("clang")'
 
 [[plugins]]
 repository = 'kana/vim-altr'

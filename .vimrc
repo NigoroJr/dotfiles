@@ -655,6 +655,16 @@ endif
 " }}}
 " vim-clang {{{
 if neobundle#tap('vim-clang')
+  " This plugin is disabled when vimproc.vim and clang executable are
+  " available, hence, when vim-marching can be used. The reason why
+  " neobundle#is_installed('vim-marching') is not used for evaluating
+  " 'disabled' is because neobundle#is_installed() returns undefined results
+  " until finishing parsing the TOML file. The reasony why
+  " neobundle#is_installed('vimproc.vim') works is because vimproc.vim is
+  " stated in a different file (NeoBundle.toml), therefore, parsed before
+  " NeoBundleLazy.toml. Care must be taken to ensure that neobundle.vim can
+  " see vimproc.vim before parsing the vim-clang configs in the TOML file.
+
   function! neobundle#hooks.on_source(bundle)
     let g:clang_cpp_options = '-std=c++11'
     let g:clang_c_completeopt = 'longest,menuone'
