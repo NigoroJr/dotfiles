@@ -886,13 +886,16 @@ endif
 " }}}
 " vim-ref {{{
 if neobundle#tap('vim-ref')
-  let g:ref_detect_filetype = {
-        \ 'sh': 'man',
-        \ 'zsh': 'man',
-        \ 'bash': 'man',
-        \ }
-  let g:ref_use_vimproc = 1
   nmap K <Plug>(ref-keyword)
+
+  function! neobundle#hooks.on_source(bundle)
+    let g:ref_detect_filetype = {
+          \ 'sh': 'man',
+          \ 'zsh': 'man',
+          \ 'bash': 'man',
+          \ }
+    let g:ref_use_vimproc = 1
+  endfunction
 
   call neobundle#untap()
 endif
