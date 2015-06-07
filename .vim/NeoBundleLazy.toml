@@ -415,6 +415,12 @@ commands = ['Abolish', 'Subvert', 'S']
 mappings = 'cr'
 
 [[plugins]]
+repository = 'tpope/vim-bundler'
+filetypes = 'ruby'
+commands = 'Bundle'
+filename_patterns = 'Gemfile\.lock'
+
+[[plugins]]
 repository = 'tpope/vim-fugitive'
 augroup = 'fugitive'
 # TODO: Completions?
@@ -434,6 +440,10 @@ filetypes = 'markdown'
 [[plugins]]
 repository = 'tpope/vim-rails'
 filetypes = ['ruby', 'eruby', 'css', 'scss', 'html', 'javascript', 'yaml']
+
+[[plugins]]
+repository = 'tpope/vim-rake'
+filetypes = 'ruby'
 
 [[plugins]]
 repository = 'tpope/vim-surround'
