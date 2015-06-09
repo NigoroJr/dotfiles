@@ -76,6 +76,15 @@ alias du='du -h'
 
 alias watch='watch -n 0.5'
 
+# Create and go into that directory
+mcd() {
+    mkdir $@ && cd $_
+}
+# With completion!
+if [[ $SHELL =~ zsh ]]; then
+    compdef _mkdir mcd
+fi
+
 if [[ $SHELL =~ zsh ]]; then
     # Global alias
     alias -g G='| grep'
