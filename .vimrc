@@ -998,9 +998,11 @@ endif
 " }}}
 " vim-windowswap {{{
 if neobundle#tap('vim-windowswap')
-  nnoremap <silent> <Leader>ww :call WindowSwap#EasyWindowSwap()<CR>
-  nnoremap <silent> <Leader>pw :call WindowSwap#DoWindowSwap()<CR>
-  nnoremap <silent> <Leader>yw :call WindowSwap#MarkWindowSwap()<CR>
+  nnoremap [window] <Nop>
+  nmap <Leader>w [window]
+  nnoremap <silent> [window]w :call WindowSwap#EasyWindowSwap()<CR>
+  nnoremap <silent> [window]p :call WindowSwap#DoWindowSwap()<CR>
+  nnoremap <silent> [window]y :call WindowSwap#MarkWindowSwap()<CR>
 
   function! neobundle#hooks.on_source(bundle)
     let g:windowswap_map_keys = 0
