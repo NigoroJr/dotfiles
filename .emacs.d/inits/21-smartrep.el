@@ -3,7 +3,8 @@
 (smartrep-define-key global-map "C-x"
                      '(("{" . shrink-window-horizontally)
                        ("}" . enlarge-window-horizontally)
-                       ("o" . other-window)))
+                       ("o" . other-window)
+                       ("O" . previous-multiframe-window)))
 
 ;;; Key bindings for multiple-cursors
 ;; Make sure these key bindings follow what's set for multiple-cursors
