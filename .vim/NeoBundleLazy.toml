@@ -381,6 +381,13 @@ repository = 'TextFormat'
 commands = ['AlignCenter', 'AlignJustify', 'AlignRight', 'AlignLeft']
 
 [[plugins]]
+repository = 'thinca/vim-prettyprint'
+
+  [plugins.commands]
+  name = ['PrettyPrint', 'PP']
+  complete = 'expression'
+
+[[plugins]]
 repository = 'thinca/vim-quickrun'
 depends = 'Shougo/vimproc.vim'
 mappings = '<Plug>(quickrun)'
