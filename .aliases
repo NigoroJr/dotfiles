@@ -85,6 +85,8 @@ if [[ $SHELL =~ zsh ]]; then
     compdef _mkdir mcd
 fi
 
+alias cdd='cd $( dirname $_ )'
+
 if [[ $SHELL =~ zsh ]]; then
     # Global alias
     alias -g G='| grep'
