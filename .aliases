@@ -16,15 +16,11 @@ case `uname -s` in
         ;;
 esac
 
-# This is a file of aliases
-#alias "sudo vim"="sudoedit"
-# sudo vi /some/file    --> sudoedit
 sudo() {
-    if [ $1 = "root" ] && {[ $2 = "vi" ] || [ $2 = "vim" ]}; then
+    if [ $1 = "--" ]; then
         shift
-        shift
-        command sudo vim "$@"
-    elif [ $1 = "vi" ] || [ $1 = "vim" ]; then
+        command sudo "$@"
+    elif [ $1 = "vi" ] || [ $1 = "vim" ] && hash sudoedit 2>/dev/null; then
         shift
         command sudoedit "$@"
     else
