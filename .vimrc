@@ -686,7 +686,7 @@ endif
 " vim-fugitive {{{
 if neobundle#tap('vim-fugitive')
   function! neobundle#hooks.on_post_source(bundle)
-    call fugitive#detect(expand('%'))
+    call fugitive#detect(resolve(expand('%')))
   endfunction
 
   call neobundle#untap()
