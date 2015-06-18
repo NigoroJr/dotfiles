@@ -683,6 +683,15 @@ if neobundle#tap('vim-eclim')
   call neobundle#untap()
 endif
 " }}}
+" vim-fugitive {{{
+if neobundle#tap('vim-fugitive')
+  function! neobundle#hooks.on_post_source(bundle)
+    call fugitive#detect(expand('%'))
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
 " vim-gista {{{
 if neobundle#tap('vim-gista')
   function! neobundle#hooks.on_source(bundle)
