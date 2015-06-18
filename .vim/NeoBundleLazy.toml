@@ -162,6 +162,10 @@ repository = 'NigoroJr/foofile.vim'
   complete = 'file'
 
 [[plugins]]
+repository = 'NigoroJr/rbenv-gems.vim'
+filetypes = 'ruby'
+
+[[plugins]]
 repository = 'NigoroJr/unite-matcher-hide-hidden-directories'
 depends = 'Shougo/unite.vim'
 on_source = 'unite.vim'
