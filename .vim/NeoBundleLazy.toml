@@ -65,7 +65,6 @@ disabled = '&filetype == "man" && has("macunix")'
 repository = 'hotchpotch/perldoc-vim'
 filetypes = 'perl'
 commands = 'Perldoc'
-# TODO: completion list s:PerldocComplete
 
 [[plugins]]
 repository = 'artur-shaik/vim-javacomplete2'
@@ -434,7 +433,6 @@ filename_patterns = 'Gemfile\.lock'
 [[plugins]]
 repository = 'tpope/vim-fugitive'
 augroup = 'fugitive'
-# TODO: Completions?
 commands = [
   'Git', 'Git!', 'Gcd', 'Glcd', 'Gstatus', 'Gcommit', 'Gmerge', 'Gpull',
   'Gpush', 'Gfetch', 'Ggrep', 'Glgrep', 'Glog', 'Gllog', 'Gedit', 'Gsplit',
