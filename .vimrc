@@ -296,6 +296,8 @@ if neobundle#load_cache()
   NeoBundleSaveCache
 end
 
+call neobundle#local(expand('~/src/local_plugins'))
+
 call neobundle#end()
 filetype plugin indent on
 if has('vim_starting')
