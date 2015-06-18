@@ -244,6 +244,10 @@ filetypes = ['c', 'cpp']
 depends = ['jceb/vim-hier', 'thinca/vim-quickrun']
 gui = 1
 
+  [plugins.commands]
+  name = ['WatchdogsRun', 'WatchdogsRunSilent']
+  complete = 'customlist,quickrun#complete'
+
 [[plugins]]
 repository = 'rhysd/clever-f.vim'
 mappings = ['f', 'F', 't', 'T']
