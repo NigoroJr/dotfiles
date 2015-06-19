@@ -655,6 +655,16 @@ if neobundle#tap('vim-altr')
   call neobundle#untap()
 endif
 " }}}
+" vim-ambicmd {{{
+if neobundle#tap('vim-ambicmd')
+  function! neobundle#hooks.on_source(bundle)
+    cnoremap <expr> <C-d> ambicmd#expand("\<C-d>")
+    cnoremap <expr> <Space> ambicmd#expand("\<Space>")
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
 " vim-clang {{{
 if neobundle#tap('vim-clang')
   " This plugin is disabled when vimproc.vim and clang executable are
