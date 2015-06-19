@@ -122,7 +122,7 @@ au BufWriteCmd  sudo:*,sudo:*/* SudoWrite <afile>
 au FileWriteCmd sudo:*,sudo:*/* SudoWrite <afile>
 
 " Reset highlight search by pressing Escape 2 times
-nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
+nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR>
 
 " Move pwd to directory of buffer
 nnoremap <silent> <Leader>cdc :cd %:h<CR>
