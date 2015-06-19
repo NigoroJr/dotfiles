@@ -438,6 +438,13 @@ commands = 'Bundle'
 filename_patterns = 'Gemfile\.lock'
 
 [[plugins]]
+repository = 'tpope/vim-endwise'
+filetypes = [
+  'aspvbs', 'c', 'cpp', 'crystal', 'elixir', 'htmldjango', 'lua', 'matlab',
+  'objc', 'ruby', 'sh', 'snippets', 'vb', 'vbnet', 'vim', 'xdefaults', 'zsh',
+]
+
+[[plugins]]
 repository = 'tpope/vim-fugitive'
 augroup = 'fugitive'
 commands = [
