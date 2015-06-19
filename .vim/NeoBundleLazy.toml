@@ -458,6 +458,11 @@ repository = 'tpope/vim-rake'
 filetypes = 'ruby'
 
 [[plugins]]
+repository = 'tpope/vim-rbenv'
+filetypes = 'ruby'
+commands = 'Rbenv'
+
+[[plugins]]
 repository = 'tpope/vim-surround'
 mappings = ['<Plug>Ysurround', '<Plug>Dsurround', '<Plug>Csurround']
 
