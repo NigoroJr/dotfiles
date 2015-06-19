@@ -1008,6 +1008,15 @@ if neobundle#tap('vim-textobj-user')
   call neobundle#untap()
 endif
 " }}}
+" vim-trailing-whitespace {{{
+if neobundle#tap('vim-trailing-whitespace')
+  function! neobundle#hooks.on_source(bundle)
+    let g:extra_whitespace_ignored_filetypes = ['unite', 'mkd']
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
 " vim-watchdogs {{{
 if neobundle#tap('vim-watchdogs')
   function! neobundle#hooks.on_source(bundle)

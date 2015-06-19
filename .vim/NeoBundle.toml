@@ -1,4 +1,11 @@
 [[plugins]]
+repository = 'AnsiEsc.vim'
+
+[[plugins]]
+repository = 'bronson/vim-trailing-whitespace'
+commands = 'FixWhitespace'
+
+[[plugins]]
 repository = 'ciaranm/securemodelines'
 
 [[plugins]]
