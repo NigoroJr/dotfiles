@@ -64,6 +64,8 @@ let g:use_rsense = 0
 let g:use_vim_clang = 0
 let g:show_startup_time = 1
 let g:case_insensitive_cmd = 0
+" Disable netrw
+let g:loaded_netrwPlugin = 1
 " }}}
 " Measure startup time in milliseconds {{{
 if exists('g:show_startup_time') && g:show_startup_time
@@ -1044,8 +1046,6 @@ if neobundle#tap('vimfiler.vim')
       autocmd FileType vimfiler nmap <buffer> <silent> <Leader>ul :UniteWithBufferDir file/async<CR>
     endif
 
-    " Disable netrw.vim
-    let g:loaded_netrwPlugin = 1
     let g:vimfiler_as_default_explorer = 1
     let g:vimfiler_time_format = "%m/%d/%y %H:%M%S"
   endfunction
