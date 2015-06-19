@@ -114,7 +114,6 @@ filetypes = 'tex'
 [[plugins]]
 #repository = 'marcus/rsense'
 repository = 'NigoroJr/rsense'
-rev = 'fix_E670'
 filetypes = 'ruby'
 # When vim-monster can be used
 disabled = """
