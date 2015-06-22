@@ -49,10 +49,6 @@ repository = 'godlygeek/tabular'
 commands = ['Tab', 'Tabularize']
 
 [[plugins]]
-repository = 'goldfeld/vim-seek'
-mappings = ['s', 'S']
-
-[[plugins]]
 repository = 'haya14busa/incsearch.vim'
 mappings = [
   '<Plug>(incsearch-forward)',
@@ -80,6 +76,11 @@ disabled = 'filereadable(expand("~/.eclim/.eclimd_instances"))'
 [[plugins]]
 repository = 'jceb/vim-hier'
 gui = 1
+
+[[plugins]]
+repository = 'justinmk/vim-sneak'
+depends = 'tpope/vim-repeat'
+mappings = ['s', 'S']
 
 [[plugins]]
 repository = 'justmao945/vim-clang'

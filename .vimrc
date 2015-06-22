@@ -943,15 +943,6 @@ if neobundle#tap('vim-rooter')
   call neobundle#untap()
 endif
 " }}}
-" vim-seek {{{
-if neobundle#tap('vim-seek')
-  function! neobundle#hooks.on_source(bundle)
-    let g:seek_ignorecase = 1
-  endfunction
-
-  call neobundle#untap()
-endif
-" }}}
 " vim-smartchr {{{
 if neobundle#tap('vim-smartchr')
   function! s:smartchr_cpp()
@@ -963,6 +954,15 @@ if neobundle#tap('vim-smartchr')
     if exists('*s:smartchr_'.&filetype)
       execute 'call s:smartchr_'.&filetype.'()'
     end
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
+" vim-sneak {{{
+if neobundle#tap('vim-sneak')
+  function! neobundle#hooks.on_source(bundle)
+    let g:sneak#s_next = 1
   endfunction
 
   call neobundle#untap()
