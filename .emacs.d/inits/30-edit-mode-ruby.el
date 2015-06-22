@@ -17,3 +17,6 @@
 
 ;;; Hooks
 (add-hook 'ruby-mode-hook 'add-yasnippet-ac-sources)
+
+;;; ruby-end
+(require 'ruby-end)

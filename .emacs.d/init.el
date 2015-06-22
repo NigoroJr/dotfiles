@@ -82,6 +82,7 @@
         projectile
         rsense
         ruby-block
+        ruby-end
         slime
         smartchr
         smartrep
