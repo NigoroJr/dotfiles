@@ -12,6 +12,12 @@ repository = 'ahayman/vim-nodejs-complete'
 filetypes = 'javascript'
 
 [[plugins]]
+repository = 'bronson/vim-trailing-whitespace'
+commands = 'FixWhitespace'
+insert = 1
+focus = 1
+
+[[plugins]]
 repository = 'c9s/perlomni.vim'
 
 [[plugins]]

@@ -1017,7 +1017,7 @@ endif
 " vim-trailing-whitespace {{{
 if neobundle#tap('vim-trailing-whitespace')
   function! neobundle#hooks.on_source(bundle)
-    let g:extra_whitespace_ignored_filetypes = ['unite', 'mkd']
+    let g:extra_whitespace_ignored_filetypes = ['unite', 'help']
   endfunction
 
   call neobundle#untap()
