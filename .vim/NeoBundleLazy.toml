@@ -204,6 +204,7 @@ filetypes = 'ruby'
 depends = 'Shougo/vimproc.vim'
 disabled = """
 !executable('rct-complete') \
+|| (exists('g:use_monster') && !g:use_monster) \
 || (exists('g:use_rsense') && g:use_rsense)"""
 
 [[plugins]]
