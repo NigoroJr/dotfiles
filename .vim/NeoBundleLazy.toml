@@ -425,6 +425,7 @@ mappings = [
 
 [[plugins]]
 repository = 'tpope/vim-abolish'
+depends = 'tpope/vim-repeat'
 commands = ['Abolish', 'Subvert', 'S']
 mappings = 'cr'
 
@@ -471,11 +472,17 @@ filetypes = 'ruby'
 commands = 'Rbenv'
 
 [[plugins]]
+repository = 'tpope/vim-repeat'
+mappings = '.'
+
+[[plugins]]
 repository = 'tpope/vim-speeddating'
+depends = 'tpope/vim-repeat'
 mappings = ['<C-a>', '<C-x>']
 
 [[plugins]]
 repository = 'tpope/vim-surround'
+depends = 'tpope/vim-repeat'
 mappings = ['<Plug>Ysurround', '<Plug>Dsurround', '<Plug>Csurround']
 
 [[plugins]]
