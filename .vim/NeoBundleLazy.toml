@@ -481,6 +481,7 @@ commands = 'Rbenv'
 [[plugins]]
 repository = 'tpope/vim-repeat'
 mappings = '.'
+functions = 'repeat#set'
 
 [[plugins]]
 repository = 'tpope/vim-speeddating'
