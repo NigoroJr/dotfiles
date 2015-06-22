@@ -395,8 +395,6 @@ if neobundle#tap('neocomplcache.vim')
         \ })
 
   function! neobundle#hooks.on_source(bundle)
-    call neocomplcache#initialize()
-
     let g:neocomplcache#enable_at_startup = 1
     let g:neocomplcache#enable_smart_case = 1
     let g:neocomplcache#min_keyword_length = 3
@@ -422,6 +420,10 @@ if neobundle#tap('neocomplcache.vim')
     if exists('b:rails_root')
       call remove(g:neocomplcache#force_omni_input_patterns, 'ruby')
     end
+  endfunction
+
+  function! neobundle#hooks.on_post_source(bundle)
+    call neocomplcache#initialize()
   endfunction
 
   call neobundle#untap()
@@ -470,6 +472,10 @@ if neobundle#tap('neocomplete.vim')
     if exists('b:rails_root')
       call remove(g:neocomplete#force_omni_input_patterns, 'ruby')
     end
+  endfunction
+
+  function! neobundle#hooks.on_post_source(bundle)
+    call neocomplete#initialize()
   endfunction
 
   call neobundle#untap()
