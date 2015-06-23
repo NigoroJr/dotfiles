@@ -278,6 +278,19 @@ function! s:make_executable(filename)
 endfunction
 autocmd BufWritePost * call s:make_executable(@%)
 " }}}
+" Returns the gem paths for rbenv {{{
+function! s:get_ruby_gems() abort
+  if &filetype != 'ruby' || !executable('rbenv')
+    return
+  end
+
+  let current_version = split(system('rbenv version'), ' ')[0]
+  let gem_path = expand('~/.rbenv/versions/'.current_version.'/lib/ruby/gems/*/gems/')
+  let dirs = split(globpath(gem_path, '*'), '\n')
+  call map(dirs, 'v:val."/lib"')
+  return join(dirs, ',')
+endfunction
+" }}}
 
 " Clone neobundle.vim if not installed {{{
 if !isdirectory(expand('~/.vim/bundle/neobundle.vim')) && executable('git')
@@ -425,6 +438,11 @@ if neobundle#tap('neocomplcache.vim')
           \ 'javascript': '[^.[:digit:] *\t]\.\w*\|\<require(',
           \ }
 
+    if !exists('g:neocomplcache#sources#include#paths')
+      let g:neocomplcache#sources#include#paths = {}
+    endif
+    let g:neocomplcache#sources#include#paths.ruby = s:get_ruby_gems()
+
     " Note: This is taking advantage of the fact that neocomplcache.vim is
     " lazy-loaded when it goes into insert mode, thus, will be sourced after
     " vim-rails is sourced.
@@ -476,6 +494,11 @@ if neobundle#tap('neocomplete.vim')
           \ 'python': '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*',
           \ 'javascript': '[^.[:digit:] *\t]\.\w*\|\<require(',
           \ }
+
+    if !exists('g:neocomplete#sources#include#paths')
+      let g:neocomplete#sources#include#paths = {}
+    endif
+    let g:neocomplete#sources#include#paths.ruby = s:get_ruby_gems()
 
     " Note: This is taking advantage of the fact that neocomplete.vim is
     " lazy-loaded when it goes into insert mode, thus, will be sourced after
