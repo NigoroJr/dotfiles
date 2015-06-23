@@ -673,6 +673,15 @@ if neobundle#tap('vim-ambicmd')
   call neobundle#untap()
 endif
 " }}}
+" vim-better-whitespace {{{
+if neobundle#tap('vim-better-whitespace')
+  function! neobundle#hooks.on_source(bundle)
+    let g:better_whitespace_filetypes_blacklist = ['unite', 'help']
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
 " vim-clang {{{
 if neobundle#tap('vim-clang')
   " This plugin is disabled when vimproc.vim and clang executable are
@@ -1010,15 +1019,6 @@ endif
 " }}}
 " vim-textobj-user {{{
 if neobundle#tap('vim-textobj-user')
-
-  call neobundle#untap()
-endif
-" }}}
-" vim-trailing-whitespace {{{
-if neobundle#tap('vim-trailing-whitespace')
-  function! neobundle#hooks.on_source(bundle)
-    let g:extra_whitespace_ignored_filetypes = ['unite', 'help']
-  endfunction
 
   call neobundle#untap()
 endif

@@ -12,12 +12,6 @@ repository = 'ahayman/vim-nodejs-complete'
 filetypes = 'javascript'
 
 [[plugins]]
-repository = 'bronson/vim-trailing-whitespace'
-commands = 'FixWhitespace'
-insert = 1
-focus = 1
-
-[[plugins]]
 repository = 'c9s/perlomni.vim'
 
 [[plugins]]
@@ -171,6 +165,11 @@ repository = 'NigoroJr/foofile.vim'
 repository = 'NigoroJr/unite-matcher-hide-hidden-directories'
 depends = 'Shougo/unite.vim'
 on_source = 'unite.vim'
+
+[[plugins]]
+repository = 'ntpeters/vim-better-whitespace'
+insert = 1
+focus = 1
 
 [[plugins]]
 repository = 'osyo-manga/shabadou.vim'
