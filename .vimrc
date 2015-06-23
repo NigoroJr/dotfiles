@@ -807,6 +807,14 @@ if neobundle#tap('vim-monster')
   call neobundle#untap()
 endif
 " }}}
+" vim-niceblock {{{
+if neobundle#tap('vim-niceblock')
+  xmap <unique> I <Plug>(niceblock-I)
+  xmap <unique> A <Plug>(niceblock-A)
+
+  call neobundle#untap()
+endif
+" }}}
 " vim-precious {{{
 if neobundle#tap('vim-precious')
   function! neobundle#hooks.on_source(bundle)

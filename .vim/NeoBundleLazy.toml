@@ -91,6 +91,13 @@ filetypes = ['c', 'cpp']
 mappings = ['<Plug>(altr-forward)', '<Plug>(altr-back)']
 
 [[plugins]]
+repository = 'kana/vim-niceblock'
+mappings = [
+  ['x', '<Plug>(niceblock-I)'],
+  ['x', '<Plug>(niceblock-A)'],
+]
+
+[[plugins]]
 repository = 'kana/vim-smartchr'
 filetypes = 'cpp'
 
