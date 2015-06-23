@@ -13,6 +13,7 @@ filetypes = 'javascript'
 
 [[plugins]]
 repository = 'c9s/perlomni.vim'
+filetypes = 'perl'
 
 [[plugins]]
 repository = 'cespare/vim-toml'
