@@ -310,6 +310,7 @@ if neobundle#load_cache()
 
   call neobundle#load_toml(expand('~/.vim/NeoBundle.toml'))
   call neobundle#load_toml(expand('~/.vim/NeoBundleLazy.toml'), {'lazy': 1})
+  call neobundle#load_toml(expand('~/.vim/NeoBundleSoftRemove.toml'), {'lazy': 1})
 
   NeoBundleSaveCache
 end
@@ -324,14 +325,6 @@ end
 " }}}
 
 " Configurations for individual plugins {{{
-" accelerated-jk {{{
-if neobundle#tap('accelerated-jk')
-  nmap j <Plug>(accelerated_jk_gj)
-  nmap k <Plug>(accelerated_jk_gk)
-
-  call neobundle#untap()
-endif
-" }}}
 " clever-f.vim {{{
 if neobundle#tap('clever-f.vim')
   let g:clever_f_fix_key_direction = 0

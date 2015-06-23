@@ -36,10 +36,6 @@ repository = 'flazz/vim-colorschemes'
 gui = 1
 
 [[plugins]]
-repository = 'gcmt/wildfire.vim'
-mappings = ['<Plug>(wildfire-water)', '<Plug>(wildfire-fuel)']
-
-[[plugins]]
 repository = 'godlygeek/tabular'
 commands = ['Tab', 'Tabularize']
 
@@ -76,15 +72,6 @@ gui = 1
 repository = 'justinmk/vim-sneak'
 depends = 'tpope/vim-repeat'
 mappings = ['s', 'S']
-
-[[plugins]]
-repository = 'justmao945/vim-clang'
-filetypes = ['c', 'cpp']
-# Ideally neobundle#is_installed('vim-marching'), but not due to the parsing.
-# See vim-clang section in .vimrc for more details.
-disabled = """
-!exists('g:use_vim_clang') || !g:use_vim_clang \
-&& (neobundle#is_installed('vimproc.vim') || !executable('clang'))"""
 
 [[plugins]]
 repository = 'kana/vim-altr'
@@ -149,25 +136,6 @@ depends = 'thinca/vim-quickrun'
 [[plugins]]
 repository = 'mips.vim'
 filetypes = 'asm'
-
-[[plugins]]
-repository = 'NigoroJr/foofile.vim'
-
-  [plugins.commands]
-  name = 'FooFile'
-  complete = 'customlist,foofile#complete'
-
-  [plugins.commands]
-  name = 'FooFileLast'
-  complete = 'customlist,foofile#complete'
-
-  [plugins.commands]
-  name = 'FooFileDelete'
-  complete = 'customlist,foofile#complete'
-
-  [plugins.commands]
-  name = 'FooFileSaveAs'
-  complete = 'file'
 
 [[plugins]]
 repository = 'NigoroJr/unite-matcher-hide-hidden-directories'
@@ -269,15 +237,6 @@ gui = 1
   complete = 'customlist,quickrun#complete'
 
 [[plugins]]
-repository = 'rhysd/accelerated-jk'
-mappings = [
-  '<Plug>(accelerated_jk_gj)', '<Plug>(accelerated_jk_gk)',
-  '<Plug>(accelerated_jk_gj_position', '<Plug>(accelerated_jk_gk_position)'
-  '<Plug>(accelerated_jk_j)', '<Plug>(accelerated_jk_k)',
-  '<Plug>(accelerated_jk_j_position', '<Plug>(accelerated_jk_k_position)'
-]
-
-[[plugins]]
 repository = 'rhysd/clever-f.vim'
 mappings = ['f', 'F', 't', 'T']
 
@@ -289,14 +248,6 @@ filetypes = 'go'
 repository = 'rhysd/wandbox-vim'
 commands = ['Wandbox', 'WandboxAsync']
 depends = ['thinca/vim-quickrun', 'Shougo/vimproc.vim']
-
-[[plugins]]
-repository = 'scrooloose/nerdtree'
-commands = 'NERDTreeFind'
-
-  [plugins.commands]
-  name = 'NERDTree'
-  complete = 'dir'
 
 [[plugins]]
 repository = 'Shougo/context_filetype.vim'
@@ -416,10 +367,6 @@ depends = 'Shougo/unite.vim'
 [[plugins]]
 repository = 'TextFormat'
 commands = ['AlignCenter', 'AlignJustify', 'AlignRight', 'AlignLeft']
-
-[[plugins]]
-repository = 'thinca/vim-ambicmd'
-mappings = ':'
 
 [[plugins]]
 repository = 'thinca/vim-prettyprint'
