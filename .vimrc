@@ -753,6 +753,25 @@ if neobundle#tap('vim-javacomplete2')
   call neobundle#untap()
 endif
 " }}}
+" vim-jplus {{{
+if neobundle#tap('vim-jplus')
+  nmap J <Plug>(jplus)
+  nmap <Leader>J <Plug>(jplus-getchar)
+
+  function! neobundle#hooks.on_source(bundle)
+    let g:jplus#input_config = {
+          \ '__DEFAULT__': {
+          \   'delimiter_format': ' %d ',
+          \ },
+          \ ',': {
+          \   'delimiter_format': '%d, ',
+          \ },
+          \ }
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
 " vim-latex {{{
 if neobundle#tap('vim-latex')
   function! neobundle#hooks.on_source(bundle)
