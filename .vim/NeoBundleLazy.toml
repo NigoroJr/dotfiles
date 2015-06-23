@@ -386,6 +386,10 @@ on_source = 'rsense'
 disabled = '!NeoCompleteCompatible()'
 
 [[plugins]]
+repository = 'supermomonga/unite-kawaii-calc'
+depends = 'Shougo/unite.vim'
+
+[[plugins]]
 repository = 'TextFormat'
 commands = ['AlignCenter', 'AlignJustify', 'AlignRight', 'AlignLeft']
 
