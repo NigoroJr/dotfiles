@@ -94,6 +94,9 @@ autocmd FileType help syntax clear helpNote
 autocmd BufNewFile,BufRead *.tex setlocal filetype=tex
 " }}}
 " General key bindings   {{{
+" Double leader
+nnoremap <D_Leader> <Nop>
+nmap <Leader><Leader> <D_Leader>
 " Move by physical/logical line
 nnoremap gj j
 nnoremap gk k
