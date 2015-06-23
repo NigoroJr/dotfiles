@@ -268,6 +268,15 @@ gui = 1
   complete = 'customlist,quickrun#complete'
 
 [[plugins]]
+repository = 'rhysd/accelerated-jk'
+mappings = [
+  '<Plug>(accelerated_jk_gj)', '<Plug>(accelerated_jk_gk)',
+  '<Plug>(accelerated_jk_gj_position', '<Plug>(accelerated_jk_gk_position)'
+  '<Plug>(accelerated_jk_j)', '<Plug>(accelerated_jk_k)',
+  '<Plug>(accelerated_jk_j_position', '<Plug>(accelerated_jk_k_position)'
+]
+
+[[plugins]]
 repository = 'rhysd/clever-f.vim'
 mappings = ['f', 'F', 't', 'T']
 
