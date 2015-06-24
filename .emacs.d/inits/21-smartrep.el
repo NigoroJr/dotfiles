@@ -4,7 +4,16 @@
 (smartrep-define-key global-map "C-x"
   '(("o" . other-window)
     ("O" . previous-multiframe-window)
+    ("1" . delete-other-windows)
+    ("2" . split-window-below)
+    ("3" . split-window-right)
+    ("+" . balance-windows)
     ("w" . ace-window)))
+(smartrep-define-key global-map "C-c w"
+  '(("h" . windmove-left)
+    ("j" . windmove-down)
+    ("k" . windmove-up)
+    ("l" . windmove-right)))
 
 ;;; Window size
 (smartrep-define-key global-map "C-x"
@@ -12,8 +21,8 @@
     ("}" . enlarge-window-horizontally)
     ("+" . balance-windows)))
 (smartrep-define-key global-map "C-c w"
-  '(("h" . shrink-window-horizontally)
-    ("l" . enlarge-window-horizontally)
+  '(("H" . shrink-window-horizontally)
+    ("L" . enlarge-window-horizontally)
     ("+" . balance-windows)))
 
 ;;; Text size
