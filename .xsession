@@ -31,10 +31,6 @@ xset s off
 xset -dpms
 setterm -blank 0 -powerdown 0
 
-if hash dropbox; then
-    dropbox &
-fi
-
 # Run any local configurations (such as setting wallpaper)
 if [ -f ~/.localrc/xsession ]; then
     sh ~/.localrc/xsession
