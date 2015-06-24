@@ -11,13 +11,13 @@
   '(("{" . shrink-window-horizontally)
     ("}" . enlarge-window-horizontally)
     ("+" . balance-windows)))
-(smartrep-define-key global-map "C-x"
+(smartrep-define-key global-map "C-c w"
   '(("h" . shrink-window-horizontally)
     ("l" . enlarge-window-horizontally)
     ("+" . balance-windows)))
 
 ;;; Text size
-(smartrep-define-key global-map "C-x"
+(smartrep-define-key global-map "C-c w"
   '(("+" . text-scale-increase)
     ("-" . text-scale-decrease)
     ("0" . (text-scale-adjust 0))))
