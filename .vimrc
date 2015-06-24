@@ -855,8 +855,8 @@ endif
 " }}}
 " vim-niceblock {{{
 if neobundle#tap('vim-niceblock')
-  xmap <unique> I <Plug>(niceblock-I)
-  xmap <unique> A <Plug>(niceblock-A)
+  xmap I <Plug>(niceblock-I)
+  xmap A <Plug>(niceblock-A)
 
   call neobundle#untap()
 endif
