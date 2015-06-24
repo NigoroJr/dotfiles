@@ -17,7 +17,7 @@ filetypes = 'perl'
 
 [[plugins]]
 repository = 'cespare/vim-toml'
-filename_patterns = '\.toml$'
+filetypes = 'toml'
 
 [[plugins]]
 repository = 'davidhalter/jedi-vim'
@@ -395,7 +395,7 @@ unite_sources = 'ref'
 
 [[plugins]]
 repository = 'tkztmk/vim-vala'
-filename_patterns = '\.vala$'
+filetypes = 'vala'
 
 [[plugins]]
 repository = 'tomtom/tcomment_vim'
@@ -414,7 +414,6 @@ mappings = 'cr'
 repository = 'tpope/vim-bundler'
 filetypes = 'ruby'
 commands = 'Bundle'
-filename_patterns = 'Gemfile\.lock'
 
 [[plugins]]
 repository = 'tpope/vim-endwise'
