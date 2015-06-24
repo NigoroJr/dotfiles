@@ -4,8 +4,7 @@
 (setq cperl-indent-level 4
       cperl-brace-offset -4
       cperl-label-offset -4
-      cperl-highlight-variables-indiscriminately t
-      )
+      cperl-highlight-variables-indiscriminately t)
 
 ;;; plsense
 (require 'plsense)

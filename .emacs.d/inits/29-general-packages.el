@@ -1,5 +1,4 @@
 ;;;; Configs for general packages
-
 ;;; ace-jump-mode
 (require 'ace-jump-mode)
 (setq ace-jump-mode-gray-background nil)
