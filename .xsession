@@ -19,7 +19,7 @@ xrandr --output $EXTERNAL_DISPLAY --primary --auto \
     --right-of $EXTERNAL_DISPLAY
 
 # Customizing mouse
-if hash imwheel; then
+if hash imwheel 2>/dev/null; then
     imwheel -b -k "0 0 6 7 0 0 10" 1>/dev/null 2>&1
 fi
 
