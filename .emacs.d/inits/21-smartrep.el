@@ -7,9 +7,8 @@
     ;("o" . ace-window)
     ("O" . previous-multiframe-window)))
 
-;;; Key bindings for multiple-cursors
-;; Make sure these key bindings follow what's set for multiple-cursors
-(smartrep-define-key global-map "C-c C-m"
+;;; multiple-cursors
+(smartrep-define-key global-map "C-c m"
   '(("n" . mc/mark-next-like-this)
     ("p" . mc/mark-previous-like-this)
     ("N" . mc/unmark-next-like-this)
