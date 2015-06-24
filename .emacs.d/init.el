@@ -58,6 +58,7 @@
         ac-slime
         ace-isearch
         ace-jump-mode
+        ace-window
         ;auctex
         auto-complete
         auto-complete-auctex
