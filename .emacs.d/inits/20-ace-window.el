@@ -1,8 +1,6 @@
 ;;;; ace-window
-;; Set before smartrep to enable repeatable C-x o
-;; UNDER REVIEW: Use C-x o for ace-window (with smartrep) if used often
-;(global-set-key (kbd "C-x o") 'ace-window)
-(global-set-key (kbd "M-n") 'ace-window)
+;; Set before smartrep.el key bindings definitions
+(global-set-key (kbd "C-x w") 'ace-window)
 (defvar aw-dispatch-alist
   '((?x aw-delete-window " Ace - Delete Window")
     (?t aw-swap-window " Ace - Swap Window")

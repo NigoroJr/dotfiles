@@ -1,9 +1,10 @@
 ;;;; smartrep
 (require 'smartrep)
+;;; Switch windows
 (smartrep-define-key global-map "C-x"
-    ("o" . other-window)
-    ;("o" . ace-window)
-    ("O" . previous-multiframe-window)))
+  '(("o" . other-window)
+    ("O" . previous-multiframe-window)
+    ("w" . ace-window)))
 
 ;;; Window size
 (smartrep-define-key global-map "C-x"
