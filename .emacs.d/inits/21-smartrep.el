@@ -1,11 +1,33 @@
 ;;;; smartrep
 (require 'smartrep)
 (smartrep-define-key global-map "C-x"
-  '(("{" . shrink-window-horizontally)
-    ("}" . enlarge-window-horizontally)
     ("o" . other-window)
     ;("o" . ace-window)
     ("O" . previous-multiframe-window)))
+
+;;; Window size
+(smartrep-define-key global-map "C-x"
+  '(("{" . shrink-window-horizontally)
+    ("}" . enlarge-window-horizontally)
+    ("+" . balance-windows)))
+(smartrep-define-key global-map "C-x"
+  '(("h" . shrink-window-horizontally)
+    ("l" . enlarge-window-horizontally)
+    ("+" . balance-windows)))
+
+;;; Text size
+(smartrep-define-key global-map "C-x"
+  '(("+" . text-scale-increase)
+    ("-" . text-scale-decrease)
+    ("0" . (text-scale-adjust 0))))
+(smartrep-define-key global-map "<f2>"
+  '(("+" . text-scale-increase)
+    ("-" . text-scale-decrease)
+    ("0" . (text-scale-adjust 0))))
+(smartrep-define-key global-map "<f2>"
+  '(("g" . text-scale-increase)
+    ("l" . text-scale-decrease)
+    ("0" . (text-scale-adjust 0))))
 
 ;;; multiple-cursors
 (smartrep-define-key global-map "C-c m"
