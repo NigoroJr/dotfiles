@@ -22,6 +22,8 @@
     ("+" . balance-windows)))
 (smartrep-define-key global-map "C-c w"
   '(("H" . shrink-window-horizontally)
+    ("J" . shrink-window)
+    ("K" . enlarge-window)
     ("L" . enlarge-window-horizontally)
     ("+" . balance-windows)))
 
