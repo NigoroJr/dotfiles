@@ -34,9 +34,10 @@ alias la='ls -A'
 alias ll='ls -CF'
 alias lh='ls -lh'
 
-# Because for some reason I mistype these a lot
+# Typos that I make a lot
 alias rm_r='rm -r'
 alias gS='git status'
+alias gD='git diff'
 
 # Alias for g++
 alias gpp='g++ -std=c++11'
