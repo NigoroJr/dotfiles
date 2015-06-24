@@ -36,9 +36,4 @@ if [ -f ~/.localrc/xsession ]; then
     sh ~/.localrc/xsession
 fi
 
-# Use bumblebee if installed
-if hash optirun; then
-    exec optirun xmonad
-else
-    exec xmonad
-fi
+exec xmonad
