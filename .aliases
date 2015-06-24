@@ -38,6 +38,7 @@ alias lh='ls -lh'
 alias rm_r='rm -r'
 alias gS='git status'
 alias gD='git diff'
+alias gC='git commit'
 
 # Alias for g++
 alias gpp='g++ -std=c++11'
