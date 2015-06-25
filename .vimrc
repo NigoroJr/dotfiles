@@ -703,7 +703,7 @@ endif
 " vim-better-whitespace {{{
 if neobundle#tap('vim-better-whitespace')
   function! neobundle#hooks.on_source(bundle)
-    let g:better_whitespace_filetypes_blacklist = ['unite', 'help']
+    let g:better_whitespace_filetypes_blacklist = ['unite', 'help', 'vimshell']
   endfunction
 
   call neobundle#untap()
