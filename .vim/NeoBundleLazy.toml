@@ -219,7 +219,6 @@ commands = [
   'SnowdropLogs',
   'SnowdropVerify',
 ]
-disabled = '!filereadable(expand("~/.eclim/.eclimd_instances"))'
 
 [[plugins]]
 repository = 'osyo-manga/vim-stargate'
