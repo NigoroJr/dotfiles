@@ -190,10 +190,10 @@ endif
 " Mapping for inserting closing curly brace {{{
 function! s:closing_brace_mapping()
   if &filetype == 'vim'
-    inoremap {<CR> {<CR>\<Space>}<Esc>O\<Space>
+    inoremap <buffer> {<CR> {<CR>\<Space>}<Esc>O\<Space>
   " Don't do this for LaTeX documents
   elseif &filetype !~ 'tex\|plaintex'
-    inoremap {<CR> {<CR>}<Esc>O
+    inoremap <buffer> {<CR> {<CR>}<Esc>O
   endif
   " Otherwise, no mapping is done
 endfun
