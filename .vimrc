@@ -73,7 +73,7 @@ if exists('g:show_startup_time') && g:show_startup_time
   function! s:show_elapsed_millisec(start) abort
     if &filetype == 'man'
       return
-    end
+    endif
 
     let duration = str2float(reltimestr(reltime(a:start)))
     let duration = duration * 1000
@@ -82,7 +82,7 @@ if exists('g:show_startup_time') && g:show_startup_time
 
   let s:start = reltime()
   autocmd VimEnter * call s:show_elapsed_millisec(s:start)
-end
+endif
 " }}}
 " Filetype-specific text properties {{{
 autocmd FileType text,vimshell setlocal textwidth=0
@@ -169,7 +169,7 @@ function! s:toggle_diff() abort
     diffoff
   else
     diffthis
-  end
+  endif
   echo 'Diff '.(&diff ? 'ON' : 'OFF')
 endfunction
 " Note that <Leader>sd is mapped to surround.vim <Plug>Dsurround
@@ -282,7 +282,7 @@ autocmd BufWritePost * call s:make_executable(@%)
 function! s:get_ruby_gems() abort
   if &filetype != 'ruby' || !executable('rbenv')
     return
-  end
+  endif
 
   let current_version = split(system('rbenv version'), ' ')[0]
   let gem_path = expand('~/.rbenv/versions/'.current_version.'/lib/ruby/gems/*/gems/')
@@ -313,7 +313,7 @@ if neobundle#load_cache()
   call neobundle#load_toml(expand('~/.vim/NeoBundleSoftRemove.toml'), {'lazy': 1})
 
   NeoBundleSaveCache
-end
+endif
 
 call neobundle#local(expand('~/src/local_plugins'))
 
@@ -321,7 +321,7 @@ call neobundle#end()
 filetype plugin indent on
 if has('vim_starting')
     NeoBundleCheck
-end
+  endif
 " }}}
 
 " Configurations for individual plugins {{{
@@ -394,7 +394,7 @@ if neobundle#tap('neobundle.vim')
     else
       NeoBundleClearCache
       let what = 'neobundle.vim'
-    end
+    endif
     echo 'Cleared cache: '.what
   endfunction
 
@@ -441,7 +441,7 @@ if neobundle#tap('neocomplcache.vim')
     " vim-rails is sourced.
     if exists('b:rails_root')
       call remove(g:neocomplcache#force_omni_input_patterns, 'ruby')
-    end
+    endif
   endfunction
 
   function! neobundle#hooks.on_post_source(bundle)
@@ -498,7 +498,7 @@ if neobundle#tap('neocomplete.vim')
     " vim-rails is sourced.
     if exists('b:rails_root')
       call remove(g:neocomplete#force_omni_input_patterns, 'ruby')
-    end
+    endif
   endfunction
 
   function! neobundle#hooks.on_post_source(bundle)
@@ -532,7 +532,7 @@ if neobundle#tap('neosnippet.vim')
       let g:neosnippet#disable_runtime_snippets = {
             \ '_': 1,
             \ }
-    end
+    endif
 
     " <TAB>: completion
     imap <expr> <TAB> neosnippet#expandable_or_jumpable() ?
@@ -557,7 +557,7 @@ if neobundle#tap('nerdtree')
     " Don't use nerdtree when opening directory (use vimfiler.vim)
     if neobundle#is_sourced('vimfiler.vim')
       let g:NERDTreeHijackNetrw = 0
-    end
+    endif
     let g:NERDTreeMinimalUI = 1
     let g:NERDTreeDirArrows = 0
     let g:NERDTreeMapToggleHidden = '.'
@@ -598,7 +598,7 @@ if neobundle#tap('rsense')
     if !filereadable(expand('~/.rsense'))
       let config_rb = '~/.vim/bundle/rsense/etc/config.rb'
       call system('ruby '.config_rb.' > ~/.rsense')
-    end
+    endif
   endfunction
 
   call neobundle#untap()
@@ -623,7 +623,7 @@ if neobundle#tap('unite.vim')
 
   if neobundle#is_installed('unite-outline')
     nnoremap [unite]o :Unite outline<CR>
-  end
+  endif
 
   function! neobundle#hooks.on_source(bundle)
     call unite#custom#profile('default',
@@ -672,7 +672,7 @@ if neobundle#tap('unite.vim')
       let g:unite_source_grep_command = 'ag'
       let g:unite_source_grep_default_opts = '--nocolor --nogroup --line-numbers '
             \ . '--ignore ".git" --ignore ".svn" --ignore ".hg"'
-    end
+    endif
 
     autocmd FileType unite imap <silent> <buffer> <C-w> <Plug>(unite_delete_backward_path)
     " helm-like preview
@@ -965,11 +965,11 @@ if neobundle#tap('vim-rails')
       if neobundle#is_installed('rsense')
         NeoBundleDisable rsense
         call neobundle#config('rsense', { 'disabled': 1 })
-      end
+      endif
       if neobundle#is_installed('vim-monster')
         NeoBundleDisable vim-monster
         call neobundle#config('vim-monster', { 'disabled': 1 })
-      end
+      endif
     endif
   endfunction
 
@@ -1016,7 +1016,7 @@ if neobundle#tap('vim-smartchr')
   function! neobundle#hooks.on_post_source(bundle)
     if exists('*s:smartchr_'.&filetype)
       execute 'call s:smartchr_'.&filetype.'()'
-    end
+    endif
   endfunction
 
   call neobundle#untap()
@@ -1158,7 +1158,7 @@ if neobundle#tap('vinarise.vim')
   " Source when -b option is specified when starting Vim
   if &binary
     call neobundle#source('vinarise.vim')
-  end
+  endif
 
   call neobundle#untap()
 endif
