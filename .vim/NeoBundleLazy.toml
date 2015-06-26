@@ -347,6 +347,7 @@ vim_version = '7.3'
 [[plugins]]
 repository = 'starcraftman/vim-eclim'
 filetypes = 'java'
+commands = 'DeployEclimd'
 disabled = '!filereadable(expand("~/.eclim/.eclimd_instances"))'
 
 [[plugins]]
