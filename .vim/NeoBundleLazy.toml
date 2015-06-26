@@ -126,6 +126,12 @@ commands = 'DisableItalic'
 gui = 1
 
 [[plugins]]
+repository = 'mattn/emmet-vim'
+filetypes = ['html', 'xhtml']
+commands = ['Emmet', 'EmmetInstall']
+mappings = '<Plug>(emmet-'
+
+[[plugins]]
 repository = 'mattn/gist-vim'
 commands = 'Gist'
 depends = 'mattn/webapi-vim'

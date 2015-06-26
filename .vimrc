@@ -340,6 +340,15 @@ if neobundle#tap('context_filetype.vim')
   call neobundle#untap()
 endif
 " }}}
+" emmet-vim {{{
+if neobundle#tap('emmet-vim')
+  function! neobundle#hooks.on_source(bundle)
+    let g:user_emmet_complete_tag = 1
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
 " incsearch.vim {{{
 if neobundle#tap('incsearch.vim')
   map / <Plug>(incsearch-forward)
