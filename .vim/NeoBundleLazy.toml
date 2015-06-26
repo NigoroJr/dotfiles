@@ -117,6 +117,10 @@ executable('rct-complete') \
 && (!exists('g:use_rsense') || !g:use_rsense)"""
 
 [[plugins]]
+repository = 'matchit.zip'
+mappings = ['%', 'g%']
+
+[[plugins]]
 repository = 'mattn/disableitalic-vim'
 commands = 'DisableItalic'
 gui = 1

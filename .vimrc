@@ -56,8 +56,6 @@ endif
 let mapleader = ','
 noremap \ ,
 syntax on
-" Jump to matching keyword
-runtime macros/matchit.vim
 
 " Global variables {{{
 let g:use_rsense = 0
@@ -373,6 +371,15 @@ if neobundle#tap('jedi-vim')
 
   function! neobundle#hooks.on_source(bundle)
     autocmd FileType python setlocal omnifunc=jedi#completions
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
+" matchit.zip {{{
+if neobundle#tap('matchit.zip')
+  function! neobundle#hooks.on_post_source(bundle)
+    silent! execute 'doautocmd FileType' &filetype
   endfunction
 
   call neobundle#untap()
