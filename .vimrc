@@ -327,7 +327,6 @@ if has('vim_starting')
 if neobundle#tap('clever-f.vim')
   let g:clever_f_fix_key_direction = 0
   let g:clever_f_chars_match_any_signs = ''
-  let g:clever_f_across_no_line = 1
 
   call neobundle#untap()
 endif
