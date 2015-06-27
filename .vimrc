@@ -439,7 +439,7 @@ if neobundle#tap('neocomplcache.vim')
     let g:neocomplcache#force_omni_input_patterns = {
           \ 'go': '[^.[:digit:] *\t]\.\w*',
           \ 'cpp': '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*',
-          \ 'java': '\%(\h\w*\|)\)\.\w*',
+          \ 'java': '[^.[:digit:] *\t]\.\w*',
           \ 'perl': '[^. \t]->\%(\h\w*\)\?\|use.*\w*::\%(\h\w*\)\?',
           \ 'ruby': '[^. *\t]\.\w*\|\h\w*::',
           \ 'python': '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*',
@@ -496,7 +496,7 @@ if neobundle#tap('neocomplete.vim')
     let g:neocomplete#force_omni_input_patterns = {
           \ 'go': '[^.[:digit:] *\t]\.\w*',
           \ 'cpp': '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*',
-          \ 'java': '\%(\h\w*\|)\)\.\w*',
+          \ 'java': '[^.[:digit:] *\t]\.\w*',
           \ 'perl': '[^. \t]->\%(\h\w*\)\?\|use.*\w*::\%(\h\w*\)\?',
           \ 'ruby': '[^. *\t]\.\w*\|\h\w*::',
           \ 'python': '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*',
