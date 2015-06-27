@@ -1,8 +1,8 @@
 ;;;; Miscellaneous configurations
 
 ;;; Only apply color theme when in GUI
-(require 'solarized-theme)
 (when window-system
+  (require 'solarized-theme)
   (load-theme 'solarized-light t))
 
 (custom-set-variables
