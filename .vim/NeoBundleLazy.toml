@@ -62,7 +62,10 @@ commands = 'Perldoc'
 [[plugins]]
 repository = 'artur-shaik/vim-javacomplete2'
 filetypes = 'java'
-disabled = 'filereadable(expand("~/.eclim/.eclimd_instances"))'
+disabled = """
+filereadable(expand('~/.eclim/.eclimd_instances')) \
+|| !executable('mvn') || !has('python')"""
+vim_version = '7.4.0'
 
 [[plugins]]
 repository = 'jceb/vim-hier'
