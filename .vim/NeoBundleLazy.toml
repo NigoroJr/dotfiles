@@ -102,6 +102,10 @@ filetypes = 'markdown'
 depends = 'tyru/open-browser.vim'
 
 [[plugins]]
+repository = 'kchmck/vim-coffee-script'
+filetypes = 'coffee'
+
+[[plugins]]
 repository = 'lambdalisue/vim-gista'
 commands = 'Gista'
 unite_sources = 'gista'
