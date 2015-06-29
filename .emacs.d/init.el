@@ -65,11 +65,13 @@
         auto-complete-c-headers
         auto-complete-clang-async
         auto-complete-yasnippet
+        coffee-mode
         color-theme
         color-theme-solarized
         emacs-async
         emacs-plsense
         exec-path-from-shell
+        haml-mode
         helm
         helm-ag
         helm-descbinds
