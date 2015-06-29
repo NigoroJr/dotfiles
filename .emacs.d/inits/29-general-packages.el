@@ -29,3 +29,7 @@
 (define-key global-map (kbd "C-c q") 'vr/query-replace)
 (define-key global-map (kbd "C-M-r") 'vr/isearch-backward)
 (define-key global-map (kbd "C-M-s") 'vr/isearch-forward)
+
+;;; ws-butler
+(require 'ws-butler)
+;; Hooks defined in 30-edit-mode-*.el

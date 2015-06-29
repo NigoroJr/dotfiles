@@ -17,6 +17,7 @@
 
 ;;; Hooks
 (add-hook 'ruby-mode-hook 'add-yasnippet-ac-sources)
+(add-hook 'ruby-mode-hook 'ws-butler-mode)
 
 ;;; ruby-end
 (require 'ruby-end)

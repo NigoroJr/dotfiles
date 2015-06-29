@@ -5,3 +5,6 @@
           (lambda ()
             (turn-on-auto-fill)
             (set-fill-column 78)))
+
+;; ws-butler
+(add-hook 'text-mode-hook 'ws-butler-mode)

@@ -36,3 +36,6 @@
 (add-hook 'c-mode-common-hook
           (lambda ()
             (define-key c-mode-base-map (kbd "C-c a") 'ff-find-other-file)))
+
+;; ws-butler
+(add-hook 'c-mode-common-hook 'ws-butler-mode)
