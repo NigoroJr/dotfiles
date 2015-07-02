@@ -1,0 +1,12 @@
+[[plugins]]
+repository = 'Shougo/neobundle.vim'
+depends = 'Shougo/vimproc.vim'
+
+[[plugins]]
+repository = 'Shougo/vimproc.vim'
+
+  [plugins.build]
+  windows = 'tools\\update-dll-mingw'
+  cygwin = 'make -f make_cygwin.mak'
+  mac = 'make -f make_mac.mak'
+  unix = 'make -f make_unix.mak'

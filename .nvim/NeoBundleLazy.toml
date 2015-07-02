@@ -1,0 +1,105 @@
+[[plugins]]
+repository = 'cespare/vim-toml'
+filetypes = 'toml'
+
+[[plugins]]
+repository = 'haya14busa/incsearch.vim'
+mappings = [
+  '<Plug>(incsearch-forward)',
+  '<Plug>(incsearch-backward)',
+  '<Plug>(incsearch-stay)',
+  '<Plug>(incsearch-nohl-n)',
+  '<Plug>(incsearch-nohl-N)',
+  '<Plug>(incsearch-nohl-*)',
+  '<Plug>(incsearch-nohl-#)',
+  '<Plug>(incsearch-nohl-g*)',
+  '<Plug>(incsearch-nohl-g#)',
+]
+disabled = '&filetype == "man" && has("macunix")'
+
+[[plugins]]
+repository = 'matchit.zip'
+mappings = ['%', 'g%']
+
+[[plugins]]
+repository = 'ntpeters/vim-better-whitespace'
+insert = 1
+focus = 1
+
+[[plugins]]
+repository = 'osyo-manga/vim-jplus'
+mappings = [
+  '<Plug>(jplus)', '<Plug>(jplus-getchar)', '<Plug>(jplus-input)',
+  '<Plug>(jplus-getchar-with-space)', '<Plug>(jplus-input-with-space)',
+]
+
+[[plugins]]
+repository = 'rhysd/clever-f.vim'
+mappings = ['f', 'F', 't', 'T']
+
+[[plugins]]
+repository = 'Shougo/vimfiler.vim'
+explorer = 1
+
+  [plugins.commands]
+  name = [
+    'VimFiler',
+    'VimFilerCurrentDir',
+    'VimFilerBufferDir',
+    'VimFilerExplorer',
+  ]
+  complete = 'customlist,vimfiler#complete'
+
+[[plugins]]
+repository = 'tomtom/tcomment_vim'
+mappings = [
+  'gc', 'g<', 'g>',
+  '<Plug>TComment_',
+]
+
+[[plugins]]
+repository = 'tpope/vim-abolish'
+depends = 'tpope/vim-repeat'
+commands = ['Abolish', 'Subvert', 'S']
+mappings = 'cr'
+
+[[plugins]]
+repository = 'tpope/vim-endwise'
+filetypes = [
+  'aspvbs', 'c', 'cpp', 'crystal', 'elixir', 'htmldjango', 'lua', 'matlab',
+  'objc', 'ruby', 'sh', 'snippets', 'vb', 'vbnet', 'vim', 'xdefaults', 'zsh',
+]
+
+[[plugins]]
+repository = 'tpope/vim-fugitive'
+augroup = 'fugitive'
+commands = [
+  'Git', 'Git!', 'Gcd', 'Glcd', 'Gstatus', 'Gcommit', 'Gmerge', 'Gpull',
+  'Gpush', 'Gfetch', 'Ggrep', 'Glgrep', 'Glog', 'Gllog', 'Gedit', 'Gsplit',
+  'Gvsplit', 'Gtabedit', 'Gpedit', 'Gsplit!', 'Gvsplit!', 'Gtabedit!',
+  'Gpedit!', 'Gread', 'Gread!', 'Gwrite', 'Gwrite', 'Gwq', 'Gwq!', 'Gdiff',
+  'Gsdiff', 'Gvdiff', 'Gmove', 'Gremove', 'Gblame',
+]
+
+[[plugins]]
+repository = 'tpope/vim-repeat'
+mappings = '.'
+functions = 'repeat#set'
+
+[[plugins]]
+repository = 'tpope/vim-speeddating'
+depends = 'tpope/vim-repeat'
+mappings = ['<C-a>', '<C-x>']
+
+[[plugins]]
+repository = 'tpope/vim-surround'
+depends = 'tpope/vim-repeat'
+mappings = ['<Plug>Ysurround', '<Plug>Dsurround', '<Plug>Csurround']
+
+[[plugins]]
+repository = 'wesQ3/vim-windowswap'
+functions = [
+  'WindowSwap#MarkWindowSwap',
+  'WindowSwap#DoWindowSwap',
+  'WindowSwap#EasyWindowSwap',
+]

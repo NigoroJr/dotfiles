@@ -1,7 +1,11 @@
+if has('vim_starting')
+  set runtimepath+=~/.nvim/bundle/neobundle.vim/
+endif
+
 set autoread
 set backspace=indent,eol,start
 set backup
-set backupdir=~/.vim/backups/
+set backupdir=~/.nvim/backups/
 set completeopt-=preview
 set expandtab
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,sjis,cp932,euc-jp,cp20932,guess
@@ -19,9 +23,9 @@ set splitbelow
 set splitright
 set tabstop=4
 set textwidth=78
-set undodir=~/.vim/undo/
+set undodir=~/.nvim/undo/
 set undofile
-set viewdir=~/.vim/view/
+set viewdir=~/.nvim/view/
 set viewoptions=cursor,folds
 set wildmode=longest,list
 
@@ -159,6 +163,184 @@ function! s:make_executable(filename)
   endif
 endfunction
 autocmd BufWritePost * call s:make_executable(@%)
+" }}}
+" Clone neobundle.vim if not installed {{{
+if !isdirectory(expand('~/.nvim/bundle/neobundle.vim')) && executable('git')
+  let url = 'https://github.com/Shougo/neobundle.vim'
+  let dest = '~/.nvim/bundle/neobundle.vim'
+  let cmd = 'git clone '.url.' '.dest
+  call system(cmd)
+endif
+" }}}
+" Init neobundle.vim {{{
+call neobundle#begin(expand('~/.nvim/bundle/'))
+
+if neobundle#load_cache()
+  NeoBundleFetch 'Shougo/neobundle.vim'
+
+  call neobundle#load_toml(expand('~/.nvim/NeoBundle.toml'))
+  call neobundle#load_toml(expand('~/.nvim/NeoBundleLazy.toml'), {'lazy': 1})
+
+  NeoBundleSaveCache
+endif
+
+call neobundle#end()
+filetype plugin indent on
+if has('vim_starting')
+    NeoBundleCheck
+  endif
+" }}}
+" Plugins {{{
+" clever-f.vim {{{
+if neobundle#tap('clever-f.vim')
+  let g:clever_f_fix_key_direction = 0
+  let g:clever_f_chars_match_any_signs = ''
+
+  call neobundle#untap()
+endif
+" }}}
+" incsearch.vim {{{
+if neobundle#tap('incsearch.vim')
+  map / <Plug>(incsearch-forward)
+  map ? <Plug>(incsearch-backward)
+  map g/ <Plug>(incsearch-stay)
+
+  map n  <Plug>(incsearch-nohl-n)
+  map N  <Plug>(incsearch-nohl-N)
+  map *  <Plug>(incsearch-nohl-*)
+  map #  <Plug>(incsearch-nohl-#)
+  map g* <Plug>(incsearch-nohl-g*)
+  map g# <Plug>(incsearch-nohl-g#)
+
+  function! neobundle#hooks.on_source(bundle)
+    let g:incsearch#consistent_n_direction = 1
+    let g:incsearch#emacs_like_keymap = 1
+    let g:incsearch#auto_nohlsearch = 1
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
+" matchit.zip {{{
+if neobundle#tap('matchit.zip')
+  function! neobundle#hooks.on_post_source(bundle)
+    silent! execute 'doautocmd FileType' &filetype
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
+" neobundle.vim {{{
+if neobundle#tap('neobundle.vim')
+  let g:neobundle#types#git#enable_submodule = 1
+  "let g:neobundle#install_process_timeout = 1500
+
+  " Smart cache clearing
+  function! s:clear_cache() abort
+    if neobundle#is_sourced('vim-marching')
+      MarchingBufferClearCache
+      let what = 'marching.vim'
+    elseif neobundle#is_sourced('rsense')
+      RSenseClear
+      let what = 'rsense'
+    else
+      NeoBundleClearCache
+      let what = 'neobundle.vim'
+    endif
+    echo 'Cleared cache: '.what
+  endfunction
+
+  nmap <silent> <Leader>cc :call <SID>clear_cache()<CR>
+
+  call neobundle#untap()
+endif
+" }}}
+" vimfiler.vim {{{
+if neobundle#tap('vimfiler.vim')
+  nnoremap <silent> <Leader>f :VimFilerBufferDir -status<CR>
+
+  function! neobundle#hooks.on_source(bundle)
+    " vim-rails maps <Leader>uf to file_rec/async:!
+    if !neobundle#is_sourced('vim-rails')
+      " Otherwise override ':Unite file_rec/async' if in vimfiler.vim
+      autocmd FileType vimfiler nmap <buffer> <silent> <Leader>uf :UniteWithBufferDir file_rec/async<CR>
+      autocmd FileType vimfiler nmap <buffer> <silent> <Leader>ul :UniteWithBufferDir file/async<CR>
+    endif
+
+    let g:vimfiler_as_default_explorer = 1
+    let g:vimfiler_time_format = "%m/%d/%y %H:%M%S"
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
+" vim-better-whitespace {{{
+if neobundle#tap('vim-better-whitespace')
+  function! neobundle#hooks.on_source(bundle)
+    let g:better_whitespace_filetypes_blacklist = [
+          \ 'unite', 'help', 'vimshell', 'git'
+          \ ]
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
+" vim-fugitive {{{
+if neobundle#tap('vim-fugitive')
+  function! neobundle#hooks.on_post_source(bundle)
+    call fugitive#detect(resolve(expand('%')))
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
+" vim-jplus {{{
+if neobundle#tap('vim-jplus')
+  nmap J <Plug>(jplus)
+  nmap <Leader>J <Plug>(jplus-getchar)
+
+  function! neobundle#hooks.on_source(bundle)
+    let g:jplus#input_config = {
+          \ '__DEFAULT__': {
+          \   'delimiter_format': ' %d ',
+          \ },
+          \ ',': {
+          \   'delimiter_format': '%d, ',
+          \ },
+          \ }
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
+" vim-surround {{{
+if neobundle#tap('vim-surround')
+  let g:surround_no_mappings = 1
+  let g:surround_no_insert_mappings = 1
+
+  " Only enable some key bindings
+  nmap <Leader>sy <Plug>Ysurround
+  nmap <Leader>sd <Plug>Dsurround
+  nmap <Leader>sc <Plug>Csurround
+
+  call neobundle#untap()
+endif
+" }}}
+" vim-windowswap {{{
+if neobundle#tap('vim-windowswap')
+  nnoremap [window] <Nop>
+  nmap <Leader>w [window]
+  nnoremap <silent> [window]w :call WindowSwap#EasyWindowSwap()<CR>
+  nnoremap <silent> [window]p :call WindowSwap#DoWindowSwap()<CR>
+  nnoremap <silent> [window]y :call WindowSwap#MarkWindowSwap()<CR>
+
+  function! neobundle#hooks.on_source(bundle)
+    let g:windowswap_map_keys = 0
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
 " }}}
 " Source local configurations if any {{{
 if filereadable(expand('~/.localrc/nvimrc'))

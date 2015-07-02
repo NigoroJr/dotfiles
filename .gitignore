@@ -1,6 +1,6 @@
 # Vim swap files
 *.swp
-# Ignore backup files (keep it local!)
+# Vim
 .vim/backups/
 .vim/view/
 .vim/undo/
@@ -8,6 +8,14 @@
 .vim/bundle/*
 !.vim/bundle/.keep
 .vim/.netrwhist
+# NeoVim
+.nvim/backups/
+.nvim/view/
+.nvim/undo/
+.nvim/spell/
+.nvim/bundle/*
+!.nvim/bundle/.keep
+.nvim/.netrwhist
 
 .emacs.d/*
 !.emacs.d/snippets
