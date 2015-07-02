@@ -1,15 +1,15 @@
 [[plugins]]
-repository = 'Align'
-commands = ['Align', 'AlignCtrl']
-mappings = '<Plug>AM_'
+repository = 'ahayman/vim-nodejs-complete'
+filetypes = 'javascript'
 
 [[plugins]]
 repository = 'airblade/vim-rooter'
 mappings = '<Plug>RooterChangeToRootDirectory'
 
 [[plugins]]
-repository = 'ahayman/vim-nodejs-complete'
-filetypes = 'javascript'
+repository = 'Align'
+commands = ['Align', 'AlignCtrl']
+mappings = '<Plug>AM_'
 
 [[plugins]]
 repository = 'c9s/perlomni.vim'
