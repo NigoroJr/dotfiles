@@ -27,7 +27,6 @@ set wildmode=longest,list
 
 let mapleader = ','
 
-
 " General key bindings   {{{
 " Move by physical/logical line
 nnoremap gj j
@@ -64,13 +63,15 @@ function! s:goto_tab() abort
   let tab_num = nr2char(getchar())
   silent exec ':tabnext '.tab_num
 endfunction
-nnoremap <silent> <Leader>tg :call <SID>goto_tab()<CR>
-nnoremap <silent> <Leader>ts :tabs<CR>
-nnoremap <silent> <Leader>tn :tabnext<CR>
-nnoremap <silent> <Leader>tp :tabprevious<CR>
-nnoremap <silent> <Leader>tf :tabfirst<CR>
-nnoremap <silent> <Leader>tl :tablast<CR>
-nnoremap <silent> <Leader>tw :tabnew<CR>
+nnoremap [tab] <Nop>
+nmap <Leader>t [tab]
+nnoremap <silent> [tab]g :call <SID>goto_tab()<CR>
+nnoremap <silent> [tab]s :tabs<CR>
+nnoremap <silent> [tab]n :tabnext<CR>
+nnoremap <silent> [tab]p :tabprevious<CR>
+nnoremap <silent> [tab]f :tabfirst<CR>
+nnoremap <silent> [tab]l :tablast<CR>
+nnoremap <silent> [tab]w :tabnew<CR>
 
 " Function to toggle variables and show message
 function! s:toggle(var, mes) abort
@@ -78,32 +79,41 @@ function! s:toggle(var, mes) abort
   echo a:mes.' '.(eval('&'.a:var) ? 'ON' : 'OFF')
 endfunction
 
-" Toggle spell check
 nmap <silent> <Leader>ss :call <SID>toggle('spell', 'Spell')<CR>
-
-" Toggle paste
 nmap <silent> <Leader>sp :call <SID>toggle('paste', 'Paste')<CR>
-
-" Toggle scrollbind
 nmap <silent> <Leader>sb :call <SID>toggle('scrollbind', 'Scrollbind')<CR>
+nmap <silent> <Leader>set :call <SID>toggle('expandtab', 'expandtab')<CR>
+
+" Toggle diff
+function! s:toggle_diff() abort
+  if &diff
+    diffoff
+  else
+    diffthis
+  endif
+  echo 'Diff '.(&diff ? 'ON' : 'OFF')
+endfunction
+" Note that <Leader>sd is mapped to surround.vim <Plug>Dsurround
+nmap <silent> <Leader>dt :call <SID>toggle_diff()<CR>
 " }}}
 " Mapping for inserting closing curly brace {{{
 function! s:closing_brace_mapping()
   if &filetype == 'vim'
-    inoremap {<CR> {<CR>\<Space>}<Esc>O\<Space>
+    inoremap <buffer> {<CR> {<CR>\<Space>}<Esc>O\<Space>
   " Don't do this for LaTeX documents
   elseif &filetype !~ 'tex\|plaintex'
-    inoremap {<CR> {<CR>}<Esc>O
+    inoremap <buffer> {<CR> {<CR>}<Esc>O
   endif
   " Otherwise, no mapping is done
 endfun
 autocmd FileType * call <SID>closing_brace_mapping()
 " }}}
-" C++ snippets {{{
+" C++ {{{
+" Snippets
 augroup cpp-namespace
   autocmd!
-  autocmd FileType cpp inoremap <buffer><expr>; <SID>expand_namespace()
-  autocmd FileType cpp inoremap <buffer><expr>{<CR> <SID>class_declaration()
+  autocmd FileType cpp inoremap <buffer> <expr> ; <SID>expand_namespace()
+  autocmd FileType cpp inoremap <buffer> <expr> {<CR> <SID>class_declaration()
 augroup END
 function! s:expand_namespace()
   let s = getline('.')[0:col('.')-1]
