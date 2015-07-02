@@ -202,7 +202,7 @@ depends = [
 filetypes = ['c', 'cpp']
 commands = 'MarchingBufferClearCache'
 mappings = [
-  ['i', '<Plug>(marching_force_start_omni_complete)']
+  ['i', '<Plug>(marching_force_start_omni_complete)'],
 ]
 disabled = """
 (exists('g:use_vim_clang') && g:use_vim_clang) \
