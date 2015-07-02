@@ -22,8 +22,8 @@ endif
 
 if has('gui_running')
   " Font for programming
-  if has('gui_mac')
-    set guifont=Ricty Discord:h16
+  if has('gui_mac') || has('gui_macvim')
+    set guifont=Ricty\ Discord:h16
   elseif has('gui_gtk')
     set guifont=Ricty\ Discord\ 9
   elseif has('gui_win32')
