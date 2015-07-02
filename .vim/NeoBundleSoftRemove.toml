@@ -42,10 +42,12 @@ disabled = """
 
 [[plugins]]
 repository = 'scrooloose/nerdtree'
-commands = 'NERDTreeFind'
 
   [plugins.commands]
-  name = 'NERDTree'
+  name = [
+    'NERDTree', 'NERDTreeCWD', 'NERDTreeClose', 'NERDTreeFind', 'NERDTreeFocus',
+    'NERDTreeFromBookmark', 'NERDTreeMirror', 'NERDTreeToggle',
+  ]
   complete = 'dir'
 
 [[plugins]]
