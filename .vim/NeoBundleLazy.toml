@@ -12,6 +12,10 @@ commands = ['Align', 'AlignCtrl']
 mappings = '<Plug>AM_'
 
 [[plugins]]
+repository = 'AnsiEsc.vim'
+commands = 'AnsiEsc'
+
+[[plugins]]
 repository = 'c9s/perlomni.vim'
 filetypes = 'perl'
 

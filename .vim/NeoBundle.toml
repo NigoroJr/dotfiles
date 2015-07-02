@@ -1,7 +1,4 @@
 [[plugins]]
-repository = 'AnsiEsc.vim'
-
-[[plugins]]
 repository = 'ciaranm/securemodelines'
 
 [[plugins]]
