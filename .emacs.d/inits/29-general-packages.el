@@ -33,3 +33,11 @@
 ;;; ws-butler
 (require 'ws-butler)
 ;; Hooks defined in 30-edit-mode-*.el
+
+;;; coffee-mode
+(custom-set-variables '(coffee-tab-width 2))
+(eval-after-load "coffee-mode"
+  '(progn
+     ;; Rebind C-c C-o since coffee-mode messes up with this key binding
+     (define-key coffee-mode-map (kbd "C-c C-o") 'insert-newline-above)
+     (define-key coffee-mode-map (kbd "C-c C-o C-s") nil)))
