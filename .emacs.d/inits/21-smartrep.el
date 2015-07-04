@@ -14,24 +14,31 @@
   '(("h" . windmove-left)
     ("j" . windmove-down)
     ("k" . windmove-up)
-    ("l" . windmove-right)))
+    ("l" . windmove-right)
+    ("o" . other-window)
+    ("O" . previous-multiframe-window)
+    ("0" . delete-window)
+    ("1" . delete-other-windows)
+    ("2" . split-window-below)
+    ("3" . split-window-right)
+    ("+" . balance-windows)
+    ("w" . ace-window)))
 
 ;;; Window size
 (smartrep-define-key global-map "C-x"
   '(("{" . shrink-window-horizontally)
-    ("}" . enlarge-window-horizontally)
-    ("+" . balance-windows)))
+    ("}" . enlarge-window-horizontally)))
 (smartrep-define-key global-map "C-c w"
   '(("H" . shrink-window-horizontally)
     ("J" . shrink-window)
     ("K" . enlarge-window)
     ("L" . enlarge-window-horizontally)
-    ("+" . balance-windows)))
+    ("=" . balance-windows)))
 
 ;;; Text size
 (smartrep-define-key global-map "C-c w"
-  '(("+" . text-scale-increase)
-    ("-" . text-scale-decrease)
+  '(("g" . text-scale-increase)
+    ("l" . text-scale-decrease)
     ("0" . (text-scale-adjust 0))))
 (smartrep-define-key global-map "<f2>"
   '(("+" . text-scale-increase)
