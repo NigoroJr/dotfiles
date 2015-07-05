@@ -366,6 +366,10 @@ vim_version = '7.3'
   complete = 'file'
 
 [[plugins]]
+repository = 'slim-template/vim-slim'
+filetypes = 'slim'
+
+[[plugins]]
 repository = 'starcraftman/vim-eclim'
 filetypes = 'java'
 commands = 'DeployEclimd'

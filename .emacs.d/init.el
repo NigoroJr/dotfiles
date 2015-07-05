@@ -87,6 +87,7 @@
         rsense
         ruby-block
         ruby-end
+        slim-mode
         slime
         smartchr
         smartrep

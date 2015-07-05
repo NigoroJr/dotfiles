@@ -7,4 +7,5 @@ augroup filetypedetect
   autocmd BufRead,BufNewFile *.toml set filetype=toml
   autocmd BufRead,BufNewFile *.vala set filetype=vala
   autocmd BufRead,BufNewFile *.coffee set filetype=coffee
+  autocmd BufRead,BufNewFile *.slim set filetype=slim
 augroup END
