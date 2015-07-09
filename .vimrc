@@ -82,6 +82,16 @@ if exists('g:show_startup_time') && g:show_startup_time
   autocmd VimEnter * call s:show_elapsed_millisec(s:start)
 endif
 " }}}
+" Recompile .zshrc etc. on save {{{
+function! s:recompile_zshrc(filename) abort
+  " zcompile is a built-in shell command so isn't detected with executable()
+  if !executable('zsh') || !filereadable(a:filename)
+    return
+  endif
+
+  call system('zcompile '.a:filename)
+endfunction
+" }}}
 " Filetype-specific text properties {{{
 autocmd FileType text,vimshell setlocal textwidth=0
 autocmd FileType ruby,html,xhtml,eruby,vim,toml,xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
@@ -90,6 +100,7 @@ autocmd FileType go setlocal noexpandtab
 autocmd FileType man setlocal nonumber noexpandtab shiftwidth=8 tabstop=8 softtabstop=8
 autocmd FileType help syntax clear helpNote
 autocmd BufNewFile,BufRead *.tex setlocal filetype=tex
+autocmd BufWritePost .zsh* call s:recompile_zshrc(expand('%'))
 " }}}
 " General key bindings   {{{
 " Double leader

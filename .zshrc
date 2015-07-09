@@ -11,6 +11,11 @@ if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
 
+# Self-check (only .zshrc)
+if [ ! -f ~/.zshrc.zwc -o ~/.zshrc -nt ~/.zshrc.zwc ]; then
+    zcompile ~/.zshrc
+fi
+
 # ls colors {{{
 case `uname -s` in
     # Macintosh
