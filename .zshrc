@@ -143,6 +143,98 @@ bindkey '[Z' reverse-menu-complete # S-Tab to reverse traverse completion
 
 # }}}
 
+# Functions {{{
+# Create and go into that directory
+mcd() {
+    mkdir $@ && cd $_
+}
+compdef _mkdir mcd
+
+# Brace expansion with completion. For example,
+#
+#   mv ~/{foo,bar}_
+#
+# pressing <Tab> when the cursor is at _ expands to
+#
+#   mv ~/foo ~/bar _
+#
+# even if there's still more path to type. With this function, one can type
+#
+#   mv ${=$( bre foo bar _
+#
+# and get the same completion as foo_ while having the same expansion as
+#
+#   {foo,bar}_
+#
+# . However, the limitation is that this function does not know about the
+# outer array expansion such as:
+#
+#   mv ~/${^${ bre foo bar _
+#
+# and thus, needs to be used like:
+#
+#   mv $( bre ~/foo ~/bar _
+#
+# otherwise, it will show the completions for the current directory in the
+# previous example.
+#
+# Also, note that putting a strange value as the first argument like
+#
+#   bre "$( rm -rf ~ )" _
+#
+# and calling the completion function is dangerous.
+#
+# http://stackoverflow.com/a/27485157/2580849
+
+bre() {
+    local len last
+    local -a args
+    # first=${@[1]}
+    # shift
+    # args=($@)
+    len=$(( $# - 1 ))
+    args=(${@:1:$len})
+    last=${@: -1}
+
+    for arg in $args; do
+        # echo "$first$arg"
+        echo "$arg$last"
+    done
+}
+
+_bre() {
+    local context state line ret=1
+    local -a matching
+
+    _arguments \
+        '1: :->none' \
+        '*: :->rest' \
+        && ret=0
+
+    case $state; in
+        none)
+            _arguments \
+                '1:file:_files' \
+                && ret=0
+            ;;
+        rest)
+            eval first=$line[1]
+            # Use a different (and most of the times safe) delimeter
+            matching=($( eval "ls -d $first*" | sed -e "s|$first||" ))
+            _arguments \
+                "*:arg:($matching)" \
+                && ret=0
+                # "*:files:_files -g '(click*):s/click//'" \
+                # "*:files:_files -g '${line[1]}*:s/${line[1]}//'" \
+                ;;
+    esac
+
+    return ret
+}
+
+compdef _bre bre
+# }}}
+
 # Settings for prompt
 if [ -f ~/.zshrc_prompt ]; then
     source ~/.zshrc_prompt
