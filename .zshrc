@@ -11,14 +11,13 @@ if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
 
-# Self-check (only .zshrc)
+# Compile .zshrc if necessary
 if [ ! -f ~/.zshrc.zwc -o ~/.zshrc -nt ~/.zshrc.zwc ]; then
     zcompile ~/.zshrc
 fi
 
 # ls colors {{{
 case `uname -s` in
-    # Macintosh
     Darwin)
         if hash brew 2>/dev/null; then
             local gnubin=$(brew --prefix coreutils)/libexec/gnubin
@@ -67,7 +66,6 @@ zstyle ':completion:*:(processes|jobs)' menu yes select=2
 limit coredumpsize 102400
 
 # Options {{{
-##############################################################################
 setopt auto_cd              # cd when only directory is entered
 setopt auto_list            # Show list of completion
 setopt auto_name_dirs       # Use named dirs automatically
@@ -100,8 +98,6 @@ unsetopt promptcr           # Show lines without trailing \n
 # }}}
 
 # Key bindings {{{
-#############################################################################
-
 # emacs keybinding
 bindkey -e
 bindkey -M emacs 'n' down-line-or-history
