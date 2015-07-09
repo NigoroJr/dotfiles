@@ -35,3 +35,6 @@ SAVEHIST=6000000
 WORDCHARS="*?_-.[]~=&;!#$%^(){}<>"
 # Don't trim space after completion for these chars
 ZLE_SPACE_SUFFIX_CHARS=$'|&'
+# Prompt "do you wish to see all N possibilities"
+# only when going out of screen
+LISTMAX=0
