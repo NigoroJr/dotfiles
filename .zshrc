@@ -69,6 +69,7 @@ setopt auto_name_dirs       # Use named dirs automatically
 setopt auto_param_keys      # Complete variables
 setopt auto_param_slash     # Complete / automatically
 setopt auto_pushd
+setopt auto_remove_slash    # Remove trailing / automatically
 setopt auto_resume          # Resume when suspended command is entered
 setopt cdable_vars          # cd to named dirs without ~ at beginning
 setopt correct              # Suggest correction
@@ -90,8 +91,7 @@ setopt prompt_subst
 setopt pushd_ignore_dups    # Don't pushd the same directory
 setopt share_history
 unsetopt auto_menu          # Don't change completion with Tab
-unsetopt auto_remove_slash  # Don't remove last / automatically
-unsetopt promptcr           # Show even when no Return at the end
+unsetopt promptcr           # Show lines without trailing \n
 # }}}
 
 # Key bindings {{{
