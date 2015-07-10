@@ -3,6 +3,7 @@ import XMonad.Actions.SpawnOn
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Master
 import XMonad.Layout.PerWorkspace
@@ -67,7 +68,8 @@ myFloatHook = composeAll
 
 -- Log Hook
 myLogHook h = dynamicLogWithPP xmobarPP {
-    ppOutput = hPutStrLn h
+    ppOutput = hPutStrLn h,
+    ppUrgent = xmobarColor "blue" "white"
 }
 
 -- Startup Hook
@@ -83,6 +85,7 @@ myStartupHook = do
     spawnOn "4" "urxvt"
     spawnOn "4" "urxvt"
     spawnOn "4" "urxvt"
+    spawnOn "6" "urxvt"
 
 -- Keybindings
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
@@ -177,7 +180,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 main = do
     myStatusBar <- spawnPipe "xmobar"
-    xmonad $ defaultConfig {
+    xmonad $ withUrgencyHook NoUrgencyHook defaultConfig {
         terminal = myTerminal
         , borderWidth = myBorderWidth
         , normalBorderColor = myNormalBorderColor

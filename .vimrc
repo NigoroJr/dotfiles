@@ -730,7 +730,7 @@ endif
 if neobundle#tap('vim-better-whitespace')
   function! neobundle#hooks.on_source(bundle)
     let g:better_whitespace_filetypes_blacklist = [
-          \ 'unite', 'help', 'vimshell', 'git'
+          \ 'unite', 'help', 'vimshell', 'git', 'mail'
           \ ]
   endfunction
 

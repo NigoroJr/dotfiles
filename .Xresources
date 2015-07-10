@@ -16,6 +16,7 @@ URxvt.scrollBar: false
 
 URxvt.saveLines: 5000
 URxvt.pointerBlank: true
+URxvt.urgentOnBell: true
 
 URxvt.font:\
     xft:Ricty Discord:Regular:size=9:antialias=true,
