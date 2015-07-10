@@ -80,6 +80,7 @@ myStartupHook = do
     spawnOn "1" "urxvt"
     spawnOn "2" "chromium"
     spawn "imwheel -b \"0 0 6 7 0 0 10\" -k"
+    spawn "dropbox"
     spawnOn "3" "gvim"
     spawnOn "4" "urxvt"
     spawnOn "4" "urxvt"
