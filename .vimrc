@@ -49,6 +49,7 @@ set modeline
 set completeopt-=preview
 set autoread
 set showtabline=0
+set formatoptions+=nmBj
 " blowfish2 requires Vim 7.4.399. Encryption available after Vim 7.3
 if s:has_version('7.3')
   execute 'set cryptmethod='.(s:has_version('7.4.399') ? 'blowfish2' : 'blowfish')
