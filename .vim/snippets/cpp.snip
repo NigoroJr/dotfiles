@@ -56,3 +56,15 @@ options		head
 snippet     param
 abbr        \param[in] param desc
 	\param[${1:in}] ${2:param} ${3:description}
+
+snippet		operator_prototype
+abbr		operator overload prototype
+options		head
+	${1:Foo&} operator${2:=}(${3:const Foo& other});${0}
+
+snippet		operator
+abbr		operator overload
+options		head
+	${1:Foo&} ${2:Foo::}operator${3:=}(${4:const Foo& other}) {
+		${0}
+	}
