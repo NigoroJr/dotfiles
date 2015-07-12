@@ -258,7 +258,7 @@ gui = 1
 
 [[plugins]]
 repository = 'rhysd/clever-f.vim'
-mappings = ['f', 'F', 't', 'T']
+mappings = ['f', 'F', 't', 'T', 'cf', 'ct']
 
 [[plugins]]
 repository = 'rhysd/vim-go-impl'
