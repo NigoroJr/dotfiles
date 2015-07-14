@@ -73,6 +73,7 @@
 ;; Enable fuzzy match
 (ido-mode t)
 (setq ido-enable-flex-matching t)
+(setq ido-auto-merge-work-directories-length -1)
 ;; Auto-reload file when changed
 (global-auto-revert-mode t)
 ;; Show full path of file in modeline
