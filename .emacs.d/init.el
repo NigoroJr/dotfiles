@@ -84,6 +84,7 @@
         owdriver
         popup
         projectile
+        projectile-rails
         rsense
         ruby-block
         ruby-end
