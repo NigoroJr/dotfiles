@@ -42,3 +42,6 @@
      ;; Rebind C-c C-o since coffee-mode messes up with this key binding
      (define-key coffee-mode-map (kbd "C-c C-o") 'insert-newline-above)
      (define-key coffee-mode-map (kbd "C-c C-o C-s") nil)))
+
+;;; slim-mode
+(require 'slim-mode)
