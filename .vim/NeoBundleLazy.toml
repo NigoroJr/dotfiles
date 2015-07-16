@@ -80,7 +80,8 @@ repository = 'jeaye/color_coded'
 filetypes = ['c', 'cpp', 'objc', 'objcpp']
 build_commands = ['cmake', 'make']
 vim_version = '7.4.330'
-disabled = '!has("lua")'
+disabled = """
+!has('lua') || (exists('g:disable_color_coded') && g:disable_color_coded)"""
 gui = 1
 
   [plugins.build]
