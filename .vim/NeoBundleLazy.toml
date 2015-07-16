@@ -76,6 +76,17 @@ repository = 'jceb/vim-hier'
 gui = 1
 
 [[plugins]]
+repository = 'jeaye/color_coded'
+filetypes = ['c', 'cpp', 'objc', 'objcpp']
+build_commands = ['cmake', 'make']
+vim_version = '7.4.330'
+disabled = '!has("lua")'
+gui = 1
+
+  [plugins.build]
+  unix = 'cmake . && make && make install'
+
+[[plugins]]
 repository = 'justinmk/vim-sneak'
 depends = 'tpope/vim-repeat'
 mappings = ['s', 'S']
