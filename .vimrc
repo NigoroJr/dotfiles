@@ -814,6 +814,7 @@ endif
 if neobundle#tap('vim-jplus')
   nmap J <Plug>(jplus)
   nmap <Leader>J <Plug>(jplus-getchar)
+  nmap <D_Leader>J <Plug>(jplus-input)
 
   function! neobundle#hooks.on_source(bundle)
     let g:jplus#input_config = {
