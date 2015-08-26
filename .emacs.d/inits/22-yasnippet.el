@@ -8,4 +8,3 @@
 ;; yasnippet sources for AutoComplete
 (defun add-yasnippet-ac-sources ()
   (add-to-list 'ac-sources 'ac-source-yasnippet))
-
