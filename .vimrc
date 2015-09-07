@@ -65,6 +65,7 @@ syntax on
 
 " Global variables {{{
 let g:use_rsense = 0
+let g:rsenseHome = expand('~/.vim/bundle/rsense')
 let g:use_vim_clang = 0
 let g:show_startup_time = 1
 let g:case_insensitive_cmd = 0
