@@ -338,6 +338,7 @@ depends = 'Shougo/vimproc.vim'
 
 [[plugins]]
 repository = 'Shougo/vimfiler.vim'
+depends = 'Shougo/unite.vim'
 explorer = 1
 
   [plugins.commands]
