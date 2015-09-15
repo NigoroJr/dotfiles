@@ -76,6 +76,10 @@ alias watch='watch -n 0.5'
 
 alias cdd='cd $( dirname $_ )'
 
+psg() {
+    ps aux | grep $1 | grep -v grep
+}
+
 if [[ $SHELL =~ zsh ]]; then
     # Global alias
     alias -g G='| grep'
