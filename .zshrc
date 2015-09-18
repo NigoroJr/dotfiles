@@ -142,7 +142,11 @@ bindkey '[Z' reverse-menu-complete # S-Tab to reverse traverse completion
 # Functions {{{
 # Create and go into that directory
 mcd() {
-    mkdir $@ && cd $_
+    DIR=$1
+    if [ -z $DIR ]; then
+        DIR=tmp
+    fi
+    mkdir $DIR && cd $_
 }
 compdef _mkdir mcd
 
