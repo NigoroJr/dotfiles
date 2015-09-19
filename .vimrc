@@ -1113,6 +1113,7 @@ endif
 if neobundle#tap('vim-watchdogs')
   function! neobundle#hooks.on_source(bundle)
     nmap <silent> <Leader>wd :WatchdogsRun<CR>
+
     let g:watchdogs_check_BufWritePost_enable = 1
     let g:quickrun_config['watchdogs_checker/_'] = {
           \ 'hook/close_quickfix/enable_exit': 1,
@@ -1127,6 +1128,7 @@ if neobundle#tap('vim-watchdogs')
           \ 'type': checker,
           \ 'cmdopt': '-Wall',
           \ }
+
     call watchdogs#setup(g:quickrun_config)
   endfunction
 
