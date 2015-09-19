@@ -956,11 +956,6 @@ if neobundle#tap('vim-quickrun')
           \   'exec': "%c %o",
           \   'runner': 'vimproc',
           \ },
-          \ 'watchdogs_checker/_': {
-          \   'hook/close_quickfix/enable_exit': 1,
-          \   'hook/unite_quickfix/enable': 0,
-          \   'hook/close_unite_quickfix/enable_exit': 1,
-          \ },
           \ }
     let g:quickrun_config.cpp = {
           \ 'command': 'g++',
@@ -1119,6 +1114,11 @@ if neobundle#tap('vim-watchdogs')
   function! neobundle#hooks.on_source(bundle)
     nmap <silent> <Leader>wd :WatchdogsRun<CR>
     let g:watchdogs_check_BufWritePost_enable = 1
+    let g:quickrun_config['watchdogs_checker/_'] = {
+          \ 'hook/close_quickfix/enable_exit': 1,
+          \ 'hook/unite_quickfix/enable': 0,
+          \ 'hook/close_unite_quickfix/enable_exit': 1,
+          \ }
     call watchdogs#setup(g:quickrun_config)
   endfunction
 
