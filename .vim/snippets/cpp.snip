@@ -82,13 +82,13 @@ options		head
 	class ${1:Foo} ${0}{
 	public:
 		// Default constructor
-		$1() {}
+		$1() { }
 		// Copy constructor
-		$1(const $1& ${3:other}) ${4:#init member vars} {}
+		$1(const $1& ${3:other}) ${4:#init member vars} { }
 		// Move constructor
-		$1(const $1&& ${5:other}) ${6:#init member vars} {}
+		$1(const $1&& ${5:other}) ${6:#init member vars} { }
 		// Destructor
-		~$1() {}
+		~$1() { }
 
 		// Assignment operator
 		$1& operator=(const $1& ${7:other}) {
