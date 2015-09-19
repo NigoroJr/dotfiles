@@ -146,7 +146,7 @@ mcd() {
     if [ -z $DIR ]; then
         DIR=tmp
     fi
-    mkdir $DIR && cd $_
+    mkdir -p $DIR && cd $_
 }
 compdef _mkdir mcd
 
