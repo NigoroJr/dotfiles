@@ -1119,6 +1119,14 @@ if neobundle#tap('vim-watchdogs')
           \ 'hook/unite_quickfix/enable': 0,
           \ 'hook/close_unite_quickfix/enable_exit': 1,
           \ }
+    " Use g++ (or clang++) rather than the default clang-check
+    let checker = (executable('g++')
+          \ ? 'watchdogs_checker/g++' : executable('clang++')
+          \ ? 'watchdogs_checker/clang++' : '')
+    let g:quickrun_config['cpp/watchdogs_checker'] = {
+          \ 'type': checker,
+          \ 'cmdopt': '-Wall',
+          \ }
     call watchdogs#setup(g:quickrun_config)
   endfunction
 
