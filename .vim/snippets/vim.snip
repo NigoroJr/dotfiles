@@ -18,21 +18,21 @@ options			head
 	call neobundle#end()
 	filetype plugin indent on
 
-snippet     tap_hook_on_source
+snippet		tap_hook_on_source
 	function! neobundle#hooks.on_source(bundle)
 	  ${1}
 	endfunction
 
-snippet     tap
-options     head
+snippet		tap
+options		head
 	if neobundle#tap('${1}')
 		${0}
 		call neobundle#untap()
 	endif
 
-snippet     neobundle_config
-abbr        call neobundle#config
-options     head
+snippet		neobundle_config
+abbr		call neobundle#config
+options		head
   call neobundle#config({
-        \ '${1:autoload}': ${2},
-        \ })
+		\ '${1:autoload}': ${2},
+		\ })
