@@ -75,3 +75,31 @@ options		head
 snippet		template
 abbr		template<typename T>
 	template<typename ${1:T}>${0}
+
+snippet		class_full
+abbr		class declaration
+options		head
+	class ${1:Foo} ${0}{
+	public:
+		// Default constructor
+		$1() {}
+		// Copy constructor
+		$1(const $1& ${3:other}) ${4:#init member vars} {}
+		// Destructor
+		~$1() {}
+
+		// Assignment operator
+		$1& operator=(const $1& ${5:other}) {
+			${6:#assignments}
+			return *this;
+		}
+
+	private:
+		${2:#member vars}
+	};
+
+snippet		operator<<
+abbr		operator<<
+alias		stream_insertion
+options		word
+	std::ostream& operator<<(std::ostream& ${1:os}, const ${2:Foo}& ${3:f})${0}
