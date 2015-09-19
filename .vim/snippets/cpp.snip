@@ -85,12 +85,14 @@ options		head
 		$1() {}
 		// Copy constructor
 		$1(const $1& ${3:other}) ${4:#init member vars} {}
+		// Move constructor
+		$1(const $1&& ${5:other}) ${6:#init member vars} {}
 		// Destructor
 		~$1() {}
 
 		// Assignment operator
-		$1& operator=(const $1& ${5:other}) {
-			${6:#assignments}
+		$1& operator=(const $1& ${7:other}) {
+			${8:#assignments}
 			return *this;
 		}
 
