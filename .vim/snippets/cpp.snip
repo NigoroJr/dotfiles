@@ -9,15 +9,6 @@ snippet		inc
 snippet		incl
 	#include "${1}"${0}
 
-snippet		pl
-	std::cout << ${1} << std::endl;${0}
-
-snippet		cout
-	std::cout << ${0}
-
-snippet		endl
-	std::endl;${0}
-
 snippet		class
 	class ${1:Name} {
 	public:
@@ -60,17 +51,10 @@ snippet		param
 abbr		\param[in] param desc
 	\param[${1:in}] ${2:param} ${3:description}
 
-snippet		operator_prototype
-abbr		operator overload prototype
-options		head
-	${1:Foo&} operator${2:=}(${3:const Foo& other});${0}
-
 snippet		operator
 abbr		operator overload
 options		head
-	${1:Foo&} ${2:Foo::}operator${3:=}(${4:const Foo& other}) {
-		${0}
-	}
+	${1:Foo&} ${2:Foo::}operator${3:=}(${4:const Foo& other})${0}
 
 snippet		template
 abbr		template<typename T>
