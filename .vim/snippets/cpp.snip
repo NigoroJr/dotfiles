@@ -1,5 +1,5 @@
 snippet		main
-	int main(int argc, char const* argv[]) {${0:TARGET}
+	int main(int argc, char const* argv[]) {${0}
 		return 0;
 	}
 
@@ -9,7 +9,7 @@ snippet		inc
 snippet		incl
 	#include "${1}"${0}
 
-snippet		class
+snippet		class_short
 	class ${1:Name} {
 	public:
 		${0}
@@ -35,7 +35,6 @@ options		head
 		return 0;
 	}
 
-# Hello World
 snippet		hello
 abbr		hello_world
 options		head
@@ -62,6 +61,7 @@ abbr		template<typename T>
 
 snippet		class_full
 abbr		class declaration
+alias		class
 options		head
 	class ${1:Foo} ${0}{
 	public:
