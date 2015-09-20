@@ -95,7 +95,7 @@ fi
 p_info+="%0(?,%F{046}$sign%f,%20(?,%F{046}$sign%f,%F{009}$sign%f))"
 
 # Display in two lines if too long
-local pwd_length=`expr length $PWD`
+local pwd_length=`expr $PWD : '.*'`
 if [ "$pwd_length" -ge 45 ]; then
     PROMPT="[ %F{219}%~%f ]"$'\n'"$p_info"
 else
