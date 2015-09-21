@@ -477,10 +477,6 @@ depends = 'godlygeek/tabular'
 filetypes = 'markdown'
 
 [[plugins]]
-repository = 'tpope/vim-obsession'
-commands = ['Obsession', 'Obsession!']
-
-[[plugins]]
 repository = 'tpope/vim-rails'
 filetypes = ['ruby', 'eruby', 'css', 'scss', 'html', 'javascript', 'yaml']
 
