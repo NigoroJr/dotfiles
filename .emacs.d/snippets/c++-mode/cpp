@@ -3,10 +3,15 @@
 # --
 #include <algorithm>
 #include <chrono>
+#include <functional>
+#include <iomanip>
 #include <iostream>
 #include <iterator>
+#include <memory>
+#include <sstream>
 #include <string>
 #include <thread>
+#include <type_traits>
 #include <unordered_map>
 #include <utility>
 #include <vector>
