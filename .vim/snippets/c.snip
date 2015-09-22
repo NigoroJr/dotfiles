@@ -37,3 +37,12 @@ snippet		impl_me
 abbr		Implement me!
 options		head
 	// TODO: Implement me!
+
+snippet     switch
+abbr        switch-case
+options     head
+	switch (${1:#var}) {
+		case ${2:#val}:
+			${0}
+			break;
+	}

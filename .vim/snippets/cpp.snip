@@ -98,3 +98,12 @@ abbr		operator<<
 alias		stream_insertion
 options		word
 	std::ostream& operator<<(std::ostream& ${1:os}, const ${2:Foo}& ${3:f})${0}
+
+snippet     switch
+abbr        switch-case
+options     head
+	switch (${1:#var}) {
+		case ${2:#val}:
+			${0}
+			break;
+	}
