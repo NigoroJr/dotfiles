@@ -167,7 +167,7 @@ nnoremap <silent> [tab]n :tabnext<CR>
 nnoremap <silent> [tab]p :tabprevious<CR>
 nnoremap <silent> [tab]f :tabfirst<CR>
 nnoremap <silent> [tab]l :tablast<CR>
-nnoremap <silent> [tab]w :tabnew<CR>
+nnoremap <silent> [tab]c :tabnew<CR>
 
 " Function to toggle variables and show message
 function! s:toggle(var, mes) abort
