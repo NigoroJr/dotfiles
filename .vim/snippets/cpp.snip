@@ -67,6 +67,7 @@ alias		class
 options		head
 	class ${1:Foo} ${0}{
 	public:
+		/* Constructors, Destructor, and Assignment operator {{{ */
 		// Default constructor
 		$1() { }
 
@@ -88,6 +89,7 @@ options		head
 			${8:#assignments}
 			return *this;
 		}
+		/* }}} */
 
 	private:
 		${2:#member vars}
