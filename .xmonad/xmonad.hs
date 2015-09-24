@@ -50,6 +50,7 @@ myManageHook = manageSpawn <+> myFloatHook <+> manageHook defaultConfig
 -- To get the class name, xprop | grep WM_CLASS
 myFloatHook = composeAll
     [ className =? "Chromium-browser"   --> moveTo2
+    , className =? "Firefox"            --> moveTo2
     , className =? "Gvim"               --> moveTo3
     , className =? "Emacs"              --> moveTo3
     , className =? "Eclipse"            --> moveTo3
