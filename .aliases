@@ -29,10 +29,9 @@ sudo() {
 }
 
 # Aliases for ls
-alias l='ls -l'
+alias l='ls -lh'
 alias la='ls -A'
 alias ll='ls -CF'
-alias lh='ls -lh'
 
 # Typos that I make a lot
 alias rm_r='rm -r'
