@@ -65,6 +65,7 @@ fi
 alias tm='tmux'
 
 alias g='git'
+alias gai='git add -i'
 alias gap='git add -p'
 alias ga.='git add .'
 alias gl='git log'
