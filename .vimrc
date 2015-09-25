@@ -1045,7 +1045,7 @@ endif
 if neobundle#tap('vim-smartchr')
   function! s:smartchr_cpp()
     " Stream operators
-    inoremap <expr> @ smartchr#loop('<< ', '>> ', '@')
+    inoremap <expr> @ smartchr#loop(' << ', ' >> ', '@')
   endfunction
 
   function! neobundle#hooks.on_post_source(bundle)
