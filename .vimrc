@@ -47,6 +47,9 @@ set splitright
 set splitbelow
 set modeline
 set completeopt-=preview
+if s:has_version('7.4.755')
+  set completeopt+=noinsert
+endif
 set autoread
 set showtabline=0
 set formatoptions+=nmB
