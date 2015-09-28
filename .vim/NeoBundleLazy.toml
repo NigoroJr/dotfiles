@@ -135,15 +135,6 @@ repository = 'lervag/vim-latex'
 filetypes = 'tex'
 
 [[plugins]]
-#repository = 'marcus/rsense'
-repository = 'NigoroJr/rsense'
-filetypes = 'ruby'
-# When vim-monster can be used
-disabled = """
-executable('rct-complete') \
-&& (!exists('g:use_rsense') || !g:use_rsense)"""
-
-[[plugins]]
 repository = 'matchit.zip'
 mappings = ['%', 'g%']
 
@@ -173,6 +164,14 @@ depends = 'thinca/vim-quickrun'
 [[plugins]]
 repository = 'mips.vim'
 filetypes = 'asm'
+
+[[plugins]]
+repository = 'NigoroJr/rsense'
+filetypes = 'ruby'
+# When vim-monster can be used
+disabled = """
+executable('rct-complete') \
+&& (!exists('g:use_rsense') || !g:use_rsense)"""
 
 [[plugins]]
 repository = 'NigoroJr/unite-matcher-hide-hidden-directories'
