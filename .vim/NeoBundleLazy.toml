@@ -184,6 +184,10 @@ insert = 1
 focus = 1
 
 [[plugins]]
+repository = 'octol/vim-cpp-enhanced-highlight'
+filetypes = 'cpp'
+
+[[plugins]]
 repository = 'osyo-manga/shabadou.vim'
 depends = 'thinca/vim-quickrun'
 
