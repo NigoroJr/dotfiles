@@ -508,8 +508,6 @@ if neobundle#tap('neocomplete.vim')
   function! neobundle#hooks.on_source(bundle)
     inoremap <expr> <C-h> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr> <BS> neocomplete#smart_close_popup()."\<BS>"
-    inoremap <expr> <C-y> neocomplete#close_popup()
-    inoremap <expr> <C-g> neocomplete#cancel_popup()
 
     let g:neocomplete#enable_at_startup = 1
     let g:neocomplete#enable_smart_case = 1
