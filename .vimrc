@@ -1106,6 +1106,14 @@ if neobundle#tap('vim-surround')
   call neobundle#untap()
 endif
 " }}}
+" vim-textobj-line {{{
+if neobundle#tap('vim-textobj-line')
+  omap al <Plug>(textobj-line-a)
+  omap il <Plug>(textobj-line-i)
+
+  call neobundle#untap()
+endif
+" }}}
 " vim-textobj-user {{{
 if neobundle#tap('vim-textobj-user')
 

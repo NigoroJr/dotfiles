@@ -109,6 +109,10 @@ repository = 'kana/vim-smartchr'
 filetypes = 'cpp'
 
 [[plugins]]
+repository = 'kana/vim-textobj-line'
+mappings = ['<Plug>(textobj-line-a)', '<Plug>(textobj-line-i)']
+
+[[plugins]]
 repository = 'kana/vim-textobj-user'
 
 [[plugins]]
