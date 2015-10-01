@@ -741,6 +741,8 @@ if neobundle#tap('vim-better-whitespace')
     let g:better_whitespace_filetypes_blacklist = [
           \ 'unite', 'help', 'vimshell', 'git', 'mail'
           \ ]
+    let g:current_line_whitespace_disabled_soft = 1
+    let g:current_line_whitespace_disabled_hard = 0
   endfunction
 
   call neobundle#untap()
