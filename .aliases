@@ -81,6 +81,15 @@ psg() {
     ps aux | grep $1 | grep -v grep
 }
 
+mcm() {
+    if [[ -n $1 ]]; then
+        THREADS="-j$1"
+    fi
+    make clean && make $THREADS
+}
+
+alias mcmj='make clean && make -j'
+
 if [[ $SHELL =~ zsh ]]; then
     # Global alias
     alias -g G='| grep'
