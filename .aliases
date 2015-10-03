@@ -75,6 +75,8 @@ alias du='du -h'
 
 alias watch='watch -n 0.5'
 
+alias rsync='rsync -auv'
+
 alias cdd='cd $( dirname $_ )'
 
 psg() {
