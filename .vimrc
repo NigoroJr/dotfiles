@@ -864,7 +864,7 @@ if neobundle#tap('vim-marching')
           \ 'cpp': '-std=c++11',
           \ }
 
-    set updatetime=200
+    set updatetime=100
     imap <C-x><C-o> <Plug>(marching_force_start_omni_complete)
   endfunction
 
@@ -949,7 +949,7 @@ if neobundle#tap('vim-quickrun')
           \   'hook/quickfix_replace_tempname_to_bufnr/priority_exit': -10,
           \   'runmode': 'async:remote:vimproc',
           \   'runner': 'vimproc',
-          \   'runner/vimproc/updatetime': 60,
+          \   'runner/vimproc/updatetime': 100,
           \ },
           \ 'make': {
           \   'command': 'make',
