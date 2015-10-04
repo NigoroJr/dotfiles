@@ -133,7 +133,11 @@ bindkey 's' history-incremental-pattern-search-forward
 bindkey -M isearch '' backward-kill-word
 bindkey -M isearch '' history-incremental-pattern-search-backward
 
-bindkey '[Z' reverse-menu-complete # S-Tab to reverse traverse completion
+zmodload zsh/complist
+# Start menu comple with Shift-Tab
+bindkey '[Z' menu-complete
+# Use Shift-Tab to reverse traverse completion list
+bindkey -M menuselect '[Z' reverse-menu-complete
 # }}}
 
 # Create and go into that directory
