@@ -109,3 +109,8 @@ options     head
 			${0}
 			break;
 	}
+
+snippet		dump
+abbr		std::copy(v.begin(), v.end(), std::ostream_iterator<>)
+options		head
+	std::copy(${1:v}.begin(), $1.end(), std::ostream_iterator<${2:int}>(${3:std::cout}, ${4:" "}));${0}
