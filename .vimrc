@@ -1138,6 +1138,8 @@ if neobundle#tap('vim-watchdogs')
           \ }
 
     call watchdogs#setup(g:quickrun_config)
+
+    set updatetime=100
   endfunction
 
   call neobundle#untap()
