@@ -1127,6 +1127,7 @@ if neobundle#tap('vim-watchdogs')
           \ 'hook/close_quickfix/enable_exit': 1,
           \ 'hook/unite_quickfix/enable': 0,
           \ 'hook/close_unite_quickfix/enable_exit': 1,
+          \ 'runner/vimproc/updatetime': 100,
           \ }
     " Use g++ (or clang++) rather than the default clang-check
     let checker = (executable('g++')
