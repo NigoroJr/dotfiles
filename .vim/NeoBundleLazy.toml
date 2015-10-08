@@ -159,7 +159,7 @@ repository = 'mattn/webapi-vim'
 
 [[plugins]]
 repository = 'mattn/quickrunex-vim'
-depends = 'thinca/vim-quickrun'
+on_source = 'vim-quickrun'
 
 [[plugins]]
 repository = 'mips.vim'
@@ -188,20 +188,18 @@ filetypes = 'cpp'
 
 [[plugins]]
 repository = 'osyo-manga/shabadou.vim'
-depends = 'thinca/vim-quickrun'
+on_source = 'vim-quickrun'
 
 [[plugins]]
 repository = 'osyo-manga/unite-boost-online-doc'
 filetypes = 'cpp'
 depends = [
-  'Shougo/unite.vim',
   'tyru/open-browser.vim',
   'mattn/webapi-vim',
 ]
 
 [[plugins]]
 repository = 'osyo-manga/unite-quickfix'
-depends = 'Shougo/unite.vim'
 
 [[plugins]]
 repository = 'osyo-manga/vim-jplus'
@@ -323,7 +321,6 @@ commands = 'NeoSnippetEdit'
 
 [[plugins]]
 repository = 'Shougo/unite-outline'
-depends = 'Shougo/unite.vim'
 
 [[plugins]]
 repository = 'Shougo/unite.vim'
@@ -404,7 +401,6 @@ disabled = '!NeoCompleteCompatible()'
 
 [[plugins]]
 repository = 'supermomonga/unite-kawaii-calc'
-depends = 'Shougo/unite.vim'
 
 [[plugins]]
 repository = 'TextFormat'
@@ -510,7 +506,6 @@ mappings = ['<Plug>Ysurround', '<Plug>Dsurround', '<Plug>Csurround']
 
 [[plugins]]
 repository = 'tsukkee/unite-help'
-depends = 'Shougo/unite.vim'
 
 [[plugins]]
 repository = 'tyru/open-browser.vim'
