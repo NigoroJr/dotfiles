@@ -175,7 +175,6 @@ executable('rct-complete') \
 
 [[plugins]]
 repository = 'NigoroJr/unite-matcher-hide-hidden-directories'
-depends = 'Shougo/unite.vim'
 on_source = 'unite.vim'
 
 [[plugins]]
@@ -293,7 +292,7 @@ repository = 'Shougo/context_filetype.vim'
 
 [[plugins]]
 repository = 'Shougo/neocomplcache-rsense.vim'
-depends = ['Shougo/neocomplcache.vim', 'rsense']
+depends = 'Shougo/neocomplcache.vim'
 on_source = 'rsense'
 disabled = 'NeoCompleteCompatible()'
 
@@ -311,13 +310,11 @@ disabled = '!NeoCompleteCompatible()'
 
 [[plugins]]
 repository = 'Shougo/neomru.vim'
-depends = 'Shougo/unite.vim'
 on_source = 'unite.vim'
 
 [[plugins]]
 repository = 'Shougo/neosnippet-snippets'
 on_source = 'neosnippet.vim'
-depends = 'Shougo/neosnippet.vim'
 
 [[plugins]]
 repository = 'Shougo/neosnippet.vim'
@@ -401,7 +398,7 @@ commands = ['SudoRead', 'SudoWrite']
 
 [[plugins]]
 repository = 'supermomonga/neocomplete-rsense.vim'
-depends = ['Shougo/neocomplete.vim', 'rsense']
+depends = 'Shougo/neocomplete.vim'
 on_source = 'rsense'
 disabled = '!NeoCompleteCompatible()'
 
