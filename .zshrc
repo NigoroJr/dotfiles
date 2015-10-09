@@ -142,11 +142,8 @@ bindkey -M menuselect '[Z' reverse-menu-complete
 
 # Create and go into that directory
 mcd() {
-    DIR=$1
-    if [ -z $DIR ]; then
-        DIR=tmp
-    fi
-    mkdir -p $DIR && cd $_
+    DIR=${1:-tmp}
+    mkdir -p $DIR && cd $DIR
 }
 compdef _mkdir mcd
 
