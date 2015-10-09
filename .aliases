@@ -80,7 +80,7 @@ alias rsync='rsync -auv'
 alias cdd='cd $( dirname $_ )'
 
 psg() {
-    ps aux | grep $1 | grep -v grep
+    ps aux | grep "\(^USER\|$1\)" | grep -v grep
 }
 
 mcm() {
