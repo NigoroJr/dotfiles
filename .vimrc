@@ -50,7 +50,7 @@ set completeopt-=preview
 set autoread
 set showtabline=0
 set formatoptions+=nmB
-" Remove comment leaders with 'j'
+" Remove comment leaders with 'J'
 if s:has_version('7.3.541')
   set formatoptions+=j
 endif
