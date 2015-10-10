@@ -6,15 +6,14 @@ snippet			hook_on_source
 
 snippet			minimal_vimrc
 options			head
-	" Setup runtimepath on start {{{
 	if has('vim_starting')
-	  set nocompatible
-	  set runtimepath+=~/.vim/bundle/neobundle.vim/
+		set nocompatible
+		set runtimepath+=~/.vim/bundle/neobundle.vim/
 	endif
-	" }}}
 	call neobundle#begin(expand('~/.vim/bundle/'))
 	NeoBundleFetch 'Shougo/neobundle.vim'
 	${1:NeoBundle 'Shougo/vimproc.vim'}
+	${0}
 	call neobundle#end()
 	filetype plugin indent on
 
