@@ -436,12 +436,6 @@ endif
 " }}}
 " neocomplcache.vim {{{
 if neobundle#tap('neocomplcache.vim')
-  call neobundle#config({
-        \ 'autoload': {
-        \   'insert': !NeoCompleteCompatible(),
-        \ },
-        \ })
-
   function! neobundle#hooks.on_source(bundle)
     let g:neocomplcache#enable_at_startup = 1
     let g:neocomplcache#enable_smart_case = 1
@@ -493,12 +487,6 @@ endif
 " }}}
 " neocomplete.vim {{{
 if neobundle#tap('neocomplete.vim')
-  call neobundle#config({
-        \ 'autoload': {
-        \   'insert': NeoCompleteCompatible(),
-        \ },
-        \ })
-
   function! neobundle#hooks.on_source(bundle)
     inoremap <expr> <C-h> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr> <BS> neocomplete#smart_close_popup()."\<BS>"

@@ -300,16 +300,16 @@ on_source = 'rsense'
 disabled = 'NeoCompleteCompatible()'
 
 [[plugins]]
-# Has autoload.insert in .vimrc
 repository = 'Shougo/neocomplcache.vim'
 depends = 'Shougo/vimproc.vim'
 disabled = 'NeoCompleteCompatible()'
+insert = 1
 
 [[plugins]]
-# Has autoload.insert in .vimrc
 repository = 'Shougo/neocomplete.vim'
 depends = 'Shougo/vimproc.vim'
 disabled = '!NeoCompleteCompatible()'
+insert = 1
 
 [[plugins]]
 repository = 'Shougo/neomru.vim'
