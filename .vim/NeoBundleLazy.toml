@@ -325,6 +325,7 @@ depends = 'Shougo/neosnippet.vim'
 repository = 'Shougo/neosnippet.vim'
 on_source = ['neocomplcache.vim', 'neocomplete.vim']
 commands = 'NeoSnippetEdit'
+unite_sources = ['neosnippet', 'neosnippet/user', 'neosnippet/runtime']
 
 [[plugins]]
 repository = 'Shougo/unite-outline'
