@@ -322,9 +322,6 @@ endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 
 if neobundle#load_cache()
-  NeoBundleFetch 'davidhalter/jedi'
-  NeoBundleFetch 'Shougo/neobundle.vim'
-
   call neobundle#load_toml(expand('~/.vim/NeoBundle.toml'))
   call neobundle#load_toml(expand('~/.vim/NeoBundleLazy.toml'), {'lazy': 1})
   call neobundle#load_toml(expand('~/.vim/NeoBundleSoftRemove.toml'), {'lazy': 1})

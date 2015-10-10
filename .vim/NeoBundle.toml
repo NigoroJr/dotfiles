@@ -2,8 +2,13 @@
 repository = 'ciaranm/securemodelines'
 
 [[plugins]]
+repository = 'davidhalter/jedi'
+fetch = 1
+
+[[plugins]]
 repository = 'Shougo/neobundle.vim'
 depends = 'Shougo/vimproc.vim'
+fetch = 1
 
 [[plugins]]
 repository = 'Shougo/vimproc.vim'
