@@ -159,7 +159,7 @@ repository = 'mattn/webapi-vim'
 
 [[plugins]]
 repository = 'mattn/quickrunex-vim'
-on_source = 'vim-quickrun'
+depends = 'thinca/vim-quickrun'
 
 [[plugins]]
 repository = 'mips.vim'
@@ -175,6 +175,7 @@ executable('rct-complete') \
 
 [[plugins]]
 repository = 'NigoroJr/unite-matcher-hide-hidden-directories'
+depends = 'Shougo/unite.vim'
 on_source = 'unite.vim'
 
 [[plugins]]
@@ -188,18 +189,20 @@ filetypes = 'cpp'
 
 [[plugins]]
 repository = 'osyo-manga/shabadou.vim'
-on_source = 'vim-quickrun'
+depends = 'thinca/vim-quickrun'
 
 [[plugins]]
 repository = 'osyo-manga/unite-boost-online-doc'
 filetypes = 'cpp'
 depends = [
+  'Shougo/unite.vim',
   'tyru/open-browser.vim',
   'mattn/webapi-vim',
 ]
 
 [[plugins]]
 repository = 'osyo-manga/unite-quickfix'
+depends = 'Shougo/unite.vim'
 
 [[plugins]]
 repository = 'osyo-manga/vim-jplus'
@@ -290,7 +293,7 @@ repository = 'Shougo/context_filetype.vim'
 
 [[plugins]]
 repository = 'Shougo/neocomplcache-rsense.vim'
-depends = 'Shougo/neocomplcache.vim'
+depends = ['Shougo/neocomplcache.vim', 'rsense']
 on_source = 'rsense'
 disabled = 'NeoCompleteCompatible()'
 
@@ -308,11 +311,13 @@ disabled = '!NeoCompleteCompatible()'
 
 [[plugins]]
 repository = 'Shougo/neomru.vim'
+depends = 'Shougo/unite.vim'
 on_source = 'unite.vim'
 
 [[plugins]]
 repository = 'Shougo/neosnippet-snippets'
 on_source = 'neosnippet.vim'
+depends = 'Shougo/neosnippet.vim'
 
 [[plugins]]
 repository = 'Shougo/neosnippet.vim'
@@ -321,6 +326,7 @@ commands = 'NeoSnippetEdit'
 
 [[plugins]]
 repository = 'Shougo/unite-outline'
+depends = 'Shougo/unite.vim'
 
 [[plugins]]
 repository = 'Shougo/unite.vim'
@@ -395,12 +401,13 @@ commands = ['SudoRead', 'SudoWrite']
 
 [[plugins]]
 repository = 'supermomonga/neocomplete-rsense.vim'
-depends = 'Shougo/neocomplete.vim'
+depends = ['Shougo/neocomplete.vim', 'rsense']
 on_source = 'rsense'
 disabled = '!NeoCompleteCompatible()'
 
 [[plugins]]
 repository = 'supermomonga/unite-kawaii-calc'
+depends = 'Shougo/unite.vim'
 
 [[plugins]]
 repository = 'TextFormat'
@@ -506,6 +513,7 @@ mappings = ['<Plug>Ysurround', '<Plug>Dsurround', '<Plug>Csurround']
 
 [[plugins]]
 repository = 'tsukkee/unite-help'
+depends = 'Shougo/unite.vim'
 
 [[plugins]]
 repository = 'tyru/open-browser.vim'
