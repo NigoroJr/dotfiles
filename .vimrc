@@ -66,7 +66,6 @@ syntax on
 " Global variables {{{
 let g:use_rsense = 0
 let g:rsenseHome = expand('~/.vim/bundle/rsense')
-let g:use_vim_clang = 0
 let g:show_startup_time = 1
 let g:case_insensitive_cmd = 0
 " Disable netrw
@@ -324,7 +323,6 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 if neobundle#load_cache()
   call neobundle#load_toml(expand('~/.vim/NeoBundle.toml'))
   call neobundle#load_toml(expand('~/.vim/NeoBundleLazy.toml'), {'lazy': 1})
-  call neobundle#load_toml(expand('~/.vim/NeoBundleSoftRemove.toml'), {'lazy': 1})
 
   NeoBundleSaveCache
 endif
@@ -568,22 +566,6 @@ if neobundle#tap('neosnippet.vim')
   call neobundle#untap()
 endif
 " }}}
-" nerdtree {{{
-if neobundle#tap('nerdtree')
-  function! neobundle#hooks.on_source(bundle)
-    " Don't use nerdtree when opening directory (use vimfiler.vim)
-    if neobundle#is_sourced('vimfiler.vim')
-      let g:NERDTreeHijackNetrw = 0
-    endif
-    let g:NERDTreeMinimalUI = 1
-    let g:NERDTreeDirArrows = 0
-    let g:NERDTreeMapToggleHidden = '.'
-    let g:NERDTreeShowHidden = 0
-  endfunction
-
-  call neobundle#untap()
-endif
-" }}}
 " previm {{{
 if neobundle#tap('previm')
   function! neobundle#hooks.on_source(bundle)
@@ -725,27 +707,6 @@ if neobundle#tap('vim-better-whitespace')
           \ ]
     let g:current_line_whitespace_disabled_soft = 1
     let g:current_line_whitespace_disabled_hard = 0
-  endfunction
-
-  call neobundle#untap()
-endif
-" }}}
-" vim-clang {{{
-if neobundle#tap('vim-clang')
-  " This plugin is disabled when vimproc.vim and clang executable are
-  " available, hence, when vim-marching can be used. The reason why
-  " neobundle#is_installed('vim-marching') is not used for evaluating
-  " 'disabled' is because neobundle#is_installed() returns undefined results
-  " until finishing parsing the TOML file. The reasony why
-  " neobundle#is_installed('vimproc.vim') works is because vimproc.vim is
-  " stated in a different file (NeoBundle.toml), therefore, parsed before
-  " NeoBundleLazy.toml. Care must be taken to ensure that neobundle.vim can
-  " see vimproc.vim before parsing the vim-clang configs in the TOML file.
-
-  function! neobundle#hooks.on_source(bundle)
-    let g:clang_cpp_options = '-std=c++11'
-    let g:clang_c_completeopt = 'longest,menuone'
-    let g:clang_cpp_completeopt = 'longest,menuone'
   endfunction
 
   call neobundle#untap()
@@ -1200,14 +1161,6 @@ if neobundle#tap('vinarise.vim')
   if &binary
     call neobundle#source('vinarise.vim')
   endif
-
-  call neobundle#untap()
-endif
-" }}}
-" wildfire.vim {{{
-if neobundle#tap('wildfire.vim')
-  map <silent> <CR> <Plug>(wildfire-fuel)
-  vmap <silent> <BS> <Plug>(wildfire-water)
 
   call neobundle#untap()
 endif

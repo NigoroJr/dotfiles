@@ -416,6 +416,10 @@ repository = 'TextFormat'
 commands = ['AlignCenter', 'AlignJustify', 'AlignRight', 'AlignLeft']
 
 [[plugins]]
+repository = 'thinca/vim-ambicmd'
+mappings = ':'
+
+[[plugins]]
 repository = 'thinca/vim-prettyprint'
 
   [plugins.commands]
