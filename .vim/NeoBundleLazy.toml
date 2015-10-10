@@ -160,6 +160,7 @@ repository = 'mattn/webapi-vim'
 [[plugins]]
 repository = 'mattn/quickrunex-vim'
 depends = 'thinca/vim-quickrun'
+on_source = 'vim-quickrun'
 
 [[plugins]]
 repository = 'mips.vim'
@@ -190,6 +191,7 @@ filetypes = 'cpp'
 [[plugins]]
 repository = 'osyo-manga/shabadou.vim'
 depends = 'thinca/vim-quickrun'
+on_source = 'vim-quickrun'
 
 [[plugins]]
 repository = 'osyo-manga/unite-boost-online-doc'
