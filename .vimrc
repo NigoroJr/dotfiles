@@ -931,8 +931,6 @@ if neobundle#tap('vim-quickrun')
   nmap <silent> <Leader>m :QuickRun make<CR>
 
   function! neobundle#hooks.on_source(bundle)
-    call neobundle#source(['shabadou.vim', 'wandbox-vim', 'unite-quickfix'])
-
     nnoremap <Leader>wb :QuickRun -runner wandbox<CR>
 
     let g:quickrun_config = {
