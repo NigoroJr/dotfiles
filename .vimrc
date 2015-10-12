@@ -620,6 +620,9 @@ if neobundle#tap('unite.vim')
   nnoremap [unite]r :Unite register -buffer-name=register<CR>
   nnoremap [unite]t :Unite tab:no-current<CR>
 
+  " NeoBundleUpdate using unite.vim interface
+  command! NeoBundleUpdateUnite :Unite neobundle/update
+
   if neobundle#is_installed('unite-outline')
     nnoremap [unite]o :Unite outline<CR>
   endif
