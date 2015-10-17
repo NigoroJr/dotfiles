@@ -286,6 +286,11 @@ repository = 'rhysd/vim-go-impl'
 filetypes = 'go'
 
 [[plugins]]
+repository = 'thinca/vim-textobj-between'
+mappings = ['<Plug>(textobj-between-a)', '<Plug>(textobj-between-i)']
+depends = 'kana/vim-textobj-user'
+
+[[plugins]]
 repository = 'rhysd/wandbox-vim'
 commands = ['Wandbox', 'WandboxAsync']
 depends = ['thinca/vim-quickrun', 'Shougo/vimproc.vim']

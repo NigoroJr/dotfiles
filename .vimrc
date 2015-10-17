@@ -1050,6 +1050,13 @@ if neobundle#tap('vim-surround')
   call neobundle#untap()
 endif
 " }}}
+" vim-textobj-between {{{
+if neobundle#tap('vim-textobj-between')
+  omap a<Bar> <Plug>(textobj-between-a)<Bar>
+  omap i<Bar> <Plug>(textobj-between-i)<Bar>
+  call neobundle#untap()
+endif
+" }}}
 " vim-textobj-line {{{
 if neobundle#tap('vim-textobj-line')
   omap al <Plug>(textobj-line-a)
