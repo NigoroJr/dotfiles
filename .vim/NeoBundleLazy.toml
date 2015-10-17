@@ -317,6 +317,11 @@ disabled = '!NeoCompleteCompatible()'
 insert = 1
 
 [[plugins]]
+repository = 'Shougo/neoinclude.vim'
+depends = 'Shougo/neocomplete.vim'
+on_source = 'neocomplete.vim'
+
+[[plugins]]
 repository = 'Shougo/neomru.vim'
 depends = 'Shougo/unite.vim'
 on_source = 'unite.vim'
