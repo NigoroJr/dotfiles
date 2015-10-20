@@ -247,10 +247,25 @@ function! s:class_declaration()
 endfunction
 
 " Include paths
+let s:mac_include_dir = ''
+" Prefer brewed clang over Xcode {{{
+if has('mac')
+  let dirs = [
+        \ '/usr/local/include/c++/v1',
+        \ '/usr/include/c++/v1',
+        \ '/usr/include/4.2.1',
+        \ ]
+  call filter(dirs, 'isdirectory(v:val)')
+  if len(dirs) != 0
+    " Select only the first
+    let s:mac_include_dir = dirs[0]
+  endif
+endif
+" }}}
 let g:cpp_include_paths = filter(
       \ split(glob('/usr/lib/gcc/x86_64-pc-linux-gnu/*/include/*/'), '\n') +
       \ split(glob('/usr/include/boost/'), '\n') +
-      \ split(glob('/usr/include/c++/*'), '\n'),
+      \ [s:mac_include_dir],
       \ 'isdirectory(v:val)')
 " }}}
 " Create backup view, and undo directories {{{
