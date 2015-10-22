@@ -216,6 +216,7 @@ endfun
 autocmd FileType * call <SID>closing_brace_mapping()
 " }}}
 " C++ {{{
+autocmd FileType cpp setlocal cinoptions+=(0
 " Snippets
 augroup cpp-namespace
   autocmd!
