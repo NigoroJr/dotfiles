@@ -804,16 +804,12 @@ endif
 " vim-latex {{{
 if neobundle#tap('vim-latex')
   function! neobundle#hooks.on_source(bundle)
-    let g:latex_indent_enabled = 1
-    let g:latex_motion_matchparen = 0
+    let g:vimtex_indent_enabled = 1
+    let g:vimtex_motion_matchparen = 0
   endfunction
 
   function! neobundle#hooks.on_post_source(bundle)
-    " Start auto-compile
-    silent call latex#latexmk#compile()
-
-    " Re-set shiftwidth and tapstop
-    set shiftwidth=4 tabstop=4 softtabstop=4
+    VimtexCompile
   endfunction
 
   call neobundle#untap()
