@@ -510,14 +510,23 @@ if neobundle#tap('neocomplete.vim')
     let g:neocomplete#min_keyword_length = 3
 
     let g:neocomplete#force_omni_input_patterns = {
-          \ 'go': '[^.[:digit:] *\t]\.\w*',
           \ 'cpp': '[^. *\t]\%(\.\|->\)\w*\|\h\w*::\w*',
+          \ 'go': '[^.[:digit:] *\t]\.\w*',
           \ 'java': '[^.[:digit:] *\t]\.\w*',
-          \ 'perl': '[^. \t]->\%(\h\w*\)\?\|use.*\w*::\%(\h\w*\)\?',
-          \ 'ruby': '[^. *\t]\.\w*\|\h\w*::',
-          \ 'python': '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*',
           \ 'javascript': '[^.[:digit:] *\t]\.\w*\|\<require(',
+          \ 'perl': '[^. \t]->\%(\h\w*\)\?\|use.*\w*::\%(\h\w*\)\?',
+          \ 'python': '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*',
+          \ 'tex': '\v\\\a*(ref|cite)\a*([^]]*\])?\{([^}]*,)*[^}]*',
           \ }
+
+    if g:use_rsense
+      let g:neocomplete#force_omni_input_patterns.ruby =
+            \ '[^. *\t]\.\w*\|\h\w*::'
+    else
+      let g:neocomplete#sources#omni#input_patterns = {
+            \   "ruby" : '[^. *\t]\.\w*\|\h\w*::',
+            \}
+    endif
 
     if !exists('g:neocomplete#sources#include#paths')
       let g:neocomplete#sources#include#paths = {}
