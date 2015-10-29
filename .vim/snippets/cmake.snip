@@ -1,0 +1,25 @@
+snippet		hello
+abbr		minimum
+options		head
+	cmake_minimum_required(VERSION ${1:2.8})
+	project(${2})
+
+	file(GLOB ${3:SOURCES} ${4:"src/*.cpp"})
+
+	add_executable(${5:$2} ${6:SOURCES})
+	set_property(TARGET $2 PROPERTY CXX_STANDARD 11)${0}
+
+snippet		add_library
+abbr		add_library
+options		head
+	add_library(${1})
+
+snippet		set_property
+abbr		set_property
+options		head
+	set_property(${1})
+
+snippet		include_directories
+abbr		include_directories
+options		head
+	include_directories(${1})
