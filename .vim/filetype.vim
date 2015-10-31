@@ -3,9 +3,9 @@ if exists('did_load_filetypes')
 endif
 
 augroup filetypedetect
-  autocmd BufRead,BufNewFile Gemfile.lock set filetype=ruby
-  autocmd BufRead,BufNewFile *.toml set filetype=toml
-  autocmd BufRead,BufNewFile *.vala set filetype=vala
-  autocmd BufRead,BufNewFile *.coffee set filetype=coffee
-  autocmd BufRead,BufNewFile *.slim set filetype=slim
+  autocmd BufRead,BufNewFile Gemfile.lock setlocal filetype=ruby
+  autocmd BufRead,BufNewFile *.toml setlocal filetype=toml
+  autocmd BufRead,BufNewFile *.vala setlocal filetype=vala
+  autocmd BufRead,BufNewFile *.coffee setlocal filetype=coffee
+  autocmd BufRead,BufNewFile *.slim setlocal filetype=slim
 augroup END
