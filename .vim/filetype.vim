@@ -8,4 +8,5 @@ augroup filetypedetect
   autocmd BufRead,BufNewFile *.vala setlocal filetype=vala
   autocmd BufRead,BufNewFile *.coffee setlocal filetype=coffee
   autocmd BufRead,BufNewFile *.slim setlocal filetype=slim
+  autocmd BufNewFile,BufRead *.tex setlocal filetype=tex
 augroup END

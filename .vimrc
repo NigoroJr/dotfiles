@@ -106,7 +106,6 @@ autocmd FileType python,scss setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType go setlocal noexpandtab
 autocmd FileType man setlocal nonumber noexpandtab shiftwidth=8 tabstop=8 softtabstop=8
 autocmd FileType help syntax clear helpNote
-autocmd BufNewFile,BufRead *.tex setlocal filetype=tex
 autocmd BufWritePost .zsh* call s:recompile_zshrc(expand('%'))
 " }}}
 " General key bindings   {{{
