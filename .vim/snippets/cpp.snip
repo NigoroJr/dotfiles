@@ -105,6 +105,12 @@ options		head
 		${2:#member vars}
 	};
 
+snippet		operator==
+abbr		operator==
+alias		equality_operator
+options		word
+	bool operator${1:==}(const ${2:Foo}& ${3:other}) ${4:const}${0}
+
 snippet		operator<<
 abbr		operator<<
 alias		stream_insertion
