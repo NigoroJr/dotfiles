@@ -61,6 +61,7 @@ myFloatHook = composeAll
     , className =? "Comix"              --> moveTo5
     , className =? "Geeqie"             --> moveTo5
     , className =? "Java"               --> doFloat
+    , className =? "R_x11"              --> doFloat
     , manageDocks ]
     where
     moveTo2 = doF $ W.shift "2"

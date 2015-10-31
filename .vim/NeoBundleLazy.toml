@@ -542,6 +542,10 @@ commands = ['Restart', 'Restart!']
 gui = 1
 
 [[plugins]]
+repository = 'Vim-R-plugin'
+filetypes = 'R'
+
+[[plugins]]
 repository = 'wesQ3/vim-windowswap'
 functions = [
   'WindowSwap#MarkWindowSwap',
