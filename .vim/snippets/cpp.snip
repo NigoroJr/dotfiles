@@ -81,7 +81,7 @@ options		head
 		{ }
 
 		// Move constructor
-		$1(const $1&& ${5:other})
+		$1($1&& ${5:other})
 			${6:#init member vars}
 		{ }
 
@@ -91,6 +91,12 @@ options		head
 		// Assignment operator
 		$1& operator=(const $1& ${7:other}) {
 			${8:#assignments}
+			return *this;
+		}
+
+		// Move assignment operator
+		$1& operator=($1&& ${9:other}) {
+			${10:#assignments}
 			return *this;
 		}
 		/* }}} */
