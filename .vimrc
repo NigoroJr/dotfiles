@@ -267,6 +267,16 @@ let g:cpp_include_paths = filter(
       \ split(glob('/usr/include/boost/'), '\n') +
       \ [s:mac_include_dir],
       \ 'isdirectory(v:val)')
+" Add syntax highlighting to STL header files
+augroup cpp-stl-highlight
+  autocmd!
+  " Boost libraries have .hpp
+  let stl_dirs = filter(deepcopy(g:cpp_include_paths), 'v:val !~ "boost"')
+  let paths = join(map(stl_dirs, 'v:val . "/*"'), ',')
+  " Remove duplicating path separators
+  let paths = substitute(paths, '/\+', '/', 'g')
+  execute "autocmd BufReadPost " . paths ." if empty(&filetype) | set filetype=cpp | endif"
+augroup END
 " }}}
 " Create backup view, and undo directories {{{
 if !isdirectory(expand(&backupdir))
