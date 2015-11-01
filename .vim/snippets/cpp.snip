@@ -135,3 +135,9 @@ snippet		begin-end
 abbr		begin-end
 options		word
     ${1:#container}.begin(), $1.end()${0}
+
+snippet		vector
+abbr		std::vector
+alias		`vec
+options		word
+	std::vector<${1:int}>${0}
