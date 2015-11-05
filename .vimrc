@@ -519,7 +519,7 @@ if neobundle#tap('neocomplete.vim')
     let g:neocomplete#min_keyword_length = 3
 
     let g:neocomplete#force_omni_input_patterns = {
-          \ 'cpp': '[^. *\t]\%(\.\|->\)\w*\|\h\w*::\w*',
+          \ 'cpp': '[^. *\t]\%(\.\|->\)\w*\|[A-Za-z>]\w*::\w*',
           \ 'go': '[^.[:digit:] *\t]\.\w*',
           \ 'java': '[^.[:digit:] *\t]\.\w*',
           \ 'javascript': '[^.[:digit:] *\t]\.\w*\|\<require(',
