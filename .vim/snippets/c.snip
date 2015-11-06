@@ -3,21 +3,12 @@ snippet		main
 		return 0;
 	}
 
-# #include <...>
-snippet		inc
-alias		#inc, #include
-	#include <${1:stdio}.h>
-	${0}
-
-# print
 snippet		pf
 	printf("${1}\n"${2});${0}
 
-# malloc
 snippet		malloc
 	(${3:$1*})malloc(sizeof(${1:#:type}) * ${2});${0}
 
-# Template
 snippet		hello
 alias		helloworld
 abbr		Hello, World!
@@ -32,7 +23,6 @@ options		head
 		return 0;
 	}
 
-# Implement me!
 snippet		impl_me
 abbr		Implement me!
 options		head

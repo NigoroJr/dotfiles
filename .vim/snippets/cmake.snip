@@ -9,6 +9,12 @@ options		head
 	add_executable(${5:$2} ${6:SOURCES})
 	set_property(TARGET $2 PROPERTY CXX_STANDARD 11)${0}
 
+snippet		cmake_minimum_required
+abbr		cmake_minimum_required
+alias		minimum_version
+options		head
+	cmake_minimum_required(${1:VERSION} ${2:2.8})${0}
+
 snippet		add_library
 abbr		add_library
 options		head

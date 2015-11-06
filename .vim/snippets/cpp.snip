@@ -3,9 +3,6 @@ snippet		main
 		return 0;
 	}
 
-snippet		inc
-	#include <${1:iostream}>${0}
-
 snippet		incl
 	#include "${1}"${0}
 
@@ -16,6 +13,7 @@ snippet		class_short
 	};
 
 snippet		cpp
+abbr		Include headers
 options		head
 	#include <algorithm>
 	#include <chrono>
