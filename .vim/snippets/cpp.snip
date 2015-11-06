@@ -63,9 +63,8 @@ snippet		template
 abbr		template<typename T>
 	template<typename ${1:T}>${0}
 
-snippet		class_full
-abbr		class declaration
-alias		class
+snippet		class_quick
+abbr		quick class declaration
 options		head
 	class ${1:Foo} ${0}{
 	public:
@@ -74,27 +73,27 @@ options		head
 		$1() { }
 
 		// Copy constructor
-		$1(const $1& ${3:other})
-			${4:#init member vars}
+		$1(const $1& other)
+			${3:#init member vars}
 		{ }
 
 		// Move constructor
-		$1($1&& ${5:other})
-			${6:#init member vars}
+		$1($1&& other)
+			${4:#init member vars}
 		{ }
 
 		// Destructor
 		~$1() { }
 
 		// Assignment operator
-		$1& operator=(const $1& ${7:other}) {
-			${8:#assignments}
+		$1& operator=(const $1& other) {
+			${5:#assignments}
 			return *this;
 		}
 
 		// Move assignment operator
-		$1& operator=($1&& ${9:other}) {
-			${10:#assignments}
+		$1& operator=($1&& other) {
+			${6:#assignments}
 			return *this;
 		}
 		/* }}} */
@@ -102,6 +101,73 @@ options		head
 	private:
 		${2:#member vars}
 	};
+
+snippet		class_declaration
+abbr		class declaration
+alias		class
+options		head
+	class ${1:Foo} ${0}{
+	public:
+		/* Constructors, Destructor, and Assignment operators {{{ */
+		// Default constructor
+		$1();
+
+		// Copy constructor
+		$1(const $1& other);
+
+		// Move constructor
+		$1($1&& other);
+
+		// Destructor
+		~$1();
+
+		// Assignment operator
+		$1& operator=(const $1& other);
+
+		// Move assignment operator
+		$1& operator=($1&& other);
+		/* }}} */
+
+	private:
+		${2:#member vars}
+	};
+
+snippet		class_definition
+abbr		class definition
+options		head
+	/* Constructors, Destructor, and Assignment operators {{{ */
+	// Default constructor
+	$1::${1:#class name}()
+		${2: #initializations}
+	{ }
+
+	// Copy constructor
+	$1::$1(const $1& other)
+		${3: #initializations}
+	{ }
+
+	// Move constructor
+	$1::$1($1&& other)
+		${4: #initializations}
+	{ }
+
+	// Destructor
+	$1::~$1()
+		${5: #initializations}
+	{ }
+
+	// Assignment operator
+	$1::$1& operator=(const $1& other) {
+		${6}
+		return *this;
+	}
+
+	// Move assignment operator
+	$1::$1& operator=($1&& other) {
+		${7}
+		return *this;
+	}
+	/* }}} */
 
 snippet		operator==
 abbr		operator==
