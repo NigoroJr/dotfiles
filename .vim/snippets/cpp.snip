@@ -157,13 +157,13 @@ options		head
 	{ }
 
 	// Assignment operator
-	$1::$1& operator=(const $1& other) {
+	$1& $1::operator=(const $1& other) {
 		${6}
 		return *this;
 	}
 
 	// Move assignment operator
-	$1::$1& operator=($1&& other) {
+	$1& $1::operator=($1&& other) {
 		${7}
 		return *this;
 	}
