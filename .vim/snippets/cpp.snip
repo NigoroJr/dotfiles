@@ -212,3 +212,8 @@ abbr		#include <vector>
 alias		`i_vec
 options		head
 	#include <vector>${0}
+
+snippet		dt
+abbr		decltype()
+options		word
+	decltype(${1:#var})${0}
