@@ -1111,6 +1111,7 @@ if neobundle#tap('vim-watchdogs')
           \ 'hook/close_quickfix/enable_exit': 1,
           \ 'hook/unite_quickfix/enable': 0,
           \ 'hook/close_unite_quickfix/enable_exit': 1,
+          \ 'runner': 'vimproc',
           \ 'runner/vimproc/updatetime': 100,
           \ }
     " Use g++ (or clang++) rather than the default clang-check
@@ -1123,8 +1124,6 @@ if neobundle#tap('vim-watchdogs')
           \ }
 
     call watchdogs#setup(g:quickrun_config)
-
-    set updatetime=100
   endfunction
 
   call neobundle#untap()
