@@ -6,9 +6,14 @@ Config { font = "xft:Ricty Discord:size=9"
        , position = Top
        , lowerOnStart = True
        , commands = [ Run Date "%a %b %_d %Y * %H:%M:%S" "date" 10
+                    , Run Uptime [] 150
+                    , Run DynNetwork [] 10
+                    , Run Cpu [] 10
+                    , Run Memory [] 10
+                    , Run Com "sh" ["-c", "awk '{ print $1, $2, $3 }' /proc/loadavg"] "loadavg" 10
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ <fc=#00FF00>%date%</fc>"
+       , template = "%StdinReader% }{ <fc=#FFFFFF>%dynnetwork% :: %uptime% :: %cpu% :: %memory% :: %loadavg%</fc> <fc=#00FF00>%date%</fc>"
     }
