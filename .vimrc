@@ -545,7 +545,7 @@ if neobundle#tap('neocomplete.vim')
     " Note: This is taking advantage of the fact that neocomplete.vim is
     " lazy-loaded when it goes into insert mode, thus, will be sourced after
     " vim-rails is sourced.
-    if exists('b:rails_root')
+    if exists('b:rails_root') && exists('g:neocomplete#force_omni_input_patterns.ruby')
       call remove(g:neocomplete#force_omni_input_patterns, 'ruby')
     endif
   endfunction
