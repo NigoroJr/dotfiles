@@ -76,7 +76,7 @@ myLogHook h = dynamicLogWithPP xmobarPP {
 
 -- Startup Hook
 myStartupHook = do
-    --setWMName "SG3D"
+    setWMName "LG3D"
     spawnOn "1" "urxvt"
     spawnOn "1" "urxvt"
     spawnOn "1" "urxvt"
