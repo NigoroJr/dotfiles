@@ -217,3 +217,37 @@ snippet		dt
 abbr		decltype()
 options		word
 	decltype(${1:#var})${0}
+
+snippet		boost_test_module
+abbr		Boost.Test
+options		head
+	#define BOOST_TEST_MODULE ${1:#model name}
+	#include <boost/test/unit_test.hpp>
+	${0}
+
+snippet		boost_auto_test_case
+abbr		BOOST_AUTO_TEST_CASE
+options		head
+	BOOST_AUTO_TEST_CASE(${1:#name}) {
+		${0}
+	}
+
+snippet		boost_require
+abbr		BOOST_REQUIRE
+options		head
+	BOOST_REQUIRE(${1:#condition});${0}
+
+snippet		boost_check
+abbr		BOOST_CHECK
+options		head
+	BOOST_CHECK(${1:#condition});${0}
+
+snippet		boost_check_equal
+abbr		BOOST_CHECK_EQUAL
+options		head
+	BOOST_CHECK_${1:EQUAL}(${2:#var1}, ${3:#var2});${0}
+
+snippet		boost_require_equal
+abbr		BOOST_REQUIRE_EQUAL
+options		head
+	BOOST_REQUIRE_${1:EQUAL}(${2:#var1}, ${3:#var2});${0}
