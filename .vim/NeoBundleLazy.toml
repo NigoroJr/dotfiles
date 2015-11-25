@@ -72,6 +72,11 @@ filetypes = 'perl'
 commands = 'Perldoc'
 
 [[plugins]]
+repository = 'jalcine/cmake.vim'
+filetypes = ['c', 'cpp']
+vim_version = '7.3'
+
+[[plugins]]
 repository = 'jceb/vim-hier'
 gui = 1
 
