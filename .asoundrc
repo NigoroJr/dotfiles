@@ -49,5 +49,17 @@ pcm.!default {
             buffer_size 16384
         }
     }
-    capture.pcm "hw:0"
+    capture.pcm {
+        type plug
+        slave.pcm "hw:0,0"
+        # slave {
+        #     pcm {
+        #         format S16_LE
+        #         rate 44100
+        #         type hw
+        #         card 0
+        #         device 0
+        #     }
+        # }
+    }
 }
