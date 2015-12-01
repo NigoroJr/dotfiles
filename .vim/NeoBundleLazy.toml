@@ -1,10 +1,10 @@
 [[plugins]]
 repository = 'ahayman/vim-nodejs-complete'
-filetypes = 'javascript'
+on_ft = 'javascript'
 
 [[plugins]]
 repository = 'artur-shaik/vim-javacomplete2'
-filetypes = 'java'
+on_ft = 'java'
 disabled = """
 filereadable(expand('~/.eclim/.eclimd_instances')) \
 || !executable('mvn') || !has('python')"""
@@ -12,28 +12,28 @@ vim_version = '7.4.0'
 
 [[plugins]]
 repository = 'airblade/vim-rooter'
-mappings = '<Plug>RooterChangeToRootDirectory'
+on_map = '<Plug>RooterChangeToRootDirectory'
 
 [[plugins]]
 repository = 'Align'
-commands = ['Align', 'AlignCtrl']
-mappings = '<Plug>AM_'
+on_cmd = ['Align', 'AlignCtrl']
+on_map = '<Plug>AM_'
 
 [[plugins]]
 repository = 'AnsiEsc.vim'
-commands = 'AnsiEsc'
+on_cmd = 'AnsiEsc'
 
 [[plugins]]
 repository = 'c9s/perlomni.vim'
-filetypes = 'perl'
+on_ft = 'perl'
 
 [[plugins]]
 repository = 'cespare/vim-toml'
-filetypes = 'toml'
+on_ft = 'toml'
 
 [[plugins]]
 repository = 'davidhalter/jedi-vim'
-filetypes = 'python'
+on_ft = 'python'
 depends = 'davidhalter/jedi'
 
 [[plugins]]
@@ -41,7 +41,7 @@ repository = 'dbext.vim'
 
 [[plugins]]
 repository = 'fatih/vim-go'
-filetypes = 'go'
+on_ft = 'go'
 
 [[plugins]]
 repository = 'flazz/vim-colorschemes'
@@ -49,11 +49,11 @@ gui = 1
 
 [[plugins]]
 repository = 'godlygeek/tabular'
-commands = ['Tab', 'Tabularize']
+on_cmd = ['Tab', 'Tabularize']
 
 [[plugins]]
 repository = 'haya14busa/incsearch.vim'
-mappings = [
+on_map = [
   '<Plug>(incsearch-forward)',
   '<Plug>(incsearch-backward)',
   '<Plug>(incsearch-stay)',
@@ -68,12 +68,12 @@ disabled = '&filetype == "man" && has("macunix")'
 
 [[plugins]]
 repository = 'hotchpotch/perldoc-vim'
-filetypes = 'perl'
-commands = 'Perldoc'
+on_ft = 'perl'
+on_cmd = 'Perldoc'
 
 [[plugins]]
 repository = 'jalcine/cmake.vim'
-filetypes = ['c', 'cpp']
+on_ft = ['c', 'cpp']
 vim_version = '7.3'
 
 [[plugins]]
@@ -82,7 +82,7 @@ gui = 1
 
 [[plugins]]
 repository = 'jeaye/color_coded'
-filetypes = ['c', 'cpp', 'objc', 'objcpp']
+on_ft = ['c', 'cpp', 'objc', 'objcpp']
 build_commands = ['cmake', 'make']
 vim_version = '7.4.330'
 disabled = """
@@ -95,68 +95,68 @@ gui = 1
 [[plugins]]
 repository = 'justinmk/vim-sneak'
 depends = 'tpope/vim-repeat'
-mappings = ['s', 'S']
+on_map = ['s', 'S']
 
 [[plugins]]
 repository = 'kana/vim-altr'
-filetypes = ['c', 'cpp']
-mappings = ['<Plug>(altr-forward)', '<Plug>(altr-back)']
+on_ft = ['c', 'cpp']
+on_map = ['<Plug>(altr-forward)', '<Plug>(altr-back)']
 
 [[plugins]]
 repository = 'kana/vim-niceblock'
-mappings = [
+on_map = [
   ['x', '<Plug>(niceblock-I)'],
   ['x', '<Plug>(niceblock-A)'],
 ]
 
 [[plugins]]
 repository = 'kana/vim-smartchr'
-filetypes = 'cpp'
+on_ft = 'cpp'
 
 [[plugins]]
 repository = 'kana/vim-textobj-line'
-mappings = ['<Plug>(textobj-line-a)', '<Plug>(textobj-line-i)']
+on_map = ['<Plug>(textobj-line-a)', '<Plug>(textobj-line-i)']
 
 [[plugins]]
 repository = 'kana/vim-textobj-user'
 
 [[plugins]]
 repository = 'kannokanno/previm'
-commands = 'PrevimOpen'
-filetypes = 'markdown'
+on_cmd = 'PrevimOpen'
+on_ft = 'markdown'
 depends = 'tyru/open-browser.vim'
 
 [[plugins]]
 repository = 'kchmck/vim-coffee-script'
-filetypes = 'coffee'
+on_ft = 'coffee'
 
 [[plugins]]
 repository = 'lambdalisue/vim-gista'
-commands = 'Gista'
-unite_sources = 'gista'
+on_cmd = 'Gista'
+on_unite = 'gista'
 
 [[plugins]]
 repository = 'lervag/vim-latex'
-filetypes = 'tex'
+on_ft = 'tex'
 
 [[plugins]]
 repository = 'matchit.zip'
-mappings = ['%', 'g%']
+on_map = ['%', 'g%']
 
 [[plugins]]
 repository = 'mattn/disableitalic-vim'
-commands = 'DisableItalic'
+on_cmd = 'DisableItalic'
 gui = 1
 
 [[plugins]]
 repository = 'mattn/emmet-vim'
-filetypes = ['html', 'xhtml']
-commands = ['Emmet', 'EmmetInstall']
-mappings = '<Plug>(emmet-'
+on_ft = ['html', 'xhtml']
+on_cmd = ['Emmet', 'EmmetInstall']
+on_map = '<Plug>(emmet-'
 
 [[plugins]]
 repository = 'mattn/gist-vim'
-commands = 'Gist'
+on_cmd = 'Gist'
 depends = 'mattn/webapi-vim'
 
 [[plugins]]
@@ -169,11 +169,11 @@ on_source = 'vim-quickrun'
 
 [[plugins]]
 repository = 'mips.vim'
-filetypes = 'asm'
+on_ft = 'asm'
 
 [[plugins]]
 repository = 'NigoroJr/rsense'
-filetypes = 'ruby'
+on_ft = 'ruby'
 # When vim-monster can be used
 disabled = """
 executable('rct-complete') \
@@ -186,12 +186,12 @@ on_source = 'unite.vim'
 
 [[plugins]]
 repository = 'ntpeters/vim-better-whitespace'
-insert = 1
+on_i = 1
 focus = 1
 
 [[plugins]]
 repository = 'octol/vim-cpp-enhanced-highlight'
-filetypes = 'cpp'
+on_ft = 'cpp'
 
 [[plugins]]
 repository = 'osyo-manga/shabadou.vim'
@@ -200,7 +200,7 @@ on_source = 'vim-quickrun'
 
 [[plugins]]
 repository = 'osyo-manga/unite-boost-online-doc'
-filetypes = 'cpp'
+on_ft = 'cpp'
 depends = [
   'Shougo/unite.vim',
   'tyru/open-browser.vim',
@@ -213,7 +213,7 @@ depends = 'Shougo/unite.vim'
 
 [[plugins]]
 repository = 'osyo-manga/vim-jplus'
-mappings = [
+on_map = [
   '<Plug>(jplus)', '<Plug>(jplus-getchar)', '<Plug>(jplus-input)',
   '<Plug>(jplus-getchar-with-space)', '<Plug>(jplus-input-with-space)',
 ]
@@ -225,9 +225,9 @@ depends = [
   'Shougo/vimproc.vim',
   'osyo-manga/vim-reunions',
 ]
-filetypes = ['c', 'cpp']
-commands = 'MarchingBufferClearCache'
-mappings = [
+on_ft = ['c', 'cpp']
+on_cmd = 'MarchingBufferClearCache'
+on_map = [
   ['i', '<Plug>(marching_force_start_omni_complete)'],
 ]
 disabled = """
@@ -236,7 +236,7 @@ disabled = """
 
 [[plugins]]
 repository = 'osyo-manga/vim-monster'
-filetypes = 'ruby'
+on_ft = 'ruby'
 depends = 'Shougo/vimproc.vim'
 disabled = """
 !executable('rct-complete') \
@@ -245,8 +245,8 @@ disabled = """
 
 [[plugins]]
 repository = 'osyo-manga/vim-precious'
-filetypes = ['html', 'xhtml', 'markdown']
-commands = [
+on_ft = ['html', 'xhtml', 'markdown']
+on_cmd = [
   'PreciousSwitch',
   'PreciousSetContextLocal',
   'PreciousReset',
@@ -259,8 +259,8 @@ depends = [
 
 [[plugins]]
 repository = 'osyo-manga/vim-snowdrop'
-filetypes = 'cpp'
-commands = [
+on_ft = 'cpp'
+on_cmd = [
   'SnowdropClearLogs',
   'SnowdropEchoClangVersion',
   'SnowdropLogs',
@@ -269,35 +269,35 @@ commands = [
 
 [[plugins]]
 repository = 'osyo-manga/vim-stargate'
-commands = 'StargateInclude'
-filetypes = 'cpp'
+on_cmd = 'StargateInclude'
+on_ft = 'cpp'
 
 [[plugins]]
 repository = 'osyo-manga/vim-watchdogs'
-filetypes = ['c', 'cpp']
+on_ft = ['c', 'cpp']
 depends = ['jceb/vim-hier', 'thinca/vim-quickrun']
 gui = 1
 
-  [plugins.commands]
+  [plugins.on_cmd]
   name = ['WatchdogsRun', 'WatchdogsRunSilent']
   complete = 'customlist,quickrun#complete'
 
 [[plugins]]
 repository = 'rhysd/clever-f.vim'
-mappings = ['f', 'F', 't', 'T', 'cf', 'ct']
+on_map = ['f', 'F', 't', 'T', 'cf', 'ct']
 
 [[plugins]]
 repository = 'rhysd/vim-go-impl'
-filetypes = 'go'
+on_ft = 'go'
 
 [[plugins]]
 repository = 'thinca/vim-textobj-between'
-mappings = ['<Plug>(textobj-between-a)', '<Plug>(textobj-between-i)']
+on_map = ['<Plug>(textobj-between-a)', '<Plug>(textobj-between-i)']
 depends = 'kana/vim-textobj-user'
 
 [[plugins]]
 repository = 'rhysd/wandbox-vim'
-commands = ['Wandbox', 'WandboxAsync']
+on_cmd = ['Wandbox', 'WandboxAsync']
 depends = ['thinca/vim-quickrun', 'Shougo/vimproc.vim']
 
 [[plugins]]
@@ -313,13 +313,13 @@ disabled = 'NeoCompleteCompatible()'
 repository = 'Shougo/neocomplcache.vim'
 depends = 'Shougo/vimproc.vim'
 disabled = 'NeoCompleteCompatible()'
-insert = 1
+on_i = 1
 
 [[plugins]]
 repository = 'Shougo/neocomplete.vim'
 depends = ['Shougo/vimproc.vim', 'Shougo/context_filetype.vim']
 disabled = '!NeoCompleteCompatible()'
-insert = 1
+on_i = 1
 
 [[plugins]]
 repository = 'Shougo/neoinclude.vim'
@@ -339,8 +339,8 @@ depends = 'Shougo/neosnippet.vim'
 [[plugins]]
 repository = 'Shougo/neosnippet.vim'
 on_source = ['neocomplcache.vim', 'neocomplete.vim']
-commands = 'NeoSnippetEdit'
-unite_sources = ['neosnippet', 'neosnippet/user', 'neosnippet/runtime']
+on_cmd = 'NeoSnippetEdit'
+on_unite = ['neosnippet', 'neosnippet/user', 'neosnippet/runtime']
 
 [[plugins]]
 repository = 'Shougo/unite-outline'
@@ -350,7 +350,7 @@ depends = 'Shougo/unite.vim'
 repository = 'Shougo/unite.vim'
 depends = 'Shougo/vimproc.vim'
 
-  [plugins.commands]
+  [plugins.on_cmd]
   name = [
     'Unite',
     'UniteWithBufferDir',
@@ -366,7 +366,7 @@ repository = 'Shougo/vimfiler.vim'
 depends = 'Shougo/unite.vim'
 explorer = 1
 
-  [plugins.commands]
+  [plugins.on_cmd]
   name = [
     'VimFiler',
     'VimFilerCurrentDir',
@@ -379,7 +379,7 @@ explorer = 1
 repository = 'Shougo/vimshell.vim'
 depends = 'Shougo/vimproc.vim'
 
-  [plugins.commands]
+  [plugins.on_cmd]
   name = [
     'VimShell',
     'VimShellBufferDir',
@@ -399,23 +399,23 @@ depends = 'Shougo/vimproc.vim'
 repository = 'Shougo/vinarise.vim'
 vim_version = '7.3'
 
-  [plugins.commands]
+  [plugins.on_cmd]
   name = 'Vinarise'
   complete = 'file'
 
 [[plugins]]
 repository = 'slim-template/vim-slim'
-filetypes = 'slim'
+on_ft = 'slim'
 
 [[plugins]]
 repository = 'starcraftman/vim-eclim'
-filetypes = 'java'
-commands = 'DeployEclimd'
+on_ft = 'java'
+on_cmd = 'DeployEclimd'
 disabled = '!filereadable(expand("~/.eclim/.eclimd_instances"))'
 
 [[plugins]]
 repository = 'sudo.vim'
-commands = ['SudoRead', 'SudoWrite']
+on_cmd = ['SudoRead', 'SudoWrite']
 
 [[plugins]]
 repository = 'supermomonga/neocomplete-rsense.vim'
@@ -429,44 +429,44 @@ depends = 'Shougo/unite.vim'
 
 [[plugins]]
 repository = 'TextFormat'
-commands = ['AlignCenter', 'AlignJustify', 'AlignRight', 'AlignLeft']
+on_cmd = ['AlignCenter', 'AlignJustify', 'AlignRight', 'AlignLeft']
 
 [[plugins]]
 repository = 'thinca/vim-ambicmd'
-mappings = ':'
+on_map = ':'
 
 [[plugins]]
 repository = 'thinca/vim-prettyprint'
 
-  [plugins.commands]
+  [plugins.on_cmd]
   name = ['PrettyPrint', 'PP']
   complete = 'expression'
 
 [[plugins]]
 repository = 'thinca/vim-quickrun'
 depends = 'Shougo/vimproc.vim'
-mappings = '<Plug>(quickrun)'
+on_map = '<Plug>(quickrun)'
 
-  [plugins.commands]
+  [plugins.on_cmd]
   name = 'QuickRun'
   complete = 'customlist,quickrun#complete'
 
 [[plugins]]
 repository = 'thinca/vim-ref'
-mappings = '<Plug>(ref-keyword)'
-unite_sources = 'ref'
+on_map = '<Plug>(ref-keyword)'
+on_unite = 'ref'
 
-  [plugins.commands]
+  [plugins.on_cmd]
   name = 'Ref'
   complete = 'customlist,ref#complete'
 
 [[plugins]]
 repository = 'tkztmk/vim-vala'
-filetypes = 'vala'
+on_ft = 'vala'
 
 [[plugins]]
 repository = 'tomtom/tcomment_vim'
-mappings = [
+on_map = [
   'gc', 'g<', 'g>',
   '<Plug>TComment_',
 ]
@@ -474,17 +474,17 @@ mappings = [
 [[plugins]]
 repository = 'tpope/vim-abolish'
 depends = 'tpope/vim-repeat'
-commands = ['Abolish', 'Subvert', 'S']
-mappings = 'cr'
+on_cmd = ['Abolish', 'Subvert', 'S']
+on_map = 'cr'
 
 [[plugins]]
 repository = 'tpope/vim-bundler'
-filetypes = 'ruby'
-commands = 'Bundle'
+on_ft = 'ruby'
+on_cmd = 'Bundle'
 
 [[plugins]]
 repository = 'tpope/vim-endwise'
-filetypes = [
+on_ft = [
   'aspvbs', 'c', 'cpp', 'crystal', 'elixir', 'htmldjango', 'lua', 'matlab',
   'objc', 'ruby', 'sh', 'snippets', 'vb', 'vbnet', 'vim', 'xdefaults', 'zsh',
 ]
@@ -492,7 +492,7 @@ filetypes = [
 [[plugins]]
 repository = 'tpope/vim-fugitive'
 augroup = 'fugitive'
-commands = [
+on_cmd = [
   'Git', 'Git!', 'Gcd', 'Glcd', 'Gstatus', 'Gcommit', 'Gmerge', 'Gpull',
   'Gpush', 'Gfetch', 'Ggrep', 'Glgrep', 'Glog', 'Gllog', 'Gedit', 'Gsplit',
   'Gvsplit', 'Gtabedit', 'Gpedit', 'Gsplit!', 'Gvsplit!', 'Gtabedit!',
@@ -503,35 +503,35 @@ commands = [
 [[plugins]]
 repository = 'tpope/vim-markdown'
 depends = 'godlygeek/tabular'
-filetypes = 'markdown'
+on_ft = 'markdown'
 
 [[plugins]]
 repository = 'tpope/vim-rails'
-filetypes = ['ruby', 'eruby', 'css', 'scss', 'html', 'javascript', 'yaml']
+on_ft = ['ruby', 'eruby', 'css', 'scss', 'html', 'javascript', 'yaml']
 
 [[plugins]]
 repository = 'tpope/vim-rake'
-filetypes = 'ruby'
+on_ft = 'ruby'
 
 [[plugins]]
 repository = 'tpope/vim-rbenv'
-filetypes = 'ruby'
-commands = 'Rbenv'
+on_ft = 'ruby'
+on_cmd = 'Rbenv'
 
 [[plugins]]
 repository = 'tpope/vim-repeat'
-mappings = '.'
-functions = 'repeat#set'
+on_map = '.'
+on_func = 'repeat#set'
 
 [[plugins]]
 repository = 'tpope/vim-speeddating'
 depends = 'tpope/vim-repeat'
-mappings = ['<C-a>', '<C-x>']
+on_map = ['<C-a>', '<C-x>']
 
 [[plugins]]
 repository = 'tpope/vim-surround'
 depends = 'tpope/vim-repeat'
-mappings = ['<Plug>Ysurround', '<Plug>Dsurround', '<Plug>Csurround']
+on_map = ['<Plug>Ysurround', '<Plug>Dsurround', '<Plug>Csurround']
 
 [[plugins]]
 repository = 'tsukkee/unite-help'
@@ -539,20 +539,20 @@ depends = 'Shougo/unite.vim'
 
 [[plugins]]
 repository = 'tyru/open-browser.vim'
-commands = 'OpenBrowser'
+on_cmd = 'OpenBrowser'
 
 [[plugins]]
 repository = 'tyru/restart.vim'
-commands = ['Restart', 'Restart!']
+on_cmd = ['Restart', 'Restart!']
 gui = 1
 
 [[plugins]]
 repository = 'Vim-R-plugin'
-filetypes = 'R'
+on_ft = 'R'
 
 [[plugins]]
 repository = 'wesQ3/vim-windowswap'
-functions = [
+on_func = [
   'WindowSwap#MarkWindowSwap',
   'WindowSwap#DoWindowSwap',
   'WindowSwap#EasyWindowSwap',
