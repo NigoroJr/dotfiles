@@ -333,6 +333,19 @@ function! s:get_ruby_gems() abort
   return join(dirs, ',')
 endfunction
 " }}}
+" Underline {{{
+function! s:underline(chars)
+  let view = winsaveview()
+
+  let chars = empty(a:chars) ? '-' : a:chars
+  let nr_columns = virtcol('$') - 1
+  let uline = repeat(chars, (nr_columns / len(chars)) + 1)
+  put =strpart(uline, 0, nr_columns)
+
+  call winrestview(view)
+endfunction
+command! -nargs=? UnderlineCurrentLine call s:underline(<q-args>)
+" }}}
 
 " Clone neobundle.vim if not installed {{{
 if !isdirectory(expand('~/.vim/bundle/neobundle.vim')) && executable('git')
