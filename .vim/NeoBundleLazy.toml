@@ -73,7 +73,13 @@ on_cmd = 'Perldoc'
 
 [[plugins]]
 repository = 'jalcine/cmake.vim'
-on_ft = ['c', 'cpp']
+# on_ft = ['c', 'cpp']
+on_cmd = [
+  'CMakeBuild', 'CMakeClean', 'CMakeClearBufferOpts', 'CMakeCtagsBuildAll',
+  'CMakeInfoForCurrentFile', 'CMakeRebuildCache', 'CMakeTarget',
+  'CMakeBuildCurrent', 'CMakeCleanBuild', 'CMakeCreateBuild',
+  'CMakeCtagsBuildCurrent', 'CMakeInstall', 'CMakeRehashProject', 'CMakeTest',
+]
 vim_version = '7.3'
 
 [[plugins]]
