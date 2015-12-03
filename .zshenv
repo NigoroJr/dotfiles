@@ -38,3 +38,7 @@ ZLE_SPACE_SUFFIX_CHARS=$'|&'
 # Prompt "do you wish to see all N possibilities"
 # only when going out of screen
 LISTMAX=0
+REPORTTIME=10
+TIMEFMT="\
+%J
+  %*E :: $fg[green]U$reset_color %*U :: $fg[blue]S$reset_color %*S :: %M KiB"
