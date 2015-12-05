@@ -16,6 +16,8 @@ path=($HOME/bin(N) \
     ${GOPATH:+$GOPATH/bin}(N) \
     $HOME/.rbenv/bin(N) \
     $HOME/.rbenv/shims(N) \
+    $HOME/.pyenv/bin(N) \
+    $HOME/.pyenv/shims(N) \
     $HOME/*/adt-bundle/sdk/{tools,platform-tools}(N) \
     /usr/lib/go/bin(N) \
     /usr/local/bin(N) \
