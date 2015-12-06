@@ -42,5 +42,5 @@ ZLE_SPACE_SUFFIX_CHARS=$'|&'
 LISTMAX=0
 REPORTTIME=10
 TIMEFMT="\
-$fg_bold[red]%J$reset_color
+$fg_bold[blue]%J$reset_color
   %*E :: $fg[green]U$reset_color %*U :: $fg[blue]S$reset_color %*S :: %M KiB"
