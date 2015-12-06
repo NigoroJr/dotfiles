@@ -48,7 +48,7 @@ abbr		set(CMAKE_CXX_FLAGS "-std=c++11")
 options		head
 	set(CMAKE_CXX_FLAGS "${1:-std=c++11 -Wall -Wextra}")
 	set(CMAKE_CXX_FLAGS_DEBUG "${2:-O0 -g}")
-	set(CMAKE_CXX_RELEASE "${3:-O3}")${0}
+	set(CMAKE_CXX_FLAGS_RELEASE "${3:-O3}")${0}
 
 snippet		add_subdirectory
 abbr		add_subdirectory
