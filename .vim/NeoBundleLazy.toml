@@ -335,7 +335,10 @@ on_source = 'neocomplete.vim'
 [[plugins]]
 repository = 'Shougo/neomru.vim'
 depends = 'Shougo/unite.vim'
-on_unite = ['neomru/file', 'neomru/directory']
+on_unite = ['neomru/file', 'neomru/directory', 'file_mru', 'directory_mru']
+on_cmd = [
+  'NeoMRUReload', 'NeoMRUSave', 'NeoMRUImportFile', 'NeoMRUImportDirectory'
+]
 
 [[plugins]]
 repository = 'Shougo/neosnippet-snippets'
