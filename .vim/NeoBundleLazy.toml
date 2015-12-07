@@ -349,6 +349,11 @@ on_cmd = 'NeoSnippetEdit'
 on_unite = ['neosnippet', 'neosnippet/user', 'neosnippet/runtime']
 
 [[plugins]]
+repository = 'Shougo/neoyank.vim'
+depends = 'Shougo/unite.vim'
+on_unite = 'history/yank'
+
+[[plugins]]
 repository = 'Shougo/unite-outline'
 depends = 'Shougo/unite.vim'
 
