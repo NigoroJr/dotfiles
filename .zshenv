@@ -18,6 +18,8 @@ path=($HOME/bin(N) \
     $HOME/.rbenv/shims(N) \
     $HOME/.pyenv/bin(N) \
     $HOME/.pyenv/shims(N) \
+    $HOME/.plenv/bin(N) \
+    $HOME/.plenv/shims(N) \
     $HOME/*/adt-bundle/sdk/{tools,platform-tools}(N) \
     /usr/lib/go/bin(N) \
     /usr/local/bin(N) \
