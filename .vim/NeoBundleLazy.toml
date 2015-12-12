@@ -561,6 +561,9 @@ on_cmd = ['Restart', 'Restart!']
 gui = 1
 
 [[plugins]]
+repository = 'ujihisa/unite-colorscheme'
+
+[[plugins]]
 repository = 'Vim-R-plugin'
 on_ft = 'R'
 
