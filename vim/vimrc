@@ -1,10 +1,12 @@
 " Don't go further if feature size is tiny or small
 if 0 | endif
 
+let g:neobundle_rtp = expand('~/.vim/bundle/neobundle.vim')
+
 " Setup runtimepath on start {{{
 if has('vim_starting')
   set nocompatible
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+  execute 'set runtimepath+=' . g:neobundle_rtp
 endif
 " }}}
 " Function to check current Vim's version {{{
@@ -348,10 +350,9 @@ command! -nargs=? UnderlineCurrentLine call s:underline(<q-args>)
 " }}}
 
 " Clone neobundle.vim if not installed {{{
-if !isdirectory(expand('~/.vim/bundle/neobundle.vim')) && executable('git')
+if !isdirectory(g:neobundle_rtp) && executable('git')
   let url = 'https://github.com/Shougo/neobundle.vim'
-  let dest = '~/.vim/bundle/neobundle.vim'
-  let cmd = 'git clone '.url.' '.dest
+  let cmd = 'git clone ' . url . ' ' . g:neobundle_rtp
   call system(cmd)
 endif
 " }}}
