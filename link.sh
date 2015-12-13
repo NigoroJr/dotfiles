@@ -1,10 +1,27 @@
 #!/bin/sh
 
 # This is a simple script that links the contents of the dotfiles repository
-# to $HOME.
+# to $HOME. The stuff to be linked should be in a directory (and have the same
+# task name) or at the top level directory. The latter is referred to as
+# "others", and can be linked with the "others" task name.
+#
+# Examples:
+#   # Link all
+#   ./link.sh
+#
+#   # Link files and directories in the vim and emacs directory
+#   ./link.sh -f vim emacs
+#
+#   # Unlink X11-related stuff
+#   ./link.sh -u X
+#
+# Flags:
+#   f: forces update by adding the -f switch to ln
+#   u: unlinks the existing links
+#   h: show help
 
 # Where all the dotfiles are
-PREFIX=~/dotfiles
+PREFIX=$HOME/dotfiles
 # Flags to add to the ln command
 DEFAULT_LINK_FLAGS=-s
 # Tasks to run when none specified
@@ -19,7 +36,7 @@ while getopts 'fuh' flag; do
             UNLINK=1
             ;;
         h)
-            echo "Usage: $0 [-h] [-f] [vim|zsh|X|others]"
+            echo "Usage: $0 [-h] [-f] [-u] [vim|zsh|emacs|X|others]"
             exit 0
     esac
 
