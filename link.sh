@@ -23,7 +23,7 @@
 # Where all the dotfiles are
 PREFIX=$HOME/dotfiles
 # Flags to add to the ln command
-DEFAULT_LINK_FLAGS=-s
+DEFAULT_LINK_FLAGS='-s -n'
 # Tasks to run when none specified
 ALL_TASKS="vim zsh emacs X others"
 
