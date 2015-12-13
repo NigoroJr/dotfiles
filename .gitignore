@@ -1,27 +1,32 @@
 # Vim swap files
 *.swp
-# Vim
-.vim/backups/
-.vim/view/
-.vim/undo/
-.vim/spell/
-.vim/bundle/*
-!.vim/bundle/.keep
-.vim/.netrwhist
-# NeoVim
-.nvim/backups/
-.nvim/view/
-.nvim/undo/
-.nvim/spell/
-.nvim/bundle/*
-!.nvim/bundle/.keep
-.nvim/.netrwhist
-
-.emacs.d/*
-!.emacs.d/snippets
-!.emacs.d/init.el
-!.emacs.d/inits
-
-.xmonad/*
-!.xmonad/xmonad.hs
+*.swo
 *.un~
+
+# Vim
+vim/vim/backups/
+vim/vim/view/
+vim/vim/undo/
+vim/vim/spell/
+vim/vim/bundle/*
+!vim/vim/bundle/.keep
+vim/vim/.netrwhist
+
+# NeoVim
+vim/nvim/backups/
+vim/nvim/view/
+vim/nvim/undo/
+vim/nvim/spell/
+vim/nvim/bundle/*
+!vim/nvim/bundle/.keep
+vim/nvim/.netrwhist
+
+# Emacs
+emacs/emacs.d/*
+!emacs/emacs.d/snippets
+!emacs/emacs.d/init.el
+!emacs/emacs.d/inits
+
+# X11
+X/xmonad/*
+!X/xmonad/xmonad.hs
