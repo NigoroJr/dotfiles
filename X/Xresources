@@ -18,9 +18,13 @@ URxvt.saveLines: 5000
 URxvt.pointerBlank: true
 URxvt.urgentOnBell: true
 
-URxvt.font:\
-    xft:Ricty Discord:Regular:size=9:antialias=true,
-    xft:Hiragino Maru Gothic Pro W4:size=9:antialias=true
+URxvt.font: \
+    xft:Ricty Discord:Regular:size=9,
+    xft:Hiragino Maru Gothic:size=9
+
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: full
 
 ! Left click to open URL
 URxvt.perl-ext-common: url-select
