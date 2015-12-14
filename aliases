@@ -17,6 +17,73 @@ case `uname -s` in
         ;;
 esac
 
+# Options
+alias l='ls -lh'
+alias la='ls -A'
+alias ll='ls -CF'
+
+alias df='df -h'
+alias du='du -h'
+
+alias watch='watch -n 0.5'
+
+alias rsync='rsync -auv'
+
+# Typos
+alias rm_r='rm -r'
+alias gS='git status'
+alias gD='git diff'
+alias gC='git commit'
+
+# C++
+alias gpp='g++ -std=c++11'
+if hash clang++ 2>/dev/null; then
+    alias clpp='clang++ -std=c++11'
+fi
+
+# Text Editors
+alias gvi='gvim'
+if hash nvim 2>/dev/null; then
+    alias nv='nvim'
+fi
+alias em='emacsclient -nw'
+alias emacs='emacs -nw'
+alias emd='emacs --daemon'
+alias kill-emacs='emacsclient -e "(kill-emacs)"'
+alias restart-emacs='emacs-kill && em'
+
+alias tm='tmux'
+
+# Git
+alias g='git'
+alias gai='git add -i'
+alias gap='git add -p'
+alias ga.='git add .'
+alias gl='git log'
+
+alias cdd='cd $( dirname $_ )'
+
+# Functions
+psg() {
+    ps aux | grep "\(^USER\|$1\)" | grep -v grep
+}
+
+mcm() {
+    if [[ -n $1 ]]; then
+        THREADS="-j$1"
+    fi
+    make clean && make $THREADS
+}
+
+# Create and go into that directory
+mcd() {
+    DIR=${1:-tmp}
+    mkdir -p $DIR && cd $DIR
+}
+if [[ $SHELL =~ zsh ]]; then
+    compdef _mkdir mcd
+fi
+
 sudo() {
     if [ $1 = "--" ]; then
         shift
@@ -29,84 +96,25 @@ sudo() {
     fi
 }
 
-# Aliases for ls
-alias l='ls -lh'
-alias la='ls -A'
-alias ll='ls -CF'
-
-# Typos that I make a lot
-alias rm_r='rm -r'
-alias gS='git status'
-alias gD='git diff'
-alias gC='git commit'
-
-# Alias for g++
-alias gpp='g++ -std=c++11'
-
-if hash clang++ 2>/dev/null; then
-    alias clpp='clang++ -std=c++11'
-fi
-
-# vi foobar.txt
-# <C-a>g instead of having to type gvim
-alias gvi='gvim'
-
-# emacs is too long to type!
-# alias em='emacs -nw'
-alias em='emacsclient -nw'
-alias emacs='emacs -nw'
-alias emd='emacs --daemon'
-alias emacs-kill='emacsclient -e "(kill-emacs)"'
-alias emacs-restart='emacs-kill && em'
-
-if hash nvim 2>/dev/null; then
-    alias nv='nvim'
-fi
-
-alias tm='tmux'
-
-alias g='git'
-alias gai='git add -i'
-alias gap='git add -p'
-alias ga.='git add .'
-alias gl='git log'
-
-alias df='df -h'
-alias du='du -h'
-
-alias watch='watch -n 0.5'
-
-alias rsync='rsync -auv'
-
-alias cdd='cd $( dirname $_ )'
-
-psg() {
-    ps aux | grep "\(^USER\|$1\)" | grep -v grep
-}
-
-mcm() {
-    if [[ -n $1 ]]; then
-        THREADS="-j$1"
+# Go home, non-zsh shells
+if [[ ! $SHELL =~ zsh ]]; then
+    if [ -f ~/.localrc/aliases ]; then
+        source ~/.localrc/aliases
     fi
-    make clean && make $THREADS
-}
-
-alias mcmj='make clean && make -j'
-
-if [[ $SHELL =~ zsh ]]; then
-    # Global alias
-    alias -g G='| grep'
-    alias -g GI='| grep -i'
-    alias -g GV='| grep -v'
-    alias -g A='| awk'
-
-    alias -g DN='>/dev/null'
-    alias -g DN1='1>/dev/null'
-    alias -g DN2='2>/dev/null'
-    alias -g DN12='1>/dev/null 2>&1'
-
-    alias -g WCL='| wc -l'
+    exit
 fi
+
+# Global alias
+alias -g G='| grep'
+alias -g GI='| grep -i'
+alias -g GV='| grep -v'
+alias -g A='| awk'
+alias -g S='| sed -e'
+alias -g WCL='| wc -l'
+alias -g DN='>/dev/null'
+alias -g DN1='1>/dev/null'
+alias -g DN2='2>/dev/null'
+alias -g DN12='1>/dev/null 2>&1'
 
 if [ -f ~/.localrc/aliases ]; then
     source ~/.localrc/aliases
