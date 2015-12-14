@@ -15,6 +15,11 @@ fi
 
 source ~/.zplug/zplug
 
+# Completions (load after compinit with niceness >= 10)
+zplug 'plugins/golang', \
+    from:oh-my-zsh, \
+    nice:10
+
 if ! zplug check; then
     printf "Install plugins? [y/N] "
     if read -q; then
@@ -65,13 +70,6 @@ case $( uname -s ) in
         ;;
 esac
 # }}}
-
-# Go completion
-if [ -f ~/.zshcomp_go ]; then
-    source ~/.zshcomp_go
-elif hash go 2>/dev/null && [ -f `go env GOROOT`/misc/zsh/go ]; then
-    source `go env GOROOT`/misc/zsh/go
-fi
 
 # In tmux, don't show status bar if there's only one window
 if [[ -n $TMUX ]]; then
