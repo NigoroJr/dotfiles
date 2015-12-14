@@ -134,15 +134,15 @@ unsetopt promptcr           # Show lines without trailing \n
 # Key bindings {{{
 # emacs keybinding
 bindkey -e
-bindkey -M emacs 'n' down-line-or-history
-bindkey -M emacs 'p' up-line-or-history
+bindkey -M emacs "\en" down-line-or-history
+bindkey -M emacs "\ep" up-line-or-history
 
 # Better history search
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-bindkey '' history-beginning-search-backward-end
-bindkey '' history-beginning-search-forward-end
+bindkey '^P' history-beginning-search-backward-end
+bindkey '^N' history-beginning-search-forward-end
 
 # Incremental backward search starting from previously executed command {{{
 history-incremental-pattern-search-backward-start-from-previous() {
@@ -152,8 +152,8 @@ history-incremental-pattern-search-backward-start-from-previous() {
 
     # Was aborted
     # Either works
-    #if (( #KEYS == ##\C-g )) || (( #KEYS == ##\C-c )) || (( #KEYS == ##\C-\\ )); then
-    if [ "$KEYS" == "" ] || [ "$KEYS" == "" ] || [ "$KEYS" == "" ]; then
+    #if [ "$KEYS" == "" ] || [ "$KEYS" == "" ] || [ "$KEYS" == "" ]; then
+    if (( #KEYS == ##\C-g )) || (( #KEYS == ##\C-c )) || (( #KEYS == ##\C-\\ )); then
         BUFFER=$CMD
     fi
 }
@@ -169,9 +169,9 @@ bindkey -M isearch '^R' history-incremental-pattern-search-backward
 
 zmodload zsh/complist
 # Start menu comple with Shift-Tab
-bindkey '[Z' menu-complete
+bindkey "\e[Z" menu-complete
 # Use Shift-Tab to reverse traverse completion list
-bindkey -M menuselect '[Z' reverse-menu-complete
+bindkey -M menuselect "\e[Z" reverse-menu-complete
 
 # zaw
 # M-z for zaw-history
