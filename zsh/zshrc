@@ -16,28 +16,34 @@ if [ ! -f ~/.zshrc.zwc -o ~/.zshrc -nt ~/.zshrc.zwc ]; then
     zcompile ~/.zshrc
 fi
 
+set_colors() {
+    eval `dircolors`
+    export ZLS_COLORS=$LS_COLORS
+    zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+}
+
 # ls colors {{{
 case `uname -s` in
     Darwin)
         if hash brew 2>/dev/null; then
-            local gnubin=$(brew --prefix coreutils)/libexec/gnubin
-            PATH=$PATH:$gnubin
-        fi
-        # No dircolors
-        if [ -f $gnubin/dircolors ]; then
-            # colorize list
-            eval `dircolors`
-            export ZLS_COLORS=$LS_COLORS
-            zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+            gnubin=$(brew --prefix coreutils)/libexec/gnubin
+            export PATH=$gnubin:$PATH
 
-            alias ls='gls --color=auto'
+            if [ -x $gnubin/dircolors ]; then
+                set_colors
+                alias ls='gls --color=auto'
+            fi
+        else
+            # Use GNU ls if available
+            if hash gls 2>/dev/null; then
+                alias ls='gls'
+            else
+                alias ls='ls -G'
+            fi
         fi
         ;;
     *)
-        # colorize list
-        eval `dircolors`
-        export ZLS_COLORS=$LS_COLORS
-        zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+        set_colors
         ;;
 esac
 # }}}

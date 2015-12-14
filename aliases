@@ -1,23 +1,9 @@
 # vim: ft=zsh
 
-# Check Operating System
-case `uname -s` in
-    Darwin)
-        if hash gls 2>/dev/null; then
-            alias ls='gls'
-        else
-            alias ls='ls -G'
-        fi
-        export GREP_COLOR='1;37;31'
-        ;;
-    *)
-        alias ls='ls --color=auto'
-        alias grep='grep --color=auto'
-        alias egrep='egrep --color=auto'
-        ;;
-esac
-
 # Options
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
 alias l='ls -lh'
 alias la='ls -A'
 alias ll='ls -CF'
@@ -37,9 +23,7 @@ alias gC='git commit'
 
 # C++
 alias gpp='g++ -std=c++11'
-if hash clang++ 2>/dev/null; then
-    alias clpp='clang++ -std=c++11'
-fi
+alias clpp='clang++ -std=c++11'
 
 # Text Editors
 alias gvi='gvim'
