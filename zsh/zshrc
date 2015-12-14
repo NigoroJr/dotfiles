@@ -1,7 +1,3 @@
-# Enable completion
-zstyle :compinstall filename "$HOME/.zshrc"
-autoload -Uz compinit && compinit
-
 # Get zplug if it doesn't exist
 export ZPLUG_HOME=~/.zplug
 if [ ! -f $ZPLUG_HOME/zplug ]; then
