@@ -20,6 +20,8 @@ zplug 'plugins/golang', \
     from:oh-my-zsh, \
     nice:10
 
+zplug 'Tarrasch/zsh-bd'
+
 if ! zplug check; then
     printf "Install plugins? [y/N] "
     if read -q; then
