@@ -21,7 +21,6 @@ zplug 'plugins/golang', \
     from:oh-my-zsh, \
     nice:10
 
-_Z_NO_COMPLETE_CD=1
 zplug 'knu/z', \
     of:'z.sh', \
     nice:10
