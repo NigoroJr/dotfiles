@@ -26,6 +26,8 @@ zplug 'knu/z', \
     of:'z.sh', \
     nice:10
 
+zplug 'zsh-users/zaw'
+
 zplug 'Tarrasch/zsh-bd'
 
 if ! zplug check; then
@@ -159,17 +161,25 @@ zle -N history-incremental-pattern-search-backward-start-from-previous
 # }}}
 
 # bindkey '' history-incremental-pattern-search-backward
-bindkey '' history-incremental-pattern-search-backward-start-from-previous
-bindkey 's' history-incremental-pattern-search-forward
+bindkey '^R' history-incremental-pattern-search-backward-start-from-previous
+bindkey '^S' history-incremental-pattern-search-forward
 
-bindkey -M isearch '' backward-kill-word
-bindkey -M isearch '' history-incremental-pattern-search-backward
+bindkey -M isearch '^H' backward-kill-word
+bindkey -M isearch '^R' history-incremental-pattern-search-backward
 
 zmodload zsh/complist
 # Start menu comple with Shift-Tab
 bindkey '[Z' menu-complete
 # Use Shift-Tab to reverse traverse completion list
 bindkey -M menuselect '[Z' reverse-menu-complete
+
+# zaw
+# M-z for zaw-history
+bindkey "\ez" zaw-history
+# C-M-z for zaw
+bindkey "\e^Z" zaw
+# C-x c for zaw-command-output
+bindkey '^X!' zaw-command-output
 # }}}
 
 # Settings for prompt
