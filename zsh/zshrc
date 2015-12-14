@@ -12,22 +12,21 @@ if [ ! -f ~/.zshrc.zwc -o ~/.zshrc -nt ~/.zshrc.zwc ]; then
     zcompile ~/.zshrc
 fi
 
+# Colors {{{
 set_colors() {
-    eval `dircolors`
+    eval $( dircolors )
     export ZLS_COLORS=$LS_COLORS
     zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 }
 
-# ls colors {{{
-case `uname -s` in
+case $( uname -s ) in
     Darwin)
         if hash brew 2>/dev/null; then
             gnubin=$(brew --prefix coreutils)/libexec/gnubin
             export PATH=$gnubin:$PATH
 
-            if [ -x $gnubin/dircolors ]; then
+            if hash dircolors 2>/dev/null; then
                 set_colors
-                alias ls='gls --color=auto'
             fi
         else
             # Use GNU ls if available
