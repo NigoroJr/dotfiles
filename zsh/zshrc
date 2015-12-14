@@ -121,15 +121,15 @@ setopt list_packed          # Compact list
 setopt list_types           # Show file types
 setopt long_list_jobs       # Set jobs -l as the output for jobs
 setopt magic_equal_subst    # Completion like --prefix=/usr etc.
-setopt nobeep
-setopt noflowcontrol        # C-s for incremental forward search
+setopt no_beep
+setopt no_flow_control      # C-s for incremental forward search
 setopt no_nomatch           # Allow things like HEAD^^ in Git repositories
 setopt numeric_glob_sort
 setopt prompt_subst
 setopt pushd_ignore_dups    # Don't pushd the same directory
 setopt share_history
 unsetopt auto_menu          # Don't change completion with Tab
-unsetopt promptcr           # Show lines without trailing \n
+unsetopt prompt_cr          # Show lines without trailing \n
 # }}}
 
 # Key bindings {{{
