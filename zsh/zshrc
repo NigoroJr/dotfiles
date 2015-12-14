@@ -8,6 +8,9 @@ if [ ! -f $ZPLUG_HOME/zplug ]; then
             mkdir -p $ZPLUG_HOME
         fi
         wget https://git.io/zplug -O $ZPLUG_HOME/zplug
+    else
+        echo "Couldn't download zplug" 1>&2
+        return 1
     fi
 fi
 
