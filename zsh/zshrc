@@ -112,7 +112,8 @@ setopt auto_resume          # Resume when suspended command is entered
 setopt cdable_vars          # cd to named dirs without ~ at beginning
 setopt correct              # Suggest correction
 setopt extended_glob
-[[ $ZSH_VERSION -ge 5.2 ]] && setopt glob_star_short
+autoload -U is-at-least
+is-at-least 5.2 && setopt glob_star_short
 setopt hist_ignore_all_dups
 setopt hist_ignore_space    # Don't add commands that start with space
 setopt hist_reduce_blanks
