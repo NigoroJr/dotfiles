@@ -1,9 +1,5 @@
-# vim: foldmethod=marker ft=zsh
-# The local .zshrc is read at the end
-
 # Enable completion
 zstyle :compinstall filename "$HOME/.zshrc"
-
 autoload -Uz compinit && compinit
 
 # Read aliases
@@ -155,3 +151,5 @@ fi
 if [ -f ~/.localrc/zshrc ]; then
     source ~/.localrc/zshrc
 fi
+
+# vim: foldmethod=marker ft=zsh
