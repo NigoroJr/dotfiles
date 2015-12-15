@@ -19,8 +19,8 @@ URxvt.pointerBlank: true
 URxvt.urgentOnBell: true
 
 URxvt.font: \
-    xft:Ricty Discord:Regular:size=9,
-    xft:Hiragino Maru Gothic:size=9
+    xft:Ricty Discord:Regular:size=9, \
+    xft:Symbola:Regular
 
 Xft.dpi: 96
 Xft.antialias: true
