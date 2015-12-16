@@ -5,53 +5,49 @@ autoload colors
 colors
 
 autoload -U add-zsh-hook
-if [ $TERM =~ "256color" ]; then
-    add-zsh-hook precmd random_colored_prompt
-else
-    add-zsh-hook precmd simple_prompt
-fi
+add-zsh-hook precmd _set_prompt
 
-get_git_prompt() {  # {{{
-    local prompt=""
+_set_prompt() {
+    if [[ -n $TERM ]] && [ $TERM =~ "256color" ]; then
+        _prompt_random_256
+    else
+        _prompt_random_16
+    fi
+}
 
-    local branch_name=`git rev-parse --abbrev-ref HEAD 2>/dev/null`
+# Get the status if in git repository {{{
+_prompt_git_status() {
+    local prompt
+    local branch_name staged modified untracked conflicts
+
+    branch_name=`git rev-parse --abbrev-ref HEAD 2>/dev/null`
+    # Not in git repository
     if [[ -z $branch_name ]]; then
-        # Not in git repository
         return
     fi
 
+    # Clean repository?
     if [[ -z `git status --short 2>/dev/null` ]]; then
-        # Clean
         echo "%F{046}$branch_name%f"
         return
     fi
 
-    # Dirty
-
-    # Total number of files
-    #local files_changed=`git status --short | wc -l`
-    #prompt+="%F{014}T%f$files_changed "
-
-    # Number of staged files
-    local staged_files="`git diff --cached --numstat | wc -l | tr -d ' '`"
-    if [ "$staged_files" -ne 0 ]; then
-        prompt+="%F{010}S%f$staged_files "
+    staged="`git diff --cached --numstat | wc -l | tr -d ' '`"
+    if [ "$staged" -ne 0 ]; then
+        prompt+="%F{010}S%f$staged "
     fi
 
-    # Number of modified files
-    local modified_files="`git diff --numstat | wc -l | tr -d ' '`"
-    if [ "$modified_files" -ne 0 ]; then
-        prompt+="%F{009}M%f$modified_files "
+    modified="`git diff --numstat | wc -l | tr -d ' '`"
+    if [ "$modified" -ne 0 ]; then
+        prompt+="%F{009}M%f$modified "
     fi
 
-    # Number of untracked files
-    local untracked_files="`git status --short | grep '^\s*??' | wc -l | tr -d ' '`"
-    if [ "$untracked_files" -ne 0 ]; then
-        # prompt+="%F{226}U%f$untracked_files "
-        prompt+="%F{099}U%f$untracked_files "
+    untracked="`git status --short | grep '^\s*??' | wc -l | tr -d ' '`"
+    if [ "$untracked" -ne 0 ]; then
+        prompt+="%F{099}U%f$untracked "
     fi
 
-    local conflicts="`git status --short | grep '^\s*UU' | wc -l | tr -d ' '`"
+    conflicts="`git status --short | grep '^\s*UU' | wc -l | tr -d ' '`"
     if [ "$conflicts" -ne 0 ]; then
         prompt+="%F{190}C%f$conflicts "
     fi
@@ -64,70 +60,89 @@ get_git_prompt() {  # {{{
     fi
 
     echo $prompt
-}   # }}}
+}
+# }}}
 
-random_colored_prompt() {   # {{{
+_prompt_arrow() {
+    local rnd=$1
+    shift
+    local -a valid_colors=($@)
+    local ind=$(( $rnd % ${#valid_colors[@]} + 1))
+    local arrow="%F{${valid_colors[$ind]}}->%f"
 
-# Change hostname on remote login
-local p_info=""
-if [ -n "${REMOTEHOST}${SSH_CONNECTION}" ]; then
-    p_info="%F{207}%m%f"
-else
-    p_info="%F{222}%m%f"
-fi
+    echo $arrow
+}
 
-# Arrow with random colors
-valid_colors=({001..015} {022..051} {058..087} {094..159} {161..231} {242..255})
+# Randomly selects a 256 color for to use for the arrow {{{
+_prompt_random_256() {
+    local front arrow rnd exit_stat l_prompt
+    local -a valid_colors
 
-local random_index=$(( $RANDOM % ${#valid_colors[@]} ))
-local signs="%F{${valid_colors[$random_index]}}->%f"
-
-# username
-p_info="$p_info$signs%F{45}%n%f"
-
-# Arrow sign that changes color depending on return state of previous command
-# Show double arrow if in tmux
-local sign=' > '
-if [[ -n $TMUX ]]; then
-    sign='>> '
-fi
-
-p_info+="%0(?,%F{046}$sign%f,%20(?,%F{046}$sign%f,%F{009}$sign%f))"
-
-# Display in two lines if too long
-local pwd_length=`expr $PWD : '.*'`
-if [ "$pwd_length" -ge 45 ]; then
-    PROMPT="[ %F{219}%~%f ]"$'\n'"$p_info"
-else
-    PROMPT="$p_info"
-fi
-
-unset RPROMPT
-# Show git repository info
-local git_prompt="`get_git_prompt`"
-if [[ -n $git_prompt ]]; then
-    RPROMPT+="($git_prompt)"
-fi
-
-# Right prompt
-if [ "$pwd_length" -lt 45 ]; then
-    RPROMPT+=" [ %F{051}%~%f ]"
-fi
-}   # }}}
-
-simple_prompt() {
-    valid_colors=("white" "light red" "light green" "brown" "yellow" "light blue" "purple" "pink" "cyan" "light cyan")
-    local random_index=$(( $RANDOM % ${#valid_colors[@]} ))
-    local signs="%F{${valid_colors[$random_index]}}%B->%b%f"
-
-    local front="%m$signs%F{blue}%B%m%b%f"
-
-    local sign=' > '
-    if [[ -n $TMUX ]]; then
-        sign='>> '
+    # Change hostname on remote login
+    if [ -n "${REMOTEHOST}${SSH_CONNECTION}" ]; then
+        front="%F{207}%m%f"
+    else
+        front="%F{222}%m%f"
     fi
 
-    p_info="%0(?,%F{green}%B$sign%b%f,%20(?,%F{green}%B$sign%b%f,%F{red}%B$sign%b%f))"
+    # Arrow with random colors
+    valid_colors=({001..015} {022..051} {058..087} {094..159} {161..231} {242..255})
+    # Needed so that $RANDOM is referenced from parent shell not subshell
+    rnd=$RANDOM
+    arrow=$( _prompt_arrow $rnd $valid_colors )
 
-    PROMPT=$front$p_info
+    # Change color depending on exit status of previous command
+    if [[ -n $TMUX ]]; then
+        sign='>>'
+    else
+        sign=' >'
+    fi
+    exit_stat="%0(?,%F{046}$sign%f,%20(?,%F{046}$sign%f,%F{009}$sign%f))"
+
+    # Construct left prompt
+    l_prompt="$front$arrow%F{45}%n%f$exit_stat "
+
+    # Display in two lines if too long
+    local pwd_length=`expr $PWD : '.*'`
+    if [ "$pwd_length" -ge 45 ]; then
+        PROMPT="[ %F{219}%~%f ]"$'\n'"$l_prompt"
+    else
+        PROMPT="$l_prompt"
+    fi
+
+    unset RPROMPT
+    # Show git repository info
+    local git_prompt="$( _prompt_git_status )"
+    if [[ -n $git_prompt ]]; then
+        RPROMPT+="($git_prompt)"
+    fi
+
+    # Right prompt
+    if [ "$pwd_length" -lt 45 ]; then
+        RPROMPT+=" [ %F{051}%~%f ]"
+    fi
 }
+# }}}
+
+# Selects a random color for the arrow {{{
+_prompt_random_16() {
+    local front arrow rnd sign exit_stat
+    local -a valid_colors
+
+    front="%m$arrow%F{blue}%B%n%b%f"
+
+    valid_colors=("grey" "magenta" "white" "red" "green" "yellow" "cyan")
+    rnd=$RANDOM
+    arrow=$( _prompt_arrow $rnd $valid_colors )
+
+    # Change color depending on exit status of previous command
+    if [[ -n $TMUX ]]; then
+        sign='>>'
+    else
+        sign=' >'
+    fi
+    exit_stat="%0(?,%F{green}%B$sign%b%f,%20(?,%F{green}%B$sign%b%f,%F{red}%B$sign%b%f))"
+
+    PROMPT="%m$arrow%F{blue}%B%n%b%f$exit_stat "
+}
+# }}}
