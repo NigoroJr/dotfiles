@@ -22,7 +22,6 @@ zplug 'plugins/golang', \
     from:oh-my-zsh, \
     nice:10
 
-_Z_NO_RESOLVE_SYMLINKS=1
 zplug 'knu/z', \
     of:'z.sh', \
     nice:10
@@ -30,6 +29,15 @@ zplug 'knu/z', \
 zplug 'zsh-users/zaw'
 
 zplug 'Tarrasch/zsh-bd'
+
+# z
+_Z_NO_RESOLVE_SYMLINKS=1
+
+# zaw
+zstyle ':filter-select' max-lines 20
+zstyle ':filter-select' extended-search yes
+zstyle ':filter-select' case-insensitive yes
+zstyle ':filter-select' rotate-list yes
 
 if ! zplug check; then
     printf "Install plugins? [y/N] "
@@ -42,12 +50,6 @@ if ! zplug check; then
 fi
 
 zplug load
-
-# zaw
-zstyle ':filter-select' max-lines 20
-zstyle ':filter-select' extended-search yes
-zstyle ':filter-select' case-insensitive yes
-zstyle ':filter-select' rotate-list yes
 
 # Read aliases
 if [ -f ~/.aliases ]; then
