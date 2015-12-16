@@ -1,4 +1,4 @@
-# vim: ft=zsh
+autoload -U colors && colors
 
 export LANG="en_US.UTF-8"
 if [ -d $HOME/src/go ]; then
@@ -33,17 +33,16 @@ fpath=($HOME/.zsh/functions(N) \
     $fpath)
 typeset -U fpath
 
-HISTFILE=~/.histfile
-HISTSIZE=6000000
-SAVEHIST=6000000
-WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+export HISTFILE=~/.histfile
+export HISTSIZE=6000000
+export SAVEHIST=6000000
+export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 # Don't trim space after completion for these chars
-ZLE_SPACE_SUFFIX_CHARS=$'|&'
+export ZLE_SPACE_SUFFIX_CHARS=$'|&'
 # Prompt "do you wish to see all N possibilities"
 # only when going out of screen
-LISTMAX=0
-REPORTTIME=10
-autoload -U colors && colors
-TIMEFMT="\
+export LISTMAX=0
+export REPORTTIME=10
+export TIMEFMT="\
 $fg_bold[blue]%J$reset_color
   %*E :: $fg[green]U$reset_color %*U :: $fg[blue]S$reset_color %*S :: %M KiB"
