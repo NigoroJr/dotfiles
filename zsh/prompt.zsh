@@ -1,5 +1,4 @@
-autoload colors
-colors
+autoload -U colors && colors
 
 autoload -U add-zsh-hook
 add-zsh-hook precmd _set_prompt
