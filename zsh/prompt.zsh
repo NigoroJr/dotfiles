@@ -1,5 +1,3 @@
-# Prompt
-
 autoload colors
 colors
 
@@ -145,5 +143,3 @@ _prompt_random_16() {
     PROMPT="%m$arrow%F{blue}%B%n%b%f$exit_stat "
 }
 # }}}
-
-# vim: ft=zsh

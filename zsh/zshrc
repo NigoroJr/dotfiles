@@ -191,8 +191,8 @@ bindkey '^X!' zaw-command-output
 # }}}
 
 # Settings for prompt
-if [ -f ~/.zshrc_prompt ]; then
-    source ~/.zshrc_prompt
+if [ -f ~/.prompt.zsh ]; then
+    source ~/.prompt.zsh
 fi
 
 # Read local configs if any
