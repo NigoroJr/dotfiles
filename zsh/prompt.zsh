@@ -70,7 +70,7 @@ _prompt_arrow() {
     echo $arrow
 }
 
-# Randomly selects a 256 color for to use for the arrow {{{
+# Randomly selects a 256 color to use for the arrow {{{
 _prompt_random_256() {
     local front arrow rnd exit_stat l_prompt
     local -a valid_colors
@@ -82,7 +82,6 @@ _prompt_random_256() {
         front="%F{222}%m%f"
     fi
 
-    # Arrow with random colors
     valid_colors=({001..015} {022..051} {058..087} {094..159} {161..231} {242..255})
     # Needed so that $RANDOM is referenced from parent shell not subshell
     rnd=$RANDOM
