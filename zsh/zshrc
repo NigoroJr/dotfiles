@@ -42,6 +42,12 @@ fi
 
 zplug load
 
+# zaw
+zstyle ':filter-select' max-lines 20
+zstyle ':filter-select' extended-search yes
+zstyle ':filter-select' case-insensitive yes
+zstyle ':filter-select' rotate-list yes
+
 # Read aliases
 if [ -f ~/.aliases ]; then
     source ~/.aliases
