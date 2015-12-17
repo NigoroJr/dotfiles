@@ -42,9 +42,6 @@ alias gai='git add -i'
 alias gap='git add -p'
 alias ga.='git add .'
 alias gl='git log'
-if hash hub 2>/dev/null; then
-    alias grau='hub remote add upstream'
-fi
 
 alias cdd='cd $( dirname $_ )'
 
@@ -79,6 +76,32 @@ sudo() {
     else
         command sudo "$@"
     fi
+}
+
+# Add upstream for a repository hosted on github.com
+grau() {
+    local cmd username=$1 repo_name upstream
+
+    if [ -z $username ]; then
+        echo 'Need username for upstream' 1>&2
+        return 1
+    fi
+
+    if type hub &>/dev/null; then
+        cmd=hub
+        upstream=$username
+    elif type git &>/dev/null; then
+        cmd=git
+        repo_name=$( git remote show -n origin | \
+            awk -F '/' '/Fetch/ { print $NF }' )
+        upstream="https://github.com/$username/$repo_name"
+    else
+        echo "You don't even have git!" 1>&2
+        return 1
+    fi
+
+    command $cmd remote add upstream $upstream && \
+        echo "Added $username${repo_name:+/$repo_name} as upstream"
 }
 
 # Go home, non-zsh shells
