@@ -54,6 +54,12 @@ fi
 
 zplug load
 
+# zplug that is managed by itself
+local zplugged_zplug=${(M)${(k)zplugs}:%*/zplug}
+if [[ -n $zplugged_zplug ]] && [ ! -L ~/.zplug/zplug ]; then
+    ln -sf $ZPLUG_HOME/repos/$zplugged_zplug/zplug ~/.zplug/zplug
+fi
+
 # Read aliases
 if [ -f ~/.aliases ]; then
     source ~/.aliases
