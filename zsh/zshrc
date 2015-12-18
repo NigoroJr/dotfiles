@@ -18,6 +18,9 @@ fi
 source ~/.zplug/zplug
 zplug 'b4b4r07/zplug'
 
+zplug 'clvv/fasd', \
+    as:command
+
 # Completions (load after compinit with niceness >= 10)
 zplug 'plugins/golang', \
     from:oh-my-zsh, \
