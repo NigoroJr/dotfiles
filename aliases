@@ -104,6 +104,7 @@ grau() {
         echo "Added $username${repo_name:+/$repo_name} as upstream"
 }
 
+export FZF_DEFAULT_OPTS='--ansi --select-1 --exit-0 --multi --cycle'
 hash fzf 2>/dev/null && alias f=fzf
 
 # Go home, non-zsh shells
