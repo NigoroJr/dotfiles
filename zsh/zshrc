@@ -104,13 +104,19 @@ esac
 # }}}
 
 # In tmux, don't show status bar if there's only one window
-if [[ -n $TMUX ]]; then
-    if [ $(tmux list-windows | wc -l) -eq 1 ]; then
-        tmux set-option status off >/dev/null
-    else
-        tmux set-option status on >/dev/null
+_tmux_status_bar() {
+    if [[ $TMUX ]]; then
+        local switch
+        if (( $( tmux list-windows | wc -l ) == 1 )); then
+            switch=off
+        else
+            switch=on
+        fi
+        tmux set-option status $switch
     fi
-fi
+}
+autoload -U add-zsh-hook
+add-zsh-hook precmd _tmux_status_bar
 
 # enable cursor selection
 zstyle ':completion:*:default' menu select=1
