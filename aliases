@@ -104,6 +104,8 @@ grau() {
         echo "Added $username${repo_name:+/$repo_name} as upstream"
 }
 
+hash fzf 2>/dev/null && alias f=fzf
+
 # Go home, non-zsh shells
 if [[ ! $SHELL =~ zsh ]]; then
     if [ -f ~/.localrc/aliases ]; then
@@ -123,6 +125,7 @@ alias -g DN='>/dev/null'
 alias -g DN1='1>/dev/null'
 alias -g DN2='2>/dev/null'
 alias -g DN12='1>/dev/null 2>&1'
+[[ $+commands[fzf] ]] && alias -g F='| fzf'
 
 if [ -f ~/.localrc/aliases ]; then
     source ~/.localrc/aliases

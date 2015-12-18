@@ -23,6 +23,20 @@ zplug 'b4b4r07/zplug'
 zplug 'clvv/fasd', \
     as:command
 
+zplug 'junegunn/fzf', \
+    as:command, \
+    do:'./install --bin >/dev/null', \
+    of:'bin/fzf', \
+    file:'fzf', \
+    if:"(( $+commands[go] ))"
+
+zplug "junegunn/fzf-bin", \
+    from:gh-r, \
+    as:command, \
+    of:"*${(L)$(uname -s)}*amd64*", \
+    file:fzf, \
+    if:'(( ! $+commands[go] ))'
+
 # Completions (load after compinit with niceness >= 10)
 zplug 'plugins/golang', \
     from:oh-my-zsh, \
