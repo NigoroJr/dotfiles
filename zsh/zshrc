@@ -27,6 +27,9 @@ zplug 'plugins/golang', \
     ignore:oh-my-zsh.sh, \
     nice:10
 
+zplug 'rimraf/k', \
+    of:k.sh
+
 zplug 'knu/z', \
     of:'z.sh', \
     nice:10
