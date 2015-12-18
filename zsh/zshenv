@@ -32,6 +32,10 @@ typeset -U path
 fpath=($HOME/.zsh/functions(N) \
     $fpath)
 typeset -U fpath
+manpath=(
+    $HOME/usr/share/man(N) \
+    $manpath)
+typeset -U manpath
 
 export HISTFILE=~/.histfile
 export HISTSIZE=6000000
