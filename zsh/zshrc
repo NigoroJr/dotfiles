@@ -20,6 +20,7 @@ zplug 'b4b4r07/zplug'
 # Completions (load after compinit with niceness >= 10)
 zplug 'plugins/golang', \
     from:oh-my-zsh, \
+    ignore:oh-my-zsh.sh, \
     nice:10
 
 zplug 'knu/z', \
