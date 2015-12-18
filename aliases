@@ -109,7 +109,7 @@ if [[ ! $SHELL =~ zsh ]]; then
     if [ -f ~/.localrc/aliases ]; then
         source ~/.localrc/aliases
     fi
-    exit
+    return 0
 fi
 
 # Global alias
