@@ -220,8 +220,6 @@ bindkey -M menuselect "\e[Z" reverse-menu-complete
 bindkey "\ez" zaw-history
 # C-M-z for zaw
 bindkey "\e^Z" zaw
-# C-x c for zaw-command-output
-bindkey '^X!' zaw-command-output
 # }}}
 
 # Settings for prompt
