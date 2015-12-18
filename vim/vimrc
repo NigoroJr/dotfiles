@@ -180,6 +180,7 @@ nmap <silent> <Leader>ss :call <SID>toggle('spell', 'Spell')<CR>
 nmap <silent> <Leader>sp :call <SID>toggle('paste', 'Paste')<CR>
 nmap <silent> <Leader>sb :call <SID>toggle('scrollbind', 'Scrollbind')<CR>
 nmap <silent> <Leader>set :call <SID>toggle('expandtab', 'expandtab')<CR>
+nmap <silent> <Leader>sw :call <SID>toggle('wrap', 'wrap')<CR>
 
 " Toggle diff
 function! s:toggle_diff() abort
