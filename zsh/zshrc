@@ -40,6 +40,9 @@ zplug 'plugins/golang', \
     ignore:oh-my-zsh.sh, \
     nice:10
 
+zplug 'zsh-users/zsh-syntax-highlighting', \
+    nice:15
+
 zplug 'rimraf/k', \
     of:k.sh
 
@@ -50,6 +53,9 @@ zplug 'knu/z', \
 zplug 'zsh-users/zaw'
 
 zplug 'Tarrasch/zsh-bd'
+
+# zsh-syntax-highlighting
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(brackets)
 
 # z
 _Z_NO_RESOLVE_SYMLINKS=1
