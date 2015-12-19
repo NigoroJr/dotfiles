@@ -20,9 +20,6 @@ fi
 source ~/.zplug/zplug
 zplug 'b4b4r07/zplug'
 
-zplug 'clvv/fasd', \
-    as:command
-
 zplug 'junegunn/fzf', \
     as:command, \
     do:'./install --bin >/dev/null', \
