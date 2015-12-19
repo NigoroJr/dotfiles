@@ -315,6 +315,13 @@ endfunction
 " }}}
 " Make scripts executable if it's a script {{{
 function! s:make_executable(filename)
+  " Don't change permissions in a git repo
+  call system('git status')
+  let exit_status = v:shell_error
+  if exit_status == 0
+    return
+  endif
+
   let line = getline(1)
   if line =~ '^#!' && line =~ '/bin'
     execute 'silent !chmod a+x' a:filename
