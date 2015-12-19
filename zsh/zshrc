@@ -50,7 +50,8 @@ zplug 'knu/z', \
     of:'z.sh', \
     nice:10
 
-zplug 'zsh-users/zaw'
+zplug 'zsh-users/zaw' \
+    | zplug 'NigoroJr/zaw-z', nice:1
 
 zplug 'Tarrasch/zsh-bd'
 
@@ -221,8 +222,10 @@ bindkey -M menuselect "\e[Z" reverse-menu-complete
 # zaw
 # M-z for zaw-history
 bindkey "\ez" zaw-history
-# C-M-z for zaw
-bindkey "\e^Z" zaw
+# C-M-z for zaw-z
+bindkey "\e^Z" zaw-z
+# C-x ; for zaw
+bindkey "^X;" zaw
 # }}}
 
 # Settings for prompt
