@@ -104,10 +104,10 @@ if neobundle#tap('neocomplete.vim')
             \}
     endif
 
-    if !exists('g:neocomplete#sources#include#paths')
-      let g:neocomplete#sources#include#paths = {}
+    if !exists('g:neoinclude#paths')
+      let g:neoinclude#paths = {}
     endif
-    let g:neocomplete#sources#include#paths.ruby = s:get_ruby_gems()
+    let g:neoinclude#paths.ruby = s:get_ruby_gems()
 
     " Note: This is taking advantage of the fact that neocomplete.vim is
     " lazy-loaded when it goes into insert mode, thus, will be sourced after
