@@ -4,11 +4,16 @@ function! s:get_ruby_gems() abort
     return
   endif
 
-  let current_version = split(system('rbenv version'), ' ')[0]
-  let gem_path = expand('~/.rbenv/versions/'.current_version.'/lib/ruby/gems/*/gems/')
+  let rbenv_prefix = systemlist('rbenv prefix')[0] . '/lib/ruby'
+
+  " stdlib is in the directory with the version number
+  let stdlib_path = sort(split(expand(rbenv_prefix . '/*'), '\n'))[0]
+
+  let gem_path = rbenv_prefix . '/gems/*/gems/'
   let dirs = split(globpath(gem_path, '*'), '\n')
+
   call map(dirs, 'v:val."/lib"')
-  return join(dirs, ',')
+  return stdlib_path . ',' . join(dirs, ',')
 endfunction
 " }}}
 " emmet-vim {{{
