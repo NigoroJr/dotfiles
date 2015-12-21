@@ -1,0 +1,94 @@
+# emmet-vim
+[[plugins]]
+repository = 'mattn/emmet-vim'
+on_ft = ['html', 'xhtml']
+on_cmd = ['Emmet', 'EmmetInstall']
+on_map = '<Plug>(emmet-'
+
+# jedi-vim
+[[plugins]]
+repository = 'davidhalter/jedi-vim'
+on_ft = 'python'
+depends = 'davidhalter/jedi'
+
+# neocomplcache.vim
+[[plugins]]
+repository = 'Shougo/neocomplcache.vim'
+depends = 'Shougo/vimproc.vim'
+disabled = 'NeoCompleteCompatible()'
+on_i = 1
+
+# neocomplete.vim
+[[plugins]]
+repository = 'Shougo/neocomplete.vim'
+depends = ['Shougo/vimproc.vim', 'Shougo/context_filetype.vim']
+disabled = '!NeoCompleteCompatible()'
+on_i = 1
+
+# neoinclude.vim
+[[plugins]]
+repository = 'Shougo/neoinclude.vim'
+depends = 'Shougo/neocomplete.vim'
+on_source = 'neocomplete.vim'
+
+# neosnippet-snippets
+[[plugins]]
+repository = 'Shougo/neosnippet-snippets'
+on_source = 'neosnippet.vim'
+depends = 'Shougo/neosnippet.vim'
+
+# neosnippet.vim
+[[plugins]]
+repository = 'Shougo/neosnippet.vim'
+on_source = ['neocomplcache.vim', 'neocomplete.vim']
+on_cmd = 'NeoSnippetEdit'
+on_unite = ['neosnippet', 'neosnippet/user', 'neosnippet/runtime']
+
+# perlomni.vim
+[[plugins]]
+repository = 'c9s/perlomni.vim'
+on_ft = 'perl'
+
+# vim-eclim
+[[plugins]]
+repository = 'starcraftman/vim-eclim'
+on_ft = 'java'
+on_cmd = 'DeployEclimd'
+disabled = '!filereadable(expand("~/.eclim/.eclimd_instances"))'
+
+# vim-endwise
+[[plugins]]
+repository = 'tpope/vim-endwise'
+on_ft = [
+  'aspvbs', 'c', 'cpp', 'crystal', 'elixir', 'htmldjango', 'lua', 'matlab',
+  'objc', 'ruby', 'sh', 'snippets', 'vb', 'vbnet', 'vim', 'xdefaults', 'zsh',
+]
+
+# vim-go
+[[plugins]]
+repository = 'fatih/vim-go'
+on_ft = 'go'
+
+# vim-go-impl
+[[plugins]]
+repository = 'rhysd/vim-go-impl'
+on_ft = 'go'
+
+# vim-javacomplete2
+[[plugins]]
+repository = 'artur-shaik/vim-javacomplete2'
+on_ft = 'java'
+disabled = """
+filereadable(expand('~/.eclim/.eclimd_instances')) \
+|| !executable('mvn') || !has('python')"""
+vim_version = '7.4.0'
+
+# vim-nodejs-complete
+[[plugins]]
+repository = 'ahayman/vim-nodejs-complete'
+on_ft = 'javascript'
+
+# vim-smartchar
+[[plugins]]
+repository = 'kana/vim-smartchr'
+on_ft = 'cpp'

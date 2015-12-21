@@ -1,15 +1,21 @@
+# securemodelines
 [[plugins]]
 repository = 'ciaranm/securemodelines'
 
-[[plugins]]
-repository = 'davidhalter/jedi'
-fetch = 1
-
+# neobundle.vim
 [[plugins]]
 repository = 'Shougo/neobundle.vim'
 depends = 'Shougo/vimproc.vim'
 fetch = 1
 
+# previm
+[[plugins]]
+repository = 'kannokanno/previm'
+on_cmd = 'PrevimOpen'
+on_ft = 'markdown'
+depends = 'tyru/open-browser.vim'
+
+# vimproc.vim
 [[plugins]]
 repository = 'Shougo/vimproc.vim'
 
@@ -19,6 +25,7 @@ repository = 'Shougo/vimproc.vim'
   mac = 'make -f make_mac.mak'
   unix = 'make -f make_unix.mak'
 
+# vim-obsession
 [[plugins]]
 repository = 'tpope/vim-obsession'
 commands = ['Obsession', 'Obsession!']

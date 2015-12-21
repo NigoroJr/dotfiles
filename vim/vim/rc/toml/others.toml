@@ -1,0 +1,136 @@
+# AnsiEsc.vim
+[[plugins]]
+repository = 'AnsiEsc.vim'
+on_cmd = 'AnsiEsc'
+
+# dbext.vim
+[[plugins]]
+repository = 'dbext.vim'
+
+# gist-vim
+[[plugins]]
+repository = 'mattn/gist-vim'
+on_cmd = 'Gist'
+depends = 'mattn/webapi-vim'
+
+# vimshell.vim
+[[plugins]]
+repository = 'Shougo/vimshell.vim'
+depends = 'Shougo/vimproc.vim'
+
+  [plugins.on_cmd]
+  name = [
+    'VimShell',
+    'VimShellBufferDir',
+    'VimShellCreate',
+    'VimShellTab',
+    'VimShellPop',
+    'VimShellCurrentDir',
+    'VimShellExecute',
+    'VimShellInteractive',
+    'VimShellTerminal',
+    'VimShellSendString',
+    'VimShellSendBuffer',
+  ]
+  complete = 'customlist,vimshell#complete'
+
+# sudo.vim
+[[plugins]]
+repository = 'sudo.vim'
+on_cmd = ['SudoRead', 'SudoWrite']
+
+# vim-abolish
+[[plugins]]
+repository = 'tpope/vim-abolish'
+depends = 'tpope/vim-repeat'
+on_cmd = ['Abolish', 'Subvert', 'S']
+on_map = 'cr'
+
+# vim-ambicmd
+[[plugins]]
+repository = 'thinca/vim-ambicmd'
+on_map = ':'
+
+# vim-fugitive
+[[plugins]]
+repository = 'tpope/vim-fugitive'
+augroup = 'fugitive'
+on_cmd = [
+  'Git', 'Git!', 'Gcd', 'Glcd', 'Gstatus', 'Gcommit', 'Gmerge', 'Gpull',
+  'Gpush', 'Gfetch', 'Ggrep', 'Glgrep', 'Glog', 'Gllog', 'Gedit', 'Gsplit',
+  'Gvsplit', 'Gtabedit', 'Gpedit', 'Gsplit!', 'Gvsplit!', 'Gtabedit!',
+  'Gpedit!', 'Gread', 'Gread!', 'Gwrite', 'Gwrite', 'Gwq', 'Gwq!', 'Gdiff',
+  'Gsdiff', 'Gvdiff', 'Gmove', 'Gremove', 'Gblame',
+]
+
+# vim-gista
+[[plugins]]
+repository = 'lambdalisue/vim-gista'
+on_cmd = 'Gista'
+on_unite = 'gista'
+
+# vim-niceblock
+[[plugins]]
+repository = 'kana/vim-niceblock'
+on_map = [
+  ['x', '<Plug>(niceblock-I)'],
+  ['x', '<Plug>(niceblock-A)'],
+]
+
+# vim-prettyprint
+[[plugins]]
+repository = 'thinca/vim-prettyprint'
+
+  [plugins.on_cmd]
+  name = ['PrettyPrint', 'PP']
+  complete = 'expression'
+
+# vim-ref
+[[plugins]]
+repository = 'thinca/vim-ref'
+on_map = '<Plug>(ref-keyword)'
+on_unite = 'ref'
+
+  [plugins.on_cmd]
+  name = 'Ref'
+  complete = 'customlist,ref#complete'
+
+# vim-textobj-between
+[[plugins]]
+repository = 'thinca/vim-textobj-between'
+on_map = ['<Plug>(textobj-between-a)', '<Plug>(textobj-between-i)']
+depends = 'kana/vim-textobj-user'
+
+# vim-textobj-line
+[[plugins]]
+repository = 'kana/vim-textobj-line'
+on_map = ['<Plug>(textobj-line-a)', '<Plug>(textobj-line-i)']
+
+# vim-textobj-user
+[[plugins]]
+repository = 'kana/vim-textobj-user'
+
+# vim-repeat
+[[plugins]]
+repository = 'tpope/vim-repeat'
+on_map = '.'
+on_func = 'repeat#set'
+
+# vim-speeddating
+[[plugins]]
+repository = 'tpope/vim-speeddating'
+depends = 'tpope/vim-repeat'
+on_map = ['<C-a>', '<C-x>']
+
+# vinarise.vim
+[[plugins]]
+repository = 'Shougo/vinarise.vim'
+vim_version = '7.3'
+
+  [plugins.on_cmd]
+  name = 'Vinarise'
+  complete = 'file'
+
+# webapi-vim
+[[plugins]]
+repository = 'mattn/webapi-vim'

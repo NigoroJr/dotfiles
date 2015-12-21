@@ -1,0 +1,71 @@
+# neoyank.vim
+[[plugins]]
+repository = 'Shougo/neoyank.vim'
+depends = 'Shougo/unite.vim'
+on_unite = 'history/yank'
+
+# neomru.vim
+[[plugins]]
+repository = 'Shougo/neomru.vim'
+depends = 'Shougo/unite.vim'
+on_unite = ['neomru/file', 'neomru/directory', 'file_mru', 'directory_mru']
+on_cmd = [
+  'NeoMRUReload', 'NeoMRUSave', 'NeoMRUImportFile', 'NeoMRUImportDirectory'
+]
+
+# unite.vim
+[[plugins]]
+repository = 'Shougo/unite.vim'
+depends = 'Shougo/vimproc.vim'
+
+  [plugins.on_cmd]
+  name = [
+    'Unite',
+    'UniteWithBufferDir',
+    'UniteWithCurrentDir',
+    'UniteWithProjectDir',
+    'UniteWithInputDirectory',
+    'UniteWithCursorWord',
+  ]
+  complete = 'customlist,unite#complete#source'
+
+# unite-help
+[[plugins]]
+repository = 'tsukkee/unite-help'
+depends = 'Shougo/unite.vim'
+
+# unite-colorscheme
+[[plugins]]
+repository = 'ujihisa/unite-colorscheme'
+
+# unite-matcher-hide-hidden-directories
+[[plugins]]
+repository = 'NigoroJr/unite-matcher-hide-hidden-directories'
+depends = 'Shougo/unite.vim'
+on_source = 'unite.vim'
+
+# unite-boost-online-doc
+[[plugins]]
+repository = 'osyo-manga/unite-boost-online-doc'
+on_ft = 'cpp'
+depends = [
+  'Shougo/unite.vim',
+  'tyru/open-browser.vim',
+  'mattn/webapi-vim',
+]
+
+# unite-quickfix
+[[plugins]]
+repository = 'osyo-manga/unite-quickfix'
+depends = 'Shougo/unite.vim'
+
+# unite-outline
+[[plugins]]
+repository = 'Shougo/unite-outline'
+depends = 'Shougo/unite.vim'
+
+# unite-kawaii-calc
+[[plugins]]
+repository = 'supermomonga/unite-kawaii-calc'
+depends = 'Shougo/unite.vim'
+

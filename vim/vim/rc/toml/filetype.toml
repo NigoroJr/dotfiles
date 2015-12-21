@@ -1,0 +1,82 @@
+# cmake.vim
+[[plugins]]
+repository = 'jalcine/cmake.vim'
+# on_ft = ['c', 'cpp']
+on_cmd = [
+  'CMakeBuild', 'CMakeClean', 'CMakeClearBufferOpts', 'CMakeCtagsBuildAll',
+  'CMakeInfoForCurrentFile', 'CMakeRebuildCache', 'CMakeTarget',
+  'CMakeBuildCurrent', 'CMakeCleanBuild', 'CMakeCreateBuild',
+  'CMakeCtagsBuildCurrent', 'CMakeInstall', 'CMakeRehashProject', 'CMakeTest',
+]
+vim_version = '7.3'
+
+# context_filetype.vim
+[[plugins]]
+repository = 'Shougo/context_filetype.vim'
+
+# jedi
+[[plugins]]
+repository = 'davidhalter/jedi'
+fetch = 1
+
+# mips.vim
+[[plugins]]
+repository = 'mips.vim'
+on_ft = 'asm'
+
+# perldoc-vim
+[[plugins]]
+repository = 'hotchpotch/perldoc-vim'
+on_ft = 'perl'
+on_cmd = 'Perldoc'
+
+# vim-coffee-script
+[[plugins]]
+repository = 'kchmck/vim-coffee-script'
+on_ft = 'coffee'
+
+# vim-latex
+[[plugins]]
+repository = 'lervag/vim-latex'
+on_ft = 'tex'
+
+# vim-markdown
+[[plugins]]
+repository = 'tpope/vim-markdown'
+depends = 'godlygeek/tabular'
+on_ft = 'markdown'
+
+# vim-precious
+[[plugins]]
+repository = 'osyo-manga/vim-precious'
+on_ft = ['html', 'xhtml', 'markdown']
+on_cmd = [
+  'PreciousSwitch',
+  'PreciousSetContextLocal',
+  'PreciousReset',
+]
+depends = [
+  'Shougo/context_filetype.vim',
+  'vim-textobj-user',
+  'thinca/vim-quickrun',
+]
+
+# vim-R-plugin
+[[plugins]]
+repository = 'Vim-R-plugin'
+on_ft = 'R'
+
+# vim-slim
+[[plugins]]
+repository = 'slim-template/vim-slim'
+on_ft = 'slim'
+
+# vim-toml
+[[plugins]]
+repository = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]]
+repository = 'tkztmk/vim-vala'
+on_ft = 'vala'
+

@@ -1,0 +1,55 @@
+# clever-f.vim
+[[plugins]]
+repository = 'rhysd/clever-f.vim'
+on_map = ['f', 'F', 't', 'T', 'cf', 'ct']
+
+# incsearch.vim
+[[plugins]]
+repository = 'haya14busa/incsearch.vim'
+on_map = [
+  '<Plug>(incsearch-forward)',
+  '<Plug>(incsearch-backward)',
+  '<Plug>(incsearch-stay)',
+  '<Plug>(incsearch-nohl-n)',
+  '<Plug>(incsearch-nohl-N)',
+  '<Plug>(incsearch-nohl-*)',
+  '<Plug>(incsearch-nohl-#)',
+  '<Plug>(incsearch-nohl-g*)',
+  '<Plug>(incsearch-nohl-g#)',
+]
+disabled = '&filetype == "man" && has("macunix")'
+
+# vimfiler.vim
+[[plugins]]
+repository = 'Shougo/vimfiler.vim'
+depends = 'Shougo/unite.vim'
+explorer = 1
+
+  [plugins.on_cmd]
+  name = [
+    'VimFiler',
+    'VimFilerCurrentDir',
+    'VimFilerBufferDir',
+    'VimFilerExplorer',
+  ]
+  complete = 'customlist,vimfiler#complete'
+
+# vim-rooter
+[[plugins]]
+repository = 'airblade/vim-rooter'
+on_map = '<Plug>RooterChangeToRootDirectory'
+
+# vim-sneak
+[[plugins]]
+repository = 'justinmk/vim-sneak'
+depends = 'tpope/vim-repeat'
+on_map = ['s', 'S']
+
+# vim-windowswap
+[[plugins]]
+repository = 'wesQ3/vim-windowswap'
+on_func = [
+  'WindowSwap#MarkWindowSwap',
+  'WindowSwap#DoWindowSwap',
+  'WindowSwap#EasyWindowSwap',
+]
