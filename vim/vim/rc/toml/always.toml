@@ -8,13 +8,6 @@ repository = 'Shougo/neobundle.vim'
 depends = 'Shougo/vimproc.vim'
 fetch = 1
 
-# previm
-[[plugins]]
-repository = 'kannokanno/previm'
-on_cmd = 'PrevimOpen'
-on_ft = 'markdown'
-depends = 'tyru/open-browser.vim'
-
 # vimproc.vim
 [[plugins]]
 repository = 'Shougo/vimproc.vim'

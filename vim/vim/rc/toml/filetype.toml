@@ -30,6 +30,13 @@ repository = 'hotchpotch/perldoc-vim'
 on_ft = 'perl'
 on_cmd = 'Perldoc'
 
+# previm
+[[plugins]]
+repository = 'kannokanno/previm'
+on_cmd = 'PrevimOpen'
+on_ft = 'markdown'
+depends = 'tyru/open-browser.vim'
+
 # vim-coffee-script
 [[plugins]]
 repository = 'kchmck/vim-coffee-script'
