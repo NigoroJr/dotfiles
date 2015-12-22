@@ -1,4 +1,3 @@
-" unite.vim
 " unite.vim {{{
 if neobundle#tap('unite.vim')
   nnoremap [unite] <Nop>
@@ -15,7 +14,7 @@ if neobundle#tap('unite.vim')
   nnoremap [unite]q :Unite quickfix -horizontal -no-quit<CR>
   nnoremap [unite]r :Unite register -buffer-name=register<CR>
   nnoremap [unite]t :Unite tab:no-current<CR>
-  nnoremap [unite]h :Unite history/yank<CR>
+  nnoremap [unite]y :Unite history/yank<CR>
 
   " NeoBundleUpdate using unite.vim interface
   command! NeoBundleUpdateUnite :Unite neobundle/update

@@ -1,6 +1,7 @@
 " vim-quickrun {{{
 if neobundle#tap('vim-quickrun')
   nmap <silent> <Leader>r <Plug>(quickrun)
+  vmap <silent> <Leader>r <Plug>(quickrun)
   nmap <silent> <Leader>m :QuickRun make<CR>
 
   function! neobundle#hooks.on_source(bundle)

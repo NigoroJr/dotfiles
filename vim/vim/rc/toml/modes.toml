@@ -1,0 +1,27 @@
+# vim-ambicmd
+[[plugins]]
+repository = 'thinca/vim-ambicmd'
+on_map = ':'
+
+# vim-niceblock
+[[plugins]]
+repository = 'kana/vim-niceblock'
+on_map = [
+  ['x', '<Plug>(niceblock-I)'],
+  ['x', '<Plug>(niceblock-A)'],
+]
+
+# vim-textobj-between
+[[plugins]]
+repository = 'thinca/vim-textobj-between'
+on_map = ['<Plug>(textobj-between-a)', '<Plug>(textobj-between-i)']
+depends = 'kana/vim-textobj-user'
+
+# vim-textobj-line
+[[plugins]]
+repository = 'kana/vim-textobj-line'
+on_map = ['<Plug>(textobj-line-a)', '<Plug>(textobj-line-i)']
+
+# vim-textobj-user
+[[plugins]]
+repository = 'kana/vim-textobj-user'

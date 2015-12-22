@@ -13,8 +13,8 @@ gui = 1
 # vim-colorschemes
 [[plugins]]
 repository = 'flazz/vim-colorschemes'
-# Can't lazy-load color schemes (neobundle.vim #445)
-# gui = 1
+lazy = 0
+gui = 1
 
 # vim-hier
 [[plugins]]

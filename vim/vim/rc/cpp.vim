@@ -62,6 +62,7 @@ augroup cpp-stl-highlight
   execute "autocmd BufReadPost " . paths ." if empty(&filetype) | set filetype=cpp | endif"
 augroup END
 " }}}
+
 " vim-altr {{{
 if neobundle#tap('vim-altr')
   nmap <Leader>a <Plug>(altr-forward)

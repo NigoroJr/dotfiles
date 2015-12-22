@@ -25,7 +25,7 @@ PREFIX=$HOME/dotfiles
 # Flags to add to the ln command
 DEFAULT_LINK_FLAGS='-s -n'
 # Tasks to run when none specified
-ALL_TASKS="vim zsh emacs X others"
+ALL_TASKS="vim nvim zsh emacs X others"
 
 while getopts 'fuh' flag; do
     case "$flag" in
@@ -71,6 +71,13 @@ for ARG in $TASKS; do
             for F in $PREFIX/$ARG/*; do
                 process_target $F $FLAGS
             done
+            ;;
+        nvim)
+            # init.vim
+            ln $FLAGS $DEFAULT_LINK_FLAGS \
+                $PREFIX/vim/vimrc \
+                $HOME/.config/nvim/init.vim
+            process_target $PREFIX/vim/vim $FLAGS
             ;;
         others)
             OTHER_FILES=$( find $PREFIX -maxdepth 1 -type f \

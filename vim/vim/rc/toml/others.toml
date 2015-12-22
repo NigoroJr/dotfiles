@@ -13,6 +13,34 @@ repository = 'mattn/gist-vim'
 on_cmd = 'Gist'
 depends = 'mattn/webapi-vim'
 
+# neobundle.vim
+[[plugins]]
+repository = 'Shougo/neobundle.vim'
+lazy = 0
+depends = 'Shougo/vimproc.vim'
+fetch = 1
+
+# securemodelines
+[[plugins]]
+repository = 'ciaranm/securemodelines'
+lazy = 0
+
+# sudo.vim
+[[plugins]]
+repository = 'sudo.vim'
+on_cmd = ['SudoRead', 'SudoWrite']
+
+# vimproc.vim
+[[plugins]]
+repository = 'Shougo/vimproc.vim'
+lazy = 0
+
+  [plugins.build]
+  windows = 'tools\\update-dll-mingw'
+  cygwin = 'make -f make_cygwin.mak'
+  mac = 'make -f make_mac.mak'
+  unix = 'make -f make_unix.mak'
+
 # vimshell.vim
 [[plugins]]
 repository = 'Shougo/vimshell.vim'
@@ -34,22 +62,12 @@ depends = 'Shougo/vimproc.vim'
   ]
   complete = 'customlist,vimshell#complete'
 
-# sudo.vim
-[[plugins]]
-repository = 'sudo.vim'
-on_cmd = ['SudoRead', 'SudoWrite']
-
 # vim-abolish
 [[plugins]]
 repository = 'tpope/vim-abolish'
 depends = 'tpope/vim-repeat'
 on_cmd = ['Abolish', 'Subvert', 'S']
 on_map = 'cr'
-
-# vim-ambicmd
-[[plugins]]
-repository = 'thinca/vim-ambicmd'
-on_map = ':'
 
 # vim-fugitive
 [[plugins]]
@@ -69,13 +87,11 @@ repository = 'lambdalisue/vim-gista'
 on_cmd = 'Gista'
 on_unite = 'gista'
 
-# vim-niceblock
+# vim-obsession
 [[plugins]]
-repository = 'kana/vim-niceblock'
-on_map = [
-  ['x', '<Plug>(niceblock-I)'],
-  ['x', '<Plug>(niceblock-A)'],
-]
+repository = 'tpope/vim-obsession'
+lazy = 0
+on_cmd = ['Obsession', 'Obsession!']
 
 # vim-prettyprint
 [[plugins]]
@@ -94,21 +110,6 @@ on_unite = 'ref'
   [plugins.on_cmd]
   name = 'Ref'
   complete = 'customlist,ref#complete'
-
-# vim-textobj-between
-[[plugins]]
-repository = 'thinca/vim-textobj-between'
-on_map = ['<Plug>(textobj-between-a)', '<Plug>(textobj-between-i)']
-depends = 'kana/vim-textobj-user'
-
-# vim-textobj-line
-[[plugins]]
-repository = 'kana/vim-textobj-line'
-on_map = ['<Plug>(textobj-line-a)', '<Plug>(textobj-line-i)']
-
-# vim-textobj-user
-[[plugins]]
-repository = 'kana/vim-textobj-user'
 
 # vim-repeat
 [[plugins]]

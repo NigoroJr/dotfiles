@@ -1,16 +1,8 @@
-# neocomplcache-rsense.vim
-[[plugins]]
-repository = 'Shougo/neocomplcache-rsense.vim'
-depends = ['Shougo/neocomplcache.vim', 'rsense']
-on_source = 'rsense'
-disabled = 'NeoCompleteCompatible()'
-
 # neocomplete-rsense.vim
 [[plugins]]
 repository = 'supermomonga/neocomplete-rsense.vim'
 depends = ['Shougo/neocomplete.vim', 'rsense']
 on_source = 'rsense'
-disabled = '!NeoCompleteCompatible()'
 
 # rsense
 [[plugins]]
@@ -52,4 +44,3 @@ on_ft = 'ruby'
 repository = 'tpope/vim-rbenv'
 on_ft = 'ruby'
 on_cmd = 'Rbenv'
-

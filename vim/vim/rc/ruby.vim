@@ -1,12 +1,3 @@
-" neocomplcache-rsense.vim {{{
-if neobundle#tap('neocomplcache-rsense.vim')
-  function! neobundle#hooks.on_source(bundle)
-    let g:neocomplcache#sources#rsense#home_directory = g:rsenseHome
-  endfunction
-
-  call neobundle#untap()
-endif
-" }}}
 " neocomplete-rsense.vim {{{
 if neobundle#tap('neocomplete-rsense.vim')
   function! neobundle#hooks.on_source(bundle)
@@ -60,7 +51,7 @@ if neobundle#tap('vim-rails')
 
   function! neobundle#hooks.on_post_source(bundle)
     " Don't overrwrite omnifunc
-    " Also, omni complete is disabled in neocomplete.vim and neocomplcache.vim
+    " Also, omni complete is disabled in neocomplete.vim
     if exists('b:rails_root') && &filetype == 'ruby'
       if neobundle#is_installed('rsense')
         NeoBundleDisable rsense

@@ -1,0 +1,5 @@
+# deoplete.nvim
+[[plugins]]
+repository = 'Shougo/deoplete.nvim'
+on_i = 1
+# disabled = '!has("python3")'

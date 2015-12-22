@@ -20,7 +20,7 @@ repository = 'ntpeters/vim-better-whitespace'
 on_i = 1
 focus = 1
 
-# vim-jplug
+# vim-jplus
 [[plugins]]
 repository = 'osyo-manga/vim-jplus'
 on_map = [
@@ -46,4 +46,3 @@ on_map = [
   'gc', 'g<', 'g>',
   '<Plug>TComment_',
 ]
-

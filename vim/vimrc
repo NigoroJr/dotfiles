@@ -10,7 +10,7 @@ if has('vim_starting')
 endif
 " }}}
 " Function to check current Vim's version {{{
-function! s:has_version(ver_str)
+function! HasVersion(ver_str)
   let split_version = split(a:ver_str, '\.')
   let major = get(split_version, 0, 0)
   let minor = get(split_version, 1, 0)
@@ -25,7 +25,7 @@ set backup
 set backupdir=~/.vim/backups/
 set viewdir=~/.vim/view/
 " Persistent undo requires Vim 7.3+
-if s:has_version('7.3')
+if HasVersion('7.3')
   set undodir=~/.vim/undo/
   set undofile
 endif
@@ -39,12 +39,8 @@ set number
 set wildmode=longest,list
 set foldenable
 set foldmethod=marker
-set history=10000
 set viewoptions=cursor,folds
-set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,sjis,cp932,euc-jp,cp20932,guess
-set backspace=indent,eol,start
-set hlsearch
 set splitright
 set splitbelow
 set modeline
@@ -54,14 +50,10 @@ set showtabline=0
 set formatoptions+=nmB
 set updatetime=500
 " Remove comment leaders with 'J'
-if s:has_version('7.3.541')
+if HasVersion('7.3.541')
   set formatoptions+=j
 endif
 set formatlistpat=^\\s*\\(\\d\\+[\\]:.)}\\t\ ]\\\|[*+-]\\)\\s*
-" blowfish2 requires Vim 7.4.399. Encryption available after Vim 7.3
-if s:has_version('7.3')
-  execute 'set cryptmethod='.(s:has_version('7.4.399') ? 'blowfish2' : 'blowfish')
-endif
 let mapleader = ','
 noremap \ ,
 syntax on
@@ -225,7 +217,7 @@ endif
 if !isdirectory(expand(&viewdir))
   call mkdir(&viewdir)
 endif
-if !isdirectory(expand(&undodir)) && s:has_version('7.3')
+if !isdirectory(expand(&undodir)) && HasVersion('7.3')
   call mkdir(&undodir)
 endif
 " }}}
@@ -242,12 +234,6 @@ augroup vimrc
         \|      silent loadview
         \|  endif
 augroup END
-" }}}
-" Whether neocomplete.vim can be run on Vim {{{
-function! NeoCompleteCompatible()
-  " Vim must be compiled with lua interface AND version larger than 7.3.855
-  return has('lua') && s:has_version('7.3.855')
-endfunction
 " }}}
 " Make scripts executable if it's a script {{{
 function! s:make_executable(filename)
@@ -287,18 +273,30 @@ if !isdirectory(g:neobundle_rtp) && executable('git')
   call system(cmd)
 endif
 " }}}
-
 " Init neobundle.vim {{{
 call neobundle#begin(expand('~/.vim/bundle/'))
 
+" Names to manually load and source
+let s:manually_load = [
+      \ 'oldvim',
+      \ 'neovim',
+      \ ]
 let s:rc_prefix = expand('~/.vim/rc')
 let s:rc_names = split(globpath(s:rc_prefix, '*.vim'), '\n')
 call map(s:rc_names, 'fnamemodify(v:val, ":t:r")')
+" Ignore plugins to manually load and source
+call filter(s:rc_names, 'index(s:manually_load, v:val) == -1')
 if neobundle#load_cache()
   for name in s:rc_names
-    let path = printf('%s/toml/%s.toml', s:rc_prefix, name)
-    call neobundle#load_toml(path)
+    let toml_path = printf('%s/toml/%s.toml', s:rc_prefix, name)
+    call neobundle#load_toml(toml_path)
   endfor
+
+  if has('nvim')
+    call neobundle#load_toml(s:rc_prefix . '/toml/neovim.toml')
+  else
+    call neobundle#load_toml(s:rc_prefix . '/toml/oldvim.toml')
+  endif
 
   NeoBundleSaveCache
 endif
@@ -317,6 +315,12 @@ for name in s:rc_names
   let path = printf('%s/%s.vim', s:rc_prefix, name)
   execute 'source ' . path
 endfor
+
+if has('nvim')
+  execute 'source ' . s:rc_prefix . '/neovim.vim'
+else
+  execute 'source ' . s:rc_prefix . '/oldvim.vim'
+endif
 " }}}
 
 " Source local configurations if any {{{
