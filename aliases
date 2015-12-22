@@ -59,8 +59,8 @@ mcm() {
 
 # Create and go into that directory
 mcd() {
-    DIR=${1:-tmp}
-    mkdir -p $DIR && cd $DIR
+    local dir=${1:-tmp}
+    mkdir -p $dir && cd $dir
 }
 if [[ $SHELL =~ zsh ]]; then
     compdef _mkdir mcd
