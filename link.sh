@@ -73,6 +73,7 @@ for ARG in $TASKS; do
             done
             ;;
         nvim)
+            [ -d ~/.config/nvim ] || mkdir -p ~/.config/nvim
             # init.vim
             ln $FLAGS $DEFAULT_LINK_FLAGS \
                 $PREFIX/vim/vimrc \
