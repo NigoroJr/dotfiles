@@ -1,0 +1,48 @@
+# Align
+[[plugins]]
+repository = 'Align'
+on_cmd = ['Align', 'AlignCtrl']
+on_map = '<Plug>AM_'
+
+# tabular
+[[plugins]]
+repository = 'godlygeek/tabular'
+on_cmd = ['Tab', 'Tabularize']
+
+# matchit.zip
+[[plugins]]
+repository = 'matchit.zip'
+on_map = ['%', 'g%']
+
+# vim-better-whitespace
+[[plugins]]
+repository = 'ntpeters/vim-better-whitespace'
+on_i = 1
+focus = 1
+
+# vim-jplus
+[[plugins]]
+repository = 'osyo-manga/vim-jplus'
+on_map = [
+  '<Plug>(jplus)', '<Plug>(jplus-getchar)', '<Plug>(jplus-input)',
+  '<Plug>(jplus-getchar-with-space)', '<Plug>(jplus-input-with-space)',
+]
+
+# vim-surround
+[[plugins]]
+repository = 'tpope/vim-surround'
+depends = 'tpope/vim-repeat'
+on_map = ['<Plug>Ysurround', '<Plug>Dsurround', '<Plug>Csurround']
+
+# TextFormat
+[[plugins]]
+repository = 'TextFormat'
+on_cmd = ['AlignCenter', 'AlignJustify', 'AlignRight', 'AlignLeft']
+
+# tcomment_vim
+[[plugins]]
+repository = 'tomtom/tcomment_vim'
+on_map = [
+  'gc', 'g<', 'g>',
+  '<Plug>TComment_',
+]

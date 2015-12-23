@@ -1,0 +1,22 @@
+# disableitalic-vim
+[[plugins]]
+repository = 'mattn/disableitalic-vim'
+on_cmd = 'DisableItalic'
+gui = 1
+
+# restart.vim
+[[plugins]]
+repository = 'tyru/restart.vim'
+on_cmd = ['Restart', 'Restart!']
+gui = 1
+
+# vim-colorschemes
+[[plugins]]
+repository = 'flazz/vim-colorschemes'
+lazy = 0
+gui = 1
+
+# vim-hier
+[[plugins]]
+repository = 'jceb/vim-hier'
+gui = 1

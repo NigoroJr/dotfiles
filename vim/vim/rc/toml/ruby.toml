@@ -1,0 +1,46 @@
+# neocomplete-rsense.vim
+[[plugins]]
+repository = 'supermomonga/neocomplete-rsense.vim'
+depends = ['Shougo/neocomplete.vim', 'rsense']
+on_source = 'rsense'
+
+# rsense
+[[plugins]]
+repository = 'NigoroJr/rsense'
+on_ft = 'ruby'
+# When vim-monster can be used
+disabled = """
+executable('rct-complete') \
+&& (!exists('g:use_rsense') || !g:use_rsense)"""
+
+# vim-bundler
+[[plugins]]
+repository = 'tpope/vim-bundler'
+on_ft = 'ruby'
+on_cmd = 'Bundle'
+
+# vim-monster
+[[plugins]]
+repository = 'osyo-manga/vim-monster'
+on_ft = 'ruby'
+depends = 'Shougo/vimproc.vim'
+disabled = """
+!executable('rct-complete') \
+|| (exists('g:use_monster') && !g:use_monster) \
+|| (exists('g:use_rsense') && g:use_rsense)"""
+
+# vim-rails
+[[plugins]]
+repository = 'tpope/vim-rails'
+on_ft = ['ruby', 'eruby', 'css', 'scss', 'html', 'javascript', 'yaml']
+
+# vim-rake
+[[plugins]]
+repository = 'tpope/vim-rake'
+on_ft = 'ruby'
+
+# vim-rbenv
+[[plugins]]
+repository = 'tpope/vim-rbenv'
+on_ft = 'ruby'
+on_cmd = 'Rbenv'
