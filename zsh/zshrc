@@ -18,7 +18,7 @@ if [ ! -f $ZPLUG_HOME/zplug ]; then
 fi
 
 source ~/.zplug/zplug
-zplug 'b4b4r07/zplug', at:update-not-pull
+zplug 'b4b4r07/zplug'
 
 zplug 'junegunn/fzf', \
     as:command, \
