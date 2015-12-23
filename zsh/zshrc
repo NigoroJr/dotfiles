@@ -138,7 +138,7 @@ add-zsh-hook precmd _tmux_status_bar
 
 # enable cursor selection
 zstyle ':completion:*:default' menu select=1
-zstyle ':completion:*:(processes|jobs)' menu yes select=2
+zstyle ':completion:*:(processes|jobs)' command "ps -u $USER"
 
 # Limit Coredump size
 limit coredumpsize 102400
