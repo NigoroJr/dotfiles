@@ -71,7 +71,8 @@ myFloatHook = composeAll
 -- Log Hook
 myLogHook h = dynamicLogWithPP xmobarPP {
     ppOutput = hPutStrLn h,
-    ppUrgent = xmobarColor "blue" "white"
+    ppUrgent = xmobarColor "blue" "white",
+    ppTitle  = xmobarColor "green"  "" . shorten 180
 }
 
 -- Startup Hook
