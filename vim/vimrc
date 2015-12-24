@@ -235,7 +235,7 @@ augroup vimrc
         \   if expand('%') != '' &&
         \     &buftype !~ 'nofile' &&
         \     index(s:no_view, &filetype) == -1
-        \|      silent loadview
+        \|      silent! loadview
         \|  endif
 augroup END
 " }}}
