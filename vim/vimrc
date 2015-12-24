@@ -223,14 +223,18 @@ endif
 " }}}
 " Set filetypes to not save/load the view {{{
 autocmd FileType gitcommit autocmd! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-let no_view = ['gitcommit', 'tex', 'plaintex']
+let s:no_view = ['gitcommit', 'tex', 'plaintex', 'diff']
 augroup vimrc
   autocmd BufWritePost *
-        \   if expand('%') != '' && &buftype !~ 'nofile' && index(no_view, &filetype) == -1
+        \   if expand('%') != '' &&
+        \     &buftype !~ 'nofile' &&
+        \     index(s:no_view, &filetype) == -1
         \|      mkview!
         \|  endif
   autocmd BufRead *
-        \   if expand('%') != '' && &buftype !~ 'nofile' && index(no_view, &filetype) == -1
+        \   if expand('%') != '' &&
+        \     &buftype !~ 'nofile' &&
+        \     index(s:no_view, &filetype) == -1
         \|      silent loadview
         \|  endif
 augroup END
