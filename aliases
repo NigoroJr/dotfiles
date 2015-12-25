@@ -127,7 +127,7 @@ alias -g DN='>/dev/null'
 alias -g DN1='1>/dev/null'
 alias -g DN2='2>/dev/null'
 alias -g DN12='1>/dev/null 2>&1'
-[[ $+commands[fzf] ]] && alias -g F='| fzf'
+[[ $+commands[fzf] ]] && alias -g FL='| fzf'
 
 if [ -f ~/.localrc/aliases ]; then
     source ~/.localrc/aliases
