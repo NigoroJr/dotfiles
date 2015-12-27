@@ -234,6 +234,10 @@ bindkey "\e^Z" zaw-z
 bindkey "^X;" zaw
 # }}}
 
+(( $+commands[rbenv] )) && eval "$( rbenv init - )"
+(( $+commands[pyenv] )) && eval "$( pyenv init - )"
+(( $+commands[plenv] )) && eval "$( plenv init - )"
+
 # Settings for prompt
 if [ -f ~/.prompt.zsh ]; then
     source ~/.prompt.zsh
