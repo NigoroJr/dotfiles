@@ -24,17 +24,9 @@ if neobundle#tap('neocomplete.vim')
           \ 'javascript': '[^.[:digit:] *\t]\.\w*\|\<require(',
           \ 'perl': '[^. \t]->\%(\h\w*\)\?\|use.*\w*::\%(\h\w*\)\?',
           \ 'python': '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*',
+          \ 'ruby' : '[^. *\t]\.\w*\|\h\w*::',
           \ 'tex': '\v\\\a*(ref|cite)\a*([^]]*\])?\{([^}]*,)*[^}]*',
           \ }
-
-    if g:use_rsense
-      let g:neocomplete#force_omni_input_patterns.ruby =
-            \ '[^. *\t]\.\w*\|\h\w*::'
-    else
-      let g:neocomplete#sources#omni#input_patterns = {
-            \   "ruby" : '[^. *\t]\.\w*\|\h\w*::',
-            \}
-    endif
 
     " Note: This is taking advantage of the fact that neocomplete.vim is
     " lazy-loaded when it goes into insert mode, thus, will be sourced after
