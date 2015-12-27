@@ -98,8 +98,8 @@ _prompt_random_256() {
     l_prompt="$front$arrow%F{45}%n%f$exit_stat "
 
     # Display in two lines if too long
-    local pwd_length=`expr $PWD : '.*'`
-    if [ "$pwd_length" -ge 45 ]; then
+    local pwd_length=${(c)#${(D)PWD}}
+    if [ $pwd_length -ge 45 ]; then
         PROMPT="[ %F{219}%~%f ]"$'\n'"$l_prompt"
     else
         PROMPT="$l_prompt"
@@ -113,7 +113,7 @@ _prompt_random_256() {
     fi
 
     # Right prompt
-    if [ "$pwd_length" -lt 45 ]; then
+    if [ $pwd_length -lt 45 ]; then
         RPROMPT+=" [ %F{051}%~%f ]"
     fi
 }
