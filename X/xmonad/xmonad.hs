@@ -49,19 +49,20 @@ myManageHook = manageSpawn <+> myFloatHook <+> manageHook defaultConfig
 
 -- To get the class name, xprop | grep WM_CLASS
 myFloatHook = composeAll
-    [ className =? "Chromium-browser"   --> moveTo2
-    , className =? "Firefox"            --> moveTo2
-    , className =? "Gvim"               --> moveTo3
-    , className =? "Emacs"              --> moveTo3
-    , className =? "Eclipse"            --> moveTo3
-    , className =? "Qpdfview"           --> moveTo3
-    , className =? "mplayer2"           --> moveTo5
-    , className =? "MPlayer"            --> moveTo5
-    , className =? "feh"                --> moveTo5
-    , className =? "Comix"              --> moveTo5
-    , className =? "Geeqie"             --> moveTo5
-    , className =? "Java"               --> doFloat
-    , className =? "R_x11"              --> doFloat
+    [ className =? "Chromium-browser"          --> moveTo2
+    , className =? "chromium-browser-chromium" --> moveTo2
+    , className =? "Firefox"                   --> moveTo2
+    , className =? "Gvim"                      --> moveTo3
+    , className =? "Emacs"                     --> moveTo3
+    , className =? "Eclipse"                   --> moveTo3
+    , className =? "Qpdfview"                  --> moveTo3
+    , className =? "mplayer2"                  --> moveTo5
+    , className =? "MPlayer"                   --> moveTo5
+    , className =? "feh"                       --> moveTo5
+    , className =? "Comix"                     --> moveTo5
+    , className =? "Geeqie"                    --> moveTo5
+    , className =? "Java"                      --> doFloat
+    , className =? "R_x11"                     --> doFloat
     , manageDocks ]
     where
     moveTo2 = doF $ W.shift "2"
