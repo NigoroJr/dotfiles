@@ -75,7 +75,7 @@ _Z_NO_RESOLVE_SYMLINKS=1
 _Z_NO_COMPLETE_CD=1
 
 # zaw
-zstyle ':filter-select' max-lines 20
+zstyle ':filter-select' max-lines 10
 zstyle ':filter-select' extended-search yes
 zstyle ':filter-select' case-insensitive yes
 zstyle ':filter-select' rotate-list yes
