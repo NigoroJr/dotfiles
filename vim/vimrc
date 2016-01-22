@@ -242,7 +242,7 @@ augroup END
 " Make scripts executable if it's a script {{{
 function! s:make_executable(filename)
   " Don't change permissions in a git repo
-  call system('git status')
+  execute 'call system("cd ' . expand('%:h') . ' && git status")'
   let exit_status = v:shell_error
   if exit_status == 0
     return
