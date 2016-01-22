@@ -37,6 +37,12 @@ zplug "junegunn/fzf-bin", \
     file:fzf, \
     if:'(( ! $+commands[go] ))'
 
+zplug 'NigoroJr/d53982a4d0cf0848985b', \
+    from:gist, \
+    as:command, \
+    of:goocl, \
+    do:'bundle'
+
 # Completions (load after compinit with niceness >= 10)
 zplug 'plugins/golang', \
     from:oh-my-zsh, \
