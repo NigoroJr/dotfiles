@@ -64,7 +64,7 @@ zplug 'zsh-users/zaw' \
 zplug 'Tarrasch/zsh-bd'
 
 # enhancd
-ENHANCD_COMMAND='ecd'
+ENHANCD_COMMAND='e'
 
 # zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(brackets)
