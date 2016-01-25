@@ -41,7 +41,7 @@ zplug 'NigoroJr/d53982a4d0cf0848985b', \
     from:gist, \
     as:command, \
     of:goocl, \
-    do:'bundle'
+    do:'bundle && chmod 755 goocl'
 
 zplug 'plugins/golang', \
     from:oh-my-zsh, \
