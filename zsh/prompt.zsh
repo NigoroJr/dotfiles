@@ -62,7 +62,8 @@ _prompt_git_status() {
 _prompt_arrow() {
     local rnd=$1
     shift
-    local -a valid_colors=($@)
+    local -a valid_colors
+    valid_colors=($@)
     local ind=$(( $rnd % ${#valid_colors[@]} + 1))
     local arrow="%F{${valid_colors[$ind]}}->%f"
 
