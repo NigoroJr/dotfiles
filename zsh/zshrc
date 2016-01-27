@@ -20,6 +20,13 @@ fi
 source $ZPLUG_HOME/zplug
 zplug 'b4b4r07/zplug'
 
+zplug 'NigoroJr/do-after', \
+    as:command, \
+    of:do-after
+# Completion
+zplug 'NigoroJr/do-after', \
+    as:plugin
+
 zplug 'b4b4r07/enhancd', \
     of:'enhancd.sh'
 
