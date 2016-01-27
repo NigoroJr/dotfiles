@@ -35,7 +35,7 @@ zplug 'junegunn/fzf', \
     do:'./install --bin >/dev/null', \
     of:'bin/fzf', \
     file:'fzf', \
-    if:"(( $+commands[go] ))"
+    if:'(( $+commands[go] ))'
 
 zplug "junegunn/fzf-bin", \
     from:gh-r, \
