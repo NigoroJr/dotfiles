@@ -26,6 +26,7 @@ depends = 'Shougo/neosnippet.vim'
 # neosnippet.vim
 [[plugins]]
 repository = 'Shougo/neosnippet.vim'
+on_path = '.snip'
 on_source = ['neocomplete.vim', 'deoplete.nvim']
 on_cmd = 'NeoSnippetEdit'
 on_unite = ['neosnippet', 'neosnippet/user', 'neosnippet/runtime']
