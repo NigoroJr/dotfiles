@@ -19,6 +19,7 @@ repository = 'Shougo/neobundle.vim'
 lazy = 0
 depends = 'Shougo/vimproc.vim'
 fetch = 1
+on_unite = 'neobundle/update'
 
 # securemodelines
 [[plugins]]
