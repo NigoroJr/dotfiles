@@ -13,6 +13,7 @@ vim_version = '7.3'
 # context_filetype.vim
 [[plugins]]
 repository = 'Shougo/context_filetype.vim'
+lazy = 1
 
 # jedi
 [[plugins]]
