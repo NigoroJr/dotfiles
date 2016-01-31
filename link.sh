@@ -55,7 +55,7 @@ process_target() {
     for F in $PREFIX/$SRC; do
         DST=$HOME/.$( basename $SRC )
 
-        if [[ -n $UNLINK ]] && [ $UNLINK -eq 1 ]; then
+        if [ -n "$UNLINK" ] && [ "$UNLINK" -eq 1 ]; then
             unlink $DST
         else
             ln $FLAGS $SRC $DST && \
