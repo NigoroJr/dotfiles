@@ -50,6 +50,13 @@ zplug 'NigoroJr/d53982a4d0cf0848985b', \
     of:goocl, \
     do:'chmod 755 goocl'
 
+zplug 'NigoroJr/644ae8775023be82544d', \
+    from:gist, \
+    as:command, \
+    file:sort-du, \
+    of:sort_du.rb, \
+    do:'chmod 755 sort_du.rb'
+
 zplug 'plugins/golang', \
     from:oh-my-zsh, \
     ignore:oh-my-zsh.sh, \
