@@ -80,6 +80,8 @@ zplug 'Tarrasch/zsh-bd'
 # enhancd
 ENHANCD_COMMAND='e'
 
+FZF_DEFAULT_OPTS='--ansi --exact --select-1 --exit-0 --multi --cycle'
+
 # zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(brackets)
 
