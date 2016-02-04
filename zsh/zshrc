@@ -14,10 +14,10 @@ if [ ! -f $ZPLUG_HOME/zplug ]; then
         return 1
     fi
 
-    source ~/.zplug/zplug && zplug update --self
+    source ~/.zplug/init.zsh && zplug update --self
 fi
 
-source $ZPLUG_HOME/zplug
+source $ZPLUG_HOME/init.zsh
 zplug 'b4b4r07/zplug'
 
 zplug 'NigoroJr/do-after', \
