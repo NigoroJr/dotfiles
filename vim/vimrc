@@ -241,8 +241,10 @@ augroup END
 " }}}
 " Make scripts executable if it's a script {{{
 function! s:make_executable(filename)
+  let real_fname = resolve(expand('%'))
+  let dirname = fnamemodify(real_fname, ':h')
   " Don't change permissions in a git repo
-  execute 'call system("cd ' . expand('%:h') . ' && git status")'
+  execute 'call system("cd ' . dirname . ' && git status")'
   let exit_status = v:shell_error
   if exit_status == 0
     return
