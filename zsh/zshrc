@@ -1,5 +1,6 @@
-ZPLUG_HOME=~/.zplug
-ZPLUG_SHALLOW=false
+export ZPLUG_HOME=~/.zplug
+export ZPLUG_SHALLOW=false
+
 if [ ! -f $ZPLUG_HOME/init.zsh ]; then
     if (( $+commands[git] )); then
         git clone https://github.com/b4b4r07/zplug2 $ZPLUG_HOME
@@ -70,16 +71,16 @@ zplug 'NigoroJr/zaw-z', nice:11, on:'zsh-users/zaw'
 zplug 'Tarrasch/zsh-bd'
 
 # enhancd
-ENHANCD_COMMAND='e'
+export ENHANCD_COMMAND='e'
 
-FZF_DEFAULT_OPTS='--ansi --exact --select-1 --exit-0 --multi --cycle'
+export FZF_DEFAULT_OPTS='--ansi --exact --select-1 --exit-0 --multi --cycle'
 
 # zsh-syntax-highlighting
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(brackets)
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(brackets)
 
 # z
-_Z_NO_RESOLVE_SYMLINKS=1
-_Z_NO_COMPLETE_CD=1
+export _Z_NO_RESOLVE_SYMLINKS=1
+export _Z_NO_COMPLETE_CD=1
 
 # zaw
 zstyle ':filter-select' max-lines 10
