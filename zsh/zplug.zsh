@@ -54,5 +54,3 @@ zplug 'knu/z', \
 
 zplug 'zsh-users/zaw'
 zplug 'NigoroJr/zaw-z', nice:11, on:'zsh-users/zaw'
-
-zplug 'Tarrasch/zsh-bd'
