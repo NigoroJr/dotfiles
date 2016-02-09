@@ -3,7 +3,7 @@
 repository = 'Shougo/neomru.vim'
 lazy = 0
 depends = 'Shougo/unite.vim'
-on_unite = ['neomru/file', 'neomru/directory', 'file_mru', 'directory_mru']
+on_source = 'unite.vim'
 on_cmd = [
   'NeoMRUReload', 'NeoMRUSave', 'NeoMRUImportFile', 'NeoMRUImportDirectory'
 ]
@@ -13,7 +13,7 @@ on_cmd = [
 repository = 'Shougo/neoyank.vim'
 lazy = 0
 depends = 'Shougo/unite.vim'
-on_unite = 'history/yank'
+on_source = 'unite.vim'
 
 # unite.vim
 [[plugins]]

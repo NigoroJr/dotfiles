@@ -19,7 +19,7 @@ repository = 'Shougo/neobundle.vim'
 lazy = 0
 depends = 'Shougo/vimproc.vim'
 fetch = 1
-on_unite = 'neobundle/update'
+on_source = 'unite.vim'
 
 # securemodelines
 [[plugins]]
@@ -86,7 +86,7 @@ on_cmd = [
 [[plugins]]
 repository = 'lambdalisue/vim-gista'
 on_cmd = 'Gista'
-on_unite = 'gista'
+on_source = 'unite.vim'
 
 # vim-obsession
 [[plugins]]
@@ -106,7 +106,7 @@ repository = 'thinca/vim-prettyprint'
 [[plugins]]
 repository = 'thinca/vim-ref'
 on_map = '<Plug>(ref-keyword)'
-on_unite = 'ref'
+on_source = 'unite.vim'
 
   [plugins.on_cmd]
   name = 'Ref'
