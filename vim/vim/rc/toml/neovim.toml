@@ -2,5 +2,6 @@
 [[plugins]]
 repository = 'Shougo/deoplete.nvim'
 on_i = 1
-build = 'pip install neovim && neovim -c ":NeoBundleRemotePlugins"'
-# disabled = '!has("python3")'
+build = 'nvim -c ":NeoBundleRemotePlugins | q"'
+# Run `pip3 install neovim' to enable python3
+disabled = '!has("python3")'
