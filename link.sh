@@ -80,6 +80,12 @@ for ARG in $TASKS; do
                 $HOME/.config/nvim/init.vim
             process_target $PREFIX/vim/vim $FLAGS
             ;;
+        tmux)
+            if [[ ! -d ~/.tmux/plugins/tpm ]] && hash git 2>/dev/null; then
+                git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+            fi
+            process_target $PREFIX/tmux/*
+            ;;
         others)
             OTHER_FILES=$( find $PREFIX -maxdepth 1 -type f \
                 ! -name '.git*' \
