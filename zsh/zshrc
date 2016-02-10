@@ -1,4 +1,4 @@
-[[ -e ~/.zshenv ]] && source ~/.zshenv
+[[ -f ~/.zshenv ]] && source ~/.zshenv
 
 export ZPLUG_HOME=~/.zplug
 export ZPLUG_SHALLOW=false
@@ -65,8 +65,8 @@ set_colors() {
 case $( uname -s ) in
     Darwin)
         if hash brew 2>/dev/null; then
-            gnubin=$(brew --prefix coreutils)/libexec/gnubin
-            export PATH=$gnubin:$PATH
+            gnubin=$( brew --prefix coreutils )/libexec/gnubin
+            path=( $gnubin $path )
 
             if hash dircolors 2>/dev/null; then
                 set_colors
