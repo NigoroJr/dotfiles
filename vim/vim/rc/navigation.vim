@@ -42,6 +42,8 @@ if neobundle#tap('vimfiler.vim')
 
     let g:vimfiler_as_default_explorer = 1
     let g:vimfiler_time_format = "%m/%d/%y %H:%M%S"
+
+    autocmd FileType vimfiler nmap <buffer> e <Plug>(vimfiler_cd_or_edit)
   endfunction
 
   call neobundle#untap()
