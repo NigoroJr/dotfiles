@@ -8,7 +8,7 @@ if neobundle#tap('deoplete.nvim')
     let g:deoplete#enable_smart_case = 1
     let g:deoplete#min_keyword_length = 3
 
-    let g:deoplete#force_omni_input_patterns = {
+    let g:deoplete#omni_patterns = {
           \ 'cpp': '[^. *\t]\%(\.\|->\)\w*\|[A-Za-z>]\w*::\w*',
           \ 'go': '[^.[:digit:] *\t]\.\w*',
           \ 'java': '[^.[:digit:] *\t]\.\w*',
