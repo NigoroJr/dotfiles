@@ -1,7 +1,7 @@
 [[ -f ~/.zshenv ]] && source ~/.zshenv
 
 export ZPLUG_HOME=~/.zplug
-export ZPLUG_SHALLOW=false
+export ZPLUG_CLONE_DEPTH=0
 export ZPLUG_EXTERNAL=~/.zplug.zsh
 
 if [ ! -f $ZPLUG_HOME/init.zsh ]; then
