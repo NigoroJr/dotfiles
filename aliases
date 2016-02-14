@@ -41,6 +41,7 @@ alias g='git'
 alias gai='git add -i'
 alias gap='git add -p'
 alias ga.='git add .'
+alias gca='git commit --amend'
 alias gl='git log'
 alias gplum='git pull upstream master'
 
