@@ -108,6 +108,14 @@ mkmv() {
     mkdir -p $@[$#] && mv $@
 }
 
+dumd() {
+    local depth
+
+    depth="$1"
+    shift
+    du -h --max-depth="$depth" $@
+}
+
 hash fzf 2>/dev/null && alias f=fzf
 
 # Go home, non-zsh shells
