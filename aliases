@@ -48,7 +48,7 @@ alias gplum='git pull upstream master'
 alias cdd='cd $( dirname $_ )'
 
 # Functions
-function psg() {
+psg() {
     ps aux | grep "\(^USER\|$1\)" | grep -v grep
 }
 
@@ -58,7 +58,7 @@ mcm() {
 }
 
 # Create and go into that directory
-function mcd() {
+mcd() {
     local dir=${1:-tmp}
     mkdir -p $dir && cd $dir
 }
@@ -66,7 +66,7 @@ if [[ $SHELL =~ zsh ]]; then
     compdef _mkdir mcd
 fi
 
-function sudo() {
+sudo() {
     if [ $1 = "--" ]; then
         shift
         command sudo "$@"
@@ -79,7 +79,7 @@ function sudo() {
 }
 
 # Add upstream for a repository hosted on github.com
-function grau() {
+grau() {
     local cmd username=$1 repo_name upstream
 
     if [ -z $username ]; then
@@ -104,7 +104,7 @@ function grau() {
         echo "Added $username${repo_name:+/$repo_name} as upstream"
 }
 
-function mkmv() {
+mkmv() {
     mkdir -p $@[$#] && mv $@
 }
 
