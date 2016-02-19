@@ -84,7 +84,7 @@ for ARG in $TASKS; do
             if [[ ! -d ~/.tmux/plugins/tpm ]] && hash git 2>/dev/null; then
                 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
             fi
-            process_target $PREFIX/tmux/*
+            process_target $PREFIX/tmux/tmux.conf $FLAGS
             ;;
         others)
             OTHER_FILES=$( find $PREFIX -maxdepth 1 -type f \
