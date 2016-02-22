@@ -45,6 +45,8 @@ fi
 
 zplug load
 
+autoload -Uz zmv
+
 # Read aliases
 if [ -f ~/.aliases ]; then
     source ~/.aliases
