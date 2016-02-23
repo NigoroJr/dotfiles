@@ -12,7 +12,7 @@ zplug 'b4b4r07/enhancd', \
 
 zplug 'junegunn/fzf', \
     as:command, \
-    do:'./install --bin >/dev/null', \
+    hook-build:'./install --bin >/dev/null', \
     use:'bin/fzf', \
     rename_to:'fzf', \
     if:'(( $+commands[go] ))'
@@ -28,14 +28,14 @@ zplug 'NigoroJr/d53982a4d0cf0848985b', \
     from:gist, \
     as:command, \
     use:goocl, \
-    do:'chmod 755 goocl'
+    hook-build:'chmod 755 goocl'
 
 zplug 'NigoroJr/644ae8775023be82544d', \
     from:gist, \
     as:command, \
     rename_to:sort-du, \
     use:sort_du.rb, \
-    do:'chmod 755 sort_du.rb'
+    hook-build:'chmod 755 sort_du.rb'
 
 zplug 'plugins/golang', \
     from:oh-my-zsh, \
