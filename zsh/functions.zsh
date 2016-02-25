@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 psg() {
     ps aux | grep "\(^USER\|$1\)" | grep -v grep
 }
@@ -12,15 +14,13 @@ mcd() {
     local dir="${1:-tmp}"
     mkdir -p "$dir" && cd "$dir"
 }
-if [[ $SHELL =~ "zsh" ]]; then
-    compdef _mkdir mcd
-fi
+compdef _mkdir mcd
 
 sudo() {
-    if [[ $1 = "--" ]]; then
+    if [[ $1 == "--" ]]; then
         shift
         command sudo "$@"
-    elif [[ $1 = "vi" ]] || [[ $1 = "vim" ]] && hash sudoedit 2>/dev/null; then
+    elif [[ $1 == "vi" ]] || [[ $1 == "vim" ]] && (( $+commands[sudoedit] )); then
         shift
         command sudoedit "$@"
     else
@@ -34,15 +34,15 @@ grau() {
 
     username="$1"
 
-    if [ -z $username ]; then
+    if [[ -z $username ]]; then
         echo 'Need username for upstream' 1>&2
         return 1
     fi
 
-    if type hub &>/dev/null; then
+    if (( $+commands[hub] )); then
         cmd=hub
         upstream=$username
-    elif type git &>/dev/null; then
+    elif (( $+commands[git] )); then
         cmd=git
         repo_name=$( git remote show -n origin | \
             awk -F '/' '/Fetch/ { print $NF }' )

@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 alias ls='ls --color=auto'
 alias l='ls -lh'
 alias la='ls -A'
@@ -65,5 +67,3 @@ fi
 if [ -f ~/.localrc/aliases ]; then
     source ~/.localrc/aliases
 fi
-
-# vim: ft=zsh
