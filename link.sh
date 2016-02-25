@@ -25,7 +25,7 @@ PREFIX=$HOME/dotfiles
 # Flags to add to the ln command
 DEFAULT_LINK_FLAGS='-s -n'
 # Tasks to run when none specified
-ALL_TASKS="vim nvim zsh emacs X others"
+ALL_TASKS="vim nvim zsh tmux emacs X others"
 
 while getopts 'fuh' flag; do
     case "$flag" in
