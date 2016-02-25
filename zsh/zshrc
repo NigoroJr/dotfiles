@@ -1,8 +1,8 @@
-[[ -f ~/.zshenv ]] && source ~/.zshenv
+[[ -f $HOME/.zshenv ]] && source $HOME/.zshenv
 
-export ZPLUG_HOME=~/.zplug
+export ZPLUG_HOME=$HOME/.zplug
 export ZPLUG_CLONE_DEPTH=0
-export ZPLUG_LOADFILE=~/.zplug.zsh
+export ZPLUG_LOADFILE=$HOME/.zplug.zsh
 
 if [ ! -f $ZPLUG_HOME/init.zsh ]; then
     if (( $+commands[git] )); then
@@ -45,51 +45,26 @@ fi
 
 zplug load
 
+# Autoload modules
+autoload -Uz add-zsh-hook
+autoload -Uz history-search-end
+autoload -Uz is-at-least
 autoload -Uz zmv
 
-# Read aliases
-if [ -f ~/.aliases ]; then
-    source ~/.aliases
-fi
+# Functions {{{
+__source() {
+    if [[ -f $1 ]]; then
+        source $1
+    fi
+}
 
-# Compile .zshrc if necessary
-if [ ! -f ~/.zshrc.zwc -o ~/.zshrc -nt ~/.zshrc.zwc ]; then
-    zcompile ~/.zshrc
-fi
-
-# Colors {{{
-set_colors() {
-    eval $( dircolors )
+__set_colors() {
+    eval "$( dircolors )"
     export ZLS_COLORS=$LS_COLORS
     zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 }
 
-case $( uname -s ) in
-    Darwin)
-        if hash brew 2>/dev/null; then
-            gnubin=$( brew --prefix coreutils )/libexec/gnubin
-            path=( $gnubin $path )
-
-            if hash dircolors 2>/dev/null; then
-                set_colors
-            fi
-        else
-            # Use GNU ls if available
-            if hash gls 2>/dev/null; then
-                alias ls='gls'
-            else
-                alias ls='ls -G'
-            fi
-        fi
-        ;;
-    *)
-        set_colors
-        ;;
-esac
-# }}}
-
-# In tmux, don't show status bar if there's only one window
-_tmux_status_bar() {
+__tmux_status_bar() {
     if [[ $TMUX ]]; then
         local switch
         if (( $( tmux list-windows | wc -l ) == 1 )); then
@@ -100,8 +75,44 @@ _tmux_status_bar() {
         tmux set-option status $switch
     fi
 }
-autoload -U add-zsh-hook
-add-zsh-hook precmd _tmux_status_bar
+# }}}
+
+# Read aliases and functions
+__source $HOME/.aliases.zsh
+__source $HOME/.functions.zsh
+
+# Compile .zshrc if necessary
+if [ ! -f $HOME/.zshrc.zwc -o $HOME/.zshrc -nt $HOME/.zshrc.zwc ]; then
+    zcompile $HOME/.zshrc
+fi
+
+# Colors {{{
+case $( uname -s ) in
+    Darwin)
+        if (( $+commands[brew] )); then
+            local gnubin="$( brew --prefix coreutils )/libexec/gnubin"
+            path=( $gnubin $path )
+
+            if (( $+commands[dircolors] )); then
+                __set_colors
+            fi
+        else
+            # Use GNU ls if available
+            if (( $+commands+[gls] )); then
+                alias ls='gls'
+            else
+                alias ls='ls -G'
+            fi
+        fi
+        ;;
+    *)
+        __set_colors
+        ;;
+esac
+# }}}
+
+# In tmux, don't show status bar if there's only one window
+add-zsh-hook precmd __tmux_status_bar
 
 # enable cursor selection
 zstyle ':completion:*:default' menu select=1
@@ -119,10 +130,9 @@ setopt auto_param_slash     # Complete / automatically
 setopt auto_pushd
 setopt auto_remove_slash    # Remove trailing / automatically
 setopt auto_resume          # Resume when suspended command is entered
-setopt cdable_vars          # cd to named dirs without ~ at beginning
+setopt cdable_vars          # cd to named dirs without leading ~
 setopt correct              # Suggest correction
 setopt extended_glob
-autoload -U is-at-least
 is-at-least 5.2 && setopt glob_star_short
 setopt hist_ignore_all_dups
 setopt hist_ignore_space    # Don't add commands that start with space
@@ -151,7 +161,6 @@ bindkey -M emacs "\en" down-line-or-history
 bindkey -M emacs "\ep" up-line-or-history
 
 # Better history search
-autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey '^P' history-beginning-search-backward-end
@@ -200,13 +209,9 @@ bindkey "^X;" zaw
 (( $+commands[plenv] )) && eval "$( plenv init - )"
 
 # Settings for prompt
-if [ -f ~/.prompt.zsh ]; then
-    source ~/.prompt.zsh
-fi
+__source $HOME/.prompt.zsh
 
 # Read local configs if any
-if [ -f ~/.localrc/zshrc ]; then
-    source ~/.localrc/zshrc
-fi
+__source $HOME/.localrc/zshrc
 
 # vim: foldmethod=marker ft=zsh
