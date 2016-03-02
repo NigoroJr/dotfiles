@@ -46,6 +46,8 @@ alias gplum='git pull upstream master'
 
 alias cdd='cd $( dirname $_ )'
 
+alias zmv='noglob zmv -W'
+
 # Global alias
 alias -g A='| awk'
 alias -g DN1='1>/dev/null'
