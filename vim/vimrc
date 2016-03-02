@@ -310,6 +310,9 @@ endif
 call neobundle#local(expand('~/src/local_plugins'))
 
 call neobundle#end()
+if filereadable(expand('~/.vim/filetype.vim'))
+  execute 'source ' . expand('~/.vim/filetype.vim')
+endif
 filetype plugin indent on
 if has('vim_starting')
   NeoBundleCheck
