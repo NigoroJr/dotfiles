@@ -11,7 +11,6 @@ if neobundle#tap('unite.vim')
   nnoremap [unite]f :Unite file_rec/async<CR>
   nnoremap [unite]l :Unite file/async<CR>
   nnoremap [unite]m :Unite neomru/file -buffer-name=mru -create<CR>
-  nnoremap [unite]q :Unite quickfix -horizontal -no-quit<CR>
   nnoremap [unite]r :Unite register -buffer-name=register<CR>
   nnoremap [unite]t :Unite tab:no-current<CR>
   nnoremap [unite]y :Unite history/yank<CR>
@@ -59,6 +58,17 @@ if neobundle#tap('unite.vim')
 
     call unite#custom#source('command', 'matchers', 'matcher_fuzzy')
 
+    call unite#custom#source('quickfix',
+          \ 'converters',
+          \ 'converter_quickfix_highlight'
+          \ )
+
+    call unite#custom_source('location_list',
+          \ 'converters',
+          \ 'converter_quickfix_highlight'
+          \ )
+
+
     let g:unite_source_alias_aliases = {
           \ 'fra': {
           \   'source': 'file_rec/async',
@@ -80,3 +90,14 @@ if neobundle#tap('unite.vim')
   call neobundle#untap()
 endif
 " }}}
+" unite-quickfix {{{
+if neobundle#tap('unite-quickfix')
+  function! neobundle#hooks.on_source(bundle)
+    nnoremap [unite]q :Unite quickfix -wrap -horizontal -no-quit<CR>
+
+    let g:unite_quickfix_is_multiline = 0
+  endfunction
+
+  call neobundle#untap()
+endif
+" \ }
