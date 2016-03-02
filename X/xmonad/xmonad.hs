@@ -51,6 +51,7 @@ myManageHook = manageSpawn <+> myFloatHook <+> manageHook defaultConfig
 myFloatHook = composeAll
     [ className =? "Chromium-browser"          --> moveTo2
     , className =? "chromium-browser-chromium" --> moveTo2
+    , className =? "Google-chrome-stable"      --> moveTo2
     , className =? "Firefox"                   --> moveTo2
     , className =? "Gvim"                      --> moveTo3
     , className =? "Emacs"                     --> moveTo3
@@ -63,6 +64,7 @@ myFloatHook = composeAll
     , className =? "Geeqie"                    --> moveTo5
     , className =? "Java"                      --> doFloat
     , className =? "R_x11"                     --> doFloat
+    , className =? "Gifview"                   --> doFloat
     , manageDocks ]
     where
     moveTo2 = doF $ W.shift "2"
@@ -82,7 +84,8 @@ myStartupHook = do
     spawnOn "1" "urxvt"
     spawnOn "1" "urxvt"
     spawnOn "1" "urxvt"
-    spawnOn "2" "chromium"
+    spawnOn "2" "optirun firefox"
+    -- spawnOn "2" "chromium"
     spawn "imwheel -b \"0 0 6 7 0 0 10\" -k"
     spawn "dropbox"
     spawnOn "3" "gvim"
