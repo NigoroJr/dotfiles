@@ -65,3 +65,44 @@ dumd() {
     shift
     du -h --max-depth="$depth" $@
 }
+
+unzip() {
+    local old_pwd="$PWD"
+    local tmp_dir
+    local final_dir
+    local -a raw_args
+
+    if [[ $@ =~ -(l|z) ]]; then
+        command unzip $@
+        return $status
+    fi
+
+    tmp_dir="${$( mktemp -d -p . ):A}"
+
+    # Convert file paths to absolute paths
+    for arg in $@; do
+        if ! [[ $arg =~ ^- ]]; then
+            [[ -e $arg ]] && arg="$arg:A"
+            final_dir=${final_dir:-$arg:t:r:r}
+        fi
+        raw_args+=( "$arg" )
+    done
+
+    (
+        local dir_pat="*(/)"
+        local -a curr_dir_dirs
+
+        builtin cd -q "$tmp_dir"
+        command unzip $raw_args
+        curr_dir_dirs=( ${~dir_pat} )
+
+        if (( $#curr_dir_dirs == 1 )) && [[ $curr_dir_dirs[1] != $dir_pat ]]; then
+            mv "$curr_dir_dirs[1]" "$old_pwd"
+            rm -rf "$tmp_dir:A"
+        else
+            mv "$tmp_dir" "$old_pwd/$final_dir"
+        fi
+    )
+
+    builtin cd -q "$old_pwd"
+}
