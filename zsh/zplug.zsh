@@ -22,7 +22,7 @@ zplug "junegunn/fzf-bin", \
     as:command, \
     use:"*${(L)$(uname -s)}*amd64*", \
     rename_to:fzf, \
-    if:'(( ! $+commands[go] ))'
+    if:'! (( $+commands[go] )) && ! [[ ${(L)$( uname -s )} =~ cygwin ]]'
 
 zplug 'NigoroJr/d53982a4d0cf0848985b', \
     from:gist, \
