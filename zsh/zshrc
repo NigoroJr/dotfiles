@@ -120,7 +120,9 @@ zstyle ':completion:*:default' menu select=1
 zstyle ':completion:*:(processes|jobs)' command "ps -u $USER"
 
 # Limit Coredump size
-limit coredumpsize 102400
+if ! [[ ${(L)$( uname -s )} =~ cygwin ]]; then
+    limit coredumpsize 102400
+fi
 
 # Options {{{
 setopt auto_cd              # cd when only directory is entered
