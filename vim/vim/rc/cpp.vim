@@ -76,7 +76,7 @@ if neobundle#tap('vim-marching')
   function! neobundle#hooks.on_source(bundle)
     let g:marching_include_paths = g:cpp_include_paths
     let g:marching_enable_neocomplete = 1
-    let g:marching_clang_command = 'clang++'
+    let g:marching_clang_command = 'clang'
     let g:marching#clang_command#options = {
           \ 'cpp': '-std=c++11',
           \ }
