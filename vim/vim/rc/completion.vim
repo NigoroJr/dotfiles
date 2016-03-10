@@ -28,11 +28,12 @@ endif
 " }}}
 " jedi-vim {{{
 if neobundle#tap('jedi-vim')
-  let g:jedi#popup_select_first = 0
-  let g:jedi#completions_enabled = 0
-  let g:jedi#auto_vim_configuration = 0
-
   function! neobundle#hooks.on_source(bundle)
+    let g:jedi#auto_initialization = 0
+    let g:jedi#popup_select_first = 0
+    let g:jedi#completions_enabled = 0
+    let g:jedi#auto_vim_configuration = 0
+
     autocmd FileType python setlocal omnifunc=jedi#completions
   endfunction
 
