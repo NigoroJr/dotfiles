@@ -1,3 +1,12 @@
+" braceless.vim {{{
+if neobundle#tap('braceless.vim')
+  function! neobundle#hooks.on_source(bundle)
+    autocmd FileType python BracelessEnable +indent +fold
+  endfunction
+
+  call neobundle#untap()
+endif
+" }}}
 " matchit.zip {{{
 if neobundle#tap('matchit.zip')
   function! neobundle#hooks.on_post_source(bundle)

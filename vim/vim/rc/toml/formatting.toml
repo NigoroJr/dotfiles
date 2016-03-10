@@ -4,6 +4,11 @@ repository = 'Align'
 on_cmd = ['Align', 'AlignCtrl']
 on_map = '<Plug>AM_'
 
+# braceless.vim
+[[plugins]]
+repository = 'tweekmonster/braceless.vim'
+on_ft = ['python']
+
 # matchit.zip
 [[plugins]]
 repository = 'matchit.zip'
