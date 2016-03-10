@@ -84,7 +84,7 @@ on_ft = 'slim'
 repository = 'cespare/vim-toml'
 on_ft = 'toml'
 
+# vim-vala
 [[plugins]]
 repository = 'tkztmk/vim-vala'
 on_ft = 'vala'
-
