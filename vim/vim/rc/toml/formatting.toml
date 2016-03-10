@@ -4,11 +4,6 @@ repository = 'Align'
 on_cmd = ['Align', 'AlignCtrl']
 on_map = '<Plug>AM_'
 
-# tabular
-[[plugins]]
-repository = 'godlygeek/tabular'
-on_cmd = ['Tab', 'Tabularize']
-
 # matchit.zip
 [[plugins]]
 repository = 'matchit.zip'
@@ -33,6 +28,11 @@ on_map = [
 repository = 'tpope/vim-surround'
 depends = 'tpope/vim-repeat'
 on_map = ['<Plug>Ysurround', '<Plug>Dsurround', '<Plug>Csurround']
+
+# tabular
+[[plugins]]
+repository = 'godlygeek/tabular'
+on_cmd = ['Tab', 'Tabularize']
 
 # TextFormat
 [[plugins]]
