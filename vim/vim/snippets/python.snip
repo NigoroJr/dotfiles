@@ -15,3 +15,17 @@ options		head
 	#!/usr/bin/env python3
 	${0}
 
+snippet     argparse
+abbr        argparse
+options     head
+	import argparse
+
+	${1:parser} = argparse.ArgumentParser(${2:description = 'stuff'})
+	$1.add_argument('${3:short}', '${4:long}', dest = '${5:val}', type = ${6:int}, nargs = '${7:?}', metavar = '${8:FOO}', help = '${9:stuff}')
+	${10:parsed} = $1.parse_args()
+	${0}
+
+snippet     add_argument
+abbr        add_argument
+options     head
+	${1:parser}.add_argument('${2:short}', '${3:long}', dest = '${4:val}', type = ${5:int}, nargs = '${6:?}', metavar = '${7:FOO}', help = '${8:stuff}')
