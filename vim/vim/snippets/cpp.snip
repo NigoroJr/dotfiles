@@ -74,20 +74,26 @@ options		head
 	public:
 		/* Constructors, Destructor, and Assignment operator {{{ */
 		// Default constructor
-		$1() { }
+		$1()
+		{
+		}
 
 		// Copy constructor
 		$1(const $1& other)
 			${3:#init member vars}
-		{ }
+		{
+		}
 
 		// Move constructor
 		$1($1&& other)
 			${4:#init member vars}
-		{ }
+		{
+		}
 
 		// Destructor
-		~$1() { }
+		~$1()
+		{
+		}
 
 		// Assignment operator
 		$1&
@@ -147,21 +153,25 @@ options		head
 	// Default constructor
 	$1::${1:#class name}()
 		${2: #initializations}
-	{ }
+	{
+	}
 
 	// Copy constructor
 	$1::$1(const $1& other)
 		${3: #initializations}
-	{ }
+	{
+	}
 
 	// Move constructor
 	$1::$1($1&& other)
 		${4: #initializations}
-	{ }
+	{
+	}
 
 	// Destructor
 	$1::~$1()
-	{ }
+	{
+	}
 
 	// Assignment operator
 	$1&
