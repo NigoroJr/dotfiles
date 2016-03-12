@@ -81,7 +81,7 @@ for ARG in $TASKS; do
             process_target $PREFIX/vim/vim $FLAGS
             ;;
         tmux)
-            if [[ ! -d ~/.tmux/plugins/tpm ]] && hash git 2>/dev/null; then
+            if [ ! -d "~/.tmux/plugins/tpm" ] && hash git 2>/dev/null; then
                 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
             fi
             process_target $PREFIX/tmux/tmux.conf $FLAGS
