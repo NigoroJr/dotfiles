@@ -9,6 +9,7 @@ if neobundle#tap('deoplete.nvim')
     let g:deoplete#min_keyword_length = 3
 
     let g:deoplete#omni_patterns = {
+          \ 'c': '[^. *\t]\%(\.\|->\)\w*',
           \ 'cpp': '[^. *\t]\%(\.\|->\)\w*\|[A-Za-z>]\w*::\w*',
           \ 'go': '[^.[:digit:] *\t]\.\w*',
           \ 'java': '[^.[:digit:] *\t]\.\w*',
