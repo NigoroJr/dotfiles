@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-from pygments.token import Token
 from ptpython.layout import CompletionVisualisation
 
 def configure(repl):
@@ -16,7 +15,3 @@ def configure(repl):
     repl.use_code_colorscheme('monokai')
 
     repl.use_ui_colorscheme('blue')
-
-_custom_ui_colorscheme = {
-    Token.Layout.Prompt: 'bg:#eeeeff #000000 bold',
-}
