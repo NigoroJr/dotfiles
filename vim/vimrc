@@ -49,6 +49,8 @@ set autoread
 set showtabline=0
 set formatoptions+=nmB
 set updatetime=500
+set autoindent
+set smartindent
 " Remove comment leaders with 'J'
 if HasVersion('7.3.541')
   set formatoptions+=j
