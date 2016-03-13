@@ -12,6 +12,8 @@ def configure(repl):
 
     repl.confirm_exit = False
 
+    repl.show_status_bar = False
+
     repl.use_code_colorscheme('monokai')
 
     repl.use_ui_colorscheme('blue')
