@@ -59,7 +59,7 @@ process_target() {
     for F in $PREFIX/$SRC; do
         DST=$HOME/.$( basename $SRC )
 
-        if [ -n "$UNLINK" ] && [ "$UNLINK" -eq 1 ]; then
+        if (( $UNLINK )); then
             unlink $DST
         else
             ln $FLAGS $SRC $DST && \
@@ -79,20 +79,28 @@ for ARG in $TASKS; do
         nvim)
             [ -d ~/.config/nvim ] || mkdir -p ~/.config/nvim
             # init.vim
-            ln $FLAGS $DEFAULT_LINK_FLAGS \
-                $PREFIX/vim/vimrc \
-                $HOME/.config/nvim/init.vim
+            if (( $UNLINK )); then
+                unlink $HOME/.config/nvim/init.vim
+            else
+                ln $DEFAULT_LINK_FLAGS \
+                    $PREFIX/vim/vimrc \
+                    $HOME/.config/nvim/init.vim
+            fi
             process_target $PREFIX/vim/vim $FLAGS
             ;;
         tmux)
-            if [ ! -d "$HOME/.tmux/plugins/tpm" ] && hash git 2>/dev/null; then
+            if ! (( $UNLINK )) && [ ! -d "$HOME/.tmux/plugins/tpm" ] && hash git 2>/dev/null; then
                 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
             fi
             process_target $PREFIX/tmux/tmux.conf $FLAGS
             ;;
         python)
-            mkdir -p $HOME/.ptpython
-            ln -s "$PREFIX/python/ptpython.py" $HOME/.ptpython/config.py
+            if (( $UNLINK )); then
+                unlink $HOME/.ptpython/config.py
+            else
+                mkdir -p $HOME/.ptpython
+                ln -s "$PREFIX/python/ptpython.py" $HOME/.ptpython/config.py
+            fi
             ;;
         others)
             OTHER_FILES=$( find $PREFIX -maxdepth 1 -type f \
