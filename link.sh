@@ -20,8 +20,8 @@
 #   u: unlinks the existing links
 #   h: show help
 
-# Where all the dotfiles are
-PREFIX=$HOME/dotfiles
+# Where this script all the dotfiles are
+PREFIX="$( readlink -f "$0" )"
 # Flags to add to the ln command
 DEFAULT_LINK_FLAGS='-s -n'
 # Tasks to run when none specified
