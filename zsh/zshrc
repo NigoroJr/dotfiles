@@ -22,7 +22,8 @@ export ENHANCD_COMMAND='e'
 export FZF_DEFAULT_OPTS='--ansi --exact --select-1 --exit-0 --multi --cycle'
 
 # zsh-syntax-highlighting
-export ZSH_HIGHLIGHT_HIGHLIGHTERS=(brackets)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(brackets)
+export ZSH_HIGHLIGHT_HIGHLIGHTERS
 
 # z
 export _Z_NO_RESOLVE_SYMLINKS=1
@@ -99,7 +100,7 @@ case $( uname -s ) in
             fi
         else
             # Use GNU ls if available
-            if (( $+commands+[gls] )); then
+            if (( $+commands[gls] )); then
                 alias ls='gls'
             else
                 alias ls='ls -G'

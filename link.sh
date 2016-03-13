@@ -21,7 +21,11 @@
 #   h: show help
 
 # Where this script all the dotfiles are
-PREFIX="$( readlink -f "$0" )"
+PREFIX="$( readlink "$0" )"
+if [ -z "$PREFIX" ]; then
+    PREFIX="$0"
+fi
+PREFIX="$( dirname "$PREFIX" )"
 # Flags to add to the ln command
 DEFAULT_LINK_FLAGS='-s -n'
 # Tasks to run when none specified
