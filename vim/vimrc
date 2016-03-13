@@ -59,6 +59,8 @@ noremap \ ,
 syntax on
 
 " Global variables {{{
+let g:disable_plugins = match($VIM_DISABLE_PLUGINS, '\%(yes\|true\|1\|on\)') != -1
+      \ ? 1 : 0
 let g:use_rsense = 0
 let g:rsenseHome = expand('~/.vim/bundle/rsense')
 let g:show_startup_time = 1
@@ -271,6 +273,20 @@ function! s:underline(chars)
 endfunction
 command! -nargs=? UnderlineCurrentLine call s:underline(<q-args>)
 " }}}
+" Load local configurations {{{
+function! s:load_local(path) abort
+  if filereadable(expand(a:path))
+    source expand(a:path)
+  endif
+endfunction
+" }}}
+
+" If plugins are disabled, source local configs and exit {{{
+if g:disable_plugins
+  call s:load_local('~/.localrc/vimrc')
+  finish
+endif
+" }}}
 
 " Clone neobundle.vim if not installed {{{
 if !isdirectory(g:neobundle_rtp) && executable('git')
@@ -333,7 +349,5 @@ endif
 " }}}
 
 " Source local configurations if any {{{
-if filereadable(expand('~/.localrc/vimrc'))
-  source ~/.localrc/vimrc
-endif
+call s:load_local('~/.localrc/vimrc')
 " }}}
