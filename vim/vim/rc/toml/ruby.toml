@@ -1,9 +1,3 @@
-# neocomplete-rsense.vim
-[[plugins]]
-repository = 'supermomonga/neocomplete-rsense.vim'
-depends = ['Shougo/neocomplete.vim', 'rsense']
-on_source = 'rsense'
-
 # rsense
 [[plugins]]
 repository = 'NigoroJr/rsense'

@@ -1,12 +1,3 @@
-" neocomplete-rsense.vim {{{
-if neobundle#tap('neocomplete-rsense.vim')
-  function! neobundle#hooks.on_source(bundle)
-    let g:neocomplete#sources#rsense#home_directory = g:rsenseHome
-  endfunction
-
-  call neobundle#untap()
-endif
-" }}}
 " rsense {{{
 if neobundle#tap('rsense')
   function! neobundle#hooks.on_source(bundle)
