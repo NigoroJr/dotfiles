@@ -333,6 +333,9 @@ if filereadable(expand('~/.vim/filetype.vim'))
 endif
 filetype plugin indent on
 if has('vim_starting')
+  if ! neobundle#is_installed('vimproc.vim')
+    NeoBundleInstall vimproc.vim
+  endif
   NeoBundleCheck
 endif
 " }}}
