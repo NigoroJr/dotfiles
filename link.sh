@@ -73,7 +73,7 @@ for ARG in $TASKS; do
     case "$ARG" in
         vim|zsh|emacs|X)
             for F in $PREFIX/$ARG/*; do
-                process_target $F $FLAGS
+                process_target $F
             done
             ;;
         nvim)
@@ -86,13 +86,13 @@ for ARG in $TASKS; do
                     $PREFIX/vim/vimrc \
                     $HOME/.config/nvim/init.vim
             fi
-            process_target $PREFIX/vim/vim $FLAGS
+            process_target $PREFIX/vim/vim
             ;;
         tmux)
             if ! (( $UNLINK )) && [ ! -d "$HOME/.tmux/plugins/tpm" ] && hash git 2>/dev/null; then
                 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
             fi
-            process_target $PREFIX/tmux/tmux.conf $FLAGS
+            process_target $PREFIX/tmux/tmux.conf
             ;;
         python)
             if (( $UNLINK )); then
@@ -107,7 +107,7 @@ for ARG in $TASKS; do
                 ! -name '.git*' \
                 ! -name "$( basename $0 )" )
             for F in $OTHER_FILES; do
-                process_target $F $FLAGS
+                process_target $F
             done
             ;;
     esac
