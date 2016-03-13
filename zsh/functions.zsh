@@ -4,6 +4,13 @@ psg() {
     ps aux | grep "\(^USER\|$1\)" | grep -v grep
 }
 
+psgz() {
+    local zombies="$( ps aux | awk '/ Z / && !/awk/ { print $2 }' )"
+    if [[ -n $zombies ]]; then
+        ps auxf | grep -B 4 "$zombies"
+    fi
+}
+
 mcm() {
     local threads="${1:-1}"
     make clean && make -j"$threads"
