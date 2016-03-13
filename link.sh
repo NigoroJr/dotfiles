@@ -25,7 +25,7 @@ PREFIX=$HOME/dotfiles
 # Flags to add to the ln command
 DEFAULT_LINK_FLAGS='-s -n'
 # Tasks to run when none specified
-ALL_TASKS="vim nvim zsh tmux emacs X others"
+ALL_TASKS="vim nvim zsh tmux emacs X python others"
 
 while getopts 'fuh' flag; do
     case "$flag" in
@@ -85,6 +85,10 @@ for ARG in $TASKS; do
                 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
             fi
             process_target $PREFIX/tmux/tmux.conf $FLAGS
+            ;;
+        python)
+            mkdir -p $HOME/.ptpython
+            ln -s "$PREFIX/python/ptpython.py" $HOME/.ptpython/config.py
             ;;
         others)
             OTHER_FILES=$( find $PREFIX -maxdepth 1 -type f \
