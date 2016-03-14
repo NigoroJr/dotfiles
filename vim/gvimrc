@@ -1,13 +1,12 @@
-colorscheme molokai
-" Other good colorschemes
-" desert
 " gentooish
 " jellybeans
-" molokai
 " moria
-" solarazed
-" wombat
-" zenburn
+if neobundle#is_installed('color_coded-colorschemes')
+  let s:colorscheme = 'molokaied'
+else
+  let s:colorscheme = 'molokai'
+endif
+execute 'colorscheme' s:colorscheme
 
 if exists(':DisableItalic') == 2
   DisableItalic
