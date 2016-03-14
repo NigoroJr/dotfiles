@@ -1,3 +1,8 @@
+# color_coded-colorschemes
+[[plugins]]
+repository = 'NigoroJr/color_coded-colorschemes'
+gui = 1
+
 # disableitalic-vim
 [[plugins]]
 repository = 'mattn/disableitalic-vim'

@@ -69,7 +69,7 @@ let g:show_startup_time = 1
 let g:case_insensitive_cmd = 0
 " Disable netrw
 let g:loaded_netrwPlugin = 1
-let g:disable_color_coded = 1
+let g:disable_color_coded = 0
 " }}}
 " Measure startup time in milliseconds {{{
 if exists('g:show_startup_time') && g:show_startup_time

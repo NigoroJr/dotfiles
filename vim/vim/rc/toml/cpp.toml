@@ -9,7 +9,7 @@ disabled = """
 gui = 1
 
   [plugins.build]
-  unix = 'cmake . && make && make install'
+  unix = 'cmake . && make && make install && make clean && make clean_clang'
 
 # vim-altr
 [[plugins]]
@@ -21,6 +21,7 @@ on_map = ['<Plug>(altr-forward)', '<Plug>(altr-back)']
 [[plugins]]
 repository = 'octol/vim-cpp-enhanced-highlight'
 on_ft = 'cpp'
+terminal = 1
 
 # vim-marching
 [[plugins]]
