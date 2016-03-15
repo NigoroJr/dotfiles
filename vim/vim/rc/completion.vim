@@ -47,6 +47,12 @@ if neobundle#tap('neoinclude.vim')
       let g:neoinclude#paths = {}
     endif
     let g:neoinclude#paths.ruby = s:get_ruby_gems()
+
+    if !exists('g:cpp_include_paths')
+      execute 'source' expand('%:h') . '/cpp.vim'
+    endif
+    let include_paths = join(g:cpp_include_paths, ',')
+    let g:neoinclude#paths.cpp = include_paths
   endfunction
 
   call neobundle#untap()
