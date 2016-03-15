@@ -256,7 +256,7 @@ function! s:make_executable(filename)
 
   let line = getline(1)
   if line =~ '^#!' && line =~ '/bin'
-    execute 'silent !chmod a+x' a:filename
+    execute 'silent !chmod a+x' real_fname
     filetype detect
   endif
 endfunction
