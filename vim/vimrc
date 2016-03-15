@@ -278,7 +278,7 @@ command! -nargs=? UnderlineCurrentLine call s:underline(<q-args>)
 " Load local configurations {{{
 function! s:load_local(path) abort
   if filereadable(expand(a:path))
-    source expand(a:path)
+    execute 'source' expand(a:path)
   endif
 endfunction
 " }}}
