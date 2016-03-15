@@ -9,6 +9,7 @@ disabled = """
 gui = 1
 
   [plugins.build]
+  mac = 'cmake . && make && make install && make clean && make clean_clang'
   unix = 'cmake . && make && make install && make clean && make clean_clang'
 
 # vim-altr
