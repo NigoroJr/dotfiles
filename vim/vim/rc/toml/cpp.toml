@@ -2,15 +2,12 @@
 [[plugins]]
 repository = 'jeaye/color_coded'
 on_ft = ['c', 'cpp', 'objc', 'objcpp']
+build = 'cmake . && make && make install && make clean && make clean_clang'
 build_commands = ['cmake', 'make']
 vim_version = '7.4.330'
 disabled = """
 !has('lua') || (exists('g:disable_color_coded') && g:disable_color_coded)"""
 gui = 1
-
-  [plugins.build]
-  mac = 'cmake . && make && make install && make clean && make clean_clang'
-  unix = 'cmake . && make && make install && make clean && make clean_clang'
 
 # vim-altr
 [[plugins]]
