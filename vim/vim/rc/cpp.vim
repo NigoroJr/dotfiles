@@ -49,7 +49,7 @@ endif
 let g:cpp_include_paths = filter(
       \ split(glob('/usr/lib/gcc/x86_64-pc-linux-gnu/*/include/*/'), '\n') +
       \ split(glob('/usr/lib/gcc/x86_64-pc-linux-gnu/*/include/*/x86_64-pc-linux-gnu/'), '\n') +
-      \ split(glob('/usr/include/boost/'), '\n') +
+      \ split(glob('/usr/include/'), '\n') +
       \ [s:mac_include_dir],
       \ 'isdirectory(v:val)')
 " Add syntax highlighting to STL header files
