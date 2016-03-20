@@ -59,7 +59,7 @@ process_target() {
     for F in $PREFIX/$SRC; do
         DST=$HOME/.$( basename $SRC )
 
-        if (( $UNLINK )); then
+        if [[ "$UNLINK" -eq 1 ]]; then
             unlink $DST
         else
             ln $FLAGS $SRC $DST && \
@@ -79,7 +79,7 @@ for ARG in $TASKS; do
         nvim)
             [ -d ~/.config/nvim ] || mkdir -p ~/.config/nvim
             # init.vim
-            if (( $UNLINK )); then
+            if [[ "$UNLINK" -eq 1 ]]; then
                 unlink $HOME/.config/nvim/init.vim
             else
                 ln $DEFAULT_LINK_FLAGS \
@@ -89,13 +89,15 @@ for ARG in $TASKS; do
             process_target $PREFIX/vim/vim
             ;;
         tmux)
-            if ! (( $UNLINK )) && [ ! -d "$HOME/.tmux/plugins/tpm" ] && hash git 2>/dev/null; then
+            if ! [[ "$UNLINK" -eq 1 ]] && \
+                [ ! -d "$HOME/.tmux/plugins/tpm" ] && \
+                hash git 2>/dev/null; then
                 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
             fi
             process_target $PREFIX/tmux/tmux.conf
             ;;
         python)
-            if (( $UNLINK )); then
+            if [[ "$UNLINK" -eq 1 ]]; then
                 unlink $HOME/.ptpython/config.py
             else
                 mkdir -p $HOME/.ptpython
