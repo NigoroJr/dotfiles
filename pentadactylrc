@@ -23,8 +23,12 @@ map -modes=n <Leader>tgh :tabopen<Space>https://github.com<CR>
 map -modes=n <Leader>tgg :tabopen<Space>https://google.com<CR>
 map -modes=n <Leader>tgj :tabopen<Space>https://google.co.jp<CR>
 
+map -modes=n <Leader>stb :set guioptions!=T<CR>
+
 map -modes=n -builtin j 3j
 map -modes=n -builtin k 3k
+map -modes=n -builtin <C-e> 3<C-e>
+map -modes=n -builtin <C-y> 3<C-y>
 map -modes=n -builtin <silent> <Esc> :nohlfind<CR><Esc>
 map -modes=n A :bmark -tags=
 
@@ -63,7 +67,7 @@ map -modes=c -builtin <C-g> <Esc>
 " Focus on input field (useful when switching back from other tab)
 autocmd LocationChange '^https?://mail\.google\.com/mail/u/0/.*#inbox$' :normal! gi
 " TODO: Why does only <A-b> get stolen?
-set passkeys+=.*:<A-b>
+set passkeys=.*:<A-b>
 " a is mapped to "go to inbox"
 set passkeys+=mail.google.com:a,r
 
