@@ -5,9 +5,10 @@ psg() {
 }
 
 psgz() {
-    local zombies="$( ps aux | awk '/ Z / && !/awk/ { print $2 }' )"
-    if [[ -n $zombies ]]; then
-        ps auxf | grep -B 4 "$zombies"
+    local zombies=( $( ps aux | awk '/ Z / && !/awk/ { print $2 }' ) )
+    if (( $#zombies != 0 )); then
+        local zombies_exp=( "\b$^zombies[@]\b" )
+        ps auxf | grep -v grep | grep -B 4 "${(F)zombies_exp}"
     fi
 }
 
