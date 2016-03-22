@@ -2,7 +2,6 @@
 [[plugins]]
 repository = 'Shougo/neomru.vim'
 lazy = 0
-depends = 'Shougo/unite.vim'
 on_source = 'unite.vim'
 on_cmd = [
   'NeoMRUReload', 'NeoMRUSave', 'NeoMRUImportFile', 'NeoMRUImportDirectory'
@@ -12,7 +11,6 @@ on_cmd = [
 [[plugins]]
 repository = 'Shougo/neoyank.vim'
 lazy = 0
-depends = 'Shougo/unite.vim'
 on_source = 'unite.vim'
 
 # unite.vim
@@ -35,11 +33,6 @@ depends = 'Shougo/vimproc.vim'
 [[plugins]]
 repository = 'osyo-manga/unite-boost-online-doc'
 on_ft = 'cpp'
-depends = [
-  'Shougo/unite.vim',
-  'tyru/open-browser.vim',
-  'mattn/webapi-vim',
-]
 on_source = 'unite.vim'
 
 # unite-colorscheme
@@ -50,29 +43,24 @@ on_source = 'unite.vim'
 # unite-help
 [[plugins]]
 repository = 'tsukkee/unite-help'
-depends = 'Shougo/unite.vim'
 on_source = 'unite.vim'
 
 # unite-kawaii-calc
 [[plugins]]
 repository = 'supermomonga/unite-kawaii-calc'
-depends = 'Shougo/unite.vim'
 on_source = 'unite.vim'
 
 # unite-matcher-hide-hidden-directories
 [[plugins]]
 repository = 'NigoroJr/unite-matcher-hide-hidden-directories'
-depends = 'Shougo/unite.vim'
 on_source = 'unite.vim'
 
 # unite-outline
 [[plugins]]
 repository = 'Shougo/unite-outline'
-depends = 'Shougo/unite.vim'
 on_source = 'unite.vim'
 
 # unite-quickfix
 [[plugins]]
 repository = 'osyo-manga/unite-quickfix'
-depends = 'Shougo/unite.vim'
 on_source = ['unite.vim', 'shabadou.vim']
