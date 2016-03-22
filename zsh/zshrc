@@ -3,6 +3,7 @@
 export ZPLUG_HOME=$HOME/.zplug
 export ZPLUG_CLONE_DEPTH=0
 export ZPLUG_THREADS=8
+export ZPLUG_CACHE_FILE=$HOME/.cache/zplug/cache
 export ZPLUG_LOADFILE=$HOME/.zplug.zsh
 
 if [ ! -f $ZPLUG_HOME/init.zsh ]; then
