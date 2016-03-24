@@ -26,10 +26,10 @@ mcd() {
 compdef _mkdir mcd
 
 sudo() {
-    if [[ $1 == "--" ]]; then
+    if [[ $1 == -- ]]; then
         shift
         command sudo "$@"
-    elif [[ $1 == "vi" ]] || [[ $1 == "vim" ]] && (( $+commands[sudoedit] )); then
+    elif [[ $1 =~ ^vim?$ ]] && (( $+commands[sudoedit] )); then
         shift
         command sudoedit "$@"
     else
