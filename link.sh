@@ -29,7 +29,7 @@ PREFIX="$( dirname "$PREFIX" )"
 # Flags to add to the ln command
 DEFAULT_LINK_FLAGS='-s -n'
 # Tasks to run when none specified
-ALL_TASKS="vim nvim zsh tmux emacs X python others"
+ALL_TASKS="vim nvim zsh tmux emacs git X python others"
 
 while getopts 'fuh' flag; do
     case "$flag" in
@@ -95,6 +95,44 @@ for ARG in $TASKS; do
                 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
             fi
             process_target $PREFIX/tmux/tmux.conf
+            ;;
+        git)
+            if ! hash git >/dev/null; then
+                continue
+            fi
+
+            git config --global user.name \
+                "${GIT_USER_NAME:-Naoki Mizuno}"
+            git config --global user.email \
+                "${GIT_USER_EMAIL:-nigorojr@gmail.com}"
+            git config --global core.pager \
+                "${GIT_CORE_PAGER:-less -F -X}"
+            git config --global merge.tool \
+                "${GIT_MERGE_TOOL:-vimdiff}"
+
+            git config --global alias.a 'add'
+            git config --global alias.b 'branch'
+            git config --global alias.c 'commit'
+            git config --global alias.ca 'commit --amend'
+            git config --global alias.co 'checkout'
+            git config --global alias.cob 'checkout -b'
+            git config --global alias.cop 'checkout -p'
+            git config --global alias.chp 'cherry-pick'
+            git config --global alias.d 'diff'
+            git config --global alias.dc 'diff --cached'
+            git config --global alias.f 'fetch'
+            git config --global alias.l 'log'
+            git config --global alias.la 'log --all --graph'
+            git config --global alias.lg 'log --graph'
+            git config --global alias.m 'merge --no-ff'
+            git config --global alias.mt 'mergetool'
+            git config --global alias.pl 'pull'
+            git config --global alias.plum 'pull upstream master'
+            git config --global alias.r 'reset'
+            git config --global alias.rem 'remote'
+            git config --global alias.s 'status'
+            git config --global alias.st 'stash'
+            git config --global alias.sh 'show'
             ;;
         python)
             if [ "$UNLINK" -eq 1 ]; then
