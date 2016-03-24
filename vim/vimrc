@@ -178,6 +178,17 @@ nmap <silent> <Leader>sb :call <SID>toggle('scrollbind', 'Scrollbind')<CR>
 nmap <silent> <Leader>set :call <SID>toggle('expandtab', 'expandtab')<CR>
 nmap <silent> <Leader>sw :call <SID>toggle('wrap', 'wrap')<CR>
 
+function! s:edit_register() abort
+  let c = getchar()
+  while c == "\<CursorHold>"
+    let c = getchar()
+  endwhile
+  let chosen_reg = tolower(nr2char(c))
+  let cmd = 'let @' . chosen_reg . " = " . string(getreg(chosen_reg))
+  return cmd
+endfunction
+nnoremap <silent> <leader>em :<C-u><C-r><C-r>=<SID>edit_register()<CR>
+
 " Toggle diff
 function! s:toggle_diff() abort
   if &diff
