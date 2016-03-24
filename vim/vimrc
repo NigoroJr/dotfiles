@@ -237,8 +237,11 @@ if !isdirectory(expand(&undodir)) && HasVersion('7.3')
 endif
 " }}}
 " Set filetypes to not save/load the view {{{
-autocmd! FileType gitcommit call setpos('.', [0, 1, 1, 0])
-autocmd! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+augroup gitcommit
+  autocmd!
+  autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+  autocmd BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+augroup END
 let s:no_view = ['gitcommit', 'tex', 'plaintex', 'diff']
 augroup vimrc
   autocmd!
