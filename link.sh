@@ -109,6 +109,8 @@ for ARG in $TASKS; do
                 "${GIT_CORE_PAGER:-less -F -X}"
             git config --global merge.tool \
                 "${GIT_MERGE_TOOL:-vimdiff}"
+            git config --global push.default \
+                "${GIT_PUSH_DEFAULT:-simple}"
 
             git config --global alias.a 'add'
             git config --global alias.b 'branch'
