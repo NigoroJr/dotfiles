@@ -14,7 +14,7 @@ psgz() {
 }
 
 mcm() {
-    local threads="${1:-1}"
+    local threads="${1:-5}"
     make clean && make -j"$threads"
 }
 
