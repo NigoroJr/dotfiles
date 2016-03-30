@@ -1,4 +1,5 @@
-zplug 'b4b4r07/zplug'
+zplug 'b4b4r07/zplug', \
+    at:v2
 
 zplug 'NigoroJr/scripts', \
     from:bitbucket, \
