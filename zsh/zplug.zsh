@@ -1,5 +1,15 @@
 zplug 'b4b4r07/zplug'
 
+zplug 'NigoroJr/scripts', \
+    from:bitbucket, \
+    as:command, \
+    use:'bin/*'
+
+zplug 'NigoroJr/scripts', \
+    from:bitbucket, \
+    as:command, \
+    use:'${(L)$( uname -s )}/*'
+
 zplug 'NigoroJr/do-after', \
     as:command, \
     use:do-after
