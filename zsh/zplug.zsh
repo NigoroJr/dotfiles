@@ -1,3 +1,5 @@
+local os="${(L)$( uname -s )}"
+
 zplug 'b4b4r07/zplug', \
     at:v2
 
@@ -9,7 +11,8 @@ zplug 'NigoroJr/scripts', \
 zplug 'NigoroJr/scripts', \
     from:bitbucket, \
     as:command, \
-    use:'${(L)$( uname -s )}/*'
+    use:"$os/*", \
+    if:"[[ $os != cygwin ]]"
 
 zplug 'NigoroJr/do-after', \
     as:command, \
@@ -33,7 +36,7 @@ zplug "junegunn/fzf-bin", \
     as:command, \
     use:"*${(L)$(uname -s)}*amd64*", \
     rename_to:fzf, \
-    if:'! (( $+commands[go] )) && ! [[ ${(L)$( uname -s )} =~ cygwin ]]'
+    if:"! (( $+commands[go] )) && [[ $os != cygwin ]]"
 
 zplug 'NigoroJr/d53982a4d0cf0848985b', \
     from:gist, \
