@@ -116,6 +116,8 @@ nnoremap gj j
 nnoremap gk k
 nnoremap j gj
 nnoremap k gk
+nnoremap ' `
+nnoremap ` '
 
 " More powerful ex command history
 cnoremap <C-p> <Up>
