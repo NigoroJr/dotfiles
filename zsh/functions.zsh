@@ -5,11 +5,22 @@ psg() {
 }
 
 psgz() {
+    local cmd='ps auxf'
     local -a zombies=( $( ps aux | awk '/ Z / && !/awk/ { print $2 }' ) )
     local -a zombies_exp
+
+    if [[ ${(L)"$( uname -s )"} == darwin ]]; then
+        if (( ! $+commands[pstree] )); then
+            echo 'pstree not found' >&2
+            return 1
+        fi
+
+        cmd='pstree'
+    fi
+
     if (( $#zombies != 0 )); then
         zombies_exp=( "\b${^zombies[@]}\b" )
-        ps auxf | grep -v grep | grep -B 4 "${(F)zombies_exp}"
+        eval "$cmd" | grep -v grep | grep -B 4 "${(F)zombies_exp}"
     fi
 }
 
