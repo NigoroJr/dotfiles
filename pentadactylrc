@@ -25,6 +25,7 @@ map -modes=n <Leader>tgg :tabopen<Space>https://google.com<CR>
 map -modes=n <Leader>tgj :tabopen<Space>https://google.co.jp<CR>
 
 map -modes=n <Leader>stb :set guioptions!=T<CR>
+map -modes=n <Leader>sss :source ~/.pentadactylrc<CR>
 
 map -modes=n -builtin j 3j
 map -modes=n -builtin k 3k
