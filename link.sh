@@ -119,7 +119,7 @@ for ARG in $TASKS; do
             git config --global alias.co 'checkout'
             git config --global alias.cob 'checkout -b'
             git config --global alias.cop 'checkout -p'
-            git config --global alias.chp 'cherry-pick'
+            git config --global alias.cp 'cherry-pick'
             git config --global alias.d 'diff'
             git config --global alias.dc 'diff --cached'
             git config --global alias.f 'fetch'
