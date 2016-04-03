@@ -54,15 +54,19 @@ map -modes=n -builtin <C-h> <C-p>
 map -modes=n -builtin <C-l> <C-n>
 
 " Ex mode
-map -modes=c -builtin <C-p> <Up>
-map -modes=c -builtin <C-n> <Down>
+map -modes=c -builtin <A-p> <Up>
+map -modes=c -builtin <A-n> <Down>
+" map -modes=c -builtin <C-p> <Up>
+" map -modes=c -builtin <C-n> <Down>
 map -modes=c -builtin <C-b> <Left>
 map -modes=c -builtin <C-f> <Right>
 map -modes=c -builtin <A-b> <C-Left>
 map -modes=c -builtin <A-f> <C-Right>
 " Select completion
-map -modes=c -builtin <A-p> <A-S-Tab>
-map -modes=c -builtin <A-n> <A-Tab>
+map -modes=c -builtin <C-p> <A-S-Tab>
+map -modes=c -builtin <C-n> <A-Tab>
+" map -modes=c -builtin <A-p> <A-S-Tab>
+" map -modes=c -builtin <A-n> <A-Tab>
 map -modes=c -builtin <C-g> <Esc>
 
 " Site-specific tweaks
