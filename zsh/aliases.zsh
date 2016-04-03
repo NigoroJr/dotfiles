@@ -31,7 +31,7 @@ fi
 alias em='emacsclient -nw'
 alias emacs='emacs -nw'
 alias kill-emacs='emacsclient -e "(kill-emacs)"'
-alias restart-emacs='emacs-kill && em'
+alias restart-emacs='kill-emacs && em'
 
 alias tm='tmux'
 
