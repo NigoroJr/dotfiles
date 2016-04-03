@@ -35,20 +35,6 @@
                :website "http://cx4a.org/software/rsense/index"
                :pkgname "m2ym/rsense"
                )
-        (:name plsense
-               :website "https://github.com/aki2o/plsense"
-               :url "https://github.com/aki2o/plsense/releases/download/v0.3.2/PlSense-0.3.2.tar.gz"
-               :description "tool for Perl using the type inference by analyzing source code"
-               :type http-tar
-               :pkgname "aki2o/plsense"
-               :options ("xzf")
-               :build ("perl Makefile.PL DESTDIR=./" "make" "make install"))
-        (:name emacs-plsense
-               :website "https://github.com/aki2o/emacs-plsense"
-               :description "interface for PlSense that provides omni completion for Perl."
-               :type github
-               :pkgname "aki2o/emacs-plsense"
-               :depends (auto-complete log4e yaxception plsense))
         ))
 
 ;; Packages to install
@@ -69,7 +55,6 @@
         color-theme
         color-theme-solarized
         emacs-async
-        emacs-plsense
         exec-path-from-shell
         haml-mode
         helm

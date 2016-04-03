@@ -6,10 +6,6 @@
       cperl-label-offset -4
       cperl-highlight-variables-indiscriminately t)
 
-;;; plsense
-(require 'plsense)
-(plsense-config-default)
-
 ;;; Hooks
 ;; perl-completion
 (add-hook 'cperl-mode-hook 'perl-completion-hook)
