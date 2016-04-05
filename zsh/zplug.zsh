@@ -28,14 +28,14 @@ zplug 'junegunn/fzf', \
     as:command, \
     hook-build:'./install --bin >/dev/null', \
     use:'bin/fzf', \
-    rename_to:'fzf', \
+    rename-to:'fzf', \
     if:'(( $+commands[go] ))'
 
 zplug "junegunn/fzf-bin", \
     from:gh-r, \
     as:command, \
     use:"*${(L)$(uname -s)}*amd64*", \
-    rename_to:fzf, \
+    rename-to:fzf, \
     if:"! (( $+commands[go] )) && [[ $os != cygwin ]]"
 
 zplug 'NigoroJr/d53982a4d0cf0848985b', \
@@ -47,7 +47,7 @@ zplug 'NigoroJr/d53982a4d0cf0848985b', \
 zplug 'NigoroJr/644ae8775023be82544d', \
     from:gist, \
     as:command, \
-    rename_to:sort-du, \
+    rename-to:sort-du, \
     use:sort_du.rb, \
     hook-build:'chmod 755 sort_du.rb'
 
