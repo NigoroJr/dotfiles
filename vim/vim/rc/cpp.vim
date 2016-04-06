@@ -60,7 +60,7 @@ augroup cpp-stl-highlight
   let paths = join(map(stl_dirs, 'v:val . "/*"'), ',')
   " Remove duplicating path separators
   let paths = substitute(paths, '/\+', '/', 'g')
-  execute "autocmd BufReadPost " . paths ." if empty(&filetype) | set filetype=cpp | endif"
+  execute "autocmd BufReadPost " . paths ." if empty(&filetype) | set filetype=cpp ts=8 | endif"
 augroup END
 " }}}
 
