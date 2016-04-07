@@ -41,7 +41,7 @@ while getopts 'fuh' flag; do
             UNLINK=1
             ;;
         h)
-            echo "Usage: $0 [-h] [-f] [-u] [vim|zsh|emacs|X|others]"
+            echo "Usage: $0 [-h] [-f] [-u] [$( echo "$ALL_TASKS" | sed -e 's/ /|/g' )]"
             exit 0
     esac
 
