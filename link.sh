@@ -30,6 +30,7 @@ PREFIX="$( dirname "$PREFIX" )"
 DEFAULT_LINK_FLAGS='-s -n'
 # Tasks to run when none specified
 ALL_TASKS="vim nvim zsh tmux emacs git X python others"
+UNLINK=0
 
 while getopts 'fuh' flag; do
     case "$flag" in
