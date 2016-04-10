@@ -5,6 +5,8 @@ alias l='ls -lh'
 alias la='ls -A'
 alias ll='ls -CF'
 
+alias mv='mv -n'
+
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 
