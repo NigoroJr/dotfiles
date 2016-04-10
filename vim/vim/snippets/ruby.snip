@@ -19,3 +19,18 @@ abbr		initialize
 options		head
 	def initialize${0}
 	end
+
+snippet     optparse
+abbr        Optparse
+options     head
+	opts = {}
+	OptionParser.new do |opt|
+		opt.banner = "Usage: #{File.basename($PROGRAM_NAME)} [options] ${0}"
+
+		opt.on('-${1:short}', '--${2:long}',
+				'${3:desc}') do${4: |val|}
+			opts[${5}] = '${6}'
+		end
+
+		opt.parse!(ARGV)
+	end
