@@ -10,7 +10,7 @@ if neobundle#tap('deoplete.nvim')
 
     let g:deoplete#omni_patterns = {
           \ 'c': '[^. *\t]\%(\.\|->\)\w*',
-          \ 'cpp': '[^. *\t]\%(\.\|->\)\w*\|[A-Za-z>]\w*::\w*',
+          \ 'cpp': '[^. *\t]\%(\.\|->\)\w*\|::\w*',
           \ 'go': '[^.[:digit:] *\t]\.\w*',
           \ 'java': '[^.[:digit:] *\t]\.\w*',
           \ 'javascript': '[^.[:digit:] *\t]\.\w*\|\<require(',

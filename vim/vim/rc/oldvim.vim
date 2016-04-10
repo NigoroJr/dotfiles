@@ -19,7 +19,7 @@ if neobundle#tap('neocomplete.vim')
 
     let g:neocomplete#force_omni_input_patterns = {
           \ 'c': '[^. *\t]\%(\.\|->\)\w*',
-          \ 'cpp': '[^. *\t]\%(\.\|->\)\w*\|[A-Za-z>]\w*::\w*',
+          \ 'cpp': '[^. *\t]\%(\.\|->\)\w*\|::\w*',
           \ 'go': '[^.[:digit:] *\t]\.\w*',
           \ 'java': '[^.[:digit:] *\t]\.\w*',
           \ 'javascript': '[^.[:digit:] *\t]\.\w*\|\<require(',
