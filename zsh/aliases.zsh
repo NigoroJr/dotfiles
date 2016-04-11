@@ -22,7 +22,7 @@ alias gD='git diff'
 alias gC='git commit'
 
 # C++
-alias gpp='g++ -std=c++11'
+alias gpp='g++ -std=c++11 -Wall'
 alias clpp='clang++ -std=c++11'
 
 # Text Editors
