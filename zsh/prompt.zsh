@@ -4,7 +4,7 @@ autoload -U add-zsh-hook
 add-zsh-hook precmd _set_prompt
 
 _set_prompt() {
-    if [ -n $TERM ] && [ $TERM =~ "256color" ]; then
+    if [[ $TERM =~ "256color" ]]; then
         _prompt_random_256
     else
         _prompt_random_16
@@ -16,39 +16,39 @@ _prompt_git_status() {
     local prompt
     local branch_name staged modified untracked conflicts
 
-    branch_name=`git rev-parse --abbrev-ref HEAD 2>/dev/null`
+    branch_name="$( git rev-parse --abbrev-ref HEAD 2>/dev/null )"
     # Not in git repository
     if [[ -z $branch_name ]]; then
         return
     fi
 
     # Clean repository?
-    if [[ -z `git status --short 2>/dev/null` ]]; then
+    if [[ -z $( git status --short 2>/dev/null ) ]]; then
         echo "%F{046}$branch_name%f"
         return
     fi
 
-    staged="`git diff --cached --numstat | wc -l | tr -d ' '`"
-    if [ "$staged" -ne 0 ]; then
+    staged="$( git diff --cached --numstat | wc -l | tr -d ' ' )"
+    if [[ $staged -ne 0 ]]; then
         prompt+="%F{010}S%f$staged "
     fi
 
-    modified="`git diff --numstat | wc -l | tr -d ' '`"
-    if [ "$modified" -ne 0 ]; then
+    modified="$( git diff --numstat | wc -l | tr -d ' ' )"
+    if [[ $modified -ne 0 ]]; then
         prompt+="%F{009}M%f$modified "
     fi
 
-    untracked="`git status --short | grep '^\s*??' | wc -l | tr -d ' '`"
-    if [ "$untracked" -ne 0 ]; then
+    untracked="$( git status --short | grep '^\s*??' | wc -l | tr -d ' ' )"
+    if [[ $untracked -ne 0 ]]; then
         prompt+="%F{099}U%f$untracked "
     fi
 
-    conflicts="`git status --short | grep '^\s*UU' | wc -l | tr -d ' '`"
-    if [ "$conflicts" -ne 0 ]; then
+    conflicts="$( git status --short | grep '^\s*UU' | wc -l | tr -d ' ' )"
+    if [[ $conflicts -ne 0 ]]; then
         prompt+="%F{190}C%f$conflicts "
     fi
 
-    if [[ -n "`git status | grep '^rebase in progress'`" ]]; then
+    if [[ -n $( git status | grep '^rebase in progress' ) ]]; then
         # Rebase is in progress
         prompt+="%F{039}REBASE%f"
     else
@@ -76,7 +76,7 @@ _prompt_random_256() {
     local -a valid_colors
 
     # Change hostname on remote login
-    if [ -n "${REMOTEHOST}${SSH_CONNECTION}" ]; then
+    if [[ -n $REMOTEHOST ]] || [[ -n $SSH_CONNECTION ]]; then
         front="%F{207}%m%f"
     else
         front="%F{222}%m%f"
@@ -100,7 +100,7 @@ _prompt_random_256() {
 
     # Display in two lines if too long
     local pwd_length=${(c)#${(D)PWD}}
-    if [ $pwd_length -ge 45 ]; then
+    if [[ $pwd_length -ge 45 ]]; then
         PROMPT="[ %F{219}%~%f ]"$'\n'"$l_prompt"
     else
         PROMPT="$l_prompt"
@@ -114,7 +114,7 @@ _prompt_random_256() {
     fi
 
     # Right prompt
-    if [ $pwd_length -lt 45 ]; then
+    if [[ $pwd_length -lt 45 ]]; then
         RPROMPT+=" [ %F{051}%~%f ]"
     fi
 }
