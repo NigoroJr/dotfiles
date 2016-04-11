@@ -56,6 +56,7 @@ if HasVersion('7.3.541')
   set formatoptions+=j
 endif
 set formatlistpat=^\\s*\\(\\d\\+[\\]:.)}\\t\ ]\\\|[*+-]\\)\\s*
+set matchpairs+=<:>
 let mapleader = ','
 noremap \ ,
 syntax on
