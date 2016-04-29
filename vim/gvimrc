@@ -19,7 +19,7 @@ if has('gui_running')
   elseif has('gui_gtk')
     set guifont=Ricty\ Discord\ 9
   elseif has('gui_win32')
-    set guifont=Ricty\ 13
+    set guifont=Ricty\ Discord:h13
   endif
 
   set guioptions-=m " Hide menubar
