@@ -10,8 +10,7 @@ zplug 'NigoroJr/scripts', \
 zplug 'NigoroJr/scripts', \
     from:bitbucket, \
     as:command, \
-    use:"$os/*", \
-    if:"[[ $os != cygwin ]]"
+    use:"$os/*"
 
 zplug 'NigoroJr/do-after', \
     as:command, \
