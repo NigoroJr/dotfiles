@@ -50,6 +50,10 @@ alias cdd='cd $( dirname $_ )'
 
 alias zmv='noglob zmv -W'
 
+if (( $+commands[hangups] )); then
+    alias hangups="hangups --key-quit='ctrl r' --key-close-tab='ctrl l' --col-palette-colors=256"
+fi
+
 # Global alias
 alias -g A='| awk'
 alias -g DN1='1>/dev/null'
