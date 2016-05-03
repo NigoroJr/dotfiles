@@ -22,8 +22,7 @@ if neobundle#tap('deoplete.nvim')
   endfunction
 
   function! neobundle#hooks.on_post_source(bundle)
-    DeopleteEnable
-    " call deoplete#initialize()
+    call deoplete#enable()
   endfunction
 
   call neobundle#untap()
