@@ -51,7 +51,7 @@ alias cdd='cd $( dirname $_ )'
 alias zmv='noglob zmv -W'
 
 if (( $+commands[hangups] )); then
-    alias hangups="hangups --key-quit='ctrl r' --key-close-tab='ctrl l' --col-palette-colors=256"
+    alias hangups="hangups --key-quit='ctrl r' --key-close-tab='ctrl l' --col-palette-colors=256 --col-scheme='solarized-dark'"
 fi
 
 # Global alias
