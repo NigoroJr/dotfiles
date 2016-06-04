@@ -1,6 +1,6 @@
 local os="${(L)$( uname -s )}"
 
-zplug 'b4b4r07/zplug'
+zplug 'zplug/zplug'
 
 zplug 'NigoroJr/scripts', \
     from:bitbucket, \
