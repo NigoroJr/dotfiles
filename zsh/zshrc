@@ -6,9 +6,9 @@ export ZPLUG_THREADS=8
 export ZPLUG_CACHE_FILE=$HOME/.cache/zplug/cache
 export ZPLUG_LOADFILE=$HOME/.zplug.zsh
 
-if [ ! -f $ZPLUG_HOME/init.zsh ]; then
+if [[ ! -f $ZPLUG_HOME/init.zsh ]]; then
     if (( $+commands[git] )); then
-        git clone https://github.com/b4b4r07/zplug2 $ZPLUG_HOME
+        git clone https://github.com/zplug/zplug $ZPLUG_HOME
     else
         echo 'git not found' >&2
         exit 1
