@@ -126,3 +126,8 @@ unzip() {
 
     builtin cd -q "$old_pwd"
 }
+
+viwhich() {
+    vi "$( which "$1" )"
+}
+compdef _command viwhich
