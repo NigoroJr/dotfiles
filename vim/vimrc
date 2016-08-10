@@ -40,7 +40,7 @@ set wildmode=longest,list
 set foldenable
 set foldmethod=marker
 set viewoptions=cursor,folds
-set fileencodings=ucs-bom,utf-8,iso-2022-jp,sjis,cp932,euc-jp,cp20932,guess
+set fileencodings=ucs-bom,utf-8,iso-2022-jp,sjis,cp932,euc-jp,cp20932,utf-16,utf-16le,guess
 set splitright
 set splitbelow
 set modeline
