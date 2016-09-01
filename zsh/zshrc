@@ -52,6 +52,7 @@ zplug load
 autoload -Uz add-zsh-hook
 autoload -Uz history-search-end
 autoload -Uz is-at-least
+autoload -Uz zargs
 autoload -Uz zmv
 
 # Functions {{{
