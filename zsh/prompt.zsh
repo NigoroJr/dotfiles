@@ -28,22 +28,22 @@ _prompt_git_status() {
         return
     fi
 
-    staged="$( git diff --cached --numstat | wc -l | tr -d ' ' )"
+    staged="$( git diff --cached --numstat | command wc -l | tr -d ' ' )"
     if [[ $staged -ne 0 ]]; then
         prompt+="%F{010}S%f$staged "
     fi
 
-    modified="$( git diff --numstat | wc -l | tr -d ' ' )"
+    modified="$( git diff --numstat | command wc -l | tr -d ' ' )"
     if [[ $modified -ne 0 ]]; then
         prompt+="%F{009}M%f$modified "
     fi
 
-    untracked="$( git status --short | grep '^\s*??' | wc -l | tr -d ' ' )"
+    untracked="$( git status --short | command grep '^\s*??' | command wc -l | tr -d ' ' )"
     if [[ $untracked -ne 0 ]]; then
         prompt+="%F{099}U%f$untracked "
     fi
 
-    conflicts="$( git status --short | grep '^\s*UU' | wc -l | tr -d ' ' )"
+    conflicts="$( git status --short | command grep '^\s*UU' | command wc -l | tr -d ' ' )"
     if [[ $conflicts -ne 0 ]]; then
         prompt+="%F{190}C%f$conflicts "
     fi

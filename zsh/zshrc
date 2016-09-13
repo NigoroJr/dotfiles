@@ -69,9 +69,9 @@ __set_colors() {
 }
 
 __tmux_status_bar() {
-    if [[ $TMUX ]]; then
+    if [[ -n $TMUX ]]; then
         local switch
-        if (( $( tmux list-windows | wc -l ) == 1 )); then
+        if (( $( tmux list-windows | command wc -l ) == 1 )); then
             switch=off
         else
             switch=on
