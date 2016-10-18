@@ -10,6 +10,7 @@ set hlfind
 nohlfind
 set wildmode=list:longest
 set altwildmode=list:full
+set complete=bookmark,suggestion,history,search,file
 
 set! extensions.checkCompatibility.4.0=false
 set! ui.key.menuAccessKeyFocuses=false
