@@ -131,3 +131,19 @@ viwhich() {
     vi "$( which "$1" )"
 }
 compdef _command viwhich
+
+mkrar() {
+    local src_name="$1"
+
+    if ! (( $+commands[rar] )); then
+        echo "mkrar: rar command not found" >&2
+        return 127
+    elif ! [[ -d $src_name ]]; then
+        echo "mkrar: $src_name is not a directory" >&2
+        return 1
+    fi
+
+    rar a "$src_name.rar" "$src_name" \
+        && rm -r "$src_name"
+}
+compdef _directories mkrar

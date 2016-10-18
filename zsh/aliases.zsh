@@ -13,6 +13,8 @@ alias du='du -h'
 
 alias watch='watch -n 0.5'
 
+alias mplayer-audio='mplayer -novideo -demuxer lavf'
+
 # Typos
 alias rm_r='rm -r'
 alias gS='git status'
@@ -54,6 +56,7 @@ fi
 
 # Global alias
 alias -g A='| awk'
+alias -g B='&& beep'
 alias -g DN1='1>/dev/null'
 alias -g DN12='1>/dev/null 2>&1'
 alias -g DN2='2>/dev/null'
