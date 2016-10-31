@@ -59,6 +59,9 @@ zplug 'plugins/pip', \
     ignore:'{oh-my-zsh.sh,plugins/pip/pip.plugin.zsh}', \
     nice:10
 
+zplug 'Valodim/zsh-curl-completion', \
+    nice:10
+
 zplug 'zsh-users/zsh-syntax-highlighting', \
     nice:15
 
