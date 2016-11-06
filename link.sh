@@ -127,6 +127,7 @@ for ARG in $TASKS; do
             git config --global alias.mt 'mergetool'
             git config --global alias.pl 'pull'
             git config --global alias.plum 'pull upstream master'
+            git config --global alias.pom 'push origin master'
             git config --global alias.r 'reset'
             git config --global alias.rem 'remote'
             git config --global alias.s 'status'

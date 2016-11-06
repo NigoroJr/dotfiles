@@ -45,6 +45,7 @@ alias ga.='git add .'
 alias gca='git commit --amend'
 alias gl='git log'
 alias gplum='git pull upstream master'
+alias gpom='git push origin master'
 
 alias cdd='cd $( dirname $_ )'
 alias rm_='rm -f $_'
