@@ -54,6 +54,11 @@ zplug 'plugins/golang', \
     ignore:oh-my-zsh.sh, \
     nice:10
 
+zplug 'plugins/gem', \
+    from:oh-my-zsh, \
+    ignore:'{oh-my-zsh.sh,plugins/gem/gem.plugin.zsh}', \
+    nice:10
+
 zplug 'plugins/pip', \
     from:oh-my-zsh, \
     ignore:'{oh-my-zsh.sh,plugins/pip/pip.plugin.zsh}', \
