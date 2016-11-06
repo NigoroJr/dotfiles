@@ -47,6 +47,7 @@ alias gl='git log'
 alias gplum='git pull upstream master'
 
 alias cdd='cd $( dirname $_ )'
+alias rm_='rm -f $_'
 
 alias zmv='noglob zmv -W'
 
