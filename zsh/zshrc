@@ -19,7 +19,7 @@ source $ZPLUG_HOME/init.zsh
 # enhancd
 export ENHANCD_COMMAND='e'
 
-export FZF_DEFAULT_OPTS='--ansi --exact --select-1 --exit-0 --multi --cycle'
+export FZF_DEFAULT_OPTS='--ansi --exact --select-1 --exit-0 --multi --cycle --no-sort'
 
 # zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(brackets)
