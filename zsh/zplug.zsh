@@ -67,6 +67,11 @@ zplug 'plugins/pip', \
 zplug 'Valodim/zsh-curl-completion', \
     nice:10
 
+zplug 'plugins/gem', \
+    from:oh-my-zsh, \
+    ignore:'{oh-my-zsh.sh,plugins/gem/gem.plugin.zsh}', \
+    nice:10
+
 zplug 'zsh-users/zsh-syntax-highlighting', \
     nice:15
 
