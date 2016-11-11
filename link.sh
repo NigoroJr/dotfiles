@@ -25,7 +25,7 @@ PREFIX="$( cd "$( dirname "$0" )" && pwd )"
 # Flags to add to the ln command
 DEFAULT_LINK_FLAGS='-s -n'
 # Tasks to run when none specified
-ALL_TASKS="vim nvim zsh tmux emacs git X python others"
+ALL_TASKS="vim nvim zsh tmux emacs git X ruby python others"
 UNLINK=0
 
 while getopts 'fuh' flag; do
@@ -133,6 +133,15 @@ for ARG in $TASKS; do
             git config --global alias.s 'status'
             git config --global alias.st 'stash'
             git config --global alias.sh 'show'
+            ;;
+        ruby)
+            if [ ! -d ~/.rbenv ]; then
+                git clone https://github.com/rbenv/rbenv $HOME/.rbenv
+            fi
+            if [ ! -d ~/.rbenv/plugins/ruby-build ]; then
+                git clone https://github.com/rbenv/ruby-build \
+                    $HOME/.rbenv/plugins/ruby-build
+            fi
             ;;
         python)
             if [ "$UNLINK" -eq 1 ]; then
