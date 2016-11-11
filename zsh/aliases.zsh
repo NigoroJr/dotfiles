@@ -51,6 +51,7 @@ alias cdd='cd $( dirname $_ )'
 alias rm_='rm -f $_'
 
 alias zmv='noglob zmv -W'
+alias qv='qpdfview'
 
 if (( $+commands[hangups] )); then
     alias hangups="hangups --key-quit='ctrl r' --key-close-tab='ctrl l' --col-palette-colors=256 --col-scheme='solarized-dark'"
