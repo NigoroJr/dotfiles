@@ -50,7 +50,6 @@
         auto-complete-auctex
         auto-complete-c-headers
         auto-complete-clang-async
-        auto-complete-yasnippet
         coffee-mode
         color-theme
         color-theme-solarized
