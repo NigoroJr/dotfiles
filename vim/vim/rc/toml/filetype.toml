@@ -43,7 +43,7 @@ depends = 'tyru/open-browser.vim'
 repository = 'kchmck/vim-coffee-script'
 on_ft = 'coffee'
 
-# vim-latex
+# vimtex
 [[plugins]]
 repository = 'lervag/vimtex'
 on_ft = 'tex'
