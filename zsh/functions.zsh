@@ -147,3 +147,16 @@ mkrar() {
         && rm -r "$src_name"
 }
 compdef _directories mkrar
+
+trim() {
+    local -a ins
+    if [[ -p /dev/stdin ]]; then
+        ins=( '-' )
+    elif (( $#argv >= 1 )); then
+        ins=( ${(@)argv[@]} )
+    fi
+
+    zsh -c "cat $ins" | while read line; do
+        echo "${${line## #}%% #}"
+    done
+}
