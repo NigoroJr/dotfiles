@@ -359,6 +359,10 @@ if has('vim_starting')
 endif
 " }}}
 
+" Source local configurations if any {{{
+call s:load_local('~/.localrc/vimrc_pre')
+" }}}
+
 " Configurations for individual plugins {{{
 for name in s:rc_names
   let path = printf('%s/%s.vim', s:rc_prefix, name)

@@ -46,7 +46,10 @@ if has('mac')
   endif
 endif
 " }}}
-let g:cpp_include_paths = filter(
+if !exists('g:cpp_include_paths')
+  let g:cpp_include_paths = []
+endif
+let g:cpp_include_paths += filter(
       \ split(glob('/usr/lib/gcc/x86_64-pc-linux-gnu/*/include/*/'), '\n') +
       \ split(glob('/usr/lib/gcc/x86_64-pc-linux-gnu/*/include/*/x86_64-pc-linux-gnu/'), '\n') +
       \ split(glob('/usr/include/'), '\n') +
