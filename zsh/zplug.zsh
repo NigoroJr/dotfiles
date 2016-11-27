@@ -1,4 +1,7 @@
 local os="${(L)$( uname -s )}"
+if [[ $os =~ cygwin ]]; then
+    os=cygwin
+fi
 
 zplug 'zplug/zplug'
 
