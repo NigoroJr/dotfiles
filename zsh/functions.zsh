@@ -160,3 +160,65 @@ trim() {
         echo "${${line## #}%% #}"
     done
 }
+
+gcl() {
+    local repo
+    local website
+    local url
+    local clone_path_prefix="$HOME/src/clones"
+    local clone_path
+    local cd_in=false
+
+    while getopts 'hp:c' flag; do
+        case "$flag" in
+            p)
+                clone_path_prefix="$OPTARG"
+                ;;
+            c)
+                cd_in=true
+                ;;
+            h)
+                echo "Usage: $0 [-h] [-c] [-p <prefix>] <repo> [website]"
+                return 0
+        esac
+
+    done
+    shift $(( $OPTIND - 1 ))
+
+    repo="$1"
+    website="${2:-github}"
+
+    if (( $+commands[git] == 0 )); then
+        echo "gcl: command not found: git" 2>&1
+        return 1
+    fi
+
+    if [[ -z $repo ]]; then
+        echo "gcl: repository not given" 2>&1
+        return 1
+    fi
+
+    case "$website" in
+        github)
+            url="https://github.com"
+            ;;
+        bitbucket)
+            url="https://bitbucket.org"
+            ;;
+        gist)
+            url="https://gist.github.com"
+            ;;
+        *)
+            echo "$website Didn't match anything"
+            return 1
+    esac
+
+    url="$url/$repo"
+    clone_path="$clone_path_prefix/$repo"
+
+    git clone "$url" "$clone_path"
+
+    if (( $status == 0 )) && $cd_in; then
+        builtin cd "$clone_path"
+    fi
+}
