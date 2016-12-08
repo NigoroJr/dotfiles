@@ -24,6 +24,7 @@ alias gC='git commit'
 # C++
 alias gpp='g++ -std=c++11 -Wall'
 alias clpp='clang++ -std=c++11'
+alias clf='clang-format'
 
 # Text Editors
 alias gvi='gvim'
