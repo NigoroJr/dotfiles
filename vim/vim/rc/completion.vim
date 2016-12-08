@@ -4,7 +4,11 @@ function! s:get_ruby_gems() abort
     return
   endif
 
-  let rbenv_prefix = systemlist('rbenv prefix')[0] . '/lib/ruby'
+  if HasVersion('7.4.256')
+    let rbenv_prefix = systemlist('rbenv prefix')[0] . '/lib/ruby'
+  else
+    let rbenv_prefix = split(system('rbenv prefix'), '\n')[0] . '/lib/ruby'
+  endif
 
   " stdlib is in the directory with the version number
   let stdlib_path = sort(split(expand(rbenv_prefix . '/*'), '\n'))[0]
