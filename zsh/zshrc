@@ -2,7 +2,7 @@
 
 export ZPLUG_HOME=$HOME/.zplug
 export ZPLUG_THREADS=8
-export ZPLUG_CACHE_FILE=$HOME/.cache/zplug/cache
+export ZPLUG_CACHE_DIR=$HOME/.cache/zplug
 export ZPLUG_LOADFILE=$HOME/.zplug.zsh
 
 if [[ ! -f $ZPLUG_HOME/init.zsh ]]; then

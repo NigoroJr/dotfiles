@@ -55,35 +55,34 @@ zplug 'NigoroJr/644ae8775023be82544d', \
 zplug 'plugins/golang', \
     from:oh-my-zsh, \
     ignore:oh-my-zsh.sh, \
-    nice:10
+    defer:2
 
 zplug 'plugins/gem', \
     from:oh-my-zsh, \
     ignore:'{oh-my-zsh.sh,plugins/gem/gem.plugin.zsh}', \
-    nice:10
+    defer:2
 
 zplug 'plugins/pip', \
     from:oh-my-zsh, \
     ignore:'{oh-my-zsh.sh,plugins/pip/pip.plugin.zsh}', \
-    nice:10
+    defer:2
 
 zplug 'Valodim/zsh-curl-completion', \
-    nice:10
+    defer:2
 
 zplug 'plugins/gem', \
     from:oh-my-zsh, \
     ignore:'{oh-my-zsh.sh,plugins/gem/gem.plugin.zsh}', \
-    nice:10
+    defer:2
 
 zplug 'zsh-users/zsh-syntax-highlighting', \
-    nice:15
+    defer:3
 
 zplug 'rimraf/k', \
     use:k.sh
 
 zplug 'knu/z', \
     use:'z.sh', \
-    nice:10
-
-zplug 'zsh-users/zaw'
-zplug 'NigoroJr/zaw-z', nice:11, on:'zsh-users/zaw'
+    defer:1
+zplug 'zsh-users/zaw', defer:2
+zplug 'NigoroJr/zaw-z', defer:3
