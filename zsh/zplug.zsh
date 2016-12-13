@@ -22,9 +22,6 @@ zplug 'NigoroJr/do-after', \
 zplug 'NigoroJr/do-after', \
     as:plugin
 
-zplug 'b4b4r07/enhancd', \
-    use:'enhancd.sh'
-
 zplug 'junegunn/fzf', \
     as:command, \
     hook-build:'./install --bin >/dev/null', \
@@ -39,18 +36,11 @@ zplug "junegunn/fzf-bin", \
     rename-to:fzf, \
     if:"! (( $+commands[go] )) && [[ $os != cygwin ]]"
 
-zplug 'NigoroJr/d53982a4d0cf0848985b', \
-    from:gist, \
-    as:command, \
-    use:goocl, \
-    hook-build:'chmod 755 goocl'
-
 zplug 'NigoroJr/644ae8775023be82544d', \
     from:gist, \
     as:command, \
     rename-to:sort-du, \
-    use:sort_du.rb, \
-    hook-build:'chmod 755 sort_du.rb'
+    use:sort_du.rb
 
 zplug 'plugins/golang', \
     from:oh-my-zsh, \
@@ -77,9 +67,6 @@ zplug 'plugins/gem', \
 
 zplug 'zsh-users/zsh-syntax-highlighting', \
     defer:3
-
-zplug 'rimraf/k', \
-    use:k.sh
 
 zplug 'knu/z', \
     use:'z.sh', \
