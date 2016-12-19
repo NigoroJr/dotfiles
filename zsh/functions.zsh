@@ -6,8 +6,10 @@ psg() {
 
 psgz() {
     local cmd='ps auxf'
-    local -a zombies=( $( ps aux | awk '/ Z / && !/awk/ { print $2 }' ) )
+    local -a zombies
     local -a zombies_exp
+
+    zombies=( $( ps aux | awk '/ Z / && !/awk/ { print $2 }' ) )
 
     if [[ ${(L)"$( uname -s )"} == darwin ]]; then
         if (( ! $+commands[pstree] )); then
