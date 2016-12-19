@@ -14,7 +14,7 @@ on_map = [
 # vim-textobj-between
 [[plugins]]
 repository = 'thinca/vim-textobj-between'
-on_map = ['<Plug>(textobj-between-a)', '<Plug>(textobj-between-i)']
+lazy = 0
 depends = 'kana/vim-textobj-user'
 
 # vim-textobj-line

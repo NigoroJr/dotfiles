@@ -65,7 +65,7 @@ on_cmd = [
 ]
 depends = [
   'Shougo/context_filetype.vim',
-  'vim-textobj-user',
+  'kana/vim-textobj-user',
   'thinca/vim-quickrun',
 ]
 
