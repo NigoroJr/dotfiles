@@ -31,4 +31,4 @@ URxvt.perl-ext-common: url-select
 URxvt.url-select.button: 1
 ! Underline URLs
 URxvt.url-select.underline: true
-URxvt.url-select.launcher: chromium --incognito
+URxvt.url-select.launcher: xdg-open
