@@ -5,6 +5,10 @@ fi
 
 zplug 'zplug/zplug'
 
+zplug 'NigoroJr/mkmv', \
+    as:command, \
+    use:'mkmv'
+
 zplug 'NigoroJr/scripts', \
     from:bitbucket, \
     as:command, \

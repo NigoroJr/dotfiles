@@ -78,10 +78,6 @@ grau() {
         echo "Added $username${repo_name:+/$repo_name} as upstream"
 }
 
-mkmv() {
-    mkdir -p $@[$#] && mv $@
-}
-
 dumd() {
     local depth="$1"
     shift
