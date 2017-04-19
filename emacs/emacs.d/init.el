@@ -37,6 +37,7 @@
                )
         ))
 
+(package-initialize)
 ;; Packages to install
 (setq el-get-packages
       '(
