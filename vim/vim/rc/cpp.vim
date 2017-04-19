@@ -37,7 +37,6 @@ if has('mac')
   let dirs = [
         \ '/usr/local/include/c++/v1',
         \ '/usr/include/c++/v1',
-        \ '/usr/include/4.2.1',
         \ ]
   call filter(dirs, 'isdirectory(v:val)')
   if len(dirs) != 0
@@ -50,10 +49,10 @@ if !exists('g:cpp_include_paths')
   let g:cpp_include_paths = []
 endif
 let g:cpp_include_paths += filter(
+      \ [s:mac_include_dir] +
       \ split(glob('/usr/lib/gcc/x86_64-pc-linux-gnu/*/include/*/'), '\n') +
       \ split(glob('/usr/lib/gcc/x86_64-pc-linux-gnu/*/include/*/x86_64-pc-linux-gnu/'), '\n') +
-      \ split(glob('/usr/include/'), '\n') +
-      \ [s:mac_include_dir],
+      \ split(glob('/usr/include/'), '\n'),
       \ 'isdirectory(v:val)')
 " Add syntax highlighting to STL header files
 augroup cpp-stl-highlight
