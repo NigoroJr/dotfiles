@@ -65,6 +65,32 @@ process_target() {
     done
 }
 
+version_required() {
+    REQ="$1"
+    CURRENT="$2"
+
+    REQ_MAJOR="$( echo $REQ | cut -d. -f 1)"
+    REQ_MINOR="$( echo $REQ | cut -d. -f 2)"
+    REQ_PATCH="$( echo $REQ | cut -d. -f 3)"
+    CURRENT_MAJOR="$( echo $CURRENT | cut -d. -f 1)"
+    CURRENT_MINOR="$( echo $CURRENT | cut -d. -f 2)"
+    CURRENT_PATCH="$( echo $CURRENT | cut -d. -f 3)"
+
+    echo $REQ_MAJOR $REQ_MINOR $REQ_PATCH $CURRENT_MAJOR $CURRENT_MINOR $CURRENT_PATCH
+    if [ "$REQ_MAJOR" -gt "$CURRENT_MAJOR" ]; then
+        return 1
+    elif [ "$REQ_MAJOR" -eq "$CURRENT_MAJOR" ] && \
+            [ "$REQ_MINOR" -gt "$CURRENT_MINOR" ]; then
+        return 1
+    elif [ "$REQ_MAJOR" -eq "$CURRENT_MAJOR" ] && \
+            [ "$REQ_MINOR" -eq "$CURRENT_MINOR" ] && \
+            [ "$REQ_PATCH" -gt "$CURRENT_PATCH" ]; then
+        return 1
+    else
+        return 0
+    fi
+}
+
 for ARG in $TASKS; do
     echo "Running Task: $ARG"
     case "$ARG" in
@@ -106,8 +132,11 @@ for ARG in $TASKS; do
                 "${GIT_CORE_PAGER:-less -F -X}"
             git config --global merge.tool \
                 "${GIT_MERGE_TOOL:-vimdiff}"
-            git config --global push.default \
-                "${GIT_PUSH_DEFAULT:-simple}"
+            if version_required "1.7.11" \
+                "$( git --version | cut -d' ' -f 3 )"; then
+                git config --global push.default \
+                    "${GIT_PUSH_DEFAULT:-simple}"
+            fi
 
             git config --global alias.a 'add'
             git config --global alias.b 'branch'
