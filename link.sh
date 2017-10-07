@@ -154,6 +154,7 @@ for ARG in $TASKS; do
             git config --global alias.lg 'log --graph'
             git config --global alias.m 'merge --no-ff'
             git config --global alias.mt 'mergetool'
+            git config --global alias.pom 'push origin master'
             git config --global alias.pl 'pull'
             git config --global alias.plum 'pull upstream master'
             git config --global alias.pom 'push origin master'
