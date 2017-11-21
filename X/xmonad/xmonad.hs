@@ -62,6 +62,8 @@ myFloatHook = composeAll
     , className =? "feh"                       --> moveTo5
     , className =? "Comix"                     --> moveTo5
     , className =? "Geeqie"                    --> moveTo5
+    , className =? "Gazeb"                     --> moveTo5
+    , className =? "Rviz"                      --> moveTo6
     , className =? "Java"                      --> doFloat
     , className =? "R_x11"                     --> doFloat
     , className =? "Gifview"                   --> doFloat
@@ -70,6 +72,7 @@ myFloatHook = composeAll
     moveTo2 = doF $ W.shift "2"
     moveTo3 = doF $ W.shift "3"
     moveTo5 = doF $ W.shift "5"
+    moveTo6 = doF $ W.shift "6"
 
 -- Log Hook
 myLogHook h = dynamicLogWithPP xmobarPP {
