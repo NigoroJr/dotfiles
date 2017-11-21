@@ -29,3 +29,13 @@ snippet		add_argument
 abbr		add_argument
 options		head
 	${1:parser}.add_argument('${2:short}', '${3:long}', dest = '${4:val}', type = ${5:int}, nargs = '${6:?}', metavar = '${7:FOO}', help = '${8:stuff}')
+
+snippet		seaborn
+abbr		seaborn
+options		head
+	import numpy as np
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+
+	${0}
