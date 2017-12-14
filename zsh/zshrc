@@ -78,7 +78,7 @@ __tmux_status_bar() {
 
 __source_ros() {
     # If no ROS, don't bother going further
-    if (( ! $+commands[roscore] )); then
+    if (( ! $+commands[rosversion] )); then
         return
     fi
     typeset -gxA OLD_ROS_ENV
