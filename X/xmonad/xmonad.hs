@@ -52,10 +52,12 @@ myFloatHook = composeAll
     , className =? "chromium-browser-chromium" --> moveTo2
     , className =? "Google-chrome-stable"      --> moveTo2
     , className =? "Firefox"                   --> moveTo2
+    , className =? "jetbrains-clion"           --> moveTo3
     , className =? "Gvim"                      --> moveTo3
     , className =? "Emacs"                     --> moveTo3
     , className =? "Eclipse"                   --> moveTo3
     , className =? "Qpdfview"                  --> moveTo3
+    , className =? "jetbrains-pycharm"         --> moveTo4
     , className =? "mplayer2"                  --> moveTo5
     , className =? "MPlayer"                   --> moveTo5
     , className =? "feh"                       --> moveTo5
@@ -63,6 +65,7 @@ myFloatHook = composeAll
     , className =? "Geeqie"                    --> moveTo5
     , className =? "Gazeb"                     --> moveTo5
     , className =? "Rviz"                      --> moveTo6
+    , className =? "Spotify"                   --> moveTo9
     , className =? "Java"                      --> doFloat
     , className =? "R_x11"                     --> doFloat
     , className =? "Gifview"                   --> doFloat
@@ -84,18 +87,13 @@ myLogHook h = dynamicLogWithPP xmobarPP {
 myStartupHook = do
     setWMName "LG3D"
     spawnOn "1" "urxvt"
-    spawnOn "1" "urxvt"
-    spawnOn "1" "urxvt"
-    spawnOn "2" "optirun firefox"
+    spawnOn "2" "firefox"
     -- spawnOn "2" "chromium"
-    spawn "imwheel -b \"0 0 6 7 0 0 10\" -k"
-    spawn "dropbox"
-    spawnOn "3" "gvim"
-    spawnOn "4" "urxvt"
-    spawnOn "4" "urxvt"
-    spawnOn "4" "urxvt"
-    spawnOn "4" "urxvt"
-    spawnOn "6" "urxvt"
+    -- spawnOn "3" "gvim"
+    spawnOn "8" "urxvt"
+    spawnOn "8" "urxvt"
+    spawnOn "8" "urxvt"
+    spawnOn "8" "urxvt"
 
 -- Keybindings
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
