@@ -71,10 +71,15 @@ myFloatHook = composeAll
     , className =? "Gifview"                   --> doFloat
     , manageDocks ]
     where
+    -- moveTo1 = doF $ W.shift "1"
     moveTo2 = doF $ W.shift "2"
     moveTo3 = doF $ W.shift "3"
+    moveTo4 = doF $ W.shift "4"
     moveTo5 = doF $ W.shift "5"
     moveTo6 = doF $ W.shift "6"
+    -- moveTo7 = doF $ W.shift "7"
+    -- moveTo8 = doF $ W.shift "8"
+    moveTo9 = doF $ W.shift "9"
 
 -- Log Hook
 myLogHook h = dynamicLogWithPP xmobarPP {
