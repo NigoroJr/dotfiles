@@ -220,3 +220,58 @@ gcl() {
         builtin cd "$clone_path"
     fi
 }
+
+mkvi() {
+    local full_path="$1"
+    local dirname="${full_path:h}"
+
+    if [[ ! -d $dirname ]]; then
+        mkdir -p "$dirname"
+    fi
+
+    exec vi "$full_path"
+}
+
+mount() {
+    if ! [[ -f ~/.mount-commandas ]]; then
+        command mount ${argv[@]}
+        return
+    fi
+
+    while getopts 'l' flag; do
+        case "$flag" in
+            l)
+                awk -F:= '{ print $1 ": " $2 }' ~/.mount-commands
+                return
+                ;;
+        esac
+
+    done
+    shift $(( $OPTIND - 1 ))
+
+    local -A mount_args
+    while read line; do
+        if [[ $line =~ '^[[:blank:]]*#' ]]; then
+            continue
+        fi
+        local -a mount_arg
+        mount_arg=( ${(s!:=!)line} )
+        mount_arg[1]="$( echo $mount_arg[1] | awk '{ $1 = $1; print }' )"
+        mount_arg[2]="$( echo $mount_arg[2] | awk '{ $1 = $1; print }' )"
+        mount_args[$mount_arg[1]]=$mount_arg[2]
+    done < ~/.mount-commands
+
+    if (( $#argv == 0 )); then
+        command mount
+    elif (( $#argv == 1 )); then
+        local subcommand="$1"
+        if (( ${mount_args[(I)$subcommand]} )); then
+            echo "Invalid command: $subcommand" >&2
+            return
+        fi
+        sudo mount ${(s: :)${mount_args[$subcommand]}}
+    else
+        command mount ${argv[@]}
+    fi
+
+}
