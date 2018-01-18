@@ -65,6 +65,7 @@ if (( $+commands[rosversion] )); then
     alias rtt='rosrun rqt_tf_tree rqt_tf_tree'
     alias rsu='source devel/setup.zsh'
     alias rr='rosrun'
+    alias rb='rosbag'
     alias rl='roslaunch'
     alias ck='catkin_make'
 fi
