@@ -275,3 +275,13 @@ mount() {
     fi
 
 }
+
+swapmv() {
+    local a="$1"
+    local b="$2"
+    local tmp_name="$( mktemp -p ${a:h} )"
+
+    mv "$a" "$tmp_name" && \
+        mv "$b" "$a" && \
+        mv "$tmp_name" "$b"
+}
