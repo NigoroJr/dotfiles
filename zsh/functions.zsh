@@ -233,7 +233,7 @@ mkvi() {
 }
 
 mount() {
-    if ! [[ -f ~/.mount-commandas ]]; then
+    if ! [[ -f ~/.mount-commands ]]; then
         command mount ${argv[@]}
         return
     fi
