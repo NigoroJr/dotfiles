@@ -52,11 +52,13 @@ myFloatHook = composeAll
     , className =? "chromium-browser-chromium" --> moveTo2
     , className =? "Google-chrome-stable"      --> moveTo2
     , className =? "Firefox"                   --> moveTo2
+    , className =? "Firefox-esr"               --> moveTo2
     , className =? "jetbrains-clion"           --> moveTo3
     , className =? "Gvim"                      --> moveTo3
     , className =? "Emacs"                     --> moveTo3
     , className =? "Eclipse"                   --> moveTo3
     , className =? "Qpdfview"                  --> moveTo3
+    , className =? "qpdfview"                  --> moveTo3
     , className =? "jetbrains-pycharm"         --> moveTo4
     , className =? "mplayer2"                  --> moveTo5
     , className =? "MPlayer"                   --> moveTo5
@@ -65,6 +67,7 @@ myFloatHook = composeAll
     , className =? "Geeqie"                    --> moveTo5
     , className =? "Gazeb"                     --> moveTo5
     , className =? "Rviz"                      --> moveTo6
+    , className =? "rviz"                      --> moveTo6
     , className =? "Spotify"                   --> moveTo9
     , className =? "Java"                      --> doFloat
     , className =? "R_x11"                     --> doFloat
@@ -95,10 +98,10 @@ myStartupHook = do
     spawnOn "2" "firefox"
     -- spawnOn "2" "chromium"
     -- spawnOn "3" "gvim"
-    spawnOn "8" "urxvt"
-    spawnOn "8" "urxvt"
-    spawnOn "8" "urxvt"
-    spawnOn "8" "urxvt"
+    -- spawnOn "8" "urxvt"
+    -- spawnOn "8" "urxvt"
+    -- spawnOn "8" "urxvt"
+    -- spawnOn "8" "urxvt"
 
 -- Keybindings
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
