@@ -76,7 +76,6 @@ version_required() {
     CURRENT_MINOR="$( echo $CURRENT | cut -d. -f 2)"
     CURRENT_PATCH="$( echo $CURRENT | cut -d. -f 3)"
 
-    echo $REQ_MAJOR $REQ_MINOR $REQ_PATCH $CURRENT_MAJOR $CURRENT_MINOR $CURRENT_PATCH
     if [ "$REQ_MAJOR" -gt "$CURRENT_MAJOR" ]; then
         return 1
     elif [ "$REQ_MAJOR" -eq "$CURRENT_MAJOR" ] && \
