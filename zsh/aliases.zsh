@@ -67,7 +67,7 @@ if (( $+commands[rosversion] )); then
     alias rr='rosrun'
     alias rb='rosbag'
     alias rl='roslaunch'
-    alias ck='catkin_make'
+    alias ck='catkin_make -DCMAKE_BUILD_TYPE=Release'
 fi
 
 # Global alias
