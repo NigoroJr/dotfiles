@@ -285,3 +285,13 @@ swapmv() {
         mv "$b" "$a" && \
         mv "$tmp_name" "$b"
 }
+
+trn() {
+    local new_name="$1"
+
+    if [[ -z $new_name ]]; then
+        new_name="${SHELL:t}"
+    fi
+
+    tmux rename-window "$new_name"
+}
