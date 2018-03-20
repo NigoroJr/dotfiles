@@ -67,6 +67,8 @@ if (( $+commands[rosversion] )); then
     alias rr='rosrun'
     alias rb='rosbag'
     alias rl='roslaunch'
+    alias rte='rostopic echo'
+    alias rtl='rostopic list'
     alias ck='catkin_make -DCMAKE_BUILD_TYPE=Release'
 fi
 
