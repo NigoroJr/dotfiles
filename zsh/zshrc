@@ -82,6 +82,7 @@ __source_ros() {
         return
     fi
     typeset -gxA OLD_ROS_ENV
+    export CATKIN_SETUP_UTIL_ARGS='--extend'
 
     if [[ -z $OLD_ROS_ENV[MODIFIED] ]] || ! $OLD_ROS_ENV[MODIFIED]; then
         # Save old state
