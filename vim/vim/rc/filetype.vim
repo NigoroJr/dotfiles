@@ -12,6 +12,8 @@ if neobundle#tap('previm')
   function! neobundle#hooks.on_source(bundle)
     if filereadable(expand('~/Dropbox/Vim/previm.css'))
       let g:previm_custom_css_path = expand('~/Dropbox/Vim/previm.css')
+    elseif filereadable(expand('~/.vim/previm.css'))
+      let g:previm_custom_css_path = expand('~/.vim/previm.css')
     endif
   endfunction
 
