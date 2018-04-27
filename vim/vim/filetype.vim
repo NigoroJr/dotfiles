@@ -11,4 +11,7 @@ augroup filetypedetect
   autocmd BufRead,BufNewFile *.r setlocal filetype=r
   autocmd BufRead,BufNewFile *.R setlocal filetype=r
   autocmd BufNewFile,BufRead *.tex setlocal filetype=tex
+  autocmd BufNewFile,BufRead *.launch setlocal filetype=xml
+  autocmd BufNewFile,BufRead *.world setlocal filetype=xml
+  autocmd BufNewFile,BufRead *.sdf setlocal filetype=xml
 augroup END
