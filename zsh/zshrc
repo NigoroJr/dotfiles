@@ -75,38 +75,6 @@ __tmux_status_bar() {
         tmux set-option status $switch
     fi
 }
-
-__source_ros() {
-    # If no ROS, don't bother going further
-    if (( ! $+commands[rosversion] )); then
-        return
-    fi
-    typeset -gxA OLD_ROS_ENV
-    export CATKIN_SETUP_UTIL_ARGS='--extend'
-
-    if [[ -z $OLD_ROS_ENV[MODIFIED] ]] || ! $OLD_ROS_ENV[MODIFIED]; then
-        # Save old state
-        OLD_ROS_ENV[CMAKE_PREFIX_PATH]="$CMAKE_PREFIX_PATH"
-        OLD_ROS_ENV[LD_LIBRARY_PATH]="$LD_LIBRARY_PATH"
-        OLD_ROS_ENV[PKG_CONFIG_PATH]="$PKG_CONFIG_PATH"
-        OLD_ROS_ENV[ROSLISP_PACKAGE_DIRECTORIES]="$ROSLISP_PACKAGE_DIRECTORIES"
-        OLD_ROS_ENV[ROS_PACKAGE_PATH]="$ROS_PACKAGE_PATH"
-    fi
-
-    # Check that the directory that we moved in is indeed a catkin workspace
-    if [[ -d src ]] && [[ -d build ]] && [[ -d devel ]] && [[ -e devel/setup.zsh ]] && [[ -e devel/.catkin ]]; then
-        OLD_ROS_ENV[MODIFIED]="true"
-        source devel/setup.zsh
-    elif $OLD_ROS_ENV[MODIFIED]; then
-        CMAKE_PREFIX_PATH="$OLD_ROS_ENV[CMAKE_PREFIX_PATH]"
-        LD_LIBRARY_PATH="$OLD_ROS_ENV[LD_LIBRARY_PATH]"
-        PKG_CONFIG_PATH="$OLD_ROS_ENV[PKG_CONFIG_PATH]"
-        ROSLISP_PACKAGE_DIRECTORIES="$OLD_ROS_ENV[ROSLISP_PACKAGE_DIRECTORIES]"
-        ROS_PACKAGE_PATH="$OLD_ROS_ENV[ROS_PACKAGE_PATH]"
-
-        OLD_ROS_ENV[MODIFIED]="false"
-    fi
-}
 # }}}
 
 # Read aliases and functions
@@ -145,7 +113,6 @@ esac
 
 # In tmux, don't show status bar if there's only one window
 add-zsh-hook precmd __tmux_status_bar
-add-zsh-hook chpwd __source_ros
 
 # enable cursor selection
 zstyle ':completion:*:default' menu select=1
@@ -244,6 +211,8 @@ bindkey "^X;" zaw
 (( $+commands[rbenv] )) && eval "$( rbenv init - )"
 (( $+commands[pyenv] )) && eval "$( pyenv init - )"
 (( $+commands[plenv] )) && eval "$( plenv init - )"
+
+__source $HOME/.rosrc.zsh
 
 # Settings for prompt
 __source $HOME/.prompt.zsh

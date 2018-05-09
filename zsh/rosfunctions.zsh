@@ -57,6 +57,26 @@ __clear_cmake_prefix_path() {
     sed -i -e "s!CMAKE_PREFIX_PATH = '[^']*'!CMAKE_PREFIX_PATH = ''!" $fn
 }
 
+rpp() {
+    local -a rpp
+    local -a cpp
+    rpp=( $( echo ${(s#;#)${(s#:#)ROS_PACKAGE_PATH}} | sed -e "s#$HOME#~#g" ) )
+    cpp=( $( echo ${(s#;#)${(s#:#)CMAKE_PREFIX_PATH}} | sed -e "s#$HOME#~#g" ) )
+    pp=( $( echo ${(s#;#)${(s#:#)PYTHONPATH}} | sed -e "s#$HOME#~#g" ) )
+    echo "ROS_PACKAGE_PATH"
+    for p in ${rpp[@]}; do
+        echo "  $p"
+    done
+    echo "CMAKE_PREFIX_PATH"
+    for p in ${cpp[@]}; do
+        echo "  $p"
+    done
+    echo "PYTHONPATH"
+    for p in ${pp[@]}; do
+        echo "  $p"
+    done
+}
+
 ros_source_setup_script() {
     local setup_script="$1"
 
@@ -135,6 +155,19 @@ __source_ros() {
         OLD_ROS_ENV[PKG_CONFIG_PATH]="$PKG_CONFIG_PATH"
         OLD_ROS_ENV[ROSLISP_PACKAGE_DIRECTORIES]="$ROSLISP_PACKAGE_DIRECTORIES"
         OLD_ROS_ENV[ROS_PACKAGE_PATH]="$ROS_PACKAGE_PATH"
+        OLD_ROS_ENV[PYTHONPATH]="$PYTHONPATH"
+    fi
+
+    if $OLD_ROS_ENV[MODIFIED]; then
+        ROS_DISTRO="$OLD_ROS_ENV[ROS_DISTRO]"
+        CMAKE_PREFIX_PATH="$OLD_ROS_ENV[CMAKE_PREFIX_PATH]"
+        LD_LIBRARY_PATH="$OLD_ROS_ENV[LD_LIBRARY_PATH]"
+        PKG_CONFIG_PATH="$OLD_ROS_ENV[PKG_CONFIG_PATH]"
+        ROSLISP_PACKAGE_DIRECTORIES="$OLD_ROS_ENV[ROSLISP_PACKAGE_DIRECTORIES]"
+        ROS_PACKAGE_PATH="$OLD_ROS_ENV[ROS_PACKAGE_PATH]"
+        PYTHONPATH="$OLD_ROS_ENV[PYTHONPATH]"
+
+        OLD_ROS_ENV[MODIFIED]="false"
     fi
 
     # Check that the directory that we moved in is indeed a catkin workspace
@@ -150,14 +183,9 @@ __source_ros() {
         fi
         OLD_ROS_ENV[MODIFIED]="true"
         ros_source_setup_script devel/setup.zsh
-    elif $OLD_ROS_ENV[MODIFIED]; then
-        ROS_DISTRO="$OLD_ROS_ENV[ROS_DISTRO]"
-        CMAKE_PREFIX_PATH="$OLD_ROS_ENV[CMAKE_PREFIX_PATH]"
-        LD_LIBRARY_PATH="$OLD_ROS_ENV[LD_LIBRARY_PATH]"
-        PKG_CONFIG_PATH="$OLD_ROS_ENV[PKG_CONFIG_PATH]"
-        ROSLISP_PACKAGE_DIRECTORIES="$OLD_ROS_ENV[ROSLISP_PACKAGE_DIRECTORIES]"
-        ROS_PACKAGE_PATH="$OLD_ROS_ENV[ROS_PACKAGE_PATH]"
-
-        OLD_ROS_ENV[MODIFIED]="false"
+        # Special handling in case non-APT-provided ros_comm is installed
+        if [[ -d $( rospack find rospy 2>/dev/null )/src/rospy ]]; then
+            PYTHONPATH="$( rospack find rospy 2>/dev/null )/src/rospy:$PYTHONPATH"
+        fi
     fi
 }

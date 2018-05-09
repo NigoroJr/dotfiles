@@ -60,18 +60,6 @@ if (( $+commands[hangups] )); then
     alias hangups="hangups --key-quit='ctrl r' --key-close-tab='ctrl l' --col-palette-colors=256 --col-scheme='solarized-dark'"
 fi
 
-if (( $+commands[rosversion] )); then
-    alias rgp='rosrun rqt_graph rqt_graph'
-    alias rtt='rosrun rqt_tf_tree rqt_tf_tree'
-    alias rsu='source devel/setup.zsh'
-    alias rr='rosrun'
-    alias rb='rosbag'
-    alias rl='roslaunch'
-    alias rte='rostopic echo'
-    alias rtl='rostopic list'
-    alias ck='catkin_make -DCMAKE_BUILD_TYPE=Release'
-fi
-
 # Global alias
 alias -g A='| awk'
 alias -g B='&& beep'
