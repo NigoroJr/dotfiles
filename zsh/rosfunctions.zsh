@@ -15,6 +15,10 @@ rosclear() {
 }
 
 rossetup() {
+    # Note: May not be good if non-ROS paths are set
+    unset PYTHONPATH
+    rosclear
+
     # Defaults to lunar, but may change depending on the workspace path name
     export ROS_DISTRO=${1:-lunar}
     export ROSCONSOLE_FORMAT='[${severity}] [${node}] [${time}]: ${message}'
@@ -24,6 +28,48 @@ rossetup() {
     export CATKIN_SETUP_UTIL_ARGS='--extend'
 
     ros_source_setup_script ~/ros/workspaces/$ROS_DISTRO/common/devel/setup.zsh
+}
+
+__is_ros_ws() {
+    local cwd="${1:-PWD}"
+    if [[ -d $cwd/src ]] && [[ -d $cwd/build ]] && [[ -d $cwd/devel ]] \
+            && [[ -e $cwd/devel/setup.zsh ]] && [[ -e $cwd/devel/.catkin ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+ck() {
+    local -a default_args
+    default_args=( '-DCMAKE_BUILD_TYPE=Release' )
+    local -a args
+    args=( $@ )
+    local fallback=true
+
+    local cwd="$PWD"
+    while [[ $cwd != '/' ]]; do
+        if __is_ros_ws $cwd; then
+            (
+                builtin cd -q $cwd
+                if (( $#args == 0 )); then
+                    catkin_make ${default_args[@]}
+                    fallback=false
+                    break
+                else
+                    catkin_make ${args[@]}
+                    fallback=false
+                    break
+                fi
+            )
+        fi
+
+        cwd="${cwd:h}"
+    done
+
+    if $fallback; then
+        catkin_make ${default_args[@]}
+    fi
 }
 
 rws() {
@@ -171,7 +217,7 @@ __source_ros() {
     fi
 
     # Check that the directory that we moved in is indeed a catkin workspace
-    if [[ -d src ]] && [[ -d build ]] && [[ -d devel ]] && [[ -e devel/setup.zsh ]] && [[ -e devel/.catkin ]]; then
+    if __is_ros_ws; then
         if [[ $ROS_AUTO_DISTRO == true ]]; then
             # Figure out distro if possible, otherwise keep the current distro
             local ros_distro="$( __distro_from_ws_name $PWD )"
@@ -184,8 +230,8 @@ __source_ros() {
         OLD_ROS_ENV[MODIFIED]="true"
         ros_source_setup_script devel/setup.zsh
         # Special handling in case non-APT-provided ros_comm is installed
-        if [[ -d $( rospack find rospy 2>/dev/null )/src/rospy ]]; then
-            PYTHONPATH="$( rospack find rospy 2>/dev/null )/src/rospy:$PYTHONPATH"
+        if [[ -d $( rospack find rospy 2>/dev/null )/src ]]; then
+            PYTHONPATH="$( rospack find rospy 2>/dev/null )/src:$PYTHONPATH"
         fi
     fi
 }
