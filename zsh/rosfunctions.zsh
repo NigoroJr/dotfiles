@@ -15,6 +15,8 @@ rosclear() {
 }
 
 rossetup() {
+    local common_ws
+
     # Note: May not be good if non-ROS paths are set
     unset PYTHONPATH
     rosclear
@@ -27,7 +29,11 @@ rossetup() {
     export GAZEBO_PLUGIN_PATH=$HOME/.gazebo/plugins:$GAZEBO_PLUGIN_PATH
     export CATKIN_SETUP_UTIL_ARGS='--extend'
 
-    ros_source_setup_script ~/ros/workspaces/$ROS_DISTRO/common/devel/setup.zsh
+
+    common_ws="~/ros/workspaces/$ROS_DISTRO/common"
+    if [[ -e $common_ws/devel/setup.zsh ]]; then
+        ros_source_setup_script $common_ws/devel/setup.zsh
+    fi
 }
 
 __is_ros_ws() {
