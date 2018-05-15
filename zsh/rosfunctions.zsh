@@ -30,6 +30,9 @@ rossetup() {
     export CATKIN_SETUP_UTIL_ARGS='--extend'
 
 
+    if [[ -f /opt/ros/$ROS_DISTRO/setup.zsh ]]; then
+        source /opt/ros/$ROS_DISTRO/setup.zsh
+    fi
     common_ws="~/ros/workspaces/$ROS_DISTRO/common"
     if [[ -e $common_ws/devel/setup.zsh ]]; then
         ros_source_setup_script $common_ws/devel/setup.zsh
@@ -101,12 +104,17 @@ __clear_cmake_prefix_path() {
     # given directory. Ref: Section 3.2 of http://wiki.ros.org/catkin/what
     local dirname="$1"
     local fn="$dirname/_setup_util.py"
+    local system_ros="/opt/ros/$ROS_DISTRO"
+
+    if ! [[ -d $system_ros ]]; then
+        system_ros=''
+    fi
 
     if ! [[ -f $fn ]]; then
         return
     fi
 
-    sed -i -e "s!CMAKE_PREFIX_PATH = '[^']*'!CMAKE_PREFIX_PATH = ''!" $fn
+    sed -i -e "s!CMAKE_PREFIX_PATH = '[^']*'!CMAKE_PREFIX_PATH = '$system_ros'!" $fn
 }
 
 rpp() {
@@ -132,17 +140,14 @@ rpp() {
 ros_source_setup_script() {
     local setup_script="$1"
 
-    # We want /opt/ros/* to come later in the queue (least priority when
-    # searching for packages) so we source it first
-    if [[ -f /opt/ros/$ROS_DISTRO/setup.zsh ]]; then
-        source /opt/ros/$ROS_DISTRO/setup.zsh
+    if ! [[ -f ${setup_script} ]]; then
+        return
     fi
 
     __clear_cmake_prefix_path ${setup_script:h}
     source ${setup_script}
 
-    # Need /opt/ros/*/etc/catkin/profile.d/10.ros.sh to set ROS_PACKAGE_PATH
-    # /opt/ros/*/setup.zsh executes that script
+    # Need to source /opt/ros/*/setup.zsh to set ROS_PACKAGE_PATH
     if [[ -f /opt/ros/$ROS_DISTRO/setup.zsh ]]; then
         source /opt/ros/$ROS_DISTRO/setup.zsh
     fi
