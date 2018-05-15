@@ -33,7 +33,7 @@ rossetup() {
     if [[ -f /opt/ros/$ROS_DISTRO/setup.zsh ]]; then
         source /opt/ros/$ROS_DISTRO/setup.zsh
     fi
-    common_ws="~/ros/workspaces/$ROS_DISTRO/common"
+    common_ws="$HOME/ros/workspaces/$ROS_DISTRO/common"
     if [[ -e $common_ws/devel/setup.zsh ]]; then
         ros_source_setup_script $common_ws/devel/setup.zsh
     fi
@@ -50,7 +50,6 @@ ck() {
     default_args=( '-DCMAKE_BUILD_TYPE=Release' )
     local -a args
     args=( $@ )
-    local fallback=true
 
     local cwd="$PWD"
     while [[ $cwd != '/' ]]; do
@@ -59,22 +58,17 @@ ck() {
                 builtin cd -q $cwd
                 if (( $#args == 0 )); then
                     catkin_make ${default_args[@]}
-                    fallback=false
-                    break
                 else
                     catkin_make ${args[@]}
-                    fallback=false
-                    break
                 fi
             )
+            return
         fi
 
         cwd="${cwd:h}"
     done
 
-    if $fallback; then
-        catkin_make ${default_args[@]}
-    fi
+    catkin_make ${default_args[@]}
 }
 
 rws() {
