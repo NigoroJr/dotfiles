@@ -40,13 +40,9 @@ rossetup() {
 }
 
 __is_ros_ws() {
-    local cwd="${1:-PWD}"
-    if [[ -d $cwd/src ]] && [[ -d $cwd/build ]] && [[ -d $cwd/devel ]] \
-            && [[ -e $cwd/devel/setup.zsh ]] && [[ -e $cwd/devel/.catkin ]]; then
-        return 0
-    else
-        return 1
-    fi
+    local cwd="${1:-$PWD}"
+    [[ -d $cwd/src ]] && [[ -d $cwd/build ]] && [[ -d $cwd/devel ]] \
+        && [[ -e $cwd/devel/setup.zsh ]] && [[ -e $cwd/devel/.catkin ]]
 }
 
 ck() {
