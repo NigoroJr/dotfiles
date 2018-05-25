@@ -193,6 +193,7 @@ __source_ros() {
         return
     fi
     typeset -gxA OLD_ROS_ENV
+    typeset -gx PRESERVE_LAST_WS="${PRESERVE_LAST_WS:-true}"
 
     if [[ -z $OLD_ROS_ENV[MODIFIED] ]] || ! $OLD_ROS_ENV[MODIFIED]; then
         # Save old state
@@ -205,7 +206,11 @@ __source_ros() {
         OLD_ROS_ENV[PYTHONPATH]="$PYTHONPATH"
     fi
 
-    if $OLD_ROS_ENV[MODIFIED]; then
+    # Went out of workspace with PRESERVE_LAST_WS == true or
+    # Went into a workspace with PRESERVE_LAST_WS == false
+    if ( ! ${PRESERVE_LAST_WS} && $OLD_ROS_ENV[MODIFIED] ) \
+        || ( ${PRESERVE_LAST_WS} && __is_ros_ws ); then
+        # Revert to old state
         ROS_DISTRO="$OLD_ROS_ENV[ROS_DISTRO]"
         CMAKE_PREFIX_PATH="$OLD_ROS_ENV[CMAKE_PREFIX_PATH]"
         LD_LIBRARY_PATH="$OLD_ROS_ENV[LD_LIBRARY_PATH]"
