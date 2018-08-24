@@ -21,8 +21,8 @@ rossetup() {
     unset PYTHONPATH
     rosclear
 
-    # Defaults to lunar, but may change depending on the workspace path name
-    export ROS_DISTRO=${1:-lunar}
+    # Defaults to latest, but may change depending on the workspace path name
+    export ROS_DISTRO=${1:-"$( __latest_ros_distro )"}
     export ROSCONSOLE_FORMAT='[${severity}] [${node}] [${time}]: ${message}'
     # export ROSCONSOLE_FORMAT='[${severity}] [${node} : ${function} : ${line}] [${time}]: ${message}'
     export RESIBOTS_DIR=$HOME/usr
@@ -43,6 +43,10 @@ __is_ros_ws() {
     local cwd="${1:-$PWD}"
     [[ -d $cwd/src ]] && [[ -d $cwd/build ]] && [[ -d $cwd/devel ]] \
         && [[ -e $cwd/devel/setup.zsh ]] && [[ -e $cwd/devel/.catkin ]]
+}
+
+__latest_ros_distro() {
+    print -l /opt/ros/*(On:t) | head -n 1
 }
 
 ck() {

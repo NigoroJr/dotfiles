@@ -13,4 +13,4 @@ source $HOME/.rosaliases.zsh
 
 add-zsh-hook chpwd __source_ros
 
-rossetup lunar
+rossetup
