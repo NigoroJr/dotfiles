@@ -20,6 +20,7 @@ path=($HOME/bin(N) \
     $HOME/.pyenv/shims(N) \
     $HOME/.plenv/bin(N) \
     $HOME/.plenv/shims(N) \
+    $HOME/.local/bin(N) \
     $HOME/*/adt-bundle/sdk/{tools,platform-tools}(N) \
     /usr/lib/go/bin(N) \
     /usr/local/bin(N) \
