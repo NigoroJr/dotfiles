@@ -67,9 +67,8 @@ ck() {
         return
     fi
 
-    # Assume we're in a package
-    if ! __is_ros_ws "$PWD"; then
-        default_args+='--this'
+    if ! __is_ros_ws; then
+        default_args=( '--this' ${default_args[@]} )
     fi
 
     catkin build ${default_args[@]} ${args[@]}
