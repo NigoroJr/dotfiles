@@ -58,7 +58,7 @@ __latest_ros_distro() {
 
 ck() {
     local -a default_args
-    default_args=( '--cmake-args' '-DCMAKE_BUILD_TYPE=Release' )
+    default_args=( '--no-notify' )
     local -a args
     args=( $@ )
 
