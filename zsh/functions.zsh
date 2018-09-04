@@ -295,3 +295,32 @@ trn() {
 
     tmux rename-window "$new_name"
 }
+
+ghpr() {
+    local rem_name="$1"
+    local pr_id="$2"
+    local gh_url
+    local branch
+
+    gh_url="$( command git remote get-url ${rem_name} )"
+
+    if [[ -z ${gh_url} ]]; then
+        return 1
+    fi
+
+    if [[ -n $( echo "$gh_url" | grep -o '.*@.*:.*/.*' ) ]]; then
+        host_name_repo="$( echo "$gh_url" | sed -e 's/^.*@\(.*\):\(.*\)\/\(.*\)$/\1\/\2\/\3/' )"
+        gh_url="https://${host_name_repo}"
+    fi
+
+    branch="$( grep 'head-ref' =( curl -sL ${gh_url}/pull/${pr_id} ) | \
+        egrep -o '<span class="css-truncate-target">[^<]+</span>' | \
+        sed -e 's/^<[^>]\+>[ \t]*\([^<]\+\)[ \t]*<.*$/\1/' )"
+
+    if [[ -z ${branch} ]]; then
+        echo "No branch found in URL: $gh_url/pull/${pr_id}" >&2
+        return 1
+    fi
+
+    command git fetch ${rem_name} "pull/${pr_id}/head:${branch}"
+}
