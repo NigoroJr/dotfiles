@@ -83,7 +83,7 @@ ck-legacy() {
                 if (( $#args == 0 )); then
                     catkin_make ${default_args[@]}
                 else
-                    catkin_make ${args[@]}
+                    catkin_make ${default_args[@]} ${args[@]}
                 fi
             )
             return
@@ -92,7 +92,7 @@ ck-legacy() {
         cwd="${cwd:h}"
     done
 
-    catkin_make ${default_args[@]}
+    catkin_make ${default_args[@]} ${args[@]}
 }
 
 rws() {
