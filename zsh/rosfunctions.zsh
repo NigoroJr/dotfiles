@@ -51,6 +51,26 @@ __latest_ros_distro() {
 
 ck() {
     local -a default_args
+    default_args=( '--cmake-args' '-DCMAKE_BUILD_TYPE=Release' )
+    local -a args
+    args=( $@ )
+
+    if (( ! $+commands[catkin] )); then
+        ck-legacy ${args[@]}
+        return
+    fi
+
+    # Assume we're in a package
+    if ! __is_ros_ws "$PWD"; then
+        default_args+='--this'
+    fi
+
+    catkin build ${default_args[@]} ${args[@]}
+}
+
+# catkin_make version of ck
+ck-legacy() {
+    local -a default_args
     default_args=( '-DCMAKE_BUILD_TYPE=Release' )
     local -a args
     args=( $@ )
