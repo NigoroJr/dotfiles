@@ -41,6 +41,13 @@ rossetup() {
 
 __is_ros_ws() {
     local cwd="${1:-$PWD}"
+    if [[ -L $cwd/src/CMakeLists.txt ]]; then
+        local tgt_basename="$( print $cwd/src/CMakeLists.txt(:A:t) )"
+        if [[ $tgt_basename == toplevel.cmake ]]; then
+            return true
+        fi
+    fi
+
     [[ -d $cwd/src ]] && [[ -d $cwd/build ]] && [[ -d $cwd/devel ]] \
         && [[ -e $cwd/devel/setup.zsh ]] && [[ -e $cwd/devel/.catkin ]]
 }
