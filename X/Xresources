@@ -22,6 +22,19 @@ URxvt.font: \
     xft:Ricty Discord:Regular:size=9, \
     xft:Symbola:Regular
 
+! Use bold font for italics
+URxvt.boldFont: \
+    xft:Ricty Discord:Bold:size=9, \
+    xft:Symbola:Bold
+
+URxvt.italicFont: \
+    xft:Ricty Discord:Bold:size=9, \
+    xft:Symbola:Bold
+
+URxvt.boldItalicFont: \
+    xft:Ricty Discord:Bold:size=9, \
+    xft:Symbola:Bold
+
 Xft.dpi: 96
 Xft.antialias: true
 Xft.hinting: full
