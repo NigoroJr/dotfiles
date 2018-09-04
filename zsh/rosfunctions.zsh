@@ -95,6 +95,11 @@ ck-legacy() {
     catkin_make ${default_args[@]} ${args[@]}
 }
 
+make-ws() {
+    mkdir -p bin config data launch maps media/images media/videos rviz ws/src
+    touch README.md
+}
+
 rws() {
     local ws_prefix="${ROS_HOME:-$HOME/ros/workspaces}"
     local ws_name="$1"
