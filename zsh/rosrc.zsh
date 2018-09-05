@@ -9,7 +9,7 @@ if (( $+commands[catkin] )); then
     opts=( --link-devel \
         --no-install \
         --env-cache \
-        --cmake-args -DCMAKE_BUILD_TYPE=Release \
+        --cmake-args -DCMAKE_BUILD_TYPE=Release -- \
         )
     catkin config ${opts[@]} >/dev/null &
 fi

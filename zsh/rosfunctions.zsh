@@ -58,7 +58,7 @@ __latest_ros_distro() {
 
 ck() {
     local -a default_args
-    default_args=( '--no-notify' )
+    default_args=( '--no-notify' '-l' '4' '--mem-limit' '90%' )
     local -a args
     args=( $@ )
 
