@@ -20,6 +20,9 @@ _prompt_git_status() {
     # Not in git repository
     if [[ -z $branch_name ]]; then
         return
+    # Detached state
+    elif [[ $branch_name == HEAD ]]; then
+        branch_name="$( git rev-parse HEAD | head -c 7 )"
     fi
 
     # Clean repository?
@@ -106,11 +109,22 @@ _prompt_random_256() {
         PROMPT="$l_prompt"
     fi
 
-    unset RPROMPT
+    local -a prompts
     # Show git repository info
     local git_prompt="$( _prompt_git_status )"
     if [[ -n $git_prompt ]]; then
-        RPROMPT+="($git_prompt)"
+        prompts+="$git_prompt"
+    fi
+    if (( $+commands[pyenv] )); then
+        local pyenv_prompt="$( pyenv version-name )"
+        if [[ $pyenv_prompt != system ]]; then
+            prompts+="$pyenv_prompt"
+        fi
+    fi
+
+    unset RPROMPT
+    if (( $#prompts > 0 )); then
+        RPROMPT="(${(j: | :)prompts})"
     fi
 
     # Right prompt
