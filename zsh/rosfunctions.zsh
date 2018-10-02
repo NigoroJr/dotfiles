@@ -190,9 +190,20 @@ __clear_cmake_prefix_path() {
 }
 
 rpp() {
+    local -a rpp
+    local -aU rpp_filtered
     local -a cpp
+    local -a pp
+    rpp=( $( echo ${(s#;#)${(s#:#)ROS_PACKAGE_PATH}} | sed -e "s#$HOME#~#g" ) )
     cpp=( $( echo ${(s#;#)${(s#:#)CMAKE_PREFIX_PATH}} | sed -e "s#$HOME#~#g" ) )
     pp=( $( echo ${(s#;#)${(s#:#)PYTHONPATH}} | sed -e "s#$HOME#~#g" ) )
+
+    rpp_filtered+=( $( sed -e 's#\(^~/ros/workspaces/[^/]\+/[^/]\+\)/src/.*$#\1#' =( print -l $rpp ) ) )
+
+    echo "ROS_PACKAGE_PATH"
+    for p in ${rpp_filtered[@]}; do
+        echo "  $p"
+    done
     echo "CMAKE_PREFIX_PATH"
     for p in ${cpp[@]}; do
         echo "  $p"
