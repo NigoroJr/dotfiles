@@ -171,24 +171,6 @@ make-ws() {
     touch README.md
 }
 
-rws() {
-    local ws_prefix="${ROS_HOME:-$HOME/ros/workspaces}"
-    local ws_name="$1"
-
-    if ! [[ -d $ws_prefix/$ws_name ]]; then
-        echo "Workspace $ws_name not found" >&2
-        return
-    fi
-
-    if ! [[ -d $ws_prefix/$ws_name/devel/setup.zsh ]]; then
-        echo "setup.zsh not found in $ws_prefix/$ws_name/devel" >&2
-        return
-    fi
-
-    ros_source_setup_script $ws_prefix/$ws_name/devel/setup.zsh
-}
-# TODO: completion
-
 __clear_cmake_prefix_path() {
     # Removes the pre-filled CMAKE_PREFIX_PATH from _setup_util.py in the
     # given directory. Ref: Section 3.2 of http://wiki.ros.org/catkin/what
