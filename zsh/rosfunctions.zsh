@@ -2,7 +2,6 @@
 
 rosclear() {
     unset ROS_ETC_DIR
-    unset ROS_DISTRO
     unset ROSLISP_PACKAGE_DIRECTORIES
     unset ROSCONSOLE_FORMAT
     unset ROS_LIB_DIR
@@ -10,19 +9,57 @@ rosclear() {
     unset ROS_PACKAGE_PATH
     unset ROS_ROOT
     unset CATKIN_SETUP_UTIL_ARGS
-    # Note: May unset non-ROS cmake prefix
-    unset CMAKE_PREFIX_PATH
+
+    # Reset system environment variables
+    export CMAKE_PREFIX_PATH="$NON_ROS_ENV[CMAKE_PREFIX_PATH]"
+    export LD_LIBRARY_PATH="$NON_ROS_ENV[LD_LIBRARY_PATH]"
+    export PKG_CONFIG_PATH="$NON_ROS_ENV[PKG_CONFIG_PATH]"
+    export PYTHONPATH="$NON_ROS_ENV[PYTHONPATH]"
+}
+
+rosreset() {
+    export ROS_DISTRO="$PURE_ROS_ENV[ROS_DISTRO]"
+    export CMAKE_PREFIX_PATH="$PURE_ROS_ENV[CMAKE_PREFIX_PATH]"
+    export LD_LIBRARY_PATH="$PURE_ROS_ENV[LD_LIBRARY_PATH]"
+    export PKG_CONFIG_PATH="$PURE_ROS_ENV[PKG_CONFIG_PATH]"
+    export ROSLISP_PACKAGE_DIRECTORIES="$PURE_ROS_ENV[ROSLISP_PACKAGE_DIRECTORIES]"
+    export ROS_PACKAGE_PATH="$PURE_ROS_ENV[ROS_PACKAGE_PATH]"
+    export PYTHONPATH="$PURE_ROS_ENV[PYTHONPATH]"
 }
 
 rossetup() {
     local common_ws
+    local arg
 
-    # Note: May not be good if non-ROS paths are set
-    unset PYTHONPATH
-    rosclear
+    # Environment variables before ROS is sourced
+    typeset -gxA NON_ROS_ENV
+    # Environment variables after common workspace is sourced
+    typeset -gxA PURE_ROS_ENV
+
+    while getopts 'hr' flag; do
+        case "$flag" in
+            r)
+                rosreset
+                ;;
+            h)
+                echo "Usage: $0 [-h] [-r]"
+                exit 0
+        esac
+
+    done
+    shift $(( $OPTIND - 1 ))
+
+    arg="$1"
+
+    if [[ -z $NON_ROS_ENV ]]; then
+        NON_ROS_ENV[CMAKE_PREFIX_PATH]="$CMAKE_PREFIX_PATH"
+        NON_ROS_ENV[LD_LIBRARY_PATH]="$LD_LIBRARY_PATH"
+        NON_ROS_ENV[PKG_CONFIG_PATH]="$PKG_CONFIG_PATH"
+        NON_ROS_ENV[PYTHONPATH]="$PYTHONPATH"
+    fi
 
     # Defaults to latest, but may change depending on the workspace path name
-    export ROS_DISTRO=${1:-"$( __latest_ros_distro )"}
+    export ROS_DISTRO=${arg:-"$( __latest_ros_distro )"}
     export ROSCONSOLE_FORMAT='[${severity}] [${node}] [${time}]: ${message}'
     # export ROSCONSOLE_FORMAT='[${severity}] [${node} : ${function} : ${line}] [${time}]: ${message}'
     export RESIBOTS_DIR=$HOME/usr
@@ -37,6 +74,14 @@ rossetup() {
     if [[ -e $common_ws/devel/setup.zsh ]]; then
         ros_source_setup_script $common_ws/devel/setup.zsh
     fi
+
+    PURE_ROS_ENV[ROS_DISTRO]="$ROS_DISTRO"
+    PURE_ROS_ENV[CMAKE_PREFIX_PATH]="$CMAKE_PREFIX_PATH"
+    PURE_ROS_ENV[LD_LIBRARY_PATH]="$LD_LIBRARY_PATH"
+    PURE_ROS_ENV[PKG_CONFIG_PATH]="$PKG_CONFIG_PATH"
+    PURE_ROS_ENV[ROSLISP_PACKAGE_DIRECTORIES]="$ROSLISP_PACKAGE_DIRECTORIES"
+    PURE_ROS_ENV[ROS_PACKAGE_PATH]="$ROS_PACKAGE_PATH"
+    PURE_ROS_ENV[PYTHONPATH]="$PYTHONPATH"
 }
 
 __is_ros_ws() {
@@ -213,7 +258,7 @@ __distro_from_ws_name() {
         fi
     done
 
-    echo -n ""
+    echo -n "$ROS_DISTRO"
 }
 
 __source_ros() {
@@ -221,49 +266,19 @@ __source_ros() {
     if (( ! $+commands[rosversion] )); then
         return
     fi
-    typeset -gxA OLD_ROS_ENV
-    typeset -gx PRESERVE_LAST_WS="${PRESERVE_LAST_WS:-true}"
-
-    if [[ -z $OLD_ROS_ENV[MODIFIED] ]] || ! $OLD_ROS_ENV[MODIFIED]; then
-        # Save old state
-        OLD_ROS_ENV[ROS_DISTRO]="$ROS_DISTRO"
-        OLD_ROS_ENV[CMAKE_PREFIX_PATH]="$CMAKE_PREFIX_PATH"
-        OLD_ROS_ENV[LD_LIBRARY_PATH]="$LD_LIBRARY_PATH"
-        OLD_ROS_ENV[PKG_CONFIG_PATH]="$PKG_CONFIG_PATH"
-        OLD_ROS_ENV[ROSLISP_PACKAGE_DIRECTORIES]="$ROSLISP_PACKAGE_DIRECTORIES"
-        OLD_ROS_ENV[ROS_PACKAGE_PATH]="$ROS_PACKAGE_PATH"
-        OLD_ROS_ENV[PYTHONPATH]="$PYTHONPATH"
-    fi
-
-    # Went out of workspace with PRESERVE_LAST_WS == true or
-    # Went into a workspace with PRESERVE_LAST_WS == false
-    if ( ! ${PRESERVE_LAST_WS} && $OLD_ROS_ENV[MODIFIED] ) \
-        || ( ${PRESERVE_LAST_WS} && __is_ros_ws ); then
-        # Revert to old state
-        ROS_DISTRO="$OLD_ROS_ENV[ROS_DISTRO]"
-        CMAKE_PREFIX_PATH="$OLD_ROS_ENV[CMAKE_PREFIX_PATH]"
-        LD_LIBRARY_PATH="$OLD_ROS_ENV[LD_LIBRARY_PATH]"
-        PKG_CONFIG_PATH="$OLD_ROS_ENV[PKG_CONFIG_PATH]"
-        ROSLISP_PACKAGE_DIRECTORIES="$OLD_ROS_ENV[ROSLISP_PACKAGE_DIRECTORIES]"
-        ROS_PACKAGE_PATH="$OLD_ROS_ENV[ROS_PACKAGE_PATH]"
-        PYTHONPATH="$OLD_ROS_ENV[PYTHONPATH]"
-
-        OLD_ROS_ENV[MODIFIED]="false"
-    fi
 
     # Check that the directory that we moved in is indeed a catkin workspace
     if __is_ros_ws; then
-        if [[ $ROS_AUTO_DISTRO == true ]]; then
-            # Figure out distro if possible, otherwise keep the current distro
-            local ros_distro="$( __distro_from_ws_name $PWD )"
-            if [[ -n $ros_distro ]] && [[ $ros_distro != $ROS_DISTRO ]]; then
-                rosclear
-                rossetup $ros_distro
-                echo "Switched distro to $ros_distro"
-            fi
+        local prev_distro="$ROS_DISTRO"
+        # Figure out distro if possible, otherwise keep the current distro
+        export ROS_DISTRO="$( __distro_from_ws_name $PWD )"
+        if [[ -n $ROS_DISTRO ]] && [[ $ROS_DISTRO != $prev_distro ]]; then
+            rossetup $ROS_DISTRO
+            echo "Switched distro to $ROS_DISTRO"
         fi
-        OLD_ROS_ENV[MODIFIED]="true"
+
         ros_source_setup_script devel/setup.zsh
+
         # Special handling in case non-APT-provided ros_comm is installed
         if [[ -d $( rospack find rospy 2>/dev/null )/src ]]; then
             PYTHONPATH="$( rospack find rospy 2>/dev/null )/src:$PYTHONPATH"
