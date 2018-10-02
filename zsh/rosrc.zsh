@@ -14,10 +14,6 @@ if (( $+commands[catkin] )); then
     catkin config ${opts[@]} >/dev/null &
 fi
 
-# Automatically switch ROS distributions when moving into a workspace
-# See __distro_from_ws_name function for how it detects the distro.
-export ROS_AUTO_DISTRO=true
-
 source $HOME/.rosfunctions.zsh
 source $HOME/.rosaliases.zsh
 

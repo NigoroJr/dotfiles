@@ -1,13 +1,15 @@
 # Utility functions for ROS
 
 rosclear() {
+    # Perform a "level 1" reset (see comment in rossetup)
+    unset ROS_DISTRO
+    unset ROS_ROOT
+    unset ROS_MASTER_URI
+    unset ROS_PACKAGE_PATH
     unset ROS_ETC_DIR
     unset ROSLISP_PACKAGE_DIRECTORIES
     unset ROSCONSOLE_FORMAT
     unset ROS_LIB_DIR
-    unset ROS_MASTER_URI
-    unset ROS_PACKAGE_PATH
-    unset ROS_ROOT
     unset CATKIN_SETUP_UTIL_ARGS
 
     # Reset system environment variables
@@ -18,17 +20,27 @@ rosclear() {
 }
 
 rosreset() {
+    # Perform a "level 2" reset (see comment in rossetup)
     export ROS_DISTRO="$PURE_ROS_ENV[ROS_DISTRO]"
+    export ROS_PACKAGE_PATH="$PURE_ROS_ENV[ROS_PACKAGE_PATH]"
+    export ROSLISP_PACKAGE_DIRECTORIES="$PURE_ROS_ENV[ROSLISP_PACKAGE_DIRECTORIES]"
     export CMAKE_PREFIX_PATH="$PURE_ROS_ENV[CMAKE_PREFIX_PATH]"
     export LD_LIBRARY_PATH="$PURE_ROS_ENV[LD_LIBRARY_PATH]"
     export PKG_CONFIG_PATH="$PURE_ROS_ENV[PKG_CONFIG_PATH]"
-    export ROSLISP_PACKAGE_DIRECTORIES="$PURE_ROS_ENV[ROSLISP_PACKAGE_DIRECTORIES]"
-    export ROS_PACKAGE_PATH="$PURE_ROS_ENV[ROS_PACKAGE_PATH]"
     export PYTHONPATH="$PURE_ROS_ENV[PYTHONPATH]"
 }
 
 rossetup() {
+    # Setting up a ROS environment involves resetting the environment
+    # variables. A "level 1" reset (executed by default) resets the
+    # environment variables to the state before ROS was sourced the first
+    # time. A "level 2" reset (specified by a -r) is less aggressive than
+    # level 1, in which the environment variables are set to the state before
+    # entering the first ROS workspace (after the common workspaces are
+    # sourced). To preserve the current environment variables, use the -p
+    # option.
     local common_ws
+    local preserve_env=false
     local arg
 
     # Environment variables before ROS is sourced
@@ -36,20 +48,24 @@ rossetup() {
     # Environment variables after common workspace is sourced
     typeset -gxA PURE_ROS_ENV
 
-    while getopts 'hr' flag; do
+    while getopts 'hrp' flag; do
         case "$flag" in
+            p)
+                preserve_env=true
+                ;;
             r)
                 rosreset
                 ;;
-            h)
-                echo "Usage: $0 [-h] [-r]"
-                exit 0
         esac
 
     done
     shift $(( $OPTIND - 1 ))
 
     arg="$1"
+
+    if ! $preserve_env; then
+        rosclear
+    fi
 
     if [[ -z $NON_ROS_ENV ]]; then
         NON_ROS_ENV[CMAKE_PREFIX_PATH]="$CMAKE_PREFIX_PATH"
@@ -76,11 +92,11 @@ rossetup() {
     fi
 
     PURE_ROS_ENV[ROS_DISTRO]="$ROS_DISTRO"
+    PURE_ROS_ENV[ROS_PACKAGE_PATH]="$ROS_PACKAGE_PATH"
+    PURE_ROS_ENV[ROSLISP_PACKAGE_DIRECTORIES]="$ROSLISP_PACKAGE_DIRECTORIES"
     PURE_ROS_ENV[CMAKE_PREFIX_PATH]="$CMAKE_PREFIX_PATH"
     PURE_ROS_ENV[LD_LIBRARY_PATH]="$LD_LIBRARY_PATH"
     PURE_ROS_ENV[PKG_CONFIG_PATH]="$PKG_CONFIG_PATH"
-    PURE_ROS_ENV[ROSLISP_PACKAGE_DIRECTORIES]="$ROSLISP_PACKAGE_DIRECTORIES"
-    PURE_ROS_ENV[ROS_PACKAGE_PATH]="$ROS_PACKAGE_PATH"
     PURE_ROS_ENV[PYTHONPATH]="$PYTHONPATH"
 }
 
@@ -275,6 +291,9 @@ __source_ros() {
         if [[ -n $ROS_DISTRO ]] && [[ $ROS_DISTRO != $prev_distro ]]; then
             rossetup $ROS_DISTRO
             echo "Switched distro to $ROS_DISTRO"
+        else
+            # Reset to "level 2"
+            rossetup -r $ROS_DISTRO
         fi
 
         ros_source_setup_script devel/setup.zsh
