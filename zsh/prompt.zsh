@@ -22,7 +22,7 @@ _prompt_git_status() {
         return
     # Detached state
     elif [[ $branch_name == HEAD ]]; then
-        branch_name="$( git rev-parse HEAD | head -c 7 )"
+        branch_name="$( git rev-parse HEAD 2>/dev/null | head -c 7 )"
     fi
 
     # Clean repository?
