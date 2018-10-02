@@ -200,6 +200,7 @@ rpp() {
 
     rpp_filtered+=( $( sed -e 's#\(^~/ros/workspaces/[^/]\+/[^/]\+\)/src/.*$#\1#' =( print -l $rpp ) ) )
 
+    echo "ROS_DISTRO: $ROS_DISTRO"
     echo "ROS_PACKAGE_PATH"
     for p in ${rpp_filtered[@]}; do
         echo "  $p"
