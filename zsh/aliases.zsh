@@ -78,7 +78,9 @@ alias -g S='| sed'
 alias -g SORT='| sort'
 alias -g UNIQ='| uniq'
 alias -g WCL='| wc -l'
-if (( $+commands[fzf] )); then
+if (( $+commands[fzy] )); then
+    alias -g FL='| fzy'
+elif (( $+commands[fzf] )); then
     alias -g FL='| fzf'
 fi
 

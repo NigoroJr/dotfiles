@@ -26,19 +26,10 @@ zplug 'NigoroJr/do-after', \
 zplug 'NigoroJr/do-after', \
     as:plugin
 
-zplug 'junegunn/fzf', \
+zplug "jhawthorn/fzy", \
     as:command, \
-    hook-build:'./install --bin >/dev/null', \
-    use:'bin/fzf', \
-    rename-to:'fzf', \
-    if:'(( $+commands[go] ))'
-
-zplug "junegunn/fzf-bin", \
-    from:gh-r, \
-    as:command, \
-    use:"*${(L)$(uname -s)}*amd64*", \
-    rename-to:fzf, \
-    if:"! (( $+commands[go] )) && [[ $os != cygwin ]]"
+    rename-to:fzy, \
+    hook-build:"PREFIX=$HOME/usr make install"
 
 zplug 'NigoroJr/644ae8775023be82544d', \
     from:gist, \
