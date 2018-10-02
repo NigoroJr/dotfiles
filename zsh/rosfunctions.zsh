@@ -119,7 +119,11 @@ __latest_ros_distro() {
 
 ck() {
     local -a default_args
-    default_args=( '--no-notify' '-l' '4' '--mem-limit' '90%' )
+    default_args=( \
+        '-l' '4' \
+        '--mem-limit' '90%' \
+        '--cmake-args' '-DCMAKE_BUILD_TYPE=Release' '--' \
+        '--no-notify' )
     local -a args
     args=( $@ )
 
