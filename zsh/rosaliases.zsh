@@ -12,6 +12,9 @@ alias rb='rosbag'
 alias rl='roslaunch'
 alias rte='rostopic echo'
 alias rtl='rostopic list'
+alias rti='rostopic info'
+alias rni='rosnode info'
+alias rpf='rospack find'
 
 if (( $+commands[catkin] )); then
     alias c='catkin'

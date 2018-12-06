@@ -120,7 +120,6 @@ __latest_ros_distro() {
 ck() {
     local -a default_args
     default_args=( \
-        '-l' '4' \
         '--mem-limit' '90%' \
         '--cmake-args' '-DCMAKE_BUILD_TYPE=Release' '--' \
         '--no-notify' )
@@ -169,6 +168,12 @@ ck-legacy() {
 make-ws() {
     mkdir -p bin config data launch maps media/images media/videos rviz ws/src
     touch README.md
+    cat <<EOF > launch/sample.launch
+<?xml version="1.0"?>
+<launch>
+  <arg name="prefix" default="$( pwd | sed -e "s#$HOME#\$(env HOME)#" )" />
+</launch>
+EOF
 }
 
 __clear_cmake_prefix_path() {
