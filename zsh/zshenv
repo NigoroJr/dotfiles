@@ -5,6 +5,10 @@ if [ -d $HOME/src/go ]; then
     export GOPATH=$HOME/src/go
 fi
 
+if [[ -d $HOME/usr/lib ]]; then
+    export LD_LIBRARY_PATH="$HOME/usr/lib:$LD_LIBRARY_PATH"
+fi
+
 export EDITOR="vim"
 if hash vimmanpager 2>/dev/null; then
     export MANPAGER=vimmanpager
