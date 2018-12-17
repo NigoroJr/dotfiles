@@ -166,8 +166,9 @@ gcl() {
     local clone_path_prefix="$HOME/src/clones"
     local clone_path
     local cd_in=false
+    local into_src=false
 
-    while getopts 'hp:c' flag; do
+    while getopts 'hp:cs' flag; do
         case "$flag" in
             p)
                 clone_path_prefix="$OPTARG"
@@ -175,8 +176,11 @@ gcl() {
             c)
                 cd_in=true
                 ;;
+            s)
+                into_src=true
+                ;;
             h)
-                echo "Usage: $0 [-h] [-c] [-p <prefix>] <repo> [website]"
+                echo "Usage: $0 [-h] [-s] [-c] [-p <prefix>] <repo> [website]"
                 return 0
         esac
 
@@ -212,7 +216,11 @@ gcl() {
     esac
 
     url="$url/$repo"
-    clone_path="$clone_path_prefix/$repo"
+    if $into_src; then
+        clone_path="./src/$repo"
+    else
+        clone_path="$clone_path_prefix/$repo"
+    fi
 
     git clone "$url" "$clone_path"
 
