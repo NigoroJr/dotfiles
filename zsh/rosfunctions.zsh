@@ -9,7 +9,6 @@ rosclear() {
     unset ROS_ETC_DIR
     unset ROSLISP_PACKAGE_DIRECTORIES
     unset ROSCONSOLE_FORMAT
-    unset ROS_LIB_DIR
     unset CATKIN_SETUP_UTIL_ARGS
 
     # Reset system environment variables
