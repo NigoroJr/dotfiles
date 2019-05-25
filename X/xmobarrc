@@ -15,4 +15,5 @@ Config { font = "xft:Ricty Discord:size=9"
        , sepChar = "%"
        , alignSep = "}{"
        , template = "%StdinReader% }{ <fc=#FFFFFF>%uptime% :: %cpu% :: %memory% :: %loadavg%</fc> <fc=#00FF00>%date%</fc>"
+       , overrideRedirect = False
     }
