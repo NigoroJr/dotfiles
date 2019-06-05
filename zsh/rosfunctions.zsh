@@ -1,5 +1,11 @@
 # Utility functions for ROS
 
+# roscore with use_sim_time set true
+rcs() {
+    set +m && ( sleep 2 && rosparam set use_sim_time true && set -m ) &
+    roscore
+}
+
 rosclear() {
     # Perform a "level 1" reset (see comment in rossetup)
     unset ROS_DISTRO
