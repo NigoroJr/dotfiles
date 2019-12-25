@@ -75,6 +75,7 @@ myFloatHook = composeAll
     , className =? "Spotify"                   --> moveTo9
     , className =? "spotify"                   --> moveTo9
     , className =? "Java"                      --> doFloat
+    , className =? "java-lang-Thread"          --> doFloat
     , className =? "R_x11"                     --> doFloat
     , className =? "Gifview"                   --> doFloat
     , manageDocks ]
