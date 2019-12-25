@@ -1,0 +1,11 @@
+# Extra mouse button sends C-F4
+"xte 'keydown Control_R' 'key F4' 'keyup Control_R'"
+b:10
+
+# Button 6 sends C-S-tab
+"xte 'keydown Control_R' 'keydown Shift_R' 'key Tab' 'keyup Shift_R' 'keyup Control_R'"
+b:6
+
+# Button 7 sends C-tab
+"xte 'keydown Control_R' 'key Tab' 'keyup Control_R'"
+b:7
