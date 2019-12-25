@@ -237,7 +237,7 @@ mkvi() {
         mkdir -p "$dirname"
     fi
 
-    exec vi "$full_path"
+    vi "$full_path"
 }
 
 mount() {
