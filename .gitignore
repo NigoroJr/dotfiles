@@ -1,3 +1,6 @@
+# Important files that need to be hidden
+.gitconfig
+
 # Vim swap files
 *.swp
 *.swo
