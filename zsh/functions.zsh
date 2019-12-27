@@ -323,6 +323,7 @@ ghpr() {
 
     branch="$( grep 'head-ref' =( curl -sL ${gh_url}/pull/${pr_id} ) | \
         egrep -o '<span class="css-truncate-target">[^<]+</span>' | \
+        tail -n 1 | \
         sed -e 's/^<[^>]\+>[ \t]*\([^<]\+\)[ \t]*<.*$/\1/' )"
 
     if [[ -z ${branch} ]]; then
