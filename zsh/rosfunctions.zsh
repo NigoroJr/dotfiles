@@ -125,7 +125,6 @@ __latest_ros_distro() {
 ck() {
     local -a default_args
     default_args=( \
-        '--mem-limit' '90%' \
         '--cmake-args' '-DCMAKE_BUILD_TYPE=Release' '--' \
         '--no-notify' )
     local -a args
