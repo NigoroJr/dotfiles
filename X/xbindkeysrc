@@ -1,3 +1,8 @@
+# xbindkeys configuration files
+#
+# For Ubuntu,
+# $ sudo apt install xbindkeys xautomation
+
 # Extra mouse button sends C-F4
 "xte 'keydown Control_R' 'key F4' 'keyup Control_R'"
 b:10
