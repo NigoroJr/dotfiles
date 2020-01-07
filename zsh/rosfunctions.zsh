@@ -180,6 +180,21 @@ make-ws() {
 EOF
 }
 
+clean-ws() {
+    while true; do
+        local -a removed_dirs
+        local -a dirs=( $( find . -type d -empty ) )
+        if (( $#dirs == 0 )); then
+            break
+        fi
+        rmdir ${dirs[@]}
+        removed_dirs+=( ${dirs[@]} )
+    done
+
+    echo "Removed the following directories:"
+    print -l ${(o)removed_dirs}
+}
+
 __clear_cmake_prefix_path() {
     # Removes the pre-filled CMAKE_PREFIX_PATH from _setup_util.py in the
     # given directory. Ref: Section 3.2 of http://wiki.ros.org/catkin/what
