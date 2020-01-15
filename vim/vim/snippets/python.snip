@@ -14,17 +14,30 @@ options		head
 		                                 add_help=False)
 		parser.add_argument('-h', '--help', action='help',
 		                    help='show this help message and exit')
-		parser.add_argument('${2:short}', '${3:long}',
-		                    dest='${4:val}',
-		                    default='${5:val}',
-		                    type=${6:int},
-		                    action='${7:store}',
-		                    nargs='${8:?}',
-		                    metavar='${9:FOO}',
-		                    help='${10:stuff}')
 		${0}
+
 		args = parser.parse_args()
 		return args
+
+snippet		add_argument
+abbr		add_argument
+options		head
+	parser.add_argument('${1:arg}',
+	                    default='${2:val}',
+	                    nargs=${3:'?'},
+	                    help='${4:stuff}')
+
+snippet		add_argument_full
+abbr		add_argument
+options		head
+	parser.add_argument('${1:short}', '${2:long}',
+	                    dest='${3:val}',
+	                    default='${4:val}',
+	                    type=${5:int},
+	                    action='${6:store}',
+	                    nargs=${7:'?'},
+	                    metavar='${8:FOO}',
+	                    help='${9:stuff}')
 
 snippet		seaborn
 abbr		seaborn
