@@ -160,6 +160,7 @@ for ARG in $TASKS; do
             git config --global alias.r 'reset'
             git config --global alias.rem 'remote'
             git config --global alias.s 'status'
+            git config --global alias.sm 'submodule'
             git config --global alias.st 'stash'
             git config --global alias.sh 'show'
             ;;
