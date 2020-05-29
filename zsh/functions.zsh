@@ -333,3 +333,12 @@ ghpr() {
 
     command git fetch ${rem_name} "pull/${pr_id}/head:${branch}"
 }
+
+git-https-to-ssh() {
+    local rem_name="${1:-origin}"
+    local old_url="$( command git remote get-url $rem_name )"
+    local new_url="$( echo $old_url | sed -e 's!^https\?://\([^/]\+\)/!git@\1:!' )"
+
+    command git remote set-url $rem_name $new_url
+    echo "URL of $rem_name set: $new_url"
+}
