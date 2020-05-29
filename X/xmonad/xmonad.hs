@@ -78,6 +78,7 @@ myFloatHook = composeAll
     , className =? "java-lang-Thread"          --> doFloat
     , className =? "R_x11"                     --> doFloat
     , className =? "Gifview"                   --> doFloat
+    , className =? "Gimp"                      --> doFloat
     , manageDocks ]
     where
     -- moveTo1 = doF $ W.shift "1"
