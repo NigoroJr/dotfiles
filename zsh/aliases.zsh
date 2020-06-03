@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+# Aliases
 
 alias ls='ls --color=auto'
 alias l='ls -lh'
@@ -50,19 +50,18 @@ alias gl='git log'
 alias gplum='git pull upstream master'
 alias gpom='git push origin master'
 
+# Docker
+alias d='docker'
+alias dim='docker images'
+
 alias cdd='cd $( dirname $_ )'
 alias rm_='rm -f $_'
 
 alias zmv='noglob zmv -W'
 alias qv='qpdfview'
 
-if (( $+commands[hangups] )); then
-    alias hangups="hangups --key-quit='ctrl r' --key-close-tab='ctrl l' --col-palette-colors=256 --col-scheme='solarized-dark'"
-fi
-
 # Global alias
 alias -g A='| awk'
-alias -g B='&& beep'
 alias -g DN1='1>/dev/null'
 alias -g DN12='1>/dev/null 2>&1'
 alias -g DN2='2>/dev/null'
@@ -75,8 +74,6 @@ alias -g H='HEAD^'
 alias -g HH='HEAD^^'
 alias -g HHH='HEAD^^^'
 alias -g S='| sed'
-alias -g SORT='| sort'
-alias -g UNIQ='| uniq'
 alias -g WCL='| wc -l'
 if (( $+commands[fzy] )); then
     alias -g FL='| fzy'
