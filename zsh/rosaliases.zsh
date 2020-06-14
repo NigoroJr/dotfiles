@@ -13,6 +13,8 @@ alias rl='roslaunch'
 alias rte='rostopic echo'
 alias rtl='rostopic list'
 alias rti='rostopic info'
+alias rth='rostopic hz'
+alias rnl='rosnode list'
 alias rni='rosnode info'
 alias rpf='rospack find'
 
