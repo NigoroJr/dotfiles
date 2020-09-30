@@ -52,7 +52,10 @@ alias gpom='git push origin master'
 
 # Docker
 alias d='docker'
+alias dr='docker run --interactive --tty'
 alias dim='docker images'
+alias dps='docker ps -a'
+alias drm='docker ps -a | awk "/Exited/ { print \$1 }" | xargs docker rm'
 
 alias cdd='cd $( dirname $_ )'
 alias rm_='rm -f $_'
