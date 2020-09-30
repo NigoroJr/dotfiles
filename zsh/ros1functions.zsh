@@ -224,6 +224,9 @@ rpp() {
 
     rpp_filtered+=( $( sed -e 's#\(^~/ros/workspaces/[^/]\+/[^/]\+\)/src/.*$#\1#' =( print -l $rpp ) ) )
 
+    echo "ROS_MASTER_URI: $ROS_MASTER_URI"
+    echo "ROS_HOSTNAME: $ROS_HOSTNAME"
+    echo "ROS_IP: $ROS_IP"
     echo "ROS_DISTRO: $ROS_DISTRO"
     echo "ROS_PACKAGE_PATH"
     for p in ${rpp_filtered[@]}; do

@@ -11,7 +11,7 @@ if (( $+commands[roscore] )); then
     add-zsh-hook chpwd __source_ros
 
     rossetup
-else
+elif (( $+commands[ros2] )); then
     source $HOME/.ros2functions.zsh
     source $HOME/.ros2aliases.zsh
 fi
