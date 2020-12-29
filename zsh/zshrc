@@ -59,7 +59,10 @@ __source() {
 }
 
 __set_colors() {
-    eval "$( dircolors )"
+    local dircolors="${1:-dircolors}"
+    local colors_file="${2:-}"
+
+    eval "$( $dircolors $colors_file )"
     export ZLS_COLORS=$LS_COLORS
     zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 }
@@ -87,28 +90,25 @@ if [ ! -f $HOME/.zshrc.zwc -o $HOME/.zshrc -nt $HOME/.zshrc.zwc ]; then
 fi
 
 # Colors {{{
-case $( uname -s ) in
-    Darwin)
-        if (( $+commands[brew] )); then
-            local gnubin="$( brew --prefix coreutils )/libexec/gnubin"
-            path=( $gnubin $path )
+# dircolors command name
+local dircolors=dircolors
+if [[ $( uname -s ) == Darwin ]]; then
+    if (( $+commands[gdircolors] )); then
+        dircolors=gdircolors
+    fi
 
-            if (( $+commands[dircolors] )); then
-                __set_colors
-            fi
-        else
-            # Use GNU ls if available
-            if (( $+commands[gls] )); then
-                alias ls='gls'
-            else
-                alias ls='ls -G'
-            fi
-        fi
-        ;;
-    *)
-        __set_colors
-        ;;
-esac
+    if (( $+commands[gls] )); then
+        alias ls='gls --color=auto'
+    else
+        alias ls='ls -G'
+    fi
+fi
+
+if [[ -f $HOME/.dircolors ]]; then
+    __set_colors $dircolors $HOME/.dircolors
+else
+    __set_colors $dircolors
+fi
 # }}}
 
 # In tmux, don't show status bar if there's only one window
