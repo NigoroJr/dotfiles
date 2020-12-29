@@ -324,7 +324,8 @@ ghpr() {
     branch="$( grep 'head-ref' =( curl -sL ${gh_url}/pull/${pr_id} ) | \
         egrep -o '<span class="css-truncate-target">[^<]+</span>' | \
         tail -n 1 | \
-        sed -e 's/^<[^>]\+>[ \t]*\([^<]\+\)[ \t]*<.*$/\1/' )"
+        egrep -o '>[^<]+<' | \
+        tr -d '<>' )"
 
     if [[ -z ${branch} ]]; then
         echo "No branch found in URL: $gh_url/pull/${pr_id}" >&2
