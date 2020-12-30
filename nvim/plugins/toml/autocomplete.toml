@@ -20,7 +20,6 @@ let g:deoplete#lsp#handler_enabled = v:false
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
 on_source = 'deoplete-lsp'
-# on_if = 'has("nvim-0.5")'
 on_cmd = ['LspInstall', 'LspInstallInfo']
 hook_source = '''
 execute 'source' g:config_dir . 'plugins/lsp.rc.vim'
