@@ -172,10 +172,10 @@ for ARG in $TASKS; do
             ;;
         python)
             if [ "$UNLINK" -eq 1 ]; then
-                unlink $HOME/.ptpython/config.py
+                unlink $HOME/.config/ptpython/config.py
             else
-                mkdir -p $HOME/.ptpython
-                ln -s "$PREFIX/python/ptpython.py" $HOME/.ptpython/config.py
+                mkdir -p $HOME/.config/ptpython
+                ln -s "$PREFIX/python/ptpython.py" $HOME/.config/ptpython/config.py
             fi
             ;;
         others)

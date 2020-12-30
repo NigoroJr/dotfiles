@@ -120,6 +120,8 @@ _prompt_random_256() {
         if [[ $pyenv_prompt != system ]]; then
             prompts+="$pyenv_prompt"
         fi
+    elif [[ -n $CONDA_DEFAULT_ENV ]]; then
+        prompts+="$CONDA_DEFAULT_ENV"
     fi
 
     unset RPROMPT
