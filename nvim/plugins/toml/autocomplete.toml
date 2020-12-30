@@ -12,6 +12,10 @@ execute 'source' g:config_dir . 'plugins/deoplete.rc.vim'
 [[plugins]]
 repo = 'Shougo/deoplete-lsp'
 on_source = 'deoplete.nvim'
+hook_source = '''
+" Disable hover
+let g:deoplete#lsp#handler_enabled = v:false
+'''
 
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
