@@ -99,16 +99,13 @@ for ARG in $TASKS; do
             done
             ;;
         nvim)
-            [ -d ~/.config/nvim ] || mkdir -p ~/.config/nvim
-            # init.vim
             if [ "$UNLINK" -eq 1 ]; then
-                unlink $HOME/.config/nvim/init.vim
+                unlink $HOME/.config/nvim
             else
                 ln $DEFAULT_LINK_FLAGS \
-                    $PREFIX/vim/vimrc \
-                    $HOME/.config/nvim/init.vim
+                    $PREFIX/nvim \
+                    $HOME/.config/nvim
             fi
-            process_target $PREFIX/vim/vim
             ;;
         tmux)
             if ! [ "$UNLINK" -eq 1 ] && \

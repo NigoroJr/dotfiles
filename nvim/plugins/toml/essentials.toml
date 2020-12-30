@@ -1,0 +1,19 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+hook_source = '''
+function! DeinSourcedPlugins() abort
+  for name in keys(g:dein#_plugins)
+    let sourced = g:dein#_plugins[name]['sourced']
+    if sourced
+      echo name
+    endif
+  endfor
+endfunction
+'''
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+depends = 'context_filetype.vim'

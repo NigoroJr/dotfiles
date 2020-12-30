@@ -1,0 +1,27 @@
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+depends = [
+  'vim-quickrun-neovim-job',
+  'previm',
+]
+on_map = '<Plug>(quickrun)'
+on_cmd = 'QuickRun'
+hook_add = '''
+nmap <silent> <Leader>r <Plug>(quickrun)
+vmap <silent> <Leader>r <Plug>(quickrun)
+'''
+hook_source = '''
+execute 'source' g:config_dir . 'plugins/quickrun.rc.vim'
+'''
+
+[[plugins]]
+repo = 'lambdalisue/vim-quickrun-neovim-job'
+
+[[plugins]]
+repo = 'kannokanno/previm'
+depends = 'open-browser.vim'
+on_cmd = 'PrevimOpen'
+on_ft = 'markdown'
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'

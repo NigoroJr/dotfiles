@@ -1,0 +1,33 @@
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+if = 'has("python3")'
+on_event = 'InsertEnter'
+hook_add = '''
+let g:deoplete#enable_at_startup = 1
+'''
+hook_source = '''
+execute 'source' g:config_dir . 'plugins/deoplete.rc.vim'
+'''
+
+[[plugins]]
+repo = 'Shougo/deoplete-lsp'
+on_source = 'deoplete.nvim'
+
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+on_source = 'deoplete-lsp'
+# on_if = 'has("nvim-0.5")'
+on_cmd = ['LspInstall', 'LspInstallInfo']
+hook_source = '''
+execute 'source' g:config_dir . 'plugins/lsp.rc.vim'
+'''
+
+[[plugins]]
+repo = 'deoplete-plugins/deoplete-zsh'
+depends = 'deoplete.nvim'
+on_ft = 'zsh'
+
+[[plugins]]
+repo = 'deoplete-plugins/deoplete-docker'
+depends = 'deoplete.nvim'
+on_ft = 'dockerfile'
