@@ -15,6 +15,7 @@ _set_prompt() {
 _prompt_git_status() {
     local prompt
     local branch_name staged modified untracked conflicts
+    local git_status="$( git status --short --porcelain 2>/dev/null )"
 
     branch_name="$( git rev-parse --abbrev-ref HEAD 2>/dev/null )"
     # Not in git repository
@@ -26,28 +27,28 @@ _prompt_git_status() {
     fi
 
     # Clean repository?
-    if [[ -z $( git status --short 2>/dev/null ) ]]; then
+    if [[ -z $git_status ]]; then
         echo "%F{046}$branch_name%f"
         return
     fi
 
-    staged="$( git diff --cached --numstat | command wc -l | tr -d ' ' )"
-    if [[ $staged -ne 0 ]]; then
+    staged="$( echo $git_status | command grep --count '^M.' )"
+    if (( $staged != 0 )); then
         prompt+="%F{010}S%f$staged "
     fi
 
-    modified="$( git diff --numstat | command wc -l | tr -d ' ' )"
-    if [[ $modified -ne 0 ]]; then
+    modified="$( echo $git_status | command grep --count '^.M' )"
+    if (( $modified != 0 )); then
         prompt+="%F{009}M%f$modified "
     fi
 
-    untracked="$( git status --short | command grep '^\s*??' | command wc -l | tr -d ' ' )"
-    if [[ $untracked -ne 0 ]]; then
+    untracked="$( echo $git_status | command grep --count '^??' )"
+    if (( $untracked != 0 )); then
         prompt+="%F{099}U%f$untracked "
     fi
 
-    conflicts="$( git status --short | command grep '^\s*UU' | command wc -l | tr -d ' ' )"
-    if [[ $conflicts -ne 0 ]]; then
+    conflicts="$( echo $git_status | command grep --count '^UU' )"
+    if (( $conflicts != 0 )); then
         prompt+="%F{190}C%f$conflicts "
     fi
 
@@ -103,7 +104,7 @@ _prompt_random_256() {
 
     # Display in two lines if too long
     local pwd_length=${(c)#${(D)PWD}}
-    if [[ $pwd_length -ge 45 ]]; then
+    if (( $pwd_length >= 45 )); then
         PROMPT="[ %F{219}%~%f ]"$'\n'"$l_prompt"
     else
         PROMPT="$l_prompt"
@@ -130,7 +131,7 @@ _prompt_random_256() {
     fi
 
     # Right prompt
-    if [[ $pwd_length -lt 45 ]]; then
+    if (( $pwd_length < 45 )); then
         RPROMPT+=" [ %F{051}%~%f ]"
     fi
 }
