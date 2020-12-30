@@ -4,10 +4,10 @@ local lsp = require 'lspconfig'
 on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
       virtual_text = false,
+      underline = true,
       signs = false,
       update_in_insert = false,
     }
@@ -31,6 +31,7 @@ if vim.fn.executable('pyright-langserver') then
         analysis = {
           autoSearchPaths = true,
           useLibraryCodeForTypes = true,
+          typeCheckingMode = "off",
         },
         linting = {
           enabled = false,
@@ -76,3 +77,5 @@ END
 nnoremap <buffer> <silent> gd <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <buffer> <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <buffer> <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+
+autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
