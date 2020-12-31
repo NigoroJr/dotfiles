@@ -1,6 +1,7 @@
 call deoplete#custom#option("omni_patterns", {
       \ "python": '\%(^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*',
       \})
+call deoplete#custom#option("min_pattern_length", 1)
 
 " call deoplete#custom#option("omni_patterns", {
 " 			\ "c": '[^. *\t]\%(\.\|->\)\w*',
