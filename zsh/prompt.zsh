@@ -76,8 +76,7 @@ _prompt_arrow() {
 
 # Randomly selects a 256 color to use for the arrow {{{
 _prompt_random_256() {
-    local front arrow rnd exit_stat l_prompt
-    local -a valid_colors
+    local front
 
     # Change hostname on remote login
     if [[ -n $REMOTEHOST ]] || [[ -n $SSH_CONNECTION ]]; then
@@ -86,6 +85,7 @@ _prompt_random_256() {
         front="%F{222}%m%f"
     fi
 
+    local -a valid_colors
     valid_colors=(
         {001..007}
         {009..015}
@@ -96,52 +96,68 @@ _prompt_random_256() {
         {242..255}
     )
     # Needed so that $RANDOM is referenced from parent shell not subshell
-    rnd=$RANDOM
-    arrow=$( _prompt_arrow $rnd $valid_colors )
+    local rnd="$RANDOM"
+    local arrow="$( _prompt_arrow $rnd $valid_colors )"
 
     # Change color depending on exit status of previous command
     if [[ -n $TMUX ]]; then
-        sign='>>'
+        sign=">>"
     else
-        sign=' >'
+        sign=" >"
     fi
-    exit_stat="%0(?,%F{046}$sign%f,%20(?,%F{046}$sign%f,%F{196}$sign%f))"
+    local exit_stat="%0(?,%F{046}$sign%f,%20(?,%F{046}$sign%f,%F{196}$sign%f))"
 
-    # Construct left prompt
-    l_prompt="$front$arrow%F{045}%n%f$exit_stat "
+    # Construct prompt with arrow
+    local arrow_prompt="$front$arrow%F{045}%n%f$exit_stat "
 
-    # Display in two lines if too long
-    local pwd_length=${(c)#${(D)PWD}}
-    if (( $pwd_length >= 45 )); then
-        PROMPT="[ %F{219}%~%f ]"$'\n'"$l_prompt"
-    else
-        PROMPT="$l_prompt"
+    # Currenty directory
+    # local pwd_prompt="%(10~|%-3~/.../%3~|%~)"
+    local pwd_prompt="%~"
+    local pwd_length=${(c)#${(%)pwd_prompt}}
+    # If too long, abbreviate (4 characters for the "[  ]")
+    local max_length=$(( ${COLUMNS:-80} - 4 ))
+    if (( $pwd_length >= $max_length )); then
+        local -a full_path
+        full_path=( ${(s:/:)${(%)pwd_prompt}} )
+
+        local -a abbrev_path
+        for dir in ${full_path[0,-2]}; do
+            if (( ${(c)#dir} > 3 )); then
+                abbrev_path+="%B$( echo $dir | head -c 3 )%b"
+            else
+                abbrev_path+="$dir"
+            fi
+        done
+        abbrev_path+="${full_path[-1]}"
+
+        pwd_prompt="${(j:/:)abbrev_path}"
     fi
+    pwd_prompt="[ %F{051}${pwd_prompt}%f ]"
 
-    local -a prompts
-    # Show git repository info
+    # Additional helpful info
+    local -a additional_prompts
+    # Git repository info
     local git_prompt="$( _prompt_git_status )"
     if [[ -n $git_prompt ]]; then
-        prompts+="$git_prompt"
+        additional_prompts+="$git_prompt"
     fi
+
+    # Python info
     if (( $+commands[pyenv] )); then
         local pyenv_prompt="$( pyenv version-name )"
         if [[ $pyenv_prompt != system ]]; then
-            prompts+="$pyenv_prompt"
+            additional_prompts+="$pyenv_prompt"
         fi
     elif [[ -n $CONDA_DEFAULT_ENV ]]; then
-        prompts+="$CONDA_DEFAULT_ENV"
+        additional_prompts+="$CONDA_DEFAULT_ENV"
     fi
 
-    unset RPROMPT
-    if (( $#prompts > 0 )); then
-        RPROMPT="(${(j: | :)prompts})"
+    local prefix_prompt=$'\n'
+    if (( $#additional_prompts > 0 )); then
+        prefix_prompt+="${(j: | :)additional_prompts[@]}"$'\n'
     fi
 
-    # Right prompt
-    if (( $pwd_length < 45 )); then
-        RPROMPT+=" [ %F{051}%~%f ]"
-    fi
+    PROMPT="${prefix_prompt}${pwd_prompt}"$'\n'"${arrow_prompt}"
 }
 # }}}
 
