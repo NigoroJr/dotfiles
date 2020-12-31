@@ -152,6 +152,11 @@ _prompt_random_256() {
         additional_prompts+="$CONDA_DEFAULT_ENV"
     fi
 
+    # Custom prompt
+    if [[ -n $ADDITIONAL_PROMPT ]]; then
+        additional_prompts+="$( eval "$ADDITIONAL_PROMPT" )"
+    fi
+
     local prefix_prompt=$'\n'
     if (( $#additional_prompts > 0 )); then
         prefix_prompt+="${(j: | :)additional_prompts[@]}"$'\n'
