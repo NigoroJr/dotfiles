@@ -85,23 +85,21 @@ let g:clever_f_fix_key_direction = 0
 '''
 
 [[plugins]]
-repo = 'haya14busa/incsearch.vim'
-on_map = '<Plug>(incsearch-'
+repo = 'haya14busa/is.vim'
+on_map = '<Plug>(is-'
 hook_add = '''
-map / <Plug>(incsearch-forward)
-map ? <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+nmap n <Plug>(is-n)
+nmap N <Plug>(is-N)
+nmap * <Plug>(is-*)
+nmap # <Plug>(is-#)
+nmap g* <Plug>(is-g*)
+nmap g# <Plug>(is-g#)
 
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
+nmap <C-j> <Plug>(is-nohl)<Plug>(is-scroll-f)
+nmap <C-k> <Plug>(is-nohl)<Plug>(is-scroll-b)
 '''
-
 hook_source = '''
-let g:incsearch#auto_nohlsearch = 1
+let g:is#do_default_mapping = 0
 '''
 
 [[plugins]]
