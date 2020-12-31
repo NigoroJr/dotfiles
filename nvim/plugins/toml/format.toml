@@ -74,7 +74,9 @@ let g:black_virtualenv = fnamemodify(g:python3_host_prog, ':h:h')
 repo = 'eapache/auto-pairs'
 on_event = 'InsertEnter'
 hook_source = '''
+let g:AutoPairsShortcutToggle = ''
 let g:AutoPairsUseInsertedCount = 1
+let g:AutoPairsDelRepeatedPairs = 0
 '''
 hook_post_source = '''
 call AutoPairsTryInit()

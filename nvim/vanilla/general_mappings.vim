@@ -25,6 +25,10 @@ cnoremap <C-e> <End>
 cnoremap <C-g> <C-c>
 cnoremap <C-d> <Delete>
 
+" Insert mode
+inoremap <C-d> <Delete>
+inoremap <C-t> <Nop>
+
 " Use modifiers for substitution
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
@@ -68,18 +72,3 @@ function! s:toggle_diff() abort
 endfunction
 " Note that <Leader>sd is mapped to surround.vim <Plug>Dsurround
 nmap <silent> <Leader>dt :call <SID>toggle_diff()<CR>
-
-" function! s:closing_brace_mapping()
-"   if &filetype == 'vim'
-"     inoremap <buffer> {<CR> {<CR>\<Space>}<Esc>O\<Space>
-"     inoremap <buffer> (<CR> (<CR>\<Space>)<Esc>O\<Space>
-"     inoremap <buffer> [<CR> [<CR>\<Space>]<Esc>O\<Space>
-"   " Don't do this for LaTeX documents
-"   elseif &filetype !~ 'tex\|plaintex'
-"     inoremap <buffer> {<CR> {<CR>}<Esc>O
-"     inoremap <buffer> (<CR> (<CR>)<Esc>O
-"     inoremap <buffer> [<CR> [<CR>]<Esc>O
-"   endif
-"   " Otherwise, no mapping is done
-" endfun
-" autocmd FileType * call <SID>closing_brace_mapping()
