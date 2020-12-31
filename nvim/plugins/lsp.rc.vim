@@ -1,8 +1,8 @@
 lua << END
-local lsp = require 'lspconfig'
+local lsp = require "lspconfig"
 
 on_attach = function(client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -14,14 +14,14 @@ on_attach = function(client, bufnr)
   )
 end
 
-if vim.fn.executable('clangd') then
+if vim.fn.executable("clangd") then
   lsp.clangd.setup{}
 end
 
 lsp.cmake.setup{}
 
 -- Use pyright if available
-if vim.fn.executable('pyright-langserver') then
+if vim.fn.executable("pyright-langserver") then
   lsp.pyright.setup{
     root_dir = function(fname)
       return vim.fn.getcwd()
@@ -42,14 +42,14 @@ if vim.fn.executable('pyright-langserver') then
   }
 -- Use jedi-language-server otherwise
 else
-  local jedi_ls_cmd = ''
+  local jedi_ls_cmd = ""
   -- Prefer using the jedi-language-server in the current env
-  if vim.fn.executable('jedi-language-server') == 1 then
-    jedi_ls_cmd = 'jedi-language-server'
+  if vim.fn.executable("jedi-language-server") == 1 then
+    jedi_ls_cmd = "jedi-language-server"
   else
-    local python3_dirname = vim.fn.fnamemodify(vim.g.python3_host_prog, ':h')
-    if vim.fn.executable(python3_dirname .. '/jedi-language-server') then
-      jedi_ls_cmd = python3_dirname .. '/jedi-language-server'
+    local python3_dirname = vim.fn.fnamemodify(vim.g.python3_host_prog, ":h")
+    if vim.fn.executable(python3_dirname .. "/jedi-language-server") then
+      jedi_ls_cmd = python3_dirname .. "/jedi-language-server"
     end
   end
   if vim.fn.executable(jedi_ls_cmd) then
@@ -63,7 +63,7 @@ else
           disableSnippets = true,
         },
         jediSettings = {
-          autoImportModules = {'numpy', 'pandas'}
+          autoImportModules = {"numpy", "pandas"}
         }
       },
       on_attach = on_attach,

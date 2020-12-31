@@ -1,32 +1,32 @@
 [[plugins]]
-repo = 'tpope/vim-repeat'
-on_map = '.'
+repo = "tpope/vim-repeat"
+on_map = "."
 
 [[plugins]]
-repo = 'tpope/vim-surround'
-depends = 'vim-repeat'
+repo = "tpope/vim-surround"
+depends = "vim-repeat"
 on_map = [
-  '<Plug>Ysurround', '<Plug>Dsurround', '<Plug>Csurround'
+  "<Plug>Ysurround", "<Plug>Dsurround", "<Plug>Csurround"
 ]
-hook_add = '''
+hook_add = """
 nmap <Leader>sy <Plug>Ysurround
 nmap <Leader>sd <Plug>Dsurround
 nmap <Leader>sc <Plug>Csurround
-'''
-hook_source = '''
+"""
+hook_source = """
 let g:surround_no_mappings = 1
 let g:surround_no_insert_mappings = 1
-'''
+"""
 
 [[plugins]]
-repo = 'Shougo/neosnippet.vim'
-on_event = 'InsertEnter'
-on_cmd = 'NeoSnippetEdit'
-hook_add = '''
+repo = "Shougo/neosnippet.vim"
+on_event = "InsertEnter"
+on_cmd = "NeoSnippetEdit"
+hook_add = """
 nnoremap <Leader>es :<C-u>NeoSnippetEdit
-'''
-hook_source = '''
-let g:neosnippet#snippets_directory='~/.vim/snippets/'
+"""
+hook_source = """
+let g:neosnippet#snippets_directory="~/.vim/snippets/"
 
 " <TAB> completion
 imap <expr> <TAB> neosnippet#expandable_or_jumpable() ?
@@ -37,51 +37,51 @@ smap <expr> <TAB> neosnippet#expandable_or_jumpable() ?
       \ "\<Plug>(neosnippet_jump_or_expand)" :
       \ pumvisible() ?
       \ "\<C-n>" : "\<TAB>"
-'''
+"""
 
 [[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-on_source = 'neosnippet.vim'
+repo = "Shougo/neosnippet-snippets"
+on_source = "neosnippet.vim"
 
 [[plugins]]
-repo = 'tpope/vim-abolish'
-depends = 'vim-repeat'
-on_cmd = ['Abolish', 'Subvert', 'S']
-on_map = 'cr'
+repo = "tpope/vim-abolish"
+depends = "vim-repeat"
+on_cmd = ["Abolish", "Subvert", "S"]
+on_map = "cr"
 
 [[plugins]]
-repo = 'godlygeek/tabular'
-on_cmd = 'Tabularize'
+repo = "godlygeek/tabular"
+on_cmd = "Tabularize"
 
 [[plugins]]
-repo = 'tomtom/tcomment_vim'
+repo = "tomtom/tcomment_vim"
 on_map = [
-  'gc', 'g<', 'g>', '<Plug>TComment_',
+  "gc", "g<", "g>", "<Plug>TComment_",
 ]
 
 [[plugins]]
-repo = 'hynek/vim-python-pep8-indent'
-on_ft = 'python'
+repo = "hynek/vim-python-pep8-indent"
+on_ft = "python"
 
 [[plugins]]
-repo = 'psf/black'
-on_cmd = 'Black'
-hook_source = '''
-let g:black_virtualenv = fnamemodify(g:python3_host_prog, ':h:h')
-'''
+repo = "psf/black"
+on_cmd = "Black"
+hook_source = """
+let g:black_virtualenv = fnamemodify(g:python3_host_prog, ":h:h")
+"""
 
 [[plugins]]
-repo = 'eapache/auto-pairs'
-on_event = 'InsertEnter'
-hook_source = '''
-let g:AutoPairsShortcutToggle = ''
+repo = "eapache/auto-pairs"
+on_event = "InsertEnter"
+hook_source = """
+let g:AutoPairsShortcutToggle = ""
 let g:AutoPairsUseInsertedCount = 1
 let g:AutoPairsDelRepeatedPairs = 0
-'''
-hook_post_source = '''
+"""
+hook_post_source = """
 call AutoPairsTryInit()
-'''
+"""
 
 [[plugins]]
-repo = 'tpope/vim-endwise'
-on_event = 'InsertEnter'
+repo = "tpope/vim-endwise"
+on_event = "InsertEnter"

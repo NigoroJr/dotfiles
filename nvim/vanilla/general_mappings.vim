@@ -51,8 +51,8 @@ nmap <silent> Q :q<CR>
 
 " Function to toggle variables and show message
 function! s:toggle(var, mes) abort
-  silent exec 'setlocal '.a:var.'!'
-  echo a:mes.' '.(eval('&'.a:var) ? 'ON' : 'OFF')
+  silent exec "setlocal " . a:var . "!"
+  echo a:mes . " " . (eval("&" . a:var) ? "ON" : "OFF")
 endfunction
 
 nmap <silent> <Leader>ss :call <SID>toggle("spell", "Spell")<CR>
@@ -68,7 +68,7 @@ function! s:toggle_diff() abort
   else
     diffthis
   endif
-  echo 'Diff '.(&diff ? 'ON' : 'OFF')
+  echo "Diff " . (&diff ? "ON" : "OFF")
 endfunction
 " Note that <Leader>sd is mapped to surround.vim <Plug>Dsurround
 nmap <silent> <Leader>dt :call <SID>toggle_diff()<CR>

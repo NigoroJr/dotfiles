@@ -7,36 +7,36 @@ autocmd FileType man setlocal nonumber noexpandtab shiftwidth=8 tabstop=8 softta
 
 " Make scripts executable if it's a script
 function! s:make_executable(filename)
-  let real_fname = resolve(expand('%'))
-  let dirname = fnamemodify(real_fname, ':h')
+  let real_fname = resolve(expand("%"))
+  let dirname = fnamemodify(real_fname, ":h")
   " Don't change permissions in a git repo
-  execute 'call system("cd ' . dirname . ' && git status")'
+  execute "call system('cd " . dirname . " && git status')"
   let exit_status = v:shell_error
   if exit_status == 0
     return
   endif
 
   let line = getline(1)
-  if line =~ '^#!' && line =~ '/bin'
-    execute 'silent !chmod a+x' real_fname
+  if line =~ "^#!" && line =~ "/bin"
+    execute "silent !chmod a+x" real_fname
     filetype detect
   endif
 endfunction
 autocmd BufWritePost * call s:make_executable(@%)
 
 " Automatically save/load views
-let s:no_auto_view = ['gitcommit']
+let s:no_auto_view = ["gitcommit"]
 augroup vimrc
   autocmd!
   autocmd BufWritePost *
-        \   if expand('%') != '' &&
-        \     &buftype !~ 'nofile' &&
+        \   if expand("%") != "" &&
+        \     &buftype !~ "nofile" &&
         \     index(s:no_auto_view, &filetype) == -1
         \|      mkview!
         \|  endif
   autocmd BufRead *
-        \   if expand('%') != '' &&
-        \     &buftype !~ 'nofile' &&
+        \   if expand("%") != "" &&
+        \     &buftype !~ "nofile" &&
         \     index(s:no_auto_view, &filetype) == -1
         \|      silent! loadview
         \|  endif

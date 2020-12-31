@@ -85,7 +85,7 @@ rossetup() {
     # export ROSCONSOLE_FORMAT='[${severity}] [${node} : ${function} : ${line}] [${time}]: ${message}'
     export RESIBOTS_DIR=$HOME/usr
     export GAZEBO_PLUGIN_PATH=$HOME/.gazebo/plugins:$GAZEBO_PLUGIN_PATH
-    export CATKIN_SETUP_UTIL_ARGS='--extend'
+    export CATKIN_SETUP_UTIL_ARGS="--extend"
 
 
     if [[ -f /opt/ros/$ROS_DISTRO/setup.zsh ]]; then
@@ -203,7 +203,7 @@ __clear_cmake_prefix_path() {
     local system_ros="/opt/ros/$ROS_DISTRO"
 
     if ! [[ -d $system_ros ]]; then
-        system_ros=''
+        system_ros=""
     fi
 
     if ! [[ -f $fn ]]; then

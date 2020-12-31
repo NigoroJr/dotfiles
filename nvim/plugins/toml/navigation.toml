@@ -1,93 +1,93 @@
 [[plugins]]
-repo = 'Shougo/defx.nvim'
-if = 'has("python3")'
-on_cmd = 'Defx'
-hook_add = '''
+repo = "Shougo/defx.nvim"
+if = "has('python3')"
+on_cmd = "Defx"
+hook_add = """
 nnoremap <silent><Leader>f
       \ :<C-u>Defx -columns=git:mark:filename:type
       \ -listed `expand('%:p:h')` -search=`expand('%:p')`<CR>
-'''
-hook_source = '''
-exec 'source' g:config_dir . 'plugins/defx.rc.vim'
-'''
+"""
+hook_source = """
+exec "source" g:config_dir . "plugins/defx.rc.vim"
+"""
 
 [[plugins]]
-repo ='kristijanhusak/defx-git'
-on_source = 'defx.nvim'
+repo ="kristijanhusak/defx-git"
+on_source = "defx.nvim"
 on_map = [
-  '<Plug>(defx-git-prev)',
-  '<Plug>(defx-git-next)',
-  '<Plug>(defx-git-stage)',
-  '<Plug>(defx-git-reset)',
-  '<Plug>(defx-git-discard)',
+  "<Plug>(defx-git-prev)",
+  "<Plug>(defx-git-next)",
+  "<Plug>(defx-git-stage)",
+  "<Plug>(defx-git-reset)",
+  "<Plug>(defx-git-discard)",
 ]
-hook_source = '''
+hook_source = """
 " Status icons
-call defx#custom#column('git', 'indicators', {
-      \ 'Modified'  : '✹',
-      \ 'Staged'    : '✚',
-      \ 'Untracked' : '✭',
-      \ 'Renamed'   : '➜',
-      \ 'Unmerged'  : '=',
-      \ 'Ignored'   : '.',
-      \ 'Deleted'   : '✖',
-      \ 'Unknown'   : '?'
+call defx#custom#column("git", "indicators", {
+      \ "Modified"  : "✹",
+      \ "Staged"    : "✚",
+      \ "Untracked" : "✭",
+      \ "Renamed"   : "➜",
+      \ "Unmerged"  : "=",
+      \ "Ignored"   : ".",
+      \ "Deleted"   : "✖",
+      \ "Unknown"   : "?"
       \ })
-call defx#custom#column('git', 'column_length', 1)
-call defx#custom#column('git', 'show_ignored', 0)
-call defx#custom#column('git', 'raw_mode', 0)
-'''
+call defx#custom#column("git", "column_length", 1)
+call defx#custom#column("git", "show_ignored", 0)
+call defx#custom#column("git", "raw_mode", 0)
+"""
 
 [[plugins]]
-repo = 'Shougo/denite.nvim'
-if = 'has("python3")'
-depends = ['fruzzy', 'neomru.vim', 'neoyank.vim']
-on_cmd = ['Denite', 'DeniteBufferDir', 'DeniteProjectDir', 'DeniteCursorWord']
-hook_add = '''
+repo = "Shougo/denite.nvim"
+if = "has('python3')"
+depends = ["fruzzy", "neomru.vim", "neoyank.vim"]
+on_cmd = ["Denite", "DeniteBufferDir", "DeniteProjectDir", "DeniteCursorWord"]
+hook_add = """
 nnoremap [denite] <Nop>
 nmap <Leader>u [denite]
 noremap [denite]f :DeniteBufferDir -start-filter -no-empty file/rec<CR>
 noremap [denite]m :Denite -start-filter -no-empty file_mru<CR>
 noremap [denite]g :DeniteBufferDir -start-filter -no-empty grep<CR>
 noremap [denite]y :Denite -start-filter -no-empty neoyank<CR>
-'''
-hook_post_source = '''
-execute 'source' g:config_dir . 'plugins/denite.rc.vim'
-'''
+"""
+hook_post_source = """
+execute "source" g:config_dir . "plugins/denite.rc.vim"
+"""
 
 [[plugins]]
-repo = 'Shougo/neomru.vim'
+repo = "Shougo/neomru.vim"
 
 [[plugins]]
-repo = 'Shougo/neoyank.vim'
+repo = "Shougo/neoyank.vim"
 
 [[plugins]]
-repo = 'raghur/fruzzy'
-on_func = 'fruzzy#install'
-hook_source = '''
+repo = "raghur/fruzzy"
+on_func = "fruzzy#install"
+hook_source = """
 let g:fruzzy#usenative = 0
-'''
+"""
 
 [[plugins]]
-repo = 'rhysd/clever-f.vim'
+repo = "rhysd/clever-f.vim"
 on_map = [
-  '<Plug>(clever-f-',
-  'c', 'd',
+  "<Plug>(clever-f-",
+  "c", "d",
 ]
-hook_add = '''
+hook_add = """
 map f <Plug>(clever-f-f)
 map F <Plug>(clever-f-F)
 map t <Plug>(clever-f-t)
 map T <Plug>(clever-f-T)
-'''
-hook_source = '''
+"""
+hook_source = """
 let g:clever_f_fix_key_direction = 0
-'''
+"""
 
 [[plugins]]
-repo = 'haya14busa/is.vim'
-on_map = '<Plug>(is-'
-hook_add = '''
+repo = "haya14busa/is.vim"
+on_map = "<Plug>(is-"
+hook_add = """
 nmap n <Plug>(is-n)
 nmap N <Plug>(is-N)
 nmap * <Plug>(is-*)
@@ -97,22 +97,22 @@ nmap g# <Plug>(is-g#)
 
 nmap <C-j> <Plug>(is-nohl)<Plug>(is-scroll-f)
 nmap <C-k> <Plug>(is-nohl)<Plug>(is-scroll-b)
-'''
-hook_source = '''
+"""
+hook_source = """
 let g:is#do_default_mapping = 0
-'''
+"""
 
 [[plugins]]
-repo = 'justinmk/vim-sneak'
-depends = 'tpope/vim-repeat'
-on_map = ['s', 'S']
-hook_source = '''
+repo = "justinmk/vim-sneak"
+depends = "tpope/vim-repeat"
+on_map = ["s", "S"]
+hook_source = """
 let g:sneak#s_next = 1
-'''
+"""
 
 [[plugins]]
-repo = 'tweekmonster/braceless.vim'
-on_ft = ['python', 'yaml']
-hook_source = '''
+repo = "tweekmonster/braceless.vim"
+on_ft = ["python", "yaml"]
+hook_source = """
 autocmd FileType python,yaml BracelessEnable +indent
-'''
+"""

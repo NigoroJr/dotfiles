@@ -8,12 +8,12 @@ def configure(repl):
 
     repl.highlight_matching_parenthesis = True
 
-    repl.prompt_style = 'ipython'
+    repl.prompt_style = "ipython"
 
     repl.confirm_exit = False
 
     repl.show_status_bar = False
 
-    repl.use_code_colorscheme('monokai')
+    repl.use_code_colorscheme("monokai")
 
-    repl.use_ui_colorscheme('blue')
+    repl.use_ui_colorscheme("blue")

@@ -32,27 +32,27 @@ _prompt_git_status() {
         return
     fi
 
-    staged="$( echo $git_status | command grep --count '^M.' )"
+    staged="$( echo $git_status | command grep --count "^M." )"
     if (( $staged != 0 )); then
         prompt+="%F{082}S%f$staged "
     fi
 
-    modified="$( echo $git_status | command grep --count '^.M' )"
+    modified="$( echo $git_status | command grep --count "^.M" )"
     if (( $modified != 0 )); then
         prompt+="%F{196}M%f$modified "
     fi
 
-    untracked="$( echo $git_status | command grep --count '^??' )"
+    untracked="$( echo $git_status | command grep --count "^??" )"
     if (( $untracked != 0 )); then
         prompt+="%F{099}U%f$untracked "
     fi
 
-    conflicts="$( echo $git_status | command grep --count '^UU' )"
+    conflicts="$( echo $git_status | command grep --count "^UU" )"
     if (( $conflicts != 0 )); then
         prompt+="%F{190}C%f$conflicts "
     fi
 
-    if [[ -n $( git status | grep '^rebase in progress' ) ]]; then
+    if [[ -n $( git status | grep "^rebase in progress" ) ]]; then
         # Rebase is in progress
         prompt+="%F{039}REBASE%f"
     else
@@ -174,9 +174,9 @@ _prompt_random_16() {
 
     # Change color depending on exit status of previous command
     if [[ -n $TMUX ]]; then
-        sign='>>'
+        sign=">>"
     else
-        sign=' >'
+        sign=" >"
     fi
     exit_stat="%0(?,%F{green}%B$sign%b%f,%20(?,%F{green}%B$sign%b%f,%F{red}%B$sign%b%f))"
 
