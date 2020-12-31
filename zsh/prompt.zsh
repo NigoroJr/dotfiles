@@ -34,12 +34,12 @@ _prompt_git_status() {
 
     staged="$( echo $git_status | command grep --count '^M.' )"
     if (( $staged != 0 )); then
-        prompt+="%F{010}S%f$staged "
+        prompt+="%F{082}S%f$staged "
     fi
 
     modified="$( echo $git_status | command grep --count '^.M' )"
     if (( $modified != 0 )); then
-        prompt+="%F{009}M%f$modified "
+        prompt+="%F{196}M%f$modified "
     fi
 
     untracked="$( echo $git_status | command grep --count '^??' )"
@@ -86,7 +86,15 @@ _prompt_random_256() {
         front="%F{222}%m%f"
     fi
 
-    valid_colors=({001..015} {022..051} {058..087} {094..159} {161..231} {242..255})
+    valid_colors=(
+        {001..007}
+        {009..015}
+        {022..051}
+        {058..087}
+        {094..159}
+        {161..231}
+        {242..255}
+    )
     # Needed so that $RANDOM is referenced from parent shell not subshell
     rnd=$RANDOM
     arrow=$( _prompt_arrow $rnd $valid_colors )
@@ -97,10 +105,10 @@ _prompt_random_256() {
     else
         sign=' >'
     fi
-    exit_stat="%0(?,%F{046}$sign%f,%20(?,%F{046}$sign%f,%F{009}$sign%f))"
+    exit_stat="%0(?,%F{046}$sign%f,%20(?,%F{046}$sign%f,%F{196}$sign%f))"
 
     # Construct left prompt
-    l_prompt="$front$arrow%F{45}%n%f$exit_stat "
+    l_prompt="$front$arrow%F{045}%n%f$exit_stat "
 
     # Display in two lines if too long
     local pwd_length=${(c)#${(D)PWD}}
