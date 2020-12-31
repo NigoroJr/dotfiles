@@ -15,15 +15,15 @@ _set_prompt() {
 _prompt_git_status() {
     local prompt
     local branch_name staged modified untracked conflicts
-    local git_status="$( git status --short --porcelain 2>/dev/null )"
+    local git_status="$( command git status --porcelain 2>/dev/null )"
 
-    branch_name="$( git rev-parse --abbrev-ref HEAD 2>/dev/null )"
+    branch_name="$( command git rev-parse --abbrev-ref HEAD 2>/dev/null )"
     # Not in git repository
     if [[ -z $branch_name ]]; then
         return
     # Detached state
     elif [[ $branch_name == HEAD ]]; then
-        branch_name="$( git rev-parse HEAD 2>/dev/null | head -c 7 )"
+        branch_name="$( command git rev-parse HEAD 2>/dev/null | head -c 7 )"
     fi
 
     # Clean repository?
@@ -52,12 +52,13 @@ _prompt_git_status() {
         prompt+="%F{190}C%f$conflicts "
     fi
 
-    if [[ -n $( git status | grep "^rebase in progress" ) ]]; then
-        # Rebase is in progress
-        prompt+="%F{039}REBASE%f"
-    else
-        prompt+="%F{197}$branch_name%f"
-    fi
+    # if [[ -n $( command git status | grep "^rebase in progress" ) ]]; then
+    #     # Rebase is in progress
+    #     prompt+="%F{039}REBASE%f"
+    # else
+    #     prompt+="%F{197}$branch_name%f"
+    # fi
+    prompt+="%F{197}$branch_name%f"
 
     echo $prompt
 }
