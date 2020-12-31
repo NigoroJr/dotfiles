@@ -9,14 +9,14 @@ if [[ ! -f $ZPLUG_HOME/init.zsh ]]; then
     if (( $+commands[git] )); then
         git clone https://github.com/zplug/zplug $ZPLUG_HOME
     else
-        echo 'git not found' >&2
+        echo "git not found" >&2
         exit 1
     fi
 fi
 
 source $ZPLUG_HOME/init.zsh
 
-export FZF_DEFAULT_OPTS='--ansi --exact --select-1 --exit-0 --multi --cycle --no-sort'
+export FZF_DEFAULT_OPTS="--ansi --exact --select-1 --exit-0 --multi --cycle --no-sort"
 
 # zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(brackets)
@@ -29,10 +29,10 @@ export _Z_NO_COMPLETE_CD=1
 # zaw
 zstyle ":filter-select:highlight" matched fg=magenta
 zstyle ":filter-select:highlight" selected fg=cyan
-zstyle ':filter-select' max-lines 10
-zstyle ':filter-select' extended-search yes
-zstyle ':filter-select' case-insensitive yes
-zstyle ':filter-select' rotate-list yes
+zstyle ":filter-select" max-lines 10
+zstyle ":filter-select" extended-search yes
+zstyle ":filter-select" case-insensitive yes
+zstyle ":filter-select" rotate-list yes
 
 if ! zplug check; then
     printf "Install plugins? [y/N] "
@@ -66,7 +66,7 @@ __set_colors() {
 
     eval "$( $dircolors $colors_file )"
     export ZLS_COLORS=$LS_COLORS
-    zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+    zstyle ":completion:*:default" list-colors ${(s.:.)LS_COLORS}
 }
 
 __tmux_status_bar() {
@@ -100,9 +100,9 @@ if [[ $( uname -s ) == Darwin ]]; then
     fi
 
     if (( $+commands[gls] )); then
-        alias ls='gls --color=auto'
+        alias ls="gls --color=auto"
     else
-        alias ls='ls -G'
+        alias ls="ls -G"
     fi
 fi
 
@@ -117,8 +117,8 @@ fi
 add-zsh-hook precmd __tmux_status_bar
 
 # enable cursor selection
-zstyle ':completion:*:default' menu select=1
-zstyle ':completion:*:(processes|jobs)' command "ps -u $USER"
+zstyle ":completion:*:default" menu select=1
+zstyle ":completion:*:(processes|jobs)" command "ps -u $USER"
 
 # Limit Coredump size
 if ! [[ ${(L)$( uname -s )} =~ cygwin ]]; then
@@ -169,8 +169,8 @@ bindkey -M emacs "\ep" up-line-or-history
 # Better history search
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-bindkey '^P' history-beginning-search-backward-end
-bindkey '^N' history-beginning-search-forward-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
 
 # Incremental backward search starting from previously executed command {{{
 history-incremental-pattern-search-backward-start-from-previous() {
@@ -188,12 +188,11 @@ history-incremental-pattern-search-backward-start-from-previous() {
 zle -N history-incremental-pattern-search-backward-start-from-previous
 # }}}
 
-# bindkey '' history-incremental-pattern-search-backward
-bindkey '^R' history-incremental-pattern-search-backward-start-from-previous
-bindkey '^S' history-incremental-pattern-search-forward
+bindkey "^R" history-incremental-pattern-search-backward-start-from-previous
+bindkey "^S" history-incremental-pattern-search-forward
 
-bindkey -M isearch '^H' backward-kill-word
-bindkey -M isearch '^R' history-incremental-pattern-search-backward
+bindkey -M isearch "^H" backward-kill-word
+bindkey -M isearch "^R" history-incremental-pattern-search-backward
 
 zmodload zsh/complist
 # Start menu comple with Shift-Tab

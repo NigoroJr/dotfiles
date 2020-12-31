@@ -3,27 +3,27 @@ if [[ $os =~ cygwin ]]; then
     os=cygwin
 fi
 
-zplug 'zplug/zplug'
+zplug "zplug/zplug"
 
-zplug 'NigoroJr/mkmv', \
+zplug "NigoroJr/mkmv", \
     as:command, \
-    use:'mkmv'
+    use:"mkmv"
 
-zplug 'NigoroJr/scripts', \
+zplug "NigoroJr/scripts", \
     from:bitbucket, \
     as:command, \
-    use:'bin/*'
+    use:"bin/*"
 
-zplug 'NigoroJr/scripts', \
+zplug "NigoroJr/scripts", \
     from:bitbucket, \
     as:command, \
     use:"$os/*"
 
-zplug 'NigoroJr/do-after', \
+zplug "NigoroJr/do-after", \
     as:command, \
     use:do-after
 # Completion
-zplug 'NigoroJr/do-after', \
+zplug "NigoroJr/do-after", \
     as:plugin
 
 zplug "jhawthorn/fzy", \
@@ -31,43 +31,43 @@ zplug "jhawthorn/fzy", \
     rename-to:fzy, \
     hook-build:"PREFIX=$HOME/usr make install"
 
-zplug 'NigoroJr/644ae8775023be82544d', \
+zplug "NigoroJr/644ae8775023be82544d", \
     from:gist, \
     as:command, \
     rename-to:sort-du, \
     use:sort_du.rb
 
-zplug 'plugins/golang', \
+zplug "plugins/golang", \
     from:oh-my-zsh, \
     ignore:oh-my-zsh.sh, \
     defer:2
 
-zplug 'plugins/gem', \
+zplug "plugins/gem", \
     from:oh-my-zsh, \
-    ignore:'{oh-my-zsh.sh,plugins/gem/gem.plugin.zsh}', \
+    ignore:"{oh-my-zsh.sh,plugins/gem/gem.plugin.zsh}", \
     defer:2
 
-zplug 'plugins/pip', \
+zplug "plugins/pip", \
     from:oh-my-zsh, \
-    ignore:'{oh-my-zsh.sh,plugins/pip/pip.plugin.zsh}', \
+    ignore:"{oh-my-zsh.sh,plugins/pip/pip.plugin.zsh}", \
     defer:2
 
-zplug 'Valodim/zsh-curl-completion', \
+zplug "Valodim/zsh-curl-completion", \
     defer:2
 
-zplug 'esc/conda-zsh-completion', \
+zplug "esc/conda-zsh-completion", \
     defer:2
 
-zplug 'plugins/gem', \
+zplug "plugins/gem", \
     from:oh-my-zsh, \
-    ignore:'{oh-my-zsh.sh,plugins/gem/gem.plugin.zsh}', \
+    ignore:"{oh-my-zsh.sh,plugins/gem/gem.plugin.zsh}", \
     defer:2
 
-zplug 'zsh-users/zsh-syntax-highlighting', \
+zplug "zsh-users/zsh-syntax-highlighting", \
     defer:3
 
-zplug 'knu/z', \
-    use:'z.sh', \
+zplug "knu/z", \
+    use:"z.sh", \
     defer:1
-zplug 'zsh-users/zaw', defer:2
-zplug 'NigoroJr/zaw-z', defer:3
+zplug "zsh-users/zaw", defer:2
+zplug "NigoroJr/zaw-z", defer:3

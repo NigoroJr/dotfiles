@@ -53,7 +53,7 @@ rossetup() {
     # Environment variables after common workspace is sourced
     typeset -gxA PURE_ROS_ENV
 
-    while getopts 'hrp' flag; do
+    while getopts "hrp" flag; do
         case "$flag" in
             p)
                 preserve_env=true
@@ -125,8 +125,8 @@ __latest_ros_distro() {
 ck() {
     local -a default_args
     default_args=( \
-        '--cmake-args' '-DCMAKE_BUILD_TYPE=Release' '--' \
-        '--no-notify' )
+        "--cmake-args" "-DCMAKE_BUILD_TYPE=Release" "--" \
+        "--no-notify" )
     local -a args
     args=( $@ )
 
@@ -136,7 +136,7 @@ ck() {
     fi
 
     if ! __is_ros_ws; then
-        default_args=( '--this' ${default_args[@]} )
+        default_args=( "--this" ${default_args[@]} )
     fi
 
     catkin build ${default_args[@]} ${args[@]}
@@ -145,12 +145,12 @@ ck() {
 # catkin_make version of ck
 ck-legacy() {
     local -a default_args
-    default_args=( '-DCMAKE_BUILD_TYPE=Release' )
+    default_args=( "-DCMAKE_BUILD_TYPE=Release" )
     local -a args
     args=( $@ )
 
     local cwd="$PWD"
-    while [[ $cwd != '/' ]]; do
+    while [[ $cwd != "/" ]]; do
         if __is_ros_ws $cwd; then
             (
                 builtin cd -q $cwd

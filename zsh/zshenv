@@ -45,7 +45,7 @@ typeset -U manpath
 export HISTFILE=~/.histfile
 export HISTSIZE=6000000
 export SAVEHIST=6000000
-export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>|'
+export WORDCHARS="*?_-.[]~=&;!#$%^(){}<>|"
 # Don't trim space after completion for these chars
 export ZLE_SPACE_SUFFIX_CHARS=$'|&'
 # Prompt "do you wish to see all N possibilities"
