@@ -343,3 +343,26 @@ git-https-to-ssh() {
     command git remote set-url $rem_name $new_url
     echo "URL of $rem_name set: $new_url"
 }
+
+zsh-pip-cache-packages() {
+    typeset -gx -a ZSH_PIP_INDEXES
+    ZSH_PIP_INDEXES=( https://pypi.python.org/simple/ )
+    typeset -gx ZSH_PIP_CACHE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/pip-zsh/index"
+
+    if [[ ! -d ${ZSH_PIP_CACHE_FILE:h} ]]; then
+        mkdir -p ${ZSH_PIP_CACHE_FILE:h}
+    fi
+
+    if [[ ! -f $ZSH_PIP_CACHE_FILE ]]; then
+        echo -n "getting package index..."
+        tmp_cache="$( mktemp )"
+        for index in $ZSH_PIP_INDEXES ; do
+            curl -sL "$index" 2>/dev/null \
+                | sed -n '/<a href/ s/.*>\([^<]\{1,\}\).*/\1/p' \
+                >> $tmp_cache
+        done
+        sort $tmp_cache | uniq | tr "\n" " " > $ZSH_PIP_CACHE_FILE
+        rm $tmp_cache
+        echo -n "done!"
+    fi
+}
