@@ -32,7 +32,7 @@ _prompt_git_status() {
         return
     fi
 
-    staged="$( echo $git_status | command grep --count "^M." )"
+    staged="$( echo $git_status | command grep --count "^[MA]." )"
     if (( $staged != 0 )); then
         prompt+="%F{082}S%f$staged "
     fi
