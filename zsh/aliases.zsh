@@ -29,10 +29,12 @@ alias clpp="clang++ -std=c++11"
 alias clf="clang-format"
 
 # Text Editors
-alias gvi="gvim"
 if (( $+commands[nvim] )); then
-    alias nv="nvim"
+    alias v="nvim"
+else
+    alias v="vim"
 fi
+alias gvi="gvim"
 alias em="emacsclient -nw"
 alias emacs="emacs -nw"
 alias kill-emacs='emacsclient -e "(kill-emacs)"'

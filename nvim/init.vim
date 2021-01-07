@@ -32,9 +32,9 @@ call s:source_config("vanilla/autocmd.vim")
 call s:source_config("vanilla/general_mappings.vim")
 
 " Python providers
-if executable("/usr/bin/python2.7")
-  let g:python_host_prog = "/usr/bin/python2.7"
-endif
+" if executable("/usr/bin/python2.7")
+"   let g:python_host_prog = "/usr/bin/python2.7"
+" endif
 if executable($HOME . "/.cache/nvim/python3/bin/python3")
   let g:python3_host_prog = $HOME . "/.cache/nvim/python3/bin/python3"
 endif
