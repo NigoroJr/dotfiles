@@ -1,6 +1,8 @@
 autoload -Uz colors && colors
 
 export LANG="en_US.UTF-8"
+export LC_ALL="$LANG"
+export LANGUAGE="$LANG"
 if [ -d $HOME/src/go ]; then
     export GOPATH=$HOME/src/go
 fi
