@@ -92,8 +92,12 @@ rossetup() {
         source /opt/ros/$ROS_DISTRO/setup.zsh
     fi
     common_ws="$HOME/ros/workspaces/$ROS_DISTRO/common"
+    # Catkin
     if [[ -e $common_ws/devel/setup.zsh ]]; then
         ros_source_setup_script $common_ws/devel/setup.zsh
+    # Colcon
+    elif [[ -e $common_ws/install/local_setup.zsh ]]; then
+        ros_source_setup_script $common_ws/install/local_setup.zsh
     fi
 
     PURE_ROS_ENV[ROS_DISTRO]="$ROS_DISTRO"
@@ -114,8 +118,16 @@ __is_ros_ws() {
         fi
     fi
 
-    [[ -d $cwd/src ]] && [[ -d $cwd/build ]] && [[ -d $cwd/devel ]] \
-        && [[ -e $cwd/devel/setup.zsh ]] && [[ -e $cwd/devel/.catkin ]]
+    # Catkin
+    if [[ -d $cwd/src ]] && [[ -d $cwd/build ]] && [[ -d $cwd/devel ]] \
+            && [[ -e $cwd/devel/setup.zsh ]] && [[ -e $cwd/devel/.catkin ]]; then
+        return true
+    # Colcon
+    elif [[ -d $cwd/src ]] && [[ -d $cwd/build ]] && [[ -e $cwd/build/.built_by ]]; then
+        return true
+    else
+        return false
+    fi
 }
 
 __latest_ros_distro() {
@@ -321,7 +333,13 @@ __source_ros() {
             rossetup -r $ROS_DISTRO
         fi
 
-        ros_source_setup_script devel/setup.zsh
+        # Catkin
+        if [[ -e devel/setup.zsh ]]; then
+            ros_source_setup_script devel/setup.zsh
+        # Colcon
+        elif [[ -e install/local_setup.zsh ]]; then
+            ros_source_setup_script install/local_setup.zsh
+        fi
 
         # Special handling in case non-APT-provided ros_comm is installed
         if [[ -d $( rospack find rospy 2>/dev/null )/src ]]; then
