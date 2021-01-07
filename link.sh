@@ -171,16 +171,17 @@ for ARG in $TASKS; do
             fi
             ;;
         python)
-            PTPYTHON_DEST="$HOME/.config/ptpython"
+            PTPYTHON_DEST="$HOME/.config/ptpython/"
             if [ "$( uname -s )" = "Darwin" ]; then
-                PTPYTHON_DEST="$HOME/Library/Application Support/ptpython"
+                PTPYTHON_DEST="$HOME/Library/Application Support/ptpython/"
             fi
 
             if [ "$UNLINK" -eq 1 ]; then
                 unlink "$PTPYTHON_DEST"
             else
+                mkdir -p $PTPYTHON_DEST
                 ln $DEFAULT_LINK_FLAGS \
-                    "$PREFIX/python" \
+                    "$PREFIX/python/config.py" \
                     "$PTPYTHON_DEST"
             fi
             ;;
