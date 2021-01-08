@@ -8,16 +8,28 @@ echo "Using python3 from: $( which python3 )"
 if [[ -f $VENV_DIR/bin/activate ]]; then
     echo "Found venv dir at $VENV_DIR"
 else
-    python3 -m venv $VENV_DIR
+    python3 -m venv $VENV_DIR || exit 1
 fi
 
-source $VENV_DIR/bin/activate
+source $VENV_DIR/bin/activate || exit 1
 echo "pip is now at $( which pip )"
 
 pip install --upgrade pip
 pip install --upgrade pynvim
 pip install --upgrade git+https://github.com/psf/black.git
 pip install --upgrade jedi-language-server
+
+if hash npm 2>/dev/null; then
+    echo "Installing pyright via npm"
+    sudo npm install -g pyright
+else
+    cat <<EOF >&2
+Not installing pyright because npm is not available.
+If you want pyright, install npm and run:
+
+    sudo npm install -g pyright
+EOF
+fi
 
 NVIM_VERSION="$( nvim --version | awk '/NVIM v/ { print $2 }' | tr -d "v" )"
 
