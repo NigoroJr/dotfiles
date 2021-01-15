@@ -111,7 +111,7 @@ let g:clever_f_fix_key_direction = 0
 
 [[plugins]]
 repo = "haya14busa/is.vim"
-on_map = "<Plug>(is-"
+on_map = ["/", "?", "<Plug>(is-"]
 hook_add = """
 nmap n <Plug>(is-n)
 nmap N <Plug>(is-N)
