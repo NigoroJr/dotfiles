@@ -26,7 +26,7 @@ hook_add = """
 nnoremap <Leader>es :<C-u>NeoSnippetEdit
 """
 hook_source = """
-let g:neosnippet#snippets_directory="~/.vim/snippets/"
+let g:neosnippet#snippets_directory = g:config_dir . "/snippets/"
 
 " <TAB> completion
 imap <expr> <TAB> neosnippet#expandable_or_jumpable() ?
