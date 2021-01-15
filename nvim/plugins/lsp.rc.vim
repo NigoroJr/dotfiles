@@ -20,9 +20,22 @@ if vim.fn.executable("clangd") then
   }
 end
 
-lsp.cmake.setup{
-  on_attach=on_attach,
-}
+if vim.fn.executable("cmake-language-server") == 1 then
+  local cmake_ls_cmd = ""
+  -- Prefer using the cmake-language-server in the current env
+  if vim.fn.executable("cmake-language-server") == 1 then
+    cmake_ls_cmd = "cmake-language-server"
+  else
+    local python3_dirname = vim.fn.fnamemodify(vim.g.python3_host_prog, ":h")
+    if vim.fn.executable(python3_dirname .. "/cmake-language-server") == 1 then
+      cmake_ls_cmd = python3_dirname .. "/cmake-language-server"
+    end
+  end
+  lsp.cmake.setup{
+    cmd = {cmake_ls_cmd},
+    on_attach=on_attach,
+  }
+end
 
 -- Use pyright if available
 if vim.fn.executable("pyright-langserver") == 1 then
@@ -77,9 +90,11 @@ else
   end
 end
 
-lsp.yamlls.setup{
-  on_attach=on_attach,
-}
+if vim.fn.executable("yaml-language-server") == 1 then
+  lsp.yamlls.setup{
+    on_attach=on_attach,
+  }
+end
 END
 
 nnoremap <buffer> <silent> gd <cmd>lua vim.lsp.buf.declaration()<CR>

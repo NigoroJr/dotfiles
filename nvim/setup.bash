@@ -18,6 +18,7 @@ pip install --upgrade pip
 pip install --upgrade pynvim
 pip install --upgrade git+https://github.com/psf/black.git
 pip install --upgrade jedi-language-server
+pip install --upgrade git+https://github.com/regen100/cmake-language-server.git
 
 if hash npm 2>/dev/null; then
     echo "Installing pyright via npm"
