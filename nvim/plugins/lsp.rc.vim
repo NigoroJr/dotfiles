@@ -15,10 +15,14 @@ on_attach = function(client, bufnr)
 end
 
 if vim.fn.executable("clangd") then
-  lsp.clangd.setup{}
+  lsp.clangd.setup{
+    on_attach=on_attach,
+  }
 end
 
-lsp.cmake.setup{}
+lsp.cmake.setup{
+  on_attach=on_attach,
+}
 
 -- Use pyright if available
 if vim.fn.executable("pyright-langserver") == 1 then
@@ -59,7 +63,7 @@ else
       filetypes = {"python"},
       init_options = {
         diagnostics = {
-          enable = false,
+          enable = true,
         },
         completion = {
           disableSnippets = true,
@@ -73,7 +77,9 @@ else
   end
 end
 
-lsp.yamlls.setup{}
+lsp.yamlls.setup{
+  on_attach=on_attach,
+}
 END
 
 nnoremap <buffer> <silent> gd <cmd>lua vim.lsp.buf.declaration()<CR>
