@@ -57,6 +57,11 @@ execute "source" g:config_dir . "plugins/denite.rc.vim"
 
 [[plugins]]
 repo = "Shougo/neomru.vim"
+# Note: Without this, opened files are not added to the MRU list when
+# neomru.vim is not loaded. Ideally, lazy = 0 should be used (or put into
+# essentials.toml) to be loaded on load, but doing that results in the
+# file_mru denite source not being found.
+on_event = "VimEnter"
 
 [[plugins]]
 repo = "Shougo/neoyank.vim"
