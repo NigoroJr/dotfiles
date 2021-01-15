@@ -14,7 +14,7 @@ on_attach = function(client, bufnr)
   )
 end
 
-if vim.fn.executable("clangd") then
+if vim.fn.executable("clangd") == 1 then
   lsp.clangd.setup{
     on_attach=on_attach,
   }
