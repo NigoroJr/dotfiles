@@ -8,6 +8,7 @@ echo "Using python3 from: $( which python3 )"
 if [[ -f $VENV_DIR/bin/activate ]]; then
     echo "Found venv dir at $VENV_DIR"
 else
+    # Note: In Ubuntu, may need to install python3-venv
     python3 -m venv $VENV_DIR || exit 1
 fi
 
@@ -25,10 +26,11 @@ if hash npm 2>/dev/null; then
     sudo npm install -g pyright
 else
     cat <<EOF >&2
-Not installing pyright because npm is not available.
-If you want pyright, install npm and run:
+Not installing pyright and yaml-language-server because npm is not available.
+If you want to use them, install npm and run:
 
     sudo npm install -g pyright
+    sudo npm install -g yaml-language-server
 EOF
 fi
 
