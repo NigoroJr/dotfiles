@@ -48,3 +48,40 @@ augroup filetypedetect
   autocmd BufNewFile,BufRead *.sdf setlocal filetype=xml
   autocmd BufNewFile,BufRead *.qml setlocal filetype=qml
 augroup END
+
+autocmd FileType cpp setlocal cinoptions+=(0
+" Snippets
+augroup cpp-namespace
+  autocmd!
+  autocmd FileType cpp inoremap <buffer> <expr> ; <SID>expand_namespace()
+augroup END
+function! s:expand_namespace()
+  let s = getline(".")[0:col(".")-1]
+  if s =~# '\<b;'
+    return "\<BS>oost::"
+  elseif s =~# '\<s;' && s[col(".")-2] != "s"
+    return "\<BS>td::"
+  elseif s =~# '\<d;'
+    return "\<BS>etail::"
+  " rclcpp
+  elseif s =~# '\<r;'
+    return "\<BS>clcpp::"
+  " std_msgs::
+  elseif s =~# '\<sms;'
+    return "\<BS>\<BS>\<BS>td_msgs::"
+  " geometry_msgs::
+  elseif s =~# '\<gms;'
+    return "\<BS>\<BS>\<BS>eometry_msgs::"
+  " sensor_msgs::
+  elseif s =~# '\<sems;'
+    return "\<BS>\<BS>\<BS>nsor_msgs::"
+  " visualization_msgs::
+  elseif s =~# '\<vms;'
+    return "\<BS>\<BS>\<BS>isualization_msgs::"
+  " trajectory_msgs::
+  elseif s =~# '\<tms;'
+    return "\<BS>\<BS>\<BS>rajectory_msgs::"
+  else
+    return ";"
+  endif
+endfunction
