@@ -52,6 +52,12 @@ alias gl="git log"
 alias gplum="git pull upstream master"
 alias gpom="git push origin master"
 
+# Conda
+alias cn="conda"
+alias cni="conda install"
+alias cna="conda activate"
+alias cnd="conda deactivate"
+
 # Docker
 alias d="docker"
 alias dr="docker run --interactive --tty"
