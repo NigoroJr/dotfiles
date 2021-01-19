@@ -10,7 +10,7 @@ zplug "NigoroJr/mkmv", \
     use:"mkmv"
 
 zplug "NigoroJr/scripts", \
-    from:bitbucket, \
+    from:github, \
     as:command, \
     use:"bin/*"
 
