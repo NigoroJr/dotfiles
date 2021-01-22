@@ -114,19 +114,19 @@ __is_ros_ws() {
     if [[ -L $cwd/src/CMakeLists.txt ]]; then
         local tgt_basename="$( print $cwd/src/CMakeLists.txt(:A:t) )"
         if [[ $tgt_basename == toplevel.cmake ]]; then
-            return true
+            return 0
         fi
     fi
 
     # Catkin
     if [[ -d $cwd/src ]] && [[ -d $cwd/build ]] && [[ -d $cwd/devel ]] \
             && [[ -e $cwd/devel/setup.zsh ]] && [[ -e $cwd/devel/.catkin ]]; then
-        return true
+        return 0
     # Colcon
     elif [[ -d $cwd/src ]] && [[ -d $cwd/build ]] && [[ -e $cwd/build/.built_by ]]; then
-        return true
+        return 0
     else
-        return false
+        return 1
     fi
 }
 
