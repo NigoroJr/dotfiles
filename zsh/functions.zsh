@@ -126,7 +126,7 @@ unzip() {
 }
 
 viwhich() {
-    vi "$( which "$1" )"
+    ${EDITOR:-vi} "$( which "$1" )"
 }
 compdef _command viwhich
 
