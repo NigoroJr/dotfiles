@@ -14,11 +14,6 @@ zplug "NigoroJr/scripts", \
     as:command, \
     use:"bin/*"
 
-zplug "NigoroJr/scripts", \
-    from:bitbucket, \
-    as:command, \
-    use:"$os/*"
-
 zplug "NigoroJr/do-after", \
     as:command, \
     use:do-after
@@ -52,15 +47,13 @@ zplug "plugins/pip", \
     ignore:"{oh-my-zsh.sh,plugins/pip/pip.plugin.zsh}", \
     defer:2
 
+zplug "NigoroJr/docker-zsh-completion", \
+    defer:2
+
 zplug "Valodim/zsh-curl-completion", \
     defer:2
 
 zplug "esc/conda-zsh-completion", \
-    defer:2
-
-zplug "plugins/gem", \
-    from:oh-my-zsh, \
-    ignore:"{oh-my-zsh.sh,plugins/gem/gem.plugin.zsh}", \
     defer:2
 
 zplug "zsh-users/zsh-syntax-highlighting", \
