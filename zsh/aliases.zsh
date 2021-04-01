@@ -62,14 +62,15 @@ alias cnd="conda deactivate"
 alias d="docker"
 if (( $+commands[nvidia-docker] )); then
     alias dr="docker run --interactive --tty --gpus=all"
-    alias dru='dr --user=$( id -u ):$( id -g )'
 else
     alias dr="docker run --interactive --tty"
-    alias dru='dr --user=$( id -u ):$( id -g )'
 fi
+alias drr="dr --rm"
+alias dru='dr --user=$( id -u ):$( id -g )'
 alias dim="docker images"
 alias dps="docker ps -a"
 alias drm='docker ps -a | awk "/Exited/ { print \$1 }" | xargs docker rm'
+alias drmi='docker images -f dangling=true A "!/^REPOSITORY/{ print \$3  }" | xargs -I{} docker rmi "{}"'
 
 alias cdd='cd $( dirname $_ )'
 alias rm_='rm -f $_'
