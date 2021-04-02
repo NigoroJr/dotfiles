@@ -68,9 +68,10 @@ fi
 alias drr="dr --rm"
 alias dru='dr --user=$( id -u ):$( id -g )'
 alias dim="docker images"
+alias dimd="docker images -f dangling=true"
 alias dps="docker ps -a"
 alias drm='docker ps -a | awk "/Exited/ { print \$1 }" | xargs docker rm'
-alias drmi='docker images -f dangling=true A "!/^REPOSITORY/{ print \$3  }" | xargs -I{} docker rmi "{}"'
+alias drmi='dimd | awk "!/^REPOSITORY/{ print \$3  }" | xargs -I{} docker rmi "{}"'
 
 alias cdd='cd $( dirname $_ )'
 alias rm_='rm -f $_'
