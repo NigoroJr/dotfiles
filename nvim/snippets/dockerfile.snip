@@ -1,0 +1,33 @@
+snippet		main
+abbr		Main starting point
+	FROM ${1:ubuntu}
+
+	ENV DEBIAN_FRONTEND=noninteractive
+
+	RUN apt update \
+	    && apt install -y \
+	        ${2:some-package} \
+	    && rm -rf /var/lib/apt/lists/*
+
+	${0}
+
+snippet		apt
+abbr		apt install
+	RUN apt update \
+	    && apt install -y \
+	        ${1:some-package}
+	    && rm -rf /var/lib/apt/lists/*
+
+snippet		user
+abbr		Add user
+	RUN useradd -ms /bin/bash ${1:user}
+	RUN echo "$1 ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+	USER $1
+	WORKDIR /home/$1
+
+snippet		pip
+abbr		pip install
+	RUN ${1:python3} -m pip install --upgrade pip
+	RUN $1 -m pip install \
+	    ${2:seaborn}
