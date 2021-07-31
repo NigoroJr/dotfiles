@@ -42,11 +42,12 @@ augroup vimrc
         \|  endif
 augroup END
 
-augroup filetypedetect
+augroup my_filetypedetect
   autocmd BufNewFile,BufRead *.launch setlocal filetype=xml
   autocmd BufNewFile,BufRead *.world setlocal filetype=xml
   autocmd BufNewFile,BufRead *.sdf setlocal filetype=xml
   autocmd BufNewFile,BufRead *.qml setlocal filetype=qml
+  autocmd BufNewFile,BufRead Dockerfile.* setlocal filetype=dockerfile
 augroup END
 
 autocmd FileType cpp setlocal cinoptions+=(0
