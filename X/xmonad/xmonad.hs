@@ -1,6 +1,7 @@
 import XMonad
 import XMonad.Actions.SpawnOn
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
@@ -79,6 +80,7 @@ myFloatHook = composeAll
     , className =? "R_x11"                     --> doFloat
     , className =? "Gifview"                   --> doFloat
     , className =? "Gimp"                      --> doFloat
+    , role      =? "GtkFileChooserDialog"      --> doCenterFloat
     , manageDocks ]
     where
     -- moveTo1 = doF $ W.shift "1"
@@ -90,6 +92,8 @@ myFloatHook = composeAll
     -- moveTo7 = doF $ W.shift "7"
     -- moveTo8 = doF $ W.shift "8"
     moveTo9 = doF $ W.shift "9"
+    role    = stringProperty "WM_WINDOW_ROLE"
+
 
 -- Log Hook
 myLogHook h = dynamicLogWithPP xmobarPP {
