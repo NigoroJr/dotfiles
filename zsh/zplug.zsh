@@ -50,6 +50,9 @@ zplug "plugins/pip", \
 zplug "NigoroJr/docker-zsh-completion", \
     defer:2
 
+zplug "nnao45/zsh-kubectl-completion", \
+    defer:2
+
 zplug "Valodim/zsh-curl-completion", \
     defer:2
 
@@ -64,3 +67,5 @@ zplug "knu/z", \
     defer:1
 zplug "zsh-users/zaw", defer:2
 zplug "NigoroJr/zaw-z", defer:3
+
+# zplug 'aperezdc/zsh-fzy', defer:2
