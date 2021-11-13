@@ -40,4 +40,6 @@ set smartindent
 set formatoptions+=j
 set formatlistpat=^\\s*\\(\\d\\+[\\]:.)}\\t\ ]\\\|[*+-]\\)\\s*
 set matchpairs+=<:>
+
+highlight Pmenu ctermbg=25
 syntax on
