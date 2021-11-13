@@ -2,6 +2,7 @@ autocmd FileType text,vimshell setlocal textwidth=0
 autocmd FileType ruby,html,xhtml,eruby,vim,yaml,toml,xml,cmake setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType python,scss setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType python setlocal textwidth=88
+autocmd FileType tex setlocal textwidth=0
 autocmd FileType go setlocal noexpandtab
 autocmd FileType man setlocal nonumber noexpandtab shiftwidth=8 tabstop=8 softtabstop=8
 
