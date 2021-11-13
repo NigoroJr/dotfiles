@@ -1,4 +1,4 @@
-URxvt.termName: rxvt-256color
+URxvt.termName: rxvt-unicode-256color
 
 URxvt.depth: 32
 URxvt.foreground: snow
