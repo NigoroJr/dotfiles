@@ -42,7 +42,15 @@ if vim.fn.executable("pyright-langserver") == 1 then
   lsp.pyright.setup{
     filetypes = {"python"},
     root_dir = function(fname)
-      return vim.fn.getcwd()
+      local root_files = {
+        "pyproject.toml",
+        "setup.py",
+        "setup.cfg",
+        "requirements.txt",
+        "Pipfile",
+        "pyrightconfig.json",
+      }
+      return lsp.util.root_pattern(unpack(root_files))(fname) or vim.fn.getcwd()
     end,
     settings = {
       python = {
