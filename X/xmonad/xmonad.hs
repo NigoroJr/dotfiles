@@ -102,13 +102,9 @@ myLogHook h = dynamicLogWithPP xmobarPP {
 myStartupHook = do
     setWMName "LG3D"
     spawnOn "1" "urxvt"
-    spawnOn "2" "firefox"
+    -- spawnOn "2" "firefox"
     -- spawnOn "2" "chromium"
-    -- spawnOn "3" "gvim"
-    -- spawnOn "8" "urxvt"
-    -- spawnOn "8" "urxvt"
-    -- spawnOn "8" "urxvt"
-    -- spawnOn "8" "urxvt"
+    spawnOn "2" "google-chrome"
 
 -- Keybindings
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
