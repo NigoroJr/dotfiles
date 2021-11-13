@@ -107,6 +107,7 @@ autocmd FileType go setlocal noexpandtab
 autocmd FileType man setlocal nonumber noexpandtab shiftwidth=8 tabstop=8 softtabstop=8
 autocmd FileType help syntax clear helpNote
 autocmd BufWritePost .zsh* call s:recompile_zshrc(expand('%'))
+autocmd BufRead,BufNewFile *.qml setfiletype qml
 " }}}
 " General key bindings   {{{
 " Double leader
