@@ -23,16 +23,7 @@ export ALTERNATE_EDITOR=""
 
 path=($HOME/bin(N) \
     $HOME/usr/bin(N) \
-    ${GOPATH:+$GOPATH/bin}(N) \
-    $HOME/.rbenv/bin(N) \
-    $HOME/.rbenv/shims(N) \
-    $HOME/.pyenv/bin(N) \
-    $HOME/.pyenv/shims(N) \
-    $HOME/.plenv/bin(N) \
-    $HOME/.plenv/shims(N) \
     $HOME/.local/bin(N) \
-    $HOME/*/adt-bundle/sdk/{tools,platform-tools}(N) \
-    /usr/lib/go/bin(N) \
     /usr/local/bin(N) \
     /usr/bin(N) \
     /bin(N) \
@@ -65,9 +56,3 @@ $fg_bold[blue]%J$reset_color
 export XDG_DATA_HOME=$HOME/.local/share/
 export XDG_CONFIG_HOME=$HOME/.config/
 export XDG_DATA_DIRS=/usr/local/share/:/usr/share/
-
-# Extension patterns
-export P_EXT_IMG="(png|bmp|gif|jpg|jpeg)"
-export P_EXT_MOV="(mp4|mkv|wma|avi|mov|webm)"
-export P_EXT_LOSSY="(mp3|m4a|aac)"
-export P_EXT_LOSSLESS="(flac|m4a|ape|wav)"
