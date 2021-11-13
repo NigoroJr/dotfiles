@@ -100,3 +100,32 @@ snippet		super
 abbr		super
 options		head
 	super(${1:this_class}, self)${0}
+
+snippet		logging
+abbr		logging
+options		head
+	import logging
+	
+	formatter = logging.Formatter(
+	    fmt="[%(asctime)s : %(levelname)s] %(message)s",
+	    datefmt="%Y-%m-%d %H:%M:%S",
+	)
+	handler = logging.StreamHandler()
+	handler.setFormatter(formatter)
+	${1:logger} = logging.getLogger(__name__)
+	${1}.addHandler(handler)
+	${1}.setLevel(logging.INFO)
+
+snippet		logging-rich
+abbr		logging-rich
+options		head
+	import logging
+	from rich.logging import RichHandler
+	
+	logging.basicConfig(
+	    level=logging.INFO,
+	    format="%(message)s",
+	    datefmt="[%Y-%m-%d %H:%M:%S]",
+	    handlers=[RichHandler()],
+	)
+	${1:logger} = logging.getLogger(__name__)
