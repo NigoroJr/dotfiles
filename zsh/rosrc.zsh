@@ -42,4 +42,6 @@ elif (( $USE_ROS_1_OR_2 == 2 )); then
 
     source $HOME/.ros2functions.zsh
     source $HOME/.ros2aliases.zsh
+
+    add-zsh-hook chpwd __source_ros
 fi

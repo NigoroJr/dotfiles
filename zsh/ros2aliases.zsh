@@ -9,11 +9,7 @@ alias rth="ros2 topic hz"
 alias rnl="ros2 node list"
 alias rni="ros2 node info"
 alias rpf="ros2 pkg prefix"
+alias rsu="[[ -e install/setup.zsh ]] && source install/setup.zsh"
 
 alias rpg="rqt_graph"
 # alias rtt="rosrun rqt_tf_tree rqt_tf_tree"
-# if (( $+functions[ros_source_setup_script] )); then
-#     alias rsu="ros_source_setup_script devel/setup.zsh"
-# else
-#     alias rsu="source devel/setup.zsh"
-# fi
