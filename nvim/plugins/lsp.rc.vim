@@ -50,7 +50,7 @@ if vim.fn.executable("pyright-langserver") == 1 then
         "Pipfile",
         "pyrightconfig.json",
       }
-      return lsp.util.root_pattern(unpack(root_files))(fname) or vim.fn.getcwd()
+      return lsp.util.root_pattern(unpack(root_files))(fname)
     end,
     settings = {
       python = {
@@ -109,4 +109,4 @@ nnoremap <buffer> <silent> gd <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <buffer> <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <buffer> <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 
-autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+autocmd CursorHold * lua vim.diagnostic.open_float()
