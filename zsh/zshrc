@@ -68,18 +68,6 @@ __set_colors() {
     export ZLS_COLORS=$LS_COLORS
     zstyle ":completion:*:default" list-colors ${(s.:.)LS_COLORS}
 }
-
-__tmux_status_bar() {
-    if [[ -n $TMUX ]]; then
-        local switch
-        if (( $( tmux list-windows | command wc -l ) == 1 )); then
-            switch=off
-        else
-            switch=on
-        fi
-        tmux set-option status $switch
-    fi
-}
 # }}}
 
 # Read aliases and functions
@@ -112,9 +100,6 @@ else
     __set_colors $dircolors
 fi
 # }}}
-
-# In tmux, don't show status bar if there's only one window
-add-zsh-hook precmd __tmux_status_bar
 
 # enable cursor selection
 zstyle ":completion:*:default" menu select=1
