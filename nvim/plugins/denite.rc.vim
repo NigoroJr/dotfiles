@@ -24,7 +24,6 @@ function! s:denite_filter_settings() abort
 
   imap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
   imap <silent><buffer> <C-g> <Plug>(denite_filter_quit)
-        \:q<CR>
 
   imap <silent><buffer><expr> <CR> denite#do_map("do_action")
 

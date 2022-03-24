@@ -31,6 +31,7 @@ alias clf="clang-format"
 # Text Editors
 if (( $+commands[nvim] )); then
     alias v="nvim"
+    alias vimdiff="nvim -d"
 else
     alias v="vim"
 fi
