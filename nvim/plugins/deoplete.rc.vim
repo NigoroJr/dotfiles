@@ -1,5 +1,6 @@
 call deoplete#custom#option("omni_patterns", {
       \ "python": '\%(^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*',
+      \ "go": '[^.[:digit:] *\t]\.\w*\|^\s*import\s\+"',
       \})
 call deoplete#custom#option("min_pattern_length", 1)
 

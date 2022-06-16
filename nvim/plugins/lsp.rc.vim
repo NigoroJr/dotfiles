@@ -20,6 +20,23 @@ if vim.fn.executable("clangd") == 1 then
   }
 end
 
+if vim.fn.executable("gopls") == 1 then
+  lsp.gopls.setup{
+    cmd = {"gopls", "serve"},
+    filetypes = {"go", "gomod"},
+    root_dir = lsp.util.root_pattern("go.work", "go.mod", ".git"),
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+      },
+    },
+    on_attach=on_attach,
+  }
+end
+
 if vim.fn.executable("cmake-language-server") == 1 then
   local cmake_ls_cmd = ""
   -- Prefer using the cmake-language-server in the current env
