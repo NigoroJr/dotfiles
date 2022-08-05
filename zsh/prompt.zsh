@@ -144,7 +144,9 @@ _prompt_random_256() {
     fi
 
     # Python info
-    if (( $+commands[pyenv] )); then
+    if [[ -n $VIRTUAL_ENV ]]; then
+        additional_prompts+="$( basename $VIRTUAL_ENV )"
+    elif (( $+commands[pyenv] )); then
         local pyenv_prompt="$( pyenv version-name )"
         if [[ $pyenv_prompt != system ]]; then
             additional_prompts+="$pyenv_prompt"
