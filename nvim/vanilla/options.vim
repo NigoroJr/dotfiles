@@ -41,6 +41,6 @@ set formatoptions+=j
 set formatlistpat=^\\s*\\(\\d\\+[\\]:.)}\\t\ ]\\\|[*+-]\\)\\s*
 set matchpairs+=<:>
 
-highlight Pmenu ctermbg=25 ctermfg=249
+highlight Pmenu ctermbg=32 ctermfg=235
 highlight PmenuSel ctermfg=252
 syntax on
