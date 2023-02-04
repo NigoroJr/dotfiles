@@ -110,6 +110,16 @@ myStartupHook = do
     -- spawnOn "2" "chromium"
     spawnOn "2" "google-chrome"
 
+-- Mouse bindings
+myMouseBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
+    [ ((modMask .|. controlMask, button1),
+        (\w -> focus w >> mouseMoveWindow w >> windows W.shiftMaster))
+    , ((modMask .|. controlMask, button2),
+        (\w -> focus w >> windows W.shiftMaster))
+    , ((modMask .|. controlMask, button3),
+        (\w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster))
+    ]
+
 -- Keybindings
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -215,4 +225,5 @@ main = do
         , logHook = myLogHook myStatusBar
         , startupHook = myStartupHook
         , keys = myKeys
+        , mouseBindings = myMouseBindings
     }
