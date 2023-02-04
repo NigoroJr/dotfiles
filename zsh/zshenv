@@ -27,6 +27,7 @@ path=($HOME/bin(N) \
     $HOME/.pyenv/bin(N) \
     $HOME/.rbenv/bin(N) \
     $HOME/.plenv/bin(N) \
+    $HOME/.cargo/bin(N) \
     /usr/local/bin(N) \
     /usr/bin(N) \
     /bin(N) \

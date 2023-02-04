@@ -4,7 +4,7 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd _set_prompt
 
 _set_prompt() {
-    if [[ $TERM =~ "256color" ]]; then
+    if [[ $TERM =~ "256color" ]] || [[ $TERM = "alacritty" ]]; then
         _prompt_random_256
     else
         _prompt_random_16

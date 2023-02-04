@@ -1,5 +1,7 @@
 # Aliases
 
+alias pl="print -l"
+
 alias ls="ls --color=auto"
 alias l="ls -lh"
 alias la="ls -A"
@@ -11,11 +13,19 @@ alias egrep="egrep --color=auto"
 alias df="df -h"
 alias du="du -h"
 
+alias date-ymd="date +%Y%m%d"
+
 alias watch="watch -n 0.5"
 
-alias mplayer-audio="mplayer -novideo -demuxer lavf"
+if (( $+commands[mplayer] )); then
+    alias mplayer-audio="mplayer -novideo -demuxer lavf"
+fi
 
 alias rsync="rsync --progress"
+
+if (( $+commands[pip] )); then
+    alias piup="pip install --upgrade pip"
+fi
 
 # Typos
 alias rm_r="rm -r"
@@ -70,10 +80,12 @@ alias drr="dr --rm"
 alias dru='dr --user=$( id -u ):$( id -g )'
 alias drru='drr --user=$( id -u ):$( id -g )'
 alias dim="docker images"
-alias dimd="dim -f dangling=true"
+alias dimd="docker images -f dangling=true"
 alias dps="docker ps -a"
-alias drm='dps | awk "/Exited/ { print \$1 }" | xargs docker rm'
-alias drmi='dimd | awk "!/^REPOSITORY/{ print \$3  }" | xargs -I{} docker rmi "{}"'
+alias drm='docker ps -a | awk "/Exited/ { print \$1 }" | xargs docker rm'
+alias drmi='docker images -f dangling=true | awk "!/^REPOSITORY/{ print \$3  }" | xargs -I{} docker rmi "{}"'
+alias ds="docker start"
+alias dbash='docker exec -it $( dps -lq ) /bin/bash'
 
 alias cdd='cd $( dirname $_ )'
 alias rm_='rm -f $_'
