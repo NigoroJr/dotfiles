@@ -16,7 +16,7 @@ import System.Exit
 
 -- Terminal
 myTerminal :: String
-myTerminal = "urxvt"
+myTerminal = "alacritty"
 
 -- Border
 myBorderWidth :: Dimension
@@ -105,7 +105,7 @@ myLogHook h = dynamicLogWithPP xmobarPP {
 -- Startup Hook
 myStartupHook = do
     setWMName "LG3D"
-    spawnOn "1" "urxvt"
+    spawnOn "1" "alacritty"
     -- spawnOn "2" "firefox"
     -- spawnOn "2" "chromium"
     spawnOn "2" "google-chrome"
