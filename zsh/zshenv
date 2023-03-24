@@ -55,7 +55,19 @@ export LISTMAX=0
 export REPORTTIME=10
 export TIMEFMT="\
 $fg_bold[blue]%J$reset_color
-  %*E :: $fg[green]U$reset_color %*U :: $fg[blue]S$reset_color %*S :: %M KiB"
+  TOTAL : %*E
+  USER  : %*U
+  SYS   : %*S
+  CPU   : %P
+  MEM   : %M KB"
+  # MEMORY:
+  #   Shared (text)           : %X KB
+  #   Unshared (data/stack)   : %D KB
+  #   Total                   : %K KB
+  #   Maximum                 : %M KB"
+# export TIMEFMT="\
+# $fg_bold[blue]%J$reset_color
+#   %*E :: $fg[green]U$reset_color %*U :: $fg[blue]S$reset_color %*S :: %M KiB"
 
 export XDG_DATA_HOME=$HOME/.local/share/
 export XDG_CONFIG_HOME=$HOME/.config/
