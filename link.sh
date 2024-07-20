@@ -10,7 +10,7 @@
 #   ./link.sh
 #
 #   # Link files and directories in the vim and emacs directory
-#   ./link.sh -f vim emacs
+#   ./link.sh -f nvim emacs
 #
 #   # Unlink X11-related stuff
 #   ./link.sh -u X
@@ -25,7 +25,7 @@ PREFIX="$( cd "$( dirname "$0" )" && pwd )"
 # Flags to add to the ln command
 DEFAULT_LINK_FLAGS='-s -n'
 # Tasks to run when none specified
-ALL_TASKS="vim nvim zsh tmux emacs git X ruby python others"
+ALL_TASKS="nvim zsh tmux emacs git X ruby python others"
 UNLINK=0
 
 while getopts 'fuh' flag; do
@@ -93,7 +93,11 @@ version_required() {
 for ARG in $TASKS; do
     echo "Running Task: $ARG"
     case "$ARG" in
-        vim|zsh|emacs|X)
+        vim)
+            echo "Vim is no longer supported :("
+            echo "Did you mean nvim?"
+            ;;
+        zsh|emacs|X)
             for F in $PREFIX/$ARG/*; do
                 process_target $F
             done
