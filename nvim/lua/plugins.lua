@@ -119,6 +119,9 @@ return {
       "nvim-tree/nvim-web-devicons",
       "nvim-treesitter/nvim-treesitter",
       "nvim-telescope/telescope-fzf-native.nvim",
+      "nvim-telescope/telescope-frecency.nvim",
+      "nvim-telescope/telescope-file-browser.nvim",
+      "nvim-telescope/telescope-ui-select.nvim",
     },
     config = function()
       require("config/telescope")
@@ -130,32 +133,6 @@ return {
     "nvim-telescope/telescope-fzf-native.nvim",
     lazy = true,
     build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
-  },
-  {
-    "nvim-telescope/telescope-ui-select.nvim",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-    },
-    keys = { "<Leader>es" },
-    cmd = { "Telescope" },
-  },
-  {
-    "nvim-telescope/telescope-frecency.nvim",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-    },
-    keys = {
-      "<Leader>um", "<cmd>Telescope frecency<CR>",
-    },
-  },
-  {
-    "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-    },
-    keys = {
-      "<Leader>uf", "<cmd>Telescope file_browser<CR>",
-    },
   },
   {
     "hrsh7th/nvim-cmp",
@@ -239,6 +216,7 @@ return {
   },
   {
     "nvimdev/lspsaga.nvim",
+    layy = true,
     config = function()
       require("config/lspsaga")
     end,

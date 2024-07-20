@@ -77,13 +77,18 @@ local grep_string_cwd = function()
   })
 end
 
-vim.keymap.set("n", "<Leader>uf", find_files_cwd, {})
-vim.keymap.set("n", "<Leader>ug", live_grep_cwd, {})
-vim.keymap.set("n", "<Leader>us", grep_string_cwd, {})
-vim.keymap.set("n", "<Leader>ut", builtin.treesitter, {})
-vim.keymap.set("n", "<Leader>ud", builtin.diagnostics, {})
+local map = vim.keymap.set
+
+map("n", "<Leader>uf", find_files_cwd, {})
+map("n", "<Leader>ug", live_grep_cwd, {})
+map("n", "<Leader>us", grep_string_cwd, {})
+map("n", "<Leader>ut", builtin.treesitter, {})
+map("n", "<Leader>ud", builtin.diagnostics, {})
 
 telescope.load_extension("file_browser")
 telescope.load_extension("frecency")
 telescope.load_extension("fzf")
 telescope.load_extension("ui-select")
+
+map("n", "<Leader>um", "<cmd>Telescope frecency<CR>", {})
+map("n", "<Leader>ub", "<cmd>Telescope file_browser<CR>", {})
