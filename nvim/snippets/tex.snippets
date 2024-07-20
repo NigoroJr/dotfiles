@@ -1,0 +1,36 @@
+snippet		helloworld hello world
+	\documentclass{article}
+
+	\begin{document}
+		Hello world!
+	\end{document}
+
+snippet		aligned aligned
+	\begin{aligned}
+		${0}
+	\end{aligned}
+
+snippet		frac frac
+	\frac{${1}}{${2}}
+
+snippet		label_alpha [label=(\alph*)]
+	[label=(\alph*)]
+
+snippet		bibliography
+	\bibliographystyle{plain}
+	\bibliography{${1:bibliography}}
+	${0}
+
+snippet		subfigure
+	\begin{subfigure}[${1:b}]{${2:0.3\\textwidth}}
+		${0}
+	\end{subfigure}
+
+snippet		tikzpicture \begin{tikzpicture}
+	\begin{tikzpicture}
+		${0}
+	\end{tikzpicture}
+
+# Jump to the beginning so that the space can be deleted
+snippet		ref ~\ref{}
+	${2}~\ref{${1}}${0}

@@ -1,0 +1,60 @@
+snippet perl
+	#!/usr/bin/env perl
+
+	use strict;
+	use warnings;
+
+	${1}
+
+# Package
+snippet package
+	package ${1: package name};
+
+	${0}
+
+	1;
+
+# Store STDIN into variable
+snippet stdin chomp(my ${1} = <STDIN>);
+	chomp(my $${1:var} = <STDIN>);
+	${0}
+
+# Swap variables
+snippet swap ($var1, $var2) = ($var2, $var1);
+	(${1:var1}, ${2:var2}) = ($2, $1);
+	${0}
+
+snippet push push @array, $scalar
+	push @${2}, $${1};
+
+snippet p
+	print "${1}\n";
+
+snippet pf
+	printf "${1}\n", ${2};
+
+snippet pd
+alias		dumper
+	print Dumper(${1});
+
+snippet dd use Data::Dumper;
+	use Data::Dumper;
+	${0}
+
+snippet benchmark use Benchmark(:all);
+	use Benchmark qw(:all);
+
+snippet cmpthese cmpthese(100000, {...})
+	cmpthese(${1:100000}, {
+		${2:sub1} => sub { ${3:$2()} },
+		${4:sub2} => sub { ${5:$4()} },${0}
+	});
+
+snippet timethese timethese(100000, {...})
+	timethese(${1:100000}, {
+		${2:sub1} => sub { ${3:$2()} },
+		${4:sub2} => sub { ${5:$4()} },${0}
+	});
+
+snippet join join array
+		join ${1:$glue}, ${2:@arr}

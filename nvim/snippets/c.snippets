@@ -1,0 +1,34 @@
+snippet main
+	int main(int argc, char const* argv[]) {${0:TARGET}
+		return 0;
+	}
+
+snippet pf
+	printf("${1}\n"${2});${0}
+
+snippet malloc
+	(${3:$1*})malloc(sizeof(${1:#:type}) * ${2});${0}
+
+snippet hello Hello, World!
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <string.h>
+	
+	int main(const int argc, char const *argv[]) {
+		${1:printf("Hello, World!\\n");}
+	
+		return 0;
+	}
+
+snippet impl_me Implement me!
+	// TODO: Implement me!
+
+snippet     switch switch-case
+	switch (${1:#var}) {
+		case ${2:#val}:
+			${0}
+			break;
+	}
+
+snippet us unsigned
+	unsigned ${0}

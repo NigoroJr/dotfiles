@@ -1,0 +1,233 @@
+snippet main
+	int
+	main(int argc, char const* argv[]) {${0}
+		return 0;
+	}
+
+snippet incl
+	#include "${1}"${0}
+
+snippet class_short
+	class ${1:Name} {
+	public:
+		${0}
+	};
+
+snippet cpp Include headers
+	#include <algorithm>
+	#include <chrono>
+	#include <functional>
+	#include <iomanip>
+	#include <iostream>
+	#include <iterator>
+	#include <map>
+	#include <memory>
+	#include <numeric>
+	#include <set>
+	#include <sstream>
+	#include <string>
+	#include <thread>
+	#include <tuple>
+	#include <type_traits>
+	#include <unordered_map>
+	#include <unordered_set>
+	#include <utility>
+	#include <vector>
+
+	int
+	main(const int argc, char* const argv[]) {${0}
+
+		return 0;
+	}
+
+snippet hello hello_world
+	#include <iostream>
+
+	int
+	main(const int argc, char* const argv[]) {
+	${0}
+		return 0;
+	}
+
+snippet param \param[in] param desc
+	\param[${1:in}] ${2:param} ${3:description}
+
+snippet operator operator overload
+	${1:Foo&}
+	${2:Foo::}operator${3:=}(${4:const Foo& other})${0}
+
+snippet template template<typename T>
+	template<typename ${1:T}>${0}
+
+snippet class_quick quick class declaration
+	class ${1:Foo} ${0}{
+	public:
+		/* Constructors, Destructor, and Assignment operator {{{ */
+		// Default constructor
+		$1()
+		{
+		}
+
+		// Copy constructor
+		$1(const $1& other)
+			${3:#init member vars}
+		{
+		}
+
+		// Move constructor
+		$1($1&& other)
+			${4:#init member vars}
+		{
+		}
+
+		// Destructor
+		~$1()
+		{
+		}
+
+		// Assignment operator
+		$1&
+		operator=(const $1& other) {
+			${5:#assignments}
+			return *this;
+		}
+
+		// Move assignment operator
+		$1&
+		operator=($1&& other) {
+			${6:#assignments}
+			return *this;
+		}
+		/* }}} */
+
+	private:
+		${2:#member vars}
+	};
+
+snippet class_declaration class declaration
+	class ${1:Foo} ${0}{
+	public:
+		/* Constructors, Destructor, and Assignment operators {{{ */
+		// Default constructor
+		$1();
+
+		// Copy constructor
+		$1(const $1& other);
+
+		// Move constructor
+		$1($1&& other);
+
+		// Destructor
+		~$1();
+
+		// Assignment operator
+		$1&
+		operator=(const $1& other);
+
+		// Move assignment operator
+		$1&
+		operator=($1&& other);
+		/* }}} */
+
+	private:
+		${2:#member vars}
+	};
+
+snippet class_definition class definition
+	/* Constructors, Destructor, and Assignment operators {{{ */
+	// Default constructor
+	$1::${1:#class name}()
+		${2: #initializations}
+	{
+	}
+
+	// Copy constructor
+	$1::$1(const $1& other)
+		${3: #initializations}
+	{
+	}
+
+	// Move constructor
+	$1::$1($1&& other)
+		${4: #initializations}
+	{
+	}
+
+	// Destructor
+	$1::~$1()
+	{
+	}
+
+	// Assignment operator
+	$1&
+	$1::operator=(const $1& other) {
+		${6}
+		return *this;
+	}
+
+	// Move assignment operator
+	$1&
+	$1::operator=($1&& other) {
+		${7}
+		return *this;
+	}
+	/* }}} */
+
+snippet operator== operator==
+	bool
+	operator${1:==}(const ${2:Foo}& ${3:other}) ${4:const}${0}
+
+snippet operator<< operator<<
+	std::ostream&
+	operator<<(std::ostream& ${1:os}, const ${2:Foo}& ${3:f})${0}
+
+snippet switch switch-case
+	switch (${1:#var}) {
+		case ${2:#val}:
+			${0}
+			break;
+	}
+
+snippet dump std::copy(v.begin(), v.end(), std::ostream_iterator<>)
+	std::copy(${1:v}.begin(), $1.end(), std::ostream_iterator<${2:int}>(${3:std::cout}, ${4:" "}));
+	std::cout << std::endl;${0}
+
+snippet begin-end begin-end
+	${1:#container}.begin(), $1.end()${0}
+
+snippet vector std::vector
+	std::vector<${1:int}>${0}
+
+snippet pair std::pair
+	std::pair<${1:unsigned}, ${2:unsigned}>${0}
+
+snippet include_vector #include <vector>
+	#include <vector>${0}
+
+snippet dt decltype()
+	decltype(${1:#var})${0}
+
+snippet tn typename
+	typename ${1:T}${0}
+
+snippet boost_test_module Boost.Test
+	#define BOOST_TEST_MODULE ${1:#model name}
+	#include <boost/test/unit_test.hpp>
+	${0}
+
+snippet boost_auto_test_case BOOST_AUTO_TEST_CASE
+	BOOST_AUTO_TEST_CASE(${1:#name}) {
+		${0}
+	}
+
+snippet boost_require BOOST_REQUIRE
+	BOOST_REQUIRE(${1:#condition});${0}
+
+snippet boost_check BOOST_CHECK
+	BOOST_CHECK(${1:#condition});${0}
+
+snippet boost_check_equal BOOST_CHECK_EQUAL
+	BOOST_CHECK_${1:EQUAL}(${2:#var1}, ${3:#var2});${0}
+
+snippet boost_require_equal BOOST_REQUIRE_EQUAL
+	BOOST_REQUIRE_${1:EQUAL}(${2:#var1}, ${3:#var2});${0}
