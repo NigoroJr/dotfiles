@@ -4,6 +4,6 @@ require("illuminate").configure({
     "treesitter",
     "regex",
   },
-  delay = 500,
+  delay = vim.o.updatetime,
   min_count_to_highlight = 2,
 })

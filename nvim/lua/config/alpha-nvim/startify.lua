@@ -140,7 +140,7 @@ local function mru(start, cwd, items_number, opts)
       oldfiles[#oldfiles + 1] = v
     end
   end
-  local target_width = 74
+  local target_width = 78 - 7
 
   local tbl = {}
   local num_skipped = 0

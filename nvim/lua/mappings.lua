@@ -78,3 +78,5 @@ map("n", "<Leader>dt", toggle_diff, opts_s)
 
 -- Save as super user
 map("n", "<Leader>ws", require("utils").sudo_write, opts_s)
+
+map({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, opts_s)

@@ -19,6 +19,26 @@ local on_attach = function(client, bufnr)
       update_in_insert = false,
     }
   )
+
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover,
+    {
+      border = "rounded",
+    }
+  )
+
+  require("lsp_signature").on_attach(
+    {
+      bind = true,
+      doc_lines = 30,
+      max_height = 30,
+      hint_enable = false,
+      handler_opts = {
+        border = "rounded",
+      },
+    },
+    bufnr
+  )
 end
 
 mason_lspconfig.setup_handlers({
@@ -123,6 +143,18 @@ mason_lspconfig.setup_handlers({
 -- nnoremap <buffer> <silent> gd <cmd>lua vim.lsp.buf.declaration()<CR>
 -- nnoremap <buffer> <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 -- nnoremap <buffer> <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+
+vim.diagnostic.config({
+  float = {
+    border = "rounded",
+  },
+})
+
+local map = vim.keymap.set
+map("n", "<M-k>", vim.diagnostic.goto_prev)
+map("n", "<M-j>", vim.diagnostic.goto_next)
+map("n", "K", vim.lsp.buf.hover, {})
+map({ "n", "i" }, "<S-M-r>", vim.lsp.buf.rename, {})
 
 -- LSP servers to setup:
 -- "black", "clang-format", "clangd", "cmake-language-server",

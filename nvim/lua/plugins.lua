@@ -74,6 +74,7 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "neovim/nvim-lspconfig",
+      "nvimdev/lspsaga.nvim",
     },
     config = function()
       require("config/mason")
@@ -165,6 +166,7 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
+      "ray-x/lsp_signature.nvim",
       "L3MON4D3/LuaSnip",
     },
     config = function()
@@ -234,5 +236,16 @@ return {
     config = function()
       require("config/illuminate")
     end,
+  },
+  {
+    "nvimdev/lspsaga.nvim",
+    config = function()
+      require("config/lspsaga")
+    end,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    keys = { "<M-CR>", "<M-d>" },
   },
 }

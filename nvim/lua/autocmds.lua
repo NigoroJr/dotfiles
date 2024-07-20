@@ -58,14 +58,6 @@ vim.api.nvim_create_autocmd(
 )
 
 vim.api.nvim_create_autocmd(
-  "CursorHold", {
-    callback = function(opts)
-      vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
-    end
-  }
-)
-
-vim.api.nvim_create_autocmd(
   "FileType", {
     group = vim.api.nvim_create_augroup("vert-vim-help", { clear = true }),
     pattern = "help",

@@ -81,11 +81,9 @@ vim.keymap.set("n", "<Leader>uf", find_files_cwd, {})
 vim.keymap.set("n", "<Leader>ug", live_grep_cwd, {})
 vim.keymap.set("n", "<Leader>us", grep_string_cwd, {})
 vim.keymap.set("n", "<Leader>ut", builtin.treesitter, {})
-
-telescope.load_extension("frecency")
+vim.keymap.set("n", "<Leader>ud", builtin.diagnostics, {})
 
 telescope.load_extension("file_browser")
-
-telescope.load_extension("ui-select")
-
+telescope.load_extension("frecency")
 telescope.load_extension("fzf")
+telescope.load_extension("ui-select")
