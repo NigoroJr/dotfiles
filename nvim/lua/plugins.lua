@@ -226,4 +226,17 @@ return {
     },
     keys = { "<M-CR>", "<M-d>" },
   },
+  {
+    -- "is0n/jaq-nvim",
+    "naoki-mizuno/jaq-nvim",
+    branch = "close-existing",
+    lazy = true,
+    config = function()
+      require("config/jaq-nvim")
+    end,
+    keys = {
+      { "<Leader>r", "<cmd>Jaq<CR>" },
+    },
+    cmd = { "Jaq" },
+  },
 }
