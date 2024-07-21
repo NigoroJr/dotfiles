@@ -240,4 +240,11 @@ return {
     },
     cmd = { "Jaq" },
   },
+  {
+    "nvim-zh/colorful-winsep.nvim",
+    config = function()
+      require("config/colorful-winsep")
+    end,
+    event = { "WinLeave" },
+  },
 }
