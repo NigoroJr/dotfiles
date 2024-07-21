@@ -26,7 +26,8 @@ return {
   },
   {
     "RRethy/nvim-treesitter-endwise",
-    event = "InsertEnter",
+    lazy = true,
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
   {

@@ -51,15 +51,15 @@ function M.err(msg)
 end
 
 function M.is_root()
-  return not M.IS_WINDOWS and vim.loop.getuid() == 0
+  return not M.IS_WINDOWS and vim.uv.getuid() == 0
 end
 
 function M.is_darwin()
-  return vim.loop.os_uname().sysname == "Darwin"
+  return vim.uv.os_uname().sysname == "Darwin"
 end
 
 function M.is_NetBSD()
-  return vim.loop.os_uname().sysname == "NetBSD"
+  return vim.uv.os_uname().sysname == "NetBSD"
 end
 
 function M.shell_error()
@@ -95,7 +95,7 @@ function M.set_cwd(pwd)
     local parent = vim.fn.expand("%:h")
     pwd = M.git_root(parent, true) or parent
   end
-  if vim.loop.fs_stat(pwd) then
+  if vim.uv.fs_stat(pwd) then
     vim.cmd("cd " .. pwd)
     M.info(("pwd set to %s"):format(vim.fn.shellescape(pwd)))
   else

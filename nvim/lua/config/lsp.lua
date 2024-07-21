@@ -105,7 +105,7 @@ mason_lspconfig.setup_handlers({
       on_attach=on_attach,
       on_init = function(client)
         local path = client.workspace_folders[1].name
-        if vim.loop.fs_stat(path.."/.luarc.json") or vim.loop.fs_stat(path.."/.luarc.jsonc") then
+        if vim.uv.fs_stat(path.."/.luarc.json") or vim.uv.fs_stat(path.."/.luarc.jsonc") then
           return
         end
 
@@ -151,8 +151,17 @@ vim.diagnostic.config({
 })
 
 local map = vim.keymap.set
-map("n", "<M-k>", vim.diagnostic.goto_prev)
-map("n", "<M-j>", vim.diagnostic.goto_next)
+-- Added in neovim 0.11
+-- local jump_prev = function()
+--   vim.diagnostic.jump({ count = -1, float = true })
+-- end
+-- local jump_next = function()
+--   vim.diagnostic.jump({ count = 1, float = true })
+-- end
+-- map("n", "<S-M-p>", jump_prev)
+-- map("n", "<S-M-n>", jump_next)
+map("n", "<S-M-p>", vim.diagnostic.goto_prev)
+map("n", "<S-M-n>", vim.diagnostic.goto_next)
 map("n", "K", vim.lsp.buf.hover, {})
 map({ "n", "i" }, "<S-M-r>", vim.lsp.buf.rename, {})
 

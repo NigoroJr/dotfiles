@@ -2,8 +2,8 @@ require("nvim-autopairs").setup({
   map_c_h = true,
   map_c_w = true,
   fast_wrap = {
-    map = "<M-e>",
-    chars = { "{", "[", "(", "<", "'", '"', },
+    map = "<M-f>",
+    chars = { "{", "[", "(", "'", '"', },
     pattern = [=[[%'%"%>%]%)%}%,]]=],
     end_key = "$",
     before_key = "h",
@@ -11,6 +11,7 @@ require("nvim-autopairs").setup({
     cursor_pos_before = true,
     keys = "abcdefghijklmnopqrstuvwxyz",
     manual_position = true,
+    use_virt_lines = true,
     highlight = "Search",
     highlight_grey="Comment"
   },
