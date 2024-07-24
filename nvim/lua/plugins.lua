@@ -59,18 +59,8 @@ return {
     keys = { "<Leader>s" }
   },
   {
-    "williamboman/mason.nvim",
-    cmd = {
-      "Mason",
-      "MasonInstall",
-      "MasonUninstall",
-      "MasonUninstallAll",
-      "MasonLog",
-      "MasonUpdate",
-    },
-  },
-  {
     "williamboman/mason-lspconfig.nvim",
+    lazy = true,
     event = "InsertEnter",
     dependencies = {
       "williamboman/mason.nvim",
@@ -80,6 +70,14 @@ return {
     config = function()
       require("config/mason")
     end,
+    cmd = {
+      "Mason",
+      "MasonInstall",
+      "MasonUninstall",
+      "MasonUninstallAll",
+      "MasonLog",
+      "MasonUpdate",
+    },
   },
   {
     "neovim/nvim-lspconfig",
