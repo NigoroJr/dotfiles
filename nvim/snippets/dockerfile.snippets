@@ -10,20 +10,37 @@ snippet main Main starting point
 
 	${0}
 
-snippet apt apt install
+snippet ubuntu Starting point for ubuntu
+	FROM ubuntu:${1:latest}
+
+	ENV DEBIAN_FRONTEND=noninteractive
+
 	RUN apt update \
 		&& apt install -y \
-			${1:some-package}
+			${2:some-package} \
 		&& rm -rf /var/lib/apt/lists/*
 
-snippet user Add user
+snippet alpine Starting point for alpine
+	FROM alpine:${1:latest}
+
+	RUN apk add --no-cache \
+		${2:some-package}
+
+snippet user-ubuntu Add user (ubuntu)
 	RUN useradd -ms /bin/bash ${1:user}
-	RUN echo "$1 ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 	USER $1
 	WORKDIR /home/$1
+
+snippet user-alpine Add user (alpine)
+	RUN adduser -D ${1:user}
+
+	USER $1
 
 snippet pip pip install
 	RUN ${1:python3} -m pip install --upgrade pip
 	RUN $1 -m pip install \
 		${2:seaborn}
+
+snippet sudoers Add user to sudoers
+	RUN echo "${1:user} ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
