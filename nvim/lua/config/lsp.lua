@@ -148,6 +148,10 @@ vim.diagnostic.config({
   float = {
     border = "rounded",
   },
+  virtual_text = false,
+  underline = true,
+  -- signs = false,
+  update_in_insert = false,
 })
 
 local map = vim.keymap.set
