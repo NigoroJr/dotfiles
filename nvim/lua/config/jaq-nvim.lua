@@ -9,24 +9,24 @@ require("jaq-nvim").setup({
     -- Uses shell commands
     external = {
       markdown = "glow %",
-      python   = "python3 %",
-      go       = "go run %",
-      sh       = "sh %"
+      python = "python3 %",
+      go = "go run %",
+      sh = "sh %"
     }
   },
 
   behavior = {
     -- Default type
-    default       = "terminal",
+    default = "terminal",
 
     -- Start in insert mode
-    startinsert   = false,
+    startinsert = false,
 
     -- Use `wincmd p` on startup
-    wincmd        = true,
+    wincmd = true,
 
     -- Auto-save files
-    autosave      = true,
+    autosave = true,
 
     -- Close existing buffers
     closeexisting = true
@@ -35,20 +35,20 @@ require("jaq-nvim").setup({
   ui = {
     float = {
       -- See ':h nvim_open_win'
-      border    = "rounded",
+      border = "rounded",
 
       -- See ':h winhl'
-      winhl     = "Normal",
-      borderhl  = "FloatBorder",
+      winhl = "Normal",
+      borderhl = "FloatBorder",
 
       -- See ':h winblend'
-      winblend  = 0,
+      winblend = 0,
 
       -- Num from `0-1` for measurements
-      height    = 0.8,
-      width     = 0.8,
-      x         = 0.5,
-      y         = 0.5
+      height = 0.8,
+      width = 0.8,
+      x = 0.5,
+      y = 0.5
     },
 
     terminal = {
@@ -56,10 +56,10 @@ require("jaq-nvim").setup({
       position = "vert",
 
       -- Window size
-      size     = 80,
+      size = 80,
 
       -- Disable line numbers
-      line_no  = false
+      line_no = false
     },
 
     quickfix = {
@@ -67,7 +67,7 @@ require("jaq-nvim").setup({
       position = "vert",
 
       -- Window size
-      size     = 80
+      size = 80
     }
   }
 })
