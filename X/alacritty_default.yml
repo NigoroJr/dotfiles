@@ -28,12 +28,12 @@ font:
   bold:
     family: Ricty Discord
     style: Bold
-  # italic:
-  #   family: Ricty Discord
-  #   style: Oblique
-  # bold_italic:
-  #   family: Ricty Discord
-  #   style: Bold Oblique
+  italic:
+    family: Ricty Discord
+    style: Italic
+  bold_italic:
+    family: Ricty Discord
+    style: Bold Italic
   size: 15
 
 colors:
