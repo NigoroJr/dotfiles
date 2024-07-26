@@ -9,21 +9,28 @@ require("mason").setup({
 local ensure_installed = {
   "clangd",
   "cmake",
-  "css_variables",
-  "cssls",
-  "cssmodules_ls",
-  "docker_compose_language_service",
-  "dockerls",
   "lua_ls",
-  "pyright",
-  "tailwindcss",
-  "tsserver",
-  "vuels",
-  "yamlls",
 }
 
+local add = function(name)
+  table.insert(ensure_installed, name)
+end
+
+if vim.fn.executable("npm") == 1 then
+  add("cssls")
+  add("cssmodules_ls")
+  add("css_variables")
+  add("docker_compose_language_service")
+  add("dockerls")
+  add("pyright")
+  add("tailwindcss")
+  add("tsserver")
+  add("vuels")
+  add("yamlls")
+end
+
 if vim.fn.executable("go") == 1 then
-  table.insert(ensure_installed, "gopls")
+  add("gopls")
 end
 
 if vim.fn.executable("ruby") == 1 then
@@ -34,8 +41,8 @@ if vim.fn.executable("ruby") == 1 then
   patch = tonumber(patch)
   if major >= 3 or (major >= 2 and minor >= 7) then
     -- Ruby 2.7+ required
-    table.insert(ensure_installed, "rubocop")
-    table.insert(ensure_installed, "ruby_lsp")
+    add("rubocop")
+    add("ruby_lsp")
   end
 end
 
