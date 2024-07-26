@@ -42,7 +42,9 @@ return {
     config = function()
       require("config/comment")
     end,
-    keys = { "g" },
+    keys = {
+      { "g", mode = { "n", "x" } },
+    },
   },
   {
     "norcalli/nvim-colorizer.lua",
