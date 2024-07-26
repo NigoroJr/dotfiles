@@ -194,9 +194,9 @@ bindkey "\e^Z" zaw-z
 bindkey "^X;" zaw
 # }}}
 
-(( $+commands[rbenv] )) && eval "$( rbenv init - )"
-(( $+commands[pyenv] )) && eval "$( pyenv init - )"
-(( $+commands[plenv] )) && eval "$( plenv init - )"
+if [[ -f $HOME/.local/bin/mise ]]; then
+    eval "$( $HOME/.local/bin/mise activate zsh )"
+fi
 
 __source $HOME/.rosrc.zsh
 

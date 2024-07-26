@@ -24,9 +24,6 @@ export ALTERNATE_EDITOR=""
 path=($HOME/bin(N) \
     $HOME/usr/bin(N) \
     $HOME/.local/bin(N) \
-    $HOME/.pyenv/bin(N) \
-    $HOME/.rbenv/bin(N) \
-    $HOME/.plenv/bin(N) \
     $HOME/.cargo/bin(N) \
     /usr/local/bin(N) \
     /usr/bin(N) \
