@@ -64,6 +64,12 @@ _prompt_git_status() {
 }
 # }}}
 
+_mise_get_version() {
+    local what="$1"
+
+    mise ls "$what" --no-header --current 2>/dev/null | awk '{ print $2 }'
+}
+
 _prompt_arrow() {
     local rnd=$1
     shift
@@ -143,16 +149,34 @@ _prompt_random_256() {
         additional_prompts+="$git_prompt"
     fi
 
-    # Python info
-    if [[ -n $VIRTUAL_ENV ]]; then
-        additional_prompts+="$( basename $VIRTUAL_ENV )"
-    elif (( $+commands[pyenv] )); then
-        local pyenv_prompt="$( pyenv version-name )"
-        if [[ $pyenv_prompt != system ]]; then
-            additional_prompts+="$pyenv_prompt"
+    if (( $+commands[mise] )); then
+        # Python
+        local python_version="$( _mise_get_version python )"
+        if [[ -n $python_version ]]; then
+            additional_prompts+="%F{069}py:$python_version%f"
         fi
-    elif [[ -n $CONDA_DEFAULT_ENV ]]; then
-        additional_prompts+="$CONDA_DEFAULT_ENV"
+        # Ruby
+        local ruby_version="$( _mise_get_version ruby )"
+        if [[ -n $ruby_version ]]; then
+            additional_prompts+="%F{124}rb:$ruby_version%f"
+        fi
+        # Node
+        local node_version="$( _mise_get_version node )"
+        if [[ -n $node_version ]]; then
+            additional_prompts+="%F{028}js:$node_version%f"
+        fi
+    else
+        # Python info
+        if [[ -n $VIRTUAL_ENV ]]; then
+            additional_prompts+="$( basename $VIRTUAL_ENV )"
+        elif (( $+commands[pyenv] )); then
+            local pyenv_prompt="$( pyenv version-name )"
+            if [[ $pyenv_prompt != system ]]; then
+                additional_prompts+="$pyenv_prompt"
+            fi
+        elif [[ -n $CONDA_DEFAULT_ENV ]]; then
+            additional_prompts+="$CONDA_DEFAULT_ENV"
+        fi
     fi
 
     # Custom prompt
