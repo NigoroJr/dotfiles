@@ -153,7 +153,7 @@ _prompt_random_256() {
         # Python
         local python_version="$( _mise_get_version python )"
         if [[ -n $python_version ]]; then
-            additional_prompts+="%F{069}py:$python_version%f"
+            additional_prompts+="%F{069}py:$python_version${VIRTUAL_ENV:+ venv}%f"
         fi
         # Ruby
         local ruby_version="$( _mise_get_version ruby )"
