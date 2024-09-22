@@ -41,6 +41,14 @@ local on_attach = function(client, bufnr)
   )
 end
 
+if vim.fn.executable("protols") == 1 then
+  lspconfig.protols.setup({
+    filetypes = {"proto"},
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+end
+
 mason_lspconfig.setup_handlers({
   function(server_name)
     lspconfig[server_name].setup({
@@ -50,7 +58,9 @@ mason_lspconfig.setup_handlers({
   end,
   ["clangd"] = function()
     lspconfig.clangd.setup({
+      filetypes = {"c", "cpp"},
       on_attach = on_attach,
+      capabilities = capabilities,
     })
   end,
   ["gopls"] = function()
