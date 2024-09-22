@@ -24,7 +24,7 @@ if vim.fn.executable("npm") == 1 then
   add("dockerls")
   add("pyright")
   add("tailwindcss")
-  add("tsserver")
+  add("ts_ls")
   add("vuels")
   add("yamlls")
 end
