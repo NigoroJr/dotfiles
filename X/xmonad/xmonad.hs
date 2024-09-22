@@ -45,7 +45,7 @@ myLayoutHook = avoidStruts $ smartBorders $
     delta = 1/100
 
 -- Manage Hook
-myManageHook = manageSpawn <+> myFloatHook <+> manageHook defaultConfig
+myManageHook = manageSpawn <+> myFloatHook <+> manageHook def
 
 -- To get the class name, xprop | grep WM_CLASS
 myFloatHook = composeAll
@@ -213,7 +213,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 main = do
     myStatusBar <- spawnPipe "xmobar"
-    xmonad $ withUrgencyHook NoUrgencyHook defaultConfig {
+    xmonad $ docks $ withUrgencyHook NoUrgencyHook def {
         terminal = myTerminal
         , borderWidth = myBorderWidth
         , normalBorderColor = myNormalBorderColor
@@ -221,7 +221,7 @@ main = do
         , workspaces = myWorkspaces
         , manageHook = myManageHook
         , layoutHook = myLayoutHook
-        , handleEventHook = handleEventHook defaultConfig <+> docksEventHook
+        , handleEventHook = handleEventHook def
         , logHook = myLogHook myStatusBar
         , startupHook = myStartupHook
         , keys = myKeys

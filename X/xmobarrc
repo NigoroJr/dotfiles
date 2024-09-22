@@ -1,6 +1,6 @@
 -- vim: ft=haskell
 
-Config { font = "xft:Ricty Discord:size=9"
+Config { font = "Ricty Discord 16"
        , bgColor  = "#000000"
        , fgColor  = "#BFBFBF"
        , position = Top
