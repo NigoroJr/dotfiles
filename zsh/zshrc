@@ -143,6 +143,7 @@ setopt pushd_ignore_dups    # Don't pushd the same directory
 setopt share_history
 unsetopt auto_menu          # Don't change completion with Tab
 unsetopt prompt_cr          # Show lines without trailing \n
+disable r
 # }}}
 
 # Key bindings {{{
