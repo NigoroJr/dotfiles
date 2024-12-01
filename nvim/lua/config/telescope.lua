@@ -81,7 +81,10 @@ end
 
 local map = vim.keymap.set
 
-map("n", "<Leader>uf", find_files_cwd, {})
+map("n", "<Leader>uf", builtin.find_files, {})
+-- Find files starting from the directory where the file currently being
+-- edited is located at
+map("n", "<Leader>uF", find_files_cwd, {})
 map("n", "<Leader>ug", live_grep_cwd, {})
 map("n", "<Leader>us", grep_string_cwd, {})
 map("n", "<Leader>ut", builtin.treesitter, {})
