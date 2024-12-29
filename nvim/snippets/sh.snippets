@@ -1,15 +1,15 @@
-snippet		sh #!/bin/sh
+snippet	sh #!/bin/sh
 	#!/bin/sh
 	${0}
 
-snippet		getopts while getopts
-	while getopts '${1:h}' flag; do
+snippet	getopts while getopts
+	while getopts "h${1:}" flag; do
 		case "$flag" in
-			${2:#flag})
-				${3:init}
+			${2:option})
+				${3:SOME_VAR}="${4:value}"
 				;;
 			h)
-				echo "Usage: \$0 [-h] ${0}"
+				echo "Usage: $0 [-h] [${2}]"
 				exit 0
 		esac
 
