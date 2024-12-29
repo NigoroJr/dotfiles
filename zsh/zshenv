@@ -25,6 +25,7 @@ path=($HOME/bin(N) \
     $HOME/usr/bin(N) \
     $HOME/.local/bin(N) \
     $HOME/.cargo/bin(N) \
+    ${GOPATH:+$GOPATH/bin}(N) \
     /usr/local/bin(N) \
     /usr/bin(N) \
     /bin(N) \
