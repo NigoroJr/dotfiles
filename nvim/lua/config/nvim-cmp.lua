@@ -11,6 +11,7 @@ cmp.setup({
     -- completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
+  preselect = cmp.PreselectMode.None,
   mapping = cmp.mapping.preset.insert({
     ["<C-y>"] = cmp.mapping.scroll_docs(-1),
     ["<C-e>"] = cmp.mapping.scroll_docs(1),
@@ -19,15 +20,41 @@ cmp.setup({
     ["<A-b>"] = cmp.mapping.scroll_docs(-28),
     ["<A-f>"] = cmp.mapping.scroll_docs(28),
     ["<C-g>"] = cmp.mapping.abort(),
-    -- ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-    ["<Tab>"] = cmp.mapping(
+    ["<CR>"] = cmp.mapping(
+      function(fallback)
+        if cmp.visible() then
+          cmp.confirm({ select = true })
+        else
+          fallback()
+        end
+      end
+    ),
+    ["<C-l>"] = cmp.mapping(
       function(fallback)
         if luasnip.locally_jumpable(1) then
           luasnip.jump(1)
+        else
+          fallback()
+        end
+      end
+    ),
+    ["<C-k>"] = cmp.mapping(
+      function(fallback)
+        if luasnip.expandable() then
+          luasnip.expand()
+        else
+          fallback()
+        end
+      end
+    ),
+    ["<Tab>"] = cmp.mapping(
+      function(fallback)
+        if cmp.visible() then
+          cmp.confirm({ select = true })
+        elseif luasnip.locally_jumpable(1) then
+          luasnip.jump(1)
         elseif luasnip.expandable() then
-					luasnip.expand()
-				elseif cmp.visible() then
-					cmp.confirm({ select = true })
+          luasnip.expand()
         else
           fallback()
         end
