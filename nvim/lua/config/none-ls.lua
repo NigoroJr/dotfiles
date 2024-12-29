@@ -8,6 +8,22 @@ elseif vim.fn.executable("prettier") == 1 then
   table.insert(sources, null_ls.builtins.formatting.prettier)
 end
 
+if vim.fn.executable("black") == 1 then
+  table.insert(sources, null_ls.builtins.formatting.black)
+end
+
+if vim.fn.executable("buf") == 1 then
+  table.insert(sources, null_ls.builtins.formatting.buf)
+end
+
+if vim.fn.executable("gofmt") == 1 then
+  table.insert(sources, null_ls.builtins.formatting.gofmt)
+end
+
+if vim.fn.executable("goimports") == 1 then
+  table.insert(sources, null_ls.builtins.formatting.goimports)
+end
+
 local augroup = vim.api.nvim_create_augroup("LspFormattingOnSave", {})
 null_ls.setup({
   sources = sources,

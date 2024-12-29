@@ -200,6 +200,7 @@ return {
     config = function()
       require("config/prettier")
     end,
+    keys = { ":" },
   },
   {
     "nvimtools/none-ls.nvim",
