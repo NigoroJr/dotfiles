@@ -61,10 +61,13 @@ snippet py #!/usr/bin/env python
 	#!/usr/bin/env python
 	${0}
 
-snippet py2 #!/usr/bin/env python2
-	#!/usr/bin/env python2
-	${0}
+snippet uv #!/usr/bin/env -S uv run --script
+	#!/usr/bin/env -S uv run --script
+	# /// script
+	# requires-python = ">=${1}"
+	# dependencies = [
+	#	"${2}>=${3}",
+	# ]
+	# ///
 
-snippet py3 #!/usr/bin/env python3
-	#!/usr/bin/env python3
 	${0}
