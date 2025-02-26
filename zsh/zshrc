@@ -195,13 +195,13 @@ bindkey "\e^Z" zaw-z
 bindkey "^X;" zaw
 # }}}
 
-if [[ -f $HOME/.local/bin/mise ]]; then
-    eval "$( $HOME/.local/bin/mise activate zsh )"
+if (( $+commands[mise] )); then
+    eval "$( mise activate zsh )"
 
     if [[ -z $( mise which usage 2>/dev/null ) ]]; then
-        echo mise use -g usage
+        mise use -g usage
     fi
-    eval "$( $HOME/.local/bin/mise completion zsh )"
+    eval "$( mise completion zsh )"
 fi
 
 __source $HOME/.rosrc.zsh
