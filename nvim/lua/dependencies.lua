@@ -1,5 +1,5 @@
 local bin_path = vim.env.HOME .. "/bin"
-vim.fn.mkdir(bin_path, "p'")
+vim.fn.mkdir(bin_path, "p")
 
 function install_rg(version)
   local uname = vim.uv.os_uname()
