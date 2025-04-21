@@ -1,0 +1,2 @@
+[general]
+import = ["/home/naoki/.config/alacritty_default.toml", "/home/naoki/.localrc/alacritty.toml"]

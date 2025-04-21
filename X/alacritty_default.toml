@@ -1,0 +1,85 @@
+
+[[mouse.bindings]]
+action = "ExpandSelection"
+mouse = "Right"
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mode = "~Vi"
+mouse = "Middle"
+
+[colors]
+transparent_background_colors = true
+
+[colors.bright]
+black = "0x686868"
+blue = "0x57c7ff"
+cyan = "0x4fe7f7"
+green = "0x5af78e"
+magenta = "0xf551be"
+red = "0xff5c57"
+white = "0xf1f1f0"
+yellow = "0xf5ec4d"
+
+[colors.normal]
+black = "0x282a36"
+blue = "0x57a7ff"
+cyan = "0x34dde3"
+green = "0x4ed97c"
+magenta = "0xde49ac"
+red = "0xe8544f"
+white = "0xf1f1f0"
+yellow = "0xfcd80a"
+
+[colors.primary]
+background = "0x181a16"
+foreground = "0xeff0eb"
+
+[cursor]
+unfocused_hollow = true
+
+[cursor.style]
+blinking = "Off"
+shape = "Block"
+
+[font]
+size = 15
+
+[font.bold]
+family = "Ricty Discord"
+style = "Bold"
+
+[font.bold_italic]
+family = "Ricty Discord"
+style = "Bold Italic"
+
+[font.italic]
+family = "Ricty Discord"
+style = "Italic"
+
+[font.normal]
+family = "Ricty Discord"
+style = "Regular"
+
+[mouse]
+hide_when_typing = true
+
+[scrolling]
+history = 10000
+
+[selection]
+semantic_escape_chars = '''/.,│`|:"' ()[]{}<>	'''
+
+[window]
+decorations = "none"
+dynamic_title = true
+opacity = 0.85
+startup_mode = "Maximized"
+title = "Alacritty"
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[general]
+live_config_reload = true
