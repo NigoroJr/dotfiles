@@ -204,6 +204,11 @@ if (( $+commands[mise] )); then
     eval "$( mise completion zsh )"
 fi
 
+if (( $+commands[uv] )); then
+    eval "$( uv generate-shell-completion zsh )"
+    eval "$( uvx --generate-shell-completion zsh )"
+fi
+
 __source $HOME/.rosrc.zsh
 
 # Settings for prompt
