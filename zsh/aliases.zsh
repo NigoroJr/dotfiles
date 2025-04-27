@@ -84,9 +84,12 @@ alias drm='docker ps -a | awk "/Exited/ { print \$1 }" | xargs docker rm'
 alias drmi='docker images -f dangling=true | awk "!/^REPOSITORY/{ print \$3  }" | xargs -I{} docker rmi "{}"'
 alias ds="docker start"
 alias dbash='docker exec -it $( dps -lq ) /bin/bash'
+# Compose
+alias dc="docker compose"
+alias dcu="docker compose up"
 alias dcb="docker compose build"
-alias dcr='docker compose run'
-alias dcrr='docker compose run --rm'
+alias dcr="docker compose run"
+alias dcrr="docker compose run --rm"
 
 alias cdd='cd $( dirname $_ )'
 alias rm_='rm -f $_'
