@@ -1,11 +1,11 @@
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-local mason = require("mason")
-local mason_lspconfig = require("mason-lspconfig")
+require("mason").setup()
+require("mason-lspconfig").setup({
+  ensure_installed = { },
+  automatic_enable = true,
+})
 local lspconfig = require("lspconfig")
-
-mason.setup()
-mason_lspconfig.setup()
 
 local on_attach = function(client, bufnr)
   -- vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -42,112 +42,99 @@ local on_attach = function(client, bufnr)
 end
 
 if vim.fn.executable("protols") == 1 then
-  lspconfig.protols.setup({
+  vim.lsp.config('protols', {
     filetypes = {"proto"},
     on_attach = on_attach,
     capabilities = capabilities,
   })
 end
 
-mason_lspconfig.setup_handlers({
-  function(server_name)
-    lspconfig[server_name].setup({
-      on_attach=on_attach,
-      capabilities = capabilities,
-    })
-  end,
-  ["clangd"] = function()
-    lspconfig.clangd.setup({
-      filetypes = {"c", "cpp"},
-      on_attach = on_attach,
-      capabilities = capabilities,
-    })
-  end,
-  ["gopls"] = function()
-    lspconfig.gopls.setup({
-      cmd = {"gopls", "serve"},
-      filetypes = {"go", "gomod"},
-      root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
-      settings = {
-        gopls = {
-          analyses = {
-            unusedparams = true,
-          },
-          staticcheck = true,
-        },
-      },
-      on_attach=on_attach,
-      capabilities=capabilities,
-    })
-  end,
-  ["pyright"] = function()
-    lspconfig.pyright.setup({
-      filetypes = {"python"},
-      root_dir = function(fname)
-        local root_files = {
-          "pyproject.toml",
-          "setup.py",
-          "setup.cfg",
-          "requirements.txt",
-          "Pipfile",
-          "pyrightconfig.json",
-        }
-        return lspconfig.util.root_pattern(unpack(root_files))(fname)
-      end,
-      settings = {
-        python = {
-          analysis = {
-            autoSearchPaths = true,
-            useLibraryCodeForTypes = true,
-            typeCheckingMode = "off",
-          },
-          linting = {
-            enabled = false,
-          }
-        },
-      },
-      on_attach=on_attach,
-      capabilities=capabilities,
-    })
-  end,
-  ["lua_ls"] = function()
-    lspconfig.lua_ls.setup({
-      on_attach=on_attach,
-      on_init = function(client)
-        local path = client.workspace_folders[1].name
-        if vim.uv.fs_stat(path.."/.luarc.json") or vim.uv.fs_stat(path.."/.luarc.jsonc") then
-          return
-        end
+vim.lsp.config("clangd", {
+  filetypes = {"c", "cpp"},
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
 
-        client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-          runtime = {
-            -- Tell the language server which version of Lua you're using
-            -- (most likely LuaJIT in the case of Neovim)
-            version = "LuaJIT"
-          },
-          -- Make the server aware of Neovim runtime files
-          workspace = {
-            checkThirdParty = false,
-            library = {
-              vim.env.VIMRUNTIME
-              -- Depending on the usage, you might want to add additional paths here.
-              -- "${3rd}/luv/library"
-              -- "${3rd}/busted/library",
-            }
-            -- or pull in all of "runtimepath". NOTE: this is a lot slower
-            -- library = vim.api.nvim_get_runtime_file("", true)
-          },
-        })
-      end,
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { "vim" },
-          },
-        },
+vim.lsp.config("gopls", {
+  cmd = {"gopls", "serve"},
+  filetypes = {"go", "gomod"},
+  root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+    },
+  },
+  on_attach=on_attach,
+  capabilities=capabilities,
+})
+
+vim.lsp.config("pyright", {
+  filetypes = {"python"},
+  root_dir = function(fname)
+    local root_files = {
+      "pyproject.toml",
+      "setup.py",
+      "setup.cfg",
+      "requirements.txt",
+      "Pipfile",
+      "pyrightconfig.json",
+    }
+    return lspconfig.util.root_pattern(unpack(root_files))(fname)
+  end,
+  settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        typeCheckingMode = "off",
+      },
+      linting = {
+        enabled = false,
       }
+    },
+  },
+  on_attach=on_attach,
+  capabilities=capabilities,
+})
+
+vim.lsp.config("lua_ls", {
+  on_attach=on_attach,
+  on_init = function(client)
+    local path = client.workspace_folders[1].name
+    if vim.uv.fs_stat(path.."/.luarc.json") or vim.uv.fs_stat(path.."/.luarc.jsonc") then
+      return
+    end
+
+    client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+      runtime = {
+        -- Tell the language server which version of Lua you're using
+        -- (most likely LuaJIT in the case of Neovim)
+        version = "LuaJIT"
+      },
+      -- Make the server aware of Neovim runtime files
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.env.VIMRUNTIME
+          -- Depending on the usage, you might want to add additional paths here.
+          -- "${3rd}/luv/library"
+          -- "${3rd}/busted/library",
+        }
+        -- or pull in all of "runtimepath". NOTE: this is a lot slower
+        -- library = vim.api.nvim_get_runtime_file("", true)
+      },
     })
   end,
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+    },
+  }
 })
 
 -- nnoremap <buffer> <silent> gd <cmd>lua vim.lsp.buf.declaration()<CR>
