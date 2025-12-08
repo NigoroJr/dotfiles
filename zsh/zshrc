@@ -209,6 +209,10 @@ if (( $+commands[uv] )); then
     eval "$( uvx --generate-shell-completion zsh )"
 fi
 
+if (( $+commands[jj] )); then
+    source <( jj util completion zsh )
+fi
+
 __source $HOME/.rosrc.zsh
 
 # Settings for prompt

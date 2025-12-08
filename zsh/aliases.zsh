@@ -63,6 +63,19 @@ alias gl="git log"
 alias gplum="git pull upstream master"
 alias gpom="git push origin master"
 
+# jujutsu
+alias j="jj"
+alias jd="jj diff"
+alias jds="jj describe"
+alias je="jj edit"
+alias jl="jj log"
+alias jn="jj new"
+alias jsh="jj show"
+alias js="jj status"
+alias jsp="jj split"
+alias jsq="jj squash"
+alias jsqi="jj squash -i"
+
 # Ruby
 alias r="rails"
 alias b="bundle"
@@ -93,6 +106,8 @@ alias dcrr="docker compose run --rm"
 
 alias cdd='cd $( dirname $_ )'
 alias rm_='rm -f $_'
+
+alias tf="terraform"
 
 alias zmv="noglob zmv -W"
 alias qv="qpdfview"
