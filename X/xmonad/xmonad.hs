@@ -56,13 +56,17 @@ myFloatHook = composeAll
     , className =? "google-chrome"             --> moveTo2
     , className =? "Firefox"                   --> moveTo2
     , className =? "Firefox-esr"               --> moveTo2
+    , className =? "vivaldi-stable"            --> moveTo2
+    , className =? "Vivaldi-stable"            --> moveTo2
     , className =? "jetbrains-clion"           --> moveTo3
     , className =? "Gvim"                      --> moveTo3
     , className =? "Emacs"                     --> moveTo3
     , className =? "Eclipse"                   --> moveTo3
     , className =? "Qpdfview"                  --> moveTo3
     , className =? "qpdfview"                  --> moveTo3
-    , className =? "jetbrains-pycharm"         --> moveTo4
+    , className =? "cursor"                    --> moveTo3
+    , className =? "Cursor"                    --> moveTo3
+    , className =? "obsidian"                  --> moveTo4
     , className =? "mplayer2"                  --> moveTo5
     , className =? "MPlayer"                   --> moveTo5
     , className =? "feh"                       --> moveTo5
@@ -71,6 +75,7 @@ myFloatHook = composeAll
     , className =? "Gazeb"                     --> moveTo5
     , className =? "gazebo"                    --> moveTo5
     , className =? "Gimp"                      --> moveTo5
+    , className =? "resolve"                   --> moveTo5
     , className =? "Rviz"                      --> moveTo6
     , className =? "rviz"                      --> moveTo6
     , className =? "Spotify"                   --> moveTo9
@@ -108,7 +113,8 @@ myStartupHook = do
     spawnOn "1" "alacritty"
     -- spawnOn "2" "firefox"
     -- spawnOn "2" "chromium"
-    spawnOn "2" "google-chrome"
+    -- spawnOn "2" "google-chrome"
+    spawnOn "2" "vivaldi"
 
 -- Mouse bindings
 myMouseBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
