@@ -248,4 +248,9 @@ return {
     end,
     event = { "WinLeave" },
   },
+  {
+    "avm99963/vim-jjdescription",
+    lazy = true,
+    ft = { "jjdescription" },
+  },
 }
