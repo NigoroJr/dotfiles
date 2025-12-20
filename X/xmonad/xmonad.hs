@@ -53,21 +53,17 @@ myFloatHook = composeAll
     , className =? "chromium-browser-chromium" --> moveTo2
     , className =? "Google-chrome-stable"      --> moveTo2
     , className =? "Google-chrome"             --> moveTo2
-    , className =? "google-chrome"             --> moveTo2
     , className =? "Firefox"                   --> moveTo2
     , className =? "Firefox-esr"               --> moveTo2
-    , className =? "vivaldi-stable"            --> moveTo2
     , className =? "Vivaldi-stable"            --> moveTo2
     , className =? "jetbrains-clion"           --> moveTo3
     , className =? "Gvim"                      --> moveTo3
     , className =? "Emacs"                     --> moveTo3
     , className =? "Eclipse"                   --> moveTo3
     , className =? "Qpdfview"                  --> moveTo3
-    , className =? "qpdfview"                  --> moveTo3
-    , className =? "cursor"                    --> moveTo3
     , className =? "Cursor"                    --> moveTo3
+    , className =? "Antigravity"               --> moveTo3
     , className =? "obsidian"                  --> moveTo4
-    , className =? "mplayer2"                  --> moveTo5
     , className =? "MPlayer"                   --> moveTo5
     , className =? "feh"                       --> moveTo5
     , className =? "Comix"                     --> moveTo5
@@ -111,10 +107,9 @@ myLogHook h = dynamicLogWithPP xmobarPP {
 myStartupHook = do
     setWMName "LG3D"
     spawnOn "1" "alacritty"
-    -- spawnOn "2" "firefox"
-    -- spawnOn "2" "chromium"
-    -- spawnOn "2" "google-chrome"
     spawnOn "2" "vivaldi"
+    spawnOn "3" "cursor"
+    spawnOn "4" "obsidian"
 
 -- Mouse bindings
 myMouseBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
