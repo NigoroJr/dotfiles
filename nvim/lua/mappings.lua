@@ -71,9 +71,9 @@ map("n", "<Leader>sp", paste, opts)
 
 -- Toggle diff
 local function toggle_diff()
-  vim.opt.diff = not vim.opt.diff:get()
-  vim.o.scrollbind = vim.opt.diff:get()
-  vim.print("Diff " .. (vim.opt.diff:get() and "ON" or "OFF"))
+  vim.opt.diff = not vim.o.diff
+  vim.o.scrollbind = vim.opt.diff
+  vim.print("Diff " .. (vim.o.diff and "ON" or "OFF"))
 end
 map("n", "<Leader>dt", toggle_diff, opts_s)
 

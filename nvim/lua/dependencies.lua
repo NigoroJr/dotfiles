@@ -1,8 +1,9 @@
 local bin_path = vim.env.HOME .. "/bin"
 vim.fn.mkdir(bin_path, "p")
 
-function install_rg(version)
+local function install_rg(version)
   local uname = vim.uv.os_uname()
+  local system = ""
   if uname.sysname == "Linux" then
     system = "x86_64-unknown-linux-musl"
   elseif uname.sysname == "Darwin" then
@@ -52,8 +53,9 @@ function install_rg(version)
   )
 end
 
-function install_tree_sitter_cli(version)
+local function install_tree_sitter_cli(version)
   local uname = vim.uv.os_uname()
+  local system = ""
   if uname.sysname == "Linux" then
     system = "linux-x64"
   elseif uname.sysname == "Darwin" then

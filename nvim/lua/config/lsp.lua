@@ -11,21 +11,13 @@ local on_attach = function(client, bufnr)
   -- vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
 
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-      virtual_text = false,
-      underline = true,
-      -- signs = false,
-      update_in_insert = false,
+  vim.lsp.config('*', {
+  handlers = {
+    ['textDocument/hover'] = {
+      border = 'rounded',
     }
-  )
-
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-    vim.lsp.handlers.hover,
-    {
-      border = "rounded",
-    }
-  )
+  }
+})
 
   require("lsp_signature").on_attach(
     {
@@ -142,16 +134,14 @@ vim.diagnostic.config({
 
 local map = vim.keymap.set
 -- Added in neovim 0.11
--- local jump_prev = function()
---   vim.diagnostic.jump({ count = -1, float = true })
--- end
--- local jump_next = function()
---   vim.diagnostic.jump({ count = 1, float = true })
--- end
--- map("n", "<S-M-p>", jump_prev)
--- map("n", "<S-M-n>", jump_next)
-map("n", "<S-M-p>", vim.diagnostic.goto_prev)
-map("n", "<S-M-n>", vim.diagnostic.goto_next)
+local jump_prev = function()
+  vim.diagnostic.jump({ count = -1, float = true })
+end
+local jump_next = function()
+  vim.diagnostic.jump({ count = 1, float = true })
+end
+map("n", "<S-M-p>", jump_prev)
+map("n", "<S-M-n>", jump_next)
 map("n", "K", vim.lsp.buf.hover, {})
 map({ "n", "i" }, "<S-M-r>", vim.lsp.buf.rename, {})
 
