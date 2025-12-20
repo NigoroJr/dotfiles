@@ -71,7 +71,7 @@ vim.lsp.config("gopls", {
   capabilities=capabilities,
 })
 
-vim.lsp.config("pyright", {
+vim.lsp.config("ty", {
   filetypes = {"python"},
   root_dir = function(fname)
     local root_files = {
@@ -80,21 +80,10 @@ vim.lsp.config("pyright", {
       "setup.cfg",
       "requirements.txt",
       "Pipfile",
-      "pyrightconfig.json",
     }
     return lspconfig.util.root_pattern(unpack(root_files))(fname)
   end,
   settings = {
-    python = {
-      analysis = {
-        autoSearchPaths = true,
-        useLibraryCodeForTypes = true,
-        typeCheckingMode = "off",
-      },
-      linting = {
-        enabled = false,
-      }
-    },
   },
   on_attach=on_attach,
   capabilities=capabilities,
