@@ -123,6 +123,7 @@ setopt cdable_vars          # cd to named dirs without leading ~
 setopt correct              # Suggest correction
 setopt extended_glob
 setopt extended_history
+setopt inc_append_history_time
 is-at-least 5.2 && setopt glob_star_short
 setopt hist_ignore_all_dups
 setopt hist_ignore_space    # Don't add commands that start with space

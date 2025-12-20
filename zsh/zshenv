@@ -3,8 +3,8 @@ autoload -Uz colors && colors
 export LANG="en_US.UTF-8"
 export LC_ALL="$LANG"
 export LANGUAGE="$LANG"
-if [ -d $HOME/src/go ]; then
-    export GOPATH=$HOME/src/go
+if [ -d $HOME/.go ]; then
+    export GOPATH=$HOME/.go
 fi
 
 if [[ -d $HOME/usr/lib ]]; then
@@ -41,7 +41,7 @@ manpath=(
     $manpath)
 typeset -U manpath
 
-export HISTFILE=~/.histfile
+export HISTFILE=~/.zsh_histfile
 export HISTSIZE=6000000
 export SAVEHIST=6000000
 export WORDCHARS="*?_-.[]~=&;!#$%^(){}<>|"
@@ -70,3 +70,7 @@ $fg_bold[blue]%J$reset_color
 export XDG_DATA_HOME=$HOME/.local/share/
 export XDG_CONFIG_HOME=$HOME/.config/
 export XDG_DATA_DIRS=/usr/local/share/:/usr/share/
+
+if [[ -f $HOME/.localrc/zshenv ]]; then
+    source $HOME/.localrc/zshenv
+fi
