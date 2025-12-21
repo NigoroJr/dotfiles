@@ -4,13 +4,12 @@ require("nightfox").setup({
   },
   specs = {
     nightfox = {
-      -- inactive = "bg0",
+      inactive = "bg0",
     },
   },
   groups = {
     nightfox = {
-      Normal = { fg = "fg1", bg = "bg1" },
-      NormalNC = { fg = "fg0", bg = "bg2" },
+      NormalNC = { fg = "fg0", bg = "inactive" },
     },
   },
 })

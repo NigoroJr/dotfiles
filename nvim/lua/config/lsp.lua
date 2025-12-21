@@ -1,12 +1,5 @@
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-require("mason").setup()
-require("mason-lspconfig").setup({
-  ensure_installed = { },
-  automatic_enable = true,
-})
-local lspconfig = require("lspconfig")
-
 local on_attach = function(client, bufnr)
   -- vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
@@ -31,96 +24,20 @@ local on_attach = function(client, bufnr)
     },
     bufnr
   )
-end
 
-if vim.fn.executable("protols") == 1 then
-  vim.lsp.config('protols', {
-    filetypes = {"proto"},
-    on_attach = on_attach,
-    capabilities = capabilities,
-  })
-end
-
-vim.lsp.config("clangd", {
-  filetypes = {"c", "cpp"},
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
-vim.lsp.config("gopls", {
-  cmd = {"gopls", "serve"},
-  filetypes = {"go", "gomod"},
-  root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
-  settings = {
-    gopls = {
-      analyses = {
-        unusedparams = true,
-      },
-      staticcheck = true,
-    },
-  },
-  on_attach=on_attach,
-  capabilities=capabilities,
-})
-
-vim.lsp.config("ty", {
-  filetypes = {"python"},
-  root_dir = function(fname)
-    local root_files = {
-      "pyproject.toml",
-      "setup.py",
-      "setup.cfg",
-      "requirements.txt",
-      "Pipfile",
-    }
-    return lspconfig.util.root_pattern(unpack(root_files))(fname)
-  end,
-  settings = {
-  },
-  on_attach=on_attach,
-  capabilities=capabilities,
-})
-
-vim.lsp.config("lua_ls", {
-  on_attach=on_attach,
-  on_init = function(client)
-    local path = client.workspace_folders[1].name
-    if vim.uv.fs_stat(path.."/.luarc.json") or vim.uv.fs_stat(path.."/.luarc.jsonc") then
-      return
-    end
-
-    client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-      runtime = {
-        -- Tell the language server which version of Lua you're using
-        -- (most likely LuaJIT in the case of Neovim)
-        version = "LuaJIT"
-      },
-      -- Make the server aware of Neovim runtime files
-      workspace = {
-        checkThirdParty = false,
-        library = {
-          vim.env.VIMRUNTIME
-          -- Depending on the usage, you might want to add additional paths here.
-          -- "${3rd}/luv/library"
-          -- "${3rd}/busted/library",
-        }
-        -- or pull in all of "runtimepath". NOTE: this is a lot slower
-        -- library = vim.api.nvim_get_runtime_file("", true)
-      },
+  -- Format on save
+  if client.supports_method("textDocument/formatting") then
+    local augroup = vim.api.nvim_create_augroup("LspFormattingOnSave", {})
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({ bufnr = bufnr, async = false })
+      end,
     })
-  end,
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-    },
-  }
-})
-
--- nnoremap <buffer> <silent> gd <cmd>lua vim.lsp.buf.declaration()<CR>
--- nnoremap <buffer> <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
--- nnoremap <buffer> <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+  end
+end
 
 vim.diagnostic.config({
   float = {
@@ -145,11 +62,43 @@ map("n", "<S-M-n>", jump_next)
 map("n", "K", vim.lsp.buf.hover, {})
 map({ "n", "i" }, "<S-M-r>", vim.lsp.buf.rename, {})
 
--- LSP servers to setup:
--- "black", "clang-format", "clangd", "cmake-language-server",
--- "cpptools", "css-lsp", "css-variables-language-server",
--- "cssmodules-language-server", "docker-compose-language-service",
--- "dockerfile-language-server", "gopls", "lua-language-server",
--- "protolint", "pyright", "rubocop", "ruby-lsp",
--- "tailwindcss-language-server", "typescript-language-server",
--- "vue-language-server", "yaml-language-server",
+-- Configure LSP servers with custom settings
+-- mason-lspconfig automatically enables installed servers
+vim.lsp.config("*", {
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+-- Server-specific configurations
+vim.lsp.config("gopls", {
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+      gofumpt = true,
+    },
+  },
+})
+
+vim.lsp.config("lua_ls", {
+  on_init = function(client)
+    local path = client.workspace_folders[1].name
+    if vim.uv.fs_stat(path.."/.luarc.json") or vim.uv.fs_stat(path.."/.luarc.jsonc") then
+      return
+    end
+    client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+      runtime = { version = "LuaJIT" },
+      workspace = {
+        checkThirdParty = false,
+        library = { vim.env.VIMRUNTIME }
+      },
+    })
+  end,
+  settings = {
+    Lua = {
+      diagnostics = { globals = { "vim" } },
+    },
+  },
+})

@@ -32,9 +32,15 @@ return {
   },
   {
     "windwp/nvim-autopairs",
-    event = "InsertEnter",
+    event = { "TextChanged", "TextChangedI" },
     config = function()
       require("config/nvim-autopairs")
+    end,
+  },
+  {
+    "j-hui/fidget.nvim",
+    config = function()
+      require("config/fidget")
     end,
   },
   {
@@ -61,16 +67,18 @@ return {
     keys = { "<Leader>s" }
   },
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason.nvim",
     lazy = true,
-    event = "InsertEnter",
+    event = { "TextChanged", "TextChangedI" },
     dependencies = {
-      "williamboman/mason.nvim",
       "neovim/nvim-lspconfig",
+      "mason-org/mason-lspconfig.nvim",
+      "jay-babu/mason-null-ls.nvim",
       "nvimdev/lspsaga.nvim",
     },
     config = function()
       require("config/mason")
+      require("config/none-ls")
     end,
     cmd = {
       "Mason",
@@ -83,12 +91,19 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPost", "BufNewFile" },
-    dependencies = { "williamboman/mason-lspconfig.nvim" },
+    lazy = true,
     config = function()
       require("config/lsp")
     end,
     cmd = { "LspInfo", "LspInstall", "LspUninstall" },
+  },
+  {
+    "jay-babu/mason-null-ls.nvim",
+    lazy = true,
+    dependencies = {
+      "nvimtools/none-ls.nvim",
+      "nvimtools/none-ls-extras.nvim",
+    },
   },
   {
     "nvim-lualine/lualine.nvim",
@@ -153,7 +168,7 @@ return {
   },
   {
     "L3MON4D3/LuaSnip",
-    event = "InsertEnter",
+    event = { "TextChanged", "TextChangedI" },
     dependencies = {
       "saadparwaiz1/cmp_luasnip",
       "nvim-telescope/telescope-ui-select.nvim",
@@ -192,24 +207,6 @@ return {
     end,
   },
   {
-    "MunifTanjim/prettier.nvim",
-    event = "BufWritePre",
-    dependencies = {
-      "nvimtools/none-ls.nvim",
-    },
-    config = function()
-      require("config/prettier")
-    end,
-    keys = { ":" },
-  },
-  {
-    "nvimtools/none-ls.nvim",
-    lazy = true,
-    config = function()
-      require("config/none-ls")
-    end,
-  },
-  {
     "RRethy/vim-illuminate",
     event = { "BufReadPost", "BufNewFile" },
     config = function()
@@ -243,6 +240,7 @@ return {
   },
   {
     "nvim-zh/colorful-winsep.nvim",
+    enabled = false,
     config = function()
       require("config/colorful-winsep")
     end,
