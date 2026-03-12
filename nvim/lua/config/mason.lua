@@ -62,6 +62,10 @@ if vim.fn.executable("ruby") == 1 then
   end
 end
 
+if vim.fn.executable("rustc") == 1 then
+  add_lsp("rust_analyzer")
+end
+
 -- Setup mason-lspconfig for LSP servers
 require("mason-lspconfig").setup({
   ensure_installed = lsp_servers,
