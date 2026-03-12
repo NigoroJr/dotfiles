@@ -1,43 +1,33 @@
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-local on_attach = function(client, bufnr)
-  -- vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-  vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-  vim.lsp.config('*', {
-  handlers = {
-    ['textDocument/hover'] = {
-      border = 'rounded',
-    }
-  }
-})
+    if not client then return end
 
-  require("lsp_signature").on_attach(
-    {
+    vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
+
+    require("lsp_signature").on_attach({
       bind = true,
-      doc_lines = 30,
-      max_height = 30,
-      hint_enable = false,
-      handler_opts = {
-        border = "rounded",
-      },
-    },
-    bufnr
-  )
+      handler_opts = { border = "rounded" },
+    }, bufnr)
 
-  -- Format on save
-  if client.supports_method("textDocument/formatting") then
-    local augroup = vim.api.nvim_create_augroup("LspFormattingOnSave", {})
-    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      group = augroup,
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.format({ bufnr = bufnr, async = false })
-      end,
-    })
-  end
-end
+    if client.supports_method("textDocument/formatting", { bufnr = bufnr }) then
+      local augroup = vim.api.nvim_create_augroup("LspFormattingOnSave", { clear = false })
+      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = bufnr, id = client.id, async = false })
+        end,
+      })
+    end
+  end,
+})
 
 vim.diagnostic.config({
   float = {
@@ -65,7 +55,6 @@ map({ "n", "i" }, "<S-M-r>", vim.lsp.buf.rename, {})
 -- Configure LSP servers with custom settings
 -- mason-lspconfig automatically enables installed servers
 vim.lsp.config("*", {
-  on_attach = on_attach,
   capabilities = capabilities,
 })
 
