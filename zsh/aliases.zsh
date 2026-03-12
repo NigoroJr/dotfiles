@@ -65,6 +65,7 @@ alias gpom="git push origin master"
 
 # jujutsu
 alias j="jj"
+alias jb="jj bookmark"
 alias jd="jj diff"
 alias jds="jj describe"
 alias je="jj edit"
@@ -75,6 +76,7 @@ alias js="jj status"
 alias jsp="jj split"
 alias jsq="jj squash"
 alias jsqi="jj squash -i"
+alias ju="jj undo"
 
 # Ruby
 alias r="rails"
